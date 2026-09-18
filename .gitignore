@@ -1,0 +1,25 @@
+# macOS
+.DS_Store
+
+# Abandoned Godot prototype (superseded by the single-file HTML game in web/)
+.godot/
+project.godot
+scenes/
+scripts/
+
+# Stale local backups, not part of the maintained project
+backups/
+
+# Unrelated personal files
+Wes Anderson/
+
+# Orphaned single-room HTML prototypes, superseded by web/the-secret-of-the-codebook.html
+web/causality-corridor.html
+web/corridor-art-prompts.html
+web/delegation-engine.html
+web/office-art-prompts.html
+web/statistics-basement.html
+web/survey-lab.html
+web/the-library.html
+web/the-mensa.html
+web/whirlpool-office.html
