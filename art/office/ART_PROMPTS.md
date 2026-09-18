@@ -59,6 +59,18 @@ Generate a small inventory-icon illustration in the same painted comic style as 
 
 ---
 
+# Round 3 · Act II quest object
+
+## 13. Inventory icon — H-27 Form ("Request to Approach Human Beings")
+
+Handed over by the Professor at the start of Act II, via the pneumatic tube. Carried through all four Act II rooms and stamped/stapled at each — generate the *clean* version first; later, heavily-stamped states are edits of this same base, not fresh generations.
+
+```
+Generate a small inventory-icon illustration in the same painted comic style as this reference: a thick, slightly dog-eared bureaucratic form, cream-colored paper, with bold letterhead text reading 'APPLICATION H-27' and, in smaller type beneath it, 'REQUEST TO APPROACH HUMAN BEINGS'. A few blank checkbox lines are faintly visible near the bottom edge. Centered, isolated object, small dramatic highlight/shadow for depth, slightly curled corners as if fresh from a pneumatic tube. Transparent background. Square canvas, roughly 256x256px. No other objects.
+```
+
+---
+
 # Round 2 · Desk Clutter Pickups
 
 Six small pickup items to scatter across the desk/shelf/windowsill, plus a matching inventory icon for each. Do the scene edit first, then the six icons.

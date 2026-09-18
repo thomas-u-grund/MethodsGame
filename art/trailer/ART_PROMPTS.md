@@ -109,3 +109,13 @@ No visible faces. No readable text anywhere in the scene except the plaque.
 ---
 
 *Wiring in a new panel is a two-line change: add its filename to `PRELOAD` and a `{ src, text }` entry to `PANELS`, both near the bottom of `web/the-secret-of-the-codebook.html`, just above the closing `</html>`.*
+
+---
+
+## Act II interlude (generated 2026-09-18, live)
+
+Generated in one ChatGPT chat with `trailer-panel1-deadline.png`, `office-bg.png` and `prof-lecturing.png` attached. Files: `web/trailer2-a-folder.png`, `trailer2-b-prof.png`, `trailer2-c-h27.png`. Panels D (montage) and E (cast poster) are ImageMagick composites of existing art, not generated.
+
+- **A, The Question:** the same desk and folder as panel 1, now at golden dawn; one BLANK index card in the folder lit like a relic; red rubber stamp QUESTION EXISTS on the flap; mug tipped over. (The Question text is overlaid in code.)
+- **B, Not Evidence:** the professor at his desk holding the RESEARCH PROJECT folder at arm's length like a dead fish, one eyebrow impossibly high; a rattling brass pneumatic tube above the desk, steaming.
+- **C, H-27:** the pneumatic tube coughing out an absurdly long FORM H-27 / REQUEST TO APPROACH HUMAN BEINGS with four empty checkboxes (labels overlaid in code), pages avalanching over the desk, hourglass knocked over.

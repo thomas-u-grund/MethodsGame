@@ -32,7 +32,7 @@ The Professor's Precisely Worded Question goes inside it. From here on the playe
 | After | Stamp reads |
 |---|---|
 | The Corridor (Act I) | `STATUS: QUESTION EXISTS` |
-| The Mensa + Survey Lab (Act II) | `STATUS: QUESTION HAS DATA` *(the Professor: "Where did these numbers come from?")* |
+| Survey Lab + Ethics Tribunal + The Mensa + Fieldwork Arena (Act II) | `STATUS: QUESTION HAS DATA` *(the Professor: "Where did these numbers come from?")* |
 | The Library + Statistics Basement (Act III) | `STATUS: EVIDENCE VERIFIED` |
 | The Delegation Engine (Act IV) | `STATUS: RESULT AUDITED` |
 | The Hypotheses Accelerator (Act V) | `STATUS: CLAIM DEFENSIBLE` |
@@ -88,9 +88,13 @@ A gothic, autumnal university campus (unnamed) — statues of seated philosopher
 
 - **The Player** — unnamed, mostly unseen (back-of-head or silhouette in the trailer, never shown in-game).
 - **The Professor** — hates vague claims. Runs the Office/Lecture Theatre gauntlet, bookends the entire game (first and last conversation), and delivers the real reveal at the very end. A single shared entity who physically moves between the Office and the Lecture Theatre (see `HANDOVER.md` §02). Also runs the optional citation-counter sidequest.
-- **The Doorman** — guards the Corridor gate, hands over the Research Folder, is the first to use the word "chapters." Terse, transactional, utterly unbothered by the player's confusion. Refuses entry until the player has also convinced the Skeptic.
-- **The Skeptic** — sits on the bench at Probability Pond, unmoved by the plaque's "n=2" claim. Won't vouch for the player until they demonstrate falsification (paint a swan black) *and* explain why that's sufficient — not just do the trick. His approval is a hard prerequisite for the Corridor, not flavor. No dedicated art yet; he's voice-only, implied to be the figure on the pond's existing bench.
+- **The Doorman** — (has a sprite since 2026-09-18: maroon porter's coat, bowler hat, walrus moustache, arms permanently crossed) guards the Corridor gate, hands over the Research Folder, is the first to use the word "chapters." Terse, transactional, utterly unbothered by the player's confusion. Refuses entry until the player has also convinced the Skeptic.
+- **The Skeptic** — sits on the bench at Probability Pond, unmoved by the plaque's "n=2" claim. Won't vouch for the player until they demonstrate falsification (paint a swan black) *and* explain why that's sufficient — not just do the trick. Her approval is a hard prerequisite for the Corridor, not flavor. In the game she's a woman (voice: Moira), painted from behind on the pond's bench; a front-facing sprite (`sprite-skeptic.png`) exists for the Act I "Starring" poster.
 - **KIRA** — a small, well-meaning, wildly overconfident robot assistant. Minding the Library because the actual librarian has vanished to "a workshop on information literacy," and by Act IV has escalated from "sorts citations" to "has already run and submitted your entire study without asking." Catchphrase: **"Certainly!"** — said with equal enthusiasm whether it's about to help or about to make things dramatically worse.
+- **The Survey Lab Nurse** (and an unnamed Technician) — run the emergency department for injured questions with total clinical seriousness. The Nurse is fluent in triage but sincerely believes more response categories always means more precision; someone has to talk her Technician out of adding **"SLIGHTLY EXTREMELY AGREE"** to a scale.
+- **The Ethics Tribunal** — three robed committee members seated twenty feet above the player: **the Chair of Consent** (peers down, rings a bell at the mere suggestion of talking to a student), **the Keeper of Data** (guards a transparent "anonymous" filing cabinet with a completely straight face), and **the Representative of Potential Discomfort** (visibly, permanently asleep). They treat human-subjects review like a Vatican conclave with a passport-control attitude problem.
+- **The University Sampling Officer** — presides over the Mensa's official, ludicrously ceremonial random-sampling apparatus (a giant brass drum, velvet rope, spotlights, a sash reading UNIVERSITY SAMPLING OFFICER). Speaks like a royal herald, reveres the raffle drum ("a second-generation randomiser... good God"), and is constitutionally incapable of noticing that a perfectly random sample of the wrong population is still the wrong population.
+- **The Fieldwork Director** — runs the Fieldwork Arena like a live game show, lives and dies by the illuminated RESPONSE RATE board, and considers a defensible 64% a greater achievement than a suspicious 100%.
 - **Prof. Feldstrom** — the Professor's structural opposite: hates claims that are too *small*. Runs the Hypotheses Accelerator in Act V. Not narratively connected to the first Professor — the contrast (one hates overreach, one hates timidity) is the joke, not a twist waiting to be revealed.
 - **The skeletons** — one per room, each a different flavor of research despair. Confirmed/new instances below, per act.
 - **The Research Folder** — not a character, but close to one by the end: the single physical object every act stamps, and the thing whose final state is the whole game's punchline.
@@ -140,15 +144,117 @@ A fourth Act I location, always open like the other three — already teased as 
 
 ## Act II — "Apparently We Need Data"
 
-*Rooms: The Mensa · Survey Lab*
+**Act II interlude (built).** After the Doorman scene, the first return to the campus map plays a trailer-style interlude: the folder now holding the handwritten Question, then the Professor holding it like a dead fish ("A question is not evidence"), the H-27 avalanche out of the pneumatic tube, a four-room montage, a "Starring" cast poster, and a big **ACT II: Apparently We Need Data** title card. The opening trailer likewise ends on an **ACT I: The Question** card. This is now how the act is introduced; the Office opening-beat scene below is still not built as an in-room scene.
 
-The Professor's handoff line for this act: **"A question is not evidence."**
+*Rooms: Survey Lab · The Ethics Tribunal · The Mensa · The Fieldwork Arena*
 
-**The Mensa:** everyone has an opinion and everyone insists their lunch queue is representative of the entire university — one queue could be populated entirely by people wearing matching **"I ♥ STANDARD ERRORS"** tote bags and they'd still swear blind they're a random sample. The raffle drum isn't just a prop, it's the department's actual, ludicrous, official sampling apparatus — treated with total bureaucratic seriousness by everyone except the player, who's the only one who seems to notice how strange that is.
+**Opening beat, back at the Office.** The player proudly presents the Professor with the folder stamped `QUESTION EXISTS`.
 
-**Survey Lab**, reframed as **a hospital for injured questions**: double-barrelled questions arrive physically taped together at the middle; leading questions lean visibly to one side like they've been shoved; one skeleton has spent eleven years trying to operationalize the word "often" and has a chart on the wall to prove it. The player is triage, not a grader.
+> **PROFESSOR:** "A question is not evidence."
+> **PLAYER:** "So I need data."
+> **PROFESSOR:** "Eventually."
+> **PLAYER:** "Eventually?"
+> **PROFESSOR:** "First you need permission to acquire data."
 
-**Folder update:** stamped `QUESTION HAS DATA` — which the Professor immediately undercuts: *"Where did these numbers come from?"* (setting up Act III).
+A pneumatic tube above his desk coughs violently and spits out a forty-seven-page form: **APPLICATION H-27: REQUEST TO APPROACH HUMAN BEINGS.**
+
+> **PROFESSOR:** "Try not to alarm them."
+
+H-27 is Act II's quest object — a separate, increasingly stamped/stapled/coffee-stained prop that gets folded into the Research Folder at the very end of the act. It has four boxes, one per room, and the four rooms can be tackled in almost any order:
+
+- ☐ **INSTRUMENT EXISTS** (Survey Lab)
+- ☐ **HUMANS MAY BE APPROACHED** (Ethics Tribunal)
+- ☐ **SAMPLE DRAWN** (The Mensa)
+- ☐ **RESPONSES ACQUIRED** (Fieldwork Arena)
+
+**Design rule for the whole act:** no room contains its own solution. Every room hands the player a problem whose fix is sitting in a different room, usually for an absurd institutional reason. And every major puzzle has a plausible-but-methodologically-wrong solution the game actually lets the player attempt in full — that failure, not a warning label, is where the teaching happens. All four Act I rooms stay open and re-visitable the whole time; nothing the player needs later is ever permanently used up.
+
+### Survey Lab — Emergency Department for Injured Questions
+
+Not a classroom — an A&E ward. Questions arrive on wheeled hospital beds. A double-barrelled question has been physically taped together down the middle (*"How satisfied are you with your studies AND your accommodation?"*) while two nurses argue about which half is causing the problem. A leading question lies dramatically sideways because it physically cannot stand upright (*"Don't you agree that the university's excellent new policy has improved student life?"*). A vague question labeled **OFTEN** is surrounded by specialists staring at charts. In the corner, the skeleton: **"DAY 4,016: STILL OPERATIONALISING 'OFTEN'."**
+
+The player repairs three questions physically — cuts the double-barrelled one apart, straightens the leading one, and (this is the one that reaches into another room) gives "often" an actual reference period. There's no calendar anywhere in the Lab, because *"temporal information compromises conceptual purity"* — the only calendar in the building is on the Ethics Tribunal's wall. Bring back one torn-off page (**THE LAST FOUR WEEKS**) and staple it to the question: *"During the last four weeks, how many scheduled lectures did you not attend?"* Once all three are stable, a machine labeled **FIT FOR HUMAN ADMINISTRATION** flashes and prints **SURVEY INSTRUMENT — MEDICALLY CLEARED**. The Nurse stamps the box, then adds: *"Obviously you can't give it to anyone."* / **"Why?"** / *"Ethics."*
+
+**The wrong-but-playable solution:** the player can absolutely leave "often" undefined and carry the instrument straight to Fieldwork anyway — where every respondent answers the vague version differently and the room can't do anything useful with the results, sending the player back here to actually fix it.
+
+**Act I item reused — the Likert Die.** A wounded attitude question (*"Do you agree with the new attendance policy?" YES/NO*) has, per the Nurse, "lost several degrees of opinion." The obvious move — rolling the die at the question — produces a single random answer (`STRONGLY AGREE`, then `DISAGREE` on a second roll) and the Nurse recoils: *"Please stop answering on behalf of the respondent."* The real fix is using the die as a **template**: tracing its six labeled faces onto a blank response card to build a proper ordered scale. A Technician then wants to "improve precision" by adding `SLIGHTLY EXTREMELY AGREE` — the player has to talk him down.
+
+**Act I item reused — the Hourglass, later.** Once a question *sounds* fine but is actually an unreadable pile of jargon (see Fieldwork below), it comes back here on a stretcher and the Nurse asks for "evidence of cognitive distress" — cueing the hourglass pretest described under Fieldwork.
+
+### The Ethics Tribunal
+
+Total tonal whiplash on purpose: a gigantic gothic courtroom, three robed committee members seated twenty feet above the player behind an enormous bench, a stained-glass window depicting a stick figure ticking **I CONSENT**. A plaque reads **THE INSTITUTIONAL TRIBUNAL FOR THE APPROACHING OF PERSONS.**
+
+> **CHAIR OF CONSENT:** "You intend to ask students... questions?"
+> **PLAYER:** "Yes."
+> *(all three recoil; a bell rings)*
+> **KEEPER OF DATA:** "About themselves?"
+> *(another bell)*
+
+Three environmental fixes, not quiz answers:
+
+1. **The consent form** is twelve pages of incomprehensible legal text — swap it for a plain-language one-pager sitting nearby (dismissed by the Tribunal at first as "insufficiently intimidating," approved once the player points out the participant can now actually explain it back).
+2. **The withdrawal mechanism.** A device called the **IRREVERSIBLE PARTICIPATION DEVICE** has a seat belt and no exit. The player installs the missing **WITHDRAW** button.
+3. **Contact vs. identifying data** (replaces an earlier draft of this puzzle that used the Act I ink bottle — see design note below). The Tribunal's showpiece is a magnificent *transparent* glass filing cabinet labeled **STRICTLY ANONYMOUS DATA**, every card inside plainly showing name, matriculation number, email, and favorite color. *"Nobody is permitted to look inside."* / **"It's glass."** / *"Correct."*
+
+   The Tribunal keeps its own **Redaction Stamp** (a rubber stamp reading `REDACTED`, sitting on the bench, never leaves the room) and a locked **Key Ledger**. The naive move — stamping every name *and* every participant number on the returned questionnaires — gets full marks from the Tribunal (*"Excellent information governance"*) and is a real trap: back at Fieldwork, nobody can tell which empty seat belongs to which non-respondent anymore, so no reminder can ever be sent. The actual fix: use the **chewed pen** (Act I) to write a numeric ID on each questionnaire *before* it leaves, redact only the name with the stamp, and leave the name↔ID key in the Ledger at Ethics, never carried out into the field.
+
+Each fix gets a ceremonial thumb lowered. Final stamp: **ETHICAL APPROVAL**, tiny print underneath: *subject to fourteen minor amendments.* The skeleton here is buried under amendment letters, sign reading **"MINOR AMENDMENT 14 OF 15."**
+
+**Act I items tried and correctly rejected here**, as one-line gags rather than real puzzles: the `SIGNIFICANT (p<.05)` stamp (*"Wrong department"* — saved for the Statistics Basement in Act III) and the `FINAL_v23_REALFINAL_USETHIS` USB drive as "secure storage" (*"Is it encrypted?" / "It says FINAL." / "That was not my question."* — saved for later).
+
+### The Mensa — The Grand Sampling Ceremony
+
+Everyone here has developed extremely strong methodological opinions over lunch. One queue is entirely people carrying matching **I ♥ STANDARD ERRORS** tote bags (*"This queue is basically the university"*); a table labeled **QUALITATIVE PEOPLE** for no stated reason; a table for one, sign reading **n = 1 / BUT VERY INTERESTING** — with, per house style, a skeleton sitting across from them, sign: **"ALSO VERY LONELY."**
+
+The centerpiece: a colossal brass raffle drum behind a velvet rope under spotlights, tended by the Sampling Officer in his ceremonial sash. Before he'll spin anything, he needs **the sampling frame** — and points, with total sincerity, at an enormous empty gilded picture frame on a pedestal.
+
+> **SAMPLING OFFICER:** "The frame."
+
+**The wrong-but-playable solution:** aim the empty frame at the lunch queue. Everyone in it dutifully poses inside it; the Officer is delighted (*"A population!"*) and spins the drum for a perfectly random sample of twelve tote-bag-carrying, curry-eating people. Take that "sample" to the Survey Lab and the statistician deflates it in one line: *"Remarkably representative of people currently standing in that queue."* Random selection from the wrong frame is still the wrong frame.
+
+The real sampling frame — the actual, complete student list — is held at the Ethics Tribunal and won't be released until the Tribunal's own box is checked (identifying data has to be stripped first). What comes back is the **PSEUDONYMISED SAMPLING FRAME**: the same gilded frame, now full of numbered cards instead of names.
+
+**Act I item reused — Magnifying Glass.** Even the "official" list looks suspicious under it: microscopic print at the bottom reads *"Includes only students registered for the university newsletter."* The Officer is unmoved (*"But it's a very large list." / "Still not the same thing." / "It has four thousand names." / "Still not the same thing." / "Alphabetised."*) — undercoverage, made physical.
+
+**Act I item reused — the Raffle Drum.** The Act I desk prop turns out to be the **MODEL SR-2 PORTABLE RANDOMISATION APPARATUS**, recognized instantly and reverently by the Officer ("Good God — a second-generation randomiser"). It's the correct tool throughout; only the *population fed into it* is ever wrong.
+
+**Act I item reused — the Mug.** The drum has no official receptacle for the drawn numbers (someone lost it). `Use` the `WORLD'S OKAYEST SAMPLE SIZE` mug on the sampling machine; numbered balls land in it; the Officer reads the label, long pause: *"Adequate."*
+
+Once the pseudonymised frame goes into the drum: trumpets, confetti, a small flag reading **A SAMPLE HAS OCCURRED**. Box stamped. Player: *"So I have data?"* Officer: *"Good heavens, no."*
+
+### The Fieldwork Arena
+
+A game-show set. A huge illuminated **RESPONSE RATE** board starts at 100% and craters in real time as summoned participants bail through doors labeled **TOO BUSY**, **FORGOT**, **EMAIL WENT TO SPAM**, and **I DON'T DO SURVEYS**, while a headset-wearing Fieldwork Director screams things like *"WE'RE LOSING THE COMMUTERS!"* The skeleton sits next to a phone: **"FOLLOW-UP EMAIL #11 · STILL HOPEFUL."**
+
+**First exposure — wording.** Administer the *unrepaired* instrument here and a numbered seat just sits there, silently reading, for far too long. The **hourglass** (Act I) turns over, empties, turns over again — twenty-one seconds and counting — before the Director blows a whistle and the question gets stretchered back to the Survey Lab. This is a cognitive-pretest failure, discovered by watching a respondent struggle rather than being told the question is bad.
+
+**Second exposure — social desirability.** With "often" fixed but the question still asked openly, every single respondent claims zero missed lectures — even the one who's visibly been asleep in the Mensa since Tuesday. `LECTURE ATTENDANCE: 100%`. Nothing changes until the response method itself changes: bring the **redacted, ID-tagged questionnaires and the Tribunal's now-covered response box** here — wrapped, at the Keeper of Data's genuine approval, in an ordinary brown Mensa lunch bag, since the box itself is transparent and "nobody is permitted to look inside" was apparently a purely legal statement. Anonymous, private answers change the distribution immediately. Director: *"Oh."* Player: *"What?"* *"Apparently people miss lectures."*
+
+**Third exposure — nonresponse, the real final boss of the act.** Twelve numbered seats light up for the drawn sample. Several stay empty; one has an out-of-office autoresponder (**"I AM CURRENTLY OUT OF OFFICE UNTIL FURTHER NOTICE"**). The response-rate board falls: 100 → 83 → 67. A large button reads **REPLACE MISSING RESPONDENTS WITH NEAREST AVAILABLE PERSON.**
+
+**The wrong-but-playable solution:** press it. Mensa diners flood the empty seats; the board snaps back to 100% with confetti — and the Sampling Officer bursts in, apoplectic: *"THOSE PEOPLE WERE NOT DRAWN."* Convenience substitution isn't a repaired sample, it's a different, undocumented one.
+
+The real fix needs three things fetched from elsewhere, each tied to something the player already did wrong once: a **reminder** (found stapled to the Survey Lab's skeleton — "FINAL REMINDER" / "FINAL FINAL REMINDER" / "ACTUAL FINAL REMINDER"), an **alternative response mode** (paper questionnaires from the Ethics Tribunal, for the one drawn participant who refuses the online form), and a **small incentive voucher** from the Mensa — which the Mensa won't hand over until the player surrenders the earlier, useless tote-bag sample from the sampling-frame puzzle. An Act-II mistake becomes an Act-II resource. Response rate climbs 58 → 67 → 75 and then genuinely stops.
+
+> **PLAYER:** "Only seventy-five per cent?"
+> **FIELDWORK DIRECTOR:** "Only? We haven't seen numbers like this since 2003."
+
+A **RECORD HIGH** banner drops, a dot-matrix printer buries the floor in paper, and a tiny USB drive pops out labeled **DATA**. Box stamped: **RESPONSES ACQUIRED.**
+
+**Act I item reused — the Rubber Duck**, played strictly as a one-line gag, no puzzle attached: try it as a mock respondent and get *"No answer."* / *(you wait)* / *"Still no answer."* / **"Nonresponse."** / *"Technically."*
+
+**Design note — items deliberately not reused here.** An earlier draft of this act reused the Act I **bingo card** as a physical nonresponse tracker (draw a line of five respondents, celebrate a "BINGO," then realize the completed line is entirely on-campus sociology students and nobody's actually representative) and the **black ink bottle** for the over-redaction gag now handled by the Tribunal's own Redaction Stamp. Both were cut on request to keep Act II's own object set distinct from Act I's swan puzzle — the numbered-seat board already carries the "which specific people didn't answer, and what do they have in common" beat without needing a second physical tracker, and the Redaction Stamp/Key Ledger pairing teaches the same pseudonymization lesson as the ink did, natively at the Tribunal instead of imported from the Pond.
+
+**H-27, complete.** All four boxes checked, the form is nearly invisible under stamps, staples, a Mensa coffee ring, and an ethics amendment stapled on sideways. Back at the Office, the player hands over the dataset.
+
+**Folder update:** stamped `QUESTION HAS DATA` — which the Professor immediately undercuts:
+
+> **PROFESSOR:** "Where did these numbers come from?"
+> **PLAYER:** "You cannot possibly be serious."
+> **PROFESSOR:** "Page seventeen, observation forty-three. Vegetarian. Stress score: nine." *(looks up)* "Why?"
+
+(setting up Act III).
 
 ## Act III — "Apparently Evidence Must Exist"
 
@@ -193,12 +299,13 @@ The player returns to the Seven-Second Office with the finished folder. See "The
 
 ## What's still not built
 
-1. **Acts II–V have no narrative text changes yet** — they still run their original, plot-free framing (see `ROADMAP.md` for their current, purely-mechanical descriptions). Everything in the Act II–V sections above is new copy to be written into those rooms' dialogue, plus the Research Folder needs to become an actual inspectable, evolving item/UI element (not just narration) that those acts update — new engineering, not just new copy.
-2. **No ending scene exists in code at all.** Completing Act V currently just says "decommissioned (for now)" and returns to the map — the entire Office-return epilogue above needs to be built from scratch.
-3. **Acts II–V are still flat procedural SVG rooms** with the older UI pattern, versus Act I's painted, verb-grid rooms (`HANDOVER.md` §03). Now that they have real plot beats, this visual gap matters more than it did — they need the same painted-art/verb-grid treatment to sell the new dialogue and props (tote bags, the taped-together questions, the casino bell, the SUBMIT MANUSCRIPT lever, Feldstrom's IMPACT gauge).
-4. **Trailer panel 1 needs new art** — the shipped `trailer-panel1-rejection.png` still shows the old rejected-letter concept; regenerate from the revised prompt in `art/trailer/ART_PROMPTS.md` (an empty research folder + a circled deadline) before swapping in the new narration text.
-5. **Trailer panel 2b ("The Spiral")** needs art — prompt is ready in `art/trailer/ART_PROMPTS.md`, not yet generated.
+1. **Act II is built and playable end-to-end** (see `HANDOVER.md` §01i for exactly how each chain was implemented and where it simplified the design above — e.g. the pen writes WITHDRAW on the Device instead of a separate button item, and the Act II ending is narrated in the Fieldwork Arena rather than as a scene back at the Office). Character sprites for the Nurse, the three judges, the Sampling Officer and the Fieldwork Director are in (the Mensa cook stays off-screen). Still missing for Act II: voiced audio, and the Office return scene ("Where did these numbers come from?") that hands over to Act III.
+2. **Acts III–V still have no narrative text changes** — they still run their original, plot-free framing. Everything in those sections is new copy to be written into those rooms' dialogue.
+3. **No ending scene exists in code at all.** Completing Act V currently just says "decommissioned (for now)" and returns to the map — the entire Office-return epilogue above needs to be built from scratch.
+4. **Acts II–V are still flat procedural SVG rooms** with the older UI pattern, versus Act I's painted, verb-grid rooms (`HANDOVER.md` §03). Act II now has real plot beats and a lot of specific physical props (the gilded sampling frame, the transparent anonymous filing cabinet, the RESPONSE RATE board, the taped-together questions) that need the same painted-art/verb-grid treatment Act I got to actually land.
+5. **Trailer panel 1 needs new art** — the shipped `trailer-panel1-rejection.png` still shows the old rejected-letter concept; regenerate from the revised prompt in `art/trailer/ART_PROMPTS.md` (an empty research folder + a circled deadline) before swapping in the new narration text.
+6. **Trailer panel 2b ("The Spiral")** needs art — prompt is ready in `art/trailer/ART_PROMPTS.md`, not yet generated.
 
-Given 1 and 2 alone are essentially "write and build four more room-narratives plus an ending," this is a real scope decision, not a small follow-up — worth agreeing on sequencing (one act at a time, ending last or first) before diving in.
+Given 1 alone is "build four room-narratives, two of them brand new, with four interlocking cross-room puzzle chains," this is a real scope decision on its own — worth agreeing on room build order (the doc above suggests Survey Lab first) before diving in. See `ROADMAP.md` for the logged, not-yet-built entry.
 
 **Already shipped, done:** Act I's two-stage reveal (Doorman exchange + Research Folder item), the full 5-panel trailer, the boot splash/logo/title sequence. See `HANDOVER.md` §01b for exact details.

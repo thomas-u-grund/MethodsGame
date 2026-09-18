@@ -23,3 +23,6 @@ web/survey-lab.html
 web/the-library.html
 web/the-mensa.html
 web/whirlpool-office.html
+
+# Full-size PNG originals of the WebP assets in web/ (kept locally, too big for the repo)
+web-png-originals/

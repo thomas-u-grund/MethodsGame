@@ -27,4 +27,8 @@ Then visit `http://localhost:8080/the-secret-of-the-codebook.html`.
 
 ## Status
 
-Act I (Office, Lecture Theatre, Causality Corridor, Probability Pond) is fully built, art-passed, and voice-acted. Acts II–V exist as functional puzzle rooms but don't yet have the same art or narrative pass — see `HANDOVER.md` for the current state and open items.
+- **Act I** (Office, Lecture Theatre, Causality Corridor, Probability Pond) is fully built, art-passed and voice-acted, with a "Starring" cast poster and an ACT I title card at the end of the opening trailer.
+- **Act II** (Survey Lab, Ethics Tribunal, Mensa, Fieldwork Arena) is fully built as painted verb-grid rooms with character sprites and the H-27 cross-room puzzle chain, introduced by its own trailer-style interlude (and "Starring" poster).
+- **Acts III–V** exist as functional puzzle rooms but don't yet have the art or narrative pass.
+
+Each act's assets are preloaded behind a progress bar, and the next act is fetched in the background. Large images ship as WebP; the full-size PNG originals are kept out of the repo. See `HANDOVER.md` for the current state and open items.
