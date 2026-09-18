@@ -4,7 +4,7 @@
 
 A LucasArts-style point-and-click adventure teaching Research Methods, built as a single self-contained HTML file. This is the orientation doc for picking the project back up — what's live, how it's wired together, and what's still open.
 
-**Play the current build:** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 (v45 · 2026-09-18 · Acts I–V, 10 rooms including Probability Pond)
+**Play the current build:** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 (v49 · 2026-09-19 · Acts I–V; Act II fully built)
 
 v45 is current — everything through section 01f below is live, including voiced dialogue for the Office and Lecture Theatre, the Skeptic's voice in Probability Pond, room background music, and campus-map music. **Important lesson from this session: local edits and "it worked" verification (headless Chrome, etc.) do NOT mean the change is live** — the Artifact has to be explicitly republished every time, and it was very easy to lose track of this mid-session (the Office voiced-dialogue pilot sat local-only through the entire Lecture Theatre extension before anyone noticed the published version was still pre-audio). `title-theme.m4a` was not published (the Artifact host doesn't serve `.m4a`) — the `<audio>` element's `.mp3` fallback `<source>` handles this transparently, already verified working.
 
