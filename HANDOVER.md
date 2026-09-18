@@ -1,12 +1,12 @@
 # The Secret of the Lost Codebook — Handover
 
-*Project handover / internal reference — compiled 2026-09-15, last updated 2026-09-17 after the narrative throughline + trailer/title art pass*
+*Project handover / internal reference — compiled 2026-09-15, last updated 2026-09-19 after the Act II build, sprites, interludes, preloading and the v49 publish*
 
 A LucasArts-style point-and-click adventure teaching Research Methods, built as a single self-contained HTML file. This is the orientation doc for picking the project back up — what's live, how it's wired together, and what's still open.
 
 **Play the current build:** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 (v49 · 2026-09-19 · Acts I–V; Act II fully built)
 
-v45 is current — everything through section 01f below is live, including voiced dialogue for the Office and Lecture Theatre, the Skeptic's voice in Probability Pond, room background music, and campus-map music. **Important lesson from this session: local edits and "it worked" verification (headless Chrome, etc.) do NOT mean the change is live** — the Artifact has to be explicitly republished every time, and it was very easy to lose track of this mid-session (the Office voiced-dialogue pilot sat local-only through the entire Lecture Theatre extension before anyone noticed the published version was still pre-audio). `title-theme.m4a` was not published (the Artifact host doesn't serve `.m4a`) — the `<audio>` element's `.mp3` fallback `<source>` handles this transparently, already verified working.
+**v49 is live (2026-09-19)** and matches the local build and GitHub `main` (https://github.com/thomas-u-grund/MethodsGame): everything in sections 01b–01k is published — all of Act I (voiced), all four Act II rooms with character sprites, the Doorman, the Act I/Act II "Starring" posters and ACT title cards, the Act II trailer interlude, and per-act preloading with progress bars. **Lesson that keeps recurring: local edits and headless-Chrome "it worked" do NOT mean the change is live** — the Artifact must be republished explicitly, with every new/changed asset passed in `files` (recipe in section 01k).
 
 ---
 
@@ -48,6 +48,13 @@ All of the above verified end-to-end via headless Chrome/CDP this session (panel
 
 ---
 
+## 01k. Session changes (2026-09-19): v49 published, images switched to WebP, GitHub synced
+
+- **Published as v49** to the same artifact URL. The artifact host caps a version at 64 MB and the referenced assets had grown to ~97 MB, so every image over 400 KB (44 files: all backgrounds, trailer panels, title/logo, professor sprites, the bigger Act II sprites and a few icons) was converted with `cwebp -q 88 -alpha_q 95 -m 6` — 78 MB → 11 MB, visually indistinguishable in side-by-side crops, alpha intact. The whole game is now ~30 MB, which also makes the loading bars fast. References in the HTML were rewritten `.png` → `.webp`; small PNGs (icons, patches) stayed PNG.
+- **Full-size PNG originals** of the converted files live in `web-png-originals/` at the repo root — local only, git-ignored. Regenerate a WebP from there if an asset needs re-editing; never edit the WebP and re-encode repeatedly.
+- **How to republish** (what produced v49): collect every asset literally referenced in the HTML (`re.findall(r'[A-Za-z0-9_-]+\.(?:png|mp3|m4a|jpg|webp)', html)`), pass them as `files` `{ "name.webp": "web/name.webp", … }` with `url` = the artifact URL, and map any published file that's no longer referenced to `null` so it's removed. `.m4a` is **not** a served type — leave `title-theme.m4a` out; the `<audio>` element falls back to `title-theme.mp3`.
+- **Repo:** `sprite-skeptic.png`, `sprite-skeleton.png` (only used to build the Act I poster) and the unused `icon-consentform-thick.png` moved from `web/` to `art/sprites/`, so `web/` holds only what the game loads (plus the old git-ignored prototype HTML files). README status updated. Pushed to `main`.
+
 ## 01j. Session changes (2026-09-18, night): Doorman sprite, Act I/II title cards, Act II interlude, Survey Lab patient charts
 
 - **Doorman sprite** (`sprite-doorman.png`, generated in the same ChatGPT chat as the Act II cast): maroon porter's coat, bowler, walrus moustache, arms crossed. Corridor markup has a `#cc_doorman` img; `showDoorman(DOORMAN_GATE | DOORMAN_ARCH | null)` puts him in the gate's doorway whenever he answers the bell, and beside the archway for the "Not here / Chapter One" exchange. `renderGate`/`renderRoom` hide him. Still silent (no voice).
@@ -61,7 +68,7 @@ All of the above verified end-to-end via headless Chrome/CDP this session (panel
 
 ## 01i. Session changes (2026-09-18, late): Act II built in code — all four rooms playable end-to-end
 
-**Not yet published.** Act II now exists as four real verb-grid rooms using the painted art from 01h, replacing the old SVG Mensa and quiz-style Survey Lab entirely.
+**Published in v49.** Act II now exists as four real verb-grid rooms using the painted art from 01h, replacing the old SVG Mensa and quiz-style Survey Lab entirely.
 
 **Shared scaffolding (engine IIFE):** `CODEBOOK_ADV_HTML(o)` builds a room's markup from a hotspot table (+ optional sprites/overlay); `CODEBOOK_ADV_ROOM(ctx, o)` wires the verb grid, inventory, hover labels and hotspot clicks, and hands each room an `api` (`say`, `choice`, `give`, `take`, `sprite`, `spriteSrc`, `sync`, …). A room is now just a hotspot table plus one `onClick(id, verb, item, api)` function — return `false` for the generic fallback line. Act I rooms were **not** migrated to it (they work; no reason to touch them). `CODEBOOK_H27_HTML()` renders the ☐/☑ H-27 strip shown top-right in every Act II room. The H-27 form is issued (with a one-time pneumatic-tube line) the first time the player walks into *any* Act II room — the Office's tuned dialogue tree was deliberately left alone.
 
@@ -227,21 +234,24 @@ All of the above verified end-to-end via headless Chrome/CDP this session (panel
 
 ## 01. What's actually playable right now
 
-Act I (the first three rooms) is the finished, polished slice: fully painted backgrounds, a real puzzle loop, and the game's current signature mechanic — the professor physically moves between two rooms depending on what you've done. Acts II–V exist and are functionally playable, but visually they're still in an earlier, flatter style (procedural SVG scenes, no commissioned art) and use an older, stricter unlock pattern than Act I does. See the callout in section 03 — this is the single most important thing to know before touching those rooms.
+Acts I and II are the finished slices: painted backgrounds, verb-grid/inventory UI, character sprites, trailer-style act openers. Acts III–V are functionally playable but still in the older flat SVG style with the older UI (see section 03).
 
 | Act | Room | Unlock rule | Art |
 |---|---|---|---|
-| I | **The Seven-Second Office** `id: whirlpool` | always open | painted |
-| I | **Introduction to Systems Theory** `id: lecture` | always open | painted |
-| I | **Causality Corridor** `id: corridor` | always open | painted · 4 rooms |
-| II | **The Mensa** `id: mensa` | needs `corridorDone` | flat / procedural |
-| II | **Survey Lab** `id: surveylab` | needs `mensaDone` | flat / procedural |
-| III | **The Library** `id: library` | needs `surveyDone` | flat / procedural |
+| I | **The Seven-Second Office** `id: whirlpool` | always open | painted · voiced |
+| I | **Introduction to Systems Theory** `id: lecture` | always open | painted · voiced |
+| I | **Probability Pond** `id: pond` | always open | painted · Skeptic voiced |
+| I | **Causality Corridor** `id: corridor` | always open (gate checks Question + Skeptic) | painted · 4 rooms · Doorman sprite |
+| II | **Survey Lab** `id: surveylab` | needs `corridorDone` | painted · Nurse · patient charts |
+| II | **The Ethics Tribunal** `id: ethics` | needs `corridorDone` | painted · three judges |
+| II | **The Mensa** `id: mensa` | needs `corridorDone` | painted · Sampling Officer |
+| II | **The Fieldwork Arena** `id: fieldwork` | needs `corridorDone` | painted · Fieldwork Director |
+| III | **The Library** `id: library` | needs `actIIDone` | flat / procedural |
 | III | **Statistics Basement** `id: statsbasement` | needs `libraryDone` | flat / procedural |
 | IV | **The Delegation Engine** `id: delegation` | needs `statsDone` | flat / procedural |
 | V | **The Hypotheses Accelerator** `id: accelerator` | needs `delegationDone` | flat / procedural |
 
-Every room, including the locked ones, is reachable directly by seeding `localStorage` during testing — see section 05.
+Flow: boot (logo → title, "Loading Act I" bar) → opening trailer → Act I "Starring" → ACT I card → map. After the Corridor, the first map visit plays the Act II interlude (preload bar → folder/Question → Professor → H-27 → montage → "Starring" → ACT II card). Every room is reachable directly by seeding `localStorage` during testing — see section 05.
 
 ---
 
@@ -304,12 +314,14 @@ This is the first flag in the codebase that needs to go both ways, so a `clearFl
 
 This is the loop that produced every painted asset shipped so far — Office, Lecture Theatre, all four Corridor rooms, the campus map, and every pickup icon.
 
-1. Write a precise ChatGPT image prompt (composition, framing, what needs to stay isolated/transparent for later cropping) and hand it to the user, or generate directly if asked.
-2. User saves the result to `~/Downloads`. Always check **all** matching files there before picking one — regenerations often land as 3–4 near-duplicates with adjacent timestamps.
+1. Write a precise ChatGPT image prompt (composition, framing, what needs to stay isolated/transparent for later cropping). Since 2026-09-18 Claude generates directly in the user's ChatGPT via Claude in Chrome (see 01h): attach style references (`prof-lecturing.png` for characters, a room/trailer image for scenes), type prompts as **one line** (a newline submits early), and keep all sprites of a cast in **one chat** so the style stays consistent. Download without the editor via an in-page `fetch(img.src)` → blob → `<a download="name.png">`.
+2. Files land in `~/Downloads`. Always check **all** matching files there before picking one — regenerations often land as 3–4 near-duplicates with adjacent timestamps.
 3. Verify before using it: `identify -format "%wx%h"` for dimensions, and `identify -verbose file.png | awk '/Alpha:$/{found=1} found{print}'` to confirm real (not just apparent) transparency on anything meant to overlay a scene.
 4. For hotspot/sprite placement: overlay a magenta/cyan pixel grid at 100px, then a tighter 25–50px crop over the target area, read coordinates off it, convert to `%` of the native image size for CSS.
 5. For anything whose placement is uncertain (visibility, fit): composite it locally first — `magick base.png ( overlay.png -resize WxH ) -geometry +X+Y -composite test.png` — and look at the result before touching the live page. This caught real bugs (an invisible magnifying glass, a badly-placed bingo card) that screenshot-based browser testing alone missed.
-6. Archive the source in `art/<room>/`, install the trimmed/resized final in `web/`, wire it into the HTML, test locally (section 05), then publish with the new file(s) explicitly listed — see the warning below.
+6. Sprites: crop to the alpha>40% bounding box (`g=$(magick in.png -alpha extract -threshold 40% -format '%@' info:)`, then `-crop $g +repage`) — plain `-trim` leaves big padding because ChatGPT's transparent pixels carry varying RGB. Full-body sprites → 820 px tall; chest-up → 560 px wide. Size each sprite's box to the image's aspect ratio so `object-fit:contain` doesn't shift it.
+7. Anything over ~400 KB ships as WebP (`cwebp -q 88 -alpha_q 95 -m 6`); keep the PNG original in `web-png-originals/` or `art/`.
+8. Archive the source in `art/<room>/`, install the final in `web/`, wire it into the HTML, add it to the right `CODEBOOK_ACT_ASSETS` list so it's preloaded, test locally (section 05), then publish with the new file(s) explicitly listed — see the warning below and 01k.
 
 > **⚠** Republishing the HTML text alone does **not** update images already referenced by it. Any publish that touches assets must pass them via the Artifact tool's `files` parameter, or the live page keeps serving the old (or missing) PNGs.
 
@@ -333,52 +345,49 @@ localStorage.setItem('codebook_save_v1', JSON.stringify({
 location.reload();
 ```
 
+Headless verification (what every change this session was checked with): launch Chrome with `--headless=new --mute-audio --remote-debugging-port=9333` (**always `--mute-audio`** — an unmuted run once played the game music out loud on the user's machine) and drive it over CDP from Node. Scratch scripts from this session: a full Act II playthrough in a deliberately messy order that asserts zero JS errors and all four H-27 boxes, per-room sprite screenshots, interlude/title-card screenshots, and a throttled-network run for the loading bars (`Network.emulateNetworkConditions`). Preview the Act II interlude alone with `?play=act2` (doesn't touch the save).
+
 Always `localStorage.removeItem('codebook_save_v1')` after testing and before publishing, so the shipped link starts fresh. Real mouse clicks work fine for a human player; automated clicks (browser-automation tooling) can miss small hitboxes even when the CSS math checks out — dispatching via `document.querySelector(...).click()` is the reliable fallback for scripted verification.
 
 ---
 
 ## 06. Repo layout
 
+GitHub: https://github.com/thomas-u-grund/MethodsGame (public, `main`). Only what the game and its art pipeline need is committed.
+
 ```
-web/                              # everything that ships
+web/                              # everything that ships (= exactly what gets published)
   the-secret-of-the-codebook.html   # the whole game — source of truth
-  *.png                              # every installed game asset
-  *-art-prompts.html                 # reference docs of prompts used per room
-  causality-corridor.html, delegation-engine.html,
-  statistics-basement.html, survey-lab.html,
-  the-library.html, the-mensa.html, whirlpool-office.html
-    ^ standalone prototypes, one per room, predating the merge into
-      the single file above. Likely stale — confirm with the user
-      before deleting; nothing in the live game reads from them.
+  *.webp / *.png / *.mp3            # every asset the HTML references; big images are WebP
+  (git-ignored: old per-room prototype HTMLs and *-art-prompts.html — stale, nothing reads them)
 
-art/                              # source art, organized by room
-  office/, lecture/, corridor/, map/, characters/professor/, trailer/
-    ^ each holds source generations + candidates; trailer/ also has ART_PROMPTS.md,
-      corridor/ also has ARCHWAY_PROMPT.md
+web-png-originals/                # git-ignored, local only: full-size PNGs behind the WebP files
 
-backups/                          # pre-change snapshots this session made before editing (see 01a)
-  the-secret-of-the-codebook.pre-mi-captions.<timestamp>.html
-  patch-{hourglass,mug,penjar,stamp,usb,likertdie}.png   # the old, professor-containing patches
+art/                              # source art + prompts, organized by room
+  office/, lecture/, corridor/, map/, trailer/, characters/professor/
+  surveylab/, ethics/, mensa/, fieldwork/   # each with ART_PROMPTS.md (Act II)
+  sprites/                                  # sprites not used in a room (Skeptic, skeleton, spare icon)
 
+README.md                         # public-facing summary + how to run locally
 ROADMAP.md                        # the detailed, chronological changelog + backlog
 STORY.md                          # the narrative bible: premise, cast, act-by-act plot, open story threads
 ```
 
-This doc is the map; `ROADMAP.md` is the full trip log — every shipped change and every open idea is written up there in far more detail than repeated here. `STORY.md` is the narrative counterpart — read it before writing new dialogue or planning Acts II–V's story beats.
+This doc is the map; `ROADMAP.md` is the full trip log. `STORY.md` is the narrative counterpart — read it before writing new dialogue or planning Acts III–V.
 
 ---
 
 ## 07. Open backlog, condensed
 
-- **Not published yet.** Section 01b's changes are local-only. Publish via the Artifact tool, `files` covering every new PNG listed there.
-- **Trailer is complete** — all 5 panels generated and wired in, always plays, Escape skips it. Not open anymore.
-- **Citation-counter desk prop + `icon-citationslip.png`** — the sidequest (section 01b) works end-to-end through dialogue alone; a physical counter prop on the desk and a real inventory icon are cosmetic follow-ups whenever art gets made.
-- **Acts II–V** need the same treatment Act I got: painted backgrounds, verb-grid/inventory UI, a decision on the always-open-vs-chained unlock question (section 03), and — if the Monkey-Island caption style (section 02) is a keeper — the same `.scene-caption` treatment, which touches markup only per room, no JS.
-- **Mensa** has no side-panel/inventory display at all (a side effect of removing the old top-HUD inventory chips) — the raffle-drum mechanic still works, but the player can't see they're carrying it. Fix is giving it the same `side-inv` treatment Office/Corridor/Lecture Theatre already have.
-- **Mensa room** has a second art-prompt set drafted ("slightly ridiculous") but never generated.
-- **Corridor** wrong-door "falling" sequence has no dedicated transition art (uses a plain fade/scale) — not blocking, just not as polished as the rest of Act I.
-- **Baked-in text** in `office-bg.png` ("Drittmittel-funded staff only") can't be removed without regenerating the art; an inpainting prompt was offered but never requested.
+- **Story mismatch between Act I and Act II:** the Question is about parental education and Gymnasium transfer (NRW 2005–2020), but the Act II survey instrument is about lecture attendance. Decide which one the story keeps; the Act II interlude shows the real Act I Question on the index card.
+- **Office hand-off scene to Act II/III** isn't built as an in-room scene; Act II is introduced by the interlude instead, and the "Where did these numbers come from?" hand-off to Act III doesn't exist yet.
+- **No voices in Act II;** the Doorman is also still silent (no acceptable macOS voice was found — see 01f).
+- **Acts III–V** need the Act I/II treatment: painted rooms on `CODEBOOK_ADV_HTML`/`CODEBOOK_ADV_ROOM`, sprites, an interlude + "Starring" poster + ACT card, and an `act3`… list in `CODEBOOK_ACT_ASSETS`.
+- **Unused sprites:** `art/sprites/sprite-skeptic.png` and `sprite-skeleton.png` could replace the painted back-view Skeptic at the pond and the Office skeleton, if wanted.
+- **Citation-counter** has a sprite (`sprite-citationcounter`) but `citationslip` still has no inventory icon — cosmetic.
+- **Corridor** wrong-door "falling" sequence has no dedicated transition art — not blocking.
+- **Baked-in text** in `office-bg` ("Drittmittel-funded staff only") can't be removed without regenerating the art.
 
 ---
 
-*the-secret-of-the-codebook.html · ~3,700 lines · single file, no build step*
+*the-secret-of-the-codebook.html · ~5,000 lines · single file, no build step*

@@ -1,5 +1,25 @@
 # The Secret of the Codebook — Roadmap / Backlog
 
+## Voiced dialogue everywhere + living characters (talking and moving sprites) — planned
+_Logged 2026-09-19, requested by the user. Not started._
+
+**1. Audio for all dialogue.** Today only the Office, the Lecture Theatre and the Skeptic are voiced (macOS `say` → mp3 via `CODEBOOK_PLAY_LINE_AUDIO`; Space stops a line). Still silent: the Doorman, every Act II character (Nurse, Chair of Consent, Keeper of Data, the snoring Representative, Sampling Officer, Fieldwork Director, the Mensa cook), the interlude captions and Acts III–V.
+- Cast one distinct voice per character. The user rejected every macOS voice tried for the Doorman as "too artificial", and Premium Siri voices weren't downloadable on their Mac, so **the voice source is the open decision**: better local voices, a hosted TTS service, or recorded human voices. Decide this before generating lines at scale.
+- Wire Act II through the existing hook: `api.say(speaker, html, cls, audio)` in `CODEBOOK_ADV_ROOM` already accepts an audio file. Lines that are assembled dynamically (e.g. Ethics approval prefixes, Fieldwork klaxon append) need per-fragment clips or a rewrite into fixed lines.
+- Keep the Lecture Theatre rule: characters speak only their own words — narration/stage directions stay text-only.
+- Add every new clip to the right `CODEBOOK_ACT_ASSETS` list so the loading bars cover it; mind the 64 MB per-version artifact cap (mp3 at `-q:a 3` is fine; ~9 MB for Act I today).
+
+**2. Talking sprites.** Characters visibly speak while their line plays.
+- Minimum: a CSS "puppet" animation while `CODEBOOK_PLAY_LINE_AUDIO` is playing — slight bob/lean/squash on the speaker's sprite, stopped on `ended` or Space. Needs a speaker → sprite map per room. No new art.
+- Better: 2–3 mouth frames per character (closed / open / wide), generated in the same ChatGPT chat as the base sprite with the pose locked, swapped on a timer or driven by the audio's amplitude via Web Audio `AnalyserNode`. Add an idle blink frame for extra life.
+
+**3. Moving sprites.** Characters walk instead of popping in.
+- Minimum: tween a sprite's `left`/`top` with a walking bob (the Professor already has `prof-walking` for his Office ↔ Lecture Theatre moves; the Doorman stepping out of the gate; the Sampling Officer striding to the drum; the Fieldwork Director pacing by the podiums).
+- Better: 4–6 frame walk cycles as sprite sheets. Frame-to-frame consistency is the risk with image generation — generate all frames in one image (a strip on a transparent background) rather than one call per frame, then slice.
+- Flip horizontally for direction (`transform: scaleX(-1)`), and keep hotspots following the sprite while it moves.
+
+Suggested order: pick the voice source → voice Act II + the Doorman → CSS talking puppet for every speaking sprite → walking tweens → only then invest in mouth frames and walk-cycle sheets where it pays off most (the Professor first).
+
 ## Act II — full redesign: four rooms, H-27 form, cross-room puzzle chains (built)
 _Logged 2026-09-18, art generated and all four rooms built the same day — see HANDOVER.md §01i_
 
