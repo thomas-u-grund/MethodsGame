@@ -1,5 +1,15 @@
 # The Secret of the Codebook — Roadmap / Backlog
 
+## Campus map: label only the rooms the player can enter — planned
+_Logged 2026-09-19, requested by the user. Not started._
+
+The campus map art currently has painted name signs on every building, including rooms that are still locked or belong to later acts (e.g. Library Annex, Administration, Ethics Tribunal, Fieldwork Arena are all labelled from the very start). Instead:
+- **Act I map:** only the Act I locations carry labels (Professor's Office, Lecture Theatre, Department of Causality, Probability Pond); every other building is unlabelled.
+- **Act II map:** adds labels for the four Act II rooms (Survey Lab, Ethics Tribunal, Mensa, Fieldwork Arena); later-act buildings stay unlabelled.
+- Continue per act (Act III adds the Library and Statistics Basement, and so on).
+
+Implementation options: regenerate/inpaint one map image per act with the signs removed or blank (`art/map/` already has `source-v1-act1.png` and `source-v2-act2.png` as starting points), or paint blank signboards once and render the labels as HTML overlays that appear when a room unlocks (more flexible, and one map image serves every act). `showMap()` picks the image or overlays by act progress (`corridorDone`, `actIIDone`, …).
+
 ## Voiced dialogue everywhere + living characters (talking and moving sprites) — planned
 _Logged 2026-09-19, requested by the user. Not started._
 
