@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8"><title>rig test</title>
+<style>body{margin:0;background:#2b2520;font:12px monospace;color:#ccc} .cell{position:relative;display:inline-block;width:230px;height:470px;border-right:1px solid #444} .cell span{position:absolute;left:6px;top:4px}</style>
+<div id="row"></div>
+<script src="rig.js"></script><script id="d"></script>
+<script>
+var q=new URLSearchParams(location.search), n=q.get('n'), v=q.get('v');
+var sc=document.createElement('script'); sc.src=n+'/rig-def.js?'+Date.now(); sc.onload=go; document.body.appendChild(sc);
+function go(){ var def=window[v], row=document.getElementById('row');
+  if (q.get('live')){ var c=document.createElement('div'); c.className='cell'; c.style.width='600px'; row.appendChild(c);
+    var r=CodebookRig.build(c,def,{height:420}); r.root.style.left='260px'; r.root.style.top='250px'; r.play(CodebookRig.walk,{}); return; }
+  [-1,0,.125,.25,.375,.5,.625,.75].forEach(function(t){ var c=document.createElement('div'); c.className='cell'; row.appendChild(c);
+    var s=document.createElement('span'); s.textContent=t<0?'rest':'t='+t; c.appendChild(s);
+    var r=CodebookRig.build(c,def,{height:420}); r.root.style.left='110px'; r.root.style.top='250px';
+    if(t>=0){var p=CodebookRig.walk(t,{}); r.pose(p.angles,p.offset);} });
+}
+</script>
