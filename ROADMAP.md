@@ -9,6 +9,8 @@ _Logged 2026-09-19, requested by the user. Not started._
 - Keep the Lecture Theatre rule: characters speak only their own words — narration/stage directions stay text-only.
 - Add every new clip to the right `CODEBOOK_ACT_ASSETS` list so the loading bars cover it; mind the 64 MB per-version artifact cap (mp3 at `-q:a 3` is fine; ~9 MB for Act I today).
 
+**Progress (2026-09-19):** voice source decided: **local Chatterbox** (English model, `tools/tts/gen.py`, see HANDOVER §01l). The Doorman is voiced (Ralph reference, exaggeration 0.6). Next: cast and voice the Act II characters the same way (a reference clip per character, compared as 3–5 takes), then decide whether to recast the Professor and the Skeptic for consistency.
+
 **2. Talking sprites.** Characters visibly speak while their line plays.
 - Minimum: a CSS "puppet" animation while `CODEBOOK_PLAY_LINE_AUDIO` is playing — slight bob/lean/squash on the speaker's sprite, stopped on `ended` or Space. Needs a speaker → sprite map per room. No new art.
 - Better: 2–3 mouth frames per character (closed / open / wide), generated in the same ChatGPT chat as the base sprite with the pose locked, swapped on a timer or driven by the audio's amplitude via Web Audio `AnalyserNode`. Add an idle blink frame for extra life.

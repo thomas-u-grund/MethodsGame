@@ -27,7 +27,7 @@ PROVISIONAL RESEARCH PROJECT
 STATUS: QUESTION EXISTS
 ```
 
-The Professor's Precisely Worded Question goes inside it. From here on the player isn't completing lessons — they're trying to turn one miserable grad-student idea into something the Professor will actually accept, and every department unit insists its particular contribution is mandatory before the project can proceed. The folder is inspectable at any time and visibly grows/changes stamp across the game:
+The Professor's Precisely Worded Question goes inside it: **"Do first-years who attend more Methods lectures get better exam results? (winter term 2025/26)"** — attendance is what Act II's survey measures, exam results are what later acts link it to. From here on the player isn't completing lessons — they're trying to turn one miserable grad-student idea into something the Professor will actually accept, and every department unit insists its particular contribution is mandatory before the project can proceed. The folder is inspectable at any time and visibly grows/changes stamp across the game:
 
 | After | Stamp reads |
 |---|---|

@@ -26,3 +26,7 @@ web/whirlpool-office.html
 
 # Full-size PNG originals of the WebP assets in web/ (kept locally, too big for the repo)
 web-png-originals/
+
+# Local text-to-speech environment (Chatterbox) and its model cache
+.venv-tts/
+tools/tts/out/

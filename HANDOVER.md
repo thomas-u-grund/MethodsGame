@@ -48,6 +48,15 @@ All of the above verified end-to-end via headless Chrome/CDP this session (panel
 
 ---
 
+## 01l. Session changes (2026-09-19, later): local Chatterbox voices; the Doorman speaks
+
+- **Voice engine: Chatterbox** (Resemble AI, open source), English model only (`ResembleAI/chatterbox`, ~3 GB of weights in the Hugging Face cache), installed in the git-ignored `.venv-tts/` (Python 3.11.9 from pyenv, `chatterbox-tts==0.1.7`, torch 2.6, runs on Apple-Silicon MPS at ~2–3 s per line). Chosen over Kokoro/Piper for its `exaggeration` dial (theatrical delivery); the Turbo variant was skipped because it ignores `exaggeration`.
+- **Pipeline:** `.venv-tts/bin/python tools/tts/gen.py jobs.json` (committed script; each job = `out`, `text`, optional `ref` reference-voice wav, `exaggeration`, `cfg_weight`, `temperature`, `seed`) → wav in the git-ignored `tools/tts/out/` → `ffmpeg -codec:a libmp3lame -q:a 3` into `web/`. A character's voice = a ~10 s reference clip in `tools/tts/refs/` (currently macOS `say` voices re-rendered through Chatterbox, which keeps the timbre but makes the delivery natural).
+- **Doorman cast** (user picked take 3 of 5): ref `tools/tts/refs/Ralph.wav`, `exaggeration 0.6`, `cfg_weight 0.4`. Six clips: `doorman-noquestion`, `doorman-noskeptic`, `doorman-pass`, `doorman-nothere`, `doorman-thedoor`, `doorman-chapterone` (.mp3), added to `CODEBOOK_ACT_ASSETS.act1`. Only his own words are voiced; narration stays text-only.
+- **Corridor wiring:** the Corridor's `setLine(speaker, html, cls, audioSrc)` now takes an optional clip (plays only when given, so System lines don't cut him off). Timers were retimed around clip lengths: gate refusals wait 2.4 s / 7.4 s before the door shuts, the pass line 9.6 s before "You step through", and the archway exchange runs to 12.6 s before the folder is handed over. Verified headless (muted) for all three gate cases.
+- **Act I Question changed** to lecture attendance and exam results (see the "Story mismatch resolved" note in 01j); `office-w2.mp3` and `office-w3-callout-a.mp3` regenerated with `say -v Daniel` so the Professor's voice stays consistent until he's recast.
+- **Not yet pushed or published** at the time of writing.
+
 ## 01k. Session changes (2026-09-19): v49 published, images switched to WebP, GitHub synced
 
 - **Published as v49** to the same artifact URL. The artifact host caps a version at 64 MB and the referenced assets had grown to ~97 MB, so every image over 400 KB (44 files: all backgrounds, trailer panels, title/logo, professor sprites, the bigger Act II sprites and a few icons) was converted with `cwebp -q 88 -alpha_q 95 -m 6` — 78 MB → 11 MB, visually indistinguishable in side-by-side crops, alpha intact. The whole game is now ~30 MB, which also makes the loading bars fast. References in the HTML were rewritten `.png` → `.webp`; small PNGs (icons, patches) stayed PNG.
@@ -64,7 +73,7 @@ All of the above verified end-to-end via headless Chrome/CDP this session (panel
 - **Survey Lab patient charts**: the four ailing questions are now visible as hospital charts hanging above their beds (overlay `#sv_p1..4`, `renderPatients()`); each shows the real wording plus its ailment (tape across a double-barrel, a chart physically leaning, "often" circled with bobbing "?", only YES/NO on the clipboard) and flips to a green STABLE version once fixed. Re-rendered by wrapping `ctx.setFlag` inside the room's init.
 - **Per-act preloading with progress bars**: `CODEBOOK_PRELOAD(list, onProgress, onDone)` (engine) fetches each URL once (shared between callers), reports byte-accurate progress via Content-Length, and decodes images into kept-alive `Image`s. `CODEBOOK_ACT_ASSETS = {act1, act2}` lives in the boot script (act1 = the old `PRELOAD` images + all Act I voice/music mp3s; act2 = interlude art, room backgrounds, sprites, icons). Boot shows "Loading Act I · n%" (or "Loading Act II" when the save already has `corridorDone`) on the logo/title screens and only offers "Click to begin" when it's done, then fetches the other act silently in the background. The Act II interlude takes `{preload, label}` and holds on a centred "Preparing Act II · n%" bar before the first panel, so it's usually near-instant thanks to the background fetch. **When Act III gets art, add an `act3` list and pass it to the Act III interlude the same way.**
 - **Bug fix**: Fieldwork `board()`/`redButton()` no longer throw when a klaxon timer fires after the player has left the room.
-- **Known content mismatch** (not fixed): the Act I Question is about parental education and Gymnasium transfer (NRW 2005-2020), but the Act II instrument is about lecture attendance.
+- **Story mismatch resolved (2026-09-19):** the Act I Question is now about **lecture attendance and exam results** — Office W2 correct answer "Do students who attend more lectures get better exam results?", W3 scoping "first-years in the Methods lecture · lectures attended & final exam grade · winter term 2025/26 · direction left open" (wrong options: fixed direction, or "students, generally"). `office-w2.mp3` and `office-w3-callout-a.mp3` were regenerated (`say -v Daniel`); the interlude index card shows the new Question. Act II's attendance survey now fits.
 
 ## 01i. Session changes (2026-09-18, late): Act II built in code — all four rooms playable end-to-end
 
@@ -379,7 +388,6 @@ This doc is the map; `ROADMAP.md` is the full trip log. `STORY.md` is the narrat
 
 ## 07. Open backlog, condensed
 
-- **Story mismatch between Act I and Act II:** the Question is about parental education and Gymnasium transfer (NRW 2005–2020), but the Act II survey instrument is about lecture attendance. Decide which one the story keeps; the Act II interlude shows the real Act I Question on the index card.
 - **Office hand-off scene to Act II/III** isn't built as an in-room scene; Act II is introduced by the interlude instead, and the "Where did these numbers come from?" hand-off to Act III doesn't exist yet.
 - **No voices in Act II;** the Doorman is also still silent (no acceptable macOS voice was found — see 01f).
 - **Acts III–V** need the Act I/II treatment: painted rooms on `CODEBOOK_ADV_HTML`/`CODEBOOK_ADV_ROOM`, sprites, an interlude + "Starring" poster + ACT card, and an `act3`… list in `CODEBOOK_ACT_ASSETS`.
