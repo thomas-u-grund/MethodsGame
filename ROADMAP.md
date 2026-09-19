@@ -36,6 +36,8 @@ _Logged 2026-09-19, requested by the user. Not started._
 - Either animate the rig directly in the browser (CSS transforms / canvas on the parts: cheap, perfectly consistent, and it reuses the art we already have), or render each rig pose as a stick-figure/pose reference and send those clear pose images to ChatGPT together with the character sprite, so every frame is "this character, exactly this pose".
 - Try it on one character first (the Professor, who already walks between rooms) and compare the direct-rig and pose-guided options before scaling to the cast.
 
+**Progress (2026-09-19, later):** talking/breathing animation is live for every voiced sprite, and the rig-first approach works: the Professor now walks in the Lecture Theatre with a cut-out rig and a procedural walk cycle (HANDOVER §01m). Next: rigs for the Doorman, the Sampling Officer and the Fieldwork Director; a gesturing "lecturing" loop for the Professor; mouth frames only if the talking bob isn't enough.
+
 Suggested order: pick the voice source → voice Act II + the Doorman → CSS talking puppet for every speaking sprite → walking tweens → only then invest in mouth frames and walk-cycle sheets where it pays off most (the Professor first).
 
 ## Act II — full redesign: four rooms, H-27 form, cross-room puzzle chains (built)

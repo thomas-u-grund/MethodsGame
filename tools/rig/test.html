@@ -1,0 +1,19 @@
+<!doctype html><meta charset="utf-8"><title>rig test</title>
+<style>body{margin:0;background:#2b2520;font:12px monospace;color:#ccc} .cell{position:relative;display:inline-block;width:230px;height:470px;border-right:1px solid #444} .cell span{position:absolute;left:6px;top:4px}</style>
+<div id="row"></div>
+<script src="rig.js"></script><script src="prof/rig-def.js"></script>
+<script>
+var row=document.getElementById('row'), q=new URLSearchParams(location.search);
+if (q.get('live')){
+  var c=document.createElement('div'); c.className='cell'; c.style.width='600px'; row.appendChild(c);
+  var r=CodebookRig.build(c,PROF_RIG,{height:420}); r.root.style.left='260px'; r.root.style.top='250px';
+  r.play(q.get('live')==='idle'?CodebookRig.idle:CodebookRig.walk,{});
+} else {
+  [0,.125,.25,.375,.5,.625,.75,.875].forEach(function(t){
+    var c=document.createElement('div'); c.className='cell'; row.appendChild(c);
+    var s=document.createElement('span'); s.textContent='t='+t; c.appendChild(s);
+    var r=CodebookRig.build(c,PROF_RIG,{height:420}); r.root.style.left='110px'; r.root.style.top='250px';
+    var p=CodebookRig.walk(t,{}); r.pose(p.angles,p.offset);
+  });
+}
+</script>
