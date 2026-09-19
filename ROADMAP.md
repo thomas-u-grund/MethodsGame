@@ -1,7 +1,7 @@
 # The Secret of the Codebook — Roadmap / Backlog
 
-## Campus map: label only the rooms the player can enter — planned
-_Logged 2026-09-19, requested by the user. Not started._
+## Campus map: label only the rooms the player can enter — built
+_Logged and built 2026-09-19 (HANDOVER §01m): per-act base maps with no banners, signboards drawn only for enterable rooms, tent and black swan + FALSIFIED only from Act II._
 
 The campus map art currently has painted name signs on every building, including rooms that are still locked or belong to later acts (e.g. Library Annex, Administration, Ethics Tribunal, Fieldwork Arena are all labelled from the very start). Instead:
 - **Act I map:** only the Act I locations carry labels (Professor's Office, Lecture Theatre, Department of Causality, Probability Pond); every other building is unlabelled.
