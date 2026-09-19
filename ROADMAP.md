@@ -18,6 +18,12 @@ _Logged 2026-09-19, requested by the user. Not started._
 - Better: 4–6 frame walk cycles as sprite sheets. Frame-to-frame consistency is the risk with image generation — generate all frames in one image (a strip on a transparent background) rather than one call per frame, then slice.
 - Flip horizontally for direction (`transform: scaleX(-1)`), and keep hotspots following the sprite while it moves.
 
+**Practical experience so far (user, 2026-09-19):** walking sprites generated directly with ChatGPT were **not good enough**. Frame-to-frame the character drifts (proportions, costume details, face), and the leg/arm poses don't form a believable cycle, so the "one strip in one image" idea above is unlikely to be enough on its own. Proposed alternative: **rig first, then generate against the rig.**
+- Build a simple 2D rig per character: split the sprite into parts (head, torso, upper/lower arms, upper/lower legs, feet) with pivot points, either as separate layers cut from the existing sprite or regenerated as parts on a transparent background.
+- Define the movement explicitly as rig poses/keyframes (e.g. a 6-frame walk cycle as joint angles, a 2–3 pose talking loop), instead of asking the image model to invent the motion.
+- Either animate the rig directly in the browser (CSS transforms / canvas on the parts: cheap, perfectly consistent, and it reuses the art we already have), or render each rig pose as a stick-figure/pose reference and send those clear pose images to ChatGPT together with the character sprite, so every frame is "this character, exactly this pose".
+- Try it on one character first (the Professor, who already walks between rooms) and compare the direct-rig and pose-guided options before scaling to the cast.
+
 Suggested order: pick the voice source → voice Act II + the Doorman → CSS talking puppet for every speaking sprite → walking tweens → only then invest in mouth frames and walk-cycle sheets where it pays off most (the Professor first).
 
 ## Act II — full redesign: four rooms, H-27 form, cross-room puzzle chains (built)
