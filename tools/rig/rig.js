@@ -77,7 +77,7 @@
         hipL: L.hip, kneeL: L.knee, hipR: R.hip, kneeR: R.knee,
         shoulderL: 24 * stride * L.sw, elbowL: -14 - 16 * Math.max(0, -L.sw),
         shoulderR: 24 * stride * R.sw, elbowR: -14 - 16 * Math.max(0, -R.sw),
-        torso: 4, neck: -3 + 1.5 * S(t * 2, 0.25)
+        torso: 1.5, neck: -1.5 + 1.5 * S(t * 2, 0.25)
       },
       offset: { x: 0, y: -12 * Math.abs(S(t * 2, 0.25)) }
     };
