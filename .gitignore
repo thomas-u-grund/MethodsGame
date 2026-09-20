@@ -30,3 +30,6 @@ web-png-originals/
 # Local text-to-speech environment (Chatterbox) and its model cache
 .venv-tts/
 tools/tts/out/
+
+# Scratch test harness output
+scratchpad/
