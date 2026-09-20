@@ -4,9 +4,9 @@
 
 A LucasArts-style point-and-click adventure teaching Research Methods, built as a single self-contained HTML file. This is the orientation doc for picking the project back up — what's live, how it's wired together, and what's still open.
 
-**Play the current build:** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 (v49 · 2026-09-19 · Acts I–V; Act II fully built)
+**Play the current build:** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 (v50 · 2026-09-20 · Acts I–V; Act II fully built, voiced, animated)
 
-**v49 is live (2026-09-19)** and matches the local build and GitHub `main` (https://github.com/thomas-u-grund/MethodsGame): everything in sections 01b–01k is published — all of Act I (voiced), all four Act II rooms with character sprites, the Doorman, the Act I/Act II "Starring" posters and ACT title cards, the Act II trailer interlude, and per-act preloading with progress bars. **Lesson that keeps recurring: local edits and headless-Chrome "it worked" do NOT mean the change is live** — the Artifact must be republished explicitly, with every new/changed asset passed in `files` (recipe in section 01k).
+**v50 is live (2026-09-20)** and matches the local build and GitHub `main` (https://github.com/thomas-u-grund/MethodsGame): everything in sections 01b–01k is published — all of Act I (voiced), all four Act II rooms with character sprites, the Doorman, the Act I/Act II "Starring" posters and ACT title cards, the Act II trailer interlude, and per-act preloading with progress bars. **Lesson that keeps recurring: local edits and headless-Chrome "it worked" do NOT mean the change is live** — the Artifact must be republished explicitly, with every new/changed asset passed in `files` (recipe in section 01k).
 
 ---
 
