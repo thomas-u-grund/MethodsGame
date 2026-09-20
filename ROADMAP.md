@@ -32,15 +32,15 @@
 - **Everything is one file:** `web/the-secret-of-the-codebook.html` (~5,000 lines). No build step.
 - **Built and playable:** Act I (4 rooms, painted, voiced, rigged, animated) and the data act (4 rooms, painted, voiced, sprites) — **the data act is still labelled "Act II" in code and must be renumbered to Act III** (WP-0.2).
 - **Not built at all:** the new Act II (theory), the new Act IV third room, all of Act V, the outro.
-- **Local asset state:** 285 files in `web/`, 51 MB. The publish limits are **255 files and 64 MB per version**, so the game currently *cannot be published as-is* without an explicit file list — see WP-0.1, which fixes this properly.
+- **Local asset state (after Phase 0):** **140 files, 42 MB** in `web/`, comfortably inside the artifact host's 255/64 MB, and no longer the binding constraint now that GitHub Pages is the target (§3).
 
 ### Build status board
 
 | Act | Rooms | Story | Art | Sprites | Voices | Rig/anim | SFX | Code |
 |---|---|---|---|---|---|---|---|---|
-| **I — The Question** | Office, Lecture Theatre, Corridor, Pond | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ✅ |
+| **I — The Question** | Office, Lecture Theatre, Corridor, Pond | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **II — Theory** | Library, Hall of Founders, Workshop, Seminar Room | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **III — Data** | Survey Lab, Ethics, Mensa, Fieldwork | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ✅ (mislabelled Act II) |
+| **III — Data** | Survey Lab, Ethics, Mensa, Fieldwork | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **IV — Evidence** | Basement, Delegation Engine, Bureau of Implications | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **V — Writing** | Gap Registry, Writing Room | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
 | **Outro** | cutscene | ✅ | ⬜ | — | ⬜ | — | ⬜ | ⬜ |
@@ -55,7 +55,7 @@ These are not suggestions. Every new room follows them, and a deviation needs a 
 
 ### 2.1 Design rules
 
-1. **Every room is open from the start of its act.** Progress is gated by what the player has done, never by a map lock. (Act I follows this; the data act does not — WP-0.4.)
+1. **Every room is open from the start of its act.** Progress is gated by what the player has done, never by a map lock. Implemented as `CODEBOOK_ACT_GATE(n)`; see `HANDOVER.md` §03.
 2. **No room contains its own solution.** Every room hands the player a problem whose fix is in a different room, for an absurd institutional reason.
 3. **Every wrong path is walkable to the end.** The game never blocks a bad choice; it lets it complete and pays the consequence **at least one act later**. Immediate punishment reads as a quiz marking you down.
 4. **Only three durable flags cross act boundaries** — `theory_empty`, `analysis_p_hacked`, `claim_overstated` (WP-0.3). Everything else is local colour.
@@ -248,26 +248,26 @@ cd web/ && python3 -m http.server 8934
 
 ### Phase 0 — Foundations *(do all of these before any new room)*
 
-**WP-0.1 · Asset budget cleanup.** All 115 loose `web/vo-*.mp3` are already inside `voices-act1/2.mp3` and present in `CODEBOOK_VOICE_SPRITE`; they exist only as a fallback path. Move them to `web-audio-originals/` (git-ignored), confirm every referenced clip name resolves through the sprite map, and re-test audio. **Takes `web/` from 285 files to 170** and buys the room needed for three acts. *Acceptance:* every voiced line still plays; `ls web/*.mp3 | wc -l` drops by 115.
+**WP-0.1 ✅ DONE · Asset budget cleanup.** All 115 loose `web/vo-*.mp3` are already inside `voices-act1/2.mp3` and present in `CODEBOOK_VOICE_SPRITE`; they exist only as a fallback path. Move them to `web-audio-originals/` (git-ignored), confirm every referenced clip name resolves through the sprite map, and re-test audio. **Takes `web/` from 285 files to 170** and buys the room needed for three acts. *Acceptance:* every voiced line still plays; `ls web/*.mp3 | wc -l` drops by 115.
 
-**WP-0.2 · Renumber the data act II → III.** Room `act:` labels; `CODEBOOK_ACT2_INTERLUDE` → `ACT3`; `trailer2-*` art; `vo-narr-act2-*` (including the spoken title card, which says "Act Two. Apparently, we need data." and must be **re-rendered** to "Act Three"); `campus-map-act2.webp` (the map should now change at the *new* Act II); `CODEBOOK_ACT_ASSETS.act2` → `act3`; the `act2IntroSeen` flag (migrate existing saves or accept a reset); all doc references. *Decision to make and record:* rename the asset files or keep the names and relabel. Renaming is more churn but the names become actively misleading otherwise — **recommend renaming.**
+**WP-0.2 ✅ DONE · Renumber the data act II → III.** Room `act:` labels; `CODEBOOK_ACT2_INTERLUDE` → `ACT3`; `trailer2-*` art; `vo-narr-act2-*` (including the spoken title card, which says "Act Two. Apparently, we need data." and must be **re-rendered** to "Act Three"); `campus-map-act2.webp` (the map should now change at the *new* Act II); `CODEBOOK_ACT_ASSETS.act2` → `act3`; the `act2IntroSeen` flag (migrate existing saves or accept a reset); all doc references. *Decision to make and record:* rename the asset files or keep the names and relabel. Renaming is more churn but the names become actively misleading otherwise — **recommend renaming.**
 
-**WP-0.3 · The three durable flags.** Implement `theory_empty`, `analysis_p_hacked`, `claim_overstated` as ordinary `ctx` flags, documented in one place in the source, with a comment pointing at `STORY.md` § "Three flags, not a story tree". Nothing sets them yet.
+**WP-0.3 ✅ DONE · The three durable flags.** Implement `theory_empty`, `analysis_p_hacked`, `claim_overstated` as ordinary `ctx` flags, documented in one place in the source, with a comment pointing at `STORY.md` § "Three flags, not a story tree". Nothing sets them yet.
 
-**WP-0.4 · Resolve the open/locked inconsistency** (`HANDOVER.md` §03). Act I rooms are `prereq: null`; the data act rooms still chain off each other's `doneFlag`. Apply the Act I rule everywhere and move real gating inside rooms. Record the decision in `HANDOVER.md`.
+**WP-0.4 ✅ DONE · Resolve the open/locked inconsistency** (`HANDOVER.md` §03). Act I rooms are `prereq: null`; the data act rooms still chain off each other's `doneFlag`. Apply the Act I rule everywhere and move real gating inside rooms. Record the decision in `HANDOVER.md`.
 
-**WP-0.5 · The three logged bugs.**
+**WP-0.5 ✅ DONE · The three logged bugs.**
 - Pond: a millisecond of blue screen before the pond repaints after the swan is painted.
 - Causality Corridor: the same flash on scene change.
 - Doorman: skipping his dialogue leaves the gate apparently shut — the open timer must key off **line end or skip**, not a fixed delay.
 
-**WP-0.6 · Wire the sound effects.** `web/sfx-act1.mp3` and `sfx-act2.mp3` are built and unused. Add an SFX channel alongside the voice channel (same blob-URL segment approach), wire ambience loops per room and the one-shot triggers listed in `CHANGELOG.md` § "Sound effects pass". **Explicitly requested:** applause when the player shouts BINGO; background snoring in the Lecture Theatre; the Ethics door bell.
+**WP-0.6 ✅ DONE · Wire the sound effects.** `web/sfx-act1.mp3` and `sfx-act2.mp3` are built and unused. Add an SFX channel alongside the voice channel (same blob-URL segment approach), wire ambience loops per room and the one-shot triggers listed in `CHANGELOG.md` § "Sound effects pass". **Explicitly requested:** applause when the player shouts BINGO; background snoring in the Lecture Theatre; the Ethics door bell.
 
-**WP-0.7 · Backstory props into built rooms.** Cheap, high-value, needs no new act. Per the one-prop-one-line table: the Professor's hidden *Death of Community* in the Office, the Skeptic's *Things I Was Wrong About, Vol. XI* on the pond bench, the class photograph with the young Doorman, the Keeper's `BEVERAGE VESSEL 0047`, the Director's champagne photograph, the Officer's family portraits. `Look At` targets with one line each.
+**WP-0.7 ✅ DONE · Backstory props into built rooms.** Cheap, high-value, needs no new act. Per the one-prop-one-line table: the Professor's hidden *Death of Community* in the Office, the Skeptic's *Things I Was Wrong About, Vol. XI* on the pond bench, the class photograph with the young Doorman, the Keeper's `BEVERAGE VESSEL 0047`, the Director's champagne photograph, the Officer's family portraits. `Look At` targets with one line each.
 
-**WP-0.8 · Trailer fixes.** Regenerate panel 1 from the revised prompt (empty folder + circled deadline — the shipped art still shows the old rejected-letter concept) and swap in the new narration together. Generate panel 2b "The Spiral". Both prompts are in `art/trailer/ART_PROMPTS.md`.
+**WP-0.8 · Trailer fixes.** *(BLOCKED: needs the user's ChatGPT via Claude in Chrome — the only art step in Phase 0.)* Regenerate panel 1 from the revised prompt (empty folder + circled deadline — the shipped art still shows the old rejected-letter concept) and swap in the new narration together. Generate panel 2b "The Spiral". Both prompts are in `art/trailer/ART_PROMPTS.md`.
 
-**WP-0.9 · Seed "Reviewer 2".** One line per act, from characters who are otherwise rational, so the outro pays off. *"Reviewer 2 will ask." / "Who is Reviewer 2?" / "Nobody knows."*
+**WP-0.9 ✅ DONE · Seed "Reviewer 2".** One line per act, from characters who are otherwise rational, so the outro pays off. *"Reviewer 2 will ask." / "Who is Reviewer 2?" / "Nobody knows."*
 
 ### Phase 1 — Act II, "Apparently We Need a Theory" *(the largest package in the project)*
 
