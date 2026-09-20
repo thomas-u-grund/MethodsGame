@@ -31,6 +31,23 @@ _Reported by the user while playing v51. Not fixed yet._
 2. **Same flash in the Causality Corridor** on every scene change (case rooms, archway, the fall) — same code pattern, same fix. Check `renderRoom`/`renderGate`/`checkWin`/`startFall`.
 3. **Skipping the Doorman's dialogue can leave the gate shut.** The gate sequence is driven by fixed `setTimeout`s sized to the voice clips (2.8 s / 10.8 s / 13.4 s before "You step through"), so pressing Space only cuts the audio — the timers keep running and the player is left staring at an apparently dead door, or clicks away before the room advances. Fix: drive each step off the line's `ended` event (or a shared "line finished or skipped" helper) instead of hard-coded delays, so skipping advances the scene immediately. Same pattern is used in the archway exchange (`checkWin`) and the BINGO walk-out — worth fixing in one place.
 
+## Act structure reworked: theory becomes its own act — planned
+_Logged 2026-09-20 with the user. Design written into STORY.md; nothing built yet._
+
+The acts were missing **theory** entirely: the game went question → data → analysis, which is the mistake it should be teaching against. New order:
+
+1. **Act I — The Question** (built)
+2. **Act II — Apparently We Need a Theory** (new: Library, Hall of Founders, Feldstrom's Workshop, Seminar Room; quest object the **Prediction Slip**, sealed at the end, which is what makes the Registry release Form H-27)
+3. **Act III — Apparently We Need Data** (the built four-room act, renumbered from II)
+4. **Act IV — Apparently Evidence Must Exist** (Statistics Basement casino + KIRA's Delegation Engine emergency, merged so analysis and delegation sit together)
+5. **Act V — The Hypotheses Accelerator** (Feldstrom again, now inflating the finished result)
+
+**The act's lesson (user's framing):** a theory is an idea about how something works, not a pile of old men saying things — and it has to touch reality, i.e. forbid something observable. Each room is a different way of getting that wrong: citations (Library), quotations (Hall), scale (Workshop), unfalsifiability (Seminar).
+
+**Work needed to renumber the built act:** room `act:` labels, the ACT II title card and interlude (`CODEBOOK_ACT2_INTERLUDE`, `trailer2-*` art, `vo-narr-act2-*`), `campus-map-act2.webp` (the map should now change at the *new* Act II), `CODEBOOK_ACT_ASSETS.act2`, the `act2IntroSeen` flag, HANDOVER/ROADMAP references. Decide whether to rename the asset files or keep the names and relabel (keeping them is less churn but the names get confusing).
+
+**New art needed:** four room backgrounds, KIRA, Feldstrom, the Visiting Fellow, two skeletons, the Prediction Slip and its icons, a lean-to extension painted onto both campus maps (which in Act V has grown into the Accelerator), and an Act II trailer.
+
 ## Sound effects pass — planned
 _Logged 2026-09-20, requested by the user. Not started. Source: **Epidemic Sound** sound-effects library (https://www.epidemicsound.com/sound-effects/) — check the account's licence before shipping; keep raw downloads out of `web/` like `web-png-originals/`._
 

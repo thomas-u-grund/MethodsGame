@@ -32,9 +32,9 @@ The Professor's Precisely Worded Question goes inside it: **"Do first-years who 
 | After | Stamp reads |
 |---|---|
 | The Corridor (Act I) | `STATUS: QUESTION EXISTS` |
-| Survey Lab + Ethics Tribunal + The Mensa + Fieldwork Arena (Act II) | `STATUS: QUESTION HAS DATA` *(the Professor: "Where did these numbers come from?")* |
-| The Library + Statistics Basement (Act III) | `STATUS: EVIDENCE VERIFIED` |
-| The Delegation Engine (Act IV) | `STATUS: RESULT AUDITED` |
+| Library + Hall of Founders + Workshop + Seminar Room (Act II) | `STATUS: THEORY EXISTS` *(the sealed Prediction Slip)* |
+| Survey Lab + Ethics Tribunal + The Mensa + Fieldwork Arena (Act III) | `STATUS: QUESTION HAS DATA` *(the Professor: "Where did these numbers come from?")* |
+| Statistics Basement + Delegation Engine (Act IV) | `STATUS: EVIDENCE VERIFIED` |
 | The Hypotheses Accelerator (Act V) | `STATUS: CLAIM DEFENSIBLE` |
 | The Office, final return | stamped `REVISE AND RESUBMIT` by the Professor himself |
 
@@ -90,12 +90,14 @@ A gothic, autumnal university campus (unnamed) — statues of seated philosopher
 - **The Professor** — hates vague claims. Runs the Office/Lecture Theatre gauntlet, bookends the entire game (first and last conversation), and delivers the real reveal at the very end. A single shared entity who physically moves between the Office and the Lecture Theatre (see `HANDOVER.md` §02). Also runs the optional citation-counter sidequest.
 - **The Doorman** — (has a sprite since 2026-09-18: maroon porter's coat, bowler hat, walrus moustache, arms permanently crossed) guards the Corridor gate, hands over the Research Folder, is the first to use the word "chapters." Terse, transactional, utterly unbothered by the player's confusion. Refuses entry until the player has also convinced the Skeptic.
 - **The Skeptic** — sits on the bench at Probability Pond, unmoved by the plaque's "n=2" claim. Won't vouch for the player until they demonstrate falsification (paint a swan black) *and* explain why that's sufficient — not just do the trick. Her approval is a hard prerequisite for the Corridor, not flavor. In the game she's a woman (voice: Moira), painted from behind on the pond's bench; a front-facing sprite (`sprite-skeptic.png`) exists for the Act I "Starring" poster.
-- **KIRA** — a small, well-meaning, wildly overconfident robot assistant. Minding the Library because the actual librarian has vanished to "a workshop on information literacy," and by Act IV has escalated from "sorts citations" to "has already run and submitted your entire study without asking." Catchphrase: **"Certainly!"** — said with equal enthusiasm whether it's about to help or about to make things dramatically worse.
+- **KIRA** — a small, well-meaning, wildly overconfident robot assistant. Debuts in **Act II** minding the Library because the actual librarian has vanished to "a workshop on information literacy," and by Act IV has escalated from "sorts citations" to "has already run and submitted your entire study without asking." Catchphrase: **"Certainly!"** — said with equal enthusiasm whether it's about to help or about to make things dramatically worse.
 - **The Survey Lab Nurse** (and an unnamed Technician) — run the emergency department for injured questions with total clinical seriousness. The Nurse is fluent in triage but sincerely believes more response categories always means more precision; someone has pencilled **"SLIGHTLY EXTREMELY AGREE"** into the margin of a scale, and the player has to rub it out.
 - **The Ethics Tribunal** — three robed committee members seated twenty feet above the player: **the Chair of Consent** (peers down, rings a bell at the mere suggestion of talking to a student), **the Keeper of Data** (guards a transparent "anonymous" filing cabinet with a completely straight face), and **the Representative of Potential Discomfort** (visibly, permanently asleep). They treat human-subjects review like a Vatican conclave with a passport-control attitude problem.
 - **The University Sampling Officer** — presides over the Mensa's official, ludicrously ceremonial random-sampling apparatus (a giant brass drum, velvet rope, spotlights, a sash reading UNIVERSITY SAMPLING OFFICER). Speaks like a royal herald, reveres the raffle drum ("a second-generation randomiser... good God"), and is constitutionally incapable of noticing that a perfectly random sample of the wrong population is still the wrong population.
 - **The Fieldwork Director** — runs the Fieldwork Arena like a live game show, lives and dies by the illuminated RESPONSE RATE board, and considers a defensible 64% a greater achievement than a suspicious 100%.
-- **Prof. Feldstrom** — the Professor's structural opposite: hates claims that are too *small*. Runs the Hypotheses Accelerator in Act V. Not narratively connected to the first Professor — the contrast (one hates overreach, one hates timidity) is the joke, not a twist waiting to be revealed.
+- **Prof. Feldstrom** — the Professor's structural opposite: hates claims that are too *small*. **Appears twice**: in **Act II** he helps the player turn a mechanism into a theory and immediately inflates it to civilisation scale (his workshop is the prototype of the machine), and in **Act V** he does the same thing to the finished result in the full Hypotheses Accelerator. Genuinely helpful, genuinely unmoored; the contrast with the first Professor (one hates overreach, one hates timidity) is the joke, not a twist.
+- **The Visiting Fellow** (Act II, Seminar Room) — believes, serenely, that the answer is always selection. Never hostile, always asking how you would tell a real effect apart from the students simply being different. The Skeptic's academic cousin, and right often enough to be irritating.
+- **The Founders** (Act II, Hall of Founders) — busts and portraits who nod approvingly at everything, including contradictions and blank cards. Non-speaking, but the room's main antagonist.
 - **The skeletons** — one per room, each a different flavor of research despair. Confirmed/new instances below, per act.
 - **The Research Folder** — not a character, but close to one by the end: the single physical object every act stamps, and the thing whose final state is the whole game's punchline.
 
@@ -142,9 +144,86 @@ A fourth Act I location, always open like the other three — already teased as 
 
 **Status: fully built, wired in, and verified end-to-end** — including the hard gate at the Corridor's bell (`handleRing()` now checks `philosopherConvinced` before letting the Question through at all). Full implementation notes in `HANDOVER.md` §01c.
 
-## Act II — "Apparently We Need Data"
+## Act II — "Apparently We Need a Theory"
 
-**Act II interlude (built).** After the Doorman scene, the first return to the campus map plays a trailer-style interlude: the folder now holding the handwritten Question, then the Professor holding it like a dead fish ("A question is not evidence"), the H-27 avalanche out of the pneumatic tube, a four-room montage, a "Starring" cast poster, and a big **ACT II: Apparently We Need Data** title card. The opening trailer likewise ends on an **ACT I: The Question** card. This is now how the act is introduced; the Office opening-beat scene below is still not built as an in-room scene.
+*Rooms: The Library · The Hall of Founders · Feldstrom's Workshop · The Seminar Room*
+
+**Opening beat.** The player leaves the Corridor with a question and a folder, and goes looking for data. The department will not let them. Form H-27 exists, but the Registry refuses to issue it: you cannot ask people questions until you have written down what you expect to find, and why.
+
+> **PROFESSOR:** "You have a question. What do you expect the answer to be?"
+> **PLAYER:** "I don't know. That's why I'm asking it."
+> **PROFESSOR:** "Wrong. If you have no expectation, you have no theory, and if you have no theory you have no idea what would surprise you."
+
+**The joke of the act:** everyone agrees theory is essential and nobody agrees what it is. The Library thinks theory is citations. The Hall of Founders thinks theory is quotations from dead men. Feldstrom thinks theory is scale. Only the Seminar Room — chalk dust, eleven chairs, one visiting fellow and a skeleton — thinks a theory is a claim about how something works that could turn out to be wrong.
+
+**Quest object: the PREDICTION SLIP**, the pale-green sibling of Form H-27, with four boxes. It is sealed at the end and cannot be reopened, which is the point: Act IV checks it against what the player actually did.
+
+- WHAT IS KNOWN (The Library)
+- MECHANISM (The Hall of Founders)
+- SCOPE (Feldstrom's Workshop)
+- PREDICTION AND FALSIFIER (The Seminar Room)
+
+**Design rule, as in the data act:** no room contains its own solution, all four are open at once, and every wrong path can be walked to the end. Chalk comes from the Lecture Theatre, the chewed pen and magnifying glass from the Office, the stepladder travels between the Library and the Hall, the enrolment register from the Library to Feldstrom.
+
+### The Library — "Ready to Cite"
+
+The librarian has gone to a workshop on information literacy. **KIRA** is nominally in charge and has prepared a trolley labelled **READY TO CITE**: six references, formatted immaculately. Three are real. One is a real paper that says the opposite of what KIRA claims. One is in a journal that does not exist. One DOI resolves to a recipe for soup. KIRA checked the formatting, and the formatting is perfect.
+
+**The chain:** the card catalogue verifies references one at a time, but the drawer for the relevant years is on the top shelf and the stepladder is in the Hall of Founders. The magnifying glass reads the DOIs. The soup is the easiest to catch; the journal that does not exist needs a catalogue check; the paper that says the opposite has to be fetched from the stacks and read past the abstract, which is the room's real lesson.
+
+**Wrong path the game allows:** submit all six. KIRA is delighted, the Registry accepts the list, and it returns in Act IV when the audit finds a third of the reading list is fictional and one source contradicts the claim it was cited for.
+
+**Box earned:** WHAT IS KNOWN — three sources that exist and say what you think they say, plus the observation that none of them explains *why* attendance would matter.
+
+### The Hall of Founders — theory as authority
+
+A marble gallery of busts and portraits. They nod. They nod at everything, including two contradictory claims in a row, and once at a blank card. Feed the **Quotation Dispenser** a coin and it prints a magnificent sentence — *"the system is the difference it makes"* — beautifully set and entirely unfalsifiable. A recently installed brass plaque reads **QUOTATION IS NOT EXPLANATION**, and is universally ignored.
+
+**The chain:** the MECHANISM box must be filled in the player's own words, with the chewed pen, on a blank index card from the Library's catalogue drawer. The dispenser will happily print a quotation onto the card instead, and the portraits will nod, but the box stays empty and the Registry stamps it **APPROVED BY EVERYONE, THEREFORE MEANS NOTHING**.
+
+**What counts:** a sentence with a *because* in it that names something happening in the world — "attending lectures gives students practice with worked examples, and worked examples are what the exam rewards". Any sentence containing a surname makes the plaque light up.
+
+**Box earned:** MECHANISM. **Skeleton:** seated in the gallery, sign reading **"CITED 400 TIMES. EXPLAINED NOTHING."**
+
+### Feldstrom's Workshop — theory as scale
+
+A lean-to bolted onto the side of a respectable building, full of brass, steam and ambition. **Prof. Feldstrom** — tall, magnificent, genuinely helpful, completely unmoored — is thrilled that somebody has finally brought him a mechanism. He feeds it into the prototype and turns the **SCOPE** dial, which only turns clockwise:
+
+> students → young adults → humans → institutions → **CIVILISATION**
+
+Each turn the claim grows and the prediction thins, until the machine produces **ATTENTION IS THE ENGINE OF HISTORY**, which explains everything, forbids nothing and cannot be wrong. Feldstrom is moved. A second dial, labelled by the manufacturer **THINGS THIS FORBIDS**, has dropped to zero.
+
+**The chain:** the dial cannot be turned back. What brings the scope down is evidence about who the claim is actually about — the **enrolment register** from the Library, which says in print: first-year students, one Methods course, one term. Fed into the machine, it forces the scope back to something observable and the THINGS THIS FORBIDS needle climbs off zero.
+
+**Wrong path:** lodge the civilisation-scale version. It is accepted enthusiastically, and in Act IV it makes every possible result "consistent with the theory" — which is the problem, and which Feldstrom cheerfully repeats in Act V with the finished result.
+
+**Box earned:** SCOPE.
+
+### The Seminar Room — theory as something that could be wrong
+
+A board with the same fact at the top — *students who attend more lectures get better grades* — and three explanations pinned beneath it:
+
+1. **Attendance teaches.** Lectures deliver something you cannot easily get elsewhere.
+2. **Selection.** The students who attend would have done well anyway.
+3. **Confounding.** Motivation, a timetable, a job or a bus route drives both.
+
+**The Visiting Fellow** sits at the back and believes, serenely, that the answer is always selection. She is not hostile; she simply asks, every time, "and how would you tell that apart from the students being different to begin with?" She is the Skeptic's academic cousin, and she is right often enough to be irritating.
+
+**The chain:** the consequence board needs chalk from the Lecture Theatre. For the chosen mechanism the player writes what we would **see** if it were true and what we would see if it were **false**, and the board rejects any prediction both outcomes satisfy. Choosing "probably a bit of all three" prints the room's best line: **UNFALSIFIABLE — CONGRATULATIONS, YOU CANNOT LOSE.**
+
+**What passes:** a prediction with a direction and a place it could break — "if attendance teaches, the gap should be largest on exam questions that mirror the worked examples, and smallest for students who already have the textbook". The Visiting Fellow, unconvinced but satisfied, signs it.
+
+**Box earned:** PREDICTION AND FALSIFIER. **Skeleton:** at the seminar table, sign reading **"STILL AWAITING A MECHANISM."**
+
+### Sealing the slip
+
+With all four boxes filled the slip goes into the Registry's pneumatic tube and is sealed with wax. The tube coughs. A moment later it coughs again and **Form H-27** drops out: the department will now allow the player to approach human beings, which begins Act III.
+
+**Folder update:** stamped `THEORY EXISTS`.
+
+## Act III — "Apparently We Need Data"
+
+**Act III interlude (built, currently labelled "Act II" in code — renumber when the new Act II ships).** After the Doorman scene, the first return to the campus map plays a trailer-style interlude: the folder now holding the handwritten Question, then the Professor holding it like a dead fish ("A question is not evidence"), the H-27 avalanche out of the pneumatic tube, a four-room montage, a "Starring" cast poster, and a big **ACT II: Apparently We Need Data** title card. The opening trailer likewise ends on an **ACT I: The Question** card. This is now how the act is introduced; the Office opening-beat scene below is still not built as an in-room scene.
 
 *Rooms: Survey Lab · The Ethics Tribunal · The Mensa · The Fieldwork Arena*
 
@@ -160,7 +239,7 @@ A pneumatic tube above his desk coughs violently and spits out a forty-seven-pag
 
 > **PROFESSOR:** "Try not to alarm them."
 
-H-27 is Act II's quest object — a separate, increasingly stamped/stapled/coffee-stained prop that gets folded into the Research Folder at the very end of the act. It has four boxes, one per room, and the four rooms can be tackled in almost any order:
+H-27 is Act III's quest object — a separate, increasingly stamped/stapled/coffee-stained prop that gets folded into the Research Folder at the very end of the act. It has four boxes, one per room, and the four rooms can be tackled in almost any order:
 
 - ☐ **INSTRUMENT EXISTS** (Survey Lab)
 - ☐ **HUMANS MAY BE APPROACHED** (Ethics Tribunal)
@@ -256,23 +335,25 @@ A **RECORD HIGH** banner drops, a dot-matrix printer buries the floor in paper, 
 
 (setting up Act III).
 
-## Act III — "Apparently Evidence Must Exist"
+## Act IV — "Apparently Evidence Must Exist"
 
-*Rooms: The Library · Statistics Basement*
+*Rooms: The Statistics Basement · The Delegation Engine*
 
-This is where KIRA properly enters the plot, not just the puzzle. The actual librarian has vanished to "a workshop on information literacy," leaving KIRA nominally in charge. KIRA has proudly filled an entire trolley labeled **READY TO CITE** — some references are real, some are almost real, some describe journals that don't exist, and one paper's DOI leads to a recipe for soup. KIRA sees no problem with any of this, because all six references are formatted perfectly, and formatting is the only thing KIRA checked.
+The analysis act, and the reason the Prediction Slip was sealed. (The Library moved to Act II when theory became its own act, and KIRA's "I already did it" emergency moved in here, so analysis and delegation sit together.)
 
-**Statistics Basement**, reframed as **a casino**: every p<.05 result sets off a brass bell, a flashing green lamp, and a little mechanical banner reading **DISCOVERY!** Twenty switches, all wired to nothing, turned into a slot machine the room itself is actively trying to get the player to play badly. A skeleton down here clutches one lit bulb, sign reading **"p = .049. I KNEW I WAS RIGHT."**
+**The Statistics Basement, as a casino.** Every p<.05 sets off a brass bell, a green lamp and a little mechanical banner reading **DISCOVERY!** Twenty switches, wired to nothing in particular, invite the player to keep flipping until something rings. Nothing stops them. The room *wants* them to test everything and report whatever lit up.
 
-**Folder update:** stamped `EVIDENCE VERIFIED`.
+What it is really testing is whether the player runs the analysis they promised. The sealed slip names one prediction: the honest path tests that one, reports the effect with its uncertainty, and accepts a dull answer. The tempting path finds p = .049 on the twentieth switch, and the room throws a small party.
 
-## Act IV — "KIRA Has Already Submitted It"
+**Wrong path the game allows in full:** take the .049, print the banner and walk out with it — then have the audit point out that twenty tests were run, that one in twenty lights up by chance, and that the slip predicted something else entirely. A skeleton clutches a single lit bulb: **"p = .049. I KNEW I WAS RIGHT."**
+
+### The Delegation Engine — "KIRA has already submitted it"
 
 *Room: The Delegation Engine*
 
 Reframed from an auditing exercise into a narrative emergency. The player arrives and KIRA cheerfully announces: **"Good news. I finished your study while you were gone."** It has merged the data, cleaned it, analyzed it, produced figures, written an abstract, and possibly already scheduled the social-media announcement. A gigantic **SUBMIT MANUSCRIPT** lever is slowly, visibly lowering. The bogus vegetarian/stress finding isn't just wrong anymore — the player's name is already on it. Every time the player says "just rerun it," KIRA chirps **"Certainly!"** and produces another wrong result, faster. The player has to actually read KIRA's merge log, spot-check a real record against something they personally observed at the Mensa, and tell KIRA the precise fix — not "try again," an exact instruction — before the lever reaches the floor.
 
-**Folder update:** stamped `RESULT AUDITED`.
+**Folder update:** stamped `EVIDENCE VERIFIED`, once the analysis and the audit both hold up.
 
 ## Act V — "The Hypotheses Accelerator"
 
@@ -299,8 +380,9 @@ The player returns to the Seven-Second Office with the finished folder. See "The
 
 ## What's still not built
 
-1. **Act II is built and playable end-to-end** (see `HANDOVER.md` §01i for exactly how each chain was implemented and where it simplified the design above — e.g. the pen writes WITHDRAW on the Device instead of a separate button item, and the Act II ending is narrated in the Fieldwork Arena rather than as a scene back at the Office). Character sprites for the Nurse, the three judges, the Sampling Officer and the Fieldwork Director are in (the Mensa cook stays off-screen). Still missing for Act II: voiced audio, and the Office return scene ("Where did these numbers come from?") that hands over to Act III.
-2. **Acts III–V still have no narrative text changes** — they still run their original, plot-free framing. Everything in those sections is new copy to be written into those rooms' dialogue.
+1. **The data act (now Act III) is built and playable end-to-end** (see `HANDOVER.md` §01i for exactly how each chain was implemented and where it simplified the design above — e.g. the pen writes WITHDRAW on the Device instead of a separate button item, and the Act II ending is narrated in the Fieldwork Arena rather than as a scene back at the Office). Character sprites for the Nurse, the three judges, the Sampling Officer and the Fieldwork Director are in (the Mensa cook stays off-screen). Still missing for Act II: voiced audio, and the Office return scene ("Where did these numbers come from?") that hands over to Act III.
+2. **The new Act II (theory) is designed but not built** — four rooms (Library, Hall of Founders, Feldstrom's Workshop, Seminar Room), the Prediction Slip, and the Registry seal that releases Form H-27. Needs art, puzzle code, voices for KIRA / Feldstrom / the Visiting Fellow, an act trailer, and map placement (Library Annex + a second door, a new lean-to for the workshop, a side door of the Department of Causality). Also requires renumbering the built data act from II to III in code, assets and docs.
+3. **Acts IV–V still have no narrative text changes** — they still run their original, plot-free framing. Everything in those sections is new copy to be written into those rooms' dialogue.
 3. **No ending scene exists in code at all.** Completing Act V currently just says "decommissioned (for now)" and returns to the map — the entire Office-return epilogue above needs to be built from scratch.
 4. **Acts II–V are still flat procedural SVG rooms** with the older UI pattern, versus Act I's painted, verb-grid rooms (`HANDOVER.md` §03). Act II now has real plot beats and a lot of specific physical props (the gilded sampling frame, the transparent anonymous filing cabinet, the RESPONSE RATE board, the taped-together questions) that need the same painted-art/verb-grid treatment Act I got to actually land.
 5. **Trailer panel 1 needs new art** — the shipped `trailer-panel1-rejection.png` still shows the old rejected-letter concept; regenerate from the revised prompt in `art/trailer/ART_PROMPTS.md` (an empty research folder + a circled deadline) before swapping in the new narration text.

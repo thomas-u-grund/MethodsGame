@@ -1,0 +1,182 @@
+{
+ "sfx-doorbell": [
+  "sfx-act1.mp3",
+  0.0,
+  1.583
+ ],
+ "sfx-door-open": [
+  "sfx-act1.mp3",
+  1.933,
+  3.169
+ ],
+ "sfx-door-slam": [
+  "sfx-act1.mp3",
+  5.452,
+  1.606
+ ],
+ "sfx-fall": [
+  "sfx-act1.mp3",
+  7.409,
+  2.478
+ ],
+ "sfx-chalk": [
+  "sfx-act1.mp3",
+  10.237,
+  0.915
+ ],
+ "sfx-stamp": [
+  "sfx-act1.mp3",
+  11.502,
+  0.6
+ ],
+ "sfx-paper": [
+  "sfx-act1.mp3",
+  12.452,
+  2.0
+ ],
+ "sfx-page": [
+  "sfx-act1.mp3",
+  14.802,
+  0.422
+ ],
+ "sfx-counter-ping": [
+  "sfx-act1.mp3",
+  15.574,
+  1.688
+ ],
+ "sfx-applause-small": [
+  "sfx-act1.mp3",
+  17.612,
+  5.0
+ ],
+ "sfx-splash": [
+  "sfx-act1.mp3",
+  22.962,
+  1.415
+ ],
+ "sfx-click": [
+  "sfx-act1.mp3",
+  24.727,
+  0.218
+ ],
+ "sfx-select": [
+  "sfx-act1.mp3",
+  25.295,
+  1.105
+ ],
+ "sfx-refuse": [
+  "sfx-act1.mp3",
+  26.75,
+  2.549
+ ],
+ "sfx-tick": [
+  "sfx-act1.mp3",
+  29.649,
+  1.175
+ ],
+ "sfx-whoosh": [
+  "sfx-act1.mp3",
+  31.174,
+  1.334
+ ],
+ "amb-office": [
+  "sfx-act1.mp3",
+  32.858,
+  30.0
+ ],
+ "amb-pond": [
+  "sfx-act1.mp3",
+  63.208,
+  30.0
+ ],
+ "amb-clock": [
+  "sfx-act1.mp3",
+  93.558,
+  19.993
+ ],
+ "sfx-applause-big": [
+  "sfx-act2.mp3",
+  0.0,
+  5.0
+ ],
+ "sfx-printer": [
+  "sfx-act2.mp3",
+  5.35,
+  4.0
+ ],
+ "sfx-lamps": [
+  "sfx-act2.mp3",
+  9.7,
+  1.106
+ ],
+ "sfx-scissors": [
+  "sfx-act2.mp3",
+  11.156,
+  2.93
+ ],
+ "sfx-stapler": [
+  "sfx-act2.mp3",
+  14.436,
+  1.154
+ ],
+ "sfx-key": [
+  "sfx-act2.mp3",
+  15.939,
+  2.478
+ ],
+ "sfx-bell-desk": [
+  "sfx-act2.mp3",
+  18.768,
+  1.179
+ ],
+ "sfx-drum-spin": [
+  "sfx-act2.mp3",
+  20.297,
+  3.937
+ ],
+ "sfx-trumpets": [
+  "sfx-act2.mp3",
+  24.584,
+  5.0
+ ],
+ "sfx-confetti": [
+  "sfx-act2.mp3",
+  29.934,
+  4.0
+ ],
+ "sfx-klaxon": [
+  "sfx-act2.mp3",
+  34.284,
+  5.0
+ ],
+ "sfx-scoreboard": [
+  "sfx-act2.mp3",
+  39.634,
+  1.775
+ ],
+ "sfx-button": [
+  "sfx-act2.mp3",
+  41.759,
+  1.037
+ ],
+ "sfx-phone-ring": [
+  "sfx-act2.mp3",
+  43.146,
+  0.997
+ ],
+ "amb-mensa": [
+  "sfx-act2.mp3",
+  44.492,
+  40.0
+ ],
+ "amb-ward": [
+  "sfx-act2.mp3",
+  84.842,
+  20.0
+ ],
+ "amb-studio": [
+  "sfx-act2.mp3",
+  105.192,
+  40.0
+ ]
+}
