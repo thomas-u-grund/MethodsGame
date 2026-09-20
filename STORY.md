@@ -459,7 +459,7 @@ A fourth Act I location, always open like the other three — already teased as 
 
 Everything else is the department being the department.
 
-But the *reason* that form exists is the act's real content, and it is not bureaucratic: a theory is what tells you when to be surprised. See "Why theory at all" below — the jokes all hang off that, and any room beat that does not eventually serve it should be cut.
+But the *reason* that form exists is the act's real content, and it is not bureaucratic: a theory is an idea about how the world works, and it has to be testable. See "Why theory at all" below — the jokes all hang off that, and any room beat that does not eventually serve it should be cut.
 
 ### Opening beat, back at the Office
 
@@ -491,15 +491,18 @@ That is the methodological thesis of the whole act, stated once, early, by the o
 
 ### Why theory at all — the act's actual argument
 
-**This is the thing the act has to land, and it is not "fill in four boxes."** The boxes are the department's filing system. The argument underneath them is simpler and much harder:
+**This is the thing the act has to land, and it is not "fill in four boxes."** The boxes are the department's filing system. The argument underneath them is deliberately small:
 
-> **A theory is what tells you when to be surprised.**
+> **A theory is an idea about how the world works. To be worth anything, it has to be testable.**
 
-Everything else follows from that. Without one, you can still collect numbers, and the numbers will still exist, and you will have no idea what any of them mean:
+That is the whole definition, and the act should never inflate it into something grander — inflating it is Feldstrom's job. Two halves, and the rooms fail by dropping one or the other:
 
-- **Guidance.** A theory tells you what to go and look at. Attendance and grades is a question; *attendance works through practice on worked examples* tells you to record which exam questions resemble the worked examples, which you would never have thought to collect otherwise. The theory writes the data-collection list.
-- **Interpretation.** A theory tells you what counts as a result. Without one, 0.3 is just 0.3. With one, 0.3 in the wrong place is a problem and 0.05 in the right place is a finding.
-- **Surprise.** A theory tells you what would change your mind, *in advance*, when it still costs you something to say it. This is the one the game cares about most, and it is what the wax seal is for.
+- **An idea about how the world works.** Not a list of citations. Not a sentence with a famous surname in it. Something you could describe to a person who has never read anything: *students who go to lectures see worked examples, and practising those is what the exam rewards.* That is a theory. It is not impressive, and it does not need to be.
+- **Testable.** It has to say something about the world that could turn out to be false. An idea that fits whatever happens is not a safe theory, it is not a theory — there is nothing in it to be right or wrong about.
+
+Testability is what keeps the idea attached to reality, and it is the only reason the rest of the act's apparatus exists: the mechanism says what should happen, the scope says to whom, and the falsifier says what would count against it. Those are not three additional virtues. They are what "testable" means once you write it down.
+
+What the player gets out of it in practice is guidance and interpretation, which are worth saying once, plainly, and not labouring: a theory tells you what to go and collect (nobody records which exam questions resemble the worked examples unless an idea told them to), and it tells you what a number means when you get one. Without it you can still collect data — the Professor says so explicitly — you just won't know what you've learned.
 
 **And the point the act must not fumble: theory and empirics are not two stages.** The game's structure — Act II theory, Act III data — makes them look sequential, so the writing has to work against its own act numbers. They are one activity, and the act should keep showing the traffic running **both ways**:
 
@@ -1023,15 +1026,7 @@ The button then retracts into the wall and does not come back.
 
 Press YES. Metal clamps descend. Wax seal. A date is punched in with considerable force.
 
-**And the machine prints a receipt** — a small card, the size of a cloakroom ticket, which does not go in the folder. The player keeps it in their inventory for the rest of the game:
-
-```
-YOU WILL BE SURPRISED IF:
-  the gap is no larger on worked-example questions
-  than on the others.
-```
-
-That card is the act, compressed into one line, and it is the object Act IV actually consults. The four boxes are what the department filed. The card is what the player is now carrying around: **a written statement, made before seeing anything, of what would change their mind.** It should be `Look At`-able in every subsequent room, and it should feel heavier the closer the data gets.
+The seal is the only piece of ceremony in the act that is doing real work: it is what makes the idea testable in practice rather than in principle. An untestable theory and a theory you are free to rewrite after seeing the data amount to the same thing.
 
 > **PLAYER:** "What if I'm wrong?"
 > **REGISTRY:** "Then you will have learned something."
@@ -1240,13 +1235,13 @@ The analysis act, and the reason the Prediction Slip was sealed. (The Library mo
 
 **The Statistics Basement, as a casino.** Every p<.05 sets off a brass bell, a green lamp and a little mechanical banner reading **DISCOVERY!** Twenty switches, wired to nothing in particular, invite the player to keep flipping until something rings. Nothing stops them. The room *wants* them to test everything and report whatever lit up.
 
-What it is really testing is whether the player runs the analysis they promised. The sealed slip names one prediction: the honest path tests that one, reports the effect with its uncertainty, and accepts a dull answer.
+What it is really testing is whether the player runs the analysis they promised. The sealed slip names one prediction: the honest path tests that one, reports the effect with its uncertainty, and accepts a dull answer. The tempting path finds p = .049 on the twentieth switch, and the room throws a small party.
 
-**Breaking the seal is the game's best moment and should be staged as one.** The wax comes off, and the player reads a sentence they wrote themselves, weeks ago, before they knew anything — and then compares it to what actually happened. This is where Act II gets paid for:
+**Breaking the seal is the game's best moment and should be staged as one.** The wax comes off, and the player reads a sentence they wrote themselves, weeks ago, before they knew anything — and then compares it to what actually happened. This is the act that makes Act II retrospectively worth having done, and it is the only place the game can show what "testable" was ever for:
 
 - If the prediction **holds**, it means something, precisely because it was written when it could have failed. Nobody in the room is impressed, which is correct.
 - If it **fails**, the player has learned something real, and the game says so plainly. A null result is only informative because a prediction existed; without the slip it would have been an afternoon wasted, and with it, it is a finding. The Skeptic should turn up here — this is her entire worldview, and Volume XI gets a new entry.
-- If the player never really had a theory (the `EVERYTHING EXPLAINS EVERYTHING` route), the seal comes off and the slip says *something will probably happen*. It is consistent with the result. It would have been consistent with any result. **The data cannot teach the player anything, and that is the punishment** — not a scolding, just a form that turns out to be worthless at the exact moment it was needed. The tempting path finds p = .049 on the twentieth switch, and the room throws a small party.
+- If the player never really had a theory (the `EVERYTHING EXPLAINS EVERYTHING` route), the seal comes off and the slip says *something will probably happen*. It is consistent with the result. It would have been consistent with any result. **The data cannot teach the player anything, and that is the punishment** — not a scolding, just a form that turns out to be worthless at the exact moment it was needed.
 
 **Wrong path the game allows in full:** take the .049, print the banner and walk out with it — then have the audit point out that twenty tests were run, that one in twenty lights up by chance, and that the slip predicted something else entirely. A skeleton clutches a single lit bulb: **"p = .049. I KNEW I WAS RIGHT."**
 
@@ -1277,8 +1272,7 @@ The player returns to the Seven-Second Office with the finished folder. See "The
 - **The Research Folder** — the one object every act touches, stamps, or defaces; the visible measure of progress and the final punchline.
 - **Skeletons with deadpan signs**, one per room, each specific to that room's failure mode (the 11-years-operationalizing-"often" skeleton, the "p = .049" skeleton, the original armchair skeleton whose sign finally flips at the very end).
 - **"Apparently we need…"** — every act after the first is named for the thing the player discovers they cannot proceed without, and the player says the line out loud, flatly, on their way out of the Office. The act titles are the player's own resignation, not the department's signage.
-- **"When would I be surprised?"** — the question the whole game is really about. It is why the Prediction Slip is sealed, why the Statistics Basement is a casino, why a null result is a finding, and why the Skeptic's *Things I Was Wrong About, Vol. XI* is the healthiest object in the department. Theory and evidence are never presented as two stages that follow one another; they are two halves of one activity, and every character who has kept only one half is a joke.
-- **The surprise card** — the receipt from the sealing machine, carried from Act II to the moment the seal is broken in Act IV. The one inventory item that is purely a promise.
+- **"Could this turn out to be wrong?"** — the question the whole game is really about. It is why the Prediction Slip is sealed, why the Statistics Basement is a casino, why a null result is a finding, and why the Skeptic's *Things I Was Wrong About, Vol. XI* is the healthiest object in the department. Theory and evidence are never two stages that follow one another; they are two halves of one activity, and every character who has kept only one half is a joke.
 - **Every act is one object going into the folder** — the Question (I), the sealed Prediction Slip (II), H-27 and the responses (III), the verified evidence (IV), the defensible claim (V). If a room's content cannot be traced back to the thing going in the folder, it is decoration and should be cut.
 - **KIRA's "Certainly!"** — enthusiastic agreement that should worry the player every time.
 - **The Professor and Feldstrom as opposite poles** — one punishes overreach, one punishes timidity — never in the same room, and that's the joke.
