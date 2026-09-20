@@ -455,7 +455,66 @@ A fourth Act I location, always open like the other three — already teased as 
 
 *Rooms: The Library · The Hall of Founders · Feldstrom's Workshop · The Seminar Room*
 
-**The hidden shape of the act.** The player arrives thinking:
+**What the act is actually for.** Same as every other act: **there is a folder, and something has to go in it.** The player leaves the Corridor holding a folder stamped `QUESTION EXISTS` and goes looking for data, because that is obviously what comes next. The department disagrees. Nothing else in this act — not the GENERALISER, not the portraits, not the telephone scam — is the point. The point is getting one pale-green form filled in, sealed, and into the folder, so the folder reads `THEORY EXISTS` and the Registry will finally release Form H-27.
+
+Everything else is the department being the department.
+
+### Opening beat, back at the Office
+
+The player presents the folder stamped `QUESTION EXISTS`.
+
+> **PLAYER:** "So now I collect the data."
+> **PROFESSOR:** "What do you expect to find?"
+> **PLAYER:** "I don't know. That's why I'm asking."
+> **PROFESSOR:** "Then what would count as surprising?"
+> **PLAYER:** "…anything?"
+
+The Professor, without breaking eye contact, reaches under the desk and pulls an emergency cord. A bell rings somewhere above. Deep inside the building, machinery that has not moved in some time wakes up. The pneumatic tube shudders and spits out a pale-green form:
+
+```
+FORM P-1
+APPLICATION FOR PERMISSION TO HAVE AN EXPECTATION
+```
+
+Tiny print along the bottom: *An expectation does not constitute optimism.*
+
+> **PLAYER:** "Can't I just collect the data first?"
+> **PROFESSOR:** "You may. You simply won't know what you've learned from them."
+
+That is the methodological thesis of the whole act, stated once, early, by the only person in it who is not ridiculous. Then the player says the act's title out loud, on the way out, to nobody:
+
+> **PLAYER:** "…apparently we need a theory."
+
+**Nobody in the act ever agrees what that means**, which is the next four rooms.
+
+### Quest object: the PREDICTION SLIP
+
+Form P-1 *is* the Prediction Slip — Act II's H-27. A separate, increasingly stamped and annotated prop that is folded into the Research Folder at the very end of the act. Four boxes, one per room, and the four rooms can be tackled in almost any order:
+
+- ☐ **WHAT IS KNOWN** — The Library
+- ☐ **MECHANISM** — The Hall of Founders
+- ☐ **SCOPE** — Feldstrom's Workshop
+- ☐ **PREDICTION AND FALSIFIER** — The Seminar Room
+
+Unlike H-27 it is **sealed** at the end and cannot be reopened, which is the point: Act IV checks it against what the player actually did.
+
+**The brass coherence indicator.** Along the bottom edge of the slip is a small brass window with a needle:
+
+```
+INTERNAL COHERENCE: EXEMPLARY
+```
+
+It starts there because the slip is blank. Every incoherent addition degrades it, one notch at a time, and the player can watch it happen in the inventory:
+
+> **EXEMPLARY → ADEQUATE → CONCERNING → THEORETICALLY BUSY → EVERYTHING EXPLAINS EVERYTHING**
+
+It is a recurring visual gag and also the game's only honest feedback in the entire act: the rooms all approve, the slip does not. Reaching `EVERYTHING EXPLAINS EVERYTHING` is not a fail state. It is an achievement, and it unlocks the Registry disaster below.
+
+**The folder gets defaced in every room, as usual.** The Library staples its reading list to the inside cover. The Hall's clerk stamps the *cover* `THEORETICALLY GROUNDED` whether or not anything inside deserves it. Feldstrom writes a correction on it in pencil. The Seminar Room's board leaves chalk dust on it that never quite comes off. By the end of Act II the folder looks handled, which is the visible proof the player has been somewhere.
+
+### The hidden shape of the act
+
+The player arrives thinking:
 
 > *"I need to write down what I think will happen."*
 
@@ -480,53 +539,7 @@ No character ever says that last line out loud. The act is built so the player a
 
 Under the last one, scratched in pencil by somebody long gone: **"and tells you why."** That is the closest the game ever comes to simply giving the answer, and it is easy to miss.
 
-### Opening beat — Form P-1
-
-The player leaves the Corridor with a question and a folder and goes looking for data. The department will not let them. Form H-27 exists, but the Registry refuses to issue it until somebody has written down what they expect to find, and why.
-
-> **PROFESSOR:** "What do you expect to find?"
-> **PLAYER:** "I don't know. That's why I'm asking."
-> **PROFESSOR:** "Then what would count as surprising?"
-> **PLAYER:** "…anything?"
-
-The Professor, without breaking eye contact, reaches under the desk and pulls an emergency cord. A bell rings somewhere above. Deep inside the building, machinery that has not moved in some time wakes up. The pneumatic tube shudders and spits out a pale-green form:
-
-```
-FORM P-1
-APPLICATION FOR PERMISSION TO HAVE AN EXPECTATION
-```
-
-Tiny print along the bottom: *An expectation does not constitute optimism.*
-
-> **PLAYER:** "Can't I just collect the data first?"
-> **PROFESSOR:** "You may. You simply won't know what you've learned from them."
-
-That is the methodological thesis of the whole act, stated once, early, by the only person in it who is not ridiculous.
-
-### Quest object: the PREDICTION SLIP
-
-Form P-1 *is* the Prediction Slip. Four boxes:
-
-- **WHAT IS KNOWN** — The Library
-- **MECHANISM** — The Hall of Founders
-- **SCOPE** — Feldstrom's Workshop
-- **PREDICTION AND FALSIFIER** — The Seminar Room
-
-It is sealed at the end and cannot be reopened, which is the point: Act IV checks it against what the player actually did.
-
-**The brass coherence indicator.** Along the bottom edge of the slip is a small brass window with a needle:
-
-```
-INTERNAL COHERENCE: EXEMPLARY
-```
-
-It starts there because the slip is blank. Every incoherent addition degrades it, one notch at a time, and the player can watch it happen in the inventory:
-
-> **EXEMPLARY → ADEQUATE → CONCERNING → THEORETICALLY BUSY → EVERYTHING EXPLAINS EVERYTHING**
-
-It is a recurring visual gag and also the game's only honest feedback in the entire act: the rooms all approve, the folder does not. Reaching `EVERYTHING EXPLAINS EVERYTHING` is not a fail state. It is an achievement, and it unlocks the Registry disaster below.
-
-**Design rule, as in the data act:** no room contains its own solution, all four are open at once, and every wrong path can be walked all the way to the end.
+**Design rule, as in the data act:** no room contains its own solution, all four are open at once, all four Act I rooms stay open and re-visitable, and every wrong path can be walked all the way to the end.
 
 ### The Library — "Ready to Cite"
 
@@ -561,7 +574,9 @@ That third one is the bridge back to Act I's Corridor without re-teaching it.
 
 **Wrong path the game allows:** submit all six. KIRA is delighted, the Registry accepts the list, the coherence needle drops one notch, and it returns in Act IV when the audit finds a third of the reading list fictional and one source contradicting the claim it was cited for.
 
-**Box earned:** WHAT IS KNOWN — three sources that exist and say what you think they say, plus the observation that none of them explains *why* attendance would matter.
+**Box filled: ☑ WHAT IS KNOWN** — three sources that exist and say what you think they say, plus the observation that none of them explains *why* attendance would matter. KIRA staples the reading list into the folder's inside cover, upside down, with great ceremony.
+
+**Why this box is on the form at all:** you cannot say what you expect to find until you know what has already been found. The room's failure mode is treating "has been cited" as "is known."
 
 **Skeleton:** slumped at a reading desk under a tower of paper, sign reading **"READ 2,741 ABSTRACTS · CURRENTLY ON PAGE 1."** (Alternate, if the first is too close to the Hall's: **"SYSTEMATIC REVIEW · SEARCH STILL RUNNING."**)
 
@@ -610,7 +625,11 @@ One portrait somehow nods anyway.
 
 **Room objects that leave:** the **stepladder** (needed in the Library) and the **portrait hook remover** (needed to unframe the abstract). Also, in a display case near the entrance, a yellowed newspaper clipping about an economist receiving the Sveriges Riksbank Prize — which is where the player learns the correct wording for the Stockholm scam three rooms over.
 
-**Box earned:** MECHANISM. **Skeleton:** seated in the gallery, sign reading **"CITED 400 TIMES. EXPLAINED NOTHING."**
+**Box filled: ☑ MECHANISM.** The clerk emerges again and stamps the *folder cover* `THEORETICALLY GROUNDED` — a stamp the folder keeps for the rest of the game, and which means nothing whatsoever.
+
+**Why this box is on the form at all:** an expectation without a reason is a guess. The room's failure mode is treating "has been said by someone important" as "has been explained."
+
+**Skeleton:** seated in the gallery, sign reading **"CITED 400 TIMES. EXPLAINED NOTHING."**
 
 ### Feldstrom's Workshop — theory as scale
 
@@ -716,7 +735,9 @@ Underneath the absurdity he genuinely sees the merit, which is what earns the Ac
 
 **Wrong path:** lodge the civilisation-scale version. Accepted enthusiastically, coherence needle drops, and in Act IV it makes every possible result "consistent with the theory."
 
-**Box earned:** SCOPE.
+**Box filled: ☑ SCOPE.** Feldstrom, defeated, writes a small pencil correction on the folder itself — *"but see also: everything"* — and cannot be persuaded to rub it out.
+
+**Why this box is on the form at all:** a prediction with no population is not checkable against any data anyone could collect. The room's failure mode is treating "applies to everything" as "is more theoretical."
 
 **Running gag — the telephone.** See the Stockholm scam below; the phone is prominent from the first second the player enters.
 
@@ -871,7 +892,11 @@ The Visiting Fellow does not say "correct."
 
 Choosing "probably a bit of all three" prints the room's best line: **UNFALSIFIABLE — CONGRATULATIONS, YOU CANNOT LOSE.**
 
-**Box earned:** PREDICTION AND FALSIFIER. **Skeleton:** at the seminar table, sign reading **"STILL AWAITING A MECHANISM."**
+**Box filled: ☑ PREDICTION AND FALSIFIER.** The Visiting Fellow signs it, and hands the folder back with chalk dust on it that never quite comes off.
+
+**Why this box is on the form at all:** this is the one that makes the other three worth having — it is the box Act IV opens the seal to check. The room's failure mode is treating "could be true" as "could be wrong."
+
+**Skeleton:** at the seminar table, sign reading **"STILL AWAITING A MECHANISM."**
 
 ### The rooms contaminate each other
 
@@ -925,9 +950,11 @@ KIRA arrives at a trot.
 
 And from somewhere in the Hall of Founders, muffled applause. The coherence indicator has reached `EVERYTHING EXPLAINS EVERYTHING`. The player has to go and do it properly, but they have now seen the entire act's argument compressed into thirty seconds.
 
-### Sealing the slip
+### Sealing the slip — the thing that goes in the folder
 
-Not a rubber stamp. A ritual. The slip goes into a machine labelled:
+All four boxes ticked, the player takes the slip to the Registry. This is the moment the act has been for: four rooms of people insisting theory is indispensable, and what actually goes in the folder is one pale-green form that says what you think will happen, why, to whom, and what would prove you wrong.
+
+Not a rubber stamp, though. A ritual. The slip goes into a machine labelled:
 
 ```
 PREREGISTRATION-ADJACENT DEVICE
@@ -956,7 +983,10 @@ Press YES. Metal clamps descend. Wax seal. A date is punched in with considerabl
 
 The tube coughs. A moment later it coughs again and **Form H-27: REQUEST TO APPROACH HUMAN BEINGS** thumps out, all forty-seven pages of it, which is Act III's problem.
 
-**Folder update:** stamped `THEORY EXISTS`.
+**Folder update.** The sealed slip is folded into the Research Folder, which is stamped `THEORY EXISTS` — under the Hall's meaningless `THEORETICALLY GROUNDED`, next to Feldstrom's pencil annotation, on top of KIRA's upside-down reading list. Four institutions have now had their way with it and exactly one of the marks on it means anything.
+
+> **PLAYER:** "So that's a theory."
+> **REGISTRY:** "That is a form."
 
 **And dramatically:** the player should leave Act II feeling that they have finally done something intellectually serious — and Act III should immediately hand them ethics paperwork.
 
@@ -1180,6 +1210,8 @@ The player returns to the Seven-Second Office with the finished folder. See "The
 
 - **The Research Folder** — the one object every act touches, stamps, or defaces; the visible measure of progress and the final punchline.
 - **Skeletons with deadpan signs**, one per room, each specific to that room's failure mode (the 11-years-operationalizing-"often" skeleton, the "p = .049" skeleton, the original armchair skeleton whose sign finally flips at the very end).
+- **"Apparently we need…"** — every act after the first is named for the thing the player discovers they cannot proceed without, and the player says the line out loud, flatly, on their way out of the Office. The act titles are the player's own resignation, not the department's signage.
+- **Every act is one object going into the folder** — the Question (I), the sealed Prediction Slip (II), H-27 and the responses (III), the verified evidence (IV), the defensible claim (V). If a room's content cannot be traced back to the thing going in the folder, it is decoration and should be cut.
 - **KIRA's "Certainly!"** — enthusiastic agreement that should worry the player every time.
 - **The Professor and Feldstrom as opposite poles** — one punishes overreach, one punishes timidity — never in the same room, and that's the joke.
 - **The empty folder in the trailer's first panel is the same folder the Doorman hands over in Act I** — a visual bookend that doesn't depend on remembering a specific stamp.
