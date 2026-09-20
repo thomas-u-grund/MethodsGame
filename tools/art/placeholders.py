@@ -95,6 +95,11 @@ ROOMS = {
     (54, 10, 20, 30, '#5C4630', 'CLERK'),
     (78, 8, 19, 34, '#3A2E22', 'FURTHER RESEARCH IS NEEDED'),
     (54, 44, 20, 12, '#8A6A2A', 'SO WHAT? gauge')]),
+ 'delegation-bg-placeholder.svg': ('THE DELEGATION ENGINE', '#232A2E', None, [
+    (6, 10, 40, 30, '#24303E', 'MERGE LOG (40 pages)'),
+    (6, 44, 40, 12, '#4A3A28', 'ONE PRINTED RECORD'),
+    (54, 10, 20, 30, '#7A6242', 'KIRA'),
+    (78, 8, 19, 34, '#7A2A20', 'LEVER \u2192 AUTO-SUBMIT')]),
  'gapregistry-bg-placeholder.svg': ('THE GAP REGISTRY', '#2A2C28', None, [
     (4, 8, 40, 48, '#3A2E22', 'DRAWERS OF APPROVED GAPS'),
     (48, 20, 18, 34, '#6A5440', 'REGISTRAR'),
