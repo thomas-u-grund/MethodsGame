@@ -24,6 +24,17 @@ _Logged 2026-09-20, requested by the user. Not started._
 
 8. **Bingo shouldn't reshuffle the Lecture Theatre layout.** Playing bingo currently changes the whole screen (card rendered beside the inventory on the right). The card should sit *inside* the main scene window instead, so the room stays visually stable.
 
+## The telephone puzzle — planned
+_Logged 2026-09-20, requested by the user. Not started._
+
+The phones are underused props right now: the Survey Lab's rotary phone only hides the reminder postcards and plays hold music, and the Fieldwork Arena's phone just gives a voicemail gag. Make one of them a real puzzle:
+
+- **Using the phone opens a dial screen** (an overlay in the scene window, in the same painted style): a rotary dial or keypad where the player enters a number digit by digit, with a wrong number giving a funny engaged/"wrong department" response.
+- **The number is found elsewhere** — written on something in another room (a staff list, a plaque, the back of a form, a sticky note on the corkboard). Cross-room, the way the rest of Act II works.
+- **What it achieves (user's idea):** the player phones a character and *pretends to be the university president* (or similar authority) to get them to leave their post — e.g. summoning the Sampling Officer away from the drum, the Keeper away from the Ledger, or the Director off the stage — opening up something that character was blocking. With rigs in place, the character can visibly walk off, which is the payoff.
+- **Methods angle to keep it honest:** the joke should land as "authority gets answers that evidence doesn't" — and ideally the game notes that impersonating your way to data is exactly what the Ethics Tribunal exists to prevent (a Tribunal reaction afterwards, or a scolding line if the player brags about it).
+- Decide which room owns it (Survey Lab's rotary phone is the most characterful), and where the number lives.
+
 ## Voiced dialogue everywhere + living characters (talking and moving sprites) — planned
 _Logged 2026-09-19, requested by the user. Not started._
 
