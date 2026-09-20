@@ -33,7 +33,8 @@ The phones are underused props right now: the Survey Lab's rotary phone only hid
 - **The number is found elsewhere** — written on something in another room (a staff list, a plaque, the back of a form, a sticky note on the corkboard). Cross-room, the way the rest of Act II works.
 - **What it achieves (user's idea):** the player phones a character and *pretends to be the Nobel Prize committee* ("we are calling about a certain nomination — are you somewhere private?") to get them to leave their post — e.g. summoning the Sampling Officer away from the drum, the Keeper away from the Ledger, or the Director off the stage — opening up something that character was blocking. With rigs in place, the character can visibly walk off, which is the payoff.
 - **Methods angle to keep it honest:** the joke should land as "vanity gets answers that evidence doesn't" — nobody in this department can resist a call from Stockholm — and ideally the game notes that impersonating your way to data is exactly what the Ethics Tribunal exists to prevent (a Tribunal reaction afterwards, or a scolding line if the player brags about it).
-- Decide which room owns it (Survey Lab's rotary phone is the most characterful), and where the number lives.
+- **Best target (user, 2026-09-20): Prof. Feldstrom in Act V** (the Hypotheses Accelerator — the tall one who hates claims that are too small). He is visibly, permanently waiting for the call from Stockholm, so a ringing phone and a polite Swedish voice is the one thing that will make him leave the room. Keeps the gag out of Act II and gives Act V a puzzle it doesn't have yet; the Act II phones can stay flavour, or hold the number.
+- Decide which room owns the dial screen (the Survey Lab's rotary phone is the most characterful prop) and where the number is written.
 
 ## Voiced dialogue everywhere + living characters (talking and moving sprites) — planned
 _Logged 2026-09-19, requested by the user. Not started._
