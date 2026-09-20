@@ -1,6 +1,6 @@
 # Headless test suite
 
-Nine CDP scripts that drive the real game in headless Chrome. They are the
+Twelve CDP scripts that drive the real game in headless Chrome. They are the
 acceptance tests for the work packages in `ROADMAP.md`, and every package is
 expected to leave them all green.
 
@@ -27,6 +27,9 @@ the user's machine.
 | `test-ethics` | linkage: over-redaction blocks it, overall-marks is refused, proper wins |
 | `test-mensa` | the enrolment register is the right frame; the official list is not |
 | `test-handoff` | the Office "where did those numbers come from" scene |
+| `test-sfx` | the effects channel: offsets, one-shots, unknown names are harmless |
+| `test-migrate` | an old save survives the Act II→III renumbering |
+| `test-preload` | preloading primes the bundle so the first line is not a cold fetch |
 
 **The audio blind spot:** a muted run cannot hear silence, which is exactly how v51
 shipped mute. `test-audio` asserts structurally (offsets resolve, clips fire `ended`

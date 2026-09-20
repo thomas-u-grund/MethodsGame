@@ -17,7 +17,7 @@
 
 1. Work in **work-package order** (§6). Packages are numbered by phase and are mostly sequential; dependencies are stated where they are not.
 2. Before starting a package, read its **Definition of Done** (§5) and the relevant `STORY.md` section.
-3. Every package ends with a **local headless test** (§4.8) and a commit. Do not batch five packages into one commit.
+3. Every package ends with a **local headless test** (`tools/test/`, see its README) and a commit. Do not batch five packages into one commit.
 4. **Publishing and pushing happen only when the user asks.** Build, test, commit locally, and say what is ready.
 5. When a package is finished, tick it here and add a short entry to `CHANGELOG.md`.
 6. If a package turns out to be wrong or the story has moved on, change this document rather than quietly deviating.
@@ -293,15 +293,15 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 
 **WP-1.9 · Act II voices and SFX.** Cast KIRA, Feldstrom, the Visiting Fellow, the clerk and the Registry with the user first. Bundle as `voices-act2.mp3` (the name frees up after WP-0.2).
 
-### Phase 2 — Act III retrofit
+### Phase 2 — Act III retrofit ✅ COMPLETE
 
-**WP-2.1 · Make the hypothesis drive the data.** `STORY.md` § Act III, "The chain that makes the middle of the game click". The player must be forced to obtain item-level exam performance, a classification of which exam items resemble the worked examples (from the Professor's Lecture Theatre sheets), and a survey item about alternative practice. **This is the highest-value single change in the whole plan** — it is what makes theory and evidence feel like one activity rather than two acts.
+**WP-2.1 ✅ DONE · Make the hypothesis drive the data.** `STORY.md` § Act III, "The chain that makes the middle of the game click". The player must be forced to obtain item-level exam performance, a classification of which exam items resemble the worked examples (from the Professor's Lecture Theatre sheets), and a survey item about alternative practice. **This is the highest-value single change in the whole plan** — it is what makes theory and evidence feel like one activity rather than two acts.
 
-**WP-2.2 · Record linkage at the Ethics Tribunal.** The pseudonymous IDs gain their second and better purpose: linkage permission, and a consent form that has to say so in plain language.
+**WP-2.2 ✅ DONE · Record linkage at the Ethics Tribunal.** The pseudonymous IDs gain their second and better purpose: linkage permission, and a consent form that has to say so in plain language.
 
-**WP-2.3 · The enrolment register becomes the sampling frame.** Replace the "complete student list held by Ethics" with the Act II register, pseudonymised by Ethics. The 4,000-name newsletter list becomes the seductive wrong alternative, and the Sampling Officer gets the *"it has the right hundred and forty names"* exchange.
+**WP-2.3 ✅ DONE · The enrolment register becomes the sampling frame.** Replace the "complete student list held by Ethics" with the Act II register, pseudonymised by Ethics. The 4,000-name newsletter list becomes the seductive wrong alternative, and the Sampling Officer gets the *"it has the right hundred and forty names"* exchange.
 
-**WP-2.4 · The Office hand-off scene** ("Where did these numbers come from?") that was never built as an in-room scene.
+**WP-2.4 ✅ DONE · The Office hand-off scene** ("Where did these numbers come from?") that was never built as an in-room scene.
 
 ### Phase 3 — Act IV, "Apparently Numbers Don't Speak for Themselves"
 
