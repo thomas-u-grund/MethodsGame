@@ -32,16 +32,38 @@ _Reported by the user while playing v51. Not fixed yet._
 3. **Skipping the Doorman's dialogue can leave the gate shut.** The gate sequence is driven by fixed `setTimeout`s sized to the voice clips (2.8 s / 10.8 s / 13.4 s before "You step through"), so pressing Space only cuts the audio — the timers keep running and the player is left staring at an apparently dead door, or clicks away before the room advances. Fix: drive each step off the line's `ended` event (or a shared "line finished or skipped" helper) instead of hard-coded delays, so skipping advances the scene immediately. Same pattern is used in the archway exchange (`checkWin`) and the BINGO walk-out — worth fixing in one place.
 
 ## Sound effects pass — planned
-_Logged 2026-09-20, requested by the user. Not started._
+_Logged 2026-09-20, requested by the user. Not started. Source: **Epidemic Sound** sound-effects library (https://www.epidemicsound.com/sound-effects/) — check the account's licence before shipping; keep raw downloads out of `web/` like `web-png-originals/`._
 
-The game has voices and room music but almost no sound effects. Source the user picked: **Epidemic Sound's sound-effects library** (https://www.epidemicsound.com/sound-effects/) — check the licence terms for the account before shipping anything, and keep the raw downloads out of `web/` (same pattern as `web-png-originals/`).
+**Three channels, not one.** Voices (`CODEBOOK_PLAY_LINE_AUDIO`) and room music (`CODEBOOK_PLAY_ROOM_MUSIC`) already exist. Effects need their own: `CODEBOOK_SFX(name, vol)` for one-shots and a looping ambience channel per room. Space cuts **dialogue only** — never ambience or effects. Ship them bundled per act with an offset table, exactly like the voices (HANDOVER §01n), or the artifact's 255-file limit bites again.
 
-Obvious candidates, roughly in order of payoff:
-- **Act I:** the Corridor door (heavy latch, bell ring), the fall through the floor, chalk on the blackboard, the Office hourglass/stamp, paper rustle when the folder is issued, the pond splash and the swan.
-- **Act II:** the pneumatic tube coughing up the H-27, the Survey Lab machine's dot-matrix printer and green-lamp clunk, the Tribunal bell and the enormous approval stamp, the Mensa drum spin + confetti + trumpets, the Fieldwork klaxon, studio applause and the red button.
-- **UI:** verb/inventory clicks, item pickup, H-27 box ticking, map room unlock.
-- **Mixing:** effects need their own channel next to `CODEBOOK_PLAY_LINE_AUDIO` (voices) and `CODEBOOK_PLAY_ROOM_MUSIC` (music), with a lower default volume, and Space should not kill them (Space only cuts dialogue).
-- **Delivery:** bundle them the same way as the voices (one file per act + offset table, see HANDOVER §01n) so the artifact's 255-file limit isn't hit again.
+### Ambience loops (one per room, very low, start in `init()`)
+| Room | Loop |
+|---|---|
+| Seven-Second Office | clock tick, radiator knock, distant corridor |
+| Lecture Theatre | **snoring student** (user's idea), occasional cough, pen scratching, chair creak, faint projector hum |
+| Probability Pond | water lapping, ducks/swans, wind in the willow, distant bell tower |
+| Causality Corridor | deep empty-building hum, faint dripping |
+| Survey Lab | heart-monitor blips, distant trolley, fluorescent buzz |
+| Ethics Tribunal | cavernous room tone, a slow ticking clock, papers shuffling above |
+| Mensa | cutlery and trays, crowd murmur, kitchen clatter |
+| Fieldwork Arena | studio air, faint audience murmur, stage-light hum |
+
+### One-shots by trigger
+- **Office:** hourglass turned; rubber stamp thump; pen scratch (writing the citation); drawer/cupboard; the counter's mechanical *ping* (citation counter); professor's patience "bubble" popping as it drains; folder slapped on the desk.
+- **Lecture Theatre:** chalk squeak (drawing on the board); the **BINGO** shout answered by a lone cough and a dropped pen; bingo square marked (soft tick); professor's footsteps walking out; door thud as he leaves; page flip.
+- **Probability Pond:** ink bottle uncorked; brush/splash as the swan is painted; swan honk of protest; plaque stamped FALSIFIED; bench creak.
+- **Corridor:** **the door bell** (user's example: an old brass bell pull, slightly too loud); heavy latch and hinge as the Doorman opens; the wrong-door **floor giving way** + falling whoosh + distant landing; correct door chime; the doors sliding into the archway.
+- **Survey Lab:** the machine's dot-matrix printer; green lamps clunking on; scissors snip (cutting the double-barrel); stapler (calendar page); gurney wheels; cabinet unlocked with a ceremonial little key; phone receiver lifted + hold music click.
+- **Ethics Tribunal:** the Chair's **bell** (rings at the word "participant"); enormous approval stamp; gavel-ish thud; the Representative's snore; the Device's seatbelt buckle clunk; ballot box glass tap; the rustle of the 12-page consent form.
+- **Mensa:** the Great Drum spinning (heavy wooden rumble); numbered balls dropping into the mug; **trumpets** and confetti pop at "A SAMPLE HAS OCCURRED"; the Officer's ceremonial throat-clear; till bell for the lunch voucher; tray slide.
+- **Fieldwork Arena:** game-show sting on going live; **klaxon** + red lights when respondents escape; the scoreboard flipping digits; doors slamming as people leave; applause and a banner drop at RECORD HIGH; the big red button; telephone ring (ties into the planned phone puzzle).
+- **UI / global:** verb selected (soft click); inventory item picked up; item used successfully vs. refused (two-note "no"); H-27 box ticking; map location unlocked; act-title whoosh in the trailers; page turn between trailer panels.
+
+### Notes
+- Keep everything quiet: effects ~0.2–0.35, ambience ~0.08–0.12, under voices at 1.0.
+- Prefer short, dry, cartoonish takes over realistic ones — the art is comic, not cinematic.
+- A few of these (klaxon, trumpets, printer) are already *described* in the text, so they're the highest-value ones: the writing promises a sound the player doesn't hear.
+
 
 ## The telephone puzzle — planned
 _Logged 2026-09-20, requested by the user. Not started._
