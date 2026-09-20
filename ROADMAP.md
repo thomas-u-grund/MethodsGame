@@ -24,6 +24,18 @@ _Logged and built 2026-09-20; all nine items done, see HANDOVER §01n. (Item 3 w
 
 8. **Bingo shouldn't reshuffle the Lecture Theatre layout.** Playing bingo currently changes the whole screen (card rendered beside the inventory on the right). The card should sit *inside* the main scene window instead, so the room stays visually stable.
 
+## Sound effects pass — planned
+_Logged 2026-09-20, requested by the user. Not started._
+
+The game has voices and room music but almost no sound effects. Source the user picked: **Epidemic Sound's sound-effects library** (https://www.epidemicsound.com/sound-effects/) — check the licence terms for the account before shipping anything, and keep the raw downloads out of `web/` (same pattern as `web-png-originals/`).
+
+Obvious candidates, roughly in order of payoff:
+- **Act I:** the Corridor door (heavy latch, bell ring), the fall through the floor, chalk on the blackboard, the Office hourglass/stamp, paper rustle when the folder is issued, the pond splash and the swan.
+- **Act II:** the pneumatic tube coughing up the H-27, the Survey Lab machine's dot-matrix printer and green-lamp clunk, the Tribunal bell and the enormous approval stamp, the Mensa drum spin + confetti + trumpets, the Fieldwork klaxon, studio applause and the red button.
+- **UI:** verb/inventory clicks, item pickup, H-27 box ticking, map room unlock.
+- **Mixing:** effects need their own channel next to `CODEBOOK_PLAY_LINE_AUDIO` (voices) and `CODEBOOK_PLAY_ROOM_MUSIC` (music), with a lower default volume, and Space should not kill them (Space only cuts dialogue).
+- **Delivery:** bundle them the same way as the voices (one file per act + offset table, see HANDOVER §01n) so the artifact's 255-file limit isn't hit again.
+
 ## The telephone puzzle — planned
 _Logged 2026-09-20, requested by the user. Not started._
 
