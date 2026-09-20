@@ -94,7 +94,7 @@ Full loop in `HANDOVER.md` §04. The short version:
 - Download via in-page `fetch(img.src)` → blob → `<a download>`; check **all** near-duplicate files in `~/Downloads` before picking.
 - Crop sprites to the **alpha > 40 % bounding box**, never plain `-trim`. Full-body **820 px** tall, chest-up **560 px** wide.
 - Composite locally with ImageMagick before touching the page when placement is uncertain.
-- Anything over ~400 KB ships as WebP: `cwebp -q 88 -alpha_q 95 -m 6`. Keep the PNG in `web-png-originals/` (git-ignored) and the source in `art/<room>/`.
+- Backgrounds ship as WebP at `cwebp -q 92 -alpha_q 95 -m 6` (raised from q88 once GitHub Pages removed the size ceiling — §3). Keep PNG where WebP hurts: line art with hard edges, and anything with crisp lettering. Keep the PNG original in `web-png-originals/` (git-ignored) and the source in `art/<room>/`.
 - Every room gets an `art/<room>/ART_PROMPTS.md` with the prompts actually used.
 
 ### 2.4 Sprites, rigs and animation
@@ -177,7 +177,11 @@ The user raised on 2026-09-20 that we do not have to publish that way. **We don'
 | itch.io | 1 GB per upload | free | Natural home for a game, gives it a store page, but uploads are zips. |
 | Claude artifact *(today)* | **255 files, 64 MB** | free | Best for quick previews and sharing a link mid-build. |
 
-**Recommendation: keep the artifact as the preview channel and add GitHub Pages as the real home.** They are not exclusive — the artifact is genuinely useful for "look at this now" during a session, and Pages carries the full-fat build.
+**DECIDED 2026-09-20 (user): GitHub Pages is the real home; the Claude artifact stays as the preview channel.** They are not exclusive — the artifact is genuinely useful for "look at this now" during a session, and Pages carries the full-fat build.
+
+**Prepared, not yet live** (needs a push, which is user-gated): a root `index.html` that redirects to `web/the-secret-of-the-codebook.html`, and `.nojekyll` so Pages serves the asset folders untouched. To switch it on, once pushed: repo **Settings → Pages → Source: deploy from branch `main`, folder `/ (root)`**, or `gh api -X POST repos/thomas-u-grund/MethodsGame/pages -f source[branch]=main -f source[path]=/`. The URL will be `https://thomas-u-grund.github.io/MethodsGame/`.
+
+**What this means for every package from Phase 1 on:** stop rationing. Backgrounds can be generated and kept at full quality, each act can have its own music, voices can go above `-q:a 3`, and a room ships as many sprites and rig parts as it needs. The artifact preview may occasionally need a reduced file list; that is a publishing detail, not a design constraint.
 
 ### What stays, and what relaxes, if we move
 
