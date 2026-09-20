@@ -1,6 +1,6 @@
 # The Secret of the Lost Codebook — Story
 
-*Narrative reference — drafted 2026-09-17, rewritten 2026-09-17 around a single-quest structural fix. This is the story bible: premise, cast, and beat-by-beat plot. For implementation details (files, code, art pipeline), see `HANDOVER.md`; for the chronological build log, see `ROADMAP.md`.*
+*Narrative reference — drafted 2026-09-17, rewritten 2026-09-17 around a single-quest structural fix. This is the story bible: premise, cast, and beat-by-beat plot. For what to build next and to what standard, see the master build plan in `ROADMAP.md`; for how the code and pipelines work, see `HANDOVER.md`; for the chronological build log, see `CHANGELOG.md`.*
 
 > **⚠ Design status: Act I is built, Acts II–V and the ending are not.** The Corridor's two-stage reveal, the Doorman exchange, and the Research Folder item are all live and tested (see `HANDOVER.md` §01b). Acts II–V still run their original plot-free framing, and no ending scene exists in code yet — see "What's still not built" at the end of this doc.
 

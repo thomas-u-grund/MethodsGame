@@ -408,11 +408,12 @@ art/                              # source art + prompts, organized by room
   sprites/                                  # sprites not used in a room (Skeptic, skeleton, spare icon)
 
 README.md                         # public-facing summary + how to run locally
-ROADMAP.md                        # the detailed, chronological changelog + backlog
+ROADMAP.md                        # the MASTER BUILD PLAN: house rules, work packages, definition of done
+CHANGELOG.md                      # the chronological build log (was ROADMAP.md until 2026-09-20)
 STORY.md                          # the narrative bible: premise, cast, act-by-act plot, open story threads
 ```
 
-This doc is the map; `ROADMAP.md` is the full trip log. `STORY.md` is the narrative counterpart — read it before writing new dialogue or planning Acts III–V.
+This doc is how the code and pipelines work; **`ROADMAP.md` is the master build plan** (what to build next, to what standard, and how to know it's done); `CHANGELOG.md` is the trip log; `STORY.md` is the narrative bible — read it before writing new dialogue.
 
 ---
 

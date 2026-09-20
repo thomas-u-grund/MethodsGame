@@ -1,258 +1,339 @@
-# The Secret of the Codebook — Roadmap / Backlog
+# The Secret of the Lost Codebook — Master Build Plan
 
-## Campus map: label only the rooms the player can enter — built
-_Logged and built 2026-09-19 (HANDOVER §01m): per-act base maps with no banners, signboards drawn only for enterable rooms, tent and black swan + FALSIFIED only from Act II._
+*Written 2026-09-20. This is the document to work through to finish the game. It assumes no memory of previous sessions: everything needed to build a room to the standard of Act I and Act III is either here or precisely referenced.*
 
-The campus map art currently has painted name signs on every building, including rooms that are still locked or belong to later acts (e.g. Library Annex, Administration, Ethics Tribunal, Fieldwork Arena are all labelled from the very start). Instead:
-- **Act I map:** only the Act I locations carry labels (Professor's Office, Lecture Theatre, Department of Causality, Probability Pond); every other building is unlabelled.
-- **Act II map:** adds labels for the four Act II rooms (Survey Lab, Ethics Tribunal, Mensa, Fieldwork Arena); later-act buildings stay unlabelled.
-- Continue per act (Act III adds the Library and Statistics Basement, and so on).
+**The three documents, and what each is for:**
 
-Implementation options: regenerate/inpaint one map image per act with the signs removed or blank (`art/map/` already has `source-v1-act1.png` and `source-v2-act2.png` as starting points), or paint blank signboards once and render the labels as HTML overlays that appear when a room unlocks (more flexible, and one map image serves every act). `showMap()` picks the image or overlays by act progress (`corridorDone`, `actIIDone`, …).
-
-## Act I polish + presentation pass — built
-_Logged and built 2026-09-20; all nine items done, see HANDOVER §01n. (Item 3 was a real bug: patience could eject a player who gave the right answer.)_
-
-1. **Lecture Theatre, the BINGO payoff needs an exit animation.** Today the professor simply vanishes when the player shouts BINGO. He should visibly lose his thread — a beat of confusion, then walk out of the hall (he already has a rig: `PROF_RIG` + `CODEBOOK_RIG_WALK`, so send him off the side of the frame and fade), and only then does the room switch to "empty theatre".
-2. **Lecture Theatre, hint the bingo trick.** The bingo card is an undocumented trick and first-time players have no cue. Idea (user's): something scribbled on the desk in front of the player's seat — deliberately *not* obvious, e.g. a half-visible tally/BINGO grid doodled among the other desk graffiti, readable with `Look At` (and maybe only fully legible with the magnifying glass). Needs a small art edit on `lecture-bg` plus a hotspot.
-3. **Bug: the Office can reject the correct Question.** `w1Answer`/`w1bAnswer`/`w2Answer`/`w3Answer` all call `spendBubble()` *before* checking the answer, and `spendBubble()` returns true when patience hits 0 → `W-LOSE`. So a player who used retries earlier can give the right final answer on their last bubble and still be ejected without the Question (matches the user's report). Fix: only spend patience on wrong/neutral answers, or check correctness first and let a correct answer always win. Re-check the whole W0–W4 path afterwards.
-4. **Space should skip voiced dialogue everywhere.** The global handler (`CODEBOOK_STOP_LINE_AUDIO` + caption dismiss) only fires when `e.target === document.body` and only dismisses `.scene-caption` — verify it works in the Act II verb-grid rooms (`.panel` lines, queued multi-clip lines), in the interludes, and after clicking a button (focus moves to the button, so Space may not reach the handler).
-5. **No speech bubble for pure narration.** Scene descriptions (e.g. walking into the empty Office) are rendered in the same speech-caption style as dialogue. Narration ("System"/"You" descriptions) should use a plain caption/box without the speech tail, dialogue keeps the bubble.
-6. **Narrate the trailers.** The opening trailer and the Act II interlude are text-only; add a narrator voice (LibriVox reference via Chatterbox, a different reader from the cast — see HANDOVER §01l) reading each panel's caption, with the panel advancing when the line ends (and Space/click still skipping).
-7. **No "Continue to Campus Map" at the end of Act I.** After the Doorman hands over the folder, go straight into the Act II trailer (it already auto-starts after ~4.5 s — remove the button entirely and tighten the timing), then land on the map.
-9. **Survey Lab: hotspots belong on the question cards.** The patients' hotspots (`gurney1/2/3`, and the desk `clipboard`) still sit on the beds/desk, but since the charts were added the *question itself* is what the player reads and reacts to — the floating chart above each bed. Move (or extend) each hotspot to cover its chart: charts are at `l:52.9 / 62.4 / 72.6, t:~19–27%` and the clipboard card at `l:28.6, t:~34.5–43%`, versus the current bed boxes at `l:50.8 / 57.4 / 67.6, t:42–69%`. Simplest fix: give each patient two hotspot boxes with the same id (chart + bed) so clicking either works, and keep the hover label on both.
-
-8. **Bingo shouldn't reshuffle the Lecture Theatre layout.** Playing bingo currently changes the whole screen (card rendered beside the inventory on the right). The card should sit *inside* the main scene window instead, so the room stays visually stable.
-
-## Bugs to fix — logged 2026-09-20
-_Reported by the user while playing v51. Not fixed yet._
-
-1. **Blue flash when the pond repaints** (painting the swan black). The room swaps `bgImg.src` behind an opacity fade (`bgImg.style.opacity='0'; setTimeout(apply, 220)`), and while the old image is transparent the player sees straight through to `.scene-wrap`'s own background, which is `var(--wall)` (the blue). Fix options: crossfade **two stacked `<img>` layers** (show the new one only once it has loaded), preload the next background before starting the fade, or — cheapest — set the scene-wrap background to near-black so any gap is invisible rather than blue.
-2. **Same flash in the Causality Corridor** on every scene change (case rooms, archway, the fall) — same code pattern, same fix. Check `renderRoom`/`renderGate`/`checkWin`/`startFall`.
-3. **Skipping the Doorman's dialogue can leave the gate shut.** The gate sequence is driven by fixed `setTimeout`s sized to the voice clips (2.8 s / 10.8 s / 13.4 s before "You step through"), so pressing Space only cuts the audio — the timers keep running and the player is left staring at an apparently dead door, or clicks away before the room advances. Fix: drive each step off the line's `ended` event (or a shared "line finished or skipped" helper) instead of hard-coded delays, so skipping advances the scene immediately. Same pattern is used in the archway exchange (`checkWin`) and the BINGO walk-out — worth fixing in one place.
-
-## Act structure reworked: theory becomes its own act — planned
-_Logged 2026-09-20 with the user. Design written into STORY.md; nothing built yet._
-
-The acts were missing **theory** entirely: the game went question → data → analysis, which is the mistake it should be teaching against. New order:
-
-1. **Act I — The Question** (built)
-2. **Act II — Apparently We Need a Theory** (new: Library, Hall of Founders, Feldstrom's Workshop, Seminar Room; quest object the **Prediction Slip**, sealed at the end, which is what makes the Registry release Form H-27)
-3. **Act III — Apparently We Need Data** (the built four-room act, renumbered from II)
-4. **Act IV — Apparently Evidence Must Exist** (Statistics Basement casino + KIRA's Delegation Engine emergency, merged so analysis and delegation sit together)
-5. **Act V — The Hypotheses Accelerator** (Feldstrom again, now inflating the finished result)
-
-**The act's lesson (user's framing):** a theory is an idea about how something works, not a pile of old men saying things — and it has to touch reality, i.e. forbid something observable. Each room is a different way of getting that wrong: citations (Library), quotations (Hall), scale (Workshop), unfalsifiability (Seminar).
-
-**Act II fleshed out, 2026-09-20 (second pass, with the user).** The four rooms now have adventure-game causality rather than four educational errands — full detail in `STORY.md`, summary of what it adds:
-
-- **Form P-1** ("APPLICATION FOR PERMISSION TO HAVE AN EXPECTATION") opens the act, pulled out of the Professor by an emergency cord. The Prediction Slip *is* Form P-1.
-- **The brass coherence indicator** on the slip: `EXEMPLARY → ADEQUATE → CONCERNING → THEORETICALLY BUSY → EVERYTHING EXPLAINS EVERYTHING`. Every room happily stamps nonsense; only the slip reacts. This is the act's honest feedback channel.
-- **Each room offers a seductively wrong shortcut**, and the fully-wrong theory can be assembled and lodged — the Registry returns it **on fire**, stamped `THEORY EXISTS / INFORMATION CONTENT: 0`. Needs to be reachable, not just theoretical.
-- **The Stockholm phone scam** is the act's set-piece: extension 4173 from the Workshop, Nobel protocol from KIRA, the prize's correct name from a Hall of Founders clipping, a grandiose phrase from the Quotation Dispenser, and **Act I's seven-second hourglass** to fake the international-line delay. Gets Feldstrom out of the room so the enrolment register can be clamped into his old traffic-counting gate. A wrong branch ("the scope is too narrow") makes him crank the machine up instead.
-- **Feldstrom is an ex-traffic-flow physicist** (see the backstories section); the GENERALISER is cannibalised from his old rig, with POPULATION / TIME / CONTEXT ratchets and the **THINGS THIS FORBIDS** gauge as the real puzzle indicator (47 → 0 as scope inflates).
-- **The Seminar Room is the boss fight**: rival explanations physically slide under every non-diagnostic prediction ("So would mine"), and the solution is assembled from WHERE / FOR WHOM / DIRECTION cards.
-- **The rooms contaminate each other** — route is roughly Library → Hall → Library → Feldstrom → Library → Feldstrom → Seminar → Library → Seminar, with ten listed object/knowledge transfers. The Seminar Room's ALTERNATIVE EXPLANATION card sends the player *back* to the Library, which is what stops the act being a corridor of lessons.
-- **Act I inventory reuse, deliberately partial:** chewed pen, magnifying glass and hourglass get real puzzle uses; the stamp, mug, Likert die, USB and black ink get jokes only and keep their later payoffs. The **enrolment register** is not consumed — it becomes the Act III sampling frame.
-- **The sealing ceremony**: PREREGISTRATION-ADJACENT DEVICE (*"Not legally a preregistration device"*), with an `I WOULD LIKE TO SEE THE DATA FIRST` button that triggers an alarm and then retracts into the wall.
-
-**Acts II/IV/V restructured, 2026-09-20 (user).** The Hypotheses Accelerator moved out of Act V and into Act II, which dissolved Act V and forced a rebuild of the back half:
-
-- **Act II** — Feldstrom's machine is now **THE HYPOTHESES ACCELERATOR Mk III**, and it runs *both* ways: `◄ SPECIFY` / `GENERALISE ►`, with a manufacturer's plate reading *"an idea and a test of it are the same statement at different magnifications."* Feldstrom has masking-taped the SPECIFY panel and written DO NOT on it; peeling that tape off is the lesson of the act performed with the player's hands. The act's output is now **a theory *and* the hypothesis derived from it** — box four renamed HYPOTHESIS AND FALSIFIER — and a new section, "Deriving the hypothesis", stages theory → hypothesis as one leftward turn of the same ratchets.
-- **Act IV** — retitled **"Apparently Numbers Don't Speak for Themselves"** and given a third room, **the Bureau of Implications**: pre-printed meanings in three sizes, a clerk who reads the size you ask for rather than the number you hand over, a SO WHAT? gauge that the significance lamp does not move, a wall of brass plaques all reading FURTHER RESEARCH IS NEEDED, and the limitations the player has to write themselves. Buying the LARGE implication locks a slot in Act V's abstract.
-- **Act V** — now **"Apparently Somebody Has to Write It"**: **the Gap Registry** (drawers of pre-approved gaps; *"a gap is a hole, a contribution is a hole that mattered"*) and **the Writing Room** (KIRA offers to write it and strengthens one verb; Feldstrom offers a title and escalates it to CIVILISATION IS TRAFFIC; the car-warranty phone call pays off here). Ends with the Office scene, the Codebook reveal, and the player **submitting** the paper down a brass chute marked NO REFUNDS.
-- **The outro is now Reviewer 2** (user's idea). FOUR MONTHS LATER · (THIS IS FAST.), the walk back across campus, three reviews of wildly unequal length — R1 two warm sentences, R3 never submitted, R2 eleven pages and forty-seven comments — with comment 3 ("Have the authors considered selection?") being *correct*, and already answered if the player wrote the paper honestly. Strongly implied to be the Visiting Fellow, never confirmed. Verdict **REVISE AND RESUBMIT**, from the journal rather than from the Professor, which turns the game's last judgement from a favour into a verdict. Sequel card now reads *"Featuring Reviewer 2."*
-
-**Whole-story pass, 2026-09-20 (user: "we need the main arc in there, but then also the act stories").** Act II had been deepened far past every other act. Added:
-
-- A new top-level **"The main arc"** section: the five-act spine as a table (what the player wants / what they are told / what they leave with), the rule that the department must be *ridiculous and right* in equal measure, the changing verb per act (supplicant → operator → tempted → refuser, with the Stockholm scam named as the turning point of the whole game), how the Codebook mystery stays alive, the Professor-vs-Feldstrom argument that the player's folder resolves, the six character through-lines, and an honest note on which acts are currently unequal.
-- **Per-act story blocks** in the same shape for Acts I, III, IV and V: what the player wants, who blocks them, who changes, what goes in the folder. Act I's notes which backstory props to seed there (the Professor's *Death of Community*, Volume XI, the class photograph). Act III's names the Act II payoff (the enrolment register becomes the sampling frame). Act IV's states that nothing obstructs the player there, on purpose.
-- **Act V rewritten from two paragraphs to a full act** — Feldstrom as a fan rather than an obstacle, the recognition scene, the traffic-physics reading of the result, the five-stage escalation to CIVILISATION IS TRAFFIC, the car-warranty phone call payoff, the resist-the-machine puzzle needing three Act II objects, a walkable wrong path that alerts the press office, and the refusal exchange that ends with Feldstrom stamping the folder himself.
-- **The Ending expanded** with the walk back across campus: the Skeptic at the pond, KIRA's four-word arc landing, a third line of chalk on Feldstrom's door, and the Doorman's "Eventually."
-
-**Act II reframed around the folder, 2026-09-20 (user correction).** The second pass had drifted into set-pieces; the act's spine is restated as *there is a folder and something has to go in it*. Changes: the head now opens with "what the act is actually for", the Office beat ends with the player flatly saying **"…apparently we need a theory"** (mirroring Act III's "So I need data"), the Prediction Slip is described as Act II's H-27 — a separate prop folded into the folder at the end — with ☐ checkboxes in the same format, each room now states **why its box is on the form at all** plus how it defaces the folder (stapled reading list, meaningless `THEORETICALLY GROUNDED` cover stamp, Feldstrom's pencil annotation, chalk dust), and the sealing scene ends on `THEORY EXISTS` with the Registry's "That is a form." Two new entries in Recurring motifs: the "apparently we need…" act-title pattern, and the rule that anything in a room that cannot be traced to the object going in the folder is decoration.
-
-**Act II: "why theory" put ahead of the checklist, 2026-09-20 (user correction).** The four-box form was reading as "theory = fill in a checklist", which is the opposite of the lesson. Changes:
-
-- New **"Why theory at all"** section stating the act's thesis, deliberately small: *a theory is an idea about how the world works, and to be worth anything it has to be testable.* Two halves, nothing grander — inflating the definition is Feldstrom's job. Mechanism / scope / falsifier are not three extra virtues, they are what "testable" means once written down. Guidance and interpretation are stated once, plainly, and not laboured. Includes the explicit warning that the act numbering (II theory, III data) makes the two look sequential so the writing has to work against it.
-- **A first pass went too far** (user: "I am not convinced by the surprise card... theory is just an idea about how the world works, and it needs to be testable") — a carried `YOU WILL BE SURPRISED IF:` receipt object was cut, and "tells you when to be surprised" was demoted from the thesis to a consequence. The wax seal already carries that weight and does not need an inventory item.
-- **The four boxes are one sentence chopped up by an institution** (one *because*, one *among*, one *if it isn't*), written out as a single readable claim. Filling them independently is the mistake; the **coherence needle is the anti-checklist device** — the only thing in the act that reads all four together.
-- **The theory↔evidence traffic table**: which transfers carry an idea toward the observable, which carry a fact back to correct an idea. The two backwards ones (enrolment register, ALTERNATIVE EXPLANATION card) are flagged must-not-cut — the second now makes the player rewrite their own mechanism after reading a paper, which is the act's most important interaction.
-- **The four rooms all commit the same failure in different coats** (each kept one half, threw away the other), and **the cast is the argument**: Feldstrom is theory with the evidence removed, KIRA is evidence with the theory removed, the Skeptic and the Visiting Fellow are the two who refuse to separate them.
-- **Act IV now stages breaking the seal as a set-piece**, with three outcomes written: prediction holds (means something because it could have failed), prediction fails (a null result is a finding, and the Skeptic turns up), or the player never had a theory (the slip is consistent with everything, the data teaches nothing, and that is the punishment).
-
-**Character backstories written, 2026-09-20.** Every named character now has one formative academic disaster that explains their methodological position — new `## Character backstories` section in `STORY.md`. Includes the Professor's *Death of Community* paper, KIRA's training set (successes only, no retractions), the Visiting Fellow's dissertation, the Nurse's nine-wave item, the Chair's "Incident", the Keeper's all-department spreadsheet, the Sampling Officer's inherited drum, the Director's fraudulent 100%, the Doorman's class photograph and the Skeptic's *Things I Was Wrong About, Vol. XI*. Several of these are `Look At` props that need adding to **already built** Act I and Act III rooms, plus the chalk graffiti on Feldstrom's door (`PEOPLE ARE NOT PARTICLES` / `UNTESTED ASSUMPTION`) which stays for the whole game.
-
-**Work needed to renumber the built act:** room `act:` labels, the ACT II title card and interlude (`CODEBOOK_ACT2_INTERLUDE`, `trailer2-*` art, `vo-narr-act2-*`), `campus-map-act2.webp` (the map should now change at the *new* Act II), `CODEBOOK_ACT_ASSETS.act2`, the `act2IntroSeen` flag, HANDOVER/ROADMAP references. Decide whether to rename the asset files or keep the names and relabel (keeping them is less churn but the names get confusing).
-
-**New art needed:** four room backgrounds, KIRA, Feldstrom, the Visiting Fellow, two skeletons, the Prediction Slip and its icons, a lean-to extension painted onto both campus maps (which in Act V has grown into the Accelerator), and an Act II trailer.
-
-## Sound effects pass — planned
-_Logged 2026-09-20, requested by the user. Not started. Source: **Epidemic Sound** sound-effects library (https://www.epidemicsound.com/sound-effects/) — check the account's licence before shipping; keep raw downloads out of `web/` like `web-png-originals/`._
-
-**Three channels, not one.** Voices (`CODEBOOK_PLAY_LINE_AUDIO`) and room music (`CODEBOOK_PLAY_ROOM_MUSIC`) already exist. Effects need their own: `CODEBOOK_SFX(name, vol)` for one-shots and a looping ambience channel per room. Space cuts **dialogue only** — never ambience or effects. Ship them bundled per act with an offset table, exactly like the voices (HANDOVER §01n), or the artifact's 255-file limit bites again.
-
-### Ambience loops (one per room, very low, start in `init()`)
-| Room | Loop |
+| File | Question it answers |
 |---|---|
-| Seven-Second Office | clock tick, radiator knock, distant corridor |
-| Lecture Theatre | **snoring student** (user's idea), occasional cough, pen scratching, chair creak, faint projector hum |
-| Probability Pond | water lapping, ducks/swans, wind in the willow, distant bell tower |
-| Causality Corridor | deep empty-building hum, faint dripping |
-| Survey Lab | heart-monitor blips, distant trolley, fluorescent buzz |
-| Ethics Tribunal | cavernous room tone, a slow ticking clock, papers shuffling above |
-| Mensa | cutlery and trays, crowd murmur, kitchen clatter |
-| Fieldwork Arena | studio air, faint audience murmur, stage-light hum |
+| `STORY.md` | *What happens, who these people are, and why.* The narrative bible. Read the act's section before writing a line of its dialogue. |
+| `ROADMAP.md` (this file) | *What to build next, to what standard, and how to know it's done.* |
+| `HANDOVER.md` | *How the code and the pipelines actually work.* Engine API, art loop, testing, publishing. |
+| `CHANGELOG.md` | *Why things are the way they are.* The build log, including dead ends worth not repeating. |
 
-### One-shots by trigger
-- **Office:** hourglass turned; rubber stamp thump; pen scratch (writing the citation); drawer/cupboard; the counter's mechanical *ping* (citation counter); professor's patience "bubble" popping as it drains; folder slapped on the desk.
-- **Lecture Theatre:** chalk squeak (drawing on the board); the **BINGO** shout answered by a lone cough and a dropped pen; bingo square marked (soft tick); professor's footsteps walking out; door thud as he leaves; page flip.
-- **Probability Pond:** ink bottle uncorked; brush/splash as the swan is painted; swan honk of protest; plaque stamped FALSIFIED; bench creak.
-- **Corridor:** **the door bell** (user's example: an old brass bell pull, slightly too loud); heavy latch and hinge as the Doorman opens; the wrong-door **floor giving way** + falling whoosh + distant landing; correct door chime; the doors sliding into the archway.
-- **Survey Lab:** the machine's dot-matrix printer; green lamps clunking on; scissors snip (cutting the double-barrel); stapler (calendar page); gurney wheels; cabinet unlocked with a ceremonial little key; phone receiver lifted + hold music click.
-- **Ethics Tribunal:** the Chair's **bell** (rings at the word "participant"); enormous approval stamp; gavel-ish thud; the Representative's snore; the Device's seatbelt buckle clunk; ballot box glass tap; the rustle of the 12-page consent form.
-- **Mensa:** the Great Drum spinning (heavy wooden rumble); numbered balls dropping into the mug; **trumpets** and confetti pop at "A SAMPLE HAS OCCURRED"; the Officer's ceremonial throat-clear; till bell for the lunch voucher; tray slide.
-- **Fieldwork Arena:** game-show sting on going live; **klaxon** + red lights when respondents escape; the scoreboard flipping digits; doors slamming as people leave; applause and a banner drop at RECORD HIGH; the big red button; telephone ring (ties into the planned phone puzzle).
-- **UI / global:** verb selected (soft click); inventory item picked up; item used successfully vs. refused (two-note "no"); H-27 box ticking; map location unlocked; act-title whoosh in the trailers; page turn between trailer panels.
+---
 
-### Notes
-- Keep everything quiet: effects ~0.2–0.35, ambience ~0.08–0.12, under voices at 1.0.
-- Prefer short, dry, cartoonish takes over realistic ones — the art is comic, not cinematic.
-- A few of these (klaxon, trumpets, printer) are already *described* in the text, so they're the highest-value ones: the writing promises a sound the player doesn't hear.
+## 0. How to work through this document
 
+1. Work in **work-package order** (§6). Packages are numbered by phase and are mostly sequential; dependencies are stated where they are not.
+2. Before starting a package, read its **Definition of Done** (§5) and the relevant `STORY.md` section.
+3. Every package ends with a **local headless test** (§4.8) and a commit. Do not batch five packages into one commit.
+4. **Publishing and pushing happen only when the user asks.** Build, test, commit locally, and say what is ready.
+5. When a package is finished, tick it here and add a short entry to `CHANGELOG.md`.
+6. If a package turns out to be wrong or the story has moved on, change this document rather than quietly deviating.
 
-## The telephone puzzle — planned
-_Logged 2026-09-20, requested by the user. Not started._
+**Working rule established with the user:** they want long autonomous stretches ("auto-mode"). Ask only when a decision is genuinely theirs — a casting choice, an art direction fork, a story change. Do not ask about implementation detail.
 
-The phones are underused props right now: the Survey Lab's rotary phone only hides the reminder postcards and plays hold music, and the Fieldwork Arena's phone just gives a voicemail gag. Make one of them a real puzzle:
+---
 
-- **Using the phone opens a dial screen** (an overlay in the scene window, in the same painted style): a rotary dial or keypad where the player enters a number digit by digit, with a wrong number giving a funny engaged/"wrong department" response.
-- **The number is found elsewhere** — written on something in another room (a staff list, a plaque, the back of a form, a sticky note on the corkboard). Cross-room, the way the rest of Act II works.
-- **What it achieves (user's idea):** the player phones a character and *pretends to be the Nobel Prize committee* ("we are calling about a certain nomination — are you somewhere private?") to get them to leave their post — e.g. summoning the Sampling Officer away from the drum, the Keeper away from the Ledger, or the Director off the stage — opening up something that character was blocking. With rigs in place, the character can visibly walk off, which is the payoff.
-- **Methods angle to keep it honest:** the joke should land as "vanity gets answers that evidence doesn't" — nobody in this department can resist a call from Stockholm — and ideally the game notes that impersonating your way to data is exactly what the Ethics Tribunal exists to prevent (a Tribunal reaction afterwards, or a scolding line if the player brags about it).
-- **Best target (user, 2026-09-20): Prof. Feldstrom in Act V** (the Hypotheses Accelerator — the tall one who hates claims that are too small). He is visibly, permanently waiting for the call from Stockholm, so a ringing phone and a polite Swedish voice is the one thing that will make him leave the room. Keeps the gag out of Act II and gives Act V a puzzle it doesn't have yet; the Act II phones can stay flavour, or hold the number.
-- Decide which room owns the dial screen (the Survey Lab's rotary phone is the most characterful prop) and where the number is written.
+## 1. Where the game stands today
 
-## Voiced dialogue everywhere + living characters (talking and moving sprites) — planned
-_Logged 2026-09-19, requested by the user. Not started._
+- **Live artifact:** v51 at https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 · **Repo:** https://github.com/thomas-u-grund/MethodsGame (`main`)
+- **Everything is one file:** `web/the-secret-of-the-codebook.html` (~5,000 lines). No build step.
+- **Built and playable:** Act I (4 rooms, painted, voiced, rigged, animated) and the data act (4 rooms, painted, voiced, sprites) — **the data act is still labelled "Act II" in code and must be renumbered to Act III** (WP-0.2).
+- **Not built at all:** the new Act II (theory), the new Act IV third room, all of Act V, the outro.
+- **Local asset state:** 285 files in `web/`, 51 MB. The publish limits are **255 files and 64 MB per version**, so the game currently *cannot be published as-is* without an explicit file list — see WP-0.1, which fixes this properly.
 
-**1. Audio for all dialogue.** Today only the Office, the Lecture Theatre and the Skeptic are voiced (macOS `say` → mp3 via `CODEBOOK_PLAY_LINE_AUDIO`; Space stops a line). Still silent: the Doorman, every Act II character (Nurse, Chair of Consent, Keeper of Data, the snoring Representative, Sampling Officer, Fieldwork Director, the Mensa cook), the interlude captions and Acts III–V.
-- Cast one distinct voice per character. The user rejected every macOS voice tried for the Doorman as "too artificial", and Premium Siri voices weren't downloadable on their Mac, so **the voice source is the open decision**: better local voices, a hosted TTS service, or recorded human voices. Decide this before generating lines at scale.
-- Wire Act II through the existing hook: `api.say(speaker, html, cls, audio)` in `CODEBOOK_ADV_ROOM` already accepts an audio file. Lines that are assembled dynamically (e.g. Ethics approval prefixes, Fieldwork klaxon append) need per-fragment clips or a rewrite into fixed lines.
-- Keep the Lecture Theatre rule: characters speak only their own words — narration/stage directions stay text-only.
-- Add every new clip to the right `CODEBOOK_ACT_ASSETS` list so the loading bars cover it; mind the 64 MB per-version artifact cap (mp3 at `-q:a 3` is fine; ~9 MB for Act I today).
+### Build status board
 
-**Progress (2026-09-19):** voice source decided: **local Chatterbox** (English model, `tools/tts/gen.py`, see HANDOVER §01l). The Doorman is voiced (Ralph reference, exaggeration 0.6). Next: cast and voice the Act II characters the same way (a reference clip per character, compared as 3–5 takes), then decide whether to recast the Professor and the Skeptic for consistency.
+| Act | Rooms | Story | Art | Sprites | Voices | Rig/anim | SFX | Code |
+|---|---|---|---|---|---|---|---|---|
+| **I — The Question** | Office, Lecture Theatre, Corridor, Pond | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ✅ |
+| **II — Theory** | Library, Hall of Founders, Workshop, Seminar Room | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **III — Data** | Survey Lab, Ethics, Mensa, Fieldwork | ✅ | ✅ | ✅ | ✅ | ✅ | ⬜ | ✅ (mislabelled Act II) |
+| **IV — Evidence** | Basement, Delegation Engine, Bureau of Implications | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **V — Writing** | Gap Registry, Writing Room | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
+| **Outro** | cutscene | ✅ | ⬜ | — | ⬜ | — | ⬜ | ⬜ |
 
-**2. Talking sprites.** Characters visibly speak while their line plays.
-- Minimum: a CSS "puppet" animation while `CODEBOOK_PLAY_LINE_AUDIO` is playing — slight bob/lean/squash on the speaker's sprite, stopped on `ended` or Space. Needs a speaker → sprite map per room. No new art.
-- Better: 2–3 mouth frames per character (closed / open / wide), generated in the same ChatGPT chat as the base sprite with the pose locked, swapped on a timer or driven by the audio's amplitude via Web Audio `AnalyserNode`. Add an idle blink frame for extra life.
+Roughly: **nine new rooms, one cutscene, and a retrofit of the data act.**
 
-**3. Moving sprites.** Characters walk instead of popping in.
-- Minimum: tween a sprite's `left`/`top` with a walking bob (the Professor already has `prof-walking` for his Office ↔ Lecture Theatre moves; the Doorman stepping out of the gate; the Sampling Officer striding to the drum; the Fieldwork Director pacing by the podiums).
-- Better: 4–6 frame walk cycles as sprite sheets. Frame-to-frame consistency is the risk with image generation — generate all frames in one image (a strip on a transparent background) rather than one call per frame, then slice.
-- Flip horizontally for direction (`transform: scaleX(-1)`), and keep hotspots following the sprite while it moves.
+---
 
-**Practical experience so far (user, 2026-09-19):** walking sprites generated directly with ChatGPT were **not good enough**. Frame-to-frame the character drifts (proportions, costume details, face), and the leg/arm poses don't form a believable cycle, so the "one strip in one image" idea above is unlikely to be enough on its own. Proposed alternative: **rig first, then generate against the rig.**
-- Build a simple 2D rig per character: split the sprite into parts (head, torso, upper/lower arms, upper/lower legs, feet) with pivot points, either as separate layers cut from the existing sprite or regenerated as parts on a transparent background.
-- Define the movement explicitly as rig poses/keyframes (e.g. a 6-frame walk cycle as joint angles, a 2–3 pose talking loop), instead of asking the image model to invent the motion.
-- Either animate the rig directly in the browser (CSS transforms / canvas on the parts: cheap, perfectly consistent, and it reuses the art we already have), or render each rig pose as a stick-figure/pose reference and send those clear pose images to ChatGPT together with the character sprite, so every frame is "this character, exactly this pose".
-- Try it on one character first (the Professor, who already walks between rooms) and compare the direct-rig and pose-guided options before scaling to the cast.
+## 2. House rules — what "consistent with Act I" actually means
 
-**Progress (2026-09-19, later):** talking/breathing animation is live for every voiced sprite, and the rig-first approach works: the Professor now walks in the Lecture Theatre with a cut-out rig and a procedural walk cycle (HANDOVER §01m). **Done the same day:** rigs and walks for the Doorman, Sampling Officer, Fieldwork Director and Nurse, plus minimal mouth movement (one open-mouth frame per character) — see HANDOVER §01m. Still open: a gesturing "lecturing" loop for the Professor; walking/mouths for the Skeptic and the Office Professor once they're sprites rather than painted into the background; more mouth shapes only if one frame isn't enough.
+These are not suggestions. Every new room follows them, and a deviation needs a reason written down.
 
-Suggested order: pick the voice source → voice Act II + the Doorman → CSS talking puppet for every speaking sprite → walking tweens → only then invest in mouth frames and walk-cycle sheets where it pays off most (the Professor first).
+### 2.1 Design rules
 
-## Act II — full redesign: four rooms, H-27 form, cross-room puzzle chains (built)
-_Logged 2026-09-18, art generated and all four rooms built the same day — see HANDOVER.md §01i_
+1. **Every room is open from the start of its act.** Progress is gated by what the player has done, never by a map lock. (Act I follows this; the data act does not — WP-0.4.)
+2. **No room contains its own solution.** Every room hands the player a problem whose fix is in a different room, for an absurd institutional reason.
+3. **Every wrong path is walkable to the end.** The game never blocks a bad choice; it lets it complete and pays the consequence **at least one act later**. Immediate punishment reads as a quiz marking you down.
+4. **Only three durable flags cross act boundaries** — `theory_empty`, `analysis_p_hacked`, `claim_overstated` (WP-0.3). Everything else is local colour.
+5. **One skeleton per room**, with a hand-lettered sign specific to that room's failure mode.
+6. **The Research Folder is defaced in every room.** Stamped, stapled, annotated, or coffee-ringed.
+7. **The department is ridiculous and it is also right.** If a room is only absurd it teaches cynicism; if it is only correct it is a textbook with jokes on it.
+8. **One prop and one line per character backstory.** The table in `STORY.md` § Character backstories is the budget. Do not put the biographies on screen.
+9. **Characters speak only their own words.** Narration and stage directions stay text-only and unvoiced — see the mixed-line lesson in `CHANGELOG.md` §01e.
 
-**Built (2026-09-18):** Survey Lab, Ethics Tribunal, Mensa and Fieldwork Arena are all live in code with their full puzzle chains, the H-27 form, the edited campus map, and Act III gated on `actIIDone`. Playthrough verified end-to-end in headless Chrome. Character sprites added the same day (see HANDOVER.md §01i). Open items: Act II voice lines, and the Office hand-off scene to Act III.
+### 2.2 Code conventions
 
-**Art generation underway (2026-09-18):** all four room backgrounds generated via ChatGPT (driven directly through the browser, not manually by the user) and installed in `web/` at the correct 1672×941 resolution: `surveylab-bg.png`, `ethics-bg.png`, `mensa-bg.png`, `fieldwork-bg.png`. **Bug caught by the user and fixed same session:** the first `ethics-bg.png` generation invented its own heraldry (navy banners, a crown-and-shield crest) instead of matching the university's actual house crest (maroon/burgundy banners, gold rampant lion or gold open book+laurel — established in the Lecture Theatre and campus map). Fixed by regenerating with `lecture-bg.png` added as an explicit banner reference and the prompt calling out the exact failure mode to avoid; `art/ethics/ART_PROMPTS.md` now documents this as a known failure mode for next time. **Lesson: when a new room needs to reuse an established visual motif (house crest, character design, recurring prop), attach the specific reference image that shows it and call out the motif explicitly in the prompt — don't assume the model will infer it from a general "match the style" instruction.**
+Register every room the same way (`HANDOVER.md` §02):
 
-Supersedes the old "Mensa + Survey Lab" two-room Act II entirely. Full narrative design lives in `STORY.md` under "Act II — 'Apparently We Need Data'" — this entry is just the build-scope summary.
+```js
+CODEBOOK_REGISTER({
+  id: 'library', act: 'Act II', title: 'The Library',
+  doneFlag: 'libraryDone', prereq: null, lockedHint: '',
+  html: CODEBOOK_ADV_HTML({ bg:'…', hotspots:[…], sprites:[…] }),
+  init: function(ctx){ var api = CODEBOOK_ADV_ROOM(ctx, {…}); }
+});
+```
 
-- **Two new rooms needed:** the Ethics Tribunal (gothic courtroom, three-judge committee) and the Fieldwork Arena (game-show set, live RESPONSE RATE board). Survey Lab and Mensa already exist in code but need a full rewrite from their current single-room, plot-free framing to the new hospital/sampling-ceremony framing.
-- **New shared quest object:** the H-27 form ("REQUEST TO APPROACH HUMAN BEINGS"), handed over by the Professor at the Office as Act II's opening beat, with four boxes checked one per room. Distinct object from the Research Folder itself; gets folded into the Folder (stamped `QUESTION HAS DATA`) once all four are checked.
-- **Four cross-room puzzle chains**, each with a plausible-but-wrong solution the player can fully attempt before finding the real fix: the sampling-frame chain (Mensa ↔ Ethics), the question-repair chain (Survey Lab ↔ Ethics ↔ Fieldwork), the anonymity-vs-contactability chain (Ethics ↔ Fieldwork, new Redaction Stamp + Key Ledger items), and the nonresponse chain (Fieldwork, resolved using resources fetched from all three other rooms).
-- **Act I items getting a second life:** Likert die (Survey Lab, as a scale template, not something to roll), magnifying glass (Mensa, exposes undercoverage in the "official" student list), raffle drum (Mensa, correct tool but only once the population fed into it is fixed), hourglass (Fieldwork, an improvised cognitive-pretest timer), mug (Mensa, becomes the sampling machine's ball receptacle), chewed pen (Ethics, assigns participant IDs), rubber duck (Fieldwork, one-line nonresponse gag). `SIGNIFICANT (p<.05)` stamp and the `FINAL_v23_REALFINAL_USETHIS` USB drive both get "tried here, correctly rejected, saved for later" gags rather than a real puzzle.
-- **Explicitly not reused, by request:** the bingo card and the black ink bottle. The nonresponse "beautiful but unrepresentative line" beat that the bingo card would have carried is instead just the numbered-seat board's own job; the ink's over-redaction gag is now the Ethics Tribunal's own Redaction Stamp + Key Ledger, native to that room instead of imported from the Pond.
-- **Sequencing note:** design doc suggests building Survey Lab first (least structurally novel — closest to the existing triage-room mechanics), then Ethics Tribunal, then re-doing Mensa, then Fieldwork Arena last since it's the room every other chain resolves through.
-- **Background art prompts drafted (2026-09-18)** for all four rooms — `art/surveylab/ART_PROMPTS.md`, `art/ethics/ART_PROMPTS.md`, `art/mensa/ART_PROMPTS.md` (supersedes the old prompt set, see entry below), `art/fieldwork/ART_PROMPTS.md`. All four are deliberately generated **empty** — no characters, no puzzle-state props, no readable text beyond fixed room signage — so items/characters can be composited on as separate sprites later, matching the Office's own item-overlay pattern. The Fieldwork Arena's scoreboard is a fixed structural prop but its display panel is left blank in the art since the live percentage is a code-rendered overlay, same as the Corridor's door-case labels.
-- **All Act II art now generated and installed (2026-09-18)** — all 4 backgrounds and all 13 portable-item icons across the four `ART_PROMPTS.md` files. See the "Art generation underway" note above for the full asset list and a workflow lesson on driving ChatGPT image generation via browser automation. **Still not started:** no code for either new room (Ethics Tribunal, Fieldwork Arena); Survey Lab/Mensa code rewrites not started. Character sprites (the three judges, the Sampling Officer, the Fieldwork Director, the Nurse/Technician) are not yet generated — only the room-fixed props and portable items from each room's "Follow-up sprites" list.
+- **New rooms use `CODEBOOK_ADV_HTML` / `CODEBOOK_ADV_ROOM`** (the Act III scaffolding), not the hand-rolled Act I pattern. `api` gives you `say, choice, clearChoices, give, take, sync, sprite, spriteSrc, setBg, el, fallback`.
+- State only through `ctx`: `hasItem/addItem/removeItem`, `hasFlag/setFlag/clearFlag`, `complete()`, `goMap()`. Everything persists to `localStorage` key `codebook_save_v1`.
+- Verb grid is **Look At / Talk To / Pick Up / Use**, inventory in the side panel via `CODEBOOK_RENDER_SIDE_INV`.
+- Dialogue captions: `.scene-caption` overlaid on the art with a hand-picked anchor per room and a `tail-up`/`tail-down` class. **Narration uses no speech bubble** — `CODEBOOK_IS_NARRATION(speaker, html)` toggles `.narration`.
+- Space skips the current line. Any timer that reveals something must key off *line end or skip*, never a fixed delay (this is the Doorman bug, WP-0.5).
+- Add every new asset to `CODEBOOK_ACT_ASSETS.actN` or the loading bar will lie.
 
+### 2.3 Art
 
-## Act I — professor now toggles between Office and Lecture Theatre (shipped)
-_Shipped 2026-09-15_
-- **The bingo card is a physical item first.** New Office `PICKUPS` entry (`bingocard`, art at `web/icon-bingocard.png` / `web/sprite-bingocard.png`, sitting on the paper stack next to the skeleton, distinct spot from the magnifying glass). `ITEM_LABELS`/`ITEM_ICONS` updated. Lecture Theatre no longer auto-starts the bingo mechanic on room entry &mdash; it now requires `Use` the bingo card `with` the professor.
-- **Single shared professor entity, toggling between the two rooms** via a `GAME.flags.profAtOffice` boolean (new `clearFlag(k)` engine helper + `ctx.clearFlag` added to unset it &mdash; `setFlag` only ever sets true, this is the first flag that needs to go both ways). Unset/false = professor is at the Lecture Theatre (the default at game start, matching its original "he's mid-lecture" flavor); true = professor is at the Office.
-  - **Office**: swaps `office-bg.png` &harr; `office-bg-empty.png` (the asset that had been sitting ready and unused since before Lecture Theatre existed) based on this flag. Absent: no dialogue tree, `Talk To`/`Look At` the empty chair gives an ambient line + a repeatable "Wait." choice that cycles a few flavor lines; desk-clutter `Pick Up` (all 7 items, incl. the raffle drum) is blocked with "Not with him sitting right there." while he's present. This also means the Office is fully explorable/lootable from the very start of the game, no softlock risk.
-  - **Lecture Theatre**: got a full rework &mdash; now has the same verb-grid + inventory side-panel as Office/Corridor (it previously had neither, since it didn't use items). Present: ambient ineffectual rambling (`Talk To` cycles flavor lines, nothing progresses) until the card is used, at which point the original bingo mechanic (unchanged: 8 Luhmann terms + free space, `GRID_LINES`, "Shout BINGO!") plays in a third `.side-panel` that's hidden until started. Winning sends him home (`ctx.setFlag('profAtOffice')`), marks `lectureDone` (only once, guarded), and live-updates the scene (hides his sprite, no room reload needed).
-  - **Getting him back**: while absent from the Lecture Theatre, a new blackboard hotspot (`Use`, no item needed) plays a short "you doodle nonsense on the board" beat, then `ctx.clearFlag('profAtOffice')` and he reappears with a line, ready to re-run bingo &mdash; this loop is intentionally repeatable, so the player can shuttle him back and forth to alternate between looting the Office and re-triggering the lecture.
-  - The old flat notebook-doodle and note/phone hotspots were ported from plain always-on click handlers to the same verb-gated `kind`-based dispatch pattern as Corridor's `extras`, for consistency now that a verb grid exists here; the notebook doodle also now cycles through 4 different lines instead of a single static one.
-- **Real bug hit during this build**: a pre-existing unconditional `goto('W0')` at the very end of Office's `init()` (previously always auto-starting the dialogue tree regardless of any state) overrode the new empty-office message every time &mdash; not something this change introduced, just never mattered before since the professor was always present. Fixed by gating it on `profHere`.
+Full loop in `HANDOVER.md` §04. The short version:
 
-## Global — painted campus map (shipped)
-_Shipped 2026-09-15_
-- Replaced the abstract dark "campus dossier" grid-map background (dashed connector line, corner brackets, redacted-dossier title text) with a real painted isometric campus illustration (`web/campus-map-bg.png`), source archived at `art/map/source.png`. The image already has hand-painted building signage, so the old dashed path between rooms and the dossier chrome were dropped entirely rather than overlaid on top of it.
-- All 9 `MAP_LAYOUT` pin coordinates repositioned (in a 1200&times;675 space matching the image's 1672&times;941 aspect) to sit on their corresponding painted buildings: Office &rarr; "Professor's Office", Lecture Theatre &rarr; "Lecture Theatre", Causality Corridor &rarr; "Department of Causality" (matches the in-fiction door-bell entrance built earlier), Mensa &rarr; "Mensa", Library &rarr; "Library Annex", Survey Lab &rarr; "Observatory", Statistics Basement &rarr; "Administration (The Labyrinth)", Delegation Engine &rarr; "Probability Pond", Hypotheses Accelerator &rarr; the armillary-sphere statue. No CSS changes needed on the pin/badge/label components themselves &mdash; they already paint their own opaque dark background per pin, so they read fine over the busy painted art without modification.
+- Generated in the user's ChatGPT through Claude in Chrome. **Prompts must be one line** (a newline submits early). **Keep one chat per cast** so style holds.
+- Always attach a style reference: `prof-lecturing.png` for characters, an existing room or trailer image for scenes.
+- Download via in-page `fetch(img.src)` → blob → `<a download>`; check **all** near-duplicate files in `~/Downloads` before picking.
+- Crop sprites to the **alpha > 40 % bounding box**, never plain `-trim`. Full-body **820 px** tall, chest-up **560 px** wide.
+- Composite locally with ImageMagick before touching the page when placement is uncertain.
+- Anything over ~400 KB ships as WebP: `cwebp -q 88 -alpha_q 95 -m 6`. Keep the PNG in `web-png-originals/` (git-ignored) and the source in `art/<room>/`.
+- Every room gets an `art/<room>/ART_PROMPTS.md` with the prompts actually used.
 
-## Global — removed the duplicate top-HUD inventory (done)
-_Shipped 2026-09-15_
-- The persistent header (shown on every screen, including the Campus Map) used to show inventory as pill chips (`#invHud`/`.inv-hud`/`.inv-chip*`), duplicating the Office's and Corridor's own side-panel inventory. Removed entirely per explicit request, to free up header space &mdash; deleted the HTML element, its CSS, and gutted `renderInvHud()` (removed the function and its 3 call sites; `addItem`/`removeItem` no longer reference it).
-- **Known tradeoff, not yet addressed:** the Mensa room references `ctx.hasItem('raffle')` in its own logic but has no side-panel of its own, so it now has *no* visible inventory display at all (the mechanic still works, the player just can't see they're carrying the raffle drum while there). Survey Lab, Library, Statistics Basement, Delegation Engine, and Hypotheses Accelerator don't reference inventory at all currently, so no functional impact there. If Mensa's missing visibility becomes a real complaint, the fix is giving it the same `.side-panel`/`side-inv` treatment as Office/Corridor (reusing the existing `CODEBOOK_RENDER_SIDE_INV` helper).
+### 2.4 Sprites, rigs and animation
 
+- **Rig-first, always.** Generating walk frames directly does not work (the character drifts); this was established the hard way — `CHANGELOG.md`, 2026-09-19.
+- Pipeline: ChatGPT "PAPER-DOLL CUT-OUT PARTS … strict SIDE VIEW facing right … REAL fully transparent background (no glow) … rounded extended joint ends" with the full sprite attached → `tools/rig/<name>/sheet.png` + `parts.json` → `python3 tools/rig/cut.py <name>` → parts + `rig-def.js`. Pose-check at `tools/rig/test2.html?n=<name>` (serve `tools/rig/` on 8935).
+- Parts ship as `web/rig-<name>-*.webp`; sources in `art/characters/<name>/rig/`.
+- Motion comes from `CodebookRig.build/walk/idle`, `CODEBOOK_RIG_WALK(spriteEl, def, route, done, {from, stay})`, `CODEBOOK_IDLE_PACE`. Route entries may be `{wait: ms}`.
+- Talking: CSS classes `cb-breathe`, `cb-talk`, `cb-talk-grand`, `cb-talk-frantic`, `cb-talk-small`, `cb-snore`, plus one open-mouth frame per character (`tools/mouth.sh <name> <cx> <cy> <rx> <ry> <resize>`) swapped via `cb-mouth`/`cb-mouth-inv`.
+- **Speeds are already tuned** — the user found the first pass "too hectic and fast" and everything was halved. Match the existing values; do not re-tune upward.
+- Characters **walk out of frame, not through furniture** (the professor exits right: `walkRoute([640], leaveForOffice, {exit:true})`).
 
-Ideas logged but not yet built. Newest first.
+### 2.5 Voices
 
-## Office — citation counter + "cite the professor" mechanic
-_Logged 2026-09-15_
+- **Local Chatterbox**, English model, Apple Silicon MPS: `.venv-tts/bin/python tools/tts/gen.py jobs.json`.
+- References are 12-second LibriVox clips in `tools/tts/refs/lv-<reader>.wav`. **Never macOS `say` voices** — the user's specific complaint was that they sound unnatural.
+- **Established casting — do not recast without asking:**
 
-- A physical citation counter as an Office sight gag: a vintage mechanical tally/odometer prop (wall or desk), showing his running citation count, ticking upward.
-- Gameplay hook: the player can eventually get the professor to do something by citing him — a research-methods joke (professors respond to citations like Pavlov's dog).
-- Two implementation options discussed, not decided:
-  1. **Light touch (leaning this way)**: a post-puzzle secret, not a blocker. After the player already has "A Precisely Worded Question," a new hidden interaction unlocks — `Talk To` professor again → he grumbles he hasn't been cited today → `Use` a citation slip `on Professor` → counter ticks up, he does one small favor (hint / bonus item / punchline). Doesn't touch the existing, already-tuned W0–W4 dialogue tree.
-  2. **Load-bearing**: citing him becomes the actual unlock condition for the existing W4-WIN payoff, replacing part of the current question-refinement puzzle. Bigger rewrite for a joke that's probably funnier as a bonus than as a gate.
-- Open question: how the player gets the "citation slip" — craft it from two items (e.g. the chewed pen + a scrap of paper from the desk-clutter pickup list), or just hand him any single carried item?
-- Depends on: the desk-clutter pickup items below existing (or at least the pen), since the citation slip idea leans on them.
+| Character | Reference | exag / cfg |
+|---|---|---|
+| Narrator (trailers, interludes, outro) | Mark F. Smith | 1.0 / 0.25 |
+| The Professor | Martin Geeson | 0.55 / 0.45 |
+| The Doorman | Bob Neufeld | 0.6 / 0.4 |
+| The Skeptic | Elizabeth Klett | 0.8 / 0.3 |
+| Survey Nurse | Ruth Golding | 0.85 / 0.3 |
+| Chair of Consent | Mil Nicholson | 0.9 / 0.3 |
+| Keeper of Data | Peter Yearsley | 0.8 / 0.3 |
+| Representative | John Greenman | 0.75 / 0.35 |
+| Sampling Officer | Andy Minter | 1.0 / 0.25 |
+| Fieldwork Director | Sibella Denton | 1.0 / 0.25 |
+| Mensa cook | *(silent by design)* | — |
 
-## Office — desk clutter pickups (done)
-_Shipped 2026-09-15_
-- Art generated, cropped, and wired in: 6 new hotspots (pen jar, mug, Likert die, hourglass, USB drive, stamp) with Look At / Pick Up handling, inventory icons, and the new office-bg.png (with all six items painted into the scene) now live.
-- Source art reorganized into `art/office/` (background-v1/v2, sprite sheets, icon sources), final game assets in `web/` (`icon-pen.png`, `icon-mug.png`, `icon-likertdie.png`, `icon-hourglass.png`, `icon-usb.png`, `icon-stamp.png`, updated `office-bg.png`).
+- **Still to cast** (new characters): KIRA, Feldstrom, the Visiting Fellow, the Hall clerk, the Registry voice, the Implications Clerk, the Registrar of Gaps. Generate 3–5 takes per candidate and put them to the user as a numbered A/B — that is the pattern that has worked every time.
+  - **KIRA needs a non-human treatment**, not just a reference voice: she is the only machine with a personality. Consider a light pitch/formant shift or a short convolution on top of a chosen reference. Put options to the user.
+  - **Feldstrom** should be big, warm and Germanic-adjacent; he is the game's most-quoted character after the Professor.
+- **Voice a character's own words only.** Before voicing a mixed narration+quote block, ask: *would reading the full text in this voice sound like the narrator is also this character?* If yes, split it.
 
-## Mensa room — art prompts drafted, not generated
-- **Superseded by the Act II redesign above (2026-09-18)** — the Mensa's role changed substantially (Grand Sampling Ceremony framing, the gilded sampling-frame prop, the raffle drum as "MODEL SR-2 PORTABLE RANDOMISATION APPARATUS"), so this old prompt set should be treated as reference only, not used as-is.
-- A second "slightly ridiculous" art-prompt set was drafted for the Mensa room. No art generated or integrated yet.
+### 2.6 Voice bundling (mandatory — this is a hard constraint, not an optimisation)
 
-## Causality Corridor — redesigned as 4 separate rooms (done)
-_Logged 2026-09-15, shipped 2026-09-15_
-- **Fully rebuilt and live** (Artifact v31). All 4 rooms painted, integrated, and tested end-to-end: door hotspots + code-rendered labels calibrated per room (each a separate generation, so compositions differ), statement-on-the-wall card overlay per room (opaque parchment-style box, sized generously after an early version clipped long statements), correct/wrong door logic and the confounder creature (persists across room transitions, unchanged from before) all working. Room-to-room advance does a short opacity cross-fade of the background.
-- All 3 pickups (magnifying glass, rubber duck, brass "Z" nameplate) wire up, grant items, and their icons render correctly in the HUD. Found and fixed a real bug: HTML entities (`&ldquo;`/`&rdquo;`) in `ITEM_LABELS` showed as literal text in the top HUD pill, since that renders via `textContent` not `innerHTML` — fixed by using real Unicode curly-quote characters instead. Worth remembering for any future item label with punctuation.
-- Skeleton motif landed in all 4 rooms as planned (room1 needed a manual edit-pass since its art was already chosen before the skeleton idea came up; rooms 2–4 got it baked into their base generation).
-- Not done: no visual "vanish on pickup" for the 3 items (unlike the Office's patch trick) — there's no clean "before" twin image for any of these rooms to cut a patch from, so items stay visible in the art after being picked up. Consistent with how Office's items worked before patches were added; could revisit later the same way (generate an explicit clean/dirty pair) if it bothers the user.
-- Also not done: no in-fiction "EXIT" door — the existing global "&larr; Campus Map" link (present on every room automatically) was treated as sufficient per earlier discussion; revisit if requested.
-- **Follow-up fixes (2026-09-15):** the big always-visible statement overlay ("the big sign") was replaced with a small click-to-read "note" hotspot sized to the actual painted card, matching the game's existing Look-At pattern — text now shows in the dialogue panel on click, not floating over the scene. Door labels (X&rarr;Y etc.) were re-calibrated against precisely measured plaque positions per room (tight-crop pixel measurement, not the rough door-relative offset used initially) — they now sit correctly on the painted brass plaques and fit within them. Also found and fixed a real hitbox bug: flavor hotspots (skeleton, etc.) sometimes visually overlapped a door's clickable area and, being added to the DOM after doors, intercepted the click — fixed by rendering doors last so they always win overlapping clicks.
+The artifact host allows **255 files per version**. Individual clips blow that instantly.
 
-- **Second redesign pass (2026-09-15):** Corridor now shares the Office's full side-panel UI (verb grid: Look At / Talk To / Pick Up / Use, plus the inventory grid + hover preview via the same shared `CODEBOOK_RENDER_SIDE_INV` helper) — items collected in the Office (or elsewhere) show up automatically since inventory is global. The note is now genuinely unreadable at first: Look At says the handwriting's too small, and only `Use` + the magnifying glass in inventory reveals the actual statement text. Doors now resolve instantly — correct shows the feedback line then auto-advances to the next room after ~1.3s (no button); wrong shows the feedback line, then a placeholder "falling" transition (background fades/scales out, no dedicated art yet) and auto-returns to the Campus Map after ~2s. The old "Confounder" retry-in-place companion is fully removed — replaced by this harsher one-shot-per-attempt design. Progress (`current`) resets to room 1 on every fresh entry as before, but collected items/flags persist across failed attempts, so a magnifying glass (or duck/nameplate) picked up before falling is still there on the next attempt.
-- **Fall artwork shipped (2026-09-15):** user generated it from the delivered prompt on the first try &mdash; dark vertical shaft, receding doorway, tumbling gags (diploma, duck, string board, film reels, popcorn, ice cream, chalkboard), deadpan skeleton holding a "WATCH YOUR STEP" sign. Installed as `web/corridor-fall-bg.png`, wired into `startFall()`: old room fades out (~420ms), fall image fades in while slowly zooming (2.1s), then `ctx.goMap()` fires at ~2.7s total.
+- Every act ships **one bundle**: `voices-act<N>.mp3`, built by concatenating clips with **0.45 s gaps** (ffmpeg, `loudnorm` + `silenceremove`).
+- `CODEBOOK_VOICE_SPRITE` maps `"clip-name.mp3" → [bundle, startSeconds, durationSeconds]`. Call sites still name a single clip; `CODEBOOK_VOICE(src)` returns a `SegmentSound`.
+- **The only playback approach that works** is: fetch the bundle once as a **blob**, `URL.createObjectURL`, then a normal `<audio>` with `currentTime = start`. Two other approaches were shipped and were silent:
+  - an `<audio>` seeking inside the bundle needs HTTP range requests, which the dev server does not serve;
+  - Web Audio `decodeAudioData` + `BufferSource` plays nothing while the AudioContext is suspended, which it is until a user gesture — and voices auto-play on room entry.
+- **Rebuild the bundle and the manifest whenever any clip changes.** A stale offset table is silent audio, and muted headless tests cannot hear it (see §4.8).
 
-- **Third pass (2026-09-15) &mdash; entrance gate:** the corridor is now unlocked on the Campus Map from the very start of the game (`prereq: null`, matching the Office's pattern) instead of being locked until the player has "A Precisely Worded Question." Gating moved inside the room itself: entering now always shows a single-door "Entrance" scene first (no art yet, just a dark placeholder + a "Ring the Bell" button/hotspot &mdash; renamed from "Knock" once the user specified a bell). Ringing checks inventory for the question item live: with it, "The Doorman" lets you through and Case 1 of 4 begins as normal; without it, he turns you away and the gate simply resets so you can leave via the map or try again once you have it &mdash; no forced navigation on this failure path (unlike the mid-puzzle wrong-door fall, which does force you back to the map). Also worth remembering: setting `img.src = ''` in JS is unsafe (can trigger a broken-image request) &mdash; used `display:none` instead for the no-art placeholder state, and made sure `renderRoom()` resets `display:block` when transitioning back to a real background.
-- **Gate&rarr;Room 1 pacing fixed (2026-09-15):** the jump from "door opens" straight into Case 1 felt instant &mdash; root cause was `renderRoom(true)` (no fade) plus the gate's placeholder image being hidden via `display:none` without ever resetting `opacity` back to 0, so the later fade-in had nothing to animate from. Added a "You step through." beat and switched to `renderRoom(false)` (proper fade) for this specific transition.
-- **Entrance art shipped (2026-09-15), and the mechanic changed with it.** User's own generation ("The Department of Causality" building facade, richer than the prompt asked for) came with a distinct bell + "RING FOR BETTER QUESTIONS" plaque baked in, which prompted two follow-up requests: (1) ringing now requires selecting **Use** and clicking the bell specifically (not a direct click / not a panel button) &mdash; matches the same "select a verb, then click" pattern as the notes; (2) the door itself is a separate flavor hotspot that always just says "The door is locked." regardless of verb. Installed as `web/corridor-gate-bg.png`; `GATE_DOOR` and `GATE_BELL` boxes calibrated against it via grid overlay.
+### 2.7 Sound effects
 
-## Corridor/Office — several fixes and one real feature (2026-09-15)
-- **Magnifying glass moved to the Office**, not the Corridor. It's not baked into the office art (nothing to generate), so it's a reused overlay sprite (`icon-cc-magnifyingglass.png`, already existed) placed on top of a stack of papers on the filing cabinet, toggled via the same `showPatch`/`hideSprite` pattern as the desk-clutter items. Corridor Room 1's glass (which *was* baked into that room's art) is now Look-At-only flavor ("Not yours &mdash; you left yours in the office.") rather than a second pickup.
-- **Notes are now visibly illegible**, not just blank parchment: added a small procedural SVG "scribble" (wavy handwriting-like paths, generated in code, not hand-authored or a new art asset) drawn over every note hotspot in all 4 corridor rooms.
-- **Real "Use X with Y" interaction added, shared by Office and Corridor.** Clicking an inventory slot now selects that item (switches to the Use verb, highlights the slot) instead of only showing a hover preview; the sentence-line then reads "Use A Magnifying Glass&hellip;" and, on hovering a hotspot, "Use A Magnifying Glass with the note/corkboard/etc." `CODEBOOK_RENDER_SIDE_INV` gained two new optional params (`onSelect` callback, `selectedItemId`) to support this &mdash; both rooms' `syncSideInv()` wrappers now pass them through. `.side-inv-slot.selected` is the new CSS state for "currently equipped."
-- **Door-label plaques were unreadable** at real display sizes (my test screenshots were small enough that a fixed 9px font read fine there, but on a normal-size window it was genuinely tiny and low-contrast against detailed plaque art). Fixed: `.cc-label` font-size is now `clamp(9px, 1.3vw, 15px)` (scales with viewport instead of a fixed px value) and each label got a light parchment background pill (`.cc-label span`) for contrast regardless of the underlying art's brightness. Per-room position calibration was already correct and untouched.
-- **Magnifying glass placement in the Office was a second real bug**, not just user preference: it was composited onto a paper stack on the filing cabinet, technically present and correctly positioned in the DOM, but visually too small (~38&times;34px on a typical window) and blended into that cluttered corner &mdash; genuinely easy to miss. Confirmed via a local ImageMagick composite before touching the live page again. Relocated to the floor by the skeleton's armchair, next to the "SUBMITTED 2016" sign (open, uncluttered spot) and enlarged (~130&times;115px source scale) with a stronger drop-shadow. Verified visible in-browser after the move.
-- **Wrong-door fall no longer auto-kicks to the map.** Per explicit request: after the fall art appears, the character now talks to itself ("Hello? Anybody here?" / "Still falling." / "Maybe I should just head back to the campus instead.") and only returns via a manual "Head back to the Campus Map" button &mdash; no more automatic `ctx.goMap()` timeout.
-- **Mechanic redesign** (superseding the old single-hallway/4-door plan): the corridor is now four separate rooms, one per case. Each room shows its statement pinned to the wall (not in the bottom text panel) and has the same 4 doors (X&rarr;Y, Y&rarr;X, Z&rarr;X&amp;Y, Coincidence, still code-rendered labels, not baked into art — AI-generated arrows/ampersands are unreliable and this way wording is editable without regenerating art). Correct door advances to the next room; wrong door rejects/retries in place (not a branching maze). Exit-anytime is already covered by the existing global "&larr; Campus Map" link every room gets automatically (re-entering already resets progress, since `current` is a local var) — no new exit control needed unless a more in-fiction one is wanted later.
-- User chose the expensive art option: **four genuinely distinct paintings**, not one reused hallway. Prompts for all 4 rooms + 3 pickup icons live in the "Corridor Art Prompts" reference artifact.
-- Per-room content: Room 1 *Tuition and Payoff* (grad/income decor + magnifying glass pickup) · Room 2 *The Television Diagnosis* (TV/sickroom decor + rubber duck "Z?" pickup) · Room 3 *Cones and Coroners* (beach decor + WANTED poster + conspiracy board, no pickup) · Room 4 *Cage Rating* (cinema props, explicitly no faces/likenesses + chalkboard + brass "Z" nameplate pickup — the two "Z" objects landing in the one room where the answer is pure coincidence is intentional irony).
-- **Status: Room 1 art received and organized** (2026-09-15). 7 candidates generated, best one (`candidate-6-chosen.png`) picked and installed as `web/corridor-room1-bg.png`; all 7 archived under `art/corridor/room1-tuition-payoff/`. Door hotspots calibrated via grid overlay (same technique as Office): door1 left8.37% top10.63% w14.05% h67.48%; door2 left32.00% same top/h w13.76%; door3 left58.91% same top/h w13.76%; door4 left77.75% same top/h w14.05%. Blank pinned-note card at left45.76% top10.10% w10.17% h27.63%. Magnifying glass baked into the art (not a separate overlay sprite) at roughly left71.77% top22.85% w5.38% h9.03% — noted for later, not yet wired up.
-- **Not yet done, blocking the actual code integration**: art for Rooms 2, 3, 4 (not generated yet), and the 3 dedicated icon-prompt images (magnifying glass / duck / nameplate — the scene renders aren't isolated/transparent, so they can't double as inventory icons). Flipping the corridor's code over to the new per-room architecture is deliberately held off until at least all 4 room backgrounds exist, so cases 2&ndash;4 don't end up visually broken mid-rollout.
+- Sources must be **free and login-free** (user requirement). `tools/sfx/search.py` finds candidates, `picks.json` records choices, `tools/sfx/build.py` bundles.
+- Same bundling discipline as voices: `web/sfx-act<N>.mp3` + an offset manifest. `sfx-act1.mp3` (19 clips, 0.9 MB) and `sfx-act2.mp3` (17 clips, 1.16 MB) **already exist and are not wired in** — WP-0.6.
+- Two kinds: **ambience loops** (one per room, very low, started in `init()`) and **one-shots by trigger**.
+- Ducking: SFX under voice, music under both. Trailer music sits at 0.2 / 0.16 under narration — the user explicitly asked for this.
 
-## Office — baked-in "Drittmittel-funded staff only" text — done
-- Removed 2026-09-19: the nameplate is blank in both office backgrounds (HANDOVER §01m).
+### 2.8 Music
+
+`CODEBOOK_PLAY_ROOM_MUSIC / STOP / VOLUME`. One theme per act minimum; reuse across rooms within an act is fine and cheaper than new tracks.
+
+### 2.9 Preloading
+
+`CODEBOOK_PRELOAD(list, onProgress, onDone)` + `CODEBOOK_ACT_ASSETS = {act1, act2, …}` + `CODEBOOK_LOADBAR_HTML/SET`. The game preloads the **next** act with a progress bar. Every new asset goes in the right list.
+
+### 2.10 Interludes and title cards
+
+`CODEBOOK_PLAY_INTERLUDE(panels, onDone, {preload, label})`, panels `{src, text, html, voice}`, on a fixed 16:9 letterboxed stage. Click/Space/Enter advance, Esc skips, narration auto-advances on clip end. Every act gets: a short trailer, a **"Starring" cast poster**, and a big **ACT N** title card. Preview with `?play=actN`.
+
+---
+
+## 3. Asset budget
+
+| Limit | Value | Now |
+|---|---|---|
+| Files per published version | **255** | 285 in `web/` |
+| Bytes per published version | **64 MB** | 51 MB |
+
+Nine new rooms will add roughly: 9 backgrounds, ~12 sprites (plus rig parts, 6–10 files each), ~20 item icons, 3 act bundles of voices, 3 SFX bundles, 3 interludes × 5–6 panels. **That does not fit** without discipline.
+
+**Rules:**
+1. Loose per-clip audio never ships. Bundles only.
+2. Rig parts are WebP and live only for characters that actually move.
+3. Interlude panels are composited locally (ImageMagick) from existing art wherever possible — the Act III "Starring" poster and montage were both built this way.
+4. Re-check `ls web/ | wc -l` and `du -sh web/` at the end of every phase.
+
+---
+
+## 4. Per-package standard steps
+
+Every room build follows the same nine steps. Referenced below as "the standard nine".
+
+1. **Read** the room's section in `STORY.md`. Write the dialogue tree as text first, in `art/<room>/SCRIPT.md`.
+2. **Background art** — one-line ChatGPT prompt with a style reference, archived in `art/<room>/ART_PROMPTS.md`, cropped, WebP'd, installed.
+3. **Sprites** — same chat as the rest of that act's cast. Alpha-crop, size, install.
+4. **Room code** — `CODEBOOK_ADV_HTML` + `CODEBOOK_ADV_ROOM`, hotspots placed off a pixel grid, verbs wired, skeleton in place.
+5. **Puzzle logic** — including the walkable wrong path and any durable flag it sets.
+6. **Voices** — script → jobs.json → Chatterbox → trim → add to the act bundle → update `CODEBOOK_VOICE_SPRITE`.
+7. **Animation** — rig if the character moves, mouth frame + `cb-talk-*` if it speaks.
+8. **SFX** — ambience loop + one-shots into the act's SFX bundle.
+9. **Test** — headless playthrough asserting zero JS errors and the room's completion flag; screenshot; then commit.
+
+### 4.8 Testing protocol
+
+```bash
+cd web/ && python3 -m http.server 8934
+# headless, ALWAYS muted:
+#   chrome --headless=new --mute-audio --remote-debugging-port=9333
+```
+
+- Drive over CDP from Node. Keep the per-act playthrough scripts in `scratchpad/`.
+- Seed state by writing `codebook_save_v1` before navigating; **always** `localStorage.removeItem('codebook_save_v1')` before publishing.
+- Automated clicks can miss small hitboxes — `document.querySelector(...).click()` is the reliable fallback.
+- **Audio has a permanent blind spot:** muted headless runs cannot hear silence, which is exactly how v51 shipped mute. After any audio change, assert programmatically that the bundle fetched, that `CODEBOOK_VOICE_SPRITE` has an entry for every clip name referenced in the HTML, and that `audio.currentTime` advances. Then ask the user to listen once.
+
+---
+
+## 5. Definition of Done — a room
+
+- [ ] Plays start to finish from the campus map with **zero JS errors** in a headless run.
+- [ ] Its `doneFlag` is set by the intended path and by no other path.
+- [ ] The **wrong path is completable** and its consequence is deferred, not blocked.
+- [ ] Painted background + verb grid + side inventory; no procedural SVG placeholder left.
+- [ ] Every speaking character: sprite, mouth frame, `cb-talk-*`, voiced lines in the act bundle.
+- [ ] Narration is unvoiced and has no speech bubble.
+- [ ] One skeleton with a room-specific sign.
+- [ ] The Research Folder is defaced in some way.
+- [ ] Ambience loop + at least two one-shot SFX.
+- [ ] Every asset is in `CODEBOOK_ACT_ASSETS`.
+- [ ] Prompts archived in `art/<room>/ART_PROMPTS.md`; script in `SCRIPT.md`.
+- [ ] `CHANGELOG.md` entry; committed.
+
+---
+
+## 6. Work packages
+
+### Phase 0 — Foundations *(do all of these before any new room)*
+
+**WP-0.1 · Asset budget cleanup.** All 115 loose `web/vo-*.mp3` are already inside `voices-act1/2.mp3` and present in `CODEBOOK_VOICE_SPRITE`; they exist only as a fallback path. Move them to `web-audio-originals/` (git-ignored), confirm every referenced clip name resolves through the sprite map, and re-test audio. **Takes `web/` from 285 files to 170** and buys the room needed for three acts. *Acceptance:* every voiced line still plays; `ls web/*.mp3 | wc -l` drops by 115.
+
+**WP-0.2 · Renumber the data act II → III.** Room `act:` labels; `CODEBOOK_ACT2_INTERLUDE` → `ACT3`; `trailer2-*` art; `vo-narr-act2-*` (including the spoken title card, which says "Act Two. Apparently, we need data." and must be **re-rendered** to "Act Three"); `campus-map-act2.webp` (the map should now change at the *new* Act II); `CODEBOOK_ACT_ASSETS.act2` → `act3`; the `act2IntroSeen` flag (migrate existing saves or accept a reset); all doc references. *Decision to make and record:* rename the asset files or keep the names and relabel. Renaming is more churn but the names become actively misleading otherwise — **recommend renaming.**
+
+**WP-0.3 · The three durable flags.** Implement `theory_empty`, `analysis_p_hacked`, `claim_overstated` as ordinary `ctx` flags, documented in one place in the source, with a comment pointing at `STORY.md` § "Three flags, not a story tree". Nothing sets them yet.
+
+**WP-0.4 · Resolve the open/locked inconsistency** (`HANDOVER.md` §03). Act I rooms are `prereq: null`; the data act rooms still chain off each other's `doneFlag`. Apply the Act I rule everywhere and move real gating inside rooms. Record the decision in `HANDOVER.md`.
+
+**WP-0.5 · The three logged bugs.**
+- Pond: a millisecond of blue screen before the pond repaints after the swan is painted.
+- Causality Corridor: the same flash on scene change.
+- Doorman: skipping his dialogue leaves the gate apparently shut — the open timer must key off **line end or skip**, not a fixed delay.
+
+**WP-0.6 · Wire the sound effects.** `web/sfx-act1.mp3` and `sfx-act2.mp3` are built and unused. Add an SFX channel alongside the voice channel (same blob-URL segment approach), wire ambience loops per room and the one-shot triggers listed in `CHANGELOG.md` § "Sound effects pass". **Explicitly requested:** applause when the player shouts BINGO; background snoring in the Lecture Theatre; the Ethics door bell.
+
+**WP-0.7 · Backstory props into built rooms.** Cheap, high-value, needs no new act. Per the one-prop-one-line table: the Professor's hidden *Death of Community* in the Office, the Skeptic's *Things I Was Wrong About, Vol. XI* on the pond bench, the class photograph with the young Doorman, the Keeper's `BEVERAGE VESSEL 0047`, the Director's champagne photograph, the Officer's family portraits. `Look At` targets with one line each.
+
+**WP-0.8 · Trailer fixes.** Regenerate panel 1 from the revised prompt (empty folder + circled deadline — the shipped art still shows the old rejected-letter concept) and swap in the new narration together. Generate panel 2b "The Spiral". Both prompts are in `art/trailer/ART_PROMPTS.md`.
+
+**WP-0.9 · Seed "Reviewer 2".** One line per act, from characters who are otherwise rational, so the outro pays off. *"Reviewer 2 will ask." / "Who is Reviewer 2?" / "Nobody knows."*
+
+### Phase 1 — Act II, "Apparently We Need a Theory" *(the largest package in the project)*
+
+Read `STORY.md` § Act II in full first. It is the most detailed act in the bible and **it is over-specified on purpose — expect to trim during the build, not expand.** The user's own note: keep the loops, lose the errands.
+
+**WP-1.0 · Act II scaffolding.** Four room registrations, map placement (Library Annex, a second door for the Hall, the workshop lean-to, a side door of the Department of Causality), `CODEBOOK_ACT_ASSETS.act2`, the act's music.
+
+**WP-1.1 · The Prediction Slip.** A persistent four-box quest object, inspectable from the inventory, with the **brass coherence indicator** degrading `EXEMPLARY → ADEQUATE → CONCERNING → THEORETICALLY BUSY → EVERYTHING EXPLAINS EVERYTHING`. **New system — no existing room has an inventory object with visible internal state.** Build it first; all four rooms write to it.
+
+**WP-1.2 · The Library** (standard nine). KIRA, the conveyor belt of THE LITERATURE, the six references and their three failure modes, the framed abstract, the catalogue, the enrolment register, the telephone.
+
+**WP-1.3 · The Hall of Founders** (standard nine). Nodding portraits, the AUTHORITY METER, the Quotation Dispenser with its mode selector, the clerk, the ceremonial stepladder (one object, two Library uses), the newspaper clipping, writing behind Weber.
+
+**WP-1.4 · Feldstrom's Workshop** (standard nine). The Hypotheses Accelerator Mk III with its two-directional `◄ SPECIFY / GENERALISE ►` panel, the masking tape reading DO NOT, the THINGS THIS FORBIDS gauge, the traffic-counting gate, and the derivation scene. **This is where the act's lesson lives** — budget the most time here.
+
+**WP-1.5 · The Stockholm scam.** **New system:** a cross-room telephone with a dial-an-extension interface and a **timed absence** (Feldstrom out of the Workshop for N seconds). Three mandatory inputs only — extension 4173, KIRA's Nobel protocol printout, the Act I hourglass for the international delay. The Hall clipping and the Dispenser phrase are optional easings. Keep the failure branches and the flattery branch.
+
+**WP-1.6 · The Seminar Room** (standard nine). **New system:** a card-assembly UI for the WHERE / FOR WHOM / DIRECTION grid, plus rival-explanation cards physically sliding under non-diagnostic predictions. The Visiting Fellow's raised finger is an animation, not a line.
+
+**WP-1.7 · The Registry and the seal.** The PREREGISTRATION-ADJACENT DEVICE, the retracting button, the wax seal, H-27 dropping out. **The Registry accepts the empty theory** and stamps it `APPROVED`; that path sets `theory_empty` and is not blocked.
+
+**WP-1.8 · Act II interlude, Starring poster and ACT II card.** Same pipeline as Act III's; composite from the new room art and sprites.
+
+**WP-1.9 · Act II voices and SFX.** Cast KIRA, Feldstrom, the Visiting Fellow, the clerk and the Registry with the user first. Bundle as `voices-act2.mp3` (the name frees up after WP-0.2).
+
+### Phase 2 — Act III retrofit
+
+**WP-2.1 · Make the hypothesis drive the data.** `STORY.md` § Act III, "The chain that makes the middle of the game click". The player must be forced to obtain item-level exam performance, a classification of which exam items resemble the worked examples (from the Professor's Lecture Theatre sheets), and a survey item about alternative practice. **This is the highest-value single change in the whole plan** — it is what makes theory and evidence feel like one activity rather than two acts.
+
+**WP-2.2 · Record linkage at the Ethics Tribunal.** The pseudonymous IDs gain their second and better purpose: linkage permission, and a consent form that has to say so in plain language.
+
+**WP-2.3 · The enrolment register becomes the sampling frame.** Replace the "complete student list held by Ethics" with the Act II register, pseudonymised by Ethics. The 4,000-name newsletter list becomes the seductive wrong alternative, and the Sampling Officer gets the *"it has the right hundred and forty names"* exchange.
+
+**WP-2.4 · The Office hand-off scene** ("Where did these numbers come from?") that was never built as an in-room scene.
+
+### Phase 3 — Act IV, "Apparently Numbers Don't Speak for Themselves"
+
+**WP-3.1 · The Statistics Basement** (standard nine). The casino, the twenty switches, and **the seal-breaking set-piece** with all three outcomes — including the tight-interval null and the `theory_empty` outcome. Use *"Twenty chances at five per cent is not five per cent."*
+
+**WP-3.2 · The Delegation Engine** (standard nine). KIRA's descending AUTO-SUBMIT lever, the merge log, the spot-check, and her arc landing on *"Certainly. …What exactly do you mean?"*
+
+**WP-3.3 · The Bureau of Implications** (standard nine). The three sizes, the SO WHAT? gauge, the wall of FURTHER RESEARCH IS NEEDED plaques, the limitations the player writes themselves. Buying LARGE sets `claim_overstated`.
+
+**WP-3.4 · Act IV interlude, poster, card, voices, SFX.**
+
+### Phase 4 — Act V, "Apparently Somebody Has to Write It"
+
+**WP-4.1 · The Gap Registry** (standard nine). The drawers of pre-approved gaps, the registrar, KIRA's conveyor belt turning genuinely useful, Feldstrom's "that is a footnote" exchange.
+
+**WP-4.2 · The Writing Room** (standard nine). KIRA's almost-perfect abstract with two or three words over the line; Feldstrom's title escalator and the IMPACT gauge; the car-warranty phone call; the refusal. **Prototype the word-finding interaction early** — this is the package most at risk of feeling like homework, and the user flagged it.
+
+**WP-4.3 · The Office scene and the submission chute.** The Codebook reveal, *"It's accurate. Send it."*, and the folder going in. `STATUS: SUBMITTED`.
+
+### Phase 5 — The outro
+
+**WP-5.1 · The cutscene.** Built with the **trailer pipeline, not the room pipeline**. Order is fixed in `STORY.md` § The Outro: walk back → Doorman → `FOUR MONTHS LATER` → decision letter → back to the Office → R&R → skeleton flip → credits. Narrator VO, 5–7 panels.
+
+**WP-5.2 · The three reviews.** Reviewer 1 (six warm comments), Reviewer 3 (never submitted), Reviewer 2 (eleven pages, forty-seven comments, contradictory, and **comment 17 is correct**). The letter branches on `claim_overstated`.
+
+**WP-5.3 · Post-credits: the monkey.** Dark office, the submission system, the monkey, `asdfghjkl` resolving into *"The theoretical contribution remains insufficiently developed."* Never explained. The Feldstrom phone beat is optional — build it, look at it, cut it if the monkey lands better alone.
+
+### Phase 6 — Ship
+
+**WP-6.1 · Full five-act playthrough**, headless, zero errors, every folder stamp in order, all eight flag combinations reachable.
+**WP-6.2 · Asset budget final check** (<255 files, <64 MB) and a real listen-through with the user.
+**WP-6.3 · Publish and push** — only on the user's word.
+
+---
+
+## 7. Open decisions for the user
+
+Ask these at the natural moment, not all at once:
+
+1. **Voice casting** for KIRA, Feldstrom, the Visiting Fellow, the Registrar, the Implications Clerk (Phase 1 and 3). Always as numbered A/B takes.
+2. **KIRA's robot treatment** — plain reference voice, or pitch/formant-shifted.
+3. **WP-0.2 file renaming** — rename `trailer2-*` / `vo-narr-act2-*` / `campus-map-act2.webp`, or keep the names and relabel.
+4. **Act II trimming** — the act is over-specified; once the four rooms are playable, which set-pieces survive is a taste call.
+5. **The optional Feldstrom/monkey phone beat** at the very end.
+
+---
+
+## 8. Recommended order, in one line
+
+`WP-0.1 → 0.2 → 0.3 → 0.4 → 0.5 → 0.6 → 0.7 → 0.8 → 0.9` (foundations, all cheap) → `Phase 2` (the Act III retrofit, because it is small and it defines what Act II's hypothesis has to produce) → `Phase 1` (Act II, the big one) → `Phase 3` → `Phase 4` → `Phase 5` → `Phase 6`.
+
+**Note the deliberate inversion:** Phase 2 runs before Phase 1. The Act III retrofit is what tells us exactly which hypothesis Act II has to produce, and it is far cheaper to discover that in four already-built rooms than in four that do not exist yet.

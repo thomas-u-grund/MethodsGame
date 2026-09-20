@@ -23,7 +23,8 @@ Then visit `http://localhost:8080/the-secret-of-the-codebook.html`.
 - **`art/`** — source art and per-room `ART_PROMPTS.md` files documenting how each background/sprite was generated, for regenerating or extending the art later.
 - **`STORY.md`** — the narrative bible: premise, cast, and beat-by-beat plot.
 - **`HANDOVER.md`** — the living technical/session log: architecture, what's built, what's still open.
-- **`ROADMAP.md`** — chronological build log.
+- **`ROADMAP.md`** — the master build plan: house rules, work packages, definition of done.
+- **`CHANGELOG.md`** — chronological build log.
 
 ## Status
 
