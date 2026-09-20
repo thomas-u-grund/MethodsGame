@@ -24,6 +24,13 @@ _Logged and built 2026-09-20; all nine items done, see HANDOVER §01n. (Item 3 w
 
 8. **Bingo shouldn't reshuffle the Lecture Theatre layout.** Playing bingo currently changes the whole screen (card rendered beside the inventory on the right). The card should sit *inside* the main scene window instead, so the room stays visually stable.
 
+## Bugs to fix — logged 2026-09-20
+_Reported by the user while playing v51. Not fixed yet._
+
+1. **Blue flash when the pond repaints** (painting the swan black). The room swaps `bgImg.src` behind an opacity fade (`bgImg.style.opacity='0'; setTimeout(apply, 220)`), and while the old image is transparent the player sees straight through to `.scene-wrap`'s own background, which is `var(--wall)` (the blue). Fix options: crossfade **two stacked `<img>` layers** (show the new one only once it has loaded), preload the next background before starting the fade, or — cheapest — set the scene-wrap background to near-black so any gap is invisible rather than blue.
+2. **Same flash in the Causality Corridor** on every scene change (case rooms, archway, the fall) — same code pattern, same fix. Check `renderRoom`/`renderGate`/`checkWin`/`startFall`.
+3. **Skipping the Doorman's dialogue can leave the gate shut.** The gate sequence is driven by fixed `setTimeout`s sized to the voice clips (2.8 s / 10.8 s / 13.4 s before "You step through"), so pressing Space only cuts the audio — the timers keep running and the player is left staring at an apparently dead door, or clicks away before the room advances. Fix: drive each step off the line's `ended` event (or a shared "line finished or skipped" helper) instead of hard-coded delays, so skipping advances the scene immediately. Same pattern is used in the archway exchange (`checkWin`) and the BINGO walk-out — worth fixing in one place.
+
 ## Sound effects pass — planned
 _Logged 2026-09-20, requested by the user. Not started._
 
