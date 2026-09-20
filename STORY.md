@@ -80,6 +80,79 @@ This is the whole game's shape: a mythologized secret that turns out to be the m
 
 ---
 
+## The main arc
+
+*Read this section before any single act. The acts below are the detail; this is the shape they have to add up to.*
+
+### The spine
+
+A student wants to finish a project quickly. They are refused five times, and each refusal turns out to be a thing they actually needed. That is the whole game.
+
+| Act | What the player wants | What they are told | What they leave with |
+|---|---|---|---|
+| **I — The Question** | a topic, today | you do not have a question, you have a topic | a question precise enough to be answered, and the knowledge that one counterexample can kill a claim |
+| **II — Apparently We Need a Theory** | to go and collect data | you cannot interpret data you had no expectation about | an idea about how the world works, written down and sealed while it could still be wrong |
+| **III — Apparently We Need Data** | to ask some students | you may not approach human beings without permission, an instrument, and a defensible sample | real answers from real people, with a known response rate and a documented sampling frame |
+| **IV — Apparently Evidence Must Exist** | a result | a number is not evidence until somebody has checked it is the number you promised | an analysis that matches the sealed slip, and one that survived an audit |
+| **V — The Hypotheses Accelerator** | to be done | you are entitled to say considerably less than you would like | a claim proportional to what was actually shown |
+
+Five acts, five refusals, and the same underlying joke each time: **the department is ridiculous and it is also right.** If either half fails, the game fails — a department that is merely absurd teaches cynicism, and a department that is merely correct is a textbook with jokes on it.
+
+### What actually changes in the player
+
+The verbs change, act by act, and this is the thing to protect when writing any individual room:
+
+1. **Act I — the player is a supplicant.** They wait, they are interrupted, they are ejected after seven seconds. The department acts on them.
+2. **Act II — the player starts acting on the department.** The Stockholm phone scam is the turning point of the entire game: it is the first time the player manipulates an institution instead of petitioning it. They are not being taught any more; they have started operating.
+3. **Act III — the player runs an operation.** Four institutions, a sampling ceremony, a live response-rate board. They are competent, and they know it.
+4. **Act IV — the player is tempted.** For the first time, the obstacle is not a bureaucrat. It is a room full of green lamps offering them exactly what they want, and an assistant who will give it to them faster. Nobody is stopping them. That is the point.
+5. **Act V — the player refuses help.** The only act whose verb is *resist*. Feldstrom offers to make the finding enormous and the correct move is to say no to a man who is being generous.
+
+Panic → competence → temptation → integrity. If an act's rooms do not sit somewhere on that line, they are in the wrong act.
+
+### The mystery, and how it stays alive
+
+The Codebook is never in any room. Each act quietly implies it is somewhere further in — the Doorman says the player has completed "Chapter One", and every institution afterwards behaves as though the project it is obstructing is a chapter of something. The player is collecting a folder and assumes the folder is the trail.
+
+**Stage one** (end of Act I): the Codebook is redirected, not revealed — *"No. I said this was the door."*
+**Stage two** (the ending): the Professor has never heard of it. *"Oh. That."* (pause) *"We used to call it Methods."*
+
+See "The two-stage reveal" above for both scenes in full. The rule for every act in between: **nobody credible ever confirms the Codebook exists.** Rumour, signage and KIRA can imply it freely. The Professor, the Skeptic and the Visiting Fellow never mention it.
+
+### The argument the game is actually having
+
+Underneath the jokes, two people are disagreeing, and the player is the answer.
+
+- **The Professor** was destroyed once for claiming too much, and now claims almost nothing. He is precise and he is diminished.
+- **Feldstrom** has never been destroyed for anything, because nothing he says could be checked. He is ambitious and he is empty.
+
+Each thinks the other learned the wrong lesson from the same era, and each is half right. The player's finished folder is the third position and the only defensible one: **an idea big enough to be interesting, stated narrowly enough to be tested, with the evidence attached.** The game never states this; it stages it, by having the same person walk out of Feldstrom's workshop with a smaller claim and into the Professor's office with a bolder one than he would have made.
+
+That is also why Feldstrom appears twice. In Act II he inflates the player's *theory*; in Act V he inflates the player's *result*. The player refuses him both times, and the second refusal costs more, because by then they have something they are proud of.
+
+### Character through-lines
+
+Each of these must land in at least two acts or it is not a through-line, it is a gag.
+
+- **KIRA** — Act II she is helpful and wrong. Act IV she has run and nearly submitted the whole study. Her arc is four words long: *"Certainly!"* becomes *"Certainly. …What exactly do you mean?"* Nothing else about her changes, and nothing else should.
+- **Feldstrom** — Act II (theory) and Act V (result), with Stockholm never calling in either. The telephone pays off in Act V with the car-warranty call.
+- **The Professor** — first and last conversation of the game. In between, his hidden *Death of Community* paper is findable in Act I and explains everything he does.
+- **The Skeptic** — gates the Corridor in Act I, and returns in Act IV when the result comes back null, because a null result is the only thing in the game she finds genuinely delightful. *Things I Was Wrong About, Vol. XI* gets an entry.
+- **The Doorman** — gates Act I, and gets the last line before the reveal. *"You knew." / "Eventually."*
+- **The Research Folder** — in every act, defaced by every institution, and its final stamp is the punchline.
+
+### Where the acts are unequal, and what to do about it
+
+Written honestly, so nobody rediscovers this mid-build:
+
+- **Act I is built and is the model.** Every later act is measured against it, not against its own design doc.
+- **Act III is built** and structurally the strongest of the unbuilt-narrative acts, because its four rooms already interlock.
+- **Act II is designed in the most depth** and is now the largest act on paper. It will need trimming during the build, not expansion.
+- **Act IV is two rooms** doing very different jobs (temptation, then emergency) and is currently the thinnest relative to its importance — it is where Act II gets paid off and where the null result has to land.
+- **Act V is one room and one gag.** It is short on purpose — it is a coda, not an act — but it carries the Feldstrom payoff and the player's first outright refusal, so it needs more than the two paragraphs it currently has.
+
+---
+
 ## Setting & tone
 
 A gothic, autumnal university campus (unnamed) — statues of seated philosophers, ivy on stone, a sociology department that's clearly run the same seven-second office hours for decades. Visual tone: warm, painted, comic-linework illustration (see `HANDOVER.md` §02 for the art style guide). Narrative tone: **every act should be its own absurd institution with rules the player has to figure out and exploit, the way Act I already does** — not a quiz with jokes pasted on top. Skeletons with hand-lettered signs are the house visual gag for research despair; keep adding one per room, each specific to that room's failure mode.
@@ -435,7 +508,15 @@ Monkey-Island-style narrated panels, played in full every time the game loads (E
 
 *Rooms: The Seven-Second Office · Introduction to Systems Theory (Lecture Theatre) · Causality Corridor*
 
-Unchanged from before, and it's the model every later act should match: a dialogue gauntlet with a hard patience limit, six absurd desk-clutter pickups (a chewed pen, a mug reading "WORLD'S OKAYEST SAMPLE SIZE," a Likert-scale die, an hourglass tagged "7 SEC," a USB drive labeled "FINAL_v23_REALFINAL_USETHIS," a rubber stamp reading "SIGNIFICANT (p<.05)"), a professor who's either at the Office or the Lecture Theatre and never both, an undocumented bingo-card trick the player has to discover, and a guarded door with real stakes (pass all four causal-reasoning cases or fall). The optional citation-counter sidequest lives here too (see `HANDOVER.md` §01b). Entry to the Corridor now requires **both** the Question *and* having convinced the Skeptic at Probability Pond (see below) — the Doorman checks for both.
+**The act's story.** The player wants a topic and they want it today. What they find is a man who will not give them one, and a building that has evidently been refusing students for a very long time. The obstacle is never access — the Professor is right there, twice, in two rooms — it is that he will not accept anything imprecise, and he will not stay in the conversation long enough for the player to be imprecise twice. The player's job is to work out what he is actually withholding: not approval, not a topic, but a sentence that could be answered. Everything else in Act I is the department teaching the same thing in a lighter key — the bingo card (a lecture can be entirely content-free and nobody in the room objects), the Corridor (a claim you reasoned your way to can still be wrong), and the pond (a claim that cannot lose is worth nothing). That last one is the seed of Act II, planted an act early and by a character the player has to *convince* rather than obey.
+
+**Who changes:** nobody. The player is a supplicant for the whole act, which is why the ending matters — the Doorman hands them a folder, and for the first time they are carrying something instead of asking for something.
+
+**What goes in the folder:** the Question. `STATUS: QUESTION EXISTS`.
+
+**Backstory props to seed here** (see *Character backstories*): the Professor's hidden *Death of Community: Evidence from Twenty-Three Residents of Leicester* somewhere in the Office — it explains his entire personality and the player will not understand why until much later; the Skeptic's *Things I Was Wrong About, Vol. XI* on the pond bench; and the ancient class photograph with a young man in the back row wearing the Doorman's moustache.
+
+Mechanically it is unchanged from before, and it's the model every later act should match: a dialogue gauntlet with a hard patience limit, six absurd desk-clutter pickups (a chewed pen, a mug reading "WORLD'S OKAYEST SAMPLE SIZE," a Likert-scale die, an hourglass tagged "7 SEC," a USB drive labeled "FINAL_v23_REALFINAL_USETHIS," a rubber stamp reading "SIGNIFICANT (p<.05)"), a professor who's either at the Office or the Lecture Theatre and never both, an undocumented bingo-card trick the player has to discover, and a guarded door with real stakes (pass all four causal-reasoning cases or fall). The optional citation-counter sidequest lives here too (see `HANDOVER.md` §01b). Entry to the Corridor now requires **both** the Question *and* having convinced the Skeptic at Probability Pond (see below) — the Doorman checks for both.
 
 **Ending, revised — live and tested.** Clearing all four Corridor cases still makes the doors align into an archway — but the payoff is the Doorman exchange above ("Not here." / "This was the door." / "You've completed Chapter One."), and instead of consuming the Question, the Doorman hands over the Research Folder with the Question already inside it, stamped `QUESTION EXISTS`.
 
@@ -1119,6 +1200,14 @@ And *then* the magnifying glass turns up a coverage problem, or Ethics refuses i
 
 *Rooms: Survey Lab · The Ethics Tribunal · The Mensa · The Fieldwork Arena*
 
+**The act's story.** The player has an idea about how the world works and a sealed promise about what would prove it wrong. Now they need people. What they discover is that **data do not exist until somebody makes them** — and that every number they will later analyse has a manufacturing history: who was asked, who agreed to answer, what words the question used, and who never turned up at all. Four institutions each own one step of that history and none of them will speak to the others. The act is at its best when the player realises that a defensible 75% is worth more than a suspicious 100%, and that a perfectly random sample of the wrong people is still the wrong people.
+
+**The Act II payoff:** the scope the player fought Feldstrom to impose — first-year Methods students, winter term — turns out to have been the sampling frame all along. The enrolment register they jammed into the GENERALISER is the list the Sampling Officer needs. A decision that felt like a humiliation in a lean-to becomes the thing that makes Act III possible.
+
+**Who changes:** the Fieldwork Director, who reaches for the old fraudulent reflex and stops himself. And the player, who stops being a student doing an exercise and starts being someone running an operation.
+
+**What goes in the folder:** the responses, and H-27 with all four boxes ticked. `STATUS: QUESTION HAS DATA`.
+
 **Opening beat, back at the Office.** The player proudly presents the Professor with the folder stamped `QUESTION EXISTS`.
 
 > **PROFESSOR:** "A question is not evidence."
@@ -1233,6 +1322,14 @@ A **RECORD HIGH** banner drops, a dot-matrix printer buries the floor in paper, 
 
 The analysis act, and the reason the Prediction Slip was sealed. (The Library moved to Act II when theory became its own act, and KIRA's "I already did it" emergency moved in here, so analysis and delegation sit together.)
 
+**The act's story.** The player has numbers and wants a result. For the first time in the game **nobody is obstructing them** — and that is the design. Acts I to III were about institutions saying no; Act IV is about two things saying yes. The Statistics Basement will happily give them a result if they keep flipping switches until a lamp comes on. KIRA will give them an entire finished paper if they simply leave the room. Both are offering exactly what the player wants, faster than they could get it honestly, and the only thing standing in the way is a sealed envelope containing a sentence they wrote themselves.
+
+The act is therefore about **accountability**: whose name is on this, and who checked. It is the only act where the player can lose by doing nothing, because the SUBMIT MANUSCRIPT lever descends whether or not they act.
+
+**Who changes:** KIRA, permanently and very slightly — this is where *"Certainly!"* finally acquires a hesitation. And the Skeptic, who turns up if the result is null and is the only person in the entire department who is pleased.
+
+**What goes in the folder:** an analysis that matches the slip, and an audit that survived. `STATUS: EVIDENCE VERIFIED`.
+
 **The Statistics Basement, as a casino.** Every p<.05 sets off a brass bell, a green lamp and a little mechanical banner reading **DISCOVERY!** Twenty switches, wired to nothing in particular, invite the player to keep flipping until something rings. Nothing stops them. The room *wants* them to test everything and report whatever lit up.
 
 What it is really testing is whether the player runs the analysis they promised. The sealed slip names one prediction: the honest path tests that one, reports the effect with its uncertainty, and accepts a dull answer. The tempting path finds p = .049 on the twentieth switch, and the room throws a small party.
@@ -1257,13 +1354,122 @@ Reframed from an auditing exercise into a narrative emergency. The player arrive
 
 *Room: The Hypotheses Accelerator*
 
-Prof. Feldstrom, magnificently insane, greets the player's careful, correctly-audited null result with something like: **"Null? That's just significance that hasn't believed in itself yet."** His machine literally turns cautious claims into bigger ones: a result about students becomes "young adults," then "humans," then "civilization," then possibly **THE FUNDAMENTAL LAW OF HISTORY**. A large **IMPACT** gauge climbs from *Modest Contribution* through *Paradigm Shift* to *Nobel Adjacent* and finally **PRESS OFFICE HAS BEEN ALERTED**. The puzzle is resisting the machine, not optimizing it — the opposite verb from every other act.
+**The act's story.** The player has a small, honest, thoroughly checked result and wants to go home. Instead they meet the only character in the game who is genuinely, uncomplicatedly *delighted* by their work — and who wants to destroy it with kindness. Feldstrom is not an obstacle. He is a fan. He thinks the player has done something magnificent and he is offering, free of charge, to make it matter.
 
-**Folder update:** stamped `CLAIM DEFENSIBLE` — the last stamp before the Office.
+This is the one act whose verb is **resist**, and it only works because refusing costs something. Everyone else in the game withheld; Feldstrom offers. He is the first person in five acts to say the player's work is important, and the correct response is to turn him down.
+
+**Who changes:** the player, finally, in the only way the game cares about — they say what they are entitled to say and no more, while somebody they like is begging them to say more.
+
+**What goes in the folder:** nothing new. The last stamp is for what the player *didn't* add. `STATUS: CLAIM DEFENSIBLE`.
+
+### Feldstrom, again
+
+He recognises the player immediately, which is the first joke, because the player has something to feel guilty about.
+
+> **FELDSTROM:** "You."
+> **PLAYER:** "Professor."
+> **FELDSTROM:** "Stockholm never arrived."
+> **PLAYER:** "Terrible."
+> **FELDSTROM:** "They called, though."
+> **PLAYER:** "…did they?"
+> **FELDSTROM:** "Very strange line."
+
+He does not suspect the player. He has simply never stopped waiting. The tuxedo is here too, still on a hanger, three acts older.
+
+**The machine.** The Hypotheses Accelerator is the GENERALISER's full-size descendant, and his physics never left him — he reads the player's careful finding as a flow law within about four seconds:
+
+> **FELDSTROM:** "Excellent."
+> **PLAYER:** "It is?"
+> **FELDSTROM:** "You have discovered a flow law."
+> **PLAYER:** "No."
+> *(he is already switching it on)*
+> **FELDSTROM:** "Educational exposure enters here. Achievement exits here. Between them—"
+> **PLAYER:** "Please don't say phase transition."
+> **FELDSTROM:** "—a phase transition."
+
+And if the result came back null:
+
+> **FELDSTROM:** "Null? That's just significance that hasn't believed in itself yet."
+
+**The escalation.** Each stage is a real claim the player could plausibly be talked into, and the trick is that the first step is *almost* reasonable:
+
+> LECTURE ATTENDANCE MAY AFFECT PERFORMANCE
+> → EDUCATIONAL EXPOSURE GENERATES HUMAN CAPITAL
+> → INSTITUTIONS CHANNEL HUMAN CAPACITY
+> → SOCIAL SYSTEMS OBEY FLOW DYNAMICS
+> → **CIVILISATION IS TRAFFIC**
+
+A large **IMPACT** gauge climbs alongside: *Modest Contribution* → *Paradigm Shift* → *Nobel Adjacent* → **PRESS OFFICE HAS BEEN ALERTED.**
+
+At the final stage Feldstrom just whispers: *"Stockholm."*
+
+**The telephone rings.**
+
+Both of them freeze. He turns towards it very slowly.
+
+> **FELDSTROM:** "Nobody move."
+
+He answers. A long pause. His expression collapses.
+
+> **FELDSTROM:** "Yes. I am aware that my vehicle's warranty is expiring."
+
+Click. Then, without missing a beat:
+
+> **FELDSTROM:** "They'll call back."
+
+### The puzzle — resisting the machine
+
+**The opposite verb from every other act.** Every previous room rewarded the player for making something bigger, better documented or more complete. This one rewards subtraction, and the interface should fight them: the escalate control is large, lit and satisfying; the way back down is a small unlabelled catch, the same one the GENERALISER had, and the player has to remember it from Act II.
+
+The honest ending needs three things, and each of them is an Act II object coming back:
+
+1. **The scope** — the same enrolment register argument, now made by the player instead of forced on Feldstrom. *These are first-year Methods students in one term at one university.*
+2. **The sealed slip** — the prediction actually made, which does not mention civilisation, human capital, or history.
+3. **The uncertainty** — what the data can and cannot distinguish, carried up from the Statistics Basement.
+
+**Wrong path the game allows in full:** let it run. The press office is alerted. The claim leaves the building. This should be walkable all the way to a small newspaper mock-up with the player's name under a headline about civilisation, and the Professor's reaction in the Office is the consequence — not a fail screen, just a much worse final conversation.
+
+**The line the act turns on.** When the player finally refuses, Feldstrom is not angry. He is disappointed in a way that is slightly sad, because he means it:
+
+> **FELDSTROM:** "You could have had all of it."
+> **PLAYER:** "I'd rather have the part that's true."
+> *(long pause)*
+> **FELDSTROM:** "…that is the smallest thing anyone has ever said in this room."
+> *(beat)*
+> **FELDSTROM:** "Write it down."
+
+He stamps the folder himself. **CLAIM DEFENSIBLE.** Then he goes back to watching the telephone.
+
+**Skeleton:** slumped beneath the IMPACT gauge, which is still lit, sign reading **"OVERSTATED IT ONCE. STILL BEING CITED FOR IT."**
 
 ## The Ending
 
-The player returns to the Seven-Second Office with the finished folder. See "The two-stage reveal" above for the full scene. Ends on the skeleton's sign flip (`SUBMITTED 2016 · STILL WAITING` → `WELCOME TO ACADEMIA`), the "Part Two: The Revisions" title-card gag, and credits.
+**The walk back.** Before the Office, the player crosses the campus one last time, and this is where the through-lines get their last beat — quietly, with no puzzle attached. The route is the reverse of Act I, which the player will feel without being told.
+
+- **Probability Pond.** The Skeptic is still on the bench. The swan is still black. She is writing in Volume XI and does not look up.
+  > **PLAYER:** "I was wrong about one of them."
+  > **SKEPTIC:** "Which one?"
+  > **PLAYER:** "The interesting one."
+  > *(she finally looks up)*
+- **The Library.** KIRA, who has been recompiling the literature for five acts, says the four words that are her entire character arc.
+  > **KIRA:** "Certainly. …What exactly do you mean?"
+- **Feldstrom's workshop door.** The chalk is still there. `PEOPLE ARE NOT PARTICLES` / `UNTESTED ASSUMPTION`. Somebody has added a third line in a third hand, very small: *"testable, though."*
+- **The Corridor gate.** The Doorman, arms crossed, exactly as in Act I. This is his last line in the game and he gets nothing else.
+  > **PLAYER:** "You knew."
+  > **DOORMAN:** "Eventually."
+
+**The Office.** The player puts the finished folder on the desk. See "The two-stage reveal" above for the full scene — the seven-second hourglass turns over, the Professor reads it and for once does not immediately object, and the Codebook turns out to be a thing he has not thought about in thirty years.
+
+> **PROFESSOR:** "Oh. That." *(pause)* "We used to call it Methods."
+
+**REVISE AND RESUBMIT**, explained plainly so it reads as the win it is, and then the room does the last two things:
+
+1. **The folder**, finally, is the punchline — every stamp, staple, coffee ring and pencil annotation from five acts, including the Hall of Founders' meaningless `THEORETICALLY GROUNDED` on the cover, which the Professor notices and says nothing about.
+2. **The armchair skeleton** slowly turns its skull toward the player, and its `SUBMITTED 2016 · STILL WAITING` sign falls over to reveal **"WELCOME TO ACADEMIA."**
+
+Then the "Part Two: The Revisions" title-card gag, and credits.
+
+**The note that the ending has to hit:** the player does not leave with the Codebook, a discovery, or a career. They leave with a modest, defensible, *true* thing and a note asking for revisions — and the game's position is that this is a good day. Every absurdity in five acts was an institution overdoing something that was, underneath, worth doing. Nothing the player learned was decoration.
 
 ---
 
