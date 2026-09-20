@@ -10,8 +10,8 @@ The campus map art currently has painted name signs on every building, including
 
 Implementation options: regenerate/inpaint one map image per act with the signs removed or blank (`art/map/` already has `source-v1-act1.png` and `source-v2-act2.png` as starting points), or paint blank signboards once and render the labels as HTML overlays that appear when a room unlocks (more flexible, and one map image serves every act). `showMap()` picks the image or overlays by act progress (`corridorDone`, `actIIDone`, …).
 
-## Act I polish + presentation pass — planned
-_Logged 2026-09-20, requested by the user. Not started._
+## Act I polish + presentation pass — built
+_Logged and built 2026-09-20; all nine items done, see HANDOVER §01n. (Item 3 was a real bug: patience could eject a player who gave the right answer.)_
 
 1. **Lecture Theatre, the BINGO payoff needs an exit animation.** Today the professor simply vanishes when the player shouts BINGO. He should visibly lose his thread — a beat of confusion, then walk out of the hall (he already has a rig: `PROF_RIG` + `CODEBOOK_RIG_WALK`, so send him off the side of the frame and fade), and only then does the room switch to "empty theatre".
 2. **Lecture Theatre, hint the bingo trick.** The bingo card is an undocumented trick and first-time players have no cue. Idea (user's): something scribbled on the desk in front of the player's seat — deliberately *not* obvious, e.g. a half-visible tally/BINGO grid doodled among the other desk graffiti, readable with `Look At` (and maybe only fully legible with the magnifying glass). Needs a small art edit on `lecture-bg` plus a hotspot.
