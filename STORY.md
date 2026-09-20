@@ -32,11 +32,12 @@ The Professor's Precisely Worded Question goes inside it: **"Do first-years who 
 | After | Stamp reads |
 |---|---|
 | The Corridor (Act I) | `STATUS: QUESTION EXISTS` |
-| Library + Hall of Founders + Workshop + Seminar Room (Act II) | `STATUS: THEORY EXISTS` *(the sealed Prediction Slip)* |
+| Library + Hall of Founders + Workshop + Seminar Room (Act II) | `STATUS: THEORY EXISTS` *(the sealed Prediction Slip, carrying the hypothesis)* |
 | Survey Lab + Ethics Tribunal + The Mensa + Fieldwork Arena (Act III) | `STATUS: QUESTION HAS DATA` *(the Professor: "Where did these numbers come from?")* |
-| Statistics Basement + Delegation Engine (Act IV) | `STATUS: EVIDENCE VERIFIED` |
-| The Hypotheses Accelerator (Act V) | `STATUS: CLAIM DEFENSIBLE` |
-| The Office, final return | stamped `REVISE AND RESUBMIT` by the Professor himself |
+| Statistics Basement + Delegation Engine + Bureau of Implications (Act IV) | `STATUS: EVIDENCE VERIFIED` |
+| Gap Registry + Writing Room (Act V) | `STATUS: CLAIM DEFENSIBLE` |
+| The Office, then the submission chute (end of Act V) | `STATUS: SUBMITTED` |
+| The decision letter (outro) | stamped `REVISE AND RESUBMIT` — by the journal, not by anyone the player has met |
 
 This also gives every act a shared visual gag opportunity: whatever absurd institution the player is dealing with always wants to stamp, staple, annotate, or otherwise physically deface the folder before letting them move on.
 
@@ -53,7 +54,7 @@ This also gives every act a shared visual gag opportunity: whatever absurd insti
 
 The player still believes there is something called the Codebook — it just apparently has chapters, scattered through the department, and the folder is how they're collected. The mystery survives Act I intact; it's *redirected*, not solved.
 
-**Stage two (the real ending, after Act V):** the player returns to the Seven-Second Office — same room, same Professor, same skeleton — and puts the finished folder on his desk.
+**Stage two (at the end of Act V, just before submission):** the player returns to the Seven-Second Office — same room, same Professor, same skeleton — and puts the finished paper on his desk.
 
 > *The seven-second hourglass turns over. He reads. For once, he doesn't immediately object.*
 > **PROFESSOR:** "Hm."
@@ -67,14 +68,11 @@ The player explains — the Corridor, the Doorman, the chapters, the rumors that
 
 > **PROFESSOR:** "Oh. That." *(pause)* "We used to call it Methods."
 
-He stamps the folder. **REVISE AND RESUBMIT.**
+Then he reads the abstract, the hourglass runs all the way out without him interrupting, and he says the two words the player has been trying to earn for five acts:
 
-> **PLAYER:** "Wait. That's... good?"
-> **PROFESSOR:** "For a first submission? That's a triumph. Most of these die in desk-reject."
+> **PROFESSOR:** "It's accurate." *(beat)* "Send it."
 
-The game says the quiet part out loud here on purpose — R&R is a real, genuinely positive outcome in academic publishing (survived review without being rejected outright), and the joke only works if every player gets to feel that relief, not just the ones who already know the convention. The armchair skeleton slowly turns its skull toward the player; its "SUBMITTED 2016 · STILL WAITING" sign falls over, revealing another sign behind it: **"WELCOME TO ACADEMIA."**
-
-A last title card before credits, played as a straight-faced gag, not a real commitment: *"THE SECRET OF THE LOST CODEBOOK, PART TWO: THE REVISIONS — coming whenever the reviewers get back to us."*
+**The player submits the paper**, and the act ends there. **Stage three — the verdict — is not delivered by anyone in the department.** It arrives four months later, from a journal, in an envelope, alongside eleven pages from Reviewer 2: **REVISE AND RESUBMIT**. See "The Outro" for the full scene. This is deliberate: the Professor being the one to stamp R&R made the game's last judgement an act of mercy from a character the player already trusts. Coming from outside, it is a verdict on the work rather than a favour, and it lets the Professor's own line — *"For a first submission? That's a triumph"* — be reassurance instead of self-congratulation.
 
 This is the whole game's shape: a mythologized secret that turns out to be the mundane, everyday name for the thing the player just spent five acts learning to do. Every act needs to earn that ending by being funny and specific on its own terms — see below.
 
@@ -91,10 +89,10 @@ A student wants to finish a project quickly. They are refused five times, and ea
 | Act | What the player wants | What they are told | What they leave with |
 |---|---|---|---|
 | **I — The Question** | a topic, today | you do not have a question, you have a topic | a question precise enough to be answered, and the knowledge that one counterexample can kill a claim |
-| **II — Apparently We Need a Theory** | to go and collect data | you cannot interpret data you had no expectation about | an idea about how the world works, written down and sealed while it could still be wrong |
+| **II — Apparently We Need a Theory** | to go and collect data | you cannot interpret data you had no expectation about | an idea about how the world works, plus one testable hypothesis derived from it, sealed while it could still be wrong |
 | **III — Apparently We Need Data** | to ask some students | you may not approach human beings without permission, an instrument, and a defensible sample | real answers from real people, with a known response rate and a documented sampling frame |
-| **IV — Apparently Evidence Must Exist** | a result | a number is not evidence until somebody has checked it is the number you promised | an analysis that matches the sealed slip, and one that survived an audit |
-| **V — The Hypotheses Accelerator** | to be done | you are entitled to say considerably less than you would like | a claim proportional to what was actually shown |
+| **IV — Apparently Numbers Don't Speak for Themselves** | a result | a number is not evidence until somebody checks it is the number you promised, and it means nothing until somebody says what it means | an analysis that matches the sealed slip, an audit it survived, and an honest interpretation |
+| **V — Apparently Somebody Has to Write It** | to be done | a finding is not a contribution, and a contribution is not a paper | a claim proportional to what was shown, written down, and submitted |
 
 Five acts, five refusals, and the same underlying joke each time: **the department is ridiculous and it is also right.** If either half fails, the game fails — a department that is merely absurd teaches cynicism, and a department that is merely correct is a textbook with jokes on it.
 
@@ -106,7 +104,7 @@ The verbs change, act by act, and this is the thing to protect when writing any 
 2. **Act II — the player starts acting on the department.** The Stockholm phone scam is the turning point of the entire game: it is the first time the player manipulates an institution instead of petitioning it. They are not being taught any more; they have started operating.
 3. **Act III — the player runs an operation.** Four institutions, a sampling ceremony, a live response-rate board. They are competent, and they know it.
 4. **Act IV — the player is tempted.** For the first time, the obstacle is not a bureaucrat. It is a room full of green lamps offering them exactly what they want, and an assistant who will give it to them faster. Nobody is stopping them. That is the point.
-5. **Act V — the player refuses help.** The only act whose verb is *resist*. Feldstrom offers to make the finding enormous and the correct move is to say no to a man who is being generous.
+5. **Act V — the player refuses help.** The only act whose verb is *resist*. KIRA offers to write it and Feldstrom offers to make it enormous, and the correct move is to say no to two people who are being generous. Then they submit it, which is the first time in five acts they give the folder away.
 
 Panic → competence → temptation → integrity. If an act's rooms do not sit somewhere on that line, they are in the wrong act.
 
@@ -135,7 +133,7 @@ That is also why Feldstrom appears twice. In Act II he inflates the player's *th
 Each of these must land in at least two acts or it is not a through-line, it is a gag.
 
 - **KIRA** — Act II she is helpful and wrong. Act IV she has run and nearly submitted the whole study. Her arc is four words long: *"Certainly!"* becomes *"Certainly. …What exactly do you mean?"* Nothing else about her changes, and nothing else should.
-- **Feldstrom** — Act II (theory) and Act V (result), with Stockholm never calling in either. The telephone pays off in Act V with the car-warranty call.
+- **Feldstrom** — Act II, where he owns the Hypotheses Accelerator and fights the player over the scope, and Act V, where he wants to retitle the paper and needs no machine to do it. Stockholm never calls in either; the telephone pays off in the Writing Room with the car-warranty call.
 - **The Professor** — first and last conversation of the game. In between, his hidden *Death of Community* paper is findable in Act I and explains everything he does.
 - **The Skeptic** — gates the Corridor in Act I, and returns in Act IV when the result comes back null, because a null result is the only thing in the game she finds genuinely delightful. *Things I Was Wrong About, Vol. XI* gets an entry.
 - **The Doorman** — gates Act I, and gets the last line before the reveal. *"You knew." / "Eventually."*
@@ -148,8 +146,9 @@ Written honestly, so nobody rediscovers this mid-build:
 - **Act I is built and is the model.** Every later act is measured against it, not against its own design doc.
 - **Act III is built** and structurally the strongest of the unbuilt-narrative acts, because its four rooms already interlock.
 - **Act II is designed in the most depth** and is now the largest act on paper. It will need trimming during the build, not expansion.
-- **Act IV is two rooms** doing very different jobs (temptation, then emergency) and is currently the thinnest relative to its importance — it is where Act II gets paid off and where the null result has to land.
-- **Act V is one room and one gag.** It is short on purpose — it is a coda, not an act — but it carries the Feldstrom payoff and the player's first outright refusal, so it needs more than the two paragraphs it currently has.
+- **Act IV is three rooms** doing three different jobs (temptation, emergency, interpretation). It is where Act II gets paid off and where the null result has to land, so it carries more weight than its room count suggests.
+- **Act V is two rooms** and is the act most likely to be cut down during the build, because "write the paper" resists being a puzzle. The Gap Registry is the part to protect; the Writing Room's four-sentence assembly is the part that will need the most prototyping to not feel like homework.
+- **The outro is a cutscene, not a room**, and should be built with the trailer pipeline rather than the room pipeline.
 
 ---
 
@@ -170,8 +169,11 @@ A gothic, autumnal university campus (unnamed) — statues of seated philosopher
 - **The Ethics Tribunal** — three robed committee members seated twenty feet above the player: **the Chair of Consent** (peers down, rings a bell at the mere suggestion of talking to a student), **the Keeper of Data** (guards a transparent "anonymous" filing cabinet with a completely straight face), and **the Representative of Potential Discomfort** (visibly, permanently asleep). They treat human-subjects review like a Vatican conclave with a passport-control attitude problem. Each of the three is overcorrecting for one specific incident in their own past.
 - **The University Sampling Officer** — presides over the Mensa's official, ludicrously ceremonial random-sampling apparatus (a giant brass drum, velvet rope, spotlights, a sash reading UNIVERSITY SAMPLING OFFICER). Third-generation Sampling Officer — his father and grandfather held the post and the drum is a family heirloom. Speaks like a royal herald, reveres the raffle drum ("a second-generation randomiser... good God"), and is constitutionally incapable of noticing that a perfectly random sample of the wrong population is still the wrong population.
 - **The Fieldwork Director** — runs the Fieldwork Arena like a live game show, lives and dies by the illuminated RESPONSE RATE board, and considers a defensible 64% a greater achievement than a suspicious 100% — because the 100% on their own CV turned out to be fraudulent.
-- **Prof. Dr. Magnus Feldstrom** — a traffic-flow physicist who crossed into the social sciences and never changed his toolkit; the Professor's structural opposite, hates claims that are too *small*. Still waiting for a phone call from Stockholm. **Appears twice**: in **Act II** he helps the player turn a mechanism into a theory and immediately inflates it to civilisation scale (his workshop is the prototype of the machine), and in **Act V** he does the same thing to the finished result in the full Hypotheses Accelerator. Genuinely helpful, genuinely unmoored; the contrast with the first Professor (one hates overreach, one hates timidity) is the joke, not a twist.
+- **Prof. Dr. Magnus Feldstrom** — a traffic-flow physicist who crossed into the social sciences and never changed his toolkit; the Professor's structural opposite, hates claims that are too *small*. Still waiting for a phone call from Stockholm. **Appears twice**: in **Act II** his Hypotheses Accelerator is how a theory becomes a hypothesis — he has taped over the control that does it, and has to be tricked out of the room before the player can run the machine the other way — and in **Act V** he tries to inflate the title of the finished paper, with no machine at all. Genuinely helpful, genuinely unmoored; the contrast with the first Professor (one hates overreach, one hates timidity) is the joke, not a twist.
 - **The Visiting Fellow** (Act II, Seminar Room) — believes, serenely, that the answer is always selection, because selection destroyed her own dissertation. Never hostile, always asking how you would tell a real effect apart from the students simply being different. The Skeptic's academic cousin, and right often enough to be irritating.
+- **The Registrar of Gaps** (Act V, Gap Registry) — helpful, tired, and in possession of a filing cabinet full of pre-approved holes in the literature. Not a fool: he is the one who says that a gap is a hole and a contribution is a hole that mattered.
+- **The Implications Clerk** (Act IV, Bureau of Implications) — sells meanings in three sizes and does not read the number you hand over, only the size you ask for.
+- **Reviewer 2** (the outro) — never seen, eleven pages, forty-seven numbered comments, and one objection that is completely correct. Strongly implied to be the Visiting Fellow; never confirmed, exactly like the Doorman's class photograph.
 - **The Founders** (Act II, Hall of Founders) — busts and portraits who nod approvingly at everything, including contradictions and blank cards. Non-speaking, but the room's main antagonist.
 - **The skeletons** — one per room, each a different flavor of research despair. Confirmed/new instances below, per act.
 - **The Research Folder** — not a character, but close to one by the end: the single physical object every act stamps, and the thing whose final state is the whole game's punchline.
@@ -536,7 +538,7 @@ A fourth Act I location, always open like the other three — already teased as 
 
 *Rooms: The Library · The Hall of Founders · Feldstrom's Workshop · The Seminar Room*
 
-**What the act is actually for.** Same as every other act: **there is a folder, and something has to go in it.** The player leaves the Corridor holding a folder stamped `QUESTION EXISTS` and goes looking for data, because that is obviously what comes next. The department disagrees. Nothing else in this act — not the GENERALISER, not the portraits, not the telephone scam — is the point. The point is getting one pale-green form filled in, sealed, and into the folder, so the folder reads `THEORY EXISTS` and the Registry will finally release Form H-27.
+**What the act is actually for.** Same as every other act: **there is a folder, and something has to go in it.** The player leaves the Corridor holding a folder stamped `QUESTION EXISTS` and goes looking for data, because that is obviously what comes next. The department disagrees. Nothing else in this act — not the Accelerator, not the portraits, not the telephone scam — is the point. The point is getting one pale-green form filled in, sealed, and into the folder, so the folder reads `THEORY EXISTS` and the Registry will finally release Form H-27. What is actually on that form when it is sealed is **an idea about how the world works and one testable hypothesis derived from it** — the thing Act III goes out and tests, and the thing Act IV breaks the seal to check.
 
 Everything else is the department being the department.
 
@@ -583,6 +585,8 @@ That is the whole definition, and the act should never inflate it into something
 
 Testability is what keeps the idea attached to reality, and it is the only reason the rest of the act's apparatus exists: the mechanism says what should happen, the scope says to whom, and the falsifier says what would count against it. Those are not three additional virtues. They are what "testable" means once you write it down.
 
+**And that is where the hypothesis comes from.** A hypothesis is not a fifth ingredient, and the act should never present it as one. It is what you get when you take the idea and turn it down until it is small enough for reality to reach — same claim, lower magnification, now about particular people in a particular place doing a particular thing. Feldstrom's Accelerator does this physically, in both directions, which is why the machine sits at the centre of the act rather than in a later one: **the player has to feel that generalising and hypothesising are the same operation run in opposite directions.** Turn it one way and you get grandeur that cannot be checked; turn it the other and you get a sentence a hundred and forty students can disprove by Thursday.
+
 What the player gets out of it in practice is guidance and interpretation, which are worth saying once, plainly, and not labouring: a theory tells you what to go and collect (nobody records which exam questions resemble the worked examples unless an idea told them to), and it tells you what a number means when you get one. Without it you can still collect data — the Professor says so explicitly — you just won't know what you've learned.
 
 **And the point the act must not fumble: theory and empirics are not two stages.** The game's structure — Act II theory, Act III data — makes them look sequential, so the writing has to work against its own act numbers. They are one activity, and the act should keep showing the traffic running **both ways**:
@@ -615,7 +619,7 @@ Form P-1 *is* the Prediction Slip — Act II's H-27. A separate, increasingly st
 - ☐ **WHAT IS KNOWN** — The Library
 - ☐ **MECHANISM** — The Hall of Founders
 - ☐ **SCOPE** — Feldstrom's Workshop
-- ☐ **PREDICTION AND FALSIFIER** — The Seminar Room
+- ☐ **HYPOTHESIS AND FALSIFIER** — The Seminar Room
 
 Unlike H-27 it is **sealed** at the end and cannot be reopened, which is the point: Act IV breaks that seal and checks it against what the player actually did.
 
@@ -760,7 +764,7 @@ One portrait somehow nods anyway.
 
 **Skeleton:** seated in the gallery, sign reading **"CITED 400 TIMES. EXPLAINED NOTHING."**
 
-### Feldstrom's Workshop — theory as scale
+### Feldstrom's Workshop — theory as scale, and where the hypothesis comes from
 
 A lean-to bolted onto the side of a respectable building, full of brass, steam and ambition. **Prof. Dr. Magnus Feldstrom** is thrilled that somebody has finally brought him a mechanism.
 
@@ -778,15 +782,34 @@ Give him the mechanism and he studies it for a long moment.
 > **PLAYER:** "They're students, not cars."
 > **FELDSTROM:** "That distinction has not yet proved theoretically useful."
 
-**THE GENERALISER, Prototype Mk III.** Not a single SCOPE dial any more but a proper contraption cannibalised out of his old traffic apparatus, with three ratchets that only turn one way:
+**THE HYPOTHESES ACCELERATOR, Mk III.** A proper contraption cannibalised out of his old traffic apparatus, and the most important machine in the game — because it is the thing that converts between a theory and a hypothesis, and it runs **both ways**.
 
-| Control | Positions |
+The manufacturer's plate above the drum reads:
+
+```
+HYPOTHESES ACCELERATOR Mk III
+  ◄ SPECIFY            GENERALISE ►
+An idea and a test of it are the same
+statement at different magnifications.
+```
+
+There are three ratchets:
+
+| Control | ◄ SPECIFY ——————————————— GENERALISE ► |
 |---|---|
-| **POPULATION** | first-years → students → young adults → humans → social beings → civilisation |
-| **TIME** | winter term 2025/26 → academic year → modernity → recorded history |
-| **CONTEXT** | one Methods course → universities → institutions → society → reality |
+| **POPULATION** | first-year Methods students ← students ← young adults ← humans ← social beings ← civilisation |
+| **TIME** | winter term 2025/26 ← academic year ← modernity ← recorded history |
+| **CONTEXT** | one Methods course ← universities ← institutions ← society ← reality |
 
 And a large red lever, **THEORETICAL SIGNIFICANCE**, with exactly two labels: `INSUFFICIENT` and `TRANSFORMATIVE`. Feldstrom will not allow it to rest between them.
+
+**The tape.** The SPECIFY direction is factory-fitted and works perfectly. Feldstrom has covered the entire left-hand control panel with masking tape and written on it, in marker:
+
+```
+DO NOT
+```
+
+Peeling that tape off is, physically, the lesson of the act. The player does it with their own hands, and the first time they turn a ratchet leftwards the machine makes a noise nobody in the workshop has heard for years.
 
 Feed in the modest mechanism. The machine shakes. Smoke. Paper:
 
@@ -817,7 +840,7 @@ That exchange is the joke and the lesson in the same two lines.
 First attempt, with Feldstrom in the room:
 
 ```
-GENERALISER: ERROR: INCONVENIENT BOUNDARY CONDITION
+ACCELERATOR: ERROR: INCONVENIENT BOUNDARY CONDITION
 ```
 
 He tries to drop the register into a waste basket marked **CONTEXT**. He will keep doing this. **Which is why he has to leave the room** — see the Stockholm scam below.
@@ -864,6 +887,27 @@ Underneath the absurdity he genuinely sees the merit, which is what earns the Ac
 
 **Wrong path:** lodge the civilisation-scale version. Accepted enthusiastically, coherence needle drops, and in Act IV it makes every possible result "consistent with the theory."
 
+### Deriving the hypothesis — the other direction of the same machine
+
+With the tape off and the enrolment register in the gate, the Accelerator can finally be run the way the manufacturer intended, and this is the beat the whole act has been building to. The player puts their *theory* in and turns the ratchets **leftwards**, and what comes out the other end is a **hypothesis**:
+
+> **THEORY** — attending lectures helps because students practise worked examples and the exam rewards that practice.
+> ◄ SPECIFY
+> **HYPOTHESIS** — among first-year Methods students in winter term 2025/26, the attendance–performance gap will be larger on exam questions resembling the worked examples than on questions that do not.
+
+Feldstrom watches this happen with the expression of a man watching someone dismantle a cathedral.
+
+> **FELDSTROM:** "That is the same sentence."
+> **PLAYER:** "Smaller."
+> **FELDSTROM:** "*Much* smaller."
+> **PLAYER:** "Small enough to check."
+> *(long pause)*
+> **FELDSTROM:** "…that is what the left-hand side is for, yes."
+
+**This is the distinction the act exists to teach**, and it should be stated exactly once, by the machine's own brass plate rather than by a character: *an idea and a test of it are the same statement at different magnifications.* A hypothesis is not a different kind of thing from a theory. It is a theory turned down far enough that reality can reach it. Feldstrom's entire pathology is that he only ever turns the dial one way — and the player's Act V refusal is the same gesture, made again when it costs more.
+
+**The hypothesis is what Act III goes and tests, and what Act IV opens the seal to check.** It is the act's real output; `THEORY EXISTS` is just what the stamp says.
+
 **Box filled: ☑ SCOPE.** Feldstrom, defeated, writes a small pencil correction on the folder itself — *"but see also: everything"* — and cannot be persuaded to rub it out.
 
 **Why this box is on the form at all:** a prediction with no population is not checkable against any data anyone could collect. The room's failure mode is treating "applies to everything" as "is more theoretical."
@@ -872,7 +916,7 @@ Underneath the absurdity he genuinely sees the merit, which is what earns the Ac
 
 ### The Stockholm scam — Act II's set-piece puzzle
 
-Feldstrom will not leave the GENERALISER unattended. So the player has to get him out of the room, and the way to do it is to exploit the one thing he wants more than generality.
+Feldstrom will not leave the Accelerator unattended. So the player has to get him out of the room, and the way to do it is to exploit the one thing he wants more than generality.
 
 **Seeding it visually, before he says a word.** The Workshop contains a tuxedo hanging permanently on the back of the door, an unopened bottle marked **STOCKHOLM**, a face-down prepared acceptance speech, a framed map with a line drawn to Stockholm, a suitcase already packed, a small shelf labelled **LECTURES TO CANCEL IF NECESSARY**, and a newspaper mock-up with a blank rectangle where his photograph would go. Beside the telephone, a second clock labelled **STOCKHOLM TIME**. It is one hour wrong. Nobody has told him.
 
@@ -965,7 +1009,7 @@ Options: **Physics · Economics · Peace · That remains under discussion.** Onl
 
 He drops the phone and sprints out. The player has about as long as it takes to run back across campus.
 
-**The obvious wrong branch, kept in.** If the player instead tells him the Committee's concern is that the scope is *too narrow*, he bellows **"I KNEW IT,"** runs to the machine and cranks it up another stage. The GENERALISER now outputs **CONSCIOUSNESS IS ATTENDANCE**, and the player has made their own life harder by flattering him. This is the branch that teaches the player what kind of man they are dealing with.
+**The obvious wrong branch, kept in.** If the player instead tells him the Committee's concern is that the scope is *too narrow*, he bellows **"I KNEW IT,"** runs to the machine and cranks it up another stage. The Accelerator now outputs **CONSCIOUSNESS IS ATTENDANCE**, and the player has made their own life harder by flattering him. This is the branch that teaches the player what kind of man they are dealing with.
 
 **Why this belongs in a methods game:** the reason the player is running a telephone confidence trick on a colleague is that *the theorist is personally preventing an empirically defensible scope from being imposed on his theory*. The methodological content is inside the action, not narrated over it.
 
@@ -1021,7 +1065,7 @@ The Visiting Fellow does not say "correct."
 
 Choosing "probably a bit of all three" prints the room's best line: **UNFALSIFIABLE — CONGRATULATIONS, YOU CANNOT LOSE.**
 
-**Box filled: ☑ PREDICTION AND FALSIFIER.** The Visiting Fellow signs it, and hands the folder back with chalk dust on it that never quite comes off.
+**Box filled: ☑ HYPOTHESIS AND FALSIFIER.** The Visiting Fellow signs it, and hands the folder back with chalk dust on it that never quite comes off.
 
 **Why this box is on the form at all:** this is the one that makes the other three worth having — it is the box Act IV opens the seal to check. The room's failure mode is treating "could be true" as "could be wrong."
 
@@ -1174,7 +1218,7 @@ Act II deliberately reuses a *few* Act I objects, because that is what makes the
 
 **And one object that is deliberately *not* reused properly: the black ink.** It had its moment with Popper's swan and reusing it as a real solution would weaken that. Interactions only:
 
-> *(on the GENERALISER)* **PLAYER:** "Maybe this will falsify it."
+> *(on the Accelerator)* **PLAYER:** "Maybe this will falsify it."
 > **FELDSTROM:** "That is not how falsification works."
 
 — which is funnier precisely because *Feldstrom* is the one correcting you.
@@ -1202,7 +1246,7 @@ And *then* the magnifying glass turns up a coverage problem, or Ethics refuses i
 
 **The act's story.** The player has an idea about how the world works and a sealed promise about what would prove it wrong. Now they need people. What they discover is that **data do not exist until somebody makes them** — and that every number they will later analyse has a manufacturing history: who was asked, who agreed to answer, what words the question used, and who never turned up at all. Four institutions each own one step of that history and none of them will speak to the others. The act is at its best when the player realises that a defensible 75% is worth more than a suspicious 100%, and that a perfectly random sample of the wrong people is still the wrong people.
 
-**The Act II payoff:** the scope the player fought Feldstrom to impose — first-year Methods students, winter term — turns out to have been the sampling frame all along. The enrolment register they jammed into the GENERALISER is the list the Sampling Officer needs. A decision that felt like a humiliation in a lean-to becomes the thing that makes Act III possible.
+**The Act II payoff:** the scope the player fought Feldstrom to impose — first-year Methods students, winter term — turns out to have been the sampling frame all along. The enrolment register they clamped into the Accelerator's traffic gate is the list the Sampling Officer needs. A decision that felt like a humiliation in a lean-to becomes the thing that makes Act III possible.
 
 **Who changes:** the Fieldwork Director, who reaches for the old fraudulent reflex and stops himself. And the player, who stops being a student doing an exercise and starts being someone running an operation.
 
@@ -1316,27 +1360,29 @@ A **RECORD HIGH** banner drops, a dot-matrix printer buries the floor in paper, 
 
 (setting up Act III).
 
-## Act IV — "Apparently Evidence Must Exist"
+## Act IV — "Apparently Numbers Don't Speak for Themselves"
 
-*Rooms: The Statistics Basement · The Delegation Engine*
+*Rooms: The Statistics Basement · The Delegation Engine · The Bureau of Implications*
 
-The analysis act, and the reason the Prediction Slip was sealed. (The Library moved to Act II when theory became its own act, and KIRA's "I already did it" emergency moved in here, so analysis and delegation sit together.)
+The analysis-and-interpretation act, and the reason the Prediction Slip was sealed. (The Library moved to Act II when theory became its own act; KIRA's "I already did it" emergency moved in here; and the discussion — *what do these results actually mean?* — is now a room of its own rather than a line at the end.)
 
-**The act's story.** The player has numbers and wants a result. For the first time in the game **nobody is obstructing them** — and that is the design. Acts I to III were about institutions saying no; Act IV is about two things saying yes. The Statistics Basement will happily give them a result if they keep flipping switches until a lamp comes on. KIRA will give them an entire finished paper if they simply leave the room. Both are offering exactly what the player wants, faster than they could get it honestly, and the only thing standing in the way is a sealed envelope containing a sentence they wrote themselves.
+**The act's story.** The player has numbers and wants a result. For the first time in the game **nobody is obstructing them** — and that is the design. Acts I to III were about institutions saying no; Act IV is about three things saying yes. The Statistics Basement will give them a result if they keep flipping switches until a lamp comes on. KIRA will give them an entire finished paper if they simply leave the room. And the Bureau of Implications will give them a meaning — any meaning, pre-printed, in whatever size they like. All three offer exactly what the player wants, faster than they could get it honestly.
 
-The act is therefore about **accountability**: whose name is on this, and who checked. It is the only act where the player can lose by doing nothing, because the SUBMIT MANUSCRIPT lever descends whether or not they act.
+The act is therefore about **accountability**: whose name is on this, who checked, and who decided what it means. It is the only act where the player can lose by doing nothing, because the SUBMIT MANUSCRIPT lever descends whether or not they act.
 
-**Who changes:** KIRA, permanently and very slightly — this is where *"Certainly!"* finally acquires a hesitation. And the Skeptic, who turns up if the result is null and is the only person in the entire department who is pleased.
+**Who changes:** KIRA, permanently and very slightly — this is where *"Certainly!"* finally acquires a hesitation. And the Skeptic, who turns up if the result is null and is the only person in the department who is pleased.
 
-**What goes in the folder:** an analysis that matches the slip, and an audit that survived. `STATUS: EVIDENCE VERIFIED`.
+**What goes in the folder:** an analysis that matches the slip, an audit that survived, and — new — a written interpretation that says what the numbers do and do not support. `STATUS: EVIDENCE VERIFIED`.
 
-**The Statistics Basement, as a casino.** Every p<.05 sets off a brass bell, a green lamp and a little mechanical banner reading **DISCOVERY!** Twenty switches, wired to nothing in particular, invite the player to keep flipping until something rings. Nothing stops them. The room *wants* them to test everything and report whatever lit up.
+### The Statistics Basement — the casino
 
-What it is really testing is whether the player runs the analysis they promised. The sealed slip names one prediction: the honest path tests that one, reports the effect with its uncertainty, and accepts a dull answer. The tempting path finds p = .049 on the twentieth switch, and the room throws a small party.
+**Every p<.05** sets off a brass bell, a green lamp and a little mechanical banner reading **DISCOVERY!** Twenty switches, wired to nothing in particular, invite the player to keep flipping until something rings. Nothing stops them. The room *wants* them to test everything and report whatever lit up.
+
+What it is really testing is whether the player runs the analysis they promised. The sealed slip names one hypothesis: the honest path tests that one, reports the effect with its uncertainty, and accepts a dull answer. The tempting path finds p = .049 on the twentieth switch, and the room throws a small party.
 
 **Breaking the seal is the game's best moment and should be staged as one.** The wax comes off, and the player reads a sentence they wrote themselves, weeks ago, before they knew anything — and then compares it to what actually happened. This is the act that makes Act II retrospectively worth having done, and it is the only place the game can show what "testable" was ever for:
 
-- If the prediction **holds**, it means something, precisely because it was written when it could have failed. Nobody in the room is impressed, which is correct.
+- If the hypothesis **holds**, it means something, precisely because it was written when it could have failed. Nobody in the room is impressed, which is correct.
 - If it **fails**, the player has learned something real, and the game says so plainly. A null result is only informative because a prediction existed; without the slip it would have been an afternoon wasted, and with it, it is a finding. The Skeptic should turn up here — this is her entire worldview, and Volume XI gets a new entry.
 - If the player never really had a theory (the `EVERYTHING EXPLAINS EVERYTHING` route), the seal comes off and the slip says *something will probably happen*. It is consistent with the result. It would have been consistent with any result. **The data cannot teach the player anything, and that is the punishment** — not a scolding, just a form that turns out to be worthless at the exact moment it was needed.
 
@@ -1344,68 +1390,119 @@ What it is really testing is whether the player runs the analysis they promised.
 
 ### The Delegation Engine — "KIRA has already submitted it"
 
-*Room: The Delegation Engine*
+Reframed from an auditing exercise into a narrative emergency. The player arrives and KIRA cheerfully announces: **"Good news. I finished your study while you were gone."** She has merged the data, cleaned it, analysed it, produced figures, written an abstract, and possibly already scheduled the social-media announcement. A gigantic **SUBMIT MANUSCRIPT** lever is slowly, visibly lowering. The bogus finding isn't just wrong any more — the player's name is already on it.
 
-Reframed from an auditing exercise into a narrative emergency. The player arrives and KIRA cheerfully announces: **"Good news. I finished your study while you were gone."** It has merged the data, cleaned it, analyzed it, produced figures, written an abstract, and possibly already scheduled the social-media announcement. A gigantic **SUBMIT MANUSCRIPT** lever is slowly, visibly lowering. The bogus vegetarian/stress finding isn't just wrong anymore — the player's name is already on it. Every time the player says "just rerun it," KIRA chirps **"Certainly!"** and produces another wrong result, faster. The player has to actually read KIRA's merge log, spot-check a real record against something they personally observed at the Mensa, and tell KIRA the precise fix — not "try again," an exact instruction — before the lever reaches the floor.
+Every time the player says "just rerun it," KIRA chirps **"Certainly!"** and produces another wrong result, faster. The player has to actually read her merge log, spot-check a real record against something they personally observed at the Mensa, and tell her the precise fix — not "try again", an exact instruction — before the lever reaches the floor.
 
-**Folder update:** stamped `EVIDENCE VERIFIED`, once the analysis and the audit both hold up.
+**Her arc lands here.** After the player has corrected her three times with specifics, the catchphrase finally breaks:
 
-## Act V — "The Hypotheses Accelerator"
+> **PLAYER:** "Redo the merge."
+> **KIRA:** "Certainly. …What exactly do you mean?"
 
-*Room: The Hypotheses Accelerator*
+Nothing else about her changes. She does not become wise, or sad, or human. She asks one question, and that is the whole four-act arc.
 
-**The act's story.** The player has a small, honest, thoroughly checked result and wants to go home. Instead they meet the only character in the game who is genuinely, uncomplicatedly *delighted* by their work — and who wants to destroy it with kindness. Feldstrom is not an obstacle. He is a fan. He thinks the player has done something magnificent and he is offering, free of charge, to make it matter.
+### The Bureau of Implications — what does it actually mean?
 
-This is the one act whose verb is **resist**, and it only works because refusing costs something. Everyone else in the game withheld; Feldstrom offers. He is the first person in five acts to say the player's work is important, and the correct response is to turn him down.
+**New room, and the one that makes Act IV an act rather than two puzzles.** A long counter, a queue rope, and behind it a clerk with a conveyor belt of **pre-printed implications** in three sizes. You hand over a number. They hand you back a meaning.
 
-**Who changes:** the player, finally, in the only way the game cares about — they say what they are entitled to say and no more, while somebody they like is begging them to say more.
+```
+SMALL      "…suggests a possible association."
+MEDIUM     "…indicates that attendance drives achievement."
+LARGE      "…demonstrates that lectures are essential to learning."
+```
 
-**What goes in the folder:** nothing new. The last stamp is for what the player *didn't* add. `STATUS: CLAIM DEFENSIBLE`.
+The clerk does not read the number. The clerk reads the *size you asked for*. There is a laminated sign: **WE DO NOT STOCK "WE DON'T KNOW" — TRY THE BASEMENT.**
 
-### Feldstrom, again
+**What the room teaches**, and nowhere else in the game does:
 
-He recognises the player immediately, which is the first joke, because the player has something to feel guilty about.
+1. **The result is not the meaning.** A coefficient is not a sentence about the world, and turning one into the other is a separate act of judgement the player has to perform themselves.
+2. **Size matters and significance doesn't say much.** A tiny, beautifully significant effect gets a party in the Basement and is almost useless here. The Bureau has a **SO WHAT? gauge** which the significance lamp does not move at all.
+3. **Limitations are not an apology.** One wall is covered in brass plaques, every single one reading **"FURTHER RESEARCH IS NEEDED"** — the department's ritual genuflection, said by everyone, meaning nothing. The player's job is to write the two or three limitations that are actually *specific to this study*: the sample was one course at one university, the design cannot separate attendance from motivation, and a quarter of the people never answered.
+4. **The alternatives that survived.** The Visiting Fellow's card comes back one final time. If selection cannot be ruled out, the honest sentence has to say so — and saying so is not weakness, it is the reason anyone should believe the rest.
 
-> **FELDSTROM:** "You."
-> **PLAYER:** "Professor."
-> **FELDSTROM:** "Stockholm never arrived."
-> **PLAYER:** "Terrible."
-> **FELDSTROM:** "They called, though."
-> **PLAYER:** "…did they?"
-> **FELDSTROM:** "Very strange line."
+**The puzzle.** The player assembles the interpretation from their own materials rather than from the conveyor: the effect and its uncertainty from the Basement, the sealed hypothesis, the response rate from the Fieldwork Arena, the sampling frame from the Mensa, and the surviving alternative from the Seminar Room. Hand the clerk anything pre-printed and it is accepted instantly, stamped, and comes back to bite in Act V when the writing has to rest on it.
 
-He does not suspect the player. He has simply never stopped waiting. The tuxedo is here too, still on a hanger, three acts older.
+**Wrong path the game allows in full:** buy the LARGE implication. It is cheap, it is immediate, and the Bureau is delighted. It becomes the abstract in Act V, and it is the exact sentence Reviewer 2 takes apart in the outro.
 
-**The machine.** The Hypotheses Accelerator is the GENERALISER's full-size descendant, and his physics never left him — he reads the player's careful finding as a flow law within about four seconds:
+> **PLAYER:** "Which one is true?"
+> **CLERK:** "We don't stock true. We stock *sizes*."
 
-> **FELDSTROM:** "Excellent."
-> **PLAYER:** "It is?"
-> **FELDSTROM:** "You have discovered a flow law."
-> **PLAYER:** "No."
-> *(he is already switching it on)*
-> **FELDSTROM:** "Educational exposure enters here. Achievement exits here. Between them—"
-> **PLAYER:** "Please don't say phase transition."
-> **FELDSTROM:** "—a phase transition."
+**Skeleton:** in the queue, still holding a ticket, sign reading **"WAITING TO FIND OUT WHAT IT MEANT."**
 
-And if the result came back null:
+---
 
-> **FELDSTROM:** "Null? That's just significance that hasn't believed in itself yet."
+## Act V — "Apparently Somebody Has to Write It"
 
-**The escalation.** Each stage is a real claim the player could plausibly be talked into, and the trick is that the first step is *almost* reasonable:
+*Rooms: The Gap Registry · The Writing Room*
 
-> LECTURE ATTENDANCE MAY AFFECT PERFORMANCE
-> → EDUCATIONAL EXPOSURE GENERATES HUMAN CAPITAL
-> → INSTITUTIONS CHANNEL HUMAN CAPACITY
-> → SOCIAL SYSTEMS OBEY FLOW DYNAMICS
+**The act's story.** The player has a verified result and an honest interpretation. They want to go home. Instead they discover the last thing nobody warned them about: **a finding is not a contribution, and a contribution is not a paper.** Somebody has to decide what this adds to what was already known, and then somebody has to write the thing, and both of those are judgement calls that no committee, machine or assistant can make for them.
+
+This is also the act where the player finally **refuses help** — the only act whose verb is *resist*. Everyone else in the game withheld; here, two characters offer. KIRA offers to write it. Feldstrom offers to make it matter. Both are being generous, and turning them down costs something, because by now the player has something they are proud of.
+
+**Who changes:** the player, in the only way the game cares about — they say what they are entitled to say and no more, while somebody they like is begging them to say more.
+
+**What goes in the folder:** nothing new. The last stamp is for what the player *didn't* add. `STATUS: CLAIM DEFENSIBLE` — and then the folder is submitted.
+
+### The Gap Registry — what is the contribution?
+
+A dim office of filing drawers, each containing a pre-approved **GAP IN THE LITERATURE**, available to anyone who asks. The registrar is helpful, tired, and has heard every possible claim to novelty.
+
+```
+DRAWER 1   NOBODY HAS STUDIED THIS IN GERMANY
+DRAWER 2   NOBODY HAS STUDIED THIS SINCE 2019
+DRAWER 3   NOBODY HAS STUDIED THIS ON A TUESDAY
+DRAWER 4   NOBODY HAS COMBINED THESE TWO THINGS BEFORE
+```
+
+Any of them can be taken, free, and pasted into the paper. They all work. They are all worthless, and the room's lesson is exactly why:
+
+> **PLAYER:** "So what's wrong with 'nobody has done it before'?"
+> **REGISTRAR:** "Nothing at all. Nobody has counted the paving stones outside either."
+> *(beat)*
+> **REGISTRAR:** "A gap is a hole. A contribution is a hole that *mattered*."
+
+**KIRA returns**, with the conveyor belt of 14,822 sources, now genuinely useful for the first time: the honest contribution can only be stated in relation to what was already known, and that means the reading list from Act II has to come back out and be *compared against* the finding. Three real papers, one result, and the question of what is different now.
+
+**What counts.** Not "nobody did this", but something like: *the association is concentrated in exactly the place the practice mechanism predicts, which the existing cross-sectional work could not distinguish; and it is weaker than the cited estimates, which were not adjusted.* Small, specific, and connected to a named body of work.
+
+**Feldstrom is here too**, and this is where he starts:
+
+> **FELDSTROM:** "Your contribution is a general law of social flow."
+> **PLAYER:** "My contribution is a boundary condition on three existing papers."
+> **FELDSTROM:** "That is not a contribution. That is a *footnote*."
+> **PLAYER:** "It's a true footnote."
+> **FELDSTROM:** "…" *(he writes it down)*
+
+**Skeleton:** wedged inside an open filing drawer, sign reading **"FOUND A GAP. IT WAS A GAP FOR A REASON."**
+
+### The Writing Room — the abstract is where people lie
+
+The last room in the game, and the one where every earlier temptation returns at once, because **the abstract is where overclaiming actually happens in real academia** — not in the analysis, not in the theory, but in the four sentences most people will be the only thing anyone reads.
+
+A long table, a typewriter, and two collaborators who both want to help.
+
+**KIRA offers to write it.** She is now genuinely good at this, which is the trap — her abstract is fluent, well-structured, correctly formatted, and says slightly more than the data support in a way that is very hard to point at. The player has to find the one word. (*"was associated with"* has become *"improved"*.)
+
+> **KIRA:** "I strengthened the phrasing."
+> **PLAYER:** "Change it back."
+> **KIRA:** "Certainly. …What exactly do you mean?"
+> **PLAYER:** "'Associated with'."
+> **KIRA:** "That is weaker."
+> **PLAYER:** "That is what happened."
+
+**Feldstrom offers a title.** This is where his machine's logic returns without the machine — he no longer needs the brass, he just talks. Each suggestion is a full magnification step upward, and each one is *slightly* tempting:
+
+> LECTURE ATTENDANCE AND EXAM PERFORMANCE IN A FIRST-YEAR METHODS COURSE
+> → WHAT MAKES STUDENTS LEARN
+> → EDUCATIONAL EXPOSURE AND HUMAN CAPITAL FORMATION
+> → INSTITUTIONS AND THE PRODUCTION OF HUMAN CAPACITY
 > → **CIVILISATION IS TRAFFIC**
 
-A large **IMPACT** gauge climbs alongside: *Modest Contribution* → *Paradigm Shift* → *Nobel Adjacent* → **PRESS OFFICE HAS BEEN ALERTED.**
+An **IMPACT** gauge on the wall climbs alongside: *Modest Contribution* → *Paradigm Shift* → *Nobel Adjacent* → **PRESS OFFICE HAS BEEN ALERTED.**
 
-At the final stage Feldstrom just whispers: *"Stockholm."*
+At the top of the scale Feldstrom just whispers: *"Stockholm."*
 
-**The telephone rings.**
-
-Both of them freeze. He turns towards it very slowly.
+**And the telephone rings.** Both of them freeze. He turns very slowly towards it.
 
 > **FELDSTROM:** "Nobody move."
 
@@ -1417,19 +1514,7 @@ Click. Then, without missing a beat:
 
 > **FELDSTROM:** "They'll call back."
 
-### The puzzle — resisting the machine
-
-**The opposite verb from every other act.** Every previous room rewarded the player for making something bigger, better documented or more complete. This one rewards subtraction, and the interface should fight them: the escalate control is large, lit and satisfying; the way back down is a small unlabelled catch, the same one the GENERALISER had, and the player has to remember it from Act II.
-
-The honest ending needs three things, and each of them is an Act II object coming back:
-
-1. **The scope** — the same enrolment register argument, now made by the player instead of forced on Feldstrom. *These are first-year Methods students in one term at one university.*
-2. **The sealed slip** — the prediction actually made, which does not mention civilisation, human capital, or history.
-3. **The uncertainty** — what the data can and cannot distinguish, carried up from the Statistics Basement.
-
-**Wrong path the game allows in full:** let it run. The press office is alerted. The claim leaves the building. This should be walkable all the way to a small newspaper mock-up with the player's name under a headline about civilisation, and the Professor's reaction in the Office is the consequence — not a fail screen, just a much worse final conversation.
-
-**The line the act turns on.** When the player finally refuses, Feldstrom is not angry. He is disappointed in a way that is slightly sad, because he means it:
+**The refusal.** When the player finally turns him down, he is not angry. He is disappointed in a way that is slightly sad, because he means every word of it:
 
 > **FELDSTROM:** "You could have had all of it."
 > **PLAYER:** "I'd rather have the part that's true."
@@ -1438,38 +1523,131 @@ The honest ending needs three things, and each of them is an Act II object comin
 > *(beat)*
 > **FELDSTROM:** "Write it down."
 
-He stamps the folder himself. **CLAIM DEFENSIBLE.** Then he goes back to watching the telephone.
+**The puzzle — the four sentences.** The abstract is assembled from the player's own materials, one line each, and every one of them has a tempting pre-written alternative sitting next to it:
 
-**Skeleton:** slumped beneath the IMPACT gauge, which is still lit, sign reading **"OVERSTATED IT ONCE. STILL BEING CITED FOR IT."**
+| Sentence | Comes from | The temptation next to it |
+|---|---|---|
+| what was known and what wasn't | Act II Library + Act V Gap Registry | a drawer gap |
+| what we did | Act III | "a large-scale study" |
+| what we found | Act IV Basement | the .049 banner |
+| what it means | Act IV Bureau | the LARGE implication |
 
-## The Ending
+If the player bought the LARGE implication in Act IV, it is already in the box and cannot be swapped out — the interpretation they accepted becomes the claim they publish. That is the consequence, and it lands in the outro.
 
-**The walk back.** Before the Office, the player crosses the campus one last time, and this is where the through-lines get their last beat — quietly, with no puzzle attached. The route is the reverse of Act I, which the player will feel without being told.
+**Wrong path the game allows in full:** let Feldstrom title it and KIRA write it. The press office is alerted. A small newspaper mock-up appears with the player's name under a headline about civilisation. The game does not stop you, and there is no fail screen — only a much worse outro.
+
+**Skeleton:** at the far end of the table, one hand on a typewriter, sign reading **"STILL POLISHING THE ABSTRACT."**
+
+### The Office, and submission
+
+The player takes the finished paper to the Seven-Second Office. This is where the **two-stage reveal** pays off — the Codebook turns out to be a thing the Professor has not thought about in thirty years (see "The two-stage reveal" above for the full scene):
+
+> **PROFESSOR:** "Oh. That." *(pause)* "We used to call it Methods."
+
+He reads the abstract. The hourglass turns over and, for once, runs all the way out without him interrupting.
+
+> **PROFESSOR:** "Hm."
+> **PLAYER:** "Is that good?"
+> **PROFESSOR:** "It's accurate."
+> *(beat)*
+> **PROFESSOR:** "Send it."
+
+**The submission ritual.** Down the corridor, a brass chute labelled **MANUSCRIPT SUBMISSION — NO REFUNDS.** The folder goes in. It is, after five acts, the first time the player gives the folder *away*.
+
+A distant thump. Then silence. Then a small printed card comes back up the chute:
+
+```
+SUBMISSION RECEIVED
+Your manuscript is now under consideration.
+Please do not contact the editorial office.
+```
+
+Folder update: `STATUS: SUBMITTED`. Cut to the outro.
+
+---
+
+## The Outro — Reviewer 2
+
+*Played as narrated panels, the same visual language as the opening trailer, so the game closes the way it opened.*
+
+**A card:** `FOUR MONTHS LATER.`
+
+Then a second card: `(THIS IS FAST.)`
+
+### The walk back
+
+Before the decision arrives, the player crosses the campus one last time, and the through-lines get their last beat — quietly, with no puzzle attached. The route is the reverse of Act I, which the player will feel without being told.
 
 - **Probability Pond.** The Skeptic is still on the bench. The swan is still black. She is writing in Volume XI and does not look up.
   > **PLAYER:** "I was wrong about one of them."
   > **SKEPTIC:** "Which one?"
   > **PLAYER:** "The interesting one."
   > *(she finally looks up)*
-- **The Library.** KIRA, who has been recompiling the literature for five acts, says the four words that are her entire character arc.
-  > **KIRA:** "Certainly. …What exactly do you mean?"
+- **The Library.** KIRA is recompiling the literature again. The conveyor belt has not stopped since Act II.
 - **Feldstrom's workshop door.** The chalk is still there. `PEOPLE ARE NOT PARTICLES` / `UNTESTED ASSUMPTION`. Somebody has added a third line in a third hand, very small: *"testable, though."*
 - **The Corridor gate.** The Doorman, arms crossed, exactly as in Act I. This is his last line in the game and he gets nothing else.
   > **PLAYER:** "You knew."
   > **DOORMAN:** "Eventually."
 
-**The Office.** The player puts the finished folder on the desk. See "The two-stage reveal" above for the full scene — the seven-second hourglass turns over, the Professor reads it and for once does not immediately object, and the Codebook turns out to be a thing he has not thought about in thirty years.
+### The decision letter
 
-> **PROFESSOR:** "Oh. That." *(pause)* "We used to call it Methods."
+An envelope arrives. Inside, three reviews of wildly unequal length, which is the joke every academic will recognise instantly.
 
-**REVISE AND RESUBMIT**, explained plainly so it reads as the win it is, and then the room does the last two things:
+**Reviewer 1** — two sentences, warm, useless:
 
-1. **The folder**, finally, is the punchline — every stamp, staple, coffee ring and pencil annotation from five acts, including the Hall of Founders' meaningless `THEORETICALLY GROUNDED` on the cover, which the Professor notices and says nothing about.
-2. **The armchair skeleton** slowly turns its skull toward the player, and its `SUBMITTED 2016 · STILL WAITING` sign falls over to reveal **"WELCOME TO ACADEMIA."**
+> *"A solid, careful paper. I have no substantive comments. Accept."*
 
-Then the "Part Two: The Revisions" title-card gag, and credits.
+**Reviewer 3** — did not submit a review. The editor waited eleven weeks. There is a note about this, apologetic and slightly wounded.
 
-**The note that the ending has to hit:** the player does not leave with the Codebook, a discovery, or a career. They leave with a modest, defensible, *true* thing and a note asking for revisions — and the game's position is that this is a good day. Every absurdity in five acts was an institution overdoing something that was, underneath, worth doing. Nothing the player learned was decoration.
+**Reviewer 2** — eleven pages, single-spaced, beginning:
+
+> *"While the authors have clearly worked hard, I am not persuaded that they have understood the problem."*
+
+And then a numbered list that goes to forty-seven. The comedy is in the escalation from the reasonable to the unhinged and back again:
+
+1. The literature review omits a substantial body of work. *(No further detail is given.)*
+2. The sample is drawn from a single institution.
+3. **Have the authors considered selection?**
+4. The theoretical framing is underdeveloped.
+5. The theoretical framing is overdeveloped.
+6. Table 2 should be a figure.
+7. Figure 1 should be a table.
+8. …
+
+**The turn, and the reason the outro is not just a gag.** Comment 3 is *correct*. It is the one the player cannot dismiss, because it is the one the Visiting Fellow raised a finger at in Act II, the one the Bureau of Implications made them write into their limitations in Act IV, and the one their honest abstract already concedes.
+
+- **If the player wrote it honestly:** the answer is already in the paper. They can point at the sentence. The reviewer's most devastating objection turns out to have been anticipated three acts ago, and *that* is the game's final argument for having done any of this properly.
+- **If the player bought the LARGE implication or let Feldstrom title it:** comment 3 lands on an undefended claim, along with comments 9 through 47, and the letter is considerably longer and colder.
+
+**Who Reviewer 2 is.** Never confirmed. But the handwriting on the margin note is the same as on the Seminar Room's consequence board, comment 3 is the only question she ever asks, and somewhere in the eleven pages is the phrase *"this would annoy me less if…"*. Play it exactly like the Doorman's class photograph — one clue, never explained, and no character ever remarks on it.
+
+### The verdict
+
+At the bottom of the letter, the editor's decision:
+
+```
+REVISE AND RESUBMIT
+```
+
+> **PLAYER:** "Wait. That's... good?"
+> **PROFESSOR:** "For a first submission? That's a triumph. Most of these die in desk-reject."
+
+The game says the quiet part out loud here on purpose — R&R is a genuinely positive outcome (the work survived review without being rejected outright), and the joke only works if every player gets to feel the relief, not just the ones who already know the convention.
+
+**The folder**, finally, is the punchline: every stamp, staple, coffee ring and pencil annotation from five acts, including the Hall of Founders' meaningless `THEORETICALLY GROUNDED` on the cover, which the Professor notices and says nothing about. Its last stamp is `REVISE AND RESUBMIT`.
+
+**The armchair skeleton** slowly turns its skull toward the player, and its `SUBMITTED 2016 · STILL WAITING` sign falls over to reveal: **"WELCOME TO ACADEMIA."**
+
+### The sequel card
+
+> **THE SECRET OF THE LOST CODEBOOK, PART TWO: THE REVISIONS**
+> *Coming whenever the reviewers get back to us.*
+
+And underneath, smaller, after a beat:
+
+> *Featuring Reviewer 2.*
+
+**The note the ending has to hit:** the player does not leave with the Codebook, a discovery, or a career. They leave with a modest, defensible, *true* thing, and a letter asking for revisions — and the game's position is that this is a good day. Every absurdity in five acts was an institution overdoing something that was, underneath, worth doing. Nothing the player learned was decoration.
 
 ---
 
@@ -1491,11 +1669,14 @@ Then the "Part Two: The Revisions" title-card gag, and credits.
 2. **The new Act II (theory) is designed but not built** — four rooms (Library, Hall of Founders, Feldstrom's Workshop, Seminar Room), the Prediction Slip with its brass coherence indicator, the Stockholm phone scam, and the Registry seal that releases Form H-27. Needs art, puzzle code, voices for KIRA / Feldstrom / the Visiting Fellow / the clerk / the Registry, an act trailer, and map placement (Library Annex + a second door, a new lean-to for the workshop, a side door of the Department of Causality). Also requires renumbering the built data act from II to III in code, assets and docs.
    - **New systems this act needs that no existing room has:** a persistent four-box quest object whose state is visible in the inventory and degrades (the coherence needle); a cross-room telephone with a dial-an-extension interface and a timed absence (Feldstrom out of the Workshop for N seconds); a card-assembly puzzle UI for the Seminar Room's WHERE / FOR WHOM / DIRECTION grid; and a *deliberately completable* wrong path that ends in the burning-form Registry disaster.
    - **Character backstories are now design input, not colour.** The Professor's hidden paper, the Visiting Fellow's stamped dissertation in the Library, the Keeper's pseudonymised possessions, the Doorman's class photograph and the Skeptic's Volume XI notebook are all `Look At` targets that need writing into their respective rooms — including three that live in *already built* Act I and Act III rooms.
-3. **Acts IV–V still have no narrative text changes** — they still run their original, plot-free framing. Everything in those sections is new copy to be written into those rooms' dialogue.
-3. **No ending scene exists in code at all.** Completing Act V currently just says "decommissioned (for now)" and returns to the map — the entire Office-return epilogue above needs to be built from scratch.
-4. **Acts II–V are still flat procedural SVG rooms** with the older UI pattern, versus Act I's painted, verb-grid rooms (`HANDOVER.md` §03). Act II now has real plot beats and a lot of specific physical props (the gilded sampling frame, the transparent anonymous filing cabinet, the RESPONSE RATE board, the taped-together questions) that need the same painted-art/verb-grid treatment Act I got to actually land.
-5. **Trailer panel 1 needs new art** — the shipped `trailer-panel1-rejection.png` still shows the old rejected-letter concept; regenerate from the revised prompt in `art/trailer/ART_PROMPTS.md` (an empty research folder + a circled deadline) before swapping in the new narration text.
-6. **Trailer panel 2b ("The Spiral")** needs art — prompt is ready in `art/trailer/ART_PROMPTS.md`, not yet generated.
+3. **Acts IV and V have been restructured on paper and have no code at all.** The old Act IV (two rooms) gained **the Bureau of Implications**, and the old Act V (the Hypotheses Accelerator) was dissolved entirely — the Accelerator moved into Feldstrom's Act II workshop, and Act V is now **the Gap Registry + the Writing Room**, ending in submission. Everything in both sections is new copy and new rooms.
+   - **Four new rooms** with no existing equivalent: the Bureau of Implications, the Gap Registry, the Writing Room, plus the submission chute as a small scene.
+   - **New systems:** a SO WHAT? gauge that significance does not move; a limitations wall; a four-sentence abstract assembly where one slot can be *locked* by a choice made an act earlier (the LARGE implication); and a title escalator with a walkable press-office ending.
+   - **The old Act V art is not wasted** — the full-size Hypotheses Accelerator design moves to Act II as Feldstrom's Mk III, which now needs the two-directional SPECIFY/GENERALISE panel and the masking tape over the left-hand controls.
+4. **The outro does not exist in code.** Completing Act V currently just says "decommissioned (for now)" and returns to the map. The outro is a **cutscene, not a room** — narrated panels using the trailer pipeline: FOUR MONTHS LATER, the walk back across campus, the three reviews, Reviewer 2's forty-seven comments, the R&R verdict, the skeleton sign flip, and the sequel card. It needs narrator VO and probably five to seven panels.
+5. **Acts II–V are still flat procedural SVG rooms** with the older UI pattern, versus Act I's painted, verb-grid rooms (`HANDOVER.md` §03). Act II now has real plot beats and a lot of specific physical props (the gilded sampling frame, the transparent anonymous filing cabinet, the RESPONSE RATE board, the taped-together questions) that need the same painted-art/verb-grid treatment Act I got to actually land.
+6. **Trailer panel 1 needs new art** — the shipped `trailer-panel1-rejection.png` still shows the old rejected-letter concept; regenerate from the revised prompt in `art/trailer/ART_PROMPTS.md` (an empty research folder + a circled deadline) before swapping in the new narration text.
+7. **Trailer panel 2b ("The Spiral")** needs art — prompt is ready in `art/trailer/ART_PROMPTS.md`, not yet generated.
 
 Given 1 alone is "build four room-narratives, two of them brand new, with four interlocking cross-room puzzle chains," this is a real scope decision on its own — worth agreeing on room build order (the doc above suggests Survey Lab first) before diving in. See `ROADMAP.md` for the logged, not-yet-built entry.
 
