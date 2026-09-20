@@ -459,6 +459,8 @@ A fourth Act I location, always open like the other three — already teased as 
 
 Everything else is the department being the department.
 
+But the *reason* that form exists is the act's real content, and it is not bureaucratic: a theory is what tells you when to be surprised. See "Why theory at all" below — the jokes all hang off that, and any room beat that does not eventually serve it should be cut.
+
 ### Opening beat, back at the Office
 
 The player presents the folder stamped `QUESTION EXISTS`.
@@ -487,6 +489,41 @@ That is the methodological thesis of the whole act, stated once, early, by the o
 
 **Nobody in the act ever agrees what that means**, which is the next four rooms.
 
+### Why theory at all — the act's actual argument
+
+**This is the thing the act has to land, and it is not "fill in four boxes."** The boxes are the department's filing system. The argument underneath them is simpler and much harder:
+
+> **A theory is what tells you when to be surprised.**
+
+Everything else follows from that. Without one, you can still collect numbers, and the numbers will still exist, and you will have no idea what any of them mean:
+
+- **Guidance.** A theory tells you what to go and look at. Attendance and grades is a question; *attendance works through practice on worked examples* tells you to record which exam questions resemble the worked examples, which you would never have thought to collect otherwise. The theory writes the data-collection list.
+- **Interpretation.** A theory tells you what counts as a result. Without one, 0.3 is just 0.3. With one, 0.3 in the wrong place is a problem and 0.05 in the right place is a finding.
+- **Surprise.** A theory tells you what would change your mind, *in advance*, when it still costs you something to say it. This is the one the game cares about most, and it is what the wax seal is for.
+
+**And the point the act must not fumble: theory and empirics are not two stages.** The game's structure — Act II theory, Act III data — makes them look sequential, so the writing has to work against its own act numbers. They are one activity, and the act should keep showing the traffic running **both ways**:
+
+| Direction | Where the player feels it |
+|---|---|
+| theory → evidence | the mechanism decides which exam questions to record; the scope decides who is even eligible to be sampled in Act III |
+| evidence → theory | the enrolment register forces the scope down; a real paper read past its abstract rewrites WHAT IS KNOWN; the Seminar Room's ALTERNATIVE EXPLANATION card sends the player back to the Library and the mechanism changes |
+
+**That is why each of the four rooms is a failure**, and it is always the *same* failure wearing a different coat: each has kept one half and thrown the other away.
+
+| Room | What it kept | What it threw away |
+|---|---|---|
+| The Library | the literature | any reason why any of it should be true |
+| The Hall of Founders | the words | anything happening in the world |
+| Feldstrom's Workshop | the generality | anything that could be observed to be otherwise |
+| The Seminar Room | — | nothing, which is why it is the only room that works |
+
+**The two healthy characters in the whole game are the ones who refuse to separate them.** The Skeptic keeps *Things I Was Wrong About, Vol. XI* — a theorist who reads her own evidence and enjoys it. The Visiting Fellow will not accept a prediction that both possible worlds satisfy — an empiricist who insists the theory do some work. Feldstrom is theory with the evidence removed; KIRA is evidence with the theory removed, which is exactly why she can produce 14,822 relevant sources and not one reason. **The cast is the argument.** The player has met both failure modes as *people* before the act asks them to avoid both.
+
+And the last line of the act's argument is delivered by the Professor, in Act V, without ceremony:
+
+> **PLAYER:** "So which matters more?"
+> **PROFESSOR:** "Which leg matters more?"
+
 ### Quest object: the PREDICTION SLIP
 
 Form P-1 *is* the Prediction Slip — Act II's H-27. A separate, increasingly stamped and annotated prop that is folded into the Research Folder at the very end of the act. Four boxes, one per room, and the four rooms can be tackled in almost any order:
@@ -496,7 +533,15 @@ Form P-1 *is* the Prediction Slip — Act II's H-27. A separate, increasingly st
 - ☐ **SCOPE** — Feldstrom's Workshop
 - ☐ **PREDICTION AND FALSIFIER** — The Seminar Room
 
-Unlike H-27 it is **sealed** at the end and cannot be reopened, which is the point: Act IV checks it against what the player actually did.
+Unlike H-27 it is **sealed** at the end and cannot be reopened, which is the point: Act IV breaks that seal and checks it against what the player actually did.
+
+**The four boxes are not four things.** This matters more than anything else about the design, because a form with boxes teaches "theory is a checklist" unless the game actively fights it. They are **one sentence that an institution has chopped into four**, and the game should let the player feel the seams. Read the filled slip back and it is a single claim:
+
+> *Given what is known (1), attendance should raise performance **because** students practise worked examples (2), **among** first-year Methods students this term (3), which means the gap should be largest on worked-example questions and smallest for students already getting that practice elsewhere — and if it isn't, I am wrong (4).*
+
+The four boxes are one **because**, one **among**, and one **if it isn't**. Filling them independently is precisely the mistake, and it is the mistake the act lets the player make — which is what the coherence needle is measuring.
+
+**The coherence needle is the anti-checklist device.** Every box can be ticked to the satisfaction of the room that owns it while the sentence as a whole says nothing. The needle is the only thing in the act that reads all four boxes *together*, and its degradation is the game telling the player: you have four approvals and no theory. It is not a score. It is the slip noticing that the boxes have stopped talking to each other.
 
 **The brass coherence indicator.** Along the bottom edge of the slip is a small brass window with a needle:
 
@@ -900,7 +945,7 @@ Choosing "probably a bit of all three" prints the room's best line: **UNFALSIFIA
 
 ### The rooms contaminate each other
 
-The four rooms are not four errands. They are mechanically interdependent, so the route through the act is not A → B → C → D but something closer to:
+The four rooms are not four errands. They are mechanically interdependent — and the interdependence is not decoration, it is the act's argument expressed as level design: **the traffic between rooms is the traffic between theory and evidence.** Half the transfers carry an idea towards something observable, and half carry a fact back to correct an idea. The route is therefore not A → B → C → D but something closer to:
 
 > **Library → Hall → Library → Feldstrom → Library → Feldstrom → Seminar → Library → Seminar**
 
@@ -917,7 +962,12 @@ The four rooms are not four errands. They are mechanically interdependent, so th
 | Feldstrom | discarded BOUNDARY CONDITION tag | Seminar Room | forces a *where does this hold* onto the prediction |
 | Seminar Room | ALTERNATIVE EXPLANATION card | Library | reveals a "supportive" paper tests the alternative |
 
-The last one is the important one: it makes the act loop back on itself, so that fixing the prediction retroactively changes what the player thinks is known. That is what stops Act II feeling like four lessons in a corridor.
+**The two that must not be cut** are the ones running *backwards*, from the world to the idea — because without them the act really is a lecture:
+
+- The **enrolment register** does not merely unlock a machine. A plain administrative fact about who is actually enrolled overrules a professor's theoretical ambition, and the player is the one who forces it.
+- The **ALTERNATIVE EXPLANATION card** sent back to the Library reveals that a paper the player filed as supportive is in fact a test of the rival explanation. WHAT IS KNOWN changes. And because the boxes are one sentence, the mechanism the player wrote behind Max Weber no longer quite fits — they have to go back to the Hall and add a clause to their own card. **This is the single most important interaction in the act:** the player's theory is altered by something they read, by their own hand, with no character telling them to.
+
+That loop is what stops Act II feeling like four lessons in a corridor, and it is the only way the player experiences theory and evidence as one activity rather than two acts.
 
 ### The spectacularly wrong complete theory
 
@@ -972,6 +1022,16 @@ Two buttons: **YES**, and **I WOULD LIKE TO SEE THE DATA FIRST**. Pressing the s
 The button then retracts into the wall and does not come back.
 
 Press YES. Metal clamps descend. Wax seal. A date is punched in with considerable force.
+
+**And the machine prints a receipt** — a small card, the size of a cloakroom ticket, which does not go in the folder. The player keeps it in their inventory for the rest of the game:
+
+```
+YOU WILL BE SURPRISED IF:
+  the gap is no larger on worked-example questions
+  than on the others.
+```
+
+That card is the act, compressed into one line, and it is the object Act IV actually consults. The four boxes are what the department filed. The card is what the player is now carrying around: **a written statement, made before seeing anything, of what would change their mind.** It should be `Look At`-able in every subsequent room, and it should feel heavier the closer the data gets.
 
 > **PLAYER:** "What if I'm wrong?"
 > **REGISTRY:** "Then you will have learned something."
@@ -1180,7 +1240,13 @@ The analysis act, and the reason the Prediction Slip was sealed. (The Library mo
 
 **The Statistics Basement, as a casino.** Every p<.05 sets off a brass bell, a green lamp and a little mechanical banner reading **DISCOVERY!** Twenty switches, wired to nothing in particular, invite the player to keep flipping until something rings. Nothing stops them. The room *wants* them to test everything and report whatever lit up.
 
-What it is really testing is whether the player runs the analysis they promised. The sealed slip names one prediction: the honest path tests that one, reports the effect with its uncertainty, and accepts a dull answer. The tempting path finds p = .049 on the twentieth switch, and the room throws a small party.
+What it is really testing is whether the player runs the analysis they promised. The sealed slip names one prediction: the honest path tests that one, reports the effect with its uncertainty, and accepts a dull answer.
+
+**Breaking the seal is the game's best moment and should be staged as one.** The wax comes off, and the player reads a sentence they wrote themselves, weeks ago, before they knew anything — and then compares it to what actually happened. This is where Act II gets paid for:
+
+- If the prediction **holds**, it means something, precisely because it was written when it could have failed. Nobody in the room is impressed, which is correct.
+- If it **fails**, the player has learned something real, and the game says so plainly. A null result is only informative because a prediction existed; without the slip it would have been an afternoon wasted, and with it, it is a finding. The Skeptic should turn up here — this is her entire worldview, and Volume XI gets a new entry.
+- If the player never really had a theory (the `EVERYTHING EXPLAINS EVERYTHING` route), the seal comes off and the slip says *something will probably happen*. It is consistent with the result. It would have been consistent with any result. **The data cannot teach the player anything, and that is the punishment** — not a scolding, just a form that turns out to be worthless at the exact moment it was needed. The tempting path finds p = .049 on the twentieth switch, and the room throws a small party.
 
 **Wrong path the game allows in full:** take the .049, print the banner and walk out with it — then have the audit point out that twenty tests were run, that one in twenty lights up by chance, and that the slip predicted something else entirely. A skeleton clutches a single lit bulb: **"p = .049. I KNEW I WAS RIGHT."**
 
@@ -1211,6 +1277,8 @@ The player returns to the Seven-Second Office with the finished folder. See "The
 - **The Research Folder** — the one object every act touches, stamps, or defaces; the visible measure of progress and the final punchline.
 - **Skeletons with deadpan signs**, one per room, each specific to that room's failure mode (the 11-years-operationalizing-"often" skeleton, the "p = .049" skeleton, the original armchair skeleton whose sign finally flips at the very end).
 - **"Apparently we need…"** — every act after the first is named for the thing the player discovers they cannot proceed without, and the player says the line out loud, flatly, on their way out of the Office. The act titles are the player's own resignation, not the department's signage.
+- **"When would I be surprised?"** — the question the whole game is really about. It is why the Prediction Slip is sealed, why the Statistics Basement is a casino, why a null result is a finding, and why the Skeptic's *Things I Was Wrong About, Vol. XI* is the healthiest object in the department. Theory and evidence are never presented as two stages that follow one another; they are two halves of one activity, and every character who has kept only one half is a joke.
+- **The surprise card** — the receipt from the sealing machine, carried from Act II to the moment the seal is broken in Act IV. The one inventory item that is purely a promise.
 - **Every act is one object going into the folder** — the Question (I), the sealed Prediction Slip (II), H-27 and the responses (III), the verified evidence (IV), the defensible claim (V). If a room's content cannot be traced back to the thing going in the folder, it is decoration and should be cut.
 - **KIRA's "Certainly!"** — enthusiastic agreement that should worry the player every time.
 - **The Professor and Feldstrom as opposite poles** — one punishes overreach, one punishes timidity — never in the same room, and that's the joke.
