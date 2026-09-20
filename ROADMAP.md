@@ -269,25 +269,25 @@ cd web/ && python3 -m http.server 8934
 
 **WP-0.9 ✅ DONE · Seed "Reviewer 2".** One line per act, from characters who are otherwise rational, so the outro pays off. *"Reviewer 2 will ask." / "Who is Reviewer 2?" / "Nobody knows."*
 
-### Phase 1 — Act II, "Apparently We Need a Theory" *(the largest package in the project)*
+### Phase 1 — Act II ✅ COMPLETE (code; art and voices outstanding)
 
 Read `STORY.md` § Act II in full first. It is the most detailed act in the bible and **it is over-specified on purpose — expect to trim during the build, not expand.** The user's own note: keep the loops, lose the errands.
 
-**WP-1.0 · Act II scaffolding.** Four room registrations, map placement (Library Annex, a second door for the Hall, the workshop lean-to, a side door of the Department of Causality), `CODEBOOK_ACT_ASSETS.act2`, the act's music.
+**WP-1.0 ✅ DONE · Act II scaffolding.** Four room registrations, map placement (Library Annex, a second door for the Hall, the workshop lean-to, a side door of the Department of Causality), `CODEBOOK_ACT_ASSETS.act2`, the act's music.
 
-**WP-1.1 · The Prediction Slip.** A persistent four-box quest object, inspectable from the inventory, with the **brass coherence indicator** degrading `EXEMPLARY → ADEQUATE → CONCERNING → THEORETICALLY BUSY → EVERYTHING EXPLAINS EVERYTHING`. **New system — no existing room has an inventory object with visible internal state.** Build it first; all four rooms write to it.
+**WP-1.1 ✅ DONE · The Prediction Slip.** A persistent four-box quest object, inspectable from the inventory, with the **brass coherence indicator** degrading `EXEMPLARY → ADEQUATE → CONCERNING → THEORETICALLY BUSY → EVERYTHING EXPLAINS EVERYTHING`. **New system — no existing room has an inventory object with visible internal state.** Build it first; all four rooms write to it.
 
-**WP-1.2 · The Library** (standard nine). KIRA, the conveyor belt of THE LITERATURE, the six references and their three failure modes, the framed abstract, the catalogue, the enrolment register, the telephone.
+**WP-1.2 ✅ DONE · The Library** (standard nine). KIRA, the conveyor belt of THE LITERATURE, the six references and their three failure modes, the framed abstract, the catalogue, the enrolment register, the telephone.
 
-**WP-1.3 · The Hall of Founders** (standard nine). Nodding portraits, the AUTHORITY METER, the Quotation Dispenser with its mode selector, the clerk, the ceremonial stepladder (one object, two Library uses), the newspaper clipping, writing behind Weber.
+**WP-1.3 ✅ DONE · The Hall of Founders** (standard nine). Nodding portraits, the AUTHORITY METER, the Quotation Dispenser with its mode selector, the clerk, the ceremonial stepladder (one object, two Library uses), the newspaper clipping, writing behind Weber.
 
 **WP-1.4 · Feldstrom's Workshop** (standard nine). The Hypotheses Accelerator Mk III with its two-directional `◄ SPECIFY / GENERALISE ►` panel, the masking tape reading DO NOT, the THINGS THIS FORBIDS gauge, the traffic-counting gate, and the derivation scene. **This is where the act's lesson lives** — budget the most time here.
 
-**WP-1.5 · The Stockholm scam.** **New system:** a cross-room telephone with a dial-an-extension interface and a **timed absence** (Feldstrom out of the Workshop for N seconds). Three mandatory inputs only — extension 4173, KIRA's Nobel protocol printout, the Act I hourglass for the international delay. The Hall clipping and the Dispenser phrase are optional easings. Keep the failure branches and the flattery branch.
+**WP-1.5 ✅ DONE · The Stockholm scam.** **New system:** a cross-room telephone with a dial-an-extension interface and a **timed absence** (Feldstrom out of the Workshop for N seconds). Three mandatory inputs only — extension 4173, KIRA's Nobel protocol printout, the Act I hourglass for the international delay. The Hall clipping and the Dispenser phrase are optional easings. Keep the failure branches and the flattery branch.
 
-**WP-1.6 · The Seminar Room** (standard nine). **New system:** a card-assembly UI for the WHERE / FOR WHOM / DIRECTION grid, plus rival-explanation cards physically sliding under non-diagnostic predictions. The Visiting Fellow's raised finger is an animation, not a line.
+**WP-1.6 ✅ DONE · The Seminar Room** (standard nine). **New system:** a card-assembly UI for the WHERE / FOR WHOM / DIRECTION grid, plus rival-explanation cards physically sliding under non-diagnostic predictions. The Visiting Fellow's raised finger is an animation, not a line.
 
-**WP-1.7 · The Registry and the seal.** The PREREGISTRATION-ADJACENT DEVICE, the retracting button, the wax seal, H-27 dropping out. **The Registry accepts the empty theory** and stamps it `APPROVED`; that path sets `theory_empty` and is not blocked.
+**WP-1.7 ✅ DONE · The Registry and the seal.** The PREREGISTRATION-ADJACENT DEVICE, the retracting button, the wax seal, H-27 dropping out. **The Registry accepts the empty theory** and stamps it `APPROVED`; that path sets `theory_empty` and is not blocked.
 
 **WP-1.8 · Act II interlude, Starring poster and ACT II card.** Same pipeline as Act III's; composite from the new room art and sprites.
 
@@ -303,31 +303,31 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 
 **WP-2.4 ✅ DONE · The Office hand-off scene** ("Where did these numbers come from?") that was never built as an in-room scene.
 
-### Phase 3 — Act IV, "Apparently Numbers Don't Speak for Themselves"
+### Phase 3 — Act IV ✅ COMPLETE (code; art and voices outstanding)
 
-**WP-3.1 · The Statistics Basement** (standard nine). The casino, the twenty switches, and **the seal-breaking set-piece** with all three outcomes — including the tight-interval null and the `theory_empty` outcome. Use *"Twenty chances at five per cent is not five per cent."*
+**WP-3.1 ✅ DONE · The Statistics Basement** (standard nine). The casino, the twenty switches, and **the seal-breaking set-piece** with all three outcomes — including the tight-interval null and the `theory_empty` outcome. Use *"Twenty chances at five per cent is not five per cent."*
 
-**WP-3.2 · The Delegation Engine** (standard nine). KIRA's descending AUTO-SUBMIT lever, the merge log, the spot-check, and her arc landing on *"Certainly. …What exactly do you mean?"*
+**WP-3.2 ✅ DONE · The Delegation Engine** (standard nine). KIRA's descending AUTO-SUBMIT lever, the merge log, the spot-check, and her arc landing on *"Certainly. …What exactly do you mean?"*
 
-**WP-3.3 · The Bureau of Implications** (standard nine). The three sizes, the SO WHAT? gauge, the wall of FURTHER RESEARCH IS NEEDED plaques, the limitations the player writes themselves. Buying LARGE sets `claim_overstated`.
+**WP-3.3 ✅ DONE · The Bureau of Implications** (standard nine). The three sizes, the SO WHAT? gauge, the wall of FURTHER RESEARCH IS NEEDED plaques, the limitations the player writes themselves. Buying LARGE sets `claim_overstated`.
 
 **WP-3.4 · Act IV interlude, poster, card, voices, SFX.**
 
-### Phase 4 — Act V, "Apparently Somebody Has to Write It"
+### Phase 4 — Act V ✅ COMPLETE (code; art and voices outstanding)
 
-**WP-4.1 · The Gap Registry** (standard nine). The drawers of pre-approved gaps, the registrar, KIRA's conveyor belt turning genuinely useful, Feldstrom's "that is a footnote" exchange.
+**WP-4.1 ✅ DONE · The Gap Registry** (standard nine). The drawers of pre-approved gaps, the registrar, KIRA's conveyor belt turning genuinely useful, Feldstrom's "that is a footnote" exchange.
 
-**WP-4.2 · The Writing Room** (standard nine). KIRA's almost-perfect abstract with two or three words over the line; Feldstrom's title escalator and the IMPACT gauge; the car-warranty phone call; the refusal. **Prototype the word-finding interaction early** — this is the package most at risk of feeling like homework, and the user flagged it.
+**WP-4.2 ✅ DONE · The Writing Room** (standard nine). KIRA's almost-perfect abstract with two or three words over the line; Feldstrom's title escalator and the IMPACT gauge; the car-warranty phone call; the refusal. **Prototype the word-finding interaction early** — this is the package most at risk of feeling like homework, and the user flagged it.
 
-**WP-4.3 · The Office scene and the submission chute.** The Codebook reveal, *"It's accurate. Send it."*, and the folder going in. `STATUS: SUBMITTED`.
+**WP-4.3 ✅ DONE · The Office scene and the submission chute.** The Codebook reveal, *"It's accurate. Send it."*, and the folder going in. `STATUS: SUBMITTED`.
 
-### Phase 5 — The outro
+### Phase 5 — The outro ✅ COMPLETE (code; art and narration outstanding)
 
-**WP-5.1 · The cutscene.** Built with the **trailer pipeline, not the room pipeline**. Order is fixed in `STORY.md` § The Outro: walk back → Doorman → `FOUR MONTHS LATER` → decision letter → back to the Office → R&R → skeleton flip → credits. Narrator VO, 5–7 panels.
+**WP-5.1 ✅ DONE · The cutscene.** Built with the **trailer pipeline, not the room pipeline**. Order is fixed in `STORY.md` § The Outro: walk back → Doorman → `FOUR MONTHS LATER` → decision letter → back to the Office → R&R → skeleton flip → credits. Narrator VO, 5–7 panels.
 
-**WP-5.2 · The three reviews.** Reviewer 1 (six warm comments), Reviewer 3 (never submitted), Reviewer 2 (eleven pages, forty-seven comments, contradictory, and **comment 17 is correct**). The letter branches on `claim_overstated`.
+**WP-5.2 ✅ DONE · The three reviews.** Reviewer 1 (six warm comments), Reviewer 3 (never submitted), Reviewer 2 (eleven pages, forty-seven comments, contradictory, and **comment 17 is correct**). The letter branches on `claim_overstated`.
 
-**WP-5.3 · Post-credits: the monkey.** Dark office, the submission system, the monkey, `asdfghjkl` resolving into *"The theoretical contribution remains insufficiently developed."* Never explained. The Feldstrom phone beat is optional — build it, look at it, cut it if the monkey lands better alone.
+**WP-5.3 ✅ DONE · Post-credits: the monkey.** Dark office, the submission system, the monkey, `asdfghjkl` resolving into *"The theoretical contribution remains insufficiently developed."* Never explained. The Feldstrom phone beat is optional — build it, look at it, cut it if the monkey lands better alone.
 
 ### Phase 6 — Ship
 
@@ -354,3 +354,37 @@ Ask these at the natural moment, not all at once:
 `WP-0.1 → 0.2 → 0.3 → 0.4 → 0.5 → 0.6 → 0.7 → 0.8 → 0.9` (foundations, all cheap) → `Phase 2` (the Act III retrofit, because it is small and it defines what Act II's hypothesis has to produce) → `Phase 1` (Act II, the big one) → `Phase 3` → `Phase 4` → `Phase 5` → `Phase 6`.
 
 **Note the deliberate inversion:** Phase 2 runs before Phase 1. The Act III retrofit is what tells us exactly which hypothesis Act II has to produce, and it is far cheaper to discover that in four already-built rooms than in four that do not exist yet.
+
+---
+
+## 9. What auto-mode built, and what it could not
+
+*Added 2026-09-20 after running Phases 0–5 autonomously.*
+
+**Every act is now playable end to end, in code.** Seventeen rooms, the Prediction Slip, the
+three durable flags, the act gates, the seal-breaking, the submission and the outro all work
+and are covered by headless tests. A player can start at the trailer and reach the monkey.
+
+**Two things were deliberately not attempted without the user, and they are the whole
+remaining job:**
+
+1. **Painted art.** Nine rooms and six outro panels ship as *designed SVG placeholders*
+   (`tools/art/placeholders.py`) — correct palette, correct composition, every prop blocked in
+   where the painting will go, so **hotspot coordinates are already final** and swapping in a
+   painting is a one-line `bg:` change per room. The pipeline needs the user's ChatGPT via
+   Claude in Chrome, which is interactive by nature. The same applies to WP-0.8's trailer
+   panels and to every new character sprite (KIRA, Feldstrom, the Visiting Fellow, the
+   Registrar, the Implications Clerk, the monkey).
+2. **Voices.** Casting is a taste decision the user has made every time so far, as numbered
+   A/B takes. Nothing is cast for the new characters, so Acts II, IV and V are silent. The
+   lines are written and sit in the code ready to be voiced; `tools/tts/bundle.py` will
+   rebuild the bundles once clips exist.
+
+**Also outstanding, and cheap once the above is unblocked:** act interludes and Starring
+posters for II, IV and V (Act III's are the model), rig-and-mouth animation for the new
+sprites, and SFX one-shots in the new rooms beyond the ones already wired.
+
+**One judgement call worth flagging:** the new rooms use the placeholder backgrounds rather
+than waiting, because the alternative was to stop after Phase 0. The rooms are structurally
+finished and visually provisional, which is the right way round — art can be swapped in
+without touching logic, whereas logic written against art that does not exist yet cannot.
