@@ -10,6 +10,18 @@ The campus map art currently has painted name signs on every building, including
 
 Implementation options: regenerate/inpaint one map image per act with the signs removed or blank (`art/map/` already has `source-v1-act1.png` and `source-v2-act2.png` as starting points), or paint blank signboards once and render the labels as HTML overlays that appear when a room unlocks (more flexible, and one map image serves every act). `showMap()` picks the image or overlays by act progress (`corridorDone`, `actIIDone`, …).
 
+## Act I polish + presentation pass — planned
+_Logged 2026-09-20, requested by the user. Not started._
+
+1. **Lecture Theatre, the BINGO payoff needs an exit animation.** Today the professor simply vanishes when the player shouts BINGO. He should visibly lose his thread — a beat of confusion, then walk out of the hall (he already has a rig: `PROF_RIG` + `CODEBOOK_RIG_WALK`, so send him off the side of the frame and fade), and only then does the room switch to "empty theatre".
+2. **Lecture Theatre, hint the bingo trick.** The bingo card is an undocumented trick and first-time players have no cue. Idea (user's): something scribbled on the desk in front of the player's seat — deliberately *not* obvious, e.g. a half-visible tally/BINGO grid doodled among the other desk graffiti, readable with `Look At` (and maybe only fully legible with the magnifying glass). Needs a small art edit on `lecture-bg` plus a hotspot.
+3. **Bug: the Office can reject the correct Question.** `w1Answer`/`w1bAnswer`/`w2Answer`/`w3Answer` all call `spendBubble()` *before* checking the answer, and `spendBubble()` returns true when patience hits 0 → `W-LOSE`. So a player who used retries earlier can give the right final answer on their last bubble and still be ejected without the Question (matches the user's report). Fix: only spend patience on wrong/neutral answers, or check correctness first and let a correct answer always win. Re-check the whole W0–W4 path afterwards.
+4. **Space should skip voiced dialogue everywhere.** The global handler (`CODEBOOK_STOP_LINE_AUDIO` + caption dismiss) only fires when `e.target === document.body` and only dismisses `.scene-caption` — verify it works in the Act II verb-grid rooms (`.panel` lines, queued multi-clip lines), in the interludes, and after clicking a button (focus moves to the button, so Space may not reach the handler).
+5. **No speech bubble for pure narration.** Scene descriptions (e.g. walking into the empty Office) are rendered in the same speech-caption style as dialogue. Narration ("System"/"You" descriptions) should use a plain caption/box without the speech tail, dialogue keeps the bubble.
+6. **Narrate the trailers.** The opening trailer and the Act II interlude are text-only; add a narrator voice (LibriVox reference via Chatterbox, a different reader from the cast — see HANDOVER §01l) reading each panel's caption, with the panel advancing when the line ends (and Space/click still skipping).
+7. **No "Continue to Campus Map" at the end of Act I.** After the Doorman hands over the folder, go straight into the Act II trailer (it already auto-starts after ~4.5 s — remove the button entirely and tighten the timing), then land on the map.
+8. **Bingo shouldn't reshuffle the Lecture Theatre layout.** Playing bingo currently changes the whole screen (card rendered beside the inventory on the right). The card should sit *inside* the main scene window instead, so the room stays visually stable.
+
 ## Voiced dialogue everywhere + living characters (talking and moving sprites) — planned
 _Logged 2026-09-19, requested by the user. Not started._
 
