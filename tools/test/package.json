@@ -1,0 +1,7 @@
+{
+  "name": "codebook-tests",
+  "private": true,
+  "description": "Headless CDP acceptance tests for The Secret of the Lost Codebook.",
+  "scripts": { "test": "./run-all.sh" },
+  "dependencies": { "ws": "^8.18.0" }
+}
