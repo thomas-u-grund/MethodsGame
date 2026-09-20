@@ -164,22 +164,35 @@ The artifact host allows **255 files per version**. Individual clips blow that i
 
 ---
 
-## 3. Asset budget
+## 3. Asset budget and hosting
 
-| Limit | Value | Now |
-|---|---|---|
-| Files per published version | **255** | 285 in `web/` |
-| Bytes per published version | **64 MB** | 51 MB |
+**The limits that shaped this plan are the Claude artifact host's, not GitHub's.** GitHub is only where the source lives; it has never constrained the game. The artifact host allows **255 files and 64 MB per published version**, and that single constraint is why voices are bundled, why images are WebP'd at q88, and why `web/` had to be pruned.
 
-Nine new rooms will add roughly: 9 backgrounds, ~12 sprites (plus rig parts, 6–10 files each), ~20 item icons, 3 act bundles of voices, 3 SFX bundles, 3 interludes × 5–6 panels. **That does not fit** without discipline.
+The user raised on 2026-09-20 that we do not have to publish that way. **We don't**, and it removes the ceiling almost entirely:
 
-**Rules:**
-1. Loose per-clip audio never ships. Bundles only.
-2. Rig parts are WebP and live only for characters that actually move.
-3. Interlude panels are composited locally (ImageMagick) from existing art wherever possible — the Act III "Starring" poster and montage were both built this way.
-4. Re-check `ls web/ | wc -l` and `du -sh web/` at the end of every phase.
+| Option | File/size limits | Cost | Notes |
+|---|---|---|---|
+| **GitHub Pages** *(recommended)* | ~1 GB repo, 100 MB per file, no file count | free | The repo already exists; publishing is a push. Custom domain possible. |
+| Cloudflare Pages / Netlify | 20–25 MB per file, thousands of files | free tier | Slightly better CDN, one more account. |
+| itch.io | 1 GB per upload | free | Natural home for a game, gives it a store page, but uploads are zips. |
+| Claude artifact *(today)* | **255 files, 64 MB** | free | Best for quick previews and sharing a link mid-build. |
 
----
+**Recommendation: keep the artifact as the preview channel and add GitHub Pages as the real home.** They are not exclusive — the artifact is genuinely useful for "look at this now" during a session, and Pages carries the full-fat build.
+
+### What stays, and what relaxes, if we move
+
+**Stays, because it is good engineering rather than a workaround:**
+- **Voice and SFX bundling.** One request per act instead of 145 beats 145 requests on any host, and the blob-URL segment player already works. Keep `tools/tts/bundle.py`.
+- **Preloading with progress bars.** Unchanged.
+- **WebP for photographic backgrounds.** Still smaller for the same quality.
+
+**Relaxes:**
+- **No file-count anxiety.** New rooms can ship as many sprites, rig parts and icons as they actually need.
+- **Art quality is no longer rationed.** Backgrounds can go to a higher quality setting, and PNG can be kept where WebP hurts (line art with hard edges, anything with crisp lettering).
+- **Audio can breathe.** Per-act music instead of reusing one theme, longer ambience loops, and voices at a higher bitrate than `-q:a 3`.
+- **The single-file constraint becomes a choice, not a requirement.** The game is ~5,000 lines in one HTML file. On a normal static host it could be split into modules. **Recommend not doing this yet** — the single file has been genuinely convenient and splitting it is a large, risky refactor with no player-visible benefit. Revisit only if the file becomes hard to work in.
+
+**Until the move actually happens, keep publishing to the artifact**, which means the 255/64 limits still bind the *published* build. Current state after WP-0.1: **140 files, 44 MB**. That is enough headroom for Act II; it would not have been enough for Acts II, IV and V together, so the hosting decision wants making before Phase 3.
 
 ## 4. Per-package standard steps
 
