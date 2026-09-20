@@ -112,3 +112,34 @@ ROOMS = {
 if __name__ == '__main__':
     for fn, (title, wall, floor, props) in ROOMS.items():
         room(fn, title, wall, floor, props)
+
+
+# --- outro cutscene panels ---------------------------------------------------------
+def card(name, big, small, bg='#1B1712', accent=None):
+    a = accent or P['mustard']
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" height="%d">' % (W, H, W, H)]
+    p.append(box(0, 0, W, H, bg))
+    p.append('<text x="%d" y="%d" fill="%s" font-family="Georgia,serif" font-size="54" '
+             'text-anchor="middle" letter-spacing="2">%s</text>' % (W/2, H/2 - 10, a, big))
+    if small:
+        p.append('<text x="%d" y="%d" fill="%s" font-family="JetBrains Mono,monospace" '
+                 'font-size="20" text-anchor="middle" opacity=".7">%s</text>' % (W/2, H/2 + 44, P['cream_dim'], small))
+    p.append('<text x="%d" y="%d" fill="%s" font-family="JetBrains Mono,monospace" font-size="12" '
+             'text-anchor="middle" opacity=".35">PLACEHOLDER — painted art pending</text>' % (W/2, H - 14, a))
+    p.append('</svg>')
+    open(os.path.join(OUT, name), 'w').write(''.join(p))
+    print('wrote', name)
+
+
+OUTRO = [
+ ('outro-1-walk.svg',    'The walk back', 'the campus, in reverse'),
+ ('outro-2-months.svg',  'FOUR MONTHS LATER', '(this is fast.)'),
+ ('outro-3-letter.svg',  'The decision letter', 'three reviews of unequal length'),
+ ('outro-4-r2.svg',      'Reviewer 2', 'eleven pages · forty-seven comments'),
+ ('outro-5-verdict.svg', 'REVISE AND RESUBMIT', 'welcome to academia'),
+ ('outro-6-monkey.svg',  'A dark office', 'a monitor, a banana, a mug reading REVIEWER 2'),
+]
+
+if __name__ == '__main__':
+    for fn, big, small in OUTRO:
+        card(fn, big, small)
