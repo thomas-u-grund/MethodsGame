@@ -8,13 +8,13 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       slipSealed:true, h27issued:true, actIIIDone:true, provenanceGiven:true,
       predictionSlip:{ known:'k', knownSound:true, mechanism:'m', mechanismSound:true,
                        scope:'s', scopeSound:true, hypothesis:'h', hypothesisSound:true, junk:0 } }}))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,2500));
+  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,4000));
   const r = await p.evaluate(`(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));
     const out = {};
-    const go = async t => { window.CODEBOOK_START(); await wait(420);
+    const go = async t => { window.CODEBOOK_START(); await wait(700);
       const b = document.querySelector('button.campus-hotspot[title^="' + t + '"]');
-      if (!b) throw new Error('no button ' + t); b.click(); await wait(750); };
+      if (!b) throw new Error('no button ' + t); b.click(); await wait(1200); };
     const verb = (p,v) => [...document.querySelectorAll('#'+p+'_verbGrid button')].find(b=>new RegExp(v,'i').test(b.textContent)).click();
     const spot = id => document.querySelector('[data-id="'+id+'"]').click();
     const ch = (p,re) => { const b=[...document.querySelectorAll('#'+p+'_choices button')].find(x=>new RegExp(re,'i').test(x.textContent));

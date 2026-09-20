@@ -26,7 +26,7 @@ async function connect(url) {
   });
   const send = (method, params = {}) => new Promise(r => { const i = ++id; pending.set(i, r); ws.send(JSON.stringify({ id: i, method, params })); });
   await send('Runtime.enable'); await send('Page.enable');
-  if (url) { await send('Page.navigate', { url }); await new Promise(r => setTimeout(r, 2500)); }
+  if (url) { await send('Page.navigate', { url }); await new Promise(r => setTimeout(r, 4000)); }
   const evaluate = async expr => {
     const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
     if (r.result?.exceptionDetails) throw new Error(JSON.stringify(r.result.exceptionDetails));

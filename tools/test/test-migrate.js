@@ -6,7 +6,7 @@ const { connect } = require('./cdp');
     inventory:['folder'], flags:{ corridorDone:true, surveyDone:true, ethicsDone:true,
     mensaDone:true, fieldworkDone:true, h27issued:true, actIIDone:true, act2IntroSeen:true }}))`);
   await p.send('Page.navigate', { url: 'http://localhost:8934/the-secret-of-the-codebook.html?cb=' + Date.now() });
-  await new Promise(r => setTimeout(r, 2500));
+  await new Promise(r => setTimeout(r, 4000));
   const r = await p.evaluate(`(() => { const f = JSON.parse(localStorage.getItem('codebook_save_v1')).flags;
     return { actIIIDone: f.actIIIDone, act3IntroSeen: f.act3IntroSeen,
              oldGone: f.actIIDone === undefined && f.act2IntroSeen === undefined }; })()`);

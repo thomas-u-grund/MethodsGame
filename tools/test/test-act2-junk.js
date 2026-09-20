@@ -7,7 +7,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
     inventory:['question','folder','pen','chalk'],
     flags:{ corridorDone:true, whirlpoolDone:true, profAtOffice:true }}))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,2500));
+  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,4000));
   const r = await p.evaluate(`(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));
     const S = window.CODEBOOK_SLIP, out = {};

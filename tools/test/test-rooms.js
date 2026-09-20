@@ -7,7 +7,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     inventory:['question','folder','magnifyingglass','chewedpen','mug','likertdie','hourglass','usb','stamp'],
     flags:{ corridorDone:true, pondDone:true, philosopherConvinced:true, whirlpoolDone:true,
             lectureDone:true, h27issued:true }}))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r => setTimeout(r, 2500));
+  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r => setTimeout(r, 4000));
   const r = await p.evaluate(`(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));
     window.CODEBOOK_START(); await wait(500);

@@ -11,13 +11,13 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
             philosopherConvinced:true, profAtOffice:true }}))`);
   await p.send('Page.navigate', { url: U + Date.now() }); await sleep(2500);
 
-  const r = await p.evaluate(`(async () => {
+  const r = await p.evaluate(`(async () => { try {
     const wait = ms => new Promise(r => setTimeout(r, ms));
     const out = { steps: [] };
     const S = window.CODEBOOK_SLIP;
     const go  = t => { window.CODEBOOK_START(); return wait(420).then(() => {
       const b = document.querySelector('button.campus-hotspot[title^="' + t + '"]');
-      if (!b) throw new Error('no map button: ' + t); b.click(); return wait(750); }); };
+      if (!b) throw new Error('no map button: ' + t); b.click(); return wait(1200); }); };
     const verb = (p, v) => [...document.querySelectorAll('#'+p+'_verbGrid button')].find(b => new RegExp(v,'i').test(b.textContent)).click();
     const item = (p, id) => document.querySelector('#'+p+'_sideInv .side-inv-slot[data-item="'+id+'"]').click();
     const spot = id => document.querySelector('[data-id="'+id+'"]').click();
@@ -94,7 +94,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     out.sealed = !!f.slipSealed; out.h27 = !!f.h27issued; out.theoryEmpty = !!f.theory_empty;
     out.endLine = document.getElementById('wp_line').textContent.slice(0, 90);
     return out;
-  })()`);
+  } catch(e){ return { ERROR: String(e && e.message || e), steps: (typeof out!=='undefined'? out.steps : null) }; } })()`);
 
   console.log(JSON.stringify(r, null, 1));
   console.log('errors:', p.errors.length ? p.errors : 'none');

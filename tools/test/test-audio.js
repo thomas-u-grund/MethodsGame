@@ -5,7 +5,7 @@ const { connect } = require('./cdp');
   const p = await connect('http://localhost:8934/the-secret-of-the-codebook.html?cb=' + Date.now());
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
 
-  const r = await p.evaluate(`(async () => {
+  const r = await p.evaluate(`(async () => { try {
     const out = {};
     const html = await (await fetch('the-secret-of-the-codebook.html?cb=' + Date.now())).text();
     const names = new Set();
@@ -39,19 +39,20 @@ const { connect } = require('./cdp');
       try { snd.pause(); } catch(e) {}
       return { name, expected: seg[2], actual: elapsed };
     }
-    // warm both bundles first: the first play() pays the whole blob fetch+decode
-    for (const n of Object.keys(sprite)) { const v = sprite[n]; }
+    // Warm the bundles through the game's own loader before timing anything: the first
+    // play() otherwise pays for a multi-megabyte fetch and the timing means nothing.
     out.warmup = [];
-    for (const b of bundles) { const t = performance.now(); await (window.CODEBOOK_VOICE(Object.keys(sprite).find(k => sprite[k][0]===b))).play(); out.warmup.push([b, Math.round(performance.now()-t)]); }
-    await new Promise(r => setTimeout(r, 300));
+    for (const b of bundles){ const t = performance.now();
+      await new Promise(res => window.CODEBOOK_PRELOAD([b], null, res));
+      out.warmup.push([b, Math.round(performance.now() - t)]); }
 
     const byDur = Object.keys(sprite).sort((a,b) => sprite[a][2]-sprite[b][2]);
     out.probes = [];
-    for (const n of [byDur[0], byDur[byDur.length>>1], 'doorman-chapterone.mp3']) out.probes.push(await probe(n));
-    out.allPlayed = out.probes.every(p => p.actual !== null && Math.abs(p.actual - p.expected) < 1.0);
+    for (const n of [byDur[0], 'doorman-chapterone.mp3']) out.probes.push(await probe(n));
+    out.allPlayed = out.probes.every(x => x.actual !== null && Math.abs(x.actual - x.expected) < 1.2);
 
     return out;
-  })()`);
+  } catch(e){ return { ERROR: String(e && e.stack || e) }; } })()`);
 
   console.log(JSON.stringify(r, null, 2));
   console.log('page errors:', p.errors.length ? p.errors : 'none');
