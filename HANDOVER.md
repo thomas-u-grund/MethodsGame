@@ -339,13 +339,37 @@ This is the first flag in the codebase that needs to go both ways, so a `clearFl
 
 ---
 
-## 03. Known inconsistency, worth fixing before Acts II–V get more content
+## 03. Room gating: the rule, resolved
 
-> **⚠ The stated design rule and the actual code disagree.** Partway through Act I's build, the explicit rule became: *every room is open from game start; progress is gated by what you've done, never by a map lock.* That was applied to all three Act I rooms (`prereq: null` on each) and to the professor-toggle mechanic. It was never retrofitted onto Acts II–V — those six rooms still use the original sequential-chain pattern, each one's `prereq` checking the previous room's `doneFlag` (see the table in section 01).
->
-> Whoever picks this up next should either (a) explicitly decide Act I's rule was Act-I-specific and document that, or (b) unlock Acts II–V the same way and move any real gating inside each room. Leaving it silently inconsistent is the worst of the three options.
+> **Rooms are gated at ACT granularity only.** A room is open if and only if its act is open. Inside an act, every room is open at once and progress is gated by what the player has done, never by a map lock.
 
-> **ℹ Related:** Acts II–V also predate the painted-art pass and the verb-grid/side-panel UI — they're still flat procedural SVG scenes without inventory panels. Bringing them up to Act I's visual and interaction standard is the largest remaining scope in the project, not a quick pass.
+This was Act I's rule and, as of 2026-09-20 (ROADMAP WP-0.4), it is the rule everywhere. It is implemented in one place:
+
+```js
+var ACT_OPENS_WHEN = { 1: always, 3: corridorDone };
+function ACT_GATE(n){ … }          // exposed as window.CODEBOOK_ACT_GATE
+prereq: CODEBOOK_ACT_GATE(3),      // every Act III room
+```
+
+So changing when an act unlocks is a one-line edit, which matters because Act III's gate is temporary: it currently opens on `corridorDone` because the theory act does not exist yet, and must move to the Act II gate (the sealed Prediction Slip releasing H-27) when Act II ships — see the TODO at the definition.
+
+**The exception, deliberately left alone:** the legacy Act IV/V placeholder rooms (`library`, `statsbasement`, `delegation`, `accelerator`) still chain off each other's `doneFlag`. They are flat SVG scenes with content that predates the current story and every one of them is scheduled for replacement; each is marked `LEGACY PLACEHOLDER` with the work package that replaces it. They get `CODEBOOK_ACT_GATE` when they are rebuilt, not before.
+
+> **ℹ Related:** those same legacy rooms predate the painted-art pass and the verb-grid/side-panel UI. Bringing the remaining acts up to Act I and Act III's standard is the bulk of the remaining project — see `ROADMAP.md`.
+
+---
+
+## 03b. The three durable failure flags
+
+Only three pieces of state cross an act boundary. They are defined once, as `window.CODEBOOK_FAIL`, with the reasoning in a comment beside them and in `STORY.md` § "Three flags, not a story tree":
+
+| Flag | Set when | Paid off in |
+|---|---|---|
+| `theory_empty` | the Prediction Slip is sealed at `EVERYTHING EXPLAINS EVERYTHING` | Act IV, breaking the seal |
+| `analysis_p_hacked` | the player leaves the Statistics Basement with the p = .049 banner | Act IV audit, Act V abstract |
+| `claim_overstated` | the LARGE implication was bought, or an inflated title/verb survived | the outro, Reviewer 2 |
+
+Anything else a player gets wrong may be reacted to locally, in the moment, by the room it happened in — but it does not get a flag.
 
 ---
 
