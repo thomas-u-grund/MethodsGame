@@ -33,3 +33,6 @@ tools/tts/out/
 
 # Scratch test harness output
 scratchpad/
+
+# Working screenshots for review; regenerated on demand, not part of the game
+screenshots/
