@@ -374,6 +374,13 @@ re-described him — same haircut, same navy jacket, same globe tote, same lanya
 Keep a written description per character for exactly this reason; it is now the only reliable
 way to get a second pose.
 
+**Separately, there is a real daily ceiling.** After roughly fifteen or sixteen generations
+in a session, requests start returning the same silence regardless of how they are phrased —
+a from-scratch prompt in a fresh chat fails exactly like a redraw. The two failure modes look
+identical from the outside, so the way to tell them apart is: *if re-describing from scratch
+in a new chat also returns nothing, stop for the day.* Roughly fifteen images is a session's
+budget; plan the batch order accordingly and do the load-bearing art first.
+
 ---
 
 ## 8d. Inventory icons missing for everything added since Act III — logged 2026-09-21
