@@ -405,20 +405,25 @@ request while the stop button is still there.
 
 ---
 
-## 8d. Inventory icons — twelve done, seven outstanding
+## 8d. Inventory icons — eighteen done, one outstanding
 
-**Done (two sheets of six):** stepladder, blankcard, nobelproc, grandphrase, altpaper, chalk,
-worksheets, examrecords, enrolreg, slip, readinglist, altcard.
+**Done (three sheets of six):** stepladder, blankcard, nobelproc, grandphrase, altpaper,
+chalk, worksheets, examrecords, enrolreg, slip, readinglist, altcard, rateprint, cleandata,
+resultprint, interpretation, contribution, ticket.
 
-**Outstanding (one sheet):** the five de-papered objects — `rateprint` (scoreboard tile 75),
-`cleandata` (tape reel), `resultprint` (the interval on a brass slide), `interpretation`
-(engraved plaque), `contribution` (drawer nameplate) — plus `ticket` (A73) and
-`drawerlabel`. The prompt is written and was attempted three times on 2026-09-21; the image
-service returned "Something went wrong while generating your image" each time. Nothing wrong
-with the prompt; retry on a later session.
+**Outstanding:** `drawerlabel` (a brass drawer-label holder with a typed card reading
+"GAPS, ASSORTED") — the odd one out, so it goes on its own rather than waiting for a sheet.
 
 Batch six per sheet in a 3x2 grid and slice with `tools/art/icons.sh` — one prompt for six
 icons, and the slicer handles the alpha-crop and sizing.
+
+Two notes from sheet 3 (2026-09-21): the generator does not respect the 3x2 grid exactly, so
+a wide object can bleed across a cell boundary and the rigid slicer then cuts it in half or
+drags a neighbour's stray pixels into a cell's alpha bbox. Check the montage after slicing;
+when a cell is wrong, run `-connected-components` on the alpha channel of a generous crop of
+the *full sheet* to get the object's true bounding box and re-crop from those coordinates.
+Sheet-3 icons are stored as `.webp` (`cwebp -q 92 -alpha_q 95 -m 6`) — a quarter the size of
+the PNGs from sheets 1 and 2, which are worth converting at some point.
 
 ### Original note
 
