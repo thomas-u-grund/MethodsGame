@@ -1922,6 +1922,66 @@ the international strategy is, Tobi answers, without any irony at all, **"Growth
 
 ---
 
+## Two solutions, and the line between them
+
+*Added 2026-09-21 (user): some puzzles should have a second, ridiculous solution — talking
+Tobi into asking somebody on your behalf, for instance.*
+
+This is a good instinct and it needs one rule, or it quietly dismantles the game's teaching.
+
+> **You can social-engineer a person. You cannot social-engineer the evidence.**
+
+Every obstacle in this game is one of two kinds, and only the first kind gets a second
+solution:
+
+| Kind | Example | Second solution? |
+|---|---|---|
+| **A gatekeeper** — someone is withholding an object or a permission | the Nurse won't release the scissors, the Registrar won't leave his desk, the Officer won't spin without a frame | **Yes.** Charm, trick or bureaucracy your way past them. |
+| **The evidence itself** — the thing to be understood | the sealed prediction, the merge on surname, the three limitations, the words in the abstract | **Never.** There is exactly one honest route, and it is the lesson. |
+
+So Tobi can get you the scissors. Tobi cannot make the interval narrower, cannot tell you
+which questions resemble the worked examples, and cannot write your limitations. If a second
+solution would let the player skip *understanding* something rather than skip *asking* for
+something, it is the wrong puzzle for one.
+
+### The price: you have to pose
+
+Tobi never does anything for free, and his price is always the same and always humiliating:
+**he wants content, and you have to be in it.**
+
+> **TOBI:** "Okay — so just stand by the window and look like you're having an idea."
+> **PLAYER:** "I'm not having an idea."
+> **TOBI:** "Look like you might."
+
+You pose. He takes eleven photographs. He picks the worst one. Then he will happily go and
+ask anyone in the building for anything, because he has no idea that any of it is difficult.
+
+This is the right shape for an adventure-game trade: the cost is not an object from your
+inventory, it is a small indignity, and the player pays it on screen.
+
+### The worked example: the Nurse and the scissors
+
+The Survey Lab's Single-Concept Scissors are locked in the cabinet, and the Nurse will not
+release them until you have diagnosed the double-barrelled question yourself. That is the
+honest route and it stays exactly as it is.
+
+The other route: pose for Tobi, then ask him. He wanders over and says something that would
+get anyone else thrown out —
+
+> **TOBI:** "Hey — can he borrow the scissors? He's doing a whole thing."
+> **NURSE:** *(instantly, warmly)* "Of course he can."
+
+You get the scissors. You did not learn what a double-barrelled question is. The room does
+not punish you for that, and it does not need to: **the patient is still lying there taped
+together**, and the machine will not clear an instrument with an undiagnosed patient on it.
+You have skipped the asking, not the understanding — which is exactly the line.
+
+And afterwards, if you ask the Nurse about it:
+
+> **NURSE:** "That nice young man sorted it out."
+
+---
+
 ## Three flags, not a story tree
 
 The game now offers a lot of "you did the wrong thing and it comes back later" branches: fake sources, the civilisation-scale theory, the .049 banner, the LARGE implication, Feldstrom's title, KIRA's abstract. Tracking all of those combinatorially would explode the implementation and produce a story tree nobody can test.
