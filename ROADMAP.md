@@ -389,6 +389,37 @@ Both are cheap: mostly `Look At` text plus one or two generated images.
 
 ---
 
+## 8c. Stockholm call needs a Swedish accent — logged 2026-09-21 (user)
+
+Feldstrom should not believe the call unless the voice is right. Add a fourth requirement to
+the Stockholm scam: **the accent**. He has been waiting for this call for seventeen years and
+he has rehearsed it; a flat delivery gives it away instantly.
+
+> **PLAYER:** "This is Stockholm."
+> **FELDSTROM:** *(a pause)* "You are from Dortmund."
+> *Click.*
+
+**Where the accent comes from — the obvious and best answer is Tobi.** He is the
+International Office. He has a phrasebook, he has "done a lot of work in the Nordics", and he
+is desperate to be useful:
+
+> **TOBI:** "Swedish? Yeah, no, massive. I did a whole recruitment push. Hold on."
+> *(he hands over a laminated card of phonetic phrases, none of which are Swedish)*
+> **TOBI:** "It's mostly vibes. Lean into the vowels."
+
+This is good because it makes Tobi load-bearing rather than decorative, and because the card
+being *wrong* and working anyway is the joke: Feldstrom has never met anyone from Stockholm
+either. The Hall of Founders clipping already supplies the correct prize name; the accent
+card supplies the delivery.
+
+**Implementation:** a fourth check in the Stockholm dialogue alongside extension 4173, KIRA's
+Nobel protocol and the Act I hourglass. Keep to three *mandatory* inputs by demoting one of
+the existing easings — the Quotation Dispenser phrase becomes optional, the accent card
+becomes required. Failure line as above, and it should be its own distinct rejection, not a
+repeat of "you are not calling internationally".
+
+---
+
 ## 8b. Cross-room puzzle density — audited 2026-09-21
 
 The user asked whether there are enough cross-room puzzles. Measured by counting, per act,
