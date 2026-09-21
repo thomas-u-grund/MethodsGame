@@ -426,7 +426,7 @@ it, not from the headings below.
 
 | § | What | Size |
 |---|---|---|
-| **8o** | The Professor is two different people in Act I (user) | Option C chosen: silhouette lecturer = the monkey |
+| ~~8o~~ | ~~The Professor is two different people in Act I~~ | **DONE 2026-09-22** (Option C, revised reveal) |
 | ~~8p~~ | ~~Character movement is mechanical~~ | **DONE 2026-09-22** |
 | ~~8i~~ | ~~The campus map has run out of campus~~ | **DONE 2026-09-22** |
 | **8a** | Running jokes still to place (the not-having-read-it thread, the founders) | small — mostly Look At text plus one or two images |
@@ -1005,7 +1005,7 @@ reverses direction more often than a sine can.
 
 ---
 
-## 8o-PRIORITY. The Professor is two different people in Act I — logged 2026-09-21 (user)
+## 8o. The Professor is two different people in Act I — DONE 2026-09-22
 
 > "In act 1 the professor is the one with the clear question and who asks for data, but
 > then he is also the one giving the system theory lecture. That does not fit. But I love
@@ -1085,6 +1085,63 @@ come out, since it is pure text and can be done in an afternoon.
 
 Either way the bingo mechanic itself does not change, and the bingo card now mocks a
 character who deserves it with no collateral damage to the Professor.
+
+---
+
+
+---
+
+**Done 2026-09-22.** Option C, with the reveal rewritten after the user caught the flaw in
+it:
+
+> "I was more thinking the person in the office is the monkey, but maybe that is not good
+> either. How should we solve it? It does not make sense that monkey gives lecture."
+
+Correct, and it is the one thing the original version could not survive: the player has
+just heard that figure speak fluently for ten minutes. **But the monkey never speaks in the
+stinger either** — it types `asdfghjkl` and the *system* resolves the noise into prose. So
+the reveal is not "the monkey lectured". It is that the lecture was the same noise, resolved
+by the same system, read aloud by a man who did not write a word of it.
+
+**The split.** The lecturer is a separate character who is never lit and never named.
+
+- Three new silhouette poses (`lecturer-lecturing/-pointing/-walking.webp`), a tall gowned
+  figure with a sheaf of printed pages under one arm — deliberately a different build from
+  the Professor's compact jacketed one. Generated black-on-white and cut by inverted
+  luminance, so the edges stay soft where they should.
+- **Both of the mouth layers are gone.** A silhouette has no visible mouth, so the whole
+  mouth-sync rig for this room was deleted, along with the five now-unreferenced files.
+- He **no longer walks on the Professor's cut-out rig** — that would put the Professor's
+  shoulders back in the one room the change exists to get them out of. He walks on his own
+  painted pose, and he no longer paces at all: he never steps out of the beam, which the
+  writing now says out loud and which is *why* the player never sees a face.
+- Poses **cut, they do not cross-fade**. Two coloured sprites dissolving reads as motion
+  blur; two silhouettes dissolving reads as a double exposure, and for half a second there
+  were visibly two of him. This was caught on screen, not in review.
+- The beam is a **CSS overlay, not new background art**, so all seventeen of the room's
+  hotspots keep their coordinates. It also gives the silhouette a reason to exist in frame,
+  which is the difference between staging and "art we could not afford".
+
+**Two flags, not one.** `lecturerGone` is this room's; `profAtOffice` is the Office's. They
+used to be the same flag, so calling the lecturer back to the blackboard also emptied the
+Office. What brings the Professor back is the building letting out forty minutes early, and
+summoning the lecturer does not un-empty it. A one-shot migration copies the old meaning
+across, so a lecture you already derailed does not start over.
+
+**Planted and paid off.** Look at him in Act I and he is reading off a printout with a
+reference number in the header. After the credits the monkey pulls a form headed
+THEORETICAL FRAMEWORK, types `asdfghjkl`, and the field resolves to the `closure` line —
+*verbatim* from the Lecture Theatre's `LINES`, the one the player marked a bingo square for.
+
+`tools/test/test-lecturer.js` pins all of it: his sprites and voice tag, the beam, the
+absence of the rig and of any `prof-*` sprite in the room, the full bingo-to-exit run, both
+flags, the Office filling up behind him, and the migration in both directions.
+
+**Still outstanding — needs a casting decision, so it is the user's call.** The eleven
+`lecture-*` clips are still rendered in the Professor's TTS voice. The words are now
+attributed to a different character but they still *sound* like him, which is audible. One
+`gen.py` run fixes it once a voice is chosen; "distant and over-amplified in a big room"
+hides the identity by design, so almost anything works.
 
 ---
 
