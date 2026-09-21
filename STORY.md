@@ -1877,6 +1877,36 @@ without a word, and the drawer is reachable.
 - *Giving him a puzzle item outright* — weaker. He should cost the player a small
   humiliation, not a fetch.
 
+### The Nurse loves him
+
+*Added 2026-09-21 at the user's request, and it is the best thing about him.*
+
+The Survey Lab Nurse — twelve years on one national survey, an emergency alarm for the phrase
+"does it matter", the most rigorous person in the building — **thinks Tobi is lovely.**
+
+She is not being ironic and she is not being fooled. She has simply decided, on no evidence
+whatsoever, that he is a nice young man who is trying his best, and nothing he says changes
+it. He is the only person she never corrects.
+
+> **TOBI:** "Can the questions be, like, fun? Is that a thing we can do?"
+> **NURSE:** *(warmly)* "No."
+> **TOBI:** "Love that."
+> **NURSE:** *(to you, after he has gone)* "He's very good with people."
+
+The joke works in both directions. It is the one soft spot in a character built entirely out
+of precision, and it is the only time anyone in this game is kind to Tobi rather than
+enduring him. Play it completely straight — no winking, no explanation, and never let
+another character remark on it.
+
+**Consequences worth using:**
+
+- Tobi turns up in the Survey Lab more often than his roaming would predict, and the Nurse
+  does not throw him out.
+- **She will do things for him she will not do for the player.** This is the obvious second
+  puzzle use if one is ever wanted: something the Nurse refuses you flatly, Tobi gets by
+  asking badly. The player has to stand there and watch it work.
+- In the outro, when his post outperforms the paper, the Nurse has liked it.
+
 ### The International Office half
 
 Same person, second lanyard. He hands out a **glossy prospectus**: four thousand smiling
