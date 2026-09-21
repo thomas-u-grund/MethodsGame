@@ -357,6 +357,72 @@ Ask these at the natural moment, not all at once:
 
 ---
 
+## 8-PRIORITY. Characters are not standing in the rooms properly — logged 2026-09-21 (user)
+
+**The defect.** Characters are placed by a raw CSS box (`l/t/w/h` as percentages of the
+scene) chosen by eye. Nothing in the game knows where a room's *floor* is, how big a person
+is *at that depth*, or what is in front of them. So: Tobi stands on a stack of books,
+Feldstrom's foot is on a chair, and scale drifts from room to room. Every sprite in the game
+is currently positioned this way — see the eight `src:'sprite-…'` entries in the room
+registrations.
+
+**The user's instinct is right; the implementation should not be literal 3D.** A painted 2D
+adventure game does not need a 3D scene graph. What it needs is the thing LucasArts used,
+which gives the same result for a fraction of the work: **a floor plane with a depth ramp,
+and feet as the anchor.**
+
+### The fix, in four parts
+
+**1. Anchor characters by their feet, not by a box.** Today a sprite is a rectangle and the
+soles land wherever the rectangle's bottom happens to be. Replace the placement API with a
+floor point:
+
+```js
+{ id:'feldstrom', src:'sprite-feldstrom.png', foot:[74, 88] }   // x%, y% of the scene
+```
+
+The engine then draws the sprite with its soles on that point and its height taken from the
+depth ramp. `CODEBOOK_RIG_WALK` already computes a `footY` this way for walking, so the
+concept is in the codebase — it just is not used for standing placement.
+
+**2. A depth ramp per room.** Two numbers: the height a person should be when standing at the
+back of the room, and at the front.
+
+```js
+depth: { backY: 62, backH: 34, frontY: 96, frontH: 64 }   // y% -> character height %
+```
+
+Character height is then interpolated from the foot's y. This is what makes scale consistent
+between rooms and correct within a room, and it is why a character who walks forward should
+get bigger — which the rig walk currently does not do either.
+
+**3. A floor polygon (walkbox) per room.** A short list of points describing where feet may
+be. Placement snaps into it; walk routes clamp to it. This is what stops anyone standing on
+a bookcase. For most of these rooms it is a trapezoid and takes two minutes to author off
+the same decile grid already used for hotspots.
+
+**4. Foreground occlusion where it matters.** A character standing behind the Bureau counter
+or the Mensa servery should be *behind* it. One optional `-fg.webp` per room — a cut-out of
+the things that are in front, painted over the sprite layer. Only a few rooms need one; the
+rest can be handled by choosing a foot position that avoids the problem.
+
+### Why this order
+
+Parts 1 and 2 fix most of what the user is seeing and are cheap — they are an engine change
+plus one `depth` block and one `foot` pair per room. Part 3 matters as soon as anyone walks.
+Part 4 is per-room art and should be done last, only for the rooms that actually need it.
+
+### Scope
+
+Thirteen adventure rooms plus the four Act I rooms. Every existing sprite placement is
+rewritten, which also means **the sprite geometry test has to change**: it currently asserts
+only that a sprite is inside its scene at a plausible height, which is exactly the weak check
+that let this through. It should assert that **the soles sit inside the room's floor
+polygon** and that **height matches the depth ramp within a tolerance** — a test that would
+have failed on Tobi standing on the books.
+
+---
+
 ## 8a. Running jokes to work in — logged 2026-09-21 (user)
 
 **1. Students who have not done the reading.** Make this a recurring presence rather than a
