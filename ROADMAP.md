@@ -374,11 +374,23 @@ re-described him — same haircut, same navy jacket, same globe tote, same lanya
 Keep a written description per character for exactly this reason; it is now the only reliable
 way to get a second pose.
 
-**The other thing that looks identical but is not: generation is sometimes just slow.**
+**The real cause of most "silent" failures: the image service errors out.** Asking the model
+to "generate that now" after a silent non-response eventually surfaced the actual message:
+
+> Something went wrong while generating your image. Sorry about that.
+
+It does not always print that on the first attempt — the request can simply end with no
+image and no text — but nudging it once usually makes the error visible. So a silent
+non-response is most often a server-side failure, not a guardrail and not a quota. Retry
+once; if it errors twice in a row the service is degraded and there is nothing to be gained
+by continuing.
+
+**And generation is also sometimes just slow.**
 Later in a session a request can take three or four minutes, during which the page looks
 completely idle — `stop-button` is present but nothing is on screen and no text has streamed.
 An earlier note here claimed a daily ceiling of about fifteen images; **that was wrong**, and
-it cost an abandoned batch. The images arrived later.
+it cost an abandoned batch. The images arrived later. Treat "slow" and "errored" as separate
+things and use the nudge to tell them apart.
 
 How to tell the two apart properly:
 
@@ -393,7 +405,24 @@ request while the stop button is still there.
 
 ---
 
-## 8d. Inventory icons missing for everything added since Act III — logged 2026-09-21
+## 8d. Inventory icons — twelve done, seven outstanding
+
+**Done (two sheets of six):** stepladder, blankcard, nobelproc, grandphrase, altpaper, chalk,
+worksheets, examrecords, enrolreg, slip, readinglist, altcard.
+
+**Outstanding (one sheet):** the five de-papered objects — `rateprint` (scoreboard tile 75),
+`cleandata` (tape reel), `resultprint` (the interval on a brass slide), `interpretation`
+(engraved plaque), `contribution` (drawer nameplate) — plus `ticket` (A73) and
+`drawerlabel`. The prompt is written and was attempted three times on 2026-09-21; the image
+service returned "Something went wrong while generating your image" each time. Nothing wrong
+with the prompt; retry on a later session.
+
+Batch six per sheet in a 3x2 grid and slice with `tools/art/icons.sh` — one prompt for six
+icons, and the slicer handles the alpha-crop and sizing.
+
+### Original note
+
+
 
 Visible in any screenshot of the new acts: the side panel falls back to two-letter text tiles
 (`EX`, `TH`, `RE`…) because `ITEM_ICONS` has no entry for the items added for Acts II, IV
