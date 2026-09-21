@@ -6,9 +6,15 @@ async function run(flags) {
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({inventory:[], flags:${JSON.stringify(flags)}}))`);
   await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,4500));
   const r = await p.evaluate(`(async()=>{const w=ms=>new Promise(r=>setTimeout(r,ms));
-    window.CODEBOOK_START(); await w(1800);
-    const signs=[...document.querySelectorAll('.map-sign')].filter(e=>/Probability Pond/.test(e.textContent)); const sign=signs[signs.length-1];
-    const imgs=[...document.querySelectorAll('.map-wrap img')]; const bg=imgs[imgs.length-1];
+    window.CODEBOOK_START();
+    let sign=null, bg=null;
+    for (let i=0;i<40;i++){                       // the boot overlay can sit on top for a while
+      await w(250);
+      const ss=[...document.querySelectorAll('.map-sign')].filter(e=>/Probability Pond/.test(e.textContent));
+      const ii=[...document.querySelectorAll('.map-wrap img')];
+      if (ss.length && ii.length){ sign=ss[ss.length-1]; bg=ii[ii.length-1]; break; }
+      window.CODEBOOK_START();
+    }
     return {sign: sign?sign.textContent:'none', map: bg?bg.getAttribute('src'):'none'};})()`);
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const e=p.errors.slice(); p.close(); return {...r, errors:e};
