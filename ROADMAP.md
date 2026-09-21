@@ -719,6 +719,19 @@ Two mechanisms, and the choice per case is whether the character ever needs to c
    appear and disappear — the Skeptic, the Cook, the Officer's cameo, the Hall clerk. Use
    `api.sprite(id, show)` for the timed entrances.
 
+**Decided 2026-09-21: crowds go in as sprites too, not repainted backgrounds.** Regenerating
+a room background cannot preserve the furniture it is generated around, and every hotspot in
+these rooms is measured against that furniture — the Mensa's gilded frame, drum and pedestal
+are all at fixed percentages. A repaint that moved the counters by three per cent would
+silently break the room. Transparent cut-out crowd sprites, foot-anchored at the hotspot
+they belong to, leave the painting untouched and cost nothing but a `sprites:` entry.
+
+Placement is measured off the existing background rather than guessed: crop the hotspot's
+pixel region out of the `-bg.webp` first and look at it, then size the sprite to the
+furniture in that crop. The Mensa's counters sit at x 1412–1672, y 410–550 of 1672x941, so
+the queue in front of them is roughly a fifth of the frame tall; the left benches run much
+closer to camera and take figures nearly twice that size.
+
 The respondents are the interesting case: three or four generic podium-occupant sprites
 toggled by `api.sprite()` as the rate climbs would make the response-rate mechanic *visible*,
 which is currently something the player only reads on a board.
