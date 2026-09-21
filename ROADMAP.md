@@ -656,6 +656,78 @@ repeat of "you are not calling internationally".
 
 ---
 
+## 8h-PRIORITY. Rooms are missing the cast the dialogue says is in them — logged 2026-09-21 (user)
+
+> "I think sometimes we require people in the room (e.g. mensa), but they are not there. we
+> need to make sure we have all the cast (even if it is just background cast) that we need
+> for a scene"
+
+Audited all 17 rooms against their `sprites:` arrays and their painted backgrounds. The user
+picked the worst example first. Every finding below was checked against the actual `.webp`,
+not inferred.
+
+### P0 — a named character speaks or transacts on screen with no body
+
+| Who | Room | What they do |
+|---|---|---|
+| **The Skeptic** | `statsbasement` | `api.say('The Skeptic', …)`. She comes down the basement stairs with Volume XI, opens it, writes, and delivers the null-result payoff — *"You have removed an explanation from circulation."* The room has **no `sprites:` key at all.** |
+| **The Cook** | `mensa` | `api.say('Cook', …)` ×3. He is a **trade partner**: takes the tote-bag sample, pins it above the till, hands over the voucher. |
+| **The twelve respondents** | `fieldwork` | The entire mechanic. They take podiums, answer into microphones, flee through doors, come back for reminders and paper and a free lunch. The board counts them. The stage never changes. |
+
+### P1 — a crowd the writing insists on, and the background does not show
+
+- **The Mensa lunch queue.** The joke *is* that everyone in it carries the same tote bag and
+  that a queue is not a population — *"This queue is basically the university."* You swing the
+  sampling frame round to face it and draw twelve people out of it. `mensa-bg.webp` has empty
+  counters and not one human in the entire hall.
+- **The Mensa diners** — the QUALITATIVE PEOPLE at the long tables "writing long notes about
+  each other", and the **n = 1** at the table for one who tells you at great length that their
+  experience generalises to everybody. All benches empty.
+- **The Fieldwork audience.** "In front of an audience", with `sfx-applause-big` playing over
+  empty red seats.
+
+### P2 — brief actors, cheap, mostly reuse
+
+- **The Hall clerk** — "emerges from a door that was not there a moment ago and stamps the
+  card." Happens twice. `sprite-clerk.png` already exists and could be flashed in.
+- **The Sampling Officer's cameo in Fieldwork** — he bursts through the TOO BUSY door in full
+  ceremonial sash: **"THOSE PEOPLE WERE NOT DRAWN!"** `sprite-officer.webp` already exists.
+- **The library student** at the reading desk — *"Yeah, no, I skimmed it."* This is also where
+  the students-who-did-not-do-the-reading running joke (§8a) should live.
+- **Skeletons**: the Library, Hall, Seminar and Gap Registry each have a bespoke
+  `sprite-skeleton-*.png`. The Mensa's "ALSO VERY LONELY" skeleton and the Ethics back-pew
+  skeleton are written but not drawn.
+
+### Correctly absent — do not "fix" these
+
+Tobi (injected by the scaffolding); Feldstrom during the Stockholm call (he is on the
+telephone, and that is the whole gag); the Library's librarian (explicitly away at a workshop
+on information literacy); the Fieldwork "host" (a podium — the Director hosts); the Gap
+Registry's doorway voice; the Seminar's absent man whose name card is on a chair; the Survey
+Lab's "patients", which are questions and are drawn as chart overlays; and every Act I
+character, all of whom are painted into their backgrounds — including the pond philosopher,
+who is on the bench with her copy of *The Black Swan*.
+
+### How to fix it
+
+Two mechanisms, and the choice per case is whether the character ever needs to change:
+
+1. **Painted into the background** for static crowds — the queue, the diners, the audience.
+   This is how Act I does every one of its characters and it costs one regenerated `-bg.webp`
+   per room, with hotspot coordinates unaffected.
+2. **A sprite in the `sprites:` array** for anyone who is spoken to, who moves, or who has to
+   appear and disappear — the Skeptic, the Cook, the Officer's cameo, the Hall clerk. Use
+   `api.sprite(id, show)` for the timed entrances.
+
+The respondents are the interesting case: three or four generic podium-occupant sprites
+toggled by `api.sprite()` as the rate climbs would make the response-rate mechanic *visible*,
+which is currently something the player only reads on a board.
+
+**Done when:** no room contains a speaking or acting character with no visual presence, and
+no line of dialogue describes a crowd that the background does not show.
+
+---
+
 ## 8g. Artwork for the Form P-1 trailer — logged 2026-09-21 (user)
 
 The Act II interlude (`CODEBOOK_ACT2_INTERLUDE`, in the ACT INTERLUDES script block) runs
