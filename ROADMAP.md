@@ -149,6 +149,13 @@ Full loop in `HANDOVER.md` §04. The short version:
 
 - **Local Chatterbox**, English model, Apple Silicon MPS: `.venv-tts/bin/python tools/tts/gen.py jobs.json`.
 - References are 12-second LibriVox clips in `tools/tts/refs/lv-<reader>.wav`. **Never macOS `say` voices** — the user's specific complaint was that they sound unnatural.
+- **24 references on file now** (was 15). `/tmp/getref.sh`-style recipe, documented in
+  HANDOVER: archive.org advancedsearch for `collection:librivoxaudio AND description:"<reader>"`,
+  take the second `_64kb.mp3` from the item's metadata, **`curl -sL` with a range request**
+  (without `-L` you get an empty file — archive.org redirects to a node server), then
+  `ffmpeg -ss 75 -t 12 -ar 24000 -ac 1 -af loudnorm`. New: rolander (Swedish), bernd,
+  karlsson, gesine, availle (Germanic), hurlock, merrill, kilmer, lange, stinson,
+  eastman, lauravictoria, burgoyne.
 - **Established casting — do not recast without asking:**
 
 | Character | Reference | exag / cfg |
@@ -164,6 +171,29 @@ Full loop in `HANDOVER.md` §04. The short version:
 | Sampling Officer | Andy Minter | 1.0 / 0.25 |
 | Fieldwork Director | Sibella Denton | 1.0 / 0.25 |
 | Mensa cook | *(silent by design)* | — |
+| **Feldstrom** | **Bernd** (German, from a LibriVox *Tausend und eine Nacht*) | **0.95 / 0.28** |
+| The protagonist | Rob Fogarty — **one word only** | 1.0 / 0.25 |
+
+**Feldstrom's casting, for the record.** The user pointed at a real professor's voice on
+YouTube (Dirk Helbing, ETH Zurich — the traffic-flow modeller turned sociologist Feldstrom
+is affectionately modelled on) and later supplied a trimmed copy of that recording. Cloning
+a named living academic's voice was declined: it would be recognisable, and Feldstrom is a
+parody of exactly that research tradition, which makes it the user's reputational problem
+rather than an abstract one. What was done instead was to *measure* the delivery and match
+its characteristics — median F0 **133 Hz**, a very wide **23-semitone** pitch range, and
+**92% voiced** (he barely pauses; two pauses over 0.35s in 71 seconds). That profile says
+low, continuously running and highly expressive, which is why the exaggeration is high.
+Bernd measured 141 Hz, the closest German-language reader to the target, and the user chose
+him from six candidates.
+
+**The protagonist is voiced exactly once**, shouting "BINGO!" in the lecture theatre.
+Everything else attributed to "You" is their own inner voice, and voicing it would collapse
+the blank the player inhabits. One spoken word in a silent protagonist is the joke.
+
+**Voicing a character whose lines are written as exchanges:** Feldstrom's blocks contain 78
+quoted lines and roughly a third are the *player's* half of the conversation ("They're
+students, not cars", "This isn't a motorway"). They were attributed by hand and dropped.
+Never feed a whole `feld(...)` string to the renderer.
 
 - **Still to cast** (new characters): KIRA, Feldstrom, the Visiting Fellow, the Hall clerk, the Registry voice, the Implications Clerk, the Registrar of Gaps. Generate 3–5 takes per candidate and put them to the user as a numbered A/B — that is the pattern that has worked every time.
   - **KIRA needs a non-human treatment**, not just a reference voice: she is the only machine with a personality. Consider a light pitch/formant shift or a short convolution on top of a chosen reference. Put options to the user.
@@ -397,6 +427,7 @@ it, not from the headings below.
 | § | What | Size |
 |---|---|---|
 | **8k** | The Hypotheses Accelerator as a mini-game, with Feldstrom as the second gauge | large — the most play left in the game |
+| **8n** | The outro repeats slides and has no camera movement | medium — one motion system fixes all of it |
 | **8i** | The campus map has run out of campus; Act II also needs its own map state | large — art is the easy half, 34 coordinates are the rest |
 | **8h** | Two cast members left: the Hall clerk and the library student | small — both reuse existing sprites |
 | **8m** | Causality Corridor: randomise case order, rewrite the door labels | medium |
@@ -565,7 +596,28 @@ robot; Feldstrom is 1.12 because he is not). All thirteen placements are convert
 included. The sprite test was rewritten to assert soles-on-the-floor and height-on-the-ramp
 instead of the old "inside the scene somewhere" check that let this through.
 
-**Parts 3 and 4 remain**: the floor polygon (needed once anyone walks in these rooms) and
+**Parts 3 and 4 are done too (2026-09-21).**
+
+*Part 4, foreground occlusion.* `CODEBOOK_ADV_HTML` takes an optional `fg:` — a cut-out of
+whatever is in front of the characters, drawn over the sprite layer and pointer-transparent
+so the hotspots underneath still work. The Bureau was the case that mattered: its Clerk had
+been parked to the *right* of his own counter because there was no way to draw anything in
+front of a sprite. `bureau-fg.webp` is the counter lifted out of the painting and laid back
+over him, and he now stands behind it and serves from it. Other rooms are handled by
+placement (the Mensa's Cook is cut at the waist by his own sprite, the Fieldwork respondents
+tuck behind the podium line) and need no cut-out.
+
+*Part 3, the walkbox.* `walk:[[xMin,xMax] at the back, [xMin,xMax] at the front]` alongside
+the existing `floor:[backY,frontY]`, interpolated with depth by `CODEBOOK_WALK_X`. Authored
+for all nine sprite rooms by reading the painted floor off each background rather than
+guessing. `test-sprites.js` now asserts every sprite's foot point is **inside** its room's
+walkbox, in x as well as y — a character could previously sit at a perfectly legal height
+and still be standing on a bookcase, which is the bug this whole section started from. All
+thirteen placements pass, which validates the boxes and the placements against each other.
+Rooms publish their geometry through `CODEBOOK_ROOM_OPTS` so the test checks what the room
+declares instead of numbers copied into the test.
+
+**Originally outstanding**: the floor polygon (needed once anyone walks in these rooms) and
 foreground cut-outs for the few rooms where a character should stand behind something — the
 Bureau counter is the clearest case, and the Clerk is currently parked to the right of it to
 avoid the problem rather than solve it.
@@ -817,6 +869,50 @@ the Sampling Officer's pedestal and the contribution tag.
 **Done when:** the four cases appear in a different order on each playthrough; the relation
 behind each door also varies; both survive a reload and a fall; the plaques look like part
 of the painting; and the Act I walkthrough still completes the corridor.
+
+---
+
+## 8n-PRIORITY. The outro repeats its slides, and nothing moves — logged 2026-09-21 (user)
+
+> "several slides show up multiple times. the animations or camera moves are not looped in"
+
+**Counted, not guessed.** The outro has **11 panels built from 6 images**:
+
+| Image | Consecutive beats it carries |
+|---|---|
+| `outro-1-walk` | **3** (the Skeptic, the workshop door, the Doorman) |
+| `outro-4-r2` | 2 (the comments, then the verdict on them) |
+| `outro-5-verdict` | 2 (REVISE AND RESUBMIT, then the armchair skeleton) |
+| `outro-6-monkey` | 2 (the office, then the typing) |
+| `outro-3-letter` | 1 — **but up to 4**, because all three conditional panels (`tobiSawResult`, `theory_empty`, `analysis_p_hacked`) splice in reusing it |
+
+So a player who earned all three flags sees the envelope four times and the campus walk three
+times in a row.
+
+**And there is no camera movement anywhere in the interlude system.** `#interlude .il-img`
+transitions `opacity` and nothing else — no pan, no zoom, no drift, in any interlude or the
+outro. That is what turns the reuse into a visible fault: each repeat is a hard cut back to
+a pixel-identical frame, which reads as the slideshow glitching rather than as a held shot.
+
+**These are one fix, not two.** Give each panel a slow continuous drift (a Ken Burns move of
+a few per cent), and — the important part — **do not restart the move when consecutive
+panels share an image**. Let it keep running across the beats. The three walk beats then
+become one slow push across the campus while the narration changes over it, which is what
+the writing already assumes. Where the image does change, cross-fade rather than cut
+(`CODEBOOK_CROSSFADE_IMG` now exists for exactly this).
+
+Per-panel control worth having: an optional `pan:` on a panel (`'in' | 'out' | 'left' | 'right'`)
+so the fall of a beat can be chosen — the months card wants a slow push in, the monkey wants
+to be still.
+
+**Only if that is not enough:** paint two more images so the three walk beats differ
+(the Library conveyor and Feldstrom's chalked door are both described in the narration and
+neither is drawn). Try the motion first; it is cheaper and it fixes the other four reuses
+too, which no amount of new art will.
+
+**Done when:** no two consecutive beats show an identical static frame; every panel drifts;
+transitions between different images cross-fade; and `?play=outro` can be watched end to end
+without it looking like the same picture keeps coming back.
 
 ---
 

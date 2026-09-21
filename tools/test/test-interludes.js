@@ -13,7 +13,7 @@ const ALL = ['act2IntroSeen','act3IntroSeen','act4IntroSeen','act5IntroSeen'];
 async function run(flags, expect) {
   const p = await connect(U + Date.now());
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({inventory:['folder'], flags: ${JSON.stringify(flags)} }))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,4000));
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const r = await p.evaluate(`(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));
     window.CODEBOOK_START(); await wait(1400);

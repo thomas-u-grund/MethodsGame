@@ -9,7 +9,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     flags:{ corridorDone:true, slipSealed:true, h27issued:true, actIIIDone:true, actIVDone:true,
             act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true, act5IntroSeen:true,
             tobiRoom:'library' }}))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,4500));
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const r = await p.evaluate(`(async () => {
     const w = ms => new Promise(r => setTimeout(r, ms));
     const sp=document.getElementById('bootSplash'); if(sp) sp.remove();

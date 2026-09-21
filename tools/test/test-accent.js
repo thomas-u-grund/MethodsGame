@@ -13,7 +13,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     inventory:['folder','hourglass','nobelproc'],
     flags:{ corridorDone:true, act2IntroSeen:true, libraryDone:true, hallDone:true,
             wsExtension:true, tobiRoom:'library' }}))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,4500));
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
 
   const r = await p.evaluate(`(async () => {
     const w = ms => new Promise(r => setTimeout(r, ms));

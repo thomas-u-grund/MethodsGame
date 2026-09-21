@@ -26,13 +26,35 @@ async function connect(url) {
   });
   const send = (method, params = {}) => new Promise(r => { const i = ++id; pending.set(i, r); ws.send(JSON.stringify({ id: i, method, params })); });
   await send('Runtime.enable'); await send('Page.enable');
-  if (url) { await send('Page.navigate', { url }); await new Promise(r => setTimeout(r, 4000)); }
+  // Never let a test validate a cached asset. The page itself is loaded with a cache
+  // buster, but sub-resources are not -- so a rebuilt voices-*.mp3 was still being
+  // measured from the previous version, and test-audio reported an overrun that had
+  // already been fixed on disk.
+  await send('Network.enable'); await send('Network.setCacheDisabled', { cacheDisabled: true });
+  // Wait for the game to be usable rather than for a fixed number of seconds. Every test
+  // used to sleep 4-4.5s after each navigation "to be safe", which across 28 tests was
+  // most of the suite's runtime; the page is normally ready in well under a second.
+  const ready = async (timeoutMs = 9000) => {
+    const t0 = Date.now();
+    for (;;) {
+      const ok = await evaluateRaw(`!!(window.CODEBOOK_START && window.CODEBOOK_VOICE_SPRITE && document.readyState === 'complete')`);
+      if (ok) { await new Promise(r => setTimeout(r, 120)); return true; }
+      if (Date.now() - t0 > timeoutMs) return false;
+      await new Promise(r => setTimeout(r, 60));
+    }
+  };
+  const evaluateRaw = async expr => {
+    const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
+    return r.result?.result?.value;
+  };
+  const goto = async u => { await send('Page.navigate', { url: u }); return ready(); };
+  if (url) { await send('Page.navigate', { url }); await ready(); }
   const evaluate = async expr => {
     const r = await send('Runtime.evaluate', { expression: expr, awaitPromise: true, returnByValue: true });
     if (r.result?.exceptionDetails) throw new Error(JSON.stringify(r.result.exceptionDetails));
     return r.result?.result?.value;
   };
-  return { send, evaluate, logs, errors, close: () => ws.close() };
+  return { send, evaluate, ready, goto, logs, errors, close: () => ws.close() };
 }
 
 module.exports = { connect };

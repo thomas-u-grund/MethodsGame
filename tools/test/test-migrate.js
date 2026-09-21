@@ -12,7 +12,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 async function load(p, save) {
   if (save) await p.evaluate(`localStorage.setItem('codebook_save_v1', ${JSON.stringify(JSON.stringify(save))})`);
   await p.send('Page.navigate', { url: U + Date.now() });
-  await sleep(4000);
+  await p.ready();
   return p.evaluate(`JSON.parse(localStorage.getItem('codebook_save_v1')).flags`);
 }
 

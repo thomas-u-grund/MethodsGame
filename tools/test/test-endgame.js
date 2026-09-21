@@ -10,7 +10,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true, act5IntroSeen:true,
       predictionSlip:{ known:'k', knownSound:true, mechanism:'m', mechanismSound:true,
                        scope:'s', scopeSound:true, hypothesis:'h', hypothesisSound:true, junk:0 } }}))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,4000));
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const r = await p.evaluate(`(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));
     const out = {};

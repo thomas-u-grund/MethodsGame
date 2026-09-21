@@ -14,6 +14,6 @@ fail=0
 for t in test-*.js; do
   printf "%-20s " "$t"
   if node "$t" >/dev/null 2>&1; then echo PASS; else echo FAIL; fail=1; fi
-  sleep 5
+  sleep 1
 done
 exit $fail

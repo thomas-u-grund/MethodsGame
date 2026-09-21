@@ -6,7 +6,7 @@ async function run(flags, pick) {
   const p = await connect(U + Date.now());
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
     inventory:['pen','folder'], flags: Object.assign({corridorDone:true,h27issued:true}, ${JSON.stringify(flags)}) }))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r => setTimeout(r, 4000));
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const r = await p.evaluate(`(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));
     window.CODEBOOK_START(); await wait(500);

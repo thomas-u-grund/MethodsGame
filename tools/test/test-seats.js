@@ -15,7 +15,7 @@ const BASE = { corridorDone:true, act2IntroSeen:true, act3IntroSeen:true, act4In
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
     inventory:['folder','ballotboxwrapped','reminders','altquestionnaire','voucher'],
     flags: ${JSON.stringify({ ...BASE, fwRunning:true })} }))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await sleep(4500);
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
 
   const r = await p.evaluate(`(async () => {
     const w = ms => new Promise(r => setTimeout(r, ms));

@@ -8,7 +8,7 @@ async function run(inv) {
     inventory: ${JSON.stringify(inv)},
     flags:{ corridorDone:true, slipSealed:true, h27issued:true, actIIIDone:true,
             act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true }}))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,4000));
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const r = await p.evaluate(`(async () => {
     const w = ms => new Promise(r => setTimeout(r, ms));
     window.CODEBOOK_START(); await w(700);

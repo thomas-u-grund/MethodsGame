@@ -10,7 +10,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     flags:{ corridorDone:true, pondDone:true, whirlpoolDone:true, lectureDone:true,
             philosopherConvinced:true, profAtOffice:true, act2IntroSeen:true,
             tobiRoom:'library' }}))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await sleep(2500);
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
 
   const r = await p.evaluate(`(async () => { try {
     const wait = ms => new Promise(r => setTimeout(r, ms));

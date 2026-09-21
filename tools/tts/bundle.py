@@ -34,6 +34,24 @@ def duration(path):
                           '-of', 'default=nw=1:nk=1', path], capture_output=True, text=True)
     return float(out.stdout.strip())
 
+def decoded_duration(path):
+    """What the browser will actually get.
+
+    ffprobe reports an mp3's duration from its header, which for a concatenated file can
+    be over a second longer than the stream really decodes to. The game seeks by absolute
+    offset, so a clip written past the real end plays silence -- which is exactly what
+    happened to the last clip in voices-act1 and what test-audio caught. Decoding is slower
+    and correct, so the overrun check uses this."""
+    out = subprocess.run(['ffmpeg', '-v', 'error', '-i', path, '-f', 'null', '-'],
+                         stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
+    m = None
+    for line in (out.stdout or '').splitlines():
+        for tok in re.findall(r'time=(\d+):(\d+):(\d+\.\d+)', line):
+            m = tok
+    if not m:
+        return duration(path)
+    return int(m[0]) * 3600 + int(m[1]) * 60 + float(m[2])
+
 def main():
     if len(sys.argv) < 2:
         sys.exit(__doc__)
@@ -77,18 +95,22 @@ def main():
             offsets[c] = [bundle_name, round(t, 3), round(d, 3)]
             parts.append(w)
             t += d
-            if i < len(clips) - 1:
-                parts.append(silence)
-                t += GAP
+            parts.append(silence)          # after every clip, including the last: the tail
+            t += GAP                        # gives the final offset room to be slightly off
         lst = os.path.join(tmp, 'list.txt')
         open(lst, 'w').write(''.join("file '%s'\n" % p for p in parts))
         out = os.path.join(ROOT, 'web', bundle_name)
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-f', 'concat', '-safe', '0',
-                        '-i', lst, '-codec:a', 'libmp3lame', '-q:a', '3', out], check=True)
+                        # CBR, not VBR. The game seeks to absolute offsets inside this
+                        # file, and a browser derives an mp3's duration from bitrate x size.
+                        # With VBR that estimate was 1.6s short of the real stream, so a
+                        # clip near the end resolved past what the browser thought was the
+                        # end and played silence. At a constant bitrate the estimate is exact.
+                        '-i', lst, '-codec:a', 'libmp3lame', '-b:a', '96k', out], check=True)
 
-    real = duration(out)
-    print('  wrote %s  %.1fs  %.1f MB' % (bundle_name, real, os.path.getsize(out) / 1e6))
-    overrun = [c for c, v in offsets.items() if v[1] + v[2] > real + 0.5]
+    real = decoded_duration(out)
+    print('  wrote %s  %.1fs decoded  %.1f MB' % (bundle_name, real, os.path.getsize(out) / 1e6))
+    overrun = [c for c, v in offsets.items() if v[1] + v[2] > real - 0.05]
     if overrun:
         sys.exit('offsets overrun the bundle: ' + ', '.join(overrun))
 

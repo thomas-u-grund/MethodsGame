@@ -18,7 +18,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     flags:{ corridorDone:true, act2IntroSeen:true, act3IntroSeen:true, actRenumberMigrated:true,
             wsExtension:true,
             predictionSlip:{ junk:0, mechanism:'Students encounter worked examples.', mechanismSound:true } }}))`);
-  await p.send('Page.navigate', { url: U + Date.now() }); await sleep(4300);
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
 
   const r = await p.evaluate(`(async () => {
     const w = ms => new Promise(r => setTimeout(r, ms));
