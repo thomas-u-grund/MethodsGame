@@ -34,7 +34,7 @@ was checked, not remembered.*
 
 - **Live artifact:** v51 at https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 — **stale**, and
   will stay stale until the user asks for a publish. **Repo:**
-  https://github.com/thomas-u-grund/MethodsGame (`main`) — **61 commits unpushed.**
+  https://github.com/thomas-u-grund/MethodsGame (`main`) — **79 commits unpushed.**
 - **Everything is one file:** `web/the-secret-of-the-codebook.html` (**7,148 lines**). No build step.
 - **All 17 rooms are built, painted and playable, end to end**, Act I through the outro. The
   data act was renumbered to Act III long ago (WP-0.2 is done).
@@ -42,11 +42,15 @@ was checked, not remembered.*
   chute and the Reviewer 2 outro without touching a placeholder room.
 - **The gap is audio and cutscene art, not rooms.** Acts II, IV and V have no recorded voices,
   and the interludes and outro still run on designed SVG cards.
-- **Local asset state:** **195 files, 54 MB** in `web/`. Inside the artifact host's 255-file
-  limit, but no longer comfortably — the margin is 60 files. Converting the 36 remaining icon
-  PNGs to webp is the cheapest reclaim if it ever binds (§8d).
-- **Tests:** 25 CDP tests, all green (`tools/test/run-all.sh`). Run them serially; two
-  concurrent runs share one browser and overwrite each other's `localStorage`.
+- **Local asset state:** **204 files, 57 MB** in `web/`. Inside the artifact host's 255-file
+  limit, with about 50 files of margin; converting the remaining icon PNGs to webp is the
+  cheapest reclaim if it ever binds (§8d).
+- **No placeholder art remains.** Every background, sprite, icon, interlude panel and outro
+  panel is painted; `web/` contains no `.svg` at all.
+- **Tests:** 26 CDP tests, all green (`tools/test/run-all.sh`). Run them **alone** — every
+  test shares one headless page, so anything else driving that tab produces phantom failures
+  (a lost `localStorage` save, or an audio test whose clip was killed mid-play). Both were
+  mistaken for regressions today and neither was one.
 
 ### Build status board
 
@@ -59,26 +63,27 @@ was checked, not remembered.*
 | **III — Data** | Survey Lab, Ethics, Mensa, Fieldwork | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **IV — Evidence** | Stats Basement, Delegation Engine, Bureau of Implications | ✅ | ✅ | ✅ | ✅ | ✅ |
 | **V — Writing** | Gap Registry, Writing Room | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Outro** | Reviewer 2 cutscene | ✅ | 🟡 1 of 6 | ✅ | ✅ | — |
+| **Outro** | Reviewer 2 cutscene | ✅ | ✅ | ✅ | ✅ | — |
 
 **Audio / cutscene art** — what is actually outstanding:
 
 | Act | Voices | SFX | Ambience | Interlude art | Notes |
 |---|---|---|---|---|---|
 | **I** | ✅ 38 clips | ✅ | ✅ | ✅ painted | complete |
-| **II** | ⬜ none | ✅ | ✅ | ⬜ 3 SVG cards | §8g — Form P-1 panel |
+| **II** | ⬜ none | ✅ | ✅ | ✅ painted | |
 | **III** | ✅ 107 clips | ✅ | ✅ | ✅ painted | complete |
-| **IV** | ⬜ none | ✅ | ✅ | ⬜ 3 SVG cards | |
-| **V** | ⬜ none | ✅ | ✅ | ⬜ 3 SVG cards | |
-| **Outro** | ⬜ none | ✅ | — | 🟡 monkey painted, panels 1–5 SVG | |
+| **IV** | ⬜ none | ✅ | ✅ | ✅ painted | |
+| **V** | ⬜ none | ✅ | ✅ | ✅ painted | |
+| **Outro** | ⬜ none | ✅ | — | ✅ painted | |
 
 SFX and ambience are ✅ everywhere because they are two shared bundles (`sfx-act1.mp3`,
 `sfx-act3.mp3`) covering 36 named cues, and the later acts draw from the same library rather
 than needing their own. Voices are the opposite: 145 clips exist, all of them Act I or Act III,
 and the later acts cannot be recorded until the user makes the casting decisions in §7.
 
-**So, in one line:** the game is built and finishable; what is left is **voices for three acts,
-twelve interlude panels, five outro panels**, and the polish items in §8.
+**So, in one line:** the game is built, finishable and fully painted; what is left is
+**voices for three acts** (blocked on casting, §7) and the §8 items — of which the live ones
+are **8k** the Accelerator mini-game, **8i** the campus map, and the last two cast reuses.
 
 ---
 
@@ -382,6 +387,31 @@ Ask these at the natural moment, not all at once:
 
 ---
 
+## 8-INDEX. What is live and what is finished
+
+§8 has grown by accretion and its sections are not in order. This is the index; work from
+it, not from the headings below.
+
+**Live — worth doing next, in this order:**
+
+| § | What | Size |
+|---|---|---|
+| **8k** | The Hypotheses Accelerator as a mini-game, with Feldstrom as the second gauge | large — the most play left in the game |
+| **8i** | The campus map has run out of campus; Act II also needs its own map state | large — art is the easy half, 34 coordinates are the rest |
+| **8h** | Two cast members left: the Hall clerk and the library student | small — both reuse existing sprites |
+| **8m** | Causality Corridor: randomise case order, rewrite the door labels | medium |
+| **8a** | Running jokes still to place | small |
+| **8-PRIORITY** | Spatial parts 3 and 4: floor polygons, foreground occlusion | medium |
+
+**Blocked on the user:** voices for Acts II, IV and V (§7 casting), and the "BINGO!" take.
+
+**Done:** 8c Swedish accent · 8d inventory icons · 8f inventory descriptions ·
+8g Form P-1 trailer art · 8h Mensa, Fieldwork and the Skeptic · 8j the pinned extension ·
+8l dialogue discoverability · 8b cross-room density (audit only, no action needed) ·
+8e image-generation failure modes (reference, not a task).
+
+---
+
 ## 8. Recommended order, in one line
 
 `WP-0.1 → 0.2 → 0.3 → 0.4 → 0.5 → 0.6 → 0.7 → 0.8 → 0.9` (foundations, all cheap) → `Phase 2` (the Act III retrofit, because it is small and it defines what Act II's hypothesis has to produce) → `Phase 1` (Act II, the big one) → `Phase 3` → `Phase 4` → `Phase 5` → `Phase 6`.
@@ -666,13 +696,29 @@ and the only cue was a scrollbar nobody looks for. Worse, `.scene-wrap` was
 and the panel took whatever was left: on a 1600x900 window that is about **80px**, against
 the ~390px four replies actually need.
 
-**Fixed by inverting which one gets the space.** `.panel` is now `flex:0 0 auto` with
-`max-height:52%`, so it sizes to its content, and `.scene-wrap` is `flex:1 1 auto;
-width:auto; margin:0 auto` — sized by the height it is left and deriving its width from
-`aspect-ratio:16/9`. The scene stays exactly 16:9, so **every hotspot percentage remains
-valid**, which is the whole reason for doing it this way rather than letting the image fill
-the width and crop. A room with no choices still gets a full-size scene, because the panel
-shrinks to the line.
+**Fixed by cutting the panel into the bottom of the scene.** The first attempt gave the
+panel the space and let the scene shrink into it; the user asked for the better version:
+
+> "maybe we can keep the size of the main scene the same? just cut into it from the bottom?
+> and have background a bit transparent under the dialog options?"
+
+So `.scene-wrap` is back to `width:100%; aspect-ratio:16/9; flex:0 0 auto` — **the original
+geometry, which is what keeps every hotspot percentage valid** — and `.panel` is
+`position:absolute; bottom:0` over it, `rgba(237,240,242,0.76)` with a `blur(9px)` backdrop
+so the art reads through, capped at `max-height:64%`. No letterboxing, no shrinking, full
+art at every size.
+
+**The trap in an overlay panel, and how it is handled.** Floating the panel over the art
+covers the hotspots underneath it — the Mensa's table for one, the Bureau's counter, every
+low hotspot in the game. The panel is therefore `pointer-events:none` and only
+`button.choice` takes `pointer-events:auto`, so clicks in its padding and in the gaps
+between buttons pass straight through to the scene. The list itself becomes interactive
+only when it is genuinely scrollable, because only then does it need the wheel; the first
+pass had `.choices` always interactive and it silently swallowed clicks in the gaps.
+
+Verified by hit-testing rather than by eye: with a four-reply menu open, a point on a button
+resolves to the button, a point in the left padding resolves to the background image, and a
+point in the gap between two buttons resolves to the clerk's hotspot.
 
 Plus `CODEBOOK_CHOICE_COUNT(el)`, called from every `choice()`/`addChoice()`/`clearChoices()`
 in both the shared scaffolding and the four hand-built Act I rooms. It writes a mono
@@ -683,9 +729,9 @@ a *sibling* of `#<p>_choices`, so every test that queries `#<p>_choices button` 
 Verified at 1600x900, 1440x900 and 1280x600: the Bureau's four-way menu shows all four
 options with no scrolling at any of them.
 
-**Cost, accepted:** when the panel is large the scene letterboxes rather than filling the
-width. That is the price of keeping 16:9 for hotspot accuracy, and it only happens while a
-long line and several replies are on screen.
+**Cost, accepted:** with several replies open the panel covers roughly the lower 45% of the
+art. It shrinks back to a thin strip as soon as the choices are gone, and the art behind it
+is visible through the blur throughout.
 
 **Original spec below.**
 
@@ -734,6 +780,43 @@ at a time, and they would cover the scene the caption is already floating over.
 **Done when:** at 1280x720, 1440x900 and 1280x600, entering a room with a four-way menu shows
 every option without scrolling; the count is visible; and the existing tests still drive the
 buttons by text (they query `#<p>_choices button`, so keep that id and structure).
+
+---
+
+## 8m. Causality Corridor: randomise the case order, and rewrite the door labels — logged 2026-09-21 (user)
+
+> "the order of rooms in causality corridor should be different every time. also, the door
+> labels are not good enough yet."
+
+**Random order.** `ROOMS` is a fixed array of four cases and `current` walks it 0-1-2-3, so
+the corridor plays identically every time and is trivially transmissible between players —
+"it's X→Y, Y→X, Z, coincidence". Shuffle on entry instead, and keep the shuffle in the save
+so a mid-corridor reload does not reorder the room you are standing in.
+
+Two things the shuffle must not break: the fall resets to the *first* case of the current
+run (`current = 0`), which stays correct as long as the shuffled order is what persists; and
+the answers are per-case, so nothing else is positional. Worth checking the four cases read
+in any order — case 1 currently doubles as the tutorial, so whichever comes first may need
+to carry the "read the note with the magnifying glass" teaching.
+
+**Door order too — logged 2026-09-21 (user):** *"maybe the doors should also have slightly
+different order each time"*. This is the stronger half of the fix. Shuffling only the cases
+still leaves "the answer to the Cones one is the third door"; shuffling which relation sits
+behind which physical door removes the positional solution entirely. It needs the door
+*positions* decoupled from the door *meanings*, which the data model currently merges —
+`room.doors.xy` is both "the X → Y door" and "the leftmost door".
+
+**The labels: keep the text, fix the look — corrected by the user 2026-09-21:** *"i actually
+liked the labels... just the visual and aesthetics of it did not match"*. So X → Y, Y → X,
+Z → X & Y and COINCIDENCE stay exactly as they are. The problem was that `.cc-label span`
+rendered them as a cream rounded chip in monospace with a drop shadow — modern UI floating
+on top of a painted Victorian corridor. They should be made of the same stuff as everything
+else in this game: engraved brass, screwed to the door, like the Bureau's wall of plaques,
+the Sampling Officer's pedestal and the contribution tag.
+
+**Done when:** the four cases appear in a different order on each playthrough; the relation
+behind each door also varies; both survive a reload and a fall; the plaques look like part
+of the painting; and the Act I walkthrough still completes the corridor.
 
 ---
 
@@ -987,7 +1070,17 @@ no line of dialogue describes a crowd that the background does not show.
 
 ---
 
-## 8g. Artwork for the Form P-1 trailer — logged 2026-09-21 (user)
+## 8g. Artwork for the Form P-1 trailer — BUILT 2026-09-21
+
+Painted as `il2-slip.webp` with the four box headings overlaid in SVG, and the Act II room
+montage composited from the four painted backgrounds. Panels 3 and 4 of that interlude went
+in at the same time. Nothing outstanding.
+
+**Original note below.**
+
+---
+
+## 8g-spec. Artwork for the Form P-1 trailer — logged 2026-09-21 (user)
 
 The Act II interlude (`CODEBOOK_ACT2_INTERLUDE`, in the ACT INTERLUDES script block) runs
 four panels and three of them are designed SVG cards: `il2-slip.svg` used **twice**, then
