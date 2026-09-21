@@ -656,6 +656,161 @@ repeat of "you are not calling internationally".
 
 ---
 
+## 8l-PRIORITY. You cannot tell when a line has alternatives — logged 2026-09-21 (user)
+
+> "i am not overly happy about how we solve alternative dialogs being available. sometimes
+> ones does not know that alternatives are available. one has to scroll down. I know that,
+> but other users might not"
+
+This is the most serious usability problem in the game, because the choices *are* the game.
+Every real decision — the three limitations at the Bureau, the contribution at the Registry,
+the redaction at the Tribunal, every wrong branch worth walking — is a button in that list.
+A player who never sees the list plays a different, much worse game and never knows.
+
+**Where it comes from.** The choices render into `<div class="choices">` inside `.panel`,
+which sits *below* the scene image in normal document flow. The scene is a 16:9 image sized
+to the window width, so on any window that is not tall, the image alone fills the viewport
+and pushes the buttons off the bottom. Nothing on screen indicates they are there. The
+dialogue caption floats over the art at `top:3%`, so the player's eye is at the top of the
+screen while the interaction is at the bottom, past the fold.
+
+It is worse in exactly the rooms that need it most: menus like the Bureau's `ownMenu()` and
+the Accelerator's four-way put four or five buttons up at once.
+
+**What to do — in order of value, and the first two are probably enough:**
+
+1. **Never let the panel go below the fold.** Make the room a viewport-height layout: the
+   scene takes the space that is left after the panel is reserved, rather than the panel
+   taking what is left after the scene. `.scene-wrap` gets `min-height:0` in a column flex
+   with the panel, and the image scales down to fit. The whole room then always fits the
+   window and there is nothing to scroll.
+2. **Say how many there are.** A small count above the list — "3 replies" — in the same
+   mono label style as the verb grid. Cheap, unmissable, and it also tells the player that
+   a *single* reply is the only reply, which is information too.
+3. **Fade and scroll inside the list** if it still overflows on a very short window:
+   `overflow-y:auto` on `.choices` with a bottom gradient mask that only appears when
+   `scrollHeight > clientHeight`.
+4. **Nudge on arrival.** When choices appear, `scrollIntoView({block:'nearest'})` on the
+   list, so even a mis-sized window lands the player on them.
+
+**Do not** solve it by moving the buttons on top of the art. They are long sentences, several
+at a time, and they would cover the scene the caption is already floating over.
+
+**Done when:** at 1280x720, 1440x900 and 1280x600, entering a room with a four-way menu shows
+every option without scrolling; the count is visible; and the existing tests still drive the
+buttons by text (they query `#<p>_choices button`, so keep that id and structure).
+
+---
+
+## 8i. The campus map has run out of campus — logged 2026-09-21 (user)
+
+> "Feldstroms workshop and the survey lab are oddly connected to the observatory. maybe we
+> just extend the campus map, zoom out and have more budlings? or we repaint other areas?"
+
+Confirmed by the coordinates. `MAP_LAYOUT` puts `surveylab` at `{l:0, t:0}` and `workshop`
+at `{l:120, t:40}` on a 1200x675 grid, and the painted observatory dome and its hillside
+occupy exactly that corner. Both rooms therefore look like annexes of the observatory, which
+belongs to neither of them. The top-left quadrant carries three rooms (surveylab, workshop,
+library) inside 510px; the whole left edge below them is pond and nothing else.
+
+Seventeen rooms were placed onto art drawn before there were seventeen rooms. Nudging two
+boxes would only move the collision, so **the fix is new map art, zoomed out**, and it
+should be done together with the other outstanding map problem rather than twice:
+
+**Act II has no map of its own.** `dataActMap = hasFlag('corridorDone') || hasFlag('pondDone')`
+switches straight from `campus-map-act1.webp` to `campus-map-act3.webp` the moment Act I
+ends, so the whole theory act is played over the *data* act's map — tent, black swan and all.
+There is a standing TODO in the code saying exactly this. There should be three states:
+
+| Map | Shown during | Gains over the previous one |
+|---|---|---|
+| `campus-map-act1.webp` | Act I | — |
+| `campus-map-act2.webp` | Act II | the Library Annex, the Hall of Founders, the workshop lean-to, the Seminar Room |
+| `campus-map-act3.webp` | Acts III–V | the Fieldwork tent, the black swan on the pond, and the Act IV/V buildings |
+
+**What the new art needs.** Same painted bird's-eye style, but pulled back far enough that
+every one of the seventeen rooms can have its own visibly distinct building with space
+around it — and specifically with **Feldstrom's workshop as a separate lean-to well away
+from the observatory**, and the Survey Lab as its own small emergency-department block
+rather than something growing out of the hillside.
+
+**The expensive part is not the art, it is the coordinates.** Every entry in `MAP_LAYOUT`
+(hotspot boxes) and `MAP_LABELS` (signboard positions, already tuned to two decimal places)
+is measured against the current painting. New art invalidates all thirty-four. Budget the
+re-measuring, do it once, and check it with a screenshot per act rather than by eye — the
+signs are now act-filtered (§1), so only a handful show at a time and mistakes hide easily.
+
+---
+
+## 8j. Feldstrom's extension number should be on the wall — logged 2026-09-21 (user)
+
+> "in feldstrom's workshop, the phone number should be very visible pinned at the wall
+> somewhere. It is too difficult to find out."
+
+Right now extension 4173 is only revealed by **Look At** on the `desk` hotspot, and the
+Library phone is dead until that flag is set. So the entire Stockholm chain — the best
+sequence in Act II — is gated behind examining one piece of furniture that looks like
+scenery. A player who picks up the receiver first is told "you do not know anybody's
+extension" and has no idea where to go.
+
+**Fix:** put it on the wall where it cannot be missed. A pinned index card or enamel plate
+near the telephone reading **EXT. 4173**, with its own hotspot, setting `wsExtension` on
+Look At exactly as the desk does. Keep the desk path working — two ways in, no new state.
+
+Do it as a sprite plus an SVG text overlay rather than a repaint, the way the Form P-1 and
+H-27 panels do their lettering: the number stays crisp at any resolution, and the painted
+workshop (which is good, and whose hotspots are measured against it) is left alone.
+
+Worth keeping the joke: the card is pinned next to the STOCKHOLM TIME clock that is an hour
+wrong, and nobody has ever told him.
+
+---
+
+## 8k. The Hypotheses Accelerator should be a mini-game — logged 2026-09-21 (user)
+
+> "There should also be some sort of mini-game where one use the hypothesis accelerator and
+> ridiculous things come out. This should be a zoom into the accelerator when one uses it."
+
+The Accelerator is the best machine in the game and the player currently interacts with it
+through a menu. Using it should **zoom into the control panel** — a full-frame view of the
+machine, the way `CODEBOOK_PLAY_INTERLUDE` takes over the stage — and the play should be
+assembling hypotheses out of parts and watching what comes out.
+
+**The hard constraint: it has to be the existing puzzle, not a replacement.** The Workshop
+already teaches something specific and it works — peel the tape so the machine runs *both*
+ways, feed in the enrolment register to bound the claim, then SPECIFY. The flags
+(`wsTapeOff`, `wsScoped`, `wsInflated`) and the slip's SCOPE and HYPOTHESIS boxes all hang
+off it. The mini-game should be the *interface* to that, with the absurd outputs as the
+texture around the one sound setting.
+
+**Shape.** Three drums you crank, in the machine's own vocabulary:
+
+- **POPULATION** — first-year Methods students · everyone at this university · everyone ·
+  all human beings · all social systems · *traffic*
+- **MECHANISM** — worked examples · exposure · osmosis · resonance · the dialectic
+- **SCALE** — one term · a decade · the post-war period · all of recorded history
+
+Crank and it prints a strip. **The THINGS THIS FORBIDS gauge is the score**, and it is the
+lesson: every grand combination reads **0** and the machine purrs approvingly; the one small,
+bounded, dull combination makes the needle climb off zero for the first time in years and
+the machine sounds *unhappy about it*. Feldstrom, if present, is delighted by the zeros.
+
+Ridiculous outputs are the reward for playing, and they should be printed on the strip and
+be genuinely funny — "CIVILISATION IS TRAFFIC" already exists as the top of the title ladder
+in Act V and belongs in here as the maximum setting, so the two jokes rhyme.
+
+**Existing pieces to reuse:** the `il-*` overlay CSS and `CODEBOOK_PLAY_INTERLUDE`'s
+full-stage takeover for the zoom; `CODEBOOK_SFX` has `sfx-printer`, `sfx-drum-spin`,
+`sfx-click` and `sfx-refuse` already; the painted Accelerator in `workshop-bg.webp` is the
+reference for the zoomed panel art.
+
+**Done when:** using the machine zooms in; the drums can be cranked freely and the absurd
+combinations are worth cranking for; the gauge reads 0 for every grand one; the sound
+setting still sets `wsScoped` and fills the slip's SCOPE box exactly as it does today; and
+`test-act2.js` still walks the honest route through the act unchanged.
+
+---
+
 ## 8h-PRIORITY. Rooms are missing the cast the dialogue says is in them — logged 2026-09-21 (user)
 
 **Progress, 2026-09-21.** Done: the Mensa entirely (lunch queue with the matching tote bags,
