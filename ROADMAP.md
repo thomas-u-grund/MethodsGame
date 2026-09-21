@@ -357,6 +357,25 @@ Ask these at the natural moment, not all at once:
 
 ---
 
+## 8e. Image generation: what silently fails — logged 2026-09-21
+
+Adding to the ChatGPT driving notes in §9, because this cost three failed attempts and looked
+like a rate limit when it was not:
+
+**Asking it to redraw an attached character — "draw the SAME man again, same face" — returns
+nothing at all.** No image, no text, no error; the prompt just sits there answered by
+silence. It is almost certainly a likeness guardrail on redrawing a depicted person.
+
+**The workaround is to describe the character fully from scratch every time**, as if new,
+and let the attached sprites carry the style rather than the identity. Tobi's second pose
+came back first try once the prompt stopped referring to him as the same person and simply
+re-described him — same haircut, same navy jacket, same globe tote, same lanyard, listed out.
+
+Keep a written description per character for exactly this reason; it is now the only reliable
+way to get a second pose.
+
+---
+
 ## 8d. Inventory icons missing for everything added since Act III — logged 2026-09-21
 
 Visible in any screenshot of the new acts: the side panel falls back to two-letter text tiles
