@@ -405,14 +405,17 @@ request while the stop button is still there.
 
 ---
 
-## 8d. Inventory icons — eighteen done, one outstanding
+## 8d. Inventory icons — DONE
 
-**Done (three sheets of six):** stepladder, blankcard, nobelproc, grandphrase, altpaper,
-chalk, worksheets, examrecords, enrolreg, slip, readinglist, altcard, rateprint, cleandata,
-resultprint, interpretation, contribution, ticket.
+Every key in `ITEM_LABELS` now has an entry in `ITEM_ICONS`, and `test-assets.js` asserts
+that, so an item added later cannot quietly ship as a two-letter text tile.
 
-**Outstanding:** `drawerlabel` (a brass drawer-label holder with a typed card reading
-"GAPS, ASSORTED") — the odd one out, so it goes on its own rather than waiting for a sheet.
+One thing to watch when adding more: two icons in the same visual family read as the same
+thing at panel size. The first `contribution` icon was a brass plate holding a cream card,
+which was indistinguishable from `drawerlabel` in the side panel; it was redrawn as a brass
+luggage tag on a chain, and the Registrar's hand-over line was rewritten to match the object
+("Attached to something" — he holds up the chain). Different silhouette, not just different
+lettering.
 
 Batch six per sheet in a 3x2 grid and slice with `tools/art/icons.sh` — one prompt for six
 icons, and the slicer handles the alpha-crop and sizing.
