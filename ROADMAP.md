@@ -1,3 +1,4 @@
+
 # The Secret of the Lost Codebook — Master Build Plan
 
 *Written 2026-09-20. This is the document to work through to finish the game. It assumes no memory of previous sessions: everything needed to build a room to the standard of Act I and Act III is either here or precisely referenced.*
