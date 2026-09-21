@@ -658,6 +658,14 @@ repeat of "you are not calling internationally".
 
 ## 8h-PRIORITY. Rooms are missing the cast the dialogue says is in them — logged 2026-09-21 (user)
 
+**Progress, 2026-09-21.** Done: the Mensa entirely (lunch queue with the matching tote bags,
+the Cook, the QUALITATIVE PEOPLE, the *n* = 1 and the skeleton listening to him); the twelve
+Fieldwork respondents, wired to the response rate so the stage empties and fills with the
+board (`test-seats.js`); and the Skeptic, who now walks down the basement stairs instead of
+speaking from nowhere. Remaining: the Fieldwork audience, the Sampling Officer's cameo, the
+Hall clerk and the library student — all P1/P2, and the last three are reuses of sprites
+that already exist.
+
 > "I think sometimes we require people in the room (e.g. mensa), but they are not there. we
 > need to make sure we have all the cast (even if it is just background cast) that we need
 > for a scene"
