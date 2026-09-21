@@ -777,7 +777,22 @@ signs are now act-filtered (§1), so only a handful show at a time and mistakes 
 
 ---
 
-## 8j. Feldstrom's extension number should be on the wall — logged 2026-09-21 (user)
+## 8j. Feldstrom's extension number should be on the wall — BUILT 2026-09-21
+
+An index card pinned to the door panel directly above the telephone, reading FELDSTROM /
+4173, with its own `extcard` hotspot that sets `wsExtension` on Look At. The desk route
+still works, so there are two ways in and no new state.
+
+Built as an HTML overlay rather than a repaint or a sprite: the number stays crisp at any
+resolution, the painted workshop is untouched, and its hotspot percentages are unaffected.
+Placed at `l:83.5, t:41.5` — clear of Feldstrom, who stands at 76%, and of the desk hotspot
+below at `t:58`. The STOCKHOLM TIME clock that is an hour wrong is still in the line.
+
+**Original note below.**
+
+---
+
+## 8j-spec. Feldstrom's extension number should be on the wall — logged 2026-09-21 (user)
 
 > "in feldstrom's workshop, the phone number should be very visible pinned at the wall
 > somewhere. It is too difficult to find out."
@@ -817,6 +832,39 @@ ways, feed in the enrolment register to bound the claim, then SPECIFY. The flags
 (`wsTapeOff`, `wsScoped`, `wsInflated`) and the slip's SCOPE and HYPOTHESIS boxes all hang
 off it. The mini-game should be the *interface* to that, with the absurd outputs as the
 texture around the one sound setting.
+
+**Feldstrom is the second gauge — logged 2026-09-21 (user):** *"while one cranks up the
+accelerator Feldstrom should get more and more excited"*.
+
+This is what makes the mini-game teach rather than merely amuse, so build it as the spine
+rather than as decoration. **Two needles move in opposite directions and he only ever
+watches one of them.** As the claim grows, THINGS THIS FORBIDS falls towards zero and
+Feldstrom climbs:
+
+| Setting | FORBIDS | Feldstrom |
+|---|---|---|
+| first-year Methods students, one term | **47** | wary, arms folded — *"That is very small."* |
+| everyone at this university | 12 | mildly interested, unfolds his arms |
+| everyone, a decade | 3 | leaning in |
+| all human beings, the post-war period | 1 | on his feet |
+| all social systems, all of recorded history | **0** | radiant, hand on your shoulder |
+| **traffic** | **0** | takes his glasses off. *"…you have understood the machine."* |
+
+The player's own instinct is the test: you crank it because his reaction is funny, and the
+gauge you are not watching is quietly telling you the claim now forbids nothing at all. When
+the honest setting goes in, the FORBIDS needle climbs off zero for the first time in years,
+the machine makes an unhappy noise, and he is genuinely deflated — which is exactly the beat
+the existing scene already ends on (*"You've made it terribly small." — "Yes." — "…brave."*),
+so the mini-game hands off into dialogue that is already written.
+
+Feldstrom must be **present** for this, which the current puzzle forbids: you can only use
+the machine properly once the Stockholm call has got him out of the room. So the cranking is
+the *before* state — play with the drums while he is here and being delighted, and the real
+scoping happens later in the empty workshop. That also gives the room something to do on the
+first visit, which it currently lacks.
+
+Reuse the existing talk animation for his escalation (`cb-talk-grand` is already his), and
+`sprite-feldstrom.png` with a scale/translate per stage rather than new art if possible.
 
 **Shape.** Three drums you crank, in the machine's own vocabulary:
 
