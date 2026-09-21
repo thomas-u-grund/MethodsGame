@@ -8,7 +8,8 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
     inventory:['question','folder','pen','magnifyingglass','hourglass','chalk','mug','stamp','likertdie','usb','blackink'],
     flags:{ corridorDone:true, pondDone:true, whirlpoolDone:true, lectureDone:true,
-            philosopherConvinced:true, profAtOffice:true, act2IntroSeen:true }}))`);
+            philosopherConvinced:true, profAtOffice:true, act2IntroSeen:true,
+            tobiRoom:'library' }}))`);
   await p.send('Page.navigate', { url: U + Date.now() }); await sleep(2500);
 
   const r = await p.evaluate(`(async () => { try {
@@ -59,8 +60,17 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     verb('lb','talk to'); spot('kira'); await wait(400);
     choice('lb','place a call'); await wait(400);
     choice('lb','4173'); await wait(600);
+    // He hangs up on the delivery, not the delay. The accent comes from Tobi and nowhere else.
+    out.steps.push(['accentNeeded', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.wsAccentNeeded ? 'ok' : 'NO']);
+    verb('lb','talk to'); spot('tobi'); await wait(400);
+    choice('lb','Swedish'); await wait(600);
+    out.steps.push(['accentCard', JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.indexOf('accentcard') !== -1 ? 'ok' : 'NO']);
+    verb('lb','talk to'); spot('kira'); await wait(400);
+    choice('lb','place a call'); await wait(400);
+    choice('lb','4173'); await wait(600);
     choice('lb','This is Stockholm'); await wait(600);
     choice('lb','remains under discussion'); await wait(600);
+    choice('lb','fika'); await wait(600);
     choice('lb','confidential consultation'); await wait(600);
     out.steps.push(['feldstromOut', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.wsFeldstromOut ? 'ok' : 'NO']);
 

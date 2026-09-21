@@ -556,7 +556,22 @@ Both are cheap: mostly `Look At` text plus one or two generated images.
 
 ---
 
-## 8c. Stockholm call needs a Swedish accent — logged 2026-09-21 (user)
+## 8c. Stockholm call needs a Swedish accent — BUILT 2026-09-21
+
+Built as specified below, with one deviation: the Quotation Dispenser phrase did not need
+demoting, because it was never required by the call in the first place — it is given out and
+never checked. So the accent is simply a third requirement alongside the procedure and the
+hourglass, and the mandatory count goes from two to three.
+
+The chain is Library phone → refused for the delivery ("You are from Dortmund.") → find Tobi,
+wherever he is that run → laminated card → Library phone. The Tobi option only appears once
+the phone has set `wsAccentNeeded`, so the card is never a solution looking for a problem.
+The garnish beat (IKEA / lagom / fika) sits between the category answer and the Committee
+lines and cannot fail, which is the rule the spec asks for. Covered by `test-accent.js`.
+
+**Original spec below.**
+
+
 
 Feldstrom should not believe the call unless the voice is right. Add a fourth requirement to
 the Stockholm scam: **the accent**. He has been waiting for this call for seventeen years and
@@ -605,6 +620,50 @@ Nobel protocol and the Act I hourglass. Keep to three *mandatory* inputs by demo
 the existing easings — the Quotation Dispenser phrase becomes optional, the accent card
 becomes required. Failure line as above, and it should be its own distinct rejection, not a
 repeat of "you are not calling internationally".
+
+---
+
+## 8f. "Look at" an inventory item should say something — logged 2026-09-21 (user)
+
+> "when one does 'look at' on items in inventory... there should be a little description
+> (sometimes with a hint, but not too obvious) popping up"
+
+Right now the side panel is a picture and a name. Clicking an item only arms it for `use`.
+Every genuine point-and-click gives you a line of description when you examine what you are
+carrying, and it is one of the main places the writing lives — it is also where a stuck
+player looks first, so it is the cheapest hint channel in the game.
+
+**Behaviour.** With the verb set to **look at**, clicking an inventory item says a line in
+the room's own dialogue box (`api.say('You', …)`), exactly like examining a hotspot, rather
+than opening any new kind of window. That keeps it inside the machinery that already exists:
+the line area, the typing animation, the voice hook. With any other verb, clicking an item
+keeps its current behaviour — arming it for `use`. The side panel already knows which verb
+is active, so this is a branch in the click handler passed to `CODEBOOK_RENDER_SIDE_INV`,
+not a new UI.
+
+**Content.** One line per item, in the voice of the player character, same register as the
+room descriptions. Two rules for the hint half:
+
+- **The hint is about the object, not the puzzle.** "Seven seconds, and it has been
+  measuring the wrong thing all morning" is a hint. "Use this on the telephone" is a
+  walkthrough. Say what the object *is for* in the world, and let the player find where.
+- **Only items that are currently load-bearing get a hint at all.** A line an item carries
+  for the whole game cannot say "you will need this in the Hall of Founders" — the player
+  may already have used it. Where an item's description needs to change after it has done
+  its job, key the second line off the flag that its puzzle sets, the way the room
+  descriptions already do.
+
+**Scope.** Nineteen items. The four Act I items (`question`, `folder`, `pen`, `hourglass`)
+carry across the whole game and are the most-examined, so write those first and most
+carefully. `folder` is a special case: it is the quest object, its label already changes per
+act (`ITEM_LABELS.folder` is rewritten when `actIIIDone` is set), and its description should
+say what is in it so far — that makes it the game's progress summary, which is worth more
+than any hint.
+
+**Done when:** every item answers **look at** with its own line; no line names a room or a
+verb; the four Act I items read well in Act V as well as Act I; and a test asserts that
+`ITEM_LABELS` and the description table have the same keys, the way `test-assets.js` now
+does for icons.
 
 ---
 
