@@ -4,7 +4,8 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 (async () => {
   const p = await connect(U + Date.now());
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
-    inventory:['folder'], flags:{ corridorDone:true, whirlpoolDone:true, profAtOffice:true,
+    inventory:['folder','pen','redacted','examrecords','worksheets','rateprint','altcard','readinglist','enrolreg','slip'],
+    flags:{ corridorDone:true, whirlpoolDone:true, profAtOffice:true,
       slipSealed:true, h27issued:true, actIIIDone:true, provenanceGiven:true,
       act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true, act5IntroSeen:true,
       predictionSlip:{ known:'k', knownSound:true, mechanism:'m', mechanismSound:true,
@@ -18,26 +19,34 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       if (!b) throw new Error('no button ' + t); b.click(); await wait(1200); };
     const verb = (p,v) => [...document.querySelectorAll('#'+p+'_verbGrid button')].find(b=>new RegExp(v,'i').test(b.textContent)).click();
     const spot = id => document.querySelector('[data-id="'+id+'"]').click();
+    const item = (p, id) => document.querySelector('#'+p+'_sideInv .side-inv-slot[data-item="'+id+'"]').click();
     const ch = (p,re) => { const b=[...document.querySelectorAll('#'+p+'_choices button')].find(x=>new RegExp(re,'i').test(x.textContent));
       if(!b) throw new Error('no choice /'+re+'/ in '+p+': '+[...document.querySelectorAll('#'+p+'_choices button')].map(x=>x.textContent.slice(0,32)).join(' | ')); b.click(); };
     const flags = () => JSON.parse(localStorage.getItem('codebook_save_v1')).flags;
 
-    // --- Statistics Basement: break the seal, run the promised test
-    await go('Statistics Basement');
-    verb('sb','use'); spot('seal'); await wait(500); ch('sb','Run it'); await wait(700);
-    out.stats = !!flags().statsDone;
-    out.resultKind = flags().resultHolds ? 'holds' : flags().resultNull ? 'null' : '?';
+    // --- Bureau first: the queue ticket is what pauses KIRA's lever
+    await go('The Bureau of Implications');
+    verb('bu','pick up'); spot('counter'); await wait(400);
+    out.ticket = !!document.querySelector('#bu_sideInv .side-inv-slot[data-item="ticket"]');
 
-    // --- Delegation Engine: read the log, check a record, give the exact instruction
+    // --- Delegation Engine: pause the lever, read the log, check a record, instruct her
     await go('The Delegation Engine');
+    item('dl','ticket'); spot('lever'); await wait(400);
     verb('dl','look at'); spot('log'); await wait(400);
     verb('dl','look at'); spot('record'); await wait(400);
     verb('dl','talk to'); spot('kira'); await wait(400);
     ch('dl','exact fix'); await wait(400);
     ch('dl','Re-merge on the pseudonymous'); await wait(600);
     out.delegation = !!flags().delegationDone;
+    out.cleandata = !!document.querySelector('#dl_sideInv .side-inv-slot[data-item="cleandata"]');
 
-    // --- Bureau: write your own interpretation
+    // --- Statistics Basement: now it can actually be analysed
+    await go('Statistics Basement');
+    verb('sb','use'); spot('seal'); await wait(500); ch('sb','Run it'); await wait(700);
+    out.stats = !!flags().statsDone;
+    out.resultKind = flags().resultHolds ? 'holds' : flags().resultNull ? 'null' : '?';
+
+    // --- Bureau again: now there is a number to interpret
     await go('The Bureau of Implications');
     verb('bu','talk to'); spot('clerk'); await wait(400);
     ch('bu','write my own'); await wait(400);
@@ -46,6 +55,11 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     ch('bu','never answered'); await wait(300);
     ch('bu','Lodge it'); await wait(600);
     out.bureau = !!flags().bureauDone; out.actIV = !!flags().actIVDone;
+
+    // --- Writing Room first: type the drawer label the Registry demands
+    await go('The Writing Room');
+    verb('wr','pick up'); spot('table'); await wait(450);
+    out.label = !!document.querySelector('#wr_sideInv .side-inv-slot[data-item="drawerlabel"]');
 
     // --- Gap Registry
     await go('The Gap Registry');
@@ -81,7 +95,8 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
+  const ok = r.ticket && r.cleandata && r.label
+    && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
 })();
