@@ -15,7 +15,8 @@ async function run(flags) {
       if (ss.length && ii.length){ sign=ss[ss.length-1]; bg=ii[ii.length-1]; break; }
       window.CODEBOOK_START();
     }
-    return {sign: sign?sign.textContent:'none', map: bg?bg.getAttribute('src'):'none'};})()`);
+    const swan = [...document.querySelectorAll('.map-wrap img')].some(i => /black-swan/.test(i.getAttribute('src')||''));
+    return {sign: sign?sign.textContent:'none', map: bg?bg.getAttribute('src'):'none', blackSwan: swan};})()`);
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const e=p.errors.slice(); p.close(); return {...r, errors:e};
 }
@@ -24,8 +25,12 @@ async function run(flags) {
   const after  = await run({ pondDone:true });
   console.log('before painting:', JSON.stringify(before));
   console.log('after painting: ', JSON.stringify(after));
-  const ok = /Still 50\/50/.test(before.sign) && /act1/.test(before.map)
-    && /literally 50\/50/.test(after.sign) && /FALSIFIED/.test(after.sign) && /act3/.test(after.map)
+  // There is one campus painting now, not one per act -- keeping three consistent maps
+  // meant keeping thirty-four coordinates valid against each. What must still change is
+  // the picture agreeing with the sign: the sign claims the pond is literally 50/50, so a
+  // black swan overlay has to appear on the map at the same moment.
+  const ok = /Still 50\/50/.test(before.sign) && !before.blackSwan
+    && /literally 50\/50/.test(after.sign) && /FALSIFIED/.test(after.sign) && after.blackSwan
     && !before.errors.length && !after.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); process.exit(ok?0:1);
 })();

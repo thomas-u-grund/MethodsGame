@@ -83,7 +83,7 @@ and the later acts cannot be recorded until the user makes the casting decisions
 
 **So, in one line:** the game is built, finishable and fully painted; what is left is
 **voices for three acts** (blocked on casting, §7) and the §8 items — of which the live ones
-are **8k** the Accelerator mini-game, **8i** the campus map, and the last two cast reuses.
+are **8k** the Accelerator mini-game and the last two cast reuses.
 
 ---
 
@@ -426,19 +426,21 @@ it, not from the headings below.
 
 | § | What | Size |
 |---|---|---|
-| **8k** | The Hypotheses Accelerator as a mini-game, with Feldstrom as the second gauge | large — the most play left in the game |
-| **8i** | The campus map has run out of campus; Act II also needs its own map state | large — art is the easy half, 34 coordinates are the rest |
-| **8h** | One cast member left: the library student who skimmed it | small |
-| **8m** | Causality Corridor: randomise case order, rewrite the door labels | medium |
-| **8a** | Running jokes still to place | small |
-| **8-PRIORITY** | Spatial parts 3 and 4: floor polygons, foreground occlusion | medium |
+| **8o** | The Professor is two different people in Act I (user) | Option C chosen: silhouette lecturer = the monkey |
+| **8p** | Character movement is mechanical: lockstep, metronomic, rigid (user) | small-medium |
+| ~~8i~~ | ~~The campus map has run out of campus~~ | **DONE 2026-09-22** |
+| **8a** | Running jokes still to place (the not-having-read-it thread, the founders) | small — mostly Look At text plus one or two images |
+| **8h** | One cast member left: the library student who skimmed it | small — and he is where the reading joke starts |
 
-**Blocked on the user:** voices for Acts II, IV and V (§7 casting), and the "BINGO!" take.
+**Blocked on the user:** voices for KIRA, the Visiting Fellow, the Registrar, the
+Implications Clerk and Tobi (§7 casting).
 
-**Done:** 8c Swedish accent · 8d inventory icons · 8f inventory descriptions ·
-8g Form P-1 trailer art · 8h Mensa, Fieldwork and the Skeptic · 8j the pinned extension ·
-8l dialogue discoverability · 8b cross-room density (audit only, no action needed) ·
-8e image-generation failure modes (reference, not a task).
+**Done:** 8-PRIORITY spatial (all four parts) · 8b cross-room density (audit) ·
+8c Swedish accent · 8d inventory icons · 8e image-generation failure modes (reference) ·
+8f inventory descriptions · 8g Form P-1 trailer art · 8h Mensa, Fieldwork, the Skeptic,
+the Hall clerk · 8j the pinned extension · 8k the Accelerator mini-game ·
+8l dialogue discoverability · 8m corridor shuffle and brass plaques ·
+8n outro camera moves · Feldstrom voiced · BINGO voiced.
 
 ---
 
@@ -931,7 +933,131 @@ without it looking like the same picture keeps coming back.
 
 ---
 
-## 8i. The campus map has run out of campus — logged 2026-09-21 (user)
+## 8p. Character movement is mechanical — logged 2026-09-21 (user)
+
+> "I also think our movements of characters are not fine tuned and natural enough."
+
+**Why it reads as mechanical.** Every character's idle and talk is a single two-keyframe
+CSS animation on `alternate`, applied to the whole sprite:
+
+```
+[data-voice]          animation: cb-breathe 3.8s  ease-in-out infinite
+[data-voice].talking  animation: cb-talk    .75s  ease-in-out infinite alternate
+```
+
+Five specific faults follow from that shape, and they are worth fixing in this order:
+
+1. **It is a metronome.** `infinite alternate` at a fixed duration is a perfect sine. Speech
+   is not periodic, and the eye reads exact periodicity as machinery. *Fix:* multi-keyframe
+   talk curves with uneven beats, and a small per-instance duration jitter.
+2. **Everyone is in lockstep.** Every sprite starts its 3.8s breath at the same moment, so
+   the Registrar, KIRA and the skeleton in the Gap Registry all inhale together. *Fix:* a
+   random negative `animation-delay` per sprite — one line, and it removes the single most
+   obviously artificial thing in the game.
+3. **It snaps on and off.** Adding `.talking` jumps straight to full amplitude and removing
+   it cuts mid-pose. *Fix:* ramp the amplitude with a CSS variable over ~200ms at each end,
+   and finish on the neutral keyframe rather than wherever the cycle happens to be.
+4. **The whole body moves as one rigid block.** `transform-origin:50% 100%` rocks the entire
+   figure from the feet. When a person talks, the head and shoulders move and the feet do
+   not. *Fix:* talk should pivot from roughly shoulder height, not the soles — and where a
+   character has a separate mouth layer, most of the motion should come from the head.
+5. **No secondary motion and no variety.** Nothing settles after a gesture, and nobody ever
+   shifts their weight. *Fix:* a rare idle "shift" every 8-20 seconds, phase-randomised, so
+   a standing character is not a loop.
+
+Cheap and high-value: (2) then (3) then (1). (4) needs per-character origins. (5) is polish.
+
+**Constraint from earlier in the project:** the user's original note was that the talking
+motion was *"too hectic and fast"* and every duration was halved in response. Do not undo
+that — the problem now is regularity and rigidity, not speed. Keep the amplitudes and the
+current tempos and change the *shape* of the motion.
+
+---
+
+## 8o-PRIORITY. The Professor is two different people in Act I — logged 2026-09-21 (user)
+
+> "In act 1 the professor is the one with the clear question and who asks for data, but
+> then he is also the one giving the system theory lecture. That does not fit. But I love
+> the bingo part."
+
+Correct, and it is the one character contradiction in the game. In the Office he is the
+game's conscience: he refuses vague questions, makes you specify WHO/WHAT/WHEN, and says
+*"a question is not evidence."* In the Lecture Theatre he delivers exactly the grand
+unfalsifiable systems-theory fog the whole game is a joke about — autopoiesis, contingency,
+second-order observation — and the bingo card is mocking *him* for it. Those are opposite
+characters wearing one sprite.
+
+**Option A — split the role.** The lecturer becomes **Feldstrom**, who already is the
+grand-theory man; meeting him droning in Act I and then finding his workshop in Act II is a
+better introduction than the one he currently gets. The bingo vocabulary is his register
+exactly.
+
+*Cost, measured:* 3 body sprites and 3 mouth layers to regenerate (`prof-lecturing`,
+`prof-walking`, `prof-pointing` and their mouths), **11 `lecture-*` voice clips** to
+re-render in Bernd, and — the real problem — **it breaks the Act I loop**. Winning bingo is
+what sends the Professor to his office so the interview can happen; the office is empty
+before that, which is what lets you loot it. If Feldstrom lectures, the Professor has to be
+somewhere else, and the "loot the empty office, then win bingo, then interview him"
+sequence has to be redesigned.
+
+**Option B — one character, fix the writing.** He is *covering someone else's course*. The
+slides are not his, the notes are not his, and he is visibly bored reading them out. Then
+the bingo card mocks the **material**, not the man, and the joke gets better: the one
+rigorous person in the building is obliged to stand there reciting the nonsense, and the
+student with the bingo card is doing him a favour by derailing it. A handful of lines in the
+Lecture Theatre change; **no art, no re-voicing, no structural change**, and his Office
+character stops contradicting itself.
+
+**Option C — the lecturer is somebody else, and you never see who. CHOSEN 2026-09-21 (user).**
+
+> "Maybe we. We'd new character for lecture or professor"
+> "The professor could be in office hidden... or in shadow... and Latinate lt. it is
+> revealed it is the monkey. Lol" / "Just an idea"
+
+The lecturer becomes a separate character who is never lit: a backlit silhouette at the
+lectern with the projector beam behind him, speaking fluent Latinate fog. The Professor is
+then only ever the Office character, and the contradiction disappears without touching his
+writing at all. The payoff is that the silhouette is **the monkey** — the same monkey that
+is Reviewer 2 in the post-credits stinger (`outro-6-monkey.webp`, already painted).
+
+This is the best version of the fix, and not only because it is funny. It closes a loop the
+game already has open: the grand-theory voice that opens the game and the anonymous verdict
+that closes it are the same creature, and the joke lands *retroactively* on a player who has
+just spent five acts being told their contribution is insufficiently developed. It also
+explains, without a word of exposition, why the lecture is unfalsifiable fog — nobody is
+home behind it.
+
+*Cost, measured — and it is cheaper than Option A, possibly cheaper than B:*
+
+- **Art: 3 sprites replaced by 1, and 2 deleted.** `prof-lecturing`, `prof-walking`,
+  `prof-pointing` become one silhouette with a pointing arm (or two poses). The two mouth
+  layers `mouth-prof-lecturing` / `mouth-prof-pointing` are **deleted outright** — a
+  silhouette has no visible mouth, so the whole mouth-sync rig for this room goes away.
+  Silhouettes are also the single most forgiving thing to generate.
+- **Voice: 11 clips** (`lecture-opening`, `lecture-summon`, `lecture-ambient-quote`, and the
+  eight `lecture-line-*`) re-rendered in a different voice, run through a hall reverb so it
+  reads as a PA in a big room. One `gen.py` run; no casting decision needed, since "distant
+  and over-amplified" hides the voice's identity by design.
+- **Structure: nothing changes.** The Professor is in his Office the whole time, which is
+  where Option A broke. Bingo still summons him — or better, bingo ends the lecture and
+  *then* you go to the Office, which is what already happens.
+- **The reveal costs nothing**, because the outro art exists. The silhouette just needs
+  proportions that are slightly wrong — a little too short, arms a little too long — so the
+  reveal is fair rather than arbitrary. A player who goes back and looks should see it.
+
+*One thing to get right:* the silhouette must not read as "asset we could not afford to
+draw". It needs a reason to be backlit that is visible in the frame — the projector blazing
+straight at camera, the figure in front of it. Then it reads as staging, not absence.
+
+**Decision: C.** Option B stays written down as the fallback if the silhouette art does not
+come out, since it is pure text and can be done in an afternoon.
+
+Either way the bingo mechanic itself does not change, and the bingo card now mocks a
+character who deserves it with no collateral damage to the Professor.
+
+---
+
+## 8i. The campus map has run out of campus — DONE 2026-09-22
 
 > "Feldstroms workshop and the survey lab are oddly connected to the observatory. maybe we
 > just extend the campus map, zoom out and have more budlings? or we repaint other areas?"
@@ -968,6 +1094,48 @@ rather than something growing out of the hillside.
 is measured against the current painting. New art invalidates all thirty-four. Budget the
 re-measuring, do it once, and check it with a screenshot per act rather than by eye — the
 signs are now act-filtered (§1), so only a handful show at a time and mistakes hide easily.
+
+---
+
+
+---
+
+**Done 2026-09-22.** New painting (dense gothic, autumn, warm-lit windows — the second
+attempt; the first was bright neoclassical parkland and the user was right that it had
+"moved too far away from the other art work"). Fifteen distinct buildings, and all
+seventeen rooms now sit on one each: the two pairs that share are the Mensa/Writing Room
+and the Delegation Engine/Gap Registry, whose acts never overlap. **The observatory is a
+room now** — the Delegation Engine — which is what actually fixes the complaint that
+opened this item: the workshop and the survey lab used to look like its outbuildings
+because it was scenery with no purpose of its own.
+
+The three-map plan stayed dead. One painting, act-filtered signage, two overlays.
+
+**The coordinates are generated, not hand-tuned.** `tools/art/maptables.py` holds one
+table of buildings and one of signs and writes `MAP_LAYOUT` and `MAP_LABELS` into the game
+with `--write`. It refuses to produce a table that violates any of:
+
+- no two hotspots overlap *anywhere* — every unlocked room's button is on the map at once
+  by Act V, so this is a global check, not a per-act one. It caught workshop/mensa and
+  seminar/fieldwork, both 1-2% slivers that would have made a room partly unclickable.
+- no two signs that can be on screen together overlap, where "together" includes the
+  Professor's Office, which is signposted in **every** act, and the Pond, which keeps its
+  board if left unpainted. It caught the Office's board sitting on the Bureau's.
+- nothing a player must read or click falls below **89%**. The map is never cropped — the
+  wrapper keeps the painting's exact aspect — but at 1600x900 the last ~10% of it is below
+  the fold and has to be scrolled to, which is what the old "y=90" rule was really about.
+
+**Board sizes are measured, not guessed.** `tools/art/signfit.js` measures each board's
+text in the real font at the real size and prints the `MEASURED` table; the board is that
+plus padding, and every board is `nowrap`. This was a real bug and not a hypothetical one:
+"Probability Pond" needed 11.13% and had 10.91%, so it wrapped to two lines and spilled
+over both curled ends of the scroll. The Pond is measured in its *painted* state — three
+lines, and the widest it ever gets, because a board cannot resize itself mid-act.
+
+`web/campus-black-swan.webp` was re-cut from the new painting's own second swan, so the
+black swan matches the white one beside it exactly. The three unreferenced map files
+(`campus-map-act1.webp`, `campus-map-act3.webp`, `campus-map-bg.webp`, ~1.9MB) were
+deleted; nothing had referenced them since the three-map plan was dropped.
 
 ---
 
