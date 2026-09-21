@@ -656,7 +656,42 @@ repeat of "you are not calling internationally".
 
 ---
 
-## 8l-PRIORITY. You cannot tell when a line has alternatives — logged 2026-09-21 (user)
+## 8l. You cannot tell when a line has alternatives — BUILT 2026-09-21
+
+**The diagnosis in the spec below was half wrong, and the real cause is worth recording.**
+The layout was already viewport-capped: `.stage` is `height:100%`, and `.panel` had
+`max-height:20%; overflow-y:auto`. So the page did not scroll — the *panel* did, internally,
+and the only cue was a scrollbar nobody looks for. Worse, `.scene-wrap` was
+`width:100%; aspect-ratio:16/9; flex:0 0 auto`, so the scene claimed the full width first
+and the panel took whatever was left: on a 1600x900 window that is about **80px**, against
+the ~390px four replies actually need.
+
+**Fixed by inverting which one gets the space.** `.panel` is now `flex:0 0 auto` with
+`max-height:52%`, so it sizes to its content, and `.scene-wrap` is `flex:1 1 auto;
+width:auto; margin:0 auto` — sized by the height it is left and deriving its width from
+`aspect-ratio:16/9`. The scene stays exactly 16:9, so **every hotspot percentage remains
+valid**, which is the whole reason for doing it this way rather than letting the image fill
+the width and crop. A room with no choices still gets a full-size scene, because the panel
+shrinks to the line.
+
+Plus `CODEBOOK_CHOICE_COUNT(el)`, called from every `choice()`/`addChoice()`/`clearChoices()`
+in both the shared scaffolding and the four hand-built Act I rooms. It writes a mono
+"4 replies" label above the list, marks the list `is-scrollable` (a bottom fade) only when
+it genuinely overflows, and `scrollIntoView({block:'nearest'})`s it on arrival. The label is
+a *sibling* of `#<p>_choices`, so every test that queries `#<p>_choices button` is untouched.
+
+Verified at 1600x900, 1440x900 and 1280x600: the Bureau's four-way menu shows all four
+options with no scrolling at any of them.
+
+**Cost, accepted:** when the panel is large the scene letterboxes rather than filling the
+width. That is the price of keeping 16:9 for hotspot accuracy, and it only happens while a
+long line and several replies are on screen.
+
+**Original spec below.**
+
+---
+
+## 8l-spec. You cannot tell when a line has alternatives — logged 2026-09-21 (user)
 
 > "i am not overly happy about how we solve alternative dialogs being available. sometimes
 > ones does not know that alternatives are available. one has to scroll down. I know that,
