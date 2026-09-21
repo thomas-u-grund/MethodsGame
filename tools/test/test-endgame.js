@@ -19,7 +19,9 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       if (!b) throw new Error('no button ' + t); b.click(); await wait(1200); };
     const verb = (p,v) => [...document.querySelectorAll('#'+p+'_verbGrid button')].find(b=>new RegExp(v,'i').test(b.textContent)).click();
     const spot = id => document.querySelector('[data-id="'+id+'"]').click();
-    const item = (p, id) => document.querySelector('#'+p+'_sideInv .side-inv-slot[data-item="'+id+'"]').click();
+    // "Look at" on an inventory item now describes it, so arm the USE verb first.
+    const item = (p, id) => { [...document.querySelectorAll('#'+p+'_verbGrid button')].find(b => /^use$/i.test(b.textContent.trim())).click();
+      document.querySelector('#'+p+'_sideInv .side-inv-slot[data-item="'+id+'"]').click(); };
     const ch = (p,re) => { const b=[...document.querySelectorAll('#'+p+'_choices button')].find(x=>new RegExp(re,'i').test(x.textContent));
       if(!b) throw new Error('no choice /'+re+'/ in '+p+': '+[...document.querySelectorAll('#'+p+'_choices button')].map(x=>x.textContent.slice(0,32)).join(' | ')); b.click(); };
     const flags = () => JSON.parse(localStorage.getItem('codebook_save_v1')).flags;

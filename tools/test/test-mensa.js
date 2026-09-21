@@ -10,7 +10,9 @@ async function run(inv) {
     const wait = ms => new Promise(r => setTimeout(r, ms));
     window.CODEBOOK_START(); await wait(500);
     document.querySelector('button.campus-hotspot[title^="The Mensa"]').click(); await wait(800);
-    const use = id => { document.querySelector('#mn_sideInv .side-inv-slot[data-item="'+id+'"]').click();
+    // "Look at" on an inventory item now describes it, so arm the USE verb first.
+    const use = id => { [...document.querySelectorAll('#mn_verbGrid button')].find(b => /^use$/i.test(b.textContent.trim())).click();
+                        document.querySelector('#mn_sideInv .side-inv-slot[data-item="'+id+'"]').click();
                         document.querySelector('[data-id="frame"]').click(); };
     const line = () => document.getElementById('mn_line').textContent;
     const out = {};

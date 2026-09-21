@@ -20,7 +20,9 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       const b = document.querySelector('button.campus-hotspot[title^="' + t + '"]');
       if (!b) throw new Error('no map button: ' + t); b.click(); return wait(1200); }); };
     const verb = (p, v) => [...document.querySelectorAll('#'+p+'_verbGrid button')].find(b => new RegExp(v,'i').test(b.textContent)).click();
-    const item = (p, id) => document.querySelector('#'+p+'_sideInv .side-inv-slot[data-item="'+id+'"]').click();
+    // "Look at" on an inventory item now describes it, so arm the USE verb first.
+    const item = (p, id) => { [...document.querySelectorAll('#'+p+'_verbGrid button')].find(b => /^use$/i.test(b.textContent.trim())).click();
+      document.querySelector('#'+p+'_sideInv .side-inv-slot[data-item="'+id+'"]').click(); };
     const spot = id => document.querySelector('[data-id="'+id+'"]').click();
     const choice = (p, re) => { const b = [...document.querySelectorAll('#'+p+'_choices button')].find(x => new RegExp(re,'i').test(x.textContent));
                                 if (!b) throw new Error('no choice /'+re+'/ in '+p+': ' + [...document.querySelectorAll('#'+p+'_choices button')].map(x=>x.textContent.slice(0,30)).join(' | ')); b.click(); };
