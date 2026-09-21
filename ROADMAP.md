@@ -28,24 +28,56 @@
 
 ## 1. Where the game stands today
 
-- **Live artifact:** v51 at https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 · **Repo:** https://github.com/thomas-u-grund/MethodsGame (`main`)
-- **Everything is one file:** `web/the-secret-of-the-codebook.html` (~5,000 lines). No build step.
-- **Built and playable:** Act I (4 rooms, painted, voiced, rigged, animated) and the data act (4 rooms, painted, voiced, sprites) — **the data act is still labelled "Act II" in code and must be renumbered to Act III** (WP-0.2).
-- **Not built at all:** the new Act II (theory), the new Act IV third room, all of Act V, the outro.
-- **Local asset state (after Phase 0):** **140 files, 42 MB** in `web/`, comfortably inside the artifact host's 255/64 MB, and no longer the binding constraint now that GitHub Pages is the target (§3).
+*Board last verified against the file and the `web/` directory on 2026-09-21. Every ✅ below
+was checked, not remembered.*
+
+- **Live artifact:** v51 at https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 — **stale**, and
+  will stay stale until the user asks for a publish. **Repo:**
+  https://github.com/thomas-u-grund/MethodsGame (`main`) — **61 commits unpushed.**
+- **Everything is one file:** `web/the-secret-of-the-codebook.html` (**7,148 lines**). No build step.
+- **All 17 rooms are built, painted and playable, end to end**, Act I through the outro. The
+  data act was renumbered to Act III long ago (WP-0.2 is done).
+- **The game is completable.** A player can go from the Office interview to the submission
+  chute and the Reviewer 2 outro without touching a placeholder room.
+- **The gap is audio and cutscene art, not rooms.** Acts II, IV and V have no recorded voices,
+  and the interludes and outro still run on designed SVG cards.
+- **Local asset state:** **195 files, 54 MB** in `web/`. Inside the artifact host's 255-file
+  limit, but no longer comfortably — the margin is 60 files. Converting the 36 remaining icon
+  PNGs to webp is the cheapest reclaim if it ever binds (§8d).
+- **Tests:** 25 CDP tests, all green (`tools/test/run-all.sh`). Run them serially; two
+  concurrent runs share one browser and overwrite each other's `localStorage`.
 
 ### Build status board
 
-| Act | Rooms | Story | Art | Sprites | Voices | Rig/anim | SFX | Code |
-|---|---|---|---|---|---|---|---|---|
-| **I — The Question** | Office, Lecture Theatre, Corridor, Pond | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **II — Theory** | Library, Hall of Founders, Workshop, Seminar Room | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **III — Data** | Survey Lab, Ethics, Mensa, Fieldwork | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **IV — Evidence** | Basement, Delegation Engine, Bureau of Implications | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **V — Writing** | Gap Registry, Writing Room | ✅ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ | ⬜ |
-| **Outro** | cutscene | ✅ | ⬜ | — | ⬜ | — | ⬜ | ⬜ |
+**Code / Story / Art** — what a player sees:
 
-Roughly: **nine new rooms, one cutscene, and a retrofit of the data act.**
+| Act | Rooms | Story | Room art | Sprites | Code | Puzzles |
+|---|---|---|---|---|---|---|
+| **I — The Question** | Office, Lecture Theatre, Corridor, Pond | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **II — Theory** | Library, Hall of Founders, Workshop, Seminar Room | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **III — Data** | Survey Lab, Ethics, Mensa, Fieldwork | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **IV — Evidence** | Stats Basement, Delegation Engine, Bureau of Implications | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **V — Writing** | Gap Registry, Writing Room | ✅ | ✅ | ✅ | ✅ | ✅ |
+| **Outro** | Reviewer 2 cutscene | ✅ | 🟡 1 of 6 | ✅ | ✅ | — |
+
+**Audio / cutscene art** — what is actually outstanding:
+
+| Act | Voices | SFX | Ambience | Interlude art | Notes |
+|---|---|---|---|---|---|
+| **I** | ✅ 38 clips | ✅ | ✅ | ✅ painted | complete |
+| **II** | ⬜ none | ✅ | ✅ | ⬜ 3 SVG cards | §8g — Form P-1 panel |
+| **III** | ✅ 107 clips | ✅ | ✅ | ✅ painted | complete |
+| **IV** | ⬜ none | ✅ | ✅ | ⬜ 3 SVG cards | |
+| **V** | ⬜ none | ✅ | ✅ | ⬜ 3 SVG cards | |
+| **Outro** | ⬜ none | ✅ | — | 🟡 monkey painted, panels 1–5 SVG | |
+
+SFX and ambience are ✅ everywhere because they are two shared bundles (`sfx-act1.mp3`,
+`sfx-act3.mp3`) covering 36 named cues, and the later acts draw from the same library rather
+than needing their own. Voices are the opposite: 145 clips exist, all of them Act I or Act III,
+and the later acts cannot be recorded until the user makes the casting decisions in §7.
+
+**So, in one line:** the game is built and finishable; what is left is **voices for three acts,
+twelve interlude panels, five outro panels**, and the polish items in §8.
 
 ---
 
@@ -623,7 +655,52 @@ repeat of "you are not calling internationally".
 
 ---
 
-## 8f. "Look at" an inventory item should say something — logged 2026-09-21 (user)
+## 8g. Artwork for the Form P-1 trailer — logged 2026-09-21 (user)
+
+The Act II interlude (`CODEBOOK_ACT2_INTERLUDE`, in the ACT INTERLUDES script block) runs
+four panels and three of them are designed SVG cards: `il2-slip.svg` used **twice**, then
+`il2-rooms.svg`, then the `il2-title.svg` ACT II card. It is the one interlude that carries
+the quest object, and the quest object is currently a vector rectangle.
+
+**Panel 1 and 2 — the slip itself.** Both narrated beats point at Form P-1, so paint it
+properly and reuse it for both, the way the outro reuses panels: a single sheet of
+municipal-looking paper on a desk, **FORM P-1 · APPLICATION FOR PERMISSION TO HAVE AN
+EXPECTATION** across the head, four ruled boxes down the page — WHAT IS KNOWN, MECHANISM,
+SCOPE, HYPOTHESIS AND FALSIFIER — all four empty, and along the bottom edge the brass
+coherence needle sitting at EXEMPLARY because nothing has been written yet. The joke is in
+the fine print: *An expectation does not constitute optimism.* Match the in-game slip (the
+`CODEBOOK_SLIP.html` markup is the reference) so the object the player is handed in the
+Office is recognisably the object from the trailer.
+
+Panel 2's narration is the "what would count as surprising?" exchange and ends with
+machinery waking up below, so if a second frame is worth painting rather than reusing the
+first, it is the same slip lit from a different angle with the Accelerator's glow on it.
+
+**Panel 3** is the three-room montage (Library / Hall / Workshop) and can be composited from
+the painted room backgrounds that now exist, the way Act III's was. **Panel 4** is the ACT II
+title card and follows the existing card design.
+
+Same pipeline as every other panel: one-line prompt, alpha-crop, `cwebp -q 92`. Update the
+`src` entries and the `CODEBOOK_ACT_ASSETS.act2` preload list, which currently names the
+three SVGs.
+
+---
+
+## 8f. "Look at" an inventory item should say something — BUILT 2026-09-21
+
+All forty-seven written and wired, in both kinds of room, answering in the room's own
+dialogue box. `folder` and `slip` are functions of `GAME` rather than strings; the folder
+lists its actual contents, which makes examining it the game's progress summary.
+`test-itemlook.js` covers it and enforces both writing rules mechanically (no description
+may name a room or tell you which verb to use).
+
+One behaviour change fell out of it, and is worth knowing about: clicking an inventory item
+used to force the verb to `use` no matter what was selected. Under **look at** it no longer
+does. Three tests were relying on that shortcut and now arm the verb first.
+
+**Original spec below.**
+
+
 
 > "when one does 'look at' on items in inventory... there should be a little description
 > (sometimes with a hint, but not too obvious) popping up"
@@ -754,7 +831,10 @@ Learned the hard way; follow these or you will lose twenty minutes each time.
 
 ## 10. What auto-mode built, and what it could not
 
-*Added 2026-09-20 after running Phases 0–5 autonomously.*
+*Added 2026-09-20 after running Phases 0–5 autonomously. **Superseded in part on 2026-09-21:**
+point 1 below is now done — every room is painted, every character sprite exists, and the
+only SVG art left is twelve interlude panels and five outro panels. Point 2 stands: voices
+for Acts II, IV and V are still blocked on the casting decisions in §7.*
 
 **Every act is now playable end to end, in code.** Seventeen rooms, the Prediction Slip, the
 three durable flags, the act gates, the seal-breaking, the submission and the outro all work
