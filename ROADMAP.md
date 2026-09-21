@@ -427,9 +427,8 @@ it, not from the headings below.
 | § | What | Size |
 |---|---|---|
 | **8k** | The Hypotheses Accelerator as a mini-game, with Feldstrom as the second gauge | large — the most play left in the game |
-| **8n** | The outro repeats slides and has no camera movement | medium — one motion system fixes all of it |
 | **8i** | The campus map has run out of campus; Act II also needs its own map state | large — art is the easy half, 34 coordinates are the rest |
-| **8h** | Two cast members left: the Hall clerk and the library student | small — both reuse existing sprites |
+| **8h** | One cast member left: the library student who skimmed it | small |
 | **8m** | Causality Corridor: randomise case order, rewrite the door labels | medium |
 | **8a** | Running jokes still to place | small |
 | **8-PRIORITY** | Spatial parts 3 and 4: floor polygons, foreground occlusion | medium |
@@ -872,7 +871,23 @@ of the painting; and the Act I walkthrough still completes the corridor.
 
 ---
 
-## 8n-PRIORITY. The outro repeats its slides, and nothing moves — logged 2026-09-21 (user)
+## 8n. The outro repeats its slides, and nothing moves — BUILT 2026-09-21
+
+Every interlude panel now drifts: a 26s scale-to-1.11 with a per-shot direction, four
+directions cycled so the sequence does not pan the same way every time, and `pan:'still'`
+on a panel to opt out. **The move does not restart when consecutive panels share an image** —
+verified by measurement: across the outro's three campus-walk beats the transform keeps
+climbing (1.012, 1.020, 1.028) instead of resetting, so they read as one held shot rather
+than the same slide three times. A new image resets and starts a fresh move. Honours
+`prefers-reduced-motion`.
+
+That was enough on its own; no extra outro art was needed.
+
+**Original note below.**
+
+---
+
+## 8n-spec. The outro repeats its slides, and nothing moves — logged 2026-09-21 (user)
 
 > "several slides show up multiple times. the animations or camera moves are not looped in"
 
