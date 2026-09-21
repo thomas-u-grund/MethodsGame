@@ -1,4 +1,5 @@
-// The Act IV seal cannot be broken without the Act III exam records AND the Act I handouts.
+// The Act IV seal needs the merged data (Delegation), the Act III exam records and the
+// Act I worked-example handouts. This test covers the last two; cleandata is assumed.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 async function run(inv) {
@@ -21,9 +22,9 @@ async function run(inv) {
   const e = p.errors.slice(); p.close(); return { ...r, errors: e };
 }
 (async () => {
-  const none  = await run(['folder']);
-  const marks = await run(['folder','examrecords']);
-  const both  = await run(['folder','examrecords','worksheets']);
+  const none  = await run(['folder','cleandata']);
+  const marks = await run(['folder','cleandata','examrecords']);
+  const both  = await run(['folder','cleandata','examrecords','worksheets']);
   console.log('nothing:   ', JSON.stringify(none));
   console.log('\nmarks only:', JSON.stringify(marks));
   console.log('\nboth:      ', JSON.stringify(both));
