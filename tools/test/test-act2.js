@@ -8,7 +8,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
     inventory:['question','folder','pen','magnifyingglass','hourglass','chalk','mug','stamp','likertdie','usb','blackink'],
     flags:{ corridorDone:true, pondDone:true, whirlpoolDone:true, lectureDone:true,
-            philosopherConvinced:true, profAtOffice:true }}))`);
+            philosopherConvinced:true, profAtOffice:true, act2IntroSeen:true }}))`);
   await p.send('Page.navigate', { url: U + Date.now() }); await sleep(2500);
 
   const r = await p.evaluate(`(async () => { try {

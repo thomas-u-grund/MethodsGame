@@ -6,6 +6,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
     inventory:['folder'], flags:{ corridorDone:true, whirlpoolDone:true, profAtOffice:true,
       slipSealed:true, h27issued:true, actIIIDone:true, provenanceGiven:true,
+      act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true, act5IntroSeen:true,
       predictionSlip:{ known:'k', knownSound:true, mechanism:'m', mechanismSound:true,
                        scope:'s', scopeSound:true, hypothesis:'h', hypothesisSound:true, junk:0 } }}))`);
   await p.send('Page.navigate', { url: U + Date.now() }); await new Promise(r=>setTimeout(r,4000));
