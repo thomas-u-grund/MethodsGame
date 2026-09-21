@@ -357,6 +357,21 @@ Ask these at the natural moment, not all at once:
 
 ---
 
+## 8d. Inventory icons missing for everything added since Act III — logged 2026-09-21
+
+Visible in any screenshot of the new acts: the side panel falls back to two-letter text tiles
+(`EX`, `TH`, `RE`…) because `ITEM_ICONS` has no entry for the items added for Acts II, IV
+and V. Roughly nineteen: `stepladder, blankcard, nobelproc, grandphrase, altpaper, chalk,
+worksheets, examrecords, enrolreg, slip, readinglist, altcard, rateprint, cleandata,
+resultprint, interpretation, contribution, ticket, drawerlabel`.
+
+They are small square props, so they generate fast and in batches of four or five per prompt.
+Follow the existing icons' look (`icon-pen.png`, `icon-folder.png`) — object centred on a
+pale card, no background scene. Purely cosmetic, but it is the most visible unfinished thing
+in the game right now.
+
+---
+
 ## 8-PRIORITY. Characters are not standing in the rooms properly — logged 2026-09-21 (user)
 
 **The defect.** Characters are placed by a raw CSS box (`l/t/w/h` as percentages of the
@@ -405,6 +420,19 @@ the same decile grid already used for hotspots.
 or the Mensa servery should be *behind* it. One optional `-fg.webp` per room — a cut-out of
 the things that are in front, painted over the sprite layer. Only a few rooms need one; the
 rest can be handled by choosing a foot position that avoids the problem.
+
+### Status (2026-09-21)
+
+**Parts 1 and 2 are done.** Sprites are placed by `foot:[x%, y%]` and sized from a per-room
+`depth` ramp, with a per-character `scale` on top (KIRA is 0.62 because she is a waist-high
+robot; Feldstrom is 1.12 because he is not). All thirteen placements are converted, Tobi
+included. The sprite test was rewritten to assert soles-on-the-floor and height-on-the-ramp
+instead of the old "inside the scene somewhere" check that let this through.
+
+**Parts 3 and 4 remain**: the floor polygon (needed once anyone walks in these rooms) and
+foreground cut-outs for the few rooms where a character should stand behind something — the
+Bureau counter is the clearest case, and the Clerk is currently parked to the right of it to
+avoid the problem rather than solve it.
 
 ### Why this order
 
