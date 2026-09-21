@@ -427,7 +427,7 @@ it, not from the headings below.
 | § | What | Size |
 |---|---|---|
 | **8o** | The Professor is two different people in Act I (user) | Option C chosen: silhouette lecturer = the monkey |
-| **8p** | Character movement is mechanical: lockstep, metronomic, rigid (user) | small-medium |
+| ~~8p~~ | ~~Character movement is mechanical~~ | **DONE 2026-09-22** |
 | ~~8i~~ | ~~The campus map has run out of campus~~ | **DONE 2026-09-22** |
 | **8a** | Running jokes still to place (the not-having-read-it thread, the founders) | small — mostly Look At text plus one or two images |
 | **8h** | One cast member left: the library student who skimmed it | small — and he is where the reading joke starts |
@@ -933,7 +933,7 @@ without it looking like the same picture keeps coming back.
 
 ---
 
-## 8p. Character movement is mechanical — logged 2026-09-21 (user)
+## 8p. Character movement is mechanical — DONE 2026-09-22
 
 > "I also think our movements of characters are not fine tuned and natural enough."
 
@@ -971,6 +971,37 @@ Cheap and high-value: (2) then (3) then (1). (4) needs per-character origins. (5
 motion was *"too hectic and fast"* and every duration was halved in response. Do not undo
 that — the problem now is regularity and rigidity, not speed. Keep the amplitudes and the
 current tempos and change the *shape* of the motion.
+
+---
+
+
+---
+
+**Done 2026-09-22.** All five, and the system got smaller rather than bigger: five separate
+talk keyframe blocks collapsed into **one curve with four dials per character**
+(`--tk-rot` how far they lean, `--tk-sc` how much they swell, `--tk-ri` how much they rise,
+`--tk-dur` how fast), so a character's manner is now a line rather than a block and is
+tunable in one place.
+
+1. **Lockstep is gone.** `stampLife()` gives every sprite a random negative delay and a
+   +/-10% tempo jitter, applied by a batched `MutationObserver` so rooms, interludes and
+   the outro all get it without being touched. Exposed as `CODEBOOK_STAMP_LIFE`.
+2. **The talk curve is seven uneven beats**, swinging both ways by different amounts,
+   starting and ending neutral so the loop has no seam. Two keyframes on `alternate` *is* a
+   sine wave; that was the whole problem.
+3. **It ramps.** `@property --cb-a` is the amplitude and it transitions over .18s.
+   `setTalking()` holds a `.talk-out` class for one ramp after the clip ends, so a
+   character settles instead of freezing mid-gesture.
+4. **Talking pivots from the shoulders** (`transform-origin:50% 72%`), not the soles.
+   Breathing still pivots at the feet, which is correct.
+5. **A weight shift** every ~17s, phase-randomised, flat for most of its cycle so it reads
+   as an event and not a sway. It composes with the breath because the two animations touch
+   **disjoint properties** — the breath only `scale`, the shift only `translate`/`rotate`.
+
+Amplitudes and tempos were left where they were: the earlier complaint was "too hectic and
+fast" and this one was about regularity, so changing the speeds would have re-opened the
+first. `tools/test/test-life.js` pins all four properties, including that the curve
+reverses direction more often than a sine can.
 
 ---
 
