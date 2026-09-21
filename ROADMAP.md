@@ -412,6 +412,27 @@ being *wrong* and working anyway is the joke: Feldstrom has never met anyone fro
 either. The Hall of Founders clipping already supplies the correct prize name; the accent
 card supplies the delivery.
 
+**And the accent is mostly just Swedish nouns.** The player does not speak Swedish, so the
+performance is a handful of words dropped in at random, with total confidence, in the gaps
+where meaning should be. Feldstrom is entirely convinced. Build the call so the player picks
+the garnish and it always works:
+
+> **PLAYER:** "Hej. This is Stockholm."
+> **FELDSTROM:** *(a chair goes over)* "Yes."
+> **PLAYER:** "We are calling about the &mdash; *ja* &mdash; the prize. The committee. **Lagom.**"
+> **FELDSTROM:** "Of course."
+> **PLAYER:** "There is a matter of &mdash; how you say &mdash; **IKEA.**"
+> **FELDSTROM:** *(without a flicker)* "Naturally."
+
+Word bank to draw the options from, all deployed as though they are procedural terms:
+**hej · hej då · ja · lagom · fika · IKEA · Volvo · smörgåsbord · tack så mycket · Öresund ·
+allemansrätten.** The funniest beat is him treating one of them as a technical stage of the
+process &mdash; *"Ah. The fika stage."* &mdash; and the player having no idea whether that is
+real.
+
+Keep one rule: **it never fails for being wrong**, only for being flat. The joke is that he
+wants it so badly he will accept furniture retailers as evidence.
+
 **Implementation:** a fourth check in the Stockholm dialogue alongside extension 4173, KIRA's
 Nobel protocol and the Act I hourglass. Keep to three *mandatory* inputs by demoting one of
 the existing easings — the Quotation Dispenser phrase becomes optional, the accent card
