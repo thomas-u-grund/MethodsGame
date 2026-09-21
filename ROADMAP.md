@@ -374,12 +374,22 @@ re-described him — same haircut, same navy jacket, same globe tote, same lanya
 Keep a written description per character for exactly this reason; it is now the only reliable
 way to get a second pose.
 
-**Separately, there is a real daily ceiling.** After roughly fifteen or sixteen generations
-in a session, requests start returning the same silence regardless of how they are phrased —
-a from-scratch prompt in a fresh chat fails exactly like a redraw. The two failure modes look
-identical from the outside, so the way to tell them apart is: *if re-describing from scratch
-in a new chat also returns nothing, stop for the day.* Roughly fifteen images is a session's
-budget; plan the batch order accordingly and do the load-bearing art first.
+**The other thing that looks identical but is not: generation is sometimes just slow.**
+Later in a session a request can take three or four minutes, during which the page looks
+completely idle — `stop-button` is present but nothing is on screen and no text has streamed.
+An earlier note here claimed a daily ceiling of about fifteen images; **that was wrong**, and
+it cost an abandoned batch. The images arrived later.
+
+How to tell the two apart properly:
+
+- `!document.querySelector('button[data-testid="stop-button"]')` is **false** → still working,
+  however long it has been. Wait.
+- It is **true** and no new image has appeared → that request is genuinely dead. If it was a
+  redraw ("the same man"), re-describe from scratch. If it was already from scratch, retry
+  once in a fresh chat before concluding anything.
+
+Budget three to four minutes per generation late in a session and do not give up on a
+request while the stop button is still there.
 
 ---
 
