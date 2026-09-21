@@ -357,6 +357,38 @@ Ask these at the natural moment, not all at once:
 
 ---
 
+## 8a. Running jokes to work in — logged 2026-09-21 (user)
+
+**1. Students who have not done the reading.** Make this a recurring presence rather than a
+one-off. They should turn up across the whole game, always confident, never having read it:
+
+- The Lecture Theatre already has the sleeping/phone students — one of them should be
+  audibly confident about a text he has not opened.
+- The Library: someone at a reading desk with an unopened book and a very long summary
+  already written. KIRA should approve of their output.
+- The Seminar Room: a chair that is always empty, with a name card on it.
+- The Mensa queue: overheard, "I skimmed it, which is basically reading it."
+- The Writing Room: the co-author who has not read the paper they are on.
+- **Payoff:** in the outro, Reviewer 2's comment 1 is *"The literature review omits a
+  substantial body of work"* with no further detail — the ultimate not-having-read-it.
+
+**2. Dead old men with beards, mocked properly in the theory act.** The Hall of Founders
+already nods at everything; push it further. The portraits should be visibly interchangeable
+— same beard, same expression, different brass nameplate. Ideas worth building:
+
+- One extra painted portrait that is obviously the *same man* as the one beside it, with a
+  different name and dates. Nobody remarks on it.
+- A nameplate that has been unscrewed and re-screwed several times, the old holes visible.
+- `Look At` a portrait: "One of the founders of the discipline. Bearded. Dead. Certain."
+- One founder whose dates make him fourteen years old at the time of his major work.
+- A small brass sign by the door: **NO LIVING THEORISTS BEYOND THIS POINT.**
+- **One funny extra picture** (user's ask): a group portrait, eleven identical bearded men,
+  captioned "THE FOUNDERS — a complete record of who was allowed to speak."
+
+Both are cheap: mostly `Look At` text plus one or two generated images.
+
+---
+
 ## 8b. Cross-room puzzle density — audited 2026-09-21
 
 The user asked whether there are enough cross-room puzzles. Measured by counting, per act,
