@@ -148,3 +148,59 @@ OUTRO = [
 if __name__ == '__main__':
     for fn, big, small in OUTRO:
         card(fn, big, small)
+
+
+# --- act interlude panels ----------------------------------------------------------
+def montage(name, title, cells):
+    """A 2x2 room montage, the way Act III's trailer panel was composited."""
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" height="%d">' % (W, H, W, H)]
+    p.append(box(0, 0, W, H, '#14110E'))
+    cw, ch = W / 2 - 18, H / 2 - 40
+    for i, (label, fill) in enumerate(cells):
+        x = 12 + (i % 2) * (cw + 12)
+        y = 16 + (i // 2) * (ch + 12)
+        p.append(box(x, y, cw, ch, fill, '', stroke=P['wood_dark']))
+        p.append('<text x="%g" y="%g" fill="%s" font-family="JetBrains Mono,monospace" font-size="17" '
+                 'text-anchor="middle" letter-spacing="1.5">%s</text>' % (x + cw / 2, y + ch / 2, P['cream'], label))
+    p.append('<text x="%d" y="%d" fill="%s" font-family="Georgia,serif" font-size="27" '
+             'text-anchor="middle">%s</text>' % (W / 2, H - 18, P['mustard'], title))
+    open(os.path.join(OUT, name), 'w').write(''.join(p))
+    print('wrote', name)
+
+
+def act_card(name, act, big, sub):
+    p = ['<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 %d %d" width="%d" height="%d">' % (W, H, W, H)]
+    p.append(box(0, 0, W, H, '#14110E'))
+    p.append('<text x="%d" y="%d" fill="%s" font-family="JetBrains Mono,monospace" font-size="19" '
+             'text-anchor="middle" letter-spacing="6" opacity=".7">THE SECRET OF THE LOST CODEBOOK</text>' % (W/2, H/2 - 96, P['cream_dim']))
+    p.append('<text x="%d" y="%d" fill="%s" font-family="Georgia,serif" font-size="88" '
+             'text-anchor="middle" letter-spacing="10">%s</text>' % (W/2, H/2 - 6, P['mustard'], act))
+    p.append('<rect x="%d" y="%d" width="240" height="3" fill="%s" opacity=".7"/>' % (W/2 - 120, H/2 + 22, P['mustard_deep']))
+    p.append('<text x="%d" y="%d" fill="%s" font-family="Georgia,serif" font-size="40" '
+             'text-anchor="middle">%s</text>' % (W/2, H/2 + 80, P['cream'], big))
+    p.append('<text x="%d" y="%d" fill="%s" font-family="JetBrains Mono,monospace" font-size="17" '
+             'text-anchor="middle" opacity=".65">%s</text>' % (W/2, H/2 + 118, P['cream_dim'], sub))
+    open(os.path.join(OUT, name), 'w').write(''.join(p))
+    print('wrote', name)
+
+
+INTERLUDES = True
+if __name__ == '__main__' and INTERLUDES:
+    montage('il2-rooms.svg', 'Four rooms. Four definitions of theory.', [
+        ('THE LIBRARY', '#2A2E3A'), ('THE HALL OF FOUNDERS', '#2B2622'),
+        ("FELDSTROM'S WORKSHOP", '#332A22'), ('THE SEMINAR ROOM', '#2E3A34')])
+    montage('il4-rooms.svg', 'Nobody is stopping you.', [
+        ('THE STATISTICS BASEMENT', '#1E2430'), ('THE DELEGATION ENGINE', '#232A2E'),
+        ('THE BUREAU OF IMPLICATIONS', '#2C3340'), ('AND A SEALED ENVELOPE', '#3A2A16')])
+    montage('il5-rooms.svg', 'A finding is not a contribution.', [
+        ('THE GAP REGISTRY', '#2A2C28'), ('THE WRITING ROOM', '#31302C'),
+        ('THE OFFICE', '#2E4358'), ('THE CHUTE', '#241A12')])
+    act_card('il2-title.svg', 'ACT II', 'Apparently We Need a Theory',
+             'An idea about how the world works. And a way to be wrong.')
+    act_card('il4-title.svg', 'ACT IV', "Apparently Numbers Don't Speak for Themselves",
+             'A result is not a meaning.')
+    act_card('il5-title.svg', 'ACT V', 'Apparently Somebody Has to Write It',
+             'Four sentences. Three of them nearly true.')
+    card('il2-slip.svg', 'FORM P-1', 'application for permission to have an expectation')
+    card('il4-seal.svg', 'The wax comes off', 'you wrote this before you knew anything')
+    card('il5-chute.svg', 'NO REFUNDS', 'manuscript submission')
