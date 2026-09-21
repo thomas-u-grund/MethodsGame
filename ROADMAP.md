@@ -357,6 +357,44 @@ Ask these at the natural moment, not all at once:
 
 ---
 
+## 8b. Cross-room puzzle density — audited 2026-09-21
+
+The user asked whether there are enough cross-room puzzles. Measured by counting, per act,
+the inventory items a room *requires* (`item === 'x'` / `hasItem('x')`) and *produces*
+(`api.give` / `addItem`):
+
+| Act | Rooms | Items required | Items produced |
+|---|---|---|---|
+| I | 4 | 2 | 5 |
+| II | 4 | 13 | 6 |
+| III | 4 | 21 | 12 |
+| **IV** | 3 | **0 → 2** | **0** |
+| **V** | 2 | **0** | **0** |
+
+**Acts II and III are densely interlocked and need nothing.** Acts IV and V had *no*
+inventory puzzles whatsoever — they gated purely on in-room flags (read the log, then check
+a record, then you may speak), which is a dialogue tree with prerequisites, not an adventure
+game, and it breaks the house rule that no room contains its own solution.
+
+**Fixed so far:** the worked-example sheets chain that `STORY.md` § Act III already
+promised and the code never built. The Act IV seal cannot be broken without **the exam
+records** (Ethics, Act III) *and* **the Professor's worked-example handouts** (the Lecture
+Theatre, Act I) — because the prediction is about particular questions, and nothing in the
+exam envelope says which questions resemble the worked examples. Three acts, one chain.
+
+**Still to add, in priority order:**
+
+1. **Bureau of Implications** should require the fieldwork response rate and the sampling
+   frame to write its three limitations — the player currently asserts them from nothing.
+2. **Gap Registry** should require the Act II reading list as an object. The contribution is
+   defined *against* the literature, so the literature should be in your hands.
+3. **Writing Room** should require the chewed pen to make the three word corrections, and
+   the sealed slip to check the claim against what was promised.
+4. **Act III → IV** has only the new exam-records link. One more would help: the Fieldwork
+   Arena's response-rate printout as a carried object.
+
+---
+
 ## 9. Art status (updated 2026-09-21)
 
 **Every room in the game is painted.** No room ships a placeholder background any more.
