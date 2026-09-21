@@ -171,6 +171,7 @@ A gothic, autumnal university campus (unnamed) — statues of seated philosopher
 - **The Fieldwork Director** — runs the Fieldwork Arena like a live game show, lives and dies by the illuminated RESPONSE RATE board, and considers a defensible 64% a greater achievement than a suspicious 100% — because the 100% on their own CV turned out to be fraudulent.
 - **Prof. Dr. Magnus Feldstrom** — a traffic-flow physicist who crossed into the social sciences and never changed his toolkit; the Professor's structural opposite, hates claims that are too *small*. Still waiting for a phone call from Stockholm. **Appears twice**: in **Act II** his Hypotheses Accelerator is how a theory becomes a hypothesis — he has taped over the control that does it, and has to be tricked out of the room before the player can run the machine the other way — and in **Act V** he tries to inflate the title of the finished paper, with no machine at all. Genuinely helpful, genuinely unmoored; the contrast with the first Professor (one hates overreach, one hates timidity) is the joke, not a twist.
 - **The Visiting Fellow** (Act II, Seminar Room) — believes, serenely, that the answer is always selection, because selection destroyed her own dissertation. Never hostile, always asking how you would tell a real effect apart from the students simply being different. The Skeptic's academic cousin, and right often enough to be irritating.
+- **Tobi** — *Strategic Visibility & International Growth*, the only character with no room of his own. A young, immaculate, relentlessly friendly marketing hire who roams the campus and turns up wherever you did not want him. Permanently on his phone. Speaks a dialect assembled entirely from LinkedIn. Doubles as the International Office, because the university merged the two posts and nobody objected. He is the game's one piece of satire aimed at the modern business of universities rather than at research itself, and he should never be cruel — he is genuinely delighted by everything, which is what makes him unbearable. Full design below.
 - **The Registrar of Gaps** (Act V, Gap Registry) — helpful, tired, and in possession of a filing cabinet full of pre-approved holes in the literature. Not a fool: he is the one who says that a gap is a hole and a contribution is a hole that mattered.
 - **The Implications Clerk** (Act IV, Bureau of Implications) — sells meanings in three sizes and does not read the number you hand over, only the size you ask for.
 - **Reviewer 2** (referenced from Act I onwards, seen only after the credits) — spoken about across the whole game as a kind of academic weather system: *"Reviewer 2 will ask."* / *"Who is Reviewer 2?"* / *"Nobody knows."* Delivers eleven pages and forty-seven contradictory comments, one of which is completely correct. **Is, it turns out, a monkey**, and the game never explains this or resolves whether the monkey or the submission software actually wrote the review.
@@ -1788,6 +1789,97 @@ And underneath, smaller, after a beat:
 > *Featuring Reviewer 2.*
 
 **The note the ending has to hit:** the player does not leave with the Codebook, a discovery, or a career. They leave with a modest, defensible, *true* thing, and a letter asking for revisions — and the game's position is that this is a good day. Every absurdity in five acts was an institution overdoing something that was, underneath, worth doing. Nothing the player learned was decoration.
+
+---
+
+## Tobi — Strategic Visibility & International Growth
+
+*Added 2026-09-21 at the user's request: a marketing/international-recruitment character who
+roams rather than owning a room.*
+
+**The joke.** Every other character in this game is ridiculous about *research*. Tobi is
+ridiculous about the *university as a business*. He is the only one who has never once asked
+what the question is, and the only one who is completely certain the project is going well.
+
+**Look.** Mid-twenties, expensive plain clothes, very good haircut, tote bag, reusable cup, a
+lanyard carrying four badges for three jobs. Phone always in hand, usually filming. Never
+sits down.
+
+**Voice.** A dialect made of conference slides. He does not use these words ironically:
+
+> "Can we get a reel out of this?" · "Love that for the department." · "So the vibe of the
+> data is basically—" · "Is there a version of this that's more *shareable*?" · "Let's
+> circle back on the student journey." · "Massive if true." · "I'm hearing a thought leader."
+
+He renames everything into marketing: the Prediction Slip is *the roadmap*, Feldstrom is *a
+thought leader*, the Doorman is *front of house*, the Ethics Tribunal is *a stakeholder
+touchpoint*, the skeletons are *heritage*.
+
+### Where he is
+
+**He roams.** Each time the player enters a room, there is a chance Tobi is already in it,
+filming something. He should appear in rooms he has no business in — the Ethics Tribunal,
+the Statistics Basement, the Corridor — and he is never surprised to be thrown out. He also
+appears on the **campus map** as a small figure with a phone, in a different spot each time
+the map is drawn.
+
+Implementation: one shared sprite plus a `tobiRoom` value rerolled on each map open; rooms
+render him if they are the current pick. One line of ambient dialogue per room, keyed to
+whatever that room is about, is enough — he does not need a dialogue tree.
+
+### What he wants: content
+
+Tobi wants a soundbite, and he will take literally anything. **Show him any number at all**
+and he is delighted, and immediately reads it upward:
+
+> **PLAYER:** *(shows the result and its interval)*
+> **TOBI:** "Okay so this says lectures make you smarter."
+> **PLAYER:** "It says the gap is larger on worked-example questions among students who—"
+> **TOBI:** "Lectures make you smarter. Amazing. Can I get you by the window?"
+
+This costs the player nothing mechanically, which is the point: he is not publishing your
+paper. **The payoff is in the outro**, where his post appears in the review bundle —
+*"STUDY SHOWS LECTURES MAKE YOU SMARTER"*, 4,000 likes, more engagement than the paper will
+ever get, and nobody on the Tribunal minds at all.
+
+### His puzzle use: he is a way of emptying a room
+
+Everybody in this department flees him. That makes him the game's second "get a person out
+of the way" mechanic, and it should be deliberately *different* in flavour from the Stockholm
+call: that one works by flattering a man's vanity, this one works because nobody wants to be
+interviewed.
+
+**Recommended placement — the Gap Registry (Act V).** The Registrar will not leave his desk,
+and one drawer behind him is locked: **CLOSED — NOT CURRENTLY IN CIRCULATION**. It holds the
+precedent that shows your result is not novel in the way you first assumed. Tell Tobi there
+is a story in the Registry — "the gap pipeline", "hidden knowledge, very visual" — and he
+goes. The Registrar, who has seen him coming for twenty years, retreats into the stacks
+without a word, and the drawer is reachable.
+
+> **REGISTRAR:** *(already standing)* "I have filing."
+> **TOBI:** "This is giving *archive core*."
+
+**Alternatives considered, and why not:**
+
+- *Luring Feldstrom out* — already done, better, by Stockholm. Feldstrom would in any case
+  stay for a camera, which is the opposite of what is needed.
+- *Getting the Bureau clerk off his stool* — works, but Act IV already has three gates and
+  does not need a fourth.
+- *Giving him a puzzle item outright* — weaker. He should cost the player a small
+  humiliation, not a fetch.
+
+### The International Office half
+
+Same person, second lanyard. He hands out a **glossy prospectus**: four thousand smiling
+students on a lawn none of them has ever sat on. It is a beautiful third wrong sampling
+frame in the Mensa, and the Sampling Officer is briefly taken in by the production values:
+
+> **SAMPLING OFFICER:** "This is a *magnificent* list."
+> **PLAYER:** "They're stock photographs."
+> **SAMPLING OFFICER:** *(long pause)* "They are extremely well lit."
+
+And one line that should land quietly, because it is the true part of the joke: asked what
+the international strategy is, Tobi answers, without any irony at all, **"Growth."**
 
 ---
 
