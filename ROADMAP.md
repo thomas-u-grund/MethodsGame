@@ -357,7 +357,54 @@ Ask these at the natural moment, not all at once:
 
 ---
 
-## 9. What auto-mode built, and what it could not
+## 9. Art status (updated 2026-09-21)
+
+**Every room in the game is painted.** No room ships a placeholder background any more.
+Nine new backgrounds were generated through the Claude-in-Chrome pipeline and installed,
+along with the post-credits monkey.
+
+**Hotspots are re-read off the painting, never inherited from the placeholder.** For each
+room: grid the PNG into deciles (`magick ... -draw line` — the helper is two dozen lines,
+see the commit history), read the prop positions off it, and rewrite that room's `HOTSPOTS`
+table. This mattered every single time — Weber turned out to be the fourth and largest
+portrait, the Bureau's counter had to stop short of the stool so it would not swallow the
+clerk's hotspot, the Library's EVIDENCE frame sat further right than planned.
+
+### Driving ChatGPT: what actually works
+
+Learned the hard way; follow these or you will lose twenty minutes each time.
+
+1. **Never type while a generation is in flight.** The composer silently keeps your text and
+   Return does nothing. Poll `!document.querySelector('button[data-testid="stop-button"]')`
+   and only type when it is true.
+2. **A "Add to Project" suggestion popup can swallow clicks on the send button.** If a send
+   click does nothing, look for `button[aria-label="Dismiss project suggestion"]`, click it,
+   then click send. This cost two failed attempts before it was spotted.
+3. **Click send via the DOM**, not by coordinate: `button[data-testid="send-button"]`. The
+   `find` tool has identified the "High" model selector as the send button more than once.
+4. **A chat stalls after roughly four generated images.** Start a fresh one and re-attach
+   references — style continuity is actually *better* when the anchors are the rooms you
+   just painted.
+5. **Download in-page**, never via the editor: `fetch(img.src)` → blob → `<a download>`.
+   The image src is not readable from outside the page.
+6. **Match generated images by `alt`**, which is `"Generated image: <title>"`. Each image
+   appears in the DOM three times; take the last.
+
+### Still outstanding
+
+- **Six character sprites** — KIRA, Feldstrom, the Visiting Fellow, the Registrar of Gaps,
+  the Implications Clerk, and Act II's skeletons. Attempted 2026-09-21: the prompt posts but
+  no image comes back and no error is shown, which looks like an image-generation rate limit
+  after ten images in a session. Retry on a fresh day/session. The cast chat should attach
+  `sprite-nurse.png`, `sprite-doorman.png` and `sprite-director.png` as style anchors.
+- **Outro panels 1–5** are still designed SVG cards (the monkey is painted). A painted
+  decision-letter panel was prompted and did not return, same symptom.
+- **WP-0.8**: trailer panel 1 regeneration and panel 2b.
+- **Voices** for Acts II, IV and V — still blocked on casting decisions from the user.
+
+---
+
+## 10. What auto-mode built, and what it could not
 
 *Added 2026-09-20 after running Phases 0–5 autonomously.*
 
