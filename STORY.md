@@ -323,6 +323,15 @@ The joke is that she is very often right, and her scar tissue makes her overdo i
 
 Which is why her approval at the end of the Seminar Room means something. She is hard to convince for a reason, and *"that would annoy me"* is the warmest thing she has said in years.
 
+**And she is the only person in this department who is actually good at the job.** The player should be allowed to notice that on their own. Everyone else has one working instinct wrapped around one disfigurement: the Professor is precise because he was publicly destroyed, Feldstrom is ambitious because he never stopped being a physicist, the Sampling Officer is rigorous because it is a family liturgy, the Nurse is careful because of nine waves of a broken item, the Keeper is safe because of one email. The Visiting Fellow's damage produced *competence* rather than a ritual. She asks the right question every time, she is right more often than anyone finds comfortable, and she has no apparatus, no ceremony and no machine — a chair at the back and one finger.
+
+Two rules follow:
+
+- **She is never the butt of a joke.** Everyone else can be laughed at. She gets the room's best line instead, and it deflates rather than escalates.
+- **She has the lowest standing in the building.** She is *visiting*. No room is named after her, no stamp, no title on a door. The one person who could actually referee this project is the one the institution has given nothing to — and the game should never point at that, only let it sit there.
+
+(The Skeptic at the pond is her counterpart outside the institution: equally sound, equally unranked, cheerful where the Fellow is tired. They never meet.)
+
 ### The Survey Lab Nurse — twelve years on one national survey
 
 She came out of a legendary national survey project that ran for over a decade, and she watched thousands of respondents misunderstand perfectly sensible-looking questions. She is not pretending the ward is an A&E. To her it basically is one.
