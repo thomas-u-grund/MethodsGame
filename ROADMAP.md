@@ -333,7 +333,7 @@ cd web/ && python3 -m http.server 8934
 
 **WP-0.7 ✅ DONE · Backstory props into built rooms.** Cheap, high-value, needs no new act. Per the one-prop-one-line table: the Professor's hidden *Death of Community* in the Office, the Skeptic's *Things I Was Wrong About, Vol. XI* on the pond bench, the class photograph with the young Doorman, the Keeper's `BEVERAGE VESSEL 0047`, the Director's champagne photograph, the Officer's family portraits. `Look At` targets with one line each.
 
-**WP-0.8 · Trailer fixes.** *(BLOCKED: needs the user's ChatGPT via Claude in Chrome — the only art step in Phase 0.)* Regenerate panel 1 from the revised prompt (empty folder + circled deadline — the shipped art still shows the old rejected-letter concept) and swap in the new narration together. Generate panel 2b "The Spiral". Both prompts are in `art/trailer/ART_PROMPTS.md`.
+**WP-0.8 ✅ DONE · Trailer fixes.** Panel 1 regenerated from the revised prompt (`trailer-panel1-deadline.webp`) and panel 2b built (`trailer-panel2b-spiral.webp`); both are in the opening trailer. *(Marked done 2026-09-22 — the work had shipped, the package was never ticked.)* Regenerate panel 1 from the revised prompt (empty folder + circled deadline — the shipped art still shows the old rejected-letter concept) and swap in the new narration together. Generate panel 2b "The Spiral". Both prompts are in `art/trailer/ART_PROMPTS.md`.
 
 **WP-0.9 ✅ DONE · Seed "Reviewer 2".** One line per act, from characters who are otherwise rational, so the outro pays off. *"Reviewer 2 will ask." / "Who is Reviewer 2?" / "Nobody knows."*
 
@@ -349,7 +349,7 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 
 **WP-1.3 ✅ DONE · The Hall of Founders** (standard nine). Nodding portraits, the AUTHORITY METER, the Quotation Dispenser with its mode selector, the clerk, the ceremonial stepladder (one object, two Library uses), the newspaper clipping, writing behind Weber.
 
-**WP-1.4 · Feldstrom's Workshop** (standard nine). The Hypotheses Accelerator Mk III with its two-directional `◄ SPECIFY / GENERALISE ►` panel, the masking tape reading DO NOT, the THINGS THIS FORBIDS gauge, the traffic-counting gate, and the derivation scene. **This is where the act's lesson lives** — budget the most time here.
+**WP-1.4 ✅ DONE · Feldstrom's Workshop** (standard nine). The Hypotheses Accelerator Mk III with its two-directional `◄ SPECIFY / GENERALISE ►` panel, the masking tape reading DO NOT, the THINGS THIS FORBIDS gauge, the traffic-counting gate, and the derivation scene. **This is where the act's lesson lives** — budget the most time here.
 
 **WP-1.5 ✅ DONE · The Stockholm scam.** **New system:** a cross-room telephone with a dial-an-extension interface and a **timed absence** (Feldstrom out of the Workshop for N seconds). Three mandatory inputs only — extension 4173, KIRA's Nobel protocol printout, the Act I hourglass for the international delay. The Hall clipping and the Dispenser phrase are optional easings. Keep the failure branches and the flattery branch.
 
@@ -357,7 +357,7 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 
 **WP-1.7 ✅ DONE · The Registry and the seal.** The PREREGISTRATION-ADJACENT DEVICE, the retracting button, the wax seal, H-27 dropping out. **The Registry accepts the empty theory** and stamps it `APPROVED`; that path sets `theory_empty` and is not blocked.
 
-**WP-1.8 · Act II interlude, Starring poster and ACT II card.** Same pipeline as Act III's; composite from the new room art and sprites.
+**WP-1.8 ✅ DONE · Act II interlude, Starring poster and ACT II card.** The interlude and title card already shipped; the Starring poster (`il2-cast.webp`) landed 2026-09-22, composited from the room sprites rather than painted, so the people on the poster are exactly the people you meet. Original note: Same pipeline as Act III's; composite from the new room art and sprites.
 
 **WP-1.9 · Act II voices and SFX.** Cast KIRA, Feldstrom, the Visiting Fellow, the clerk and the Registry with the user first. Bundle as `voices-act2.mp3` (the name frees up after WP-0.2).
 
