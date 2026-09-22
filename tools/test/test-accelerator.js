@@ -45,14 +45,15 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     for (let i = 0; i < 5; i++){ rights[0].click(); await w(160); out.curve.push(n()); }
 
     // Everything to maximum: the biggest claim the machine can make forbids nothing.
-    for (const b of rights) for (let i = 0; i < 6; i++){ b.click(); await w(70); }
+    // Click past the end of each drum rather than a fixed count -- the word lists grow.
+    for (const b of rights) for (let i = 0; i < 14; i++){ b.click(); await w(55); }
     await w(400);
     out.maxForbids = n();
     out.maxStrip = strip();
     out.maxFeld = feld();
 
     // Wind it all the way back down while he is standing here: he turns it back up.
-    for (const b of lefts) for (let i = 0; i < 6; i++){ b.click(); await w(70); }
+    for (const b of lefts) for (let i = 0; i < 14; i++){ b.click(); await w(55); }
     await w(1600);
     out.afterPushBack = { forbids: n(), said: feld() };
 
