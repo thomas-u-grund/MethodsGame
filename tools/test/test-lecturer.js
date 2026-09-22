@@ -4,10 +4,9 @@
 // in his office was also the man delivering the unfalsifiable fog the bingo card mocks.
 // The split has three parts and each of them can regress quietly:
 //
-//   1. the Lecture Theatre is DR. VOSSBERG's room -- his sprites, his voice tag, his name
-//      on the caption, and the room stages him as a silhouette (the beam is what makes a
-//      silhouette legible as staging rather than as missing art). He is named but never
-//      seen, which is the joke: you know exactly who is in the beam and never get a face.
+//   1. the Lecture Theatre is DR. VOSSBERG's room -- his sprites, his voice tag and his
+//      name on the caption, and no `prof-*` art anywhere in it, because the Professor is
+//      a woman in a different building now.
 //   2. winning bingo sends the lecturer away AND brings the Professor back, via two
 //      separate flags, because summoning the lecturer back must not empty the Office again
 //   3. a save made before the split still works: `profAtOffice` alone has to imply that
@@ -35,10 +34,12 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.speaker  = document.getElementById('lt_speaker').textContent.trim();
     out.poses    = ['Lecturing','Walking','Pointing'].every(k => {
       const el = document.getElementById('lt_lect' + k);
-      return el && /^lecturer-/.test(el.getAttribute('src')) && el.getAttribute('data-voice') === 'lecturer';
+      return el && /^vossberg-/.test(el.getAttribute('src')) && el.getAttribute('data-voice') === 'lecturer';
     });
-    out.beam     = !!document.getElementById('lt_beam');
-    out.noRig    = !document.getElementById('lt_lectRig');   // he walks on his own art now
+    out.mouths   = ['L','P'].every(k => {
+      const img = document.querySelector('#lt_mouthWrap' + k + ' img');
+      return img && /^mouth-vossberg-/.test(img.getAttribute('src'));
+    });
     out.noProfSprite = !document.querySelector('#lt_sceneWrap [src^="prof-"]');
 
     // Use the card on him to start the game.
@@ -94,7 +95,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   console.log(JSON.stringify({ ...a, ...b, migratedOldSave: c, leavesNewSaveAlone: d }, null, 1),
               '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = a && a.speaker === 'Dr. Vossberg' && a.poses && a.beam && a.noRig && a.noProfSprite
+  const ok = a && a.speaker === 'Dr. Vossberg' && a.poses && a.mouths && a.noProfSprite
           && a.started && a.shouted && a.lectureDone && a.lecturerGone && a.profAtOffice
           && b.officeOccupied && c && d && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');

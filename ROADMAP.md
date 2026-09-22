@@ -428,7 +428,8 @@ it, not from the headings below.
 |---|---|---|
 | ~~8o~~ | ~~The Professor is two different people in Act I~~ | **DONE 2026-09-22** (Option C, revised reveal) |
 | ~~8p~~ | ~~Character movement is mechanical~~ | **DONE 2026-09-22** |
-| ~~8q~~ | ~~The two professors: she is a woman, he is Dr. Vossberg~~ | **DONE 2026-09-22** (voice casting outstanding) |
+| ~~8q~~ | ~~The two professors: she is a woman, he is Dr. Vossberg~~ | **DONE 2026-09-22** (her voice casting outstanding) |
+| ~~8r~~ | ~~Silhouette staging removed; Vossberg is the old professor art~~ | **DONE 2026-09-22** |
 | ~~8i~~ | ~~The campus map has run out of campus~~ | **DONE 2026-09-22** |
 | **8a** | Running jokes still to place (the not-having-read-it thread, the founders) | small — mostly Look At text plus one or two images |
 | **8h** | One cast member left: the library student who skimmed it | small — and he is where the reading joke starts |
@@ -931,6 +932,44 @@ too, which no amount of new art will.
 **Done when:** no two consecutive beats show an identical static frame; every panel drifts;
 transitions between different images cross-fade; and `?play=outro` can be watched end to end
 without it looking like the same picture keeps coming back.
+
+---
+
+## 8r. The silhouette staging is gone — DONE 2026-09-22 (user)
+
+> "I think vossberg can be just the old prof we had there previously. Remove all the beam
+> and not seeing him story. We don't need that."
+
+Reverted, and it was the right call twice over. The silhouette only ever existed to support
+the monkey-identity reveal, and that reveal was replaced in 8o by the better one (he reads
+text he did not write). Once the identity gag went, the beam was a costume with nothing
+underneath it — and "you never see his face" is a strange amount of mystique to spend on a
+man whose whole point is that he is a stand-in.
+
+**It also dissolves the one outstanding problem 8o created.** The eleven `lecture-*` clips
+were flagged as needing recasting, because the words had moved to a new character while the
+voice stayed the Professor's. But Dr. Vossberg **is** that character now — same art, same
+build, same voice. The clips were never wrong; the diagnosis was. Nothing to re-render.
+
+Restored, under his own name: `vossberg-lecturing/-pointing/-walking.webp` and
+`mouth-vossberg-lecturing/-pointing.webp` (recovered from history), the mouth-sync rig, the
+cross-fade between poses, and the `PROF_RIG` cut-out walk with the pacing idle. `PROF_RIG`
+and `CODEBOOK_RIG_WALK` are live code again rather than the dead weight noted in 8q — the
+rig was drawn for this character back when he and the Professor were the same person, and
+he is the one who kept it.
+
+Removed: the `lt_beam` overlay, the hard pose cut, and every line that traded on not seeing
+him — "a black shape with a voice", "he has not stepped out of the beam", "nobody in the
+building can tell you his name". The outro's last panel is now simply him at the lectern in
+a lit theatre, reading the printout.
+
+**What survives, because none of it needed the silhouette:** the two characters, the name,
+the two-flag split, the timetable prop, the printout-with-a-reference-number plant in Act I,
+and the post-credits reveal.
+
+**Still the only outstanding item:** the ten `office-*` clips are a male voice and she is a
+woman, plus `vo-narr-opening-04.mp3` says "his patience" where the text says "her". Same
+bundle, one rebuild, gated on her casting.
 
 ---
 
