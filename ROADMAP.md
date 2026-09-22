@@ -379,7 +379,7 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 
 **WP-3.3 ✅ DONE · The Bureau of Implications** (standard nine). The three sizes, the SO WHAT? gauge, the wall of FURTHER RESEARCH IS NEEDED plaques, the limitations the player writes themselves. Buying LARGE sets `claim_overstated`.
 
-**WP-3.4 · Act IV interlude, poster, card, voices, SFX.**
+**WP-3.4 · Act IV interlude, poster, card, voices, SFX.** Poster done 2026-09-22 (`il4-cast.webp`), and Act V's with it (`il5-cast.webp`) — both composited from the room sprites by `tools/art/castposter.py`, so the people on the poster are exactly the people you meet. Voices and SFX remain, blocked on casting.
 
 ### Phase 4 — Act V ✅ COMPLETE (code; art and voices outstanding)
 
@@ -400,7 +400,7 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 ### Phase 6 — Ship
 
 **WP-6.1 · Full five-act playthrough**, headless, zero errors, every folder stamp in order, all eight flag combinations reachable.
-**WP-6.2 · Asset budget final check** (<255 files, <64 MB) and a real listen-through with the user.
+**WP-6.2 · Asset budget final check** — **artifact preview only**. §3 already decided (2026-09-20) that GitHub Pages is the real home and the 255-file / 64 MB ceiling is the Claude artifact's, not the game's; the user reconfirmed 2026-09-22. So this package is "does the preview build still fit", not "does the game fit". Plus a real listen-through with the user.
 **WP-6.3 · Publish and push** — only on the user's word.
 
 ---
