@@ -54,7 +54,7 @@ This also gives every act a shared visual gag opportunity: whatever absurd insti
 
 The player still believes there is something called the Codebook — it just apparently has chapters, scattered through the department, and the folder is how they're collected. The mystery survives Act I intact; it's *redirected*, not solved.
 
-**Stage two (at the end of Act V, just before submission):** the player returns to the Seven-Second Office — same room, same Professor, same skeleton — and puts the finished paper on his desk.
+**Stage two (at the end of Act V, just before submission):** the player returns to the Seven-Second Office — same room, same Professor, same skeleton — and puts the finished paper on her desk.
 
 > *The seven-second hourglass turns over. He reads. For once, he doesn't immediately object.*
 > **PROFESSOR:** "Hm."
@@ -121,10 +121,10 @@ See "The two-stage reveal" above for both scenes in full. The rule for every act
 
 Underneath the jokes, two people are disagreeing, and the player is the answer.
 
-- **The Professor** was destroyed once for claiming too much, and now claims almost nothing. He is precise and he is diminished.
+- **The Professor** was destroyed once for claiming too much, and now claims almost nothing. She is precise and she is diminished.
 - **Feldstrom** has never been destroyed for anything, because nothing he says could be checked. He is ambitious and he is empty.
 
-Each thinks the other learned the wrong lesson from the same era, and each is half right. The player's finished folder is the third position and the only defensible one: **an idea big enough to be interesting, stated narrowly enough to be tested, with the evidence attached.** The game never states this; it stages it, by having the same person walk out of Feldstrom's workshop with a smaller claim and into the Professor's office with a bolder one than he would have made.
+Each thinks the other learned the wrong lesson from the same era, and each is half right. The player's finished folder is the third position and the only defensible one: **an idea big enough to be interesting, stated narrowly enough to be tested, with the evidence attached.** The game never states this; it stages it, by having the same person walk out of Feldstrom's workshop with a smaller claim and into the Professor's office with a bolder one than she would have made.
 
 That is also why Feldstrom appears twice. In Act II he inflates the player's *theory*; in Act V he inflates the player's *result*. The player refuses him both times, and the second refusal costs more, because by then they have something they are proud of.
 
@@ -134,7 +134,7 @@ Each of these must land in at least two acts or it is not a through-line, it is 
 
 - **KIRA** — Act II she is helpful and wrong. Act IV she has run and nearly submitted the whole study. Her arc is four words long: *"Certainly!"* becomes *"Certainly. …What exactly do you mean?"* Nothing else about her changes, and nothing else should.
 - **Feldstrom** — Act II, where he owns the Hypotheses Accelerator and fights the player over the scope, and Act V, where he wants to retitle the paper and needs no machine to do it. Stockholm never calls in either; the telephone pays off in the Writing Room with the car-warranty call.
-- **The Professor** — first and last conversation of the game. In between, his hidden *Death of Community* paper is findable in Act I and explains everything he does.
+- **The Professor** — first and last conversation of the game. In between, her hidden *Death of Community* paper is findable in Act I and explains everything she does.
 - **The Skeptic** — gates the Corridor in Act I, and returns in Act IV when the result comes back null, because a null result is the only thing in the game she finds genuinely delightful. *Things I Was Wrong About, Vol. XI* gets an entry.
 - **The Doorman** — gates Act I, and gets the last line before the reveal. *"You knew." / "Eventually."*
 - **The Research Folder** — in every act, defaced by every institution, and its final stamp is the punchline.
@@ -262,7 +262,7 @@ Later, if the player brings it up again:
 > **PLAYER:** "Twenty-three people?"
 > **PROFESSOR:** "Twenty-two. One moved."
 
-**This is what his relationship with Feldstrom is made of.** They may well have been contemporaries. Feldstrom thinks the Professor became a coward. The Professor thinks Feldstrom learned nothing. Neither is entirely right, and the player ends the game standing between them. Feldstrom calls him *"my esteemed colleague in the Department of Boundary Conditions."* The Professor calls Feldstrom *"Traffic."*
+**This is what her relationship with Feldstrom is made of.** They may well have been contemporaries. Feldstrom thinks the Professor became a coward. The Professor thinks Feldstrom learned nothing. Neither is entirely right, and the player ends the game standing between them. Feldstrom calls her *"my esteemed colleague in the Department of Boundary Conditions."* The Professor calls Feldstrom *"Traffic."*
 
 ### KIRA — trained on successful papers
 
@@ -323,7 +323,7 @@ The joke is that she is very often right, and her scar tissue makes her overdo i
 
 Which is why her approval at the end of the Seminar Room means something. She is hard to convince for a reason, and *"that would annoy me"* is the warmest thing she has said in years.
 
-**And she is the only person in this department who is actually good at the job.** The player should be allowed to notice that on their own. Everyone else has one working instinct wrapped around one disfigurement: the Professor is precise because he was publicly destroyed, Feldstrom is ambitious because he never stopped being a physicist, the Sampling Officer is rigorous because it is a family liturgy, the Nurse is careful because of nine waves of a broken item, the Keeper is safe because of one email. The Visiting Fellow's damage produced *competence* rather than a ritual. She asks the right question every time, she is right more often than anyone finds comfortable, and she has no apparatus, no ceremony and no machine — a chair at the back and one finger.
+**And she is the only person in this department who is actually good at the job.** The player should be allowed to notice that on their own. Everyone else has one working instinct wrapped around one disfigurement: the Professor is precise because she was publicly destroyed, Feldstrom is ambitious because he never stopped being a physicist, the Sampling Officer is rigorous because it is a family liturgy, the Nurse is careful because of nine waves of a broken item, the Keeper is safe because of one email. The Visiting Fellow's damage produced *competence* rather than a ritual. She asks the right question every time, she is right more often than anyone finds comfortable, and she has no apparatus, no ceremony and no machine — a chair at the back and one finger.
 
 Two rules follow:
 
@@ -470,7 +470,7 @@ Never explain this. Somewhere in the department there is an ancient class photog
 > **PLAYER:** "How old is he?"
 > **KIRA:** "Certainly!"
 
-At the very end, after the Professor says the Codebook was only ever Methods, the player passes him one last time.
+At the very end, after the Professor says the Codebook was only ever Methods, the player passes her one last time.
 
 > **PLAYER:** "You knew."
 > **DOORMAN:** "Eventually."
@@ -519,7 +519,7 @@ Monkey-Island-style narrated panels, played in full every time the game loads (E
 1. **The Deadline** *(revised — see below)* — the same empty manila research folder the player will spend the whole game filling, sitting blank on a cluttered desk beside a wall calendar with a due date circled in red. *"Every research project starts the same way: a deadline, an empty folder, and nothing else."*
 2. **The Protagonist** — the player from behind, dorm desk, a corkboard of increasingly unhinged red-string connections. *"This is you, on your fourth topic change this semester. Your advisor's patience is now measured in single digits."*
 2b. **The Spiral** — the panic actually peaking: standing, hands in hair, corkboard doubled, a second energy drink tipped over. *"By week nine the topic has changed eleven times, the corkboard needs its own corkboard, and sleep has become a rumor of its own."*
-3. **The Rumor** — two students whispering in a dusk courtyard. *"Word travels, in hushed tones, of a professor who can turn any bad idea into a real one. If you can survive seven seconds of his patience."*
+3. **The Rumor** — two students whispering in a dusk courtyard. *"Word travels, in hushed tones, of a professor who can turn any bad idea into a real one. If you can survive seven seconds of her patience."*
 4. **The Legend** — a locked, older door; two students walking away from it, defeated. *"They say he keeps a Codebook. No one's seen it. Everyone's heard of it. Most who go looking end up reassigned to committee work."*
 5. **Arrival** — a hand knocking on the Professor's office door, plaque reading "PROF. — BY APPOINTMENT (GOOD LUCK)." *"This is where it starts. Again."*
 
@@ -537,13 +537,13 @@ Monkey-Island-style narrated panels, played in full every time the game loads (E
 
 *Rooms: The Seven-Second Office · Introduction to Systems Theory (Lecture Theatre) · Causality Corridor*
 
-**The act's story.** The player wants a topic and they want it today. What they find is a man who will not give them one, and a building that has evidently been refusing students for a very long time. The obstacle is never access — the Professor is right there, twice, in two rooms — it is that he will not accept anything imprecise, and he will not stay in the conversation long enough for the player to be imprecise twice. The player's job is to work out what he is actually withholding: not approval, not a topic, but a sentence that could be answered. Everything else in Act I is the department teaching the same thing in a lighter key — the bingo card (a lecture can be entirely content-free and nobody in the room objects), the Corridor (a claim you reasoned your way to can still be wrong), and the pond (a claim that cannot lose is worth nothing). That last one is the seed of Act II, planted an act early and by a character the player has to *convince* rather than obey.
+**The act's story.** The player wants a topic and they want it today. What they find is a woman who will not give them one, and a building that has evidently been refusing students for a very long time. The obstacle is never access — the Professor is right there — it is that she will not accept anything imprecise, and she will not stay in the conversation long enough for the player to be imprecise twice. The player's job is to work out what she is actually withholding: not approval, not a topic, but a sentence that could be answered. Everything else in Act I is the department teaching the same thing in a lighter key — the bingo card (a lecture can be entirely content-free and nobody in the room objects), the Corridor (a claim you reasoned your way to can still be wrong), and the pond (a claim that cannot lose is worth nothing). That last one is the seed of Act II, planted an act early and by a character the player has to *convince* rather than obey.
 
 **Who changes:** nobody. The player is a supplicant for the whole act, which is why the ending matters — the Doorman hands them a folder, and for the first time they are carrying something instead of asking for something.
 
 **What goes in the folder:** the Question. `STATUS: QUESTION EXISTS`.
 
-**Backstory props to seed here** (see *Character backstories*): the Professor's hidden *Death of Community: Evidence from Twenty-Three Residents of Leicester* somewhere in the Office — it explains his entire personality and the player will not understand why until much later; the Skeptic's *Things I Was Wrong About, Vol. XI* on the pond bench; and the ancient class photograph with a young man in the back row wearing the Doorman's moustache.
+**Backstory props to seed here** (see *Character backstories*): the Professor's hidden *Death of Community: Evidence from Twenty-Three Residents of Leicester* somewhere in the Office — it explains her entire personality and the player will not understand why until much later; the Skeptic's *Things I Was Wrong About, Vol. XI* on the pond bench; and the ancient class photograph with a young man in the back row wearing the Doorman's moustache.
 
 Mechanically it is unchanged from before, and it's the model every later act should match: a dialogue gauntlet with a hard patience limit, six absurd desk-clutter pickups (a chewed pen, a mug reading "WORLD'S OKAYEST SAMPLE SIZE," a Likert-scale die, an hourglass tagged "7 SEC," a USB drive labeled "FINAL_v23_REALFINAL_USETHIS," a rubber stamp reading "SIGNIFICANT (p<.05)"), a professor who's either at the Office or the Lecture Theatre and never both, an undocumented bingo-card trick the player has to discover, and a guarded door with real stakes (pass all four causal-reasoning cases or fall). The optional citation-counter sidequest lives here too (see `HANDOVER.md` §01b). Entry to the Corridor now requires **both** the Question *and* having convinced the Skeptic at Probability Pond (see below) — the Doorman checks for both.
 
@@ -1661,7 +1661,7 @@ Folder update: `STATUS: SUBMITTED`. Cut to the outro.
 
 ## The Outro — Reviewer 2
 
-**Order of the ending, fixed.** The old draft had the Professor speaking during the decision-letter sequence without the player having gone back to him, and it used the reverse-campus walk as a prologue to a letter that had not arrived yet. Correct order:
+**Order of the ending, fixed.** The old draft had the Professor speaking during the decision-letter sequence without the player having gone back to her, and it used the reverse-campus walk as a prologue to a letter that had not arrived yet. Correct order:
 
 1. **The Office** — the Codebook reveal, *"It's accurate. Send it."* (end of Act V)
 2. **The submission chute** — the folder goes in. `STATUS: SUBMITTED`.

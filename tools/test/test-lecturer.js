@@ -4,9 +4,10 @@
 // in his office was also the man delivering the unfalsifiable fog the bingo card mocks.
 // The split has three parts and each of them can regress quietly:
 //
-//   1. the Lecture Theatre is the LECTURER's room -- his sprites, his voice tag, his name
+//   1. the Lecture Theatre is DR. VOSSBERG's room -- his sprites, his voice tag, his name
 //      on the caption, and the room stages him as a silhouette (the beam is what makes a
-//      silhouette legible as staging rather than as missing art)
+//      silhouette legible as staging rather than as missing art). He is named but never
+//      seen, which is the joke: you know exactly who is in the beam and never get a face.
 //   2. winning bingo sends the lecturer away AND brings the Professor back, via two
 //      separate flags, because summoning the lecturer back must not empty the Office again
 //   3. a save made before the split still works: `profAtOffice` alone has to imply that
@@ -93,7 +94,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   console.log(JSON.stringify({ ...a, ...b, migratedOldSave: c, leavesNewSaveAlone: d }, null, 1),
               '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = a && a.speaker === 'Lecturer' && a.poses && a.beam && a.noRig && a.noProfSprite
+  const ok = a && a.speaker === 'Dr. Vossberg' && a.poses && a.beam && a.noRig && a.noProfSprite
           && a.started && a.shouted && a.lectureDone && a.lecturerGone && a.profAtOffice
           && b.officeOccupied && c && d && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');
