@@ -14,34 +14,33 @@ Two pairs deliberately share a building because their acts never overlap.
 import re, sys, os
 
 BUILDINGS = {
- # Every distinct structure in the painting is used exactly once. Seventeen rooms fit into
- # fifteen buildings because two pairs share, and those pairs are in acts that never
- # overlap -- the Mensa becomes the Writing Room, the Delegation Engine becomes the Gap
- # Registry. Nothing else shares, which is what went wrong on the last map.
+ # Rooms go where the PAINTING says they go. The first pass put the Mensa and Feldstrom's
+ # Workshop on the building at the far left -- which has a red cross on its gable and an
+ # ambulance standing in its lit archway. It is an accident and emergency department, and
+ # it is now the Survey Lab (A&E). Everything else was re-read the same way.
  #
  # Act I -- the old quarter.
- 'corridor':      ( 20.0, 12.0, 18.0, 29.0),   # the long gothic nave: a corridor by shape
- 'whirlpool':     ( 38.5,  5.0, 11.5, 30.0),   # the west front and its tower
- 'lecture':       ( 26.5, 43.0, 14.5, 18.0),   # the round drum: a lecture theatre in plan
+ 'corridor':      ( 20.0, 15.0, 18.0, 26.0),   # the long gothic nave: a corridor by shape
+ 'whirlpool':     ( 38.5,  5.0, 11.5, 29.0),   # the west front and its tower
+ 'lecture':       ( 27.0, 43.0, 14.0, 18.0),   # the round drum: a lecture theatre in plan
  'pond':          (  2.0, 62.0, 25.0, 25.0),   # the water, the swans and the bridge
  # Act II.
- 'workshop':      (  1.0, 21.0, 16.0, 17.5),   # the only chimney on the left that is lit
- 'library':       ( 52.0, 52.0, 18.0, 25.0),   # the long range of tall arched windows
- 'hall':          ( 61.0, 19.0, 17.0, 24.0),   # the portico, the steps and the statues
- 'seminar':       ( 70.5, 53.0, 12.0, 11.0),   # the glazed annex
+ 'hall':          ( 61.0, 22.0, 17.0, 22.0),   # the portico, the steps and the statues
+ 'library':       ( 57.0, 52.0, 12.0, 20.0),   # the range of tall lit arched windows
+ 'seminar':       ( 70.0, 55.0, 12.0, 13.0),   # the glazed annex
+ 'workshop':      ( 84.0, 55.0, 15.0, 24.0),   # the timber works shed: forge, chimney, yard
  # Act III.
- 'mensa':         (  0.0, 39.0, 15.0, 15.0),   # the arched carriage range, far left
- 'ethics':        ( 82.5, 32.0, 11.0, 19.0),   # the windowless vault, which is the joke
- 'statsbasement': ( 31.0, 78.0, 15.0, 11.0),   # the gatehouse you go down through
- 'fieldwork':     ( 76.5, 64.0,  9.0, 18.0),   # the walled yard: an arena, literally
- 'surveylab':     ( 86.0, 53.0, 13.5, 24.0),   # the works shed, bottom right
- # Act IV. The observatory is a room now, which is what fixes the complaint that opened
- # this: the workshop and the survey lab used to look like its outbuildings.
+ 'surveylab':     (  0.0, 25.0, 14.0, 25.0),   # RED CROSS ON THE GABLE, ambulance in the arch
+ 'ethics':        ( 79.0, 33.0, 14.0, 19.0),   # the big blank block, which is the joke
+ 'mensa':         ( 45.0, 70.0, 11.0, 18.0),   # the gabled range with the lit ground floor
+ 'fieldwork':     ( 70.0, 70.0, 12.0, 17.0),   # the walled yard: an arena, literally
+ 'statsbasement': ( 30.0, 78.0, 14.0, 10.0),   # the gatehouse you go down through
+ # Act IV.
  'bureau':        ( 47.5, 37.0,  7.0, 14.0),   # the small spired block
- 'delegation':    ( 85.5,  1.0, 13.0, 16.0),   # the dome on the crag
+ 'delegation':    ( 84.5,  1.0, 13.0, 16.0),   # the dome on the crag
  # Act V -- the two shared boxes.
- 'gapregistry':   ( 85.5,  1.0, 13.0, 16.0),
- 'writingroom':   (  0.0, 39.0, 15.0, 15.0),
+ 'gapregistry':   ( 84.5,  1.0, 13.0, 16.0),
+ 'writingroom':   ( 45.0, 70.0, 11.0, 18.0),
 }
 # How wide a board has to be is a property of its text, not a number to guess: the pond's
 # board was a tenth of a percent too narrow and "Probability Pond" wrapped to two lines and
@@ -68,23 +67,23 @@ PAD_X, PAD_Y = 1.8, 2.6   # the scroll's curled ends and its top and bottom marg
 # Boards are anchored by their CENTRE, so widening one keeps it over its building instead
 # of sliding it sideways. (cx, top, first line, second line).
 SIGNS_RAW = {
- 'corridor':      (27.50, 41.50, 'Department', 'of Causality'),
- 'whirlpool':     (45.30, 35.50, 'Professor&rsquo;s Office', ''),
+ 'corridor':      (29.00, 41.50, 'Department', 'of Causality'),
+ 'whirlpool':     (44.00, 34.50, 'Professor&rsquo;s Office', ''),
  'lecture':       (47.00, 48.00, 'Lecture Theatre', ''),
  'pond':          ( 8.50, 67.00, 'Probability Pond', '(Still 50/50)'),
- 'workshop':      ( 8.50, 14.50, 'Feldstrom&rsquo;s Workshop', ''),
- 'library':       (58.50, 77.50, 'Library Annex', ''),
- 'hall':          (67.50, 43.50, 'Hall of Founders', ''),
- 'seminar':       (76.00, 66.50, 'Seminar Room', ''),
- 'mensa':         ( 6.50, 33.50, 'Mensa', ''),
- 'ethics':        (88.00, 25.50, 'Ethics', 'Tribunal'),
- 'statsbasement': (37.30, 72.00, 'Statistics Basement', '(The Labyrinth)'),
- 'fieldwork':     (77.50, 81.50, 'Fieldwork Arena', ''),
- 'surveylab':     (92.00, 77.50, 'Survey Lab', '(A&amp;E)'),
- 'bureau':        (49.50, 51.50, 'Bureau of', 'Implications'),
- 'delegation':    (91.30, 17.50, 'Delegation Engine', ''),
- 'gapregistry':   (91.50, 17.50, 'Gap Registry', ''),
- 'writingroom':   ( 6.50, 33.50, 'Writing Room', ''),
+ 'hall':          (69.50, 44.50, 'Hall of Founders', ''),
+ 'library':       (63.00, 73.00, 'Library Annex', ''),
+ 'seminar':       (76.00, 50.50, 'Seminar Room', ''),
+ 'workshop':      (91.00, 80.00, 'Feldstrom&rsquo;s Workshop', ''),
+ 'surveylab':     ( 7.00, 51.00, 'Survey Lab', '(A&amp;E)'),
+ 'ethics':        (86.00, 26.00, 'Ethics', 'Tribunal'),
+ 'mensa':         (50.00, 64.00, 'Mensa', ''),
+ 'fieldwork':     (76.00, 65.50, 'Fieldwork Arena', ''),
+ 'statsbasement': (37.00, 70.00, 'Statistics Basement', '(The Labyrinth)'),
+ 'bureau':        (49.00, 24.00, 'Bureau of', 'Implications'),
+ 'delegation':    (91.00, 18.00, 'Delegation Engine', ''),
+ 'gapregistry':   (91.00, 18.00, 'Gap Registry', ''),
+ 'writingroom':   (50.00, 64.00, 'Writing Room', ''),
 }
 
 # Every board is nowrap, because every board is now wide enough to be.
