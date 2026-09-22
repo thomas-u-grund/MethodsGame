@@ -431,7 +431,7 @@ it, not from the headings below.
 | ~~8q~~ | ~~The two professors: she is a woman, he is Dr. Vossberg~~ | **DONE 2026-09-22** (her voice casting outstanding) |
 | ~~8r~~ | ~~Silhouette staging removed; Vossberg is the old professor art~~ | **DONE 2026-09-22** |
 | ~~8i~~ | ~~The campus map has run out of campus~~ | **DONE 2026-09-22** |
-| ~~8a~~ | ~~Running jokes: the not-having-read-it thread, the founders~~ | **DONE 2026-09-22** (group portrait image outstanding) |
+| ~~8a~~ | ~~Running jokes: the not-having-read-it thread, the founders~~ | **DONE 2026-09-22** |
 | ~~8h~~ | ~~The library student who skimmed it~~ | **DONE 2026-09-22** |
 | ~~8s~~ | ~~KIRA stands still in all four of her rooms~~ | **DONE 2026-09-22** |
 
@@ -971,10 +971,22 @@ Room's second author, who approved a thirty-one-page draft four minutes after re
 → Reviewer 2's comment 1 in the outro, which was already written and is now the punchline
 of a set-up rather than a one-off.
 
-**8a.2 needed almost nothing** — the Hall of Founders jokes were already all implemented:
-the two portraits that are obviously the same man, the nameplate with the older screw holes
-around it, the founder whose dates make him fourteen, and NO LIVING THEORISTS BEYOND THIS
-POINT. Only the optional group-portrait image is outstanding.
+**8a.2 needed almost nothing in text** — the Hall of Founders jokes were already all
+implemented: the two portraits that are obviously the same man, the nameplate with the older
+screw holes around it, the founder whose dates make him fourteen, and NO LIVING THEORISTS
+BEYOND THIS POINT.
+
+**The group portrait is in.** Eleven men in three rows who are unmistakably one man,
+captioned THE FOUNDERS — A COMPLETE RECORD OF WHO WAS ALLOWED TO SPEAK. It came back with
+two gags nobody asked for and both are keepers: the banner behind them reads *E PLURIBUS
+SILENTIO*, and the book in the front row's hands is *TRADITIO AUT NIHIL*.
+
+It is **not hung on the wall.** That wall is already four portraits deep with no gap, and at
+the 12%-wide size a fifth frame would have to be, the only joke in the painting — that they
+are all the same man — disappears entirely. It is a full-size reveal instead, on the same
+overlay pattern as the Workshop's Accelerator zoom, found by the *sixth* Look At the
+portraits: the five rotating wall jokes run out, and the sixth sends you to the dark end of
+the hall where the rope does not go.
 
 **The hard date is gone.** The interlude's question card is a DOM overlay, not paint, so
 "(Winter term 2025/26)" was one line — but the same string was in three other in-game places
@@ -982,8 +994,7 @@ POINT. Only the optional group-portrait image is outstanding.
 STORY.md. All now read "this winter term", which keeps WHEN bounded — the methodological
 point — without dating the game.
 
-**Outstanding:** the founders group portrait ("eleven identical bearded men"), which is
-decoration rather than substance, and her voice.
+**Outstanding:** her voice, and nothing else in §8.
 
 ---
 
