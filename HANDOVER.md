@@ -64,7 +64,7 @@ All of the above verified end-to-end via headless Chrome/CDP this session (panel
 ## 01m. Session changes (2026-09-19, later still): living sprites + first cut-out rig (the Professor walks)
 
 - **Talking + breathing (all voiced sprites).** Every character sprite carries `data-voice="<character>"` (ADV sprites via a `voice` key in the room's `SPRITES` table; the Lecture Theatre professor images and the rig box; `#cc_doorman`). The line-audio engine works out who is speaking from the clip name (`vo-<who>-…`, `office-`/`lecture-` → prof, `doorman-`, `pond-skeptic-`) and adds `.talking` to that character's sprites while the clip plays (removed on `ended`/`pause`, so Space stops it; a queue hands over between speakers). CSS uses the individual `scale`/`translate`/`rotate` properties so it composes with inline transforms: default lean-and-bob, `officer` grand sway, `director` frantic jitter, `rep` slow snore swell, `keeper`/`chair`/`doorman` small nods; everyone breathes when idle (random phase). Respects `prefers-reduced-motion`. Not possible yet where the character is painted into the background (Professor in the Office, Skeptic at the pond).
-- **Rig-first walking, piloted on the Professor** (following the logged lesson that per-frame ChatGPT walk cycles drift). ChatGPT drew a side-view paper-doll parts sheet from `prof-walking.png` (`art/characters/professor/rig/parts-sheet.png`); pieces were split by alpha connected components, cropped, rescaled to anatomical lengths (the sheet's proportions were off — the upper arm was nearly torso length; the "thigh" came back as a whole trouser leg and was cropped above the knee crease) and shipped as `web/rig-prof-{head,torso,upperarm,forearm,thigh,shin}.webp` (~170 KB). Engine `CodebookRig` (inline in the game under "CUT-OUT RIGS"; dev copy + pose test page in `tools/rig/`, serve that folder and open `test.html`, `?live=walk` animates): nested joint divs with pivots/attach points from `PROF_RIG`, far limbs darker and behind the torso, lower limb pieces layered *under* the upper ones so joints read as fabric folds instead of circles. Procedural walk cycle (`CodebookRig.walk`, 1.05 s/cycle): thigh sine ±26°, knee flexion peaking early in swing (~50°) and near-straight at heel strike, arms opposite the legs, body bob, slight lean.
+- **Rig-first walking, piloted on the Professor** (following the logged lesson that per-frame ChatGPT walk cycles drift). ChatGPT drew a side-view paper-doll parts sheet from `prof-walking.png` (`art/characters/vossberg/rig/parts-sheet.png`); pieces were split by alpha connected components, cropped, rescaled to anatomical lengths (the sheet's proportions were off — the upper arm was nearly torso length; the "thigh" came back as a whole trouser leg and was cropped above the knee crease) and shipped as `web/rig-prof-{head,torso,upperarm,forearm,thigh,shin}.webp` (~170 KB). Engine `CodebookRig` (inline in the game under "CUT-OUT RIGS"; dev copy + pose test page in `tools/rig/`, serve that folder and open `test.html`, `?live=walk` animates): nested joint divs with pivots/attach points from `PROF_RIG`, far limbs darker and behind the torso, lower limb pieces layered *under* the upper ones so joints read as fabric folds instead of circles. Procedural walk cycle (`CodebookRig.walk`, 1.05 s/cycle): thigh sine ±26°, knee flexion peaking early in swing (~50°) and near-straight at heel strike, arms opposite the legs, body bob, slight lean.
 - **In the Lecture Theatre** the random "walking" pose now calls `walkRoute([-170, 130, 0])`: the painted sprite crossfades to the rig, which walks each leg at a stride-matched constant speed (`1300 * scale / period` px/s, linear — no foot sliding), mirrors to face its direction, then crossfades back to the lecturing sprite. The rig is sized from the painted sprite's height (`1600/1549`) and placed with its soles on the same floor line. `window.CODEBOOK_DEBUG_PROF_WALK()` triggers a walk for testing. Style note: the rig is a profile view while the painted poses are three-quarter — reads as him turning to walk.
 - **Rig pipeline, generalised (same session).** `tools/rig/cut.py <name>` turns `tools/rig/<name>/sheet.png` + `parts.json` (per part: sheet box `w,h,x,y`, crop fractions, target height, width stretch; joints as fractions of each part image) into cleaned part PNGs (alpha levelled to kill any sheet glow) and `rig-def.js`; pose-check with `tools/rig/test2.html?n=<name>&v=<VAR>` (serve `tools/rig/`). Parts ship as `web/rig-<name>-*.webp`; sources in `art/characters/<name>/rig/`. ChatGPT prompt that works: "PAPER-DOLL CUT-OUT PARTS … strict SIDE VIEW facing right … REAL fully transparent background (no glow) … pieces 3–6 only once … rounded extended joint ends … realistic proportions", with the full-size original sprite attached, in the cast chat.
 - **Rigged + walking now:** Professor (Lecture Theatre pacing, lean reduced to torso 1.5°), **Doorman** (walks in from the right at the archway, `showDoorman(DOORMAN_ARCH, 30)`), **Sampling Officer** (struts idly; on the successful spin strides to the drum, waits, returns), **Fieldwork Director** (paces restlessly every 7–15 s), **Nurse** (walks to the cabinet when handing out the scissors, to the machine when she stamps the H-27, occasional idle steps). The judges sit behind the bench and aren't rigged.
@@ -408,6 +408,22 @@ localStorage.setItem('codebook_save_v1', JSON.stringify({
 location.reload();
 ```
 
+### Where files live
+
+| Directory | What is in it | Tracked? |
+|---|---|---|
+| `web/` | **the shipped game.** One HTML file plus every asset it loads | yes |
+| `art/` | art *sources*: rig parts sheets, raw and unaligned mouth layers, full-size originals, per-room prompt notes | yes |
+| `audio/voices/` | the individual voice clips `tools/tts/bundle.py` packs into `web/voices-*.mp3` | yes |
+| `tools/` | build and test scripts: `art/`, `tts/`, `rig/`, `test/` | yes (the venv and model cache are not) |
+| `web-png-originals/` | full-size PNGs of the WebP assets in `web/` | no, local only |
+| `screenshots/`, `scratchpad/` | review images and test-harness scratch, regenerated on demand | no |
+| `_attic/` | superseded but not thrown away: the abandoned Godot prototype, the orphaned single-room HTML prototypes, old local backups | no |
+
+The split that looks like duplication but is not: a character's **sprite** ships in `web/`,
+while its **rig parts and raw mouth layers** stay in `art/`. Only three filenames appear in
+both, all under `art/sprites/originals/`, which is what that folder is for.
+
 ### Debug links
 
 All are plain query strings on the game URL. `?start=` and `?room=` **overwrite the save**;
@@ -450,7 +466,7 @@ web/                              # everything that ships (= exactly what gets p
 web-png-originals/                # git-ignored, local only: full-size PNGs behind the WebP files
 
 art/                              # source art + prompts, organized by room
-  office/, lecture/, corridor/, map/, trailer/, characters/professor/
+  office/, lecture/, corridor/, map/, trailer/, characters/vossberg/
   surveylab/, ethics/, mensa/, fieldwork/   # each with ART_PROMPTS.md (Act II)
   sprites/                                  # sprites not used in a room (Skeptic, skeleton, spare icon)
 

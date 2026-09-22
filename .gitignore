@@ -1,28 +1,13 @@
 # macOS
 .DS_Store
 
-# Abandoned Godot prototype (superseded by the single-file HTML game in web/)
-.godot/
-project.godot
-scenes/
-scripts/
-
-# Stale local backups, not part of the maintained project
-backups/
+# Everything superseded but not thrown away: the abandoned Godot prototype, the orphaned
+# single-room HTML prototypes that web/the-secret-of-the-codebook.html replaced, and stale
+# local backups. None of it was ever committed, so it lives here rather than being deleted.
+_attic/
 
 # Unrelated personal files
 Wes Anderson/
-
-# Orphaned single-room HTML prototypes, superseded by web/the-secret-of-the-codebook.html
-web/causality-corridor.html
-web/corridor-art-prompts.html
-web/delegation-engine.html
-web/office-art-prompts.html
-web/statistics-basement.html
-web/survey-lab.html
-web/the-library.html
-web/the-mensa.html
-web/whirlpool-office.html
 
 # Full-size PNG originals of the WebP assets in web/ (kept locally, too big for the repo)
 web-png-originals/
