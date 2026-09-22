@@ -408,6 +408,29 @@ localStorage.setItem('codebook_save_v1', JSON.stringify({
 location.reload();
 ```
 
+### Debug links
+
+All are plain query strings on the game URL. `?start=` and `?room=` **overwrite the save**;
+`?play=` does not touch it.
+
+| Link | What it does |
+|---|---|
+| `?start=1` … `?start=5` | seed a save at the top of that act and drop you on the campus map |
+| `?play=act2` … `?play=act5` | watch that act's interlude alone |
+| `?play=outro` | watch the ending |
+| `?room=<id>` | go straight into a room, skipping map and interludes |
+| `?room=workshop&acc=1` | …and open the Hypotheses Accelerator on arrival |
+| `?room=<id>&post=1` | …and have Tobi take and post the photograph |
+
+`?room=` seeds an Act II save carrying a written mechanism, the enrolment register and the
+hook pole, so the room has something to work with, and sets every `actNIntroSeen` flag so no
+cutscene fires. Room ids are the `CODEBOOK_REGISTER` ids: `whirlpool`, `lecture`, `corridor`,
+`pond`, `library`, `hall`, `workshop`, `seminar`, `surveylab`, `ethics`, `mensa`, `fieldwork`,
+`statsbasement`, `delegation`, `bureau`, `gapregistry`, `writingroom`.
+
+The `&acc=1` hook calls `window.CODEBOOK_OPEN_ACC`, which the Workshop publishes; `&post=1`
+calls `CODEBOOK_TOBI_POST` against whatever background the room you landed in is showing.
+
 Headless verification (what every change this session was checked with): launch Chrome with `--headless=new --mute-audio --remote-debugging-port=9333` (**always `--mute-audio`** — an unmuted run once played the game music out loud on the user's machine) and drive it over CDP from Node. Scratch scripts from this session: a full Act II playthrough in a deliberately messy order that asserts zero JS errors and all four H-27 boxes, per-room sprite screenshots, interlude/title-card screenshots, and a throttled-network run for the loading bars (`Network.emulateNetworkConditions`). Preview the Act II interlude alone with `?play=act2` (doesn't touch the save).
 
 Always `localStorage.removeItem('codebook_save_v1')` after testing and before publishing, so the shipped link starts fresh. Real mouse clicks work fine for a human player; automated clicks (browser-automation tooling) can miss small hitboxes even when the CSS math checks out — dispatching via `document.querySelector(...).click()` is the reliable fallback for scripted verification.
