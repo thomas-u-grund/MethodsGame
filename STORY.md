@@ -27,7 +27,7 @@ PROVISIONAL RESEARCH PROJECT
 STATUS: QUESTION EXISTS
 ```
 
-The Professor's Precisely Worded Question goes inside it: **"Do first-years who attend more Methods lectures get better exam results? (winter term 2025/26)"** — attendance is what Act II's survey measures, exam results are what later acts link it to. From here on the player isn't completing lessons — they're trying to turn one miserable grad-student idea into something the Professor will actually accept, and every department unit insists its particular contribution is mandatory before the project can proceed. The folder is inspectable at any time and visibly grows/changes stamp across the game:
+The Professor's Precisely Worded Question goes inside it: **"Do first-years who attend more Methods lectures get better exam results? (this winter term)"** — attendance is what Act II's survey measures, exam results are what later acts link it to. From here on the player isn't completing lessons — they're trying to turn one miserable grad-student idea into something the Professor will actually accept, and every department unit insists its particular contribution is mandatory before the project can proceed. The folder is inspectable at any time and visibly grows/changes stamp across the game:
 
 | After | Stamp reads |
 |---|---|
@@ -835,7 +835,7 @@ There are three ratchets:
 | Control | ◄ SPECIFY ——————————————— GENERALISE ► |
 |---|---|
 | **POPULATION** | first-year Methods students ← students ← young adults ← humans ← social beings ← civilisation |
-| **TIME** | winter term 2025/26 ← academic year ← modernity ← recorded history |
+| **TIME** | this winter term ← academic year ← modernity ← recorded history |
 | **CONTEXT** | one Methods course ← universities ← institutions ← society ← reality |
 
 And a large red lever, **THEORETICAL SIGNIFICANCE**, with exactly two labels: `INSUFFICIENT` and `TRANSFORMATIVE`. Feldstrom will not allow it to rest between them.
@@ -872,7 +872,7 @@ Again: **INSTITUTIONS PRODUCE CAPACITY THROUGH ENCOUNTER.** Again: **ATTENTION I
 
 That exchange is the joke and the lesson in the same two lines.
 
-**The BOUNDARY CONDITIONS dial** is a big brass thing salvaged from the traffic rig, physically jammed at `IGNORE`. Fixing the scope is not "put register in machine": the enrolment register has to be clamped into Feldstrom's old **traffic-counting gate**, which is the one component that still knows how to recognise a bounded system — N = enrolled first-year Methods students, location = this university, period = winter term 2025/26.
+**The BOUNDARY CONDITIONS dial** is a big brass thing salvaged from the traffic rig, physically jammed at `IGNORE`. Fixing the scope is not "put register in machine": the enrolment register has to be clamped into Feldstrom's old **traffic-counting gate**, which is the one component that still knows how to recognise a bounded system — N = enrolled first-year Methods students, location = this university, period = this winter term.
 
 First attempt, with Feldstrom in the room:
 
@@ -884,7 +884,7 @@ He tries to drop the register into a waste basket marked **CONTEXT**. He will ke
 
 With him gone, the machine grudgingly rewinds, one heavy clunk per stage:
 
-> CIVILISATION → HUMANS → STUDENTS → FIRST-YEAR STUDENTS → **FIRST-YEAR METHODS STUDENTS, WINTER TERM 2025/26**
+> CIVILISATION → HUMANS → STUDENTS → FIRST-YEAR STUDENTS → **FIRST-YEAR METHODS STUDENTS, THIS WINTER TERM**
 
 A small bell. `SYSTEM BOUNDARY DETECTED. EMPIRICALLY POSSIBLE.`
 
@@ -930,7 +930,7 @@ With the tape off and the enrolment register in the gate, the Accelerator can fi
 
 > **THEORY** — attending lectures helps because students practise worked examples and the exam rewards that practice.
 > ◄ SPECIFY
-> **HYPOTHESIS** — among first-year Methods students in winter term 2025/26, the attendance–performance gap will be larger on exam questions resembling the worked examples than on questions that do not.
+> **HYPOTHESIS** — among first-year Methods students this winter term, the attendance–performance gap will be larger on exam questions resembling the worked examples than on questions that do not.
 
 Feldstrom watches this happen with the expression of a man watching someone dismantle a cathedral.
 
@@ -1385,7 +1385,7 @@ The centerpiece: a colossal brass raffle drum behind a velvet rope under spotlig
 
 **The wrong-but-playable solution:** aim the empty frame at the lunch queue. Everyone in it dutifully poses inside it; the Officer is delighted (*"A population!"*) and spins the drum for a perfectly random sample of twelve tote-bag-carrying, curry-eating people. Take that "sample" to the Survey Lab and the statistician deflates it in one line: *"Remarkably representative of people currently standing in that queue."* Random selection from the wrong frame is still the wrong frame.
 
-**The correct frame is the Act II enrolment register** — the same battered list the player jammed into Feldstrom's traffic gate to force his theory down to a population that exists. It contains exactly the right people: first-year Methods enrolments, winter term 2025/26. But it contains their *names*, so the Sampling Officer cannot touch it until the Ethics Tribunal has pseudonymised it. What comes back is the **PSEUDONYMISED SAMPLING FRAME**: the same gilded frame, now full of numbered cards.
+**The correct frame is the Act II enrolment register** — the same battered list the player jammed into Feldstrom's traffic gate to force his theory down to a population that exists. It contains exactly the right people: first-year Methods enrolments, this winter term. But it contains their *names*, so the Sampling Officer cannot touch it until the Ethics Tribunal has pseudonymised it. What comes back is the **PSEUDONYMISED SAMPLING FRAME**: the same gilded frame, now full of numbered cards.
 
 This is the cleanest possible Act II → Act III handover. The scope decision the player made under duress in a lean-to, to shut a professor up, turns out to have been the sampling frame all along — and they get to work that out themselves.
 

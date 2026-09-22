@@ -431,8 +431,9 @@ it, not from the headings below.
 | ~~8q~~ | ~~The two professors: she is a woman, he is Dr. Vossberg~~ | **DONE 2026-09-22** (her voice casting outstanding) |
 | ~~8r~~ | ~~Silhouette staging removed; Vossberg is the old professor art~~ | **DONE 2026-09-22** |
 | ~~8i~~ | ~~The campus map has run out of campus~~ | **DONE 2026-09-22** |
-| **8a** | Running jokes still to place (the not-having-read-it thread, the founders) | small — mostly Look At text plus one or two images |
-| **8h** | One cast member left: the library student who skimmed it | small — and he is where the reading joke starts |
+| ~~8a~~ | ~~Running jokes: the not-having-read-it thread, the founders~~ | **DONE 2026-09-22** (group portrait image outstanding) |
+| ~~8h~~ | ~~The library student who skimmed it~~ | **DONE 2026-09-22** |
+| ~~8s~~ | ~~KIRA stands still in all four of her rooms~~ | **DONE 2026-09-22** |
 
 **Blocked on the user:** voices for KIRA, the Visiting Fellow, the Registrar, the
 Implications Clerk and Tobi (§7 casting).
@@ -932,6 +933,57 @@ too, which no amount of new art will.
 **Done when:** no two consecutive beats show an identical static frame; every panel drifts;
 transitions between different images cross-fade; and `?play=outro` can be watched end to end
 without it looking like the same picture keeps coming back.
+
+---
+
+## 8s. KIRA moves, the library student exists, the reading thread lands — DONE 2026-09-22
+
+> "One other thing, Kira should move around."
+> "General note, in this interlude art with question there should be no WS25/26"
+
+**KIRA now uses her castors.** `CODEBOOK_KIRA_ROLL` had existed for a long time, was
+correct, and was **never once called** — so she stood perfectly still in all four of her
+rooms. Wiring it up needed three fixes beyond calling it:
+
+- it animated `transform`, which would have thrown away the `translateX(-50%)` that centres
+  a `.cb-foot` sprite on its foot mark and snapped her half a body sideways on the first
+  roll. It animates `left` now.
+- `translate:10% 0` would have resolved against her own width (`.cb-foot` is
+  `width:max-content`), so the distance would have depended on how wide her sprite is.
+  `left` is a percentage of the scene, which is the same unit the walkboxes are in.
+- **her hotspot moves with her**, or you are left clicking the floor she used to be on.
+
+It is declared per sprite (`roll: <scene-%>`) rather than called per room, so a character
+cannot be given movement in one room and forgotten in the next — which is exactly how this
+was lost the first time. `test-kira.js` checks all four rooms' rolls land inside that
+room's walkbox at her depth, and that the hotspot follows.
+
+**The library student (8h) has a body.** He had been written into that room for a long time
+— *"Yeah, no, I skimmed it"* — with no sprite, hooked onto the `stacks` hotspot and
+described as being somewhere in the dark. He is now drawn, seated at the reading desk row
+with a firmly shut hardback and a four-page summary of it, with his own hotspot and two
+follow-up replies. Placed by `l/t/w/h` rather than `foot`, because the depth ramp gives
+*standing* heights and he is sitting down.
+
+**The did-not-do-the-reading thread (8a.1)** now runs: the Library student → the Mensa queue
+(*"I read the abstract and the conclusion. The middle is just… evidence."*) → the Writing
+Room's second author, who approved a thirty-one-page draft four minutes after receiving it
+→ Reviewer 2's comment 1 in the outro, which was already written and is now the punchline
+of a set-up rather than a one-off.
+
+**8a.2 needed almost nothing** — the Hall of Founders jokes were already all implemented:
+the two portraits that are obviously the same man, the nameplate with the older screw holes
+around it, the founder whose dates make him fourteen, and NO LIVING THEORISTS BEYOND THIS
+POINT. Only the optional group-portrait image is outstanding.
+
+**The hard date is gone.** The interlude's question card is a DOM overlay, not paint, so
+"(Winter term 2025/26)" was one line — but the same string was in three other in-game places
+(the Office answer label, the Accelerator's scope, and its boundary readout) and six in
+STORY.md. All now read "this winter term", which keeps WHEN bounded — the methodological
+point — without dating the game.
+
+**Outstanding:** the founders group portrait ("eleven identical bearded men"), which is
+decoration rather than substance, and her voice.
 
 ---
 
