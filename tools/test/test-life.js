@@ -47,8 +47,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     t.classList.add('talking');
     await w(30);
     out.talkOrigin = getComputedStyle(t).transformOrigin;
+    // Sample across more than a full cycle. At 14 samples this was timing-sensitive and
+    // failed intermittently inside the suite while passing on its own.
     const deg = [];
-    for (let i = 0; i < 14; i++) { await w(60); deg.push(parseFloat(getComputedStyle(t).rotate) || 0); }
+    for (let i = 0; i < 30; i++) { await w(50); deg.push(parseFloat(getComputedStyle(t).rotate) || 0); }
     out.maxDeg = Math.max(...deg.map(Math.abs));
     out.wentPositive = deg.some(d => d > 0.02);
     out.wentNegative = deg.some(d => d < -0.02);
