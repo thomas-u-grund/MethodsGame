@@ -303,7 +303,14 @@ cd web/ && python3 -m http.server 8934
 - [ ] Painted background + verb grid + side inventory; no procedural SVG placeholder left.
 - [ ] Every speaking character: sprite, mouth frame, `cb-talk-*`, voiced lines in the act bundle.
 - [ ] Narration is unvoiced and has no speech bubble.
-- [ ] One skeleton with a room-specific sign.
+- [ ] ~~One skeleton with a room-specific sign.~~ **Dropped 2026-09-23 (user: "fewer skeletons in general").**
+      Seven rooms had one; it had stopped being a running joke and become wallpaper. Four
+      remain, and each earns its place: the **Office** (SUBMITTED 2016 · STILL WAITING --
+      the original, and the outro calls back to it by name), the **Causality Corridor**
+      (one per door, so only ever one on screen), the **Act IV** one clutching a lit bulb
+      and `p = .049. I KNEW I WAS RIGHT.`, and the **Gap Registry** (the Act V bookend,
+      and the one named on the cast poster). The Library, Hall of Founders and Seminar Room
+      ones were decoration with no hotspot and no line, and are in `_attic/cut-sprites/`.
 - [ ] The Research Folder is defaced in some way.
 - [ ] Ambience loop + at least two one-shot SFX.
 - [ ] Every asset is in `CODEBOOK_ACT_ASSETS`.

@@ -62,7 +62,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r && r.count === 48 && r.fellBack.length === 0 && r.namesRoom.length === 0 &&
+  // The count is a tripwire, not a fact about the world: bump it deliberately when items
+  // are added, so a new item cannot slip in without a description. 48 -> 52 when the Survey
+  // Lab's four question cards became things you carry.
+  const ok = r && r.count === 52 && r.fellBack.length === 0 && r.namesRoom.length === 0 &&
              r.tellsVerb.length === 0 && r.advWorks && r.armed && r.actIWorks &&
              r.folderAfter !== r.folderBefore && /Data/.test(r.folderAfter) &&
              r.slipAfter !== r.slipBefore && /wax/i.test(r.slipAfter) && !p.errors.length;
