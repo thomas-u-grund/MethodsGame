@@ -413,7 +413,7 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 
 ---
 
-## 8t. The Starring posters still have one professor in them — logged 2026-09-23 (user)
+## 8t. The Starring posters still have one professor in them — logged 2026-09-23 (user) — DONE 2026-09-23 in 8u
 
 ROADMAP 8o split the Professor and the lecturer into two people **in the rooms**. The Act I
 interlude never got the same treatment, and it cannot be fixed by editing text, because all
@@ -495,7 +495,7 @@ it, not from the headings below.
 |---|---|---|
 | ~~8o~~ | ~~The Professor is two different people in Act I~~ | **DONE 2026-09-22** (Option C, revised reveal) |
 | ~~8p~~ | ~~Character movement is mechanical~~ | **DONE 2026-09-22** |
-| ~~8q~~ | ~~The two professors: she is a woman, he is Dr. Vossberg~~ | **DONE 2026-09-22** (her voice casting outstanding) |
+| ~~8q~~ | ~~The two professors: she is a woman, he is Dr. Vossberg~~ | **DONE 2026-09-22**; voice, name and look done in 8u |
 | ~~8r~~ | ~~Silhouette staging removed; Vossberg is the old professor art~~ | **DONE 2026-09-22** |
 | ~~8i~~ | ~~The campus map has run out of campus~~ | **DONE 2026-09-22** |
 | ~~8a~~ | ~~Running jokes: the not-having-read-it thread, the founders~~ | **DONE 2026-09-22** |
@@ -1091,8 +1091,23 @@ point — without dating the game.
 - **`trailer3-b-prof.webp`** (Act III interlude, her at her desk) redone as a ChatGPT edit of
   the old panel, then only the figure region (feathered) pasted back onto the original so
   nothing else drifts. Same pose; new look.
-- **Still open:** the two Starring posters (8t) and the `vo-narr-opening-05/07`,
-  `vo-narr-act3-05` re-records that go with them.
+- **Mouth (user: "make sure the new prof talks with mouth movement").** `#wp_profMouth` is a
+  second image in the same box as `#wp_prof`, class `cb-mouth-solo`, `data-voice="prof"`, so
+  the line engine flickers it with her clips (the Vossberg pattern). Source: a ChatGPT
+  "only the mouth changes" edit of the seated sprite; it came back 2-4 px off, so it was
+  aligned by `-subimage-search` (shift -3,-3) before cutting a feathered ellipse, then
+  cropped/resized exactly like the sprite. `test-office` now asserts the mouth exists.
+- **Posters (closes 8t).** `trailer3-e-cast.webp`: she replaces Vossberg on the right.
+  `trailer-cast-act1.webp`: she takes the lectern with her counter; Vossberg moves to the
+  back, smaller, reading off a printout. Both are ChatGPT edits with only the changed region
+  merged back onto the original. Narration re-recorded to match: `opening-05` "she keeps a
+  Codebook", `opening-07` adds "A lecturer who reads her course out for her.", `act3-05`
+  "her next objection". Both voice bundles rebuilt.
+- **Merge recipe, because the first attempt was wrong:** `magick orig edit mask -compose over
+  -composite` silently ignored the mask and shipped the whole ChatGPT repaint (caught by an
+  RMSE check outside the figure). What works: `magick edit -alpha off mask -alpha off -compose
+  CopyOpacity -composite fg.png; magick orig -alpha off fg.png -compose over -composite out`.
+  Verify with `compare -metric RMSE` on a crop outside the mask: it must be 0.
 
 ---
 

@@ -37,7 +37,9 @@ const enterOffice = `
     out.isSprite      = !!prof && prof.getAttribute('src') === 'prof-office.webp';
     out.animates      = !!prof && prof.getAttribute('data-voice') === 'prof'
                         && getComputedStyle(prof).animationName !== 'none';
-    out.noMouthLayer  = !document.getElementById('wp_profMouth');
+    const mouth = document.getElementById('wp_profMouth');
+    out.hasMouth      = !!mouth && mouth.getAttribute('data-voice') === 'prof'
+                        && mouth.classList.contains('cb-mouth-solo') && mouth.naturalWidth > 0;
     out.visible       = !!prof && getComputedStyle(prof).display !== 'none';
     out.bubblesAtStart = document.querySelectorAll('#wp_drops .full').length;
 
@@ -80,7 +82,7 @@ const enterOffice = `
 
   console.log(JSON.stringify({ ...r, ...back }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r && r.oneBackground && r.isSprite && r.animates && r.noMouthLayer && r.visible
+  const ok = r && r.oneBackground && r.isSprite && r.animates && r.hasMouth && r.visible
           && r.bubblesAtStart === 5 && r.sheLeft && r.roomSaysSo && r.wayOut && r.wayOutSurvivesWait
           && r.deskUnguarded
           && back.sheIsBack && back.bubbles === 5 && back.notSaved
