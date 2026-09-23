@@ -49,7 +49,7 @@ const enterOffice = `
       btns[0].click();
       await w(280);
     }
-    await w(3800);
+    await w(5800);   // she leaves when her line ends (AFTER_LINE, 4.5 s cap) + 650 ms fade
     out.sheLeft      = getComputedStyle(prof).display === 'none';
     out.roomSaysSo   = /empty/i.test(document.getElementById('wp_line').textContent);
     const wayOut = () => [...document.querySelectorAll('#wp_choices button')]

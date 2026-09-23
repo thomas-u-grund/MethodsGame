@@ -161,7 +161,8 @@ Full loop in `HANDOVER.md` §04. The short version:
 | Character | Reference | exag / cfg |
 |---|---|---|
 | Narrator (trailers, interludes, outro) | Mark F. Smith | 1.0 / 0.25 |
-| The Professor | Martin Geeson | 0.55 / 0.45 |
+| The Professor (her, Office) | **Laura Victoria** (recast 2026-09-23; Claude's pick, user delegated) | 0.55 / 0.45 |
+| Dr. Vossberg (lecturer) | Martin Geeson | 0.55 / 0.45 |
 | The Doorman | Bob Neufeld | 0.6 / 0.4 |
 | The Skeptic | Elizabeth Klett | 0.8 / 0.3 |
 | Survey Nurse | Ruth Golding | 0.85 / 0.3 |
@@ -1064,6 +1065,37 @@ point — without dating the game.
 
 ---
 
+## 8u. Prof. Stellmacher: a name, a voice and a look of her own — 2026-09-23 (user)
+
+> "I don't like the name Halvorsen." / "She looks too close to Vossberg." / "Pick any voice
+> that you think works."
+
+- **Name:** Prof. Halvorsen → **Prof. Stellmacher** (user's pick). Only the timetable Look At
+  and `test-lecturer` carried it.
+- **Voice:** LibriVox **Laura Victoria** (the lowest and flattest of the four unused female
+  references: 168 Hz, vs Availle 217, Gesine 201, Eastman 247), exag 0.55 / cfg 0.45 like
+  Vossberg's. All ten `office-*` clips re-rendered; `voices-act1.mp3` rebuilt. W-LOSE now
+  leaves on `CODEBOOK_AFTER_LINE` rather than a fixed 2.6 s.
+- **Look:** "colour and edge" — cropped white pixie cut, **no glasses**, tailored teal jacket
+  over a black high-neck top, one geometric brass earring, capped fountain pen. The opposite
+  of Vossberg's grey hair, glasses and brown tweed. Teal was kept although the office wall is
+  teal: seated, she is framed by the yellow corkboard, not the wall.
+- **How the Office sprite was made (and why not the old way):** the old `prof-office.webp`
+  was a difference cut of a ChatGPT edit of the whole room, and it had holes. The new one is
+  a clean transparent seated bust generated on its own (same ChatGPT chat as the full-body
+  design, nurse + director attached as style references), cropped, scaled into the chair box
+  and **with the desk nameplate cut out of its alpha**, so the nameplate sits in front of her
+  hands. Shipped at 2× (562×520). Sources: `art/characters/stellmacher/`.
+- **Full-body design** `art/characters/stellmacher/stellmacher-full-v1.png` is the reference
+  for the 8t posters (she replaces the old tweed "professor" there).
+- **`trailer3-b-prof.webp`** (Act III interlude, her at her desk) redone as a ChatGPT edit of
+  the old panel, then only the figure region (feathered) pasted back onto the original so
+  nothing else drifts. Same pose; new look.
+- **Still open:** the two Starring posters (8t) and the `vo-narr-opening-05/07`,
+  `vo-narr-act3-05` re-records that go with them.
+
+---
+
 ## 8r. The silhouette staging is gone — DONE 2026-09-22 (user)
 
 > "I think vossberg can be just the old prof we had there previously. Remove all the beam
@@ -1096,9 +1128,9 @@ a lit theatre, reading the printout.
 the two-flag split, the timetable prop, the printout-with-a-reference-number plant in Act I,
 and the post-credits reveal.
 
-**Still the only outstanding item:** the ten `office-*` clips are a male voice and she is a
-woman, plus `vo-narr-opening-04.mp3` says "his patience" where the text says "her". Same
-bundle, one rebuild, gated on her casting.
+**Resolved 2026-09-23:** the ten `office-*` clips were re-rendered in Laura Victoria and
+`vo-narr-opening-04.mp3` now says "her patience"; `voices-act1.mp3` rebuilt. Her walk-out
+after W-LOSE now waits for the line (`CODEBOOK_AFTER_LINE`) instead of a fixed 2.6 s.
 
 ---
 
@@ -1143,7 +1175,7 @@ needed a "Retry from the start" button. Now she caps her pen, takes her coat and
 
 **The lecturer is Dr. Vossberg**, and the timetable in her office now ties the whole thing
 together in one prop: the nine o'clock slot reads INTRODUCTION TO SYSTEMS THEORY ·
-**PROF. HALVORSEN**, ringed twice in red with **NOT MINE** beside it, and underneath, in
+**PROF. STELLMACHER**, ringed twice in red with **NOT MINE** beside it, and underneath, in
 another hand, *cover — Dr. Vossberg*. So: the course is hers on paper, she refuses to
 deliver it, the department puts someone else in the beam to read it out, and that is why he
 is reading off a printout with a reference number in the header — which is the Act I plant

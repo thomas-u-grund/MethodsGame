@@ -51,7 +51,7 @@ None of them is a game over. All of them are stamped, filed and approved by some
 
 Four rooms, no locks. **Order matters here more than anywhere else in the game.**
 
-> **Two different people.** *Prof. Halvorsen* — "the Professor" — is a woman, and the Office
+> **Two different people.** *Prof. Stellmacher* — "the Professor" — is a woman, and the Office
 > is hers. *Dr. Vossberg* is the man in the Lecture Theatre, covering her nine o'clock. They
 > used to be one character; if you have read an older copy of this document, that is what
 > changed.
@@ -76,7 +76,7 @@ Community: Evidence from Twenty-Three Residents of Leicester*. That is the Profe
 backstory in one spine. Try it while she is watching and she tells you to put it back.
 
 **Also:** Look At the corkboard. The departmental timetable pinned over it is what tells you
-Dr. Vossberg exists: the nine o'clock is **INTRODUCTION TO SYSTEMS THEORY · PROF. HALVORSEN**,
+Dr. Vossberg exists: the nine o'clock is **INTRODUCTION TO SYSTEMS THEORY · PROF. STELLMACHER**,
 ringed twice in red with **NOT MINE** beside it, and underneath, in another hand, *cover —
 Dr. Vossberg*.
 
@@ -90,7 +90,7 @@ Dr. Vossberg*.
 **Do:**
 1. Pick up the chalk, the worksheets and the ink. All three are needed later — the worksheets
    not until **Act IV**.
-2. **Talk To Dr. Vossberg and ask "Where is Professor Halvorsen?"** He stops dead, which
+2. **Talk To Dr. Vossberg and ask "Where is Professor Stellmacher?"** He stops dead, which
    nothing else in the room manages, and explains that she will not be in the building while
    this runs under her name. *She is now in her office.* This needs no items and can be done
    the moment you walk in.

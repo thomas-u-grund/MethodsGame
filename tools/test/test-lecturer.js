@@ -105,7 +105,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     if (!hot) return { err: 'no lecturer hotspot' };
     hot.click(); await w(600);
     const ask = [...document.querySelectorAll('#lt_choices button')]
-      .find(b => /Halvorsen/i.test(b.textContent));
+      .find(b => /Stellmacher/i.test(b.textContent));
     const out = { offered: !!ask, before: !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.profAtOffice };
     if (!ask) return out;
     ask.click(); await w(600);
@@ -114,7 +114,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     // ...and asking twice does not re-offer it
     hot.click(); await w(400);
     out.notReoffered = ![...document.querySelectorAll('#lt_choices button')]
-      .some(b => /Halvorsen/i.test(b.textContent));
+      .some(b => /Stellmacher/i.test(b.textContent));
     return out;
   })()`);
 
