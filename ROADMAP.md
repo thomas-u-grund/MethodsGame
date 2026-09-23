@@ -412,7 +412,7 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 
 ---
 
-## 8t. Act I's interlude still has one professor in it — logged 2026-09-23 (user)
+## 8t. The Starring posters still have one professor in them — logged 2026-09-23 (user)
 
 ROADMAP 8o split the Professor and the lecturer into two people **in the rooms**. The Act I
 interlude never got the same treatment, and it cannot be fixed by editing text, because all
@@ -421,12 +421,26 @@ alone would make the narration contradict what is on screen.
 
 ### What is actually wrong
 
+**Two** of the five Starring posters carry the pre-split male professor, not one. Both use the
+same likeness — grey hair, glasses, tweed, right index finger raised — which is
+`vossberg-pointing.webp`, i.e. Dr. Vossberg.
+
 | Asset | Problem |
 | --- | --- |
-| `trailer-cast-act1.webp` | The tweed figure pointing upwards is **Dr. Vossberg** — it is his exact likeness, the same pose as `vossberg-pointing.webp`. The caption calls him "a professor with seven seconds of patience", which is **her**. She is not on her own cast poster at all, in the act she is the centre of. |
+| `trailer-cast-act1.webp` | The tweed figure pointing upwards is **Dr. Vossberg**. The caption calls him "a professor with seven seconds of patience", which is **her**. She is not on her own cast poster at all, in the act she is the centre of. |
 | `vo-narr-opening-07.mp3` | The caption above. Re-record once the poster is right. |
 | `vo-narr-opening-05.mp3` | "They say **he** keeps a Codebook." The line before it establishes the Professor as *her*, so the pronoun points at a woman. |
 | `vo-narr-opening-04.mp3` | Says "**his** patience" where the caption reads "her". Already logged; same re-record session. |
+| `trailer3-e-cast.webp` | **The same figure again, on the right.** Worse than Act I's: Dr. Vossberg does not appear anywhere in Act III, so the poster stars somebody who is not in the act. The person the caption means — "a professor, already preparing his next objection" — is **her**, and she is the one you hand the act back to. |
+| `vo-narr-act3-05.mp3` | The caption above, including the "his". |
+
+Act III's interlude is otherwise **correct about her**: `trailer3-b-prof.webp`, three panels
+earlier, is the Professor at her own desk with the WORLD'S OKAYEST SAMPLE SIZE mug, and reads
+"says the Professor". So within one trailer, panel *b* has her right and panel *e* has a man
+who is not in the act. That crossed pair is the clearest statement of the bug.
+
+Acts II, IV and V are clear: none of their posters has a professor on it, and Act II's was
+rebuilt on 2026-09-23 when the library student was cut.
 
 ### Why there is no cheap fix
 
@@ -445,8 +459,13 @@ painted asset in the game and is not worth degrading for this.
    tweed, the expression from `trailer3-b-prof.webp`, standing — **Dr. Vossberg** (the
    existing tweed figure, mid-point, unchanged), and the doorman. Empty plaque in the middle
    for the STARRING caption, same stage and vignette as now.
-2. **Re-record `vo-narr-opening-04/05/07`** in the same session as the outstanding Act II,
-   IV and V voices (§7.1), to captions that name both people and get her pronouns right.
+2. **Regenerate `trailer3-e-cast.webp`** with the rightmost figure replaced by **the
+   Professor**, same design as above. Everyone else on it — nurse, herald, the three judges,
+   the Fieldwork Director — is correct and should not move. Dr. Vossberg comes off it
+   entirely; he is not in Act III.
+3. **Re-record `vo-narr-opening-04/05/07` and `vo-narr-act3-05`** in the same session as the
+   outstanding Act II, IV and V voices (§7.1), to captions that name both people and get her
+   pronouns right.
 
 Blocked on the same casting decision as everything else in §7.
 
