@@ -9,6 +9,8 @@
 //      a woman in a different building now.
 //   2. winning bingo sends the lecturer away AND brings the Professor back, via two
 //      separate flags, because summoning the lecturer back must not empty the Office again
+//   2b. but bingo is no longer the ONLY way she comes back -- ASKING him where she is does
+//      it too, and that is the intended route. Act I must not be gated on a minigame.
 //   3. a save made before the split still works: `profAtOffice` alone has to imply that
 //      the lecturer has already gone, or a derailed lecture starts over
 const { connect } = require('./cdp');
@@ -81,6 +83,41 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     return { officeOccupied: !!line && !/The office is empty/.test(line.textContent) };
   })()`);
 
+  // ---- 4: ASKING him is the intended way to get her back, and it needs nothing.
+  // Act I used to be gated on winning the bingo minigame: that was the only event that
+  // could put the Professor at her own desk. Now the first thing anyone tries -- talk to
+  // the man covering her class -- works, with an empty inventory, on the way in.
+  await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({inventory:[],flags:{}}))`);
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
+  const e = await p.evaluate(`(async () => {
+    const w = ms => new Promise(r => setTimeout(r, ms));
+    const s = document.getElementById('bootSplash'); if (s) s.remove();
+    window.CODEBOOK_START(); await w(800);
+    [...document.querySelectorAll('button.campus-hotspot')]
+      .find(b => /Introduction to Systems Theory|Lecture/i.test(b.title)).click();
+    await w(1600);
+    const vb = [...document.querySelectorAll('#lt_verbGrid button')].find(b => /talk to/i.test(b.textContent));
+    if (!vb) return { err: 'no talk-to verb' };
+    vb.click();
+    // his zone is the bare .door-zone div at left:46% -- same selector the bingo run uses
+    const hot = [...document.querySelectorAll('#lt_sceneWrap .door-zone')]
+      .find(el => el.style.left.indexOf('46') === 0);
+    if (!hot) return { err: 'no lecturer hotspot' };
+    hot.click(); await w(600);
+    const ask = [...document.querySelectorAll('#lt_choices button')]
+      .find(b => /Halvorsen/i.test(b.textContent));
+    const out = { offered: !!ask, before: !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.profAtOffice };
+    if (!ask) return out;
+    ask.click(); await w(600);
+    out.after = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.profAtOffice;
+    out.lecturerStillHere = !JSON.parse(localStorage.getItem('codebook_save_v1')).flags.lecturerGone;
+    // ...and asking twice does not re-offer it
+    hot.click(); await w(400);
+    out.notReoffered = ![...document.querySelectorAll('#lt_choices button')]
+      .some(b => /Halvorsen/i.test(b.textContent));
+    return out;
+  })()`);
+
   // ---- 3: a pre-split save
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
     inventory:[], flags:{ lectureDone:true, profAtOffice:true }}))`);
@@ -92,12 +129,16 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const d = await p.evaluate(`JSON.parse(localStorage.getItem('codebook_save_v1')).flags.lecturerGone === undefined`);
 
-  console.log(JSON.stringify({ ...a, ...b, migratedOldSave: c, leavesNewSaveAlone: d }, null, 1),
+  console.log(JSON.stringify({ ...a, ...b, ask: e, migratedOldSave: c, leavesNewSaveAlone: d }, null, 1),
               '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = a && a.speaker === 'Dr. Vossberg' && a.poses && a.mouths && a.noProfSprite
           && a.started && a.shouted && a.lectureDone && a.lecturerGone && a.profAtOffice
-          && b.officeOccupied && c && d && !p.errors.length;
+          && b.officeOccupied && c && d
+          && e && !e.err && e.offered && !e.before && e.after   // asking alone brings her back
+          && e.lecturerStillHere                                // without derailing anything
+          && e.notReoffered
+          && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');
   p.close(); process.exit(ok ? 0 : 1);
 })();
