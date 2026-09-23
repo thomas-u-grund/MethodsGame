@@ -412,6 +412,46 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 
 ---
 
+## 8t. Act I's interlude still has one professor in it — logged 2026-09-23 (user)
+
+ROADMAP 8o split the Professor and the lecturer into two people **in the rooms**. The Act I
+interlude never got the same treatment, and it cannot be fixed by editing text, because all
+three offending lines are voiced and Act I's 38 clips are recorded. Changing the captions
+alone would make the narration contradict what is on screen.
+
+### What is actually wrong
+
+| Asset | Problem |
+| --- | --- |
+| `trailer-cast-act1.webp` | The tweed figure pointing upwards is **Dr. Vossberg** — it is his exact likeness, the same pose as `vossberg-pointing.webp`. The caption calls him "a professor with seven seconds of patience", which is **her**. She is not on her own cast poster at all, in the act she is the centre of. |
+| `vo-narr-opening-07.mp3` | The caption above. Re-record once the poster is right. |
+| `vo-narr-opening-05.mp3` | "They say **he** keeps a Codebook." The line before it establishes the Professor as *her*, so the pronoun points at a woman. |
+| `vo-narr-opening-04.mp3` | Says "**his** patience" where the caption reads "her". Already logged; same re-record session. |
+
+### Why there is no cheap fix
+
+Compositing her into the existing poster was tried and rejected. The only painted art of her
+is `trailer3-b-prof.webp` (Act III's interlude, and it is *correct* — she is at her desk with
+the WORLD'S OKAYEST SAMPLE SIZE mug) and `prof-office.webp` at 333×311. Both are **seated
+busts behind a desk**: dropped into a lineup of standing figures at 65% of the frame height
+she comes out at about 21%, reading as a miniature, and cutting her out of the Act III panel
+means matting her off a corkboard covered in sticky notes. The Act I poster is the best
+painted asset in the game and is not worth degrading for this.
+
+### The job
+
+1. **Regenerate `trailer-cast-act1.webp`** with five figures, not four: the skeleton
+   (SUBMITTED 2016 · STILL WAITING), the skeptic, **the Professor** — grey bun, glasses,
+   tweed, the expression from `trailer3-b-prof.webp`, standing — **Dr. Vossberg** (the
+   existing tweed figure, mid-point, unchanged), and the doorman. Empty plaque in the middle
+   for the STARRING caption, same stage and vignette as now.
+2. **Re-record `vo-narr-opening-04/05/07`** in the same session as the outstanding Act II,
+   IV and V voices (§7.1), to captions that name both people and get her pronouns right.
+
+Blocked on the same casting decision as everything else in §7.
+
+---
+
 ## 7. Open decisions for the user
 
 Ask these at the natural moment, not all at once:

@@ -1,6 +1,7 @@
 # THE SECRET OF THE LOST CODEBOOK — Walkthrough
 
-Every task and puzzle, act by act. Written from the code on 2026-09-21, not from memory.
+Every task and puzzle, act by act. Written from the code, not from memory.
+Last checked against the code **2026-09-23**.
 
 This is a **complete** walkthrough: it gives the solutions. It also flags the wrong branches
 worth walking on purpose, because several of them are where the teaching actually happens —
@@ -50,10 +51,19 @@ None of them is a game over. All of them are stamped, filed and approved by some
 
 Four rooms, no locks. **Order matters here more than anywhere else in the game.**
 
-> ⚠️ **Loot the Office before you win at bingo.** The professor is in the Lecture Theatre on a
-> fresh save, and every pickup in his office is blocked while he is sitting in it. Winning
-> bingo sends him back. If you loot late you can send him out again — chalk on the Lecture
-> Theatre blackboard summons him — but it is a wasted trip.
+> **Two different people.** *Prof. Halvorsen* — "the Professor" — is a woman, and the Office
+> is hers. *Dr. Vossberg* is the man in the Lecture Theatre, covering her nine o'clock. They
+> used to be one character; if you have read an older copy of this document, that is what
+> changed.
+
+> ⚠️ **Loot the Office before you fetch her.** On a fresh save the Office is empty — she
+> refuses to be in the building while a class runs under her name that she did not design —
+> and that is the only comfortable window for the eight pickups on her desk. Everything there
+> is blocked while she is sitting in it.
+>
+> If you loot late, you are not stuck: **burn her patience on purpose.** She walks out, the
+> desk is unattended, and she is back at her desk the next time you enter, with five fresh
+> bubbles. Nothing about a lost interview is saved.
 
 ### I.1 The Seven-Second Office (part one — the robbery)
 
@@ -61,23 +71,37 @@ Four rooms, no locks. **Order matters here more than anywhere else in the game.*
 `hourglass` · `usb` · `stamp` · `magnifyingglass` (desk) · `bingocard` · `raffle`
 (Pick Up the right-hand bookshelf).
 
-**Optional:** magnifying glass on the right-hand shelf → his offprint, *The Death of
-Community: Evidence from Twenty-Three Residents of Leicester*. That is the professor's
-backstory in one spine.
+**Optional:** magnifying glass on the right-hand shelf → her offprint, *The Death of
+Community: Evidence from Twenty-Three Residents of Leicester*. That is the Professor's
+backstory in one spine. Try it while she is watching and she tells you to put it back.
 
-**Easter egg:** pen on the corkboard → a **Fabricated Citation**. Use it on him later.
+**Also:** Look At the corkboard. The departmental timetable pinned over it is what tells you
+Dr. Vossberg exists: the nine o'clock is **INTRODUCTION TO SYSTEMS THEORY · PROF. HALVORSEN**,
+ringed twice in red with **NOT MINE** beside it, and underneath, in another hand, *cover —
+Dr. Vossberg*.
+
+**Easter egg:** pen on the corkboard → a **Fabricated Citation**. Use it on her later.
 
 ### I.2 Introduction to Systems Theory
 
-**Needs:** `bingocard`. **Gives:** `chalk`, `worksheets`, `blackink`.
+**Needs:** nothing (the bingo game needs `bingocard`). **Gives:** `chalk`, `worksheets`,
+`blackink`, and the Professor back in her office.
 
 **Do:**
 1. Pick up the chalk, the worksheets and the ink. All three are needed later — the worksheets
    not until **Act IV**.
-2. Use `bingocard` on the professor.
-3. Click **"Keep listening…"** until a row, column or diagonal fills. Terms: autopoiesis,
-   trust, contingency, coupling, FREE, second-order, environment, closure, communication.
-4. **"Shout 'BINGO!'"** — he walks out, and is now in his office.
+2. **Talk To Dr. Vossberg and ask "Where is Professor Halvorsen?"** He stops dead, which
+   nothing else in the room manages, and explains that she will not be in the building while
+   this runs under her name. *She is now in her office.* This needs no items and can be done
+   the moment you walk in.
+3. The bingo game is **optional** and worth playing anyway:
+   - Use `bingocard` on Dr. Vossberg.
+   - Click **"Keep listening…"** until a row, column or diagonal fills. Terms: autopoiesis,
+     trust, contingency, coupling, FREE, second-order, environment, closure, communication.
+   - **"Shout 'BINGO!'"** — he loses the thread and walks out, ending the nine o'clock forty
+     minutes early. That also puts her back in her office, if you did not just ask.
+4. Chalk on the blackboard summons **him** back (he cannot resist correcting a wrong arrow).
+   It does not send **her** away — that was the old one-person behaviour.
 
 ### I.3 The Seven-Second Office (part two — the interview)
 
@@ -336,16 +360,28 @@ resource."* You need that voucher in the Fieldwork Arena.
 
 ### III.3 The Survey Lab (Emergency Department) — ☑ INSTRUMENT EXISTS
 
-**Needs:** `calendarpage`, `likertdie`, `pen`. **Gives:** `scissors`, `reminders`.
+**Needs:** `calendarpage`, `likertdie`, `pen`. **Gives:** `scissors`, `reminders`, and the
+four question cards — `qsatisfaction`, `qpolicy`, `qlectures`, `qsupport`.
 
-Four sick questions on four gurneys, and then a fifth thing nobody asked for:
+Four sick questions, and then a fifth thing nobody asked for. **Three are on the gurneys; the
+fourth is on the triage desk at the nurse's elbow, on a clipboard, because they ran out of
+beds.** It is Patient 4 and it is easy to walk past — she names it in her opening line.
 
-| Patient | Diagnosis | Cure |
-|---|---|---|
-| 1 | Double-barrelled | **Talk to it** first to diagnose, get the **scissors** from the cabinet, then cut |
-| 2 | Leading | **Use with no item** — you pry "Don't you agree that" and "excellent" off it. Adding things won't straighten it |
-| 3 | Vague — "often" | Use the **calendar page**. "Recently" is not a question; "in the last four weeks" is |
-| Clipboard | Two response categories | Use the **Likert die** |
+| Patient | Where | Diagnosis | Cure |
+|---|---|---|---|
+| 1 | First gurney | Double-barrelled | **Look At or Talk To** it first to diagnose, get the **scissors** from the cabinet, then cut |
+| 2 | Second gurney | Leading | **Use with no item** — you pry "Don't you agree that" and "excellent" off it. Adding things won't straighten it |
+| 3 | Third gurney | Vague — "often" | Use the **calendar page**. "Recently" is not a question; "in the last four weeks" is |
+| 4 | Triage desk | Two response categories | Use the **Likert die** |
+
+**You carry them out.** Each question, once it is fit for human administration, is unclipped
+from its bed and handed to you as an inventory card — and *the bed it came from empties*. Four
+stripped beds is the progress bar. The cards are the instrument; you are meant to leave with
+it in your hands rather than with four flags set invisibly.
+
+> **Watch the verb.** With **LOOK AT** selected, clicking an inventory item examines it rather
+> than picking it up to use. Select **USE** first, then click the die or the calendar page,
+> then click the patient.
 
 Then the machine says **INSTRUMENT INCOMPLETE**: nothing on it asks whether they practise
 anywhere else, which is the alternative explanation your own hypothesis names. Use the `pen`
@@ -585,11 +621,18 @@ He is worth finding four times:
 |---|---|---|
 | **"Do you speak Swedish?"** | the phone has already hung up on your accent | the **accent card** — the only way into the Stockholm call |
 | **"There's a story in the Gap Registry."** | — | he relocates there permanently and scares the Registrar off the CLOSED drawer |
-| **"What would it take to get you to ask someone something for me?"** | — | pose for a photograph → he follows you everywhere until the favour is spent |
+| *(he asks you)* **the photograph** | four conversations | he owes you a favour, and does not know it is one |
 | **"Show him a number"** | `resultprint` | *"Okay so this says lectures make you smarter."* → an extra outro panel |
 
-Posing costs you nothing except being barely visible in your own photograph, and the caption
-*big ideas happening in the Methods dept today 🔬✨*. The nurse likes it.
+**The photograph is his idea, not yours, and you cannot say yes.** He opens with it every time
+you talk to him, and on the first three asks the *only* option is to refuse — he takes it
+extremely well each time, which is the joke, and does not lower the phone. The give-in
+(*"…fine. One photograph."*) appears on the **fourth** ask, by which point refusing has become
+more effort than posing. He takes eleven and posts the one you are barely in, captioned *big
+ideas happening in the Methods dept today 🔬✨*.
+
+He does **not** follow you around afterwards — that was the old behaviour, and having him
+turn up in every room was too much of him. There is exactly one post.
 
 **The line the two solutions never cross:** you can social-engineer a **person**. You cannot
 social-engineer the **evidence**. Tobi can get you the scissors without a diagnosis; he cannot
@@ -636,6 +679,7 @@ Everything here is recoverable, and most of it is where the jokes live.
 | A Stub of Chalk | Lecture | Seminar board |
 | Ceremonial Stepladder | Hall | Library, twice |
 | Blank Catalogue Card | Library desk | Hall *(consumed)* |
+| A Written Mechanism | Hall, written on the blank card | **Feldstrom's Workshop** |
 | Enrolment Register | Library | Workshop, Mensa *(consumed)*, Bureau |
 | Nobel Notification Procedure | Library (KIRA) | the Stockholm call |
 | A Laminated Card of Swedish (Approx.) | **Tobi** | the Stockholm call |
@@ -653,6 +697,10 @@ Everything here is recoverable, and most of it is where the jokes live.
 | The Tote-Bag Sample | Mensa, wrong branch | the Cook *(consumed)* |
 | Free Lunch Voucher | the Cook | Fieldwork *(consumed)* |
 | Single-Concept Scissors | Survey Lab cabinet | Survey Lab *(consumed)* |
+| Q1 — Satisfaction (separated) | Survey Lab, patient 1 | the instrument you leave with |
+| Q2 — Attendance Policy (neutral) | Survey Lab, patient 2 | the instrument you leave with |
+| Q3 — Lectures Missed (last 4 weeks) | Survey Lab, patient 3 | the instrument you leave with |
+| Q4 — Support (5-point scale) | Survey Lab, patient 4 | the instrument you leave with |
 | Reminder Postcards | Survey Lab phone | Fieldwork *(consumed)* |
 | A Scoreboard Tile Reading 75 | Fieldwork | Bureau |
 | Queue Ticket A73 | Bureau counter | Delegation Engine |
