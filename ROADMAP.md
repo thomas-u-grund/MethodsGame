@@ -1069,6 +1069,34 @@ point — without dating the game.
 
 ---
 
+## 8z. Rap battle, round two — 2026-09-24 (user playtest)
+
+> Applause after Tobi's intro and after each act; the three founders all had the same beat;
+> Professor G's track had no voice; more sound effects; full screen during the battle; the
+> founders' mouths moved before they rapped.
+
+- **Professor G's voice.** `media9.m4a` from the deck is the *backing track* he rapped over
+  live. The game now uses the audio of `slimrap.mp4` — the author's live performance, voice and
+  beat — loudness-normalised (`profg-slimrap.mp3`, 4.5 MB). The lyrics were timed off that same
+  video, so the +3.19 s track offset is gone; panels re-timed to it.
+- **Three beats.** `tools/rap/beat.py` has styles: Marx *factory* (92 BPM D minor, anvil on the
+  off-beats, brass stabs), Durkheim *musette* (96 BPM G minor, swung, accordion oom-pah-pah),
+  Weber *chapel* (84 BPM E minor, church organ, a bell every other bar). Verses re-mixed.
+- **Mouths.** Verses are now `rap-<founder>.mp3` (not `vo-…`, which made the engine animate the
+  mouth for the whole file including the intro bars). `verse.py` exports each line's start AND
+  end; the Hall toggles `.talking` on that portrait only between them.
+- **Sound.** `sfx-rap.mp3`, a separate bundle so no existing offset moves
+  (`tools/rap/sfx_bundle.py`): nine Mixkit sounds (needle drop, mic feedback, vinyl scratch,
+  auditorium applause, cheering with whistles, a big laugh, drum roll, huge crowd, mic hit) plus
+  a synthesised air horn (`tools/rap/airhorn.py`). Needle + feedback when the stream goes live,
+  laugh + applause after the intro, scratch + air horn into every verse, applause after every
+  verse, drum roll into Professor G, air horn + cheer as he steps up, mic hit + huge crowd after.
+- **Stage mode.** `body.cb-stage` hides the verbs, inventory, map button and header for the
+  battle, and the room requests real browser fullscreen (the USB click is the user gesture);
+  both end with the battle.
+- `test-rapbattle` checks mouths are still during the intro bars and that stage mode turns on
+  and off.
+
 ## 8y. The Corridor door did nothing — 2026-09-24 (user)
 
 > "The causality department door does not open despite having question and black swan." /

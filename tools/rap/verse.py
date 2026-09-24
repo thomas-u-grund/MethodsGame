@@ -3,6 +3,8 @@
 
     .venv-tts/bin/python tools/rap/verse.py marx tools/tts/out/rap-marx-*.wav
 
+The founder's name picks his beat (tools/rap/beat.py STYLES).
+
 Each line is trimmed of silence, tightened by at most 10%, and starts on the first BEAT after
 the previous line ends (after two bars of intro). An earlier version forced one line per bar
 and had to time-stretch some lines by 1.75x, which sounded hurried and warbly; landing on the
@@ -30,15 +32,17 @@ def load_line(path):
 
 def main():
     name, paths = sys.argv[1], sorted(sys.argv[2:])
-    beat_len = B.BAR / 4
+    st = B.style(name)
+    beat_len = st['bar'] / 4
     lines = [load_line(p) for p in paths]
-    starts, t = [], INTRO_BARS * B.BAR
+    starts, ends, t = [], [], INTRO_BARS * st['bar']
     for y in lines:
         starts.append(round(t + 0.03, 3))
+        ends.append(round(t + 0.03 + len(y) / B.SR, 3))
         end = t + len(y) / B.SR + GAP
         t = np.ceil(end / beat_len) * beat_len
-    bars = int(np.ceil(t / B.BAR)) + OUTRO_BARS
-    beat = B.build(bars) * 0.42
+    bars = int(np.ceil(t / st['bar'])) + OUTRO_BARS
+    beat = B.build(bars, name) * 0.42
     vox = np.zeros_like(beat)
     for y, at in zip(lines, starts):
         j = int(at * B.SR); k = min(len(vox), j + len(y))
@@ -46,9 +50,9 @@ def main():
     mix = np.tanh((beat + vox) * 1.1) * 0.9
     with tempfile.TemporaryDirectory() as tmp:
         wav = os.path.join(tmp, 'mix.wav'); sf.write(wav, mix, B.SR)
-        out = os.path.join(ROOT, 'web', 'vo-%s-verse.mp3' % name)
+        out = os.path.join(ROOT, 'web', 'rap-%s.mp3' % name)
         subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', wav, '-codec:a', 'libmp3lame', '-b:a', '112k', out], check=True)
-    print(json.dumps({'file': 'vo-%s-verse.mp3' % name, 'dur': round(len(mix) / B.SR, 2), 'starts': starts}))
+    print(json.dumps({'file': 'rap-%s.mp3' % name, 'dur': round(len(mix) / B.SR, 2), 'starts': starts, 'ends': ends}))
 
 if __name__ == '__main__':
     main()

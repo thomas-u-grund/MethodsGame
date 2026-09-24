@@ -1,38 +1,227 @@
 {
- "sfx-doorbell": [333, "Doorbell single press", 1],
- "sfx-door-open": [193, "Old church door open", 1],
- "sfx-door-slam": [194, "Slamming a door", 1],
- "sfx-fall": [1484, "Speeding swoosh", 1],
- "sfx-chalk": [2376, "Short pencil writing", 1],
- "sfx-stamp": [1365, "Mechanical typewriter hit", 1],
- "sfx-paper": [2379, "Papers being moved", 1],
- "sfx-page": [1104, "Page turn single", 1],
- "sfx-counter-ping": [1368, "Typewriter return bell", 1],
- "sfx-applause-small": [518, "Small group cheer and applause", 1],
- "sfx-applause-big": [476, "Conference audience clapping", 1],
- "sfx-splash": [1311, "Water splash", 1],
- "sfx-printer": [1372, "Old typewriter typing", 1],
- "sfx-lamps": [2585, "Light switch tap", 1],
- "sfx-scissors": [2378, "Scissors cutting paper", 1],
- "sfx-stapler": [2995, "Stapling paper", 1],
- "sfx-key": [2842, "Door key in lock", 1],
- "sfx-bell-desk": [931, "Service bell", 1],
- "sfx-drum-spin": [1932, "Slot machine wheel", 1],
- "sfx-trumpets": [2293, "Trumpet fanfare", 1],
- "sfx-confetti": [524, "Fireworks whooshes and bangs", 1],
- "sfx-klaxon": [999, "Facility alarm", 1],
- "sfx-scoreboard": [273, "Arcade retro scoring counter", 1],
- "sfx-button": [2582, "Quick switch click", 1],
- "sfx-phone-ring": [1350, "Office telephone ring", 1],
- "sfx-click": [1117, "Classic click", 1],
- "sfx-select": [1109, "Select click", 1],
- "sfx-refuse": [948, "Wrong answer bass buzzer", 1],
- "sfx-tick": [2364, "Hard pop click", 1],
- "sfx-whoosh": [1492, "Cinematic whoosh", 1],
- "amb-office": [447, "Office ambience", 1],
- "amb-pond": [61, "Nature water and birds", 1],
- "amb-mensa": [444, "Restaurant crowd talking", 1],
- "amb-ward": [2229, "Artificial respirator", 1],
- "amb-clock": [1060, "Wall clock tick tock", 1],
- "amb-studio": [981, "Large talking crowd", 1]
+ "sfx-doorbell": [
+  333,
+  "Doorbell single press",
+  1
+ ],
+ "sfx-door-open": [
+  193,
+  "Old church door open",
+  1
+ ],
+ "sfx-door-slam": [
+  194,
+  "Slamming a door",
+  1
+ ],
+ "sfx-fall": [
+  1484,
+  "Speeding swoosh",
+  1
+ ],
+ "sfx-chalk": [
+  2376,
+  "Short pencil writing",
+  1
+ ],
+ "sfx-stamp": [
+  1365,
+  "Mechanical typewriter hit",
+  1
+ ],
+ "sfx-paper": [
+  2379,
+  "Papers being moved",
+  1
+ ],
+ "sfx-page": [
+  1104,
+  "Page turn single",
+  1
+ ],
+ "sfx-counter-ping": [
+  1368,
+  "Typewriter return bell",
+  1
+ ],
+ "sfx-applause-small": [
+  518,
+  "Small group cheer and applause",
+  1
+ ],
+ "sfx-applause-big": [
+  476,
+  "Conference audience clapping",
+  1
+ ],
+ "sfx-splash": [
+  1311,
+  "Water splash",
+  1
+ ],
+ "sfx-printer": [
+  1372,
+  "Old typewriter typing",
+  1
+ ],
+ "sfx-lamps": [
+  2585,
+  "Light switch tap",
+  1
+ ],
+ "sfx-scissors": [
+  2378,
+  "Scissors cutting paper",
+  1
+ ],
+ "sfx-stapler": [
+  2995,
+  "Stapling paper",
+  1
+ ],
+ "sfx-key": [
+  2842,
+  "Door key in lock",
+  1
+ ],
+ "sfx-bell-desk": [
+  931,
+  "Service bell",
+  1
+ ],
+ "sfx-drum-spin": [
+  1932,
+  "Slot machine wheel",
+  1
+ ],
+ "sfx-trumpets": [
+  2293,
+  "Trumpet fanfare",
+  1
+ ],
+ "sfx-confetti": [
+  524,
+  "Fireworks whooshes and bangs",
+  1
+ ],
+ "sfx-klaxon": [
+  999,
+  "Facility alarm",
+  1
+ ],
+ "sfx-scoreboard": [
+  273,
+  "Arcade retro scoring counter",
+  1
+ ],
+ "sfx-button": [
+  2582,
+  "Quick switch click",
+  1
+ ],
+ "sfx-phone-ring": [
+  1350,
+  "Office telephone ring",
+  1
+ ],
+ "sfx-click": [
+  1117,
+  "Classic click",
+  1
+ ],
+ "sfx-select": [
+  1109,
+  "Select click",
+  1
+ ],
+ "sfx-refuse": [
+  948,
+  "Wrong answer bass buzzer",
+  1
+ ],
+ "sfx-tick": [
+  2364,
+  "Hard pop click",
+  1
+ ],
+ "sfx-whoosh": [
+  1492,
+  "Cinematic whoosh",
+  1
+ ],
+ "amb-office": [
+  447,
+  "Office ambience",
+  1
+ ],
+ "amb-pond": [
+  61,
+  "Nature water and birds",
+  1
+ ],
+ "amb-mensa": [
+  444,
+  "Restaurant crowd talking",
+  1
+ ],
+ "amb-ward": [
+  2229,
+  "Artificial respirator",
+  1
+ ],
+ "amb-clock": [
+  1060,
+  "Wall clock tick tock",
+  1
+ ],
+ "amb-studio": [
+  981,
+  "Large talking crowd",
+  1
+ ],
+ "sfx-scratch": [
+  703,
+  "Vinyl forward and back fast scratch",
+  1
+ ],
+ "sfx-needle": [
+  701,
+  "Record player needle drop on vinyl",
+  1
+ ],
+ "sfx-crowd-cheer": [
+  610,
+  "Cheering crowd loud whistle",
+  1
+ ],
+ "sfx-crowd-huge": [
+  462,
+  "Huge crowd cheering victory",
+  1
+ ],
+ "sfx-applause-hall": [
+  502,
+  "Auditorium moderate applause and cheering",
+  1
+ ],
+ "sfx-crowd-laugh": [
+  460,
+  "Big crowd laughing",
+  1
+ ],
+ "sfx-mic-hit": [
+  2181,
+  "Microphone hit",
+  1
+ ],
+ "sfx-mic-feedback": [
+  2129,
+  "Microphone distortion",
+  1
+ ],
+ "sfx-drumroll": [
+  566,
+  "Drum Roll",
+  1
+ ]
 }

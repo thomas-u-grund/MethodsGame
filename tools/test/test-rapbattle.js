@@ -6,6 +6,8 @@
 //      while a verse plays THAT founder's portrait is .talking (mouth moves) and nobody
 //      else's is. Space skips each step, which is how this test gets through it quickly.
 //   3. Professor G's verse opens the timed cutscene with lyrics; Esc skips it.
+//      No mouth moves during a verse's instrumental intro (it used to, for the whole file).
+//      The battle runs in stage mode: body.cb-stage hides the verbs, inventory and map.
 //   4. after: rapDone is set, the meter and portraits say so, and writing the mechanism no
 //      longer means crouching behind Weber.
 const { connect } = require('./cdp');
@@ -50,18 +52,31 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     if (!inv) return Object.assign(out, { err:'no usb slot' });
     inv.click(); hot('djtable').click(); await w(400);
     out.usbLine = /Iconic/.test(line());
+    out.stageOn = document.body.classList.contains('cb-stage')
+               && getComputedStyle(document.querySelector('#hf_verbGrid').closest('.side-panel')).display === 'none';
+    const introMouths = [];
     const talkingDuring = {};
-    for (let step = 0; step < 12; step++){
+    for (let step = 0; step < 24; step++){
       await w(700);
       ['marx','durkheim','weber'].forEach(n => {
         const el = document.getElementById('hf_mouth_' + n);
         if (el && el.classList.contains('talking')) talkingDuring[n] = (talkingDuring[n] || 0) + 1;
       });
       if (document.getElementById('interlude')) break;
+      if (/beat drops/.test(line()))
+        introMouths.push(['marx','durkheim','weber'].some(n => document.getElementById('hf_mouth_' + n).classList.contains('talking')));
+      // let one verse run into its first line so the talking check has something to see
+      await w(/beat drops/.test(line()) && !talkingDuring.marx ? 5600 : 0);
+      ['marx','durkheim','weber'].forEach(n => {
+        const el = document.getElementById('hf_mouth_' + n);
+        if (el && el.classList.contains('talking')) talkingDuring[n] = (talkingDuring[n] || 0) + 1;
+      });
+      if (document.getElementById('interlude')) break;   // never skip Professor G by accident
       space();
     }
     out.talkingDuring = talkingDuring;
-    out.versesPlayed = ['marx','durkheim','weber'].every(n => played.includes('vo-' + n + '-verse.mp3'));
+    out.introMouthsStill = introMouths.length > 0 && introMouths.every(x => !x);
+    out.versesPlayed = ['marx','durkheim','weber'].every(n => played.includes('rap-' + n + '.mp3'));
     out.tobiVoiced = played.some(c => /^vo-tobi-/.test(c));
     const il = document.getElementById('interlude');
     out.cutscene = !!il;
@@ -70,6 +85,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     window.dispatchEvent(new KeyboardEvent('keydown', { code:'Escape', key:'Escape', bubbles:true }));
     await w(1200);
     out.cutsceneGone = !document.getElementById('interlude');
+    out.stageOff = !document.body.classList.contains('cb-stage');
     out.rapDone = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.rapDone;
     out.after = /stopped nodding/.test(line());
     space();
@@ -83,7 +99,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   const t = r.talkingDuring || {};
-  const ok = r && t.marx && t.durkheim && t.weber && r.tobiHere && r.profgHere && r.mouths && r.noBeat && r.tobiHosts && r.usbLine
+  const ok = r && t.marx && r.introMouthsStill && r.stageOn && r.stageOff && r.tobiHere && r.profgHere && r.mouths && r.noBeat && r.tobiHosts && r.usbLine
           && r.versesPlayed && r.tobiVoiced && r.cutscene && /real social scientist/i.test(r.lyrics || '')
           && r.cutsceneGone && r.rapDone && r.after && r.meterBroken && r.writeOpenly && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');
