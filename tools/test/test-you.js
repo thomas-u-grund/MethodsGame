@@ -33,6 +33,9 @@ const spy = `
     const w = ms => new Promise(r => setTimeout(r, ms));
     const sp = document.getElementById('bootSplash'); if (sp) sp.remove();
     window.CODEBOOK_START(); await w(700);
+    // Her clips live in voices-act1.mp3 (8 MB); a cold bundle turns a timing assertion into
+    // a download race, so have it in hand first, the way the boot sequence does.
+    await new Promise(r => window.CODEBOOK_PRELOAD(['voices-act1.mp3'], null, r));
     ${spy}
     [...document.querySelectorAll('button.campus-hotspot')]
       .find(x => x.title.indexOf('The Seven-Second Office') === 0).click();

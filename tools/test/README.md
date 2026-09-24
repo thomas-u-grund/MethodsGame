@@ -30,6 +30,8 @@ the user's machine.
 | `test-sfx` | the effects channel: offsets, one-shots, unknown names are harmless |
 | `test-migrate` | an old save survives the Act II→III renumbering |
 | `test-preload` | preloading primes the bundle so the first line is not a cold fetch |
+| `test-bootstages` | staged boot: Begin needs only the trailer; the act loads during it |
+| `test-you` | the student speaks her lines and clicked answers; Space skips only her |
 
 **The audio blind spot:** a muted run cannot hear silence, which is exactly how v51
 shipped mute. `test-audio` asserts structurally (offsets resolve, clips fire `ended`

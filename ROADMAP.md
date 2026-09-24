@@ -1069,6 +1069,25 @@ point — without dating the game.
 
 ---
 
+## 8w. Staged boot loading — 2026-09-24 (user)
+
+> "Can we do the preload in stages? First load the trailer and while that is playing we can
+> preload act 1 in background?"
+
+- **Stage 1** gates "Click to begin": only the trailer's panels plus **`voices-intro.mp3`**
+  (the eight `vo-narr-opening-*` clips, 0.8 MB, split out of `voices-act1` for exactly this),
+  about 3 MB. The title music is left out: `#bootMusic` streams it, and it is 3 MB alone.
+- **Stage 2** — the act the save is in — starts the moment stage 1 is in and loads while the
+  trailer plays. `closeSplash()` goes straight into the game if it is done; otherwise (fast
+  clicking, Escape) it holds on the last trailer frame with a "Loading Act I · n%" bar and
+  enters by itself when the act lands. `CODEBOOK_PRELOAD` shares in-flight fetches, so the
+  wait re-uses the background download instead of starting a second one.
+- **Stage 3** — the other act — quietly, as before.
+- Test: `test-bootstages.js` (throttles the network to 1.5 MB/s; Begin shows at ~5.6 s with
+  `voices-act1.mp3` still downloading; Escape holds on the bar; the game starts once it lands).
+
+---
+
 ## 8v. The student speaks — 2026-09-24 (user)
 
 > "I think we should also give the main character (student) a voice." Young woman; spoken
