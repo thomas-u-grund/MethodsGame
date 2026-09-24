@@ -173,7 +173,7 @@ Full loop in `HANDOVER.md` §04. The short version:
 | Fieldwork Director | Sibella Denton | 1.0 / 0.25 |
 | Mensa cook | *(silent by design)* | — |
 | **Feldstrom** | **Bernd** (German, from a LibriVox *Tausend und eine Nacht*) | **0.95 / 0.28** |
-| The protagonist | Rob Fogarty — **one word only** | 1.0 / 0.25 |
+| The protagonist (the student) | **Eastman** (since 2026-09-24; was Rob Fogarty, one word only) | 0.6 / 0.4 (BINGO! 1.0 / 0.25) |
 
 **Feldstrom's casting, for the record.** The user pointed at a real professor's voice on
 YouTube (Dirk Helbing, ETH Zurich — the traffic-flow modeller turned sociologist Feldstrom
@@ -186,6 +186,10 @@ its characteristics — median F0 **133 Hz**, a very wide **23-semitone** pitch 
 low, continuously running and highly expressive, which is why the exaggeration is high.
 Bernd measured 141 Hz, the closest German-language reader to the target, and the user chose
 him from six candidates.
+
+**Superseded 2026-09-24 (8v): the student now speaks.** The user reversed the call below
+("I think we should also give the main character (student) a voice"), including the choices
+you click. Kept for the record:
 
 **The protagonist is voiced exactly once**, shouting "BINGO!" in the lecture theatre.
 Everything else attributed to "You" is their own inner voice, and voicing it would collapse
@@ -1062,6 +1066,38 @@ STORY.md. All now read "this winter term", which keeps WHEN bounded — the meth
 point — without dating the game.
 
 **Outstanding:** her voice, and nothing else in §8.
+
+---
+
+## 8v. The student speaks — 2026-09-24 (user)
+
+> "I think we should also give the main character (student) a voice." Young woman; spoken
+> quotes AND the quoted choices you click.
+
+- **Voice:** LibriVox **Eastman** (247 Hz, the youngest-sounding unused female reference; the
+  Professor is Laura Victoria, the Skeptic Klett), exag 0.6 / cfg 0.4. "BINGO!" re-rendered
+  in her voice so the one line she had is not a different person.
+- **What is voiced:** only what she says in quotation marks — her half of conversations and
+  every choice whose label is quoted. Narration and inner "You" lines stay silent (same rule
+  as `CODEBOOK_IS_NARRATION`); unquoted choices ("Continue…", "Leave") are actions.
+- **Attribution:** 600 unvoiced quotes were classified by hand-reading (a subagent, then the
+  unsure ones checked): 159 hers, 338 other characters, 103 signs/labels. Three texts that
+  another character also says ("Yes.", "Which one?", "It says FINAL.") are left silent,
+  because the lookup is by text and would put her voice in their mouth.
+- **Engine:** her clips are ordinary `CODEBOOK_VO` entries (`vo-you-<md5[:8]>.mp3`).
+  `CODEBOOK_PLAY_LINE(src, html)` lets the Act I rooms' `setLine()` fall back to the VO table
+  when no explicit clip is given (the Corridor only when a clip matches, so System lines still
+  never cut the Doorman off). A capture-phase click listener on `button.choice` speaks a
+  quoted choice; while her clip plays, new lines queue behind it and a room echoing her words
+  as a 'You' line does not say them twice.
+- **Space** (user asked): while she is saying a clicked answer, Space skips only HER line —
+  the queued reply starts at once and its caption stays up (`CODEBOOK_SKIP_CHOICE_LINE`). It
+  does not count as a line skip, so anything waiting on the reply via `CODEBOOK_AFTER_LINE`
+  still waits for the reply. Space at any other time stops everything, as before.
+- `CODEBOOK_VO_CLIPS` accepts “ ” as well as &ldquo; &rdquo;: a button's innerHTML comes back
+  with the entities already decoded, which is why the first run of the click hook was silent.
+- **If you reword one of her lines,** its clip no longer matches, exactly as for the NPCs.
+- Test: `test-you.js`.
 
 ---
 
