@@ -39,6 +39,14 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     const rights = [...document.querySelectorAll('.acc-crank')].filter(b => b.dataset.dir === '1');
     const lefts  = [...document.querySelectorAll('.acc-crank')].filter(b => b.dataset.dir === '-1');
 
+    // ROADMAP 8ze: the zoom says what the job is, and lodging the honest setting it opens
+    // on is refused out loud rather than simply not offered.
+    const job = document.getElementById('ws_accJob');
+    out.jobCard = !!job && /small enough to be wrong/.test(job.textContent) && /Stockholm/.test(job.textContent) && /4173/.test(job.textContent);
+    out.registerTicked = !!job && !!job.querySelector('.it.ok');   // the save holds the register
+    document.getElementById('ws_accLodge').click(); await w(300);
+    out.honestRefused = /could be wrong/.test(feld()) && !!document.getElementById('ws_acc');
+
     // Climb the population drum one notch at a time and record the gauge each time.
     out.curve = [n()];
     out.feldStart = feld();
@@ -76,7 +84,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
   // The gauge must never rise as the claim grows, must start high and end at nothing.
   const monotonic = r && r.curve.every((v, i, a) => i === 0 || v <= a[i-1]);
-  const ok = r && r.opened && monotonic && r.curve[0] === 47 && r.maxForbids === 0 &&
+  const ok = r && r.opened && r.jobCard && r.registerTicked && r.honestRefused && monotonic && r.curve[0] === 47 && r.maxForbids === 0 &&
              /CIVILISATION IS TRAFFIC/.test(r.maxStrip) && /glasses/i.test(r.maxFeld) &&
              r.afterPushBack.forbids > 0 && /does not help/i.test(r.afterPushBack.said) &&
              r.registerRefused && r.closed && r.inflated && r.scopeUnsound && r.notScoped &&

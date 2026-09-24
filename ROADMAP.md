@@ -1070,6 +1070,26 @@ point — without dating the game.
 
 ---
 
+## 8ze. The Hypotheses Accelerator says what the job is — 2026-09-24 (user)
+
+> The hypothesis accelerator is not explained enough — it is not clear what one needs to do.
+
+The zoom opened on the honest setting (first-year Methods students / worked examples / one
+term, 47 things forbidden) with no way to lodge it and no word on why: the answer on screen,
+untakeable. The real route — register from the Library, Feldstrom out via the Stockholm call,
+tape off, clamp the register in an empty workshop — was only discoverable piecemeal.
+
+- **Work order card** in the zoom (bottom left, over the painted levers): the goal in one
+  sentence (small enough to be wrong; every drum left; clamp in who it is about) and a live
+  checklist — the enrolment register (ticks when carried), Feldstrom out of the room (he is
+  waiting for Stockholm; ext. 4173 once seen, "the Library has a telephone"), the tape off
+  the ◄ SPECIFY panel.
+- **Lodge is always offered.** At the honest setting Feldstrom covers the slot: "Not that one.
+  That one could be *wrong*." — and points at the work order.
+- **Talk To Feldstrom** gains the obvious question, "Can the machine go the other way?": it can,
+  not while he is in the room, and he only leaves if Stockholm calls.
+- `test-accelerator` checks the card, the register tick and the refusal.
+
 ## 8zd. The Act I → II interlude: celebrate, explain the folder and the form — 2026-09-24 (user)
 
 > The interlude from act 1 to 2 is a bit underwhelming; two slides are the same. The end of
