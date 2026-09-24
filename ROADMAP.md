@@ -1077,7 +1077,7 @@ point — without dating the game.
 
 - **Professor G's voice.** `media9.m4a` from the deck is the *backing track* he rapped over
   live. The game now uses the audio of `slimrap.mp4` — the author's live performance, voice and
-  beat — loudness-normalised (`profg-slimrap.mp3`, 4.5 MB). The lyrics were timed off that same
+  beat — loudness-normalised (`profg-live.mp3`, 5.6 MB, unprocessed; renamed from profg-slimrap.mp3 so no browser can serve the cached backing track). The lyrics were timed off that same
   video, so the +3.19 s track offset is gone; panels re-timed to it.
 - **Three beats.** `tools/rap/beat.py` has styles: Marx *factory* (92 BPM D minor, anvil on the
   off-beats, brass stabs), Durkheim *musette* (96 BPM G minor, swung, accordion oom-pah-pah),
