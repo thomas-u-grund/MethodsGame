@@ -1082,7 +1082,7 @@ point — without dating the game.
 - **His mouth.** ChatGPT "only the mouth" edits of the close-up and stage panels changed only a
   141×147 and a 37×40 patch, so the mouth layers are cut straight from them. They flicker only
   during Whisper's word runs — while he is actually rapping, not in the breaks.
-- **Lights.** `CODEBOOK_LIGHTS(host)`: four screen-blended sweeping beams, a beat pulse and a
+- **Lights.** `CODEBOOK_LIGHTS(host, fixed)`: four screen-blended sweeping beams (kept light: beams .26, dimmer ≤ .48, per the author), covering the whole window in the Hall (`fixed`) and the whole cutscene overlay including its letterbox, not just the 16:9 picture;, a beat pulse and a
   strobe flash, plus a house-lights dimmer underneath (without it the beams vanish into the
   bright painting). Colour and tempo per act — Marx red/orange 92, Durkheim blue/white 96,
   Weber amber 84, Professor G pink/cyan 104 — flashing on every scratch/air horn and panel cut.
