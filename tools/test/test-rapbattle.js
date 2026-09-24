@@ -8,8 +8,8 @@
 //   3. Professor G's verse opens the timed cutscene with lyrics; Esc skips it.
 //      No mouth moves during a verse's instrumental intro (it used to, for the whole file).
 //      The battle runs in stage mode: body.cb-stage hides the verbs, inventory and map.
-//   4. after: rapDone is set, the meter and portraits say so, and writing the mechanism no
-//      longer means crouching behind Weber.
+//   4. after: rapDone is set, the meter and portraits say so, and Professor G dictates the
+//      mechanism.
 //   5. Talk To Tobi then offers an encore, which starts the battle (and its crowd) again.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
@@ -95,8 +95,9 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     space();
     verb(/look/i).click(); hot('meter').click(); await w(200);
     out.meterBroken = /bent/.test(line());
-    verb(/use/i).click(); hot('weber').click(); await w(200);
-    out.writeOpenly = /plain view/.test(line());
+    // after the battle Professor G dictates the mechanism (the save has a pen and a card)
+    verb(/talk/i).click(); hot('profg').click(); await w(300);
+    out.mechanismFromG = !!(window.CODEBOOK_SLIP.data().mechanismSound);
     // the encore: Talk To Tobi offers the whole battle again
     verb(/talk/i).click(); hot('tobi').click(); await w(300);
     const again = [...document.querySelectorAll('button.choice')].find(b => /again/i.test(b.textContent));
@@ -112,7 +113,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   const t = r.talkingDuring || {};
   const ok = r && t.marx && r.introMouthsStill && r.stageOn && r.stageOff && r.tobiHere && r.profgHere && r.djHere && r.djLook && r.mouths && r.noBeat && r.tobiHosts && r.usbLine
           && r.versesPlayed && r.tobiVoiced && r.cutscene && /real social scientist/i.test(r.lyrics || '')
-          && r.cutsceneGone && r.rapDone && r.after && r.meterBroken && r.writeOpenly && r.encoreOffered && r.encoreStarts && r.crowd && !p.errors.length;
+          && r.cutsceneGone && r.rapDone && r.after && r.meterBroken && r.mechanismFromG && r.encoreOffered && r.encoreStarts && r.crowd && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');
   process.exit(ok ? 0 : 1);
 })();

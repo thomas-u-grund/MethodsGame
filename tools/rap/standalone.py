@@ -6,7 +6,7 @@
 The author wanted colleagues to see the rap battle without the rest of the game, so this is
 not the game with a different start screen: it keeps only the engine, the Hall of Founders
 and the cut-out rigs, drops every other room, the trailer and the act interludes, keeps only
-Tobi's battle lines in the voice table, and packs just those clips into voices-rap.mp3 (the
+the Hall's voices (Tobi, Professor G, the three founders) in the voice table, and packs just those clips into voices-rap.mp3 (the
 game's voices-act1 bundle holds every voice in Acts I and II). A small script ahead of the
 engine seeds a fresh save each visit and sends the page straight into the Hall with the
 start button -- an artifact receives no query string, so ?play=rap could not do it.
@@ -129,9 +129,9 @@ def main():
 
     h = prune(h)
 
-    # voice table: only Tobi's battle lines
+    # voice table: only the Hall's speakers
     m = re.search(r'window\.CODEBOOK_VO = \{(.*?)\n\s*\};', h, re.S)
-    entries = re.findall(r'^\s*("(?:[^"\\]|\\.)*"):\s*("vo-tobi-[0-9a-f]+\.mp3"),?\s*$', m.group(1), re.M)
+    entries = re.findall(r'^\s*("(?:[^"\\]|\\.)*"):\s*("vo-(?:tobi|profg|marx|durkheim|weber)-[0-9a-f]+\.mp3"),?\s*$', m.group(1), re.M)
     h = h[:m.start()] + 'window.CODEBOOK_VO = {\n' + ',\n'.join('  %s: %s' % e for e in entries) + '\n};' + h[m.end():]
     clips = {json.loads(v) for _, v in entries}
 
@@ -150,7 +150,7 @@ def main():
         if os.path.isfile(src): shutil.copy(src, os.path.join(OUT, n)); copied.append(n)
     open(os.path.join(OUT, 'index.html'), 'w').write(h)
     total = sum(os.path.getsize(os.path.join(OUT, f)) for f in os.listdir(OUT))
-    print('index.html %d KB, %d assets + voices-rap.mp3, %.1f MB total, %d Tobi clips'
+    print('index.html %d KB, %d assets + voices-rap.mp3, %.1f MB total, %d voice clips'
           % (len(h) // 1024, len(copied), total / 1048576, len(clips)))
     print(' '.join(copied))
 

@@ -174,6 +174,7 @@ Full loop in `HANDOVER.md` §04. The short version:
 | Mensa cook | *(silent by design)* | — |
 | **Feldstrom** | **Bernd** (German, from a LibriVox *Tausend und eine Nacht*) | **0.95 / 0.28** |
 | The protagonist (the student) | **Eastman** (since 2026-09-24; was Rob Fogarty, one word only) | 0.6 / 0.4 (BINGO! 1.0 / 0.25) |
+| **Professor G** (spoken lines; his rap is the author's own recording) | **Availle** (Germanic LibriVox reader; Claude's pick, user chose TTS) | 0.7 / 0.35 |
 
 **Feldstrom's casting, for the record.** The user pointed at a real professor's voice on
 YouTube (Dirk Helbing, ETH Zurich — the traffic-flow modeller turned sociologist Feldstrom
@@ -1068,6 +1069,32 @@ point — without dating the game.
 **Outstanding:** her voice, and nothing else in §8.
 
 ---
+
+## 8zc. The Hall puzzle reworked: the mechanism comes from Professor G — 2026-09-24 (user)
+
+> Change the puzzle in the hall: one gets the mechanism from Professor G, but only after the
+> rap battle. Before, he is nervous; after, he happily gives it, but one needs something to
+> write on. One should also be able to talk to the three sociologists, but they would not
+> give a mechanism.
+
+- **Professor G** (`profGTalk`): before the battle, "Not now. I'm nervous…" (plus a pointer to
+  the USB stick in the Professor's office if the player has none, so the battle can't
+  dead-end the act). After it: without a blank card or the chewed pen he says what is missing;
+  with both he dictates the sound mechanism (`mechanismSound: true`), the card becomes the
+  written mechanism and the Hall completes. Talk To, or use the card or pen on him.
+- **The founders talk** (`founder()`): Weber on his hotspot, Marx and Durkheim via the portraits.
+  Each answers in his own grand theory — never a mechanism — and after the battle they sulk
+  and point at the man in the hoodie. Voiced with their verse voices, so the painted mouths move.
+- **Weber** no longer hides a writing spot: Look At names Professor G, the pen or card on him
+  sends you to Professor G, and the Grand Phrase still gets its "that says *concerning*" answer.
+  The player no longer chooses between a grand and a sound sentence (the user's call);
+  old saves holding the grand sentence still read correctly.
+- **Voices:** 12 new clips (Chatterbox; Professor G = Availle, 0.7 / 0.35 — see the casting
+  table), all checked with Whisper; in `voices-act1.mp3`. The standalone rap battle page keeps
+  the Hall's speakers now, not just Tobi.
+- Tests: `test-weber.js` became `test-hallmechanism.js` (nine cases: founders refuse, G nervous
+  before, missing card / pen, G dictates, card used on him, pen on Weber). `test-act2` seeds
+  `rapDone` and talks to Professor G; `test-rapbattle` checks he dictates after the battle.
 
 ## 8zb. Rap battle, round four — 2026-09-24 (user playtest)
 

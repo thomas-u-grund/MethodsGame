@@ -8,7 +8,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
     inventory:['question','folder','pen','magnifyingglass','hourglass','chalk','mug','stamp','likertdie','usb','blackink'],
     flags:{ corridorDone:true, pondDone:true, whirlpoolDone:true, lectureDone:true,
-            philosopherConvinced:true, profAtOffice:true, act2IntroSeen:true,
+            philosopherConvinced:true, profAtOffice:true, act2IntroSeen:true, rapDone:true,
             tobiRoom:'library' }}))`);
   await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
 
@@ -27,7 +27,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     const choice = (p, re) => { const b = [...document.querySelectorAll('#'+p+'_choices button')].find(x => new RegExp(re,'i').test(x.textContent));
                                 if (!b) throw new Error('no choice /'+re+'/ in '+p+': ' + [...document.querySelectorAll('#'+p+'_choices button')].map(x=>x.textContent.slice(0,30)).join(' | ')); b.click(); };
 
-    // ---- HALL: take the stepladder, write the mechanism behind Weber
+    // ---- HALL: take the stepladder (the battle is seeded as done, so Professor G will talk)
     await go('The Hall of Founders');
     verb('hf','pick up'); spot('ladder'); await wait(400);
     out.steps.push(['ladder', document.querySelector('#hf_sideInv .side-inv-slot[data-item="stepladder"]') ? 'ok' : 'MISSING']);
@@ -46,8 +46,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 
     // ---- HALL again: the mechanism
     await go('The Hall of Founders');
-    item('hf','pen'); spot('weber'); await wait(400);
-    choice('hf','worked examples'); await wait(500);
+    verb('hf','talk to'); spot('profg'); await wait(500);
     out.steps.push(['mechanism', S.data().mechanismSound ? 'sound' : 'junk']);
 
     // ---- WORKSHOP: he refuses, so learn the extension

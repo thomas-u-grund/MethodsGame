@@ -771,7 +771,11 @@ MECHANISM DETECTED: NO
 
 That distinction — theoretical lineage is not a mechanism — is the thing the room exists to teach, and it teaches it by *accepting* the wrong answer everywhere except on the one form that matters.
 
-**The chain.** To write a mechanism you need a blank catalogue card from the Library, the **chewed pen** from Act I, and possibly the **BECAUSE stencil** hidden behind the Founders' ceremonial plaques. But the Hall refuses sentences without citations — the reading slot rejects them audibly — so the player has to write it **where the Founders cannot see**. You crouch behind Max Weber.
+**The chain (reworked 2026-09-24, ROADMAP 8zc).** The founders talk — Weber on his own portrait, Marx and Durkheim through the others, their painted mouths moving — but each answers with his own grand theory and none of them gives a mechanism (*"Class struggle. Everything is."*, *"Bring me the suicide rates by region."*, *"Mechanisms are for engineers."*). The mechanism comes from **Professor G**, and only after the rap battle: before it he is too nervous (*"Not now. I'm nervous. Three founders, one Hall, one take. Ask me after the battle."*). Afterwards he gives it happily — but not into thin air: you need a blank catalogue card from the Library to write on, and the **chewed pen** from Act I to write with.
+
+> **PROFESSOR G:** "A mechanism? After that? Happily." "Students who go to lectures keep meeting worked examples, so they practise exactly the kind of reasoning the exam asks for." "That's a mechanism. It says because, and it could turn out to be wrong. Now go and test it."
+
+*(Before the rework the player wrote it themselves, crouched behind Max Weber where the Founders could not see, choosing between that sentence and a grand one that cited Weber.)*
 
 > **PLAYER** *(writing)*: "Students attending lectures repeatedly encounter worked examples, so they practise the type of reasoning the exam assesses."
 
