@@ -1069,6 +1069,27 @@ point — without dating the game.
 
 ---
 
+## 8za. Rap battle, round three — 2026-09-24 (user playtest)
+
+> Lyrics not always in sync with what he raps; more light effects; give Professor G a mouth.
+
+- **Line-accurate lyrics.** `tools/rap/transcribe.py` runs Whisper (small.en, local, word
+  timestamps) over `profg-live.mp3` — which also settled that the voice is in it —
+  and `tools/rap/align.py` aligns the transcript to the slide lyrics (difflib; Whisper hears
+  "lumen" for Luhmann): 118 of 130 lines get the time of their first rapped word, the rest are
+  interpolated. The cutscene shows a stanza (≤4 lines) and highlights the line being rapped.
+  Sources: `art/rap/profg-{lyrics,words,timing}.json`.
+- **His mouth.** ChatGPT "only the mouth" edits of the close-up and stage panels changed only a
+  141×147 and a 37×40 patch, so the mouth layers are cut straight from them. They flicker only
+  during Whisper's word runs — while he is actually rapping, not in the breaks.
+- **Lights.** `CODEBOOK_LIGHTS(host)`: four screen-blended sweeping beams, a beat pulse and a
+  strobe flash, plus a house-lights dimmer underneath (without it the beams vanish into the
+  bright painting). Colour and tempo per act — Marx red/orange 92, Durkheim blue/white 96,
+  Weber amber 84, Professor G pink/cyan 104 — flashing on every scratch/air horn and panel cut.
+  The caption panel is lifted above the rig in stage mode.
+- The rap track now plays from a blob (like the voice bundles), so it seeks on the dev server;
+  `window.CODEBOOK_RAP_AUDIO` is exposed for scrubbing.
+
 ## 8z. Rap battle, round two — 2026-09-24 (user playtest)
 
 > Applause after Tobi's intro and after each act; the three founders all had the same beat;
