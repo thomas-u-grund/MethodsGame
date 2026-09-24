@@ -1094,6 +1094,14 @@ point — without dating the game.
   stay in front of him (`dj-a/dj-b.webp`, full-frame layers like the founders' mouths); the
   crowd's beat clock swaps them. Look / Talk / USB on him; he plugs the stick in. Non-verbal
   (headphones), so no new voice.
+- **Prof G's panels crossfade.** Fading each panel out before the next showed the light rig on
+  an empty stage (a blue-and-pink screen between shots); the outgoing panel now stays frozen
+  underneath while the next fades in.
+- `?play=rap` reloads its own address (a session flag marks the seeded load), so the link
+  stays in the address bar and a reload restarts the battle. The start button hands the stick
+  to the DJ.
+- Tried and dropped: a spotlight on the rapping founder's portrait. An outline never sat on the
+  frames (painted in perspective), and a round pool of light washed the paintings out.
 - The standalone page (`tools/rap/standalone.py`) carries all of it.
 
 ## 8za. Rap battle, round three — 2026-09-24 (user playtest)
