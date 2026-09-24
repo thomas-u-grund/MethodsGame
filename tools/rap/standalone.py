@@ -27,7 +27,7 @@ ASSETS = ['hall-bg.webp', 'hall-founders-group.webp', 'sprite-profg.png', 'sprit
           'profg-panel-stage.webp', 'profg-panel-close.webp', 'profg-panel-micdrop.webp',
           'profg-panel-stage-mouth.webp', 'profg-panel-close-mouth.webp',
           'sfx-act1.mp3', 'sfx-act3.mp3', 'sfx-rap.mp3', 'icon-usb.png',
-          'crowd-heads.webp'] + ['crowd-arm-%d.webp' % i for i in range(1, 9)]
+          'crowd-heads.webp', 'dj-a.webp', 'dj-b.webp'] + ['crowd-arm-%d.webp' % i for i in range(1, 9)]
 
 SEED = {'inventory': ['usb'],
         'flags': {'corridorDone': True, 'act2IntroSeen': True, 'h27issued': True, 'actRenumberMigrated': True,

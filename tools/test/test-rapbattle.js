@@ -43,6 +43,9 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.mouths = ['marx','durkheim','weber'].every(n => document.getElementById('hf_mouth_' + n));
     verb(/look/i).click(); hot('djtable').click(); await w(200);
     out.noBeat = /Nothing is plugged/.test(line());
+    out.djHere = !!document.getElementById('hf_dj');
+    verb(/look/i).click(); hot('dj').click(); await w(200);
+    out.djLook = /p &lt; \.05|p < \.05/.test(line()) || /p < \.05/.test(document.getElementById('hf_line').textContent);
     verb(/talk/i).click(); hot('tobi').click(); await w(200);
     out.tobiHosts = /closing act/.test(line());
     space();
@@ -107,7 +110,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   const t = r.talkingDuring || {};
-  const ok = r && t.marx && r.introMouthsStill && r.stageOn && r.stageOff && r.tobiHere && r.profgHere && r.mouths && r.noBeat && r.tobiHosts && r.usbLine
+  const ok = r && t.marx && r.introMouthsStill && r.stageOn && r.stageOff && r.tobiHere && r.profgHere && r.djHere && r.djLook && r.mouths && r.noBeat && r.tobiHosts && r.usbLine
           && r.versesPlayed && r.tobiVoiced && r.cutscene && /real social scientist/i.test(r.lyrics || '')
           && r.cutsceneGone && r.rapDone && r.after && r.meterBroken && r.writeOpenly && r.encoreOffered && r.encoreStarts && r.crowd && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');

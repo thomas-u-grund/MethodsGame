@@ -1069,6 +1069,33 @@ point — without dating the game.
 
 ---
 
+## 8zb. Rap battle, round four — 2026-09-24 (user playtest)
+
+> The founders' beats too loud for their voices; students in the audience putting their hands
+> up with the beat (and then: painted, not drawn); Professor G's mouth stops in the zoomed-out
+> shot in the second half; let the player start the battle again from Tobi; a DJ.
+
+- **Mix.** `tools/rap/verse.py`: beat gain 0.42 → 0.26, plus a smoothed duck to 0.7 under each
+  rapped line (≈ −7 dB under the voice). Line timings unchanged.
+- **The crowd.** `CODEBOOK_CROWD(host, wide)`: `crowd-heads.webp` (15 students from behind) and
+  eight raised arms (`crowd-arm-N.webp`: fists, phones filming, horns, a peace sign) behind the
+  heads, cut from two ChatGPT sheets (`art/rap/crowd`). Arms come up when a track plays and
+  pump or sway on its beat, read from the track's own `currentTime`: the founders' fixed BPM,
+  and for Professor G his live recording's beat times (`PROFG_BEATS`, `tools/rap/beats.py` —
+  the live track drifts up to 0.3 s against a 103 BPM grid). The Hall shows a smaller crowd
+  twice across (second copy mirrored); the cutscene a close one.
+- **Professor G's mouth.** Whisper had heard nothing from 78 to 108 s (the first "empirical
+  sociologist" / "stand up" choruses), so the mouth stayed shut exactly when the wide shot is
+  on and those lyric times were interpolated. That stretch re-transcribed on its own and
+  merged: all 130 lines now matched.
+- **Encore.** After the battle, Talk To Tobi (in the Hall) offers "Run the rap battle again".
+- **DJ P-Value.** A PhD student behind the DJ table (t-shirt: *p < .05*). Two poses from
+  ChatGPT, placed and masked by `tools/rap/dj_layers.py` so the painted laptop and amplifier
+  stay in front of him (`dj-a/dj-b.webp`, full-frame layers like the founders' mouths); the
+  crowd's beat clock swaps them. Look / Talk / USB on him; he plugs the stick in. Non-verbal
+  (headphones), so no new voice.
+- The standalone page (`tools/rap/standalone.py`) carries all of it.
+
 ## 8za. Rap battle, round three — 2026-09-24 (user playtest)
 
 > Lyrics not always in sync with what he raps; more light effects; give Professor G a mouth.
