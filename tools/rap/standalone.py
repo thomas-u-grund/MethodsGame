@@ -20,7 +20,7 @@ OUT = os.path.join(ROOT, 'build', 'rapbattle')
 KEEP_ROOMS = {'hall'}
 DROP_MARKERS = ['ACT INTERLUDES', 'THE OUTRO', 'ACT III INTERLUDE']
 
-ASSETS = ['hall-bg.webp', 'hall-founders-group.webp', 'sprite-profg.png', 'sprite-clerk.png',
+ASSETS = ['hall-bg.webp', 'hall-founders-group.webp', 'sprite-profg.png',
           'sprite-tobi.png', 'sprite-tobi-reach.webp', 'sprite-tobi-crouch.webp', 'sprite-tobi-piece.webp',
           'mouth-marx.webp', 'mouth-durkheim.webp', 'mouth-weber.webp',
           'rap-marx.mp3', 'rap-durkheim.mp3', 'rap-weber.mp3', 'profg-live.mp3',
