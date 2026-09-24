@@ -23,6 +23,8 @@ ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)
 INTRO_BARS, OUTRO_BARS = 2, 1
 TIGHTEN = 1.10      # at most this much speed-up per line
 GAP = 0.10          # breath between lines before snapping to the next beat
+BEAT_GAIN = 0.26    # was 0.42: the beat drowned the voices
+DUCK = 0.7          # and it dips to this under a rapped line (a smoothed sidechain, no pumping)
 
 def load_line(path):
     y, sr = librosa.load(path, sr=B.SR, mono=True)
@@ -42,11 +44,16 @@ def main():
         end = t + len(y) / B.SR + GAP
         t = np.ceil(end / beat_len) * beat_len
     bars = int(np.ceil(t / st['bar'])) + OUTRO_BARS
-    beat = B.build(bars, name) * 0.42
+    beat = B.build(bars, name) * BEAT_GAIN
     vox = np.zeros_like(beat)
+    duck = np.ones_like(beat)
     for y, at in zip(lines, starts):
         j = int(at * B.SR); k = min(len(vox), j + len(y))
         vox[j:k] += y[:k - j]
+        duck[max(0, j - int(0.08 * B.SR)):k] = DUCK
+    w = int(0.15 * B.SR)
+    duck = np.convolve(duck, np.ones(w) / w, 'same')
+    beat = beat * duck
     mix = np.tanh((beat + vox) * 1.1) * 0.9
     with tempfile.TemporaryDirectory() as tmp:
         wav = os.path.join(tmp, 'mix.wav'); sf.write(wav, mix, B.SR)
