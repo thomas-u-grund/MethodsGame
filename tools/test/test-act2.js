@@ -74,6 +74,8 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     choice('lb','fika'); await wait(600);
     choice('lb','confidential consultation'); await wait(600);
     out.steps.push(['feldstromOut', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.wsFeldstromOut ? 'ok' : 'NO']);
+    // the call worked, so the procedure and the phrasebook are spent (ROADMAP 8zf)
+    out.steps.push(['callCardsSpent', JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.filter(x => x === 'nobelproc' || x === 'accentcard').length === 0 ? 'ok' : 'NO']);
 
     // ---- WORKSHOP: tape, register, derive
     await go("Feldstrom's Workshop");
@@ -111,6 +113,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   console.log('errors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = r && r.filled === 4 && r.coherence === 'EXEMPLARY' && r.sealed && r.h27
-          && !r.theoryEmpty && r.sealPrompt && !p.errors.length;
+          && !r.theoryEmpty && r.sealPrompt && !p.errors.length
+          && (r.steps || []).every(st => st[1] !== 'NO' && st[1] !== 'MISSING');
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
 })();

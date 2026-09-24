@@ -1070,6 +1070,37 @@ point — without dating the game.
 
 ---
 
+## 8zf. The folder takes the paperwork; acts leave their spent objects behind — 2026-09-25 (user)
+
+> It still feels like the game has too many papers as inventory items. (Then: "make sure we
+> do not break anything.")
+
+52 item types, about half of them paper, and almost nothing ever left: a player carried ~30
+things by Act V, most of them spent forms.
+
+- **Filed, not carried.** `FILED` in the engine lists the research documents (P-1 slip,
+  reading list, written mechanism, Müller & Singh, H-27, the four questionnaire items, exam
+  records, the 75 tile, the data reel, the interval slide, the plaque, the contribution tag),
+  each with its divider. Once the player has the folder, `addItem()` files them into
+  `GAME.filed` instead of the inventory; `hasItem()` looks in both and `removeItem()` takes
+  from both, so **no room logic changed** (none of these is ever selected and used on
+  anything). Giving one lights up the folder's slot. Look At on the folder lists what is
+  filed, by divider. Old saves are migrated on load. Act I's question is still carried in
+  hand (there is no folder yet).
+- **Spent objects go.** `SPENT_AT`: when an act ends (corridorDone / slipSealed / actIIIDone /
+  actIVDone), the items whose last use is in that act or earlier leave the inventory — derived
+  from where each item is checked, room by room. Also: the Nobel procedure and the Swedish
+  card go once the Stockholm call works (not on the "too narrow" answer, which may need a
+  second call); the grand phrase goes when the slip is sealed.
+- **Kept**: the bingo card (Act I's minigame), the fabricated citation (already transient),
+  the pen (Act V still uses it), the Z nameplate (brass, not paper).
+- Carried at the start of each act, before → after: Act II 13 → 12, Act III 23 → 12,
+  Act IV 27 → 7, Act V 30 → 2 (the folder and the pen, plus what Act V hands out).
+- Tests: new `test-folder` (migration, filing, no filing before the folder, removal, the
+  folder's Look At, act-end tidy); `test-act2` checks the call cards are spent and now fails
+  on any NO/MISSING step; `test-endgame`, `test-relodge`, `test-surveylab`,
+  `test-hallmechanism` read inventory + folder.
+
 ## 8ze. The Hypotheses Accelerator says what the job is — 2026-09-24 (user)
 
 > The hypothesis accelerator is not explained enough — it is not clear what one needs to do.

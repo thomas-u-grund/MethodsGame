@@ -54,7 +54,7 @@ const CASES = {
       const slip = JSON.parse(localStorage.getItem('codebook_save_v1')).flags.predictionSlip || {};
       const inv = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory;
       return { line: (document.getElementById('hf_line') || {}).textContent.replace(/\\s+/g, ' ').slice(0, 800),
-               sound: slip.mechanismSound === true, mech: !!slip.mechanism, card: inv.indexOf('mechanismcard') !== -1,
+               sound: slip.mechanismSound === true, mech: !!slip.mechanism, card: window.CODEBOOK_IS_FILED('mechanismcard') || inv.indexOf('mechanismcard') !== -1,
                voiced: played.filter(c => /^vo-(profg|marx|durkheim|weber)-/.test(c)) };
     })()`);
   }

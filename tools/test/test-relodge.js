@@ -25,7 +25,8 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     const ch = re => { const b = [...document.querySelectorAll('#lb_choices button')].find(x => new RegExp(re,'i').test(x.textContent));
       if (!b) throw new Error('no choice ' + re); b.click(); };
     const choices = () => [...document.querySelectorAll('#lb_choices button')].map(b => b.textContent);
-    const inv = () => JSON.parse(localStorage.getItem('codebook_save_v1')).inventory;
+    // inventory plus what is filed in the folder (ROADMAP 8zf): the reading list is filed
+    const inv = () => { const g = JSON.parse(localStorage.getItem('codebook_save_v1')); return g.inventory.concat(g.filed || []); };
     const flags = () => JSON.parse(localStorage.getItem('codebook_save_v1')).flags;
 
     window.CODEBOOK_START(); await w(700);

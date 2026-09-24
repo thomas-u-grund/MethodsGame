@@ -40,7 +40,8 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     ch('dl','exact fix'); await wait(400);
     ch('dl','Re-merge on the pseudonymous'); await wait(600);
     out.delegation = !!flags().delegationDone;
-    out.cleandata = !!document.querySelector('#dl_sideInv .side-inv-slot[data-item="cleandata"]');
+    // the clean data is filed in the folder (ROADMAP 8zf), not an inventory slot of its own
+    out.cleandata = window.CODEBOOK_IS_FILED('cleandata') && !document.querySelector('#dl_sideInv .side-inv-slot[data-item="cleandata"]');
 
     // --- Statistics Basement: now it can actually be analysed
     await go('Statistics Basement');

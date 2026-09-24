@@ -1,8 +1,8 @@
 // WP-2.1: the instrument is not finished until it measures what the hypothesis needs.
 //
 // ...and the four questions are things you CARRY. Each one, once made fit for human
-// administration, is unclipped from its bed and handed over as an inventory item, and the
-// bed it came from empties. Before, four fixes produced no object and no visible change --
+// administration, is unclipped from its bed and handed over -- filed into the folder, under
+// DATA, since ROADMAP 8zf -- and the bed it came from empties. Before, four fixes produced no object and no visible change --
 // the healed chart was redrawn in exactly the same spot as the sick one.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
@@ -61,7 +61,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     document.querySelector('button.campus-hotspot[title^="Survey Lab"]').click(); await wait(900);
     const verb = v => [...document.querySelectorAll('#sv_verbGrid button')].find(b => new RegExp(v,'i').test(b.textContent)).click();
     const spot = id => document.querySelector('[data-id="' + id + '"]').click();
-    const inv  = () => JSON.parse(localStorage.getItem('codebook_save_v1')).inventory;
+    const inv  = () => { const g = JSON.parse(localStorage.getItem('codebook_save_v1')); return g.inventory.concat(g.filed || []); };
     const charts = () => ['sv_p1','sv_p2','sv_p3','sv_p4']
       .filter(k => (document.getElementById(k) || {}).innerHTML);
 
