@@ -98,9 +98,6 @@ def prune(h):
     a = h.index("        if (verb === 'talkto'){\n          api.clearChoices();\n          api.say('Tobi', window.CODEBOOK_TOBI_LINE(rid));")
     b = h.index("          return true;\n        }\n        return false;\n      },", a)
     h = h[:a] + "        if (verb === 'talkto'){\n          api.clearChoices();\n          api.say('Tobi', window.CODEBOOK_TOBI_LINE(rid));\n" + h[b:]
-    # after the battle, he just says thank you
-    h = h.replace("      return tobiBase(verb);",
-                  "      if (F('rapDone') && verb === 'talkto'){ api.say('Tobi', '&ldquo;Honestly? Best content this department has ever made. Do not tell the Dean I said that.&rdquo;'); return true; }\n      return tobiBase(verb);", 1)
     # full-line comments: // lines in scripts, /* ... */ blocks that start a line (CSS and JS)
     h = re.sub(r'(?m)^[ \t]*//[^\n]*\n', '', h)
     h = re.sub(r'(?ms)^[ \t]*/\*.*?\*/[ \t]*\n', '', h)

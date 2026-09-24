@@ -10,6 +10,7 @@
 //      The battle runs in stage mode: body.cb-stage hides the verbs, inventory and map.
 //   4. after: rapDone is set, the meter and portraits say so, and writing the mechanism no
 //      longer means crouching behind Weber.
+//   5. Talk To Tobi then offers an encore, which starts the battle (and its crowd) again.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
@@ -93,6 +94,13 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.meterBroken = /bent/.test(line());
     verb(/use/i).click(); hot('weber').click(); await w(200);
     out.writeOpenly = /plain view/.test(line());
+    // the encore: Talk To Tobi offers the whole battle again
+    verb(/talk/i).click(); hot('tobi').click(); await w(300);
+    const again = [...document.querySelectorAll('button.choice')].find(b => /again/i.test(b.textContent));
+    out.encoreOffered = !!again;
+    if (again){ again.click(); await w(500); }
+    out.encoreStarts = document.body.classList.contains('cb-stage') && /Iconic/.test(line());
+    out.crowd = !!document.querySelector('#hf_sceneWrap .cb-crowd');
     return out;
   })()`);
 
@@ -101,7 +109,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   const t = r.talkingDuring || {};
   const ok = r && t.marx && r.introMouthsStill && r.stageOn && r.stageOff && r.tobiHere && r.profgHere && r.mouths && r.noBeat && r.tobiHosts && r.usbLine
           && r.versesPlayed && r.tobiVoiced && r.cutscene && /real social scientist/i.test(r.lyrics || '')
-          && r.cutsceneGone && r.rapDone && r.after && r.meterBroken && r.writeOpenly && !p.errors.length;
+          && r.cutsceneGone && r.rapDone && r.after && r.meterBroken && r.writeOpenly && r.encoreOffered && r.encoreStarts && r.crowd && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');
   process.exit(ok ? 0 : 1);
 })();
