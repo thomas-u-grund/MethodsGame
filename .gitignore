@@ -25,3 +25,4 @@ screenshots/
 # The author's Christmas-lecture source material (2.2 GB deck + videos); the game uses
 # extracts of it, archived under art/ and audio/rap/.
 rap battle/
+__pycache__/
