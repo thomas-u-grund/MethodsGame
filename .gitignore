@@ -26,3 +26,4 @@ screenshots/
 # extracts of it, archived under art/ and audio/rap/.
 rap battle/
 __pycache__/
+build/
