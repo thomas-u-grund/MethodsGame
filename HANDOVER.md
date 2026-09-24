@@ -434,6 +434,7 @@ All are plain query strings on the game URL. `?start=` and `?room=` **overwrite 
 | `?start=1` … `?start=5` | seed a save at the top of that act and drop you on the campus map |
 | `?play=act2` … `?play=act5` | watch that act's interlude alone |
 | `?play=outro` | watch the ending |
+| `?play=rap` | straight into the Hall of Founders with a fresh save and a *Start the rap battle* button (no splash, no trailer; **overwrites the save**) |
 | `?room=<id>` | go straight into a room, skipping map and interludes |
 | `?room=workshop&acc=1` | …and open the Hypotheses Accelerator on arrival |
 | `?room=<id>&post=1` | …and have Tobi take and post the photograph |
