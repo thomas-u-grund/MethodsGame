@@ -33,7 +33,7 @@ const AFTER_III = { ...AFTER_II, act3IntroSeen:true, actIIIDone:true };
 const AFTER_IV  = { ...AFTER_III, act4IntroSeen:true, actIVDone:true };
 
 (async () => {
-  const a2 = await run(AFTER_I,   'other ideas');
+  const a2 = await run(AFTER_I,   'Most people never get one');
   const a3 = await run(AFTER_II,  'permission');
   const a4 = await run(AFTER_III, 'nobody is standing in your way');
   const a5 = await run(AFTER_IV,  'somebody has to write it');

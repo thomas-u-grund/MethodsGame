@@ -174,7 +174,7 @@ Full loop in `HANDOVER.md` §04. The short version:
 | Mensa cook | *(silent by design)* | — |
 | **Feldstrom** | **Bernd** (German, from a LibriVox *Tausend und eine Nacht*) | **0.95 / 0.28** |
 | The protagonist (the student) | **Eastman** (since 2026-09-24; was Rob Fogarty, one word only) | 0.6 / 0.4 (BINGO! 1.0 / 0.25) |
-| **Professor G** (spoken lines; his rap is the author's own recording) | **Availle** (Germanic LibriVox reader; Claude's pick, user chose TTS) | 0.7 / 0.35 |
+| **Professor G** (spoken lines; his rap is the author's own recording) | **Karlsson** (Germanic LibriVox reader, ~120 Hz; recast from Availle, who is a female reader — user: "professor g needs to have a male voice") | 0.7 / 0.35 |
 
 **Feldstrom's casting, for the record.** The user pointed at a real professor's voice on
 YouTube (Dirk Helbing, ETH Zurich — the traffic-flow modeller turned sociologist Feldstrom
@@ -1070,6 +1070,35 @@ point — without dating the game.
 
 ---
 
+## 8zd. The Act I → II interlude: celebrate, explain the folder and the form — 2026-09-24 (user)
+
+> The interlude from act 1 to 2 is a bit underwhelming; two slides are the same. The end of
+> act 1 should be celebrated more. The folder is sudden / not explained, and then there is
+> the form. (Later: other artwork shows the folder — it needs to be consistent.)
+
+- **Seven panels, each with one job, all narrated** (Mark F. Smith, `vo-narr-act2-01…07` in
+  `voices-act1.mp3`): (1) **Chapter One: Complete** — the Doorman presents the folder
+  (`il2-handover.webp`), trumpets, applause and a stamp; (2) **what the Corridor taught you** —
+  the four cases ticked off (a real cause, reverse causation, a confounder, coincidence);
+  (3) **the folder, open** — five dividers QUESTION / THEORY / DATA / RESULT / PAPER, the
+  first one full (`il2-folder.webp`, the question handwritten onto its card); (4) **Form P-1**
+  — the Doorman's "what would count as surprising?", the tube, four boxes one per room;
+  then the rooms, the cast poster and the ACT II card as before. Interlude panels can now
+  carry `sfx:[[name, vol, delayMs]]` and `capTop` (caption at the top for a low subject).
+- **One folder everywhere.** The new paintings are drawn from the established one (the
+  RESEARCH PROJECT tab, the QUESTION EXISTS stamp, the desk from the opening trailer and
+  Act III). Act III's first panel is now `il3-folder.webp`: the same shot with only the THEORY
+  section painted in (sealed slip, THEORY EXISTS) — region-merged, so the card and its
+  handwriting line up — and its narration no longer says "Chapter One: complete". The
+  inventory icon now says RESEARCH PROJECT (was RESEARCH FOLDER / CONFIDENTIAL).
+- **The forms, untangled.** Form P-1 (the Prediction Slip) is Act II's; H-27 (Request to
+  Approach Human Beings) is Act III's. Act II rooms used to drop H-27 on first entry — the
+  next act's form, mid-act — and set `h27issued`, which on its own opened Act III's gate.
+  H-27 now arrives only once the slip is sealed, and the Act II rooms' nameplate shows the
+  four P-1 boxes (ticking live as they fill) instead of H-27's.
+- **The Act II poster** (`tools/art/cast_act2.py`): the Hall clerk, who no longer appears,
+  swapped for Professor G; the narration names him.
+
 ## 8zc. The Hall puzzle reworked: the mechanism comes from Professor G — 2026-09-24 (user)
 
 > Change the puzzle in the hall: one gets the mechanism from Professor G, but only after the
@@ -1089,7 +1118,7 @@ point — without dating the game.
   sends you to Professor G, and the Grand Phrase still gets its "that says *concerning*" answer.
   The player no longer chooses between a grand and a sound sentence (the user's call);
   old saves holding the grand sentence still read correctly.
-- **Voices:** 12 new clips (Chatterbox; Professor G = Availle, 0.7 / 0.35 — see the casting
+- **Voices:** 12 new clips (Chatterbox; Professor G = Karlsson, 0.7 / 0.35 — see the casting
   table), all checked with Whisper; in `voices-act1.mp3`. The standalone rap battle page keeps
   the Hall's speakers now, not just Tobi.
 - Tests: `test-weber.js` became `test-hallmechanism.js` (nine cases: founders refuse, G nervous
