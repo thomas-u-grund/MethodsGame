@@ -1,11 +1,14 @@
 // WP-0.5: the Doorman's gate must open when his line ENDS or is SKIPPED, never on a fixed timer.
+// And (user report 2026-09-24, "the door would not open, there was no Doorman"): using the
+// Question ON THE DOOR -- not the small bell beside it -- must fetch him too.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
-async function run(skip) {
+async function run(skip, viaDoor) {
   const p = await connect(U + Date.now());
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
-     inventory:['question'], flags:{ philosopherConvinced:true, pondDone:true }}))`);
+     inventory:['question','magnifyingglass','bingocard'], flags:{ philosopherConvinced:true, pondDone:true,
+       whirlpoolDone:true, lectureDone:true, lecturerGone:true, profAtOffice:true, lectureInkTaken:true }}))`);
   await p.send('Page.navigate', { url: U + Date.now() });
   await p.ready();
   const r = await p.evaluate(`(async () => {
@@ -15,7 +18,11 @@ async function run(skip) {
     await wait(900);
     [...document.querySelectorAll('#cc_verbGrid button, #cc_verbGrid .verb')]
       .find(b => /use/i.test(b.textContent)).click();
-    document.querySelector('[data-extra="bell"]').click();
+    if (${viaDoor}) {
+      // select the Question in the inventory, then click the door itself
+      document.querySelector('#cc_sideInv .side-inv-slot.filled').click();
+      document.querySelector('[data-extra="gatedoor"]').click();
+    } else document.querySelector('[data-extra="bell"]').click();
     await wait(1600);                                   // he is mid-line
     const speaking = /Question/.test(document.getElementById('cc_line').textContent);
     const t0 = performance.now();
@@ -33,11 +40,13 @@ async function run(skip) {
 }
 
 (async () => {
-  const s = await run(true), n = await run(false);
+  const s = await run(true, false), n = await run(false, false), d = await run(true, true);
   console.log('skipped: ', JSON.stringify(s));
   console.log('unskipped:', JSON.stringify(n));
+  console.log('via door: ', JSON.stringify(d));
   const ok = s.speaking && /Case/.test(s.tag) && s.ms < 3000 && !s.errors.length
-          && n.speaking && /Case/.test(n.tag) && n.ms > 6000 && !n.errors.length;
+          && n.speaking && /Case/.test(n.tag) && n.ms > 6000 && !n.errors.length
+          && d.speaking && /Case/.test(d.tag) && !d.errors.length;
   console.log(ok ? 'PASS — gate opens on skip (fast) and on line end (in its own time)' : 'FAIL');
   process.exit(ok ? 0 : 1);
 })();

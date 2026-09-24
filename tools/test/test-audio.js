@@ -12,7 +12,10 @@ const { connect } = require('./cdp');
     for (const m of html.matchAll(/['"]([a-z0-9-]+\\.mp3)['"]/gi)) names.add(m[1]);
     const sprite = window.CODEBOOK_VOICE_SPRITE || {};
     const bundles = new Set(Object.values(sprite).map(v => v[0]));
-    const nonClip = new Set([...bundles, 'title-theme.mp3','office-bgm.mp3','lecture-bgm.mp3','sfx-act1.mp3','sfx-act3.mp3']);
+    // Music, not clips: the rap battle's three founder verses are full beat-and-voice mixes
+    // and Professor G's track is 4:45 of recorded music, so they stream as their own files.
+    const nonClip = new Set([...bundles, 'title-theme.mp3','office-bgm.mp3','lecture-bgm.mp3','sfx-act1.mp3','sfx-act3.mp3',
+      'vo-marx-verse.mp3','vo-durkheim-verse.mp3','vo-weber-verse.mp3','profg-slimrap.mp3']);
     out.referenced = names.size;
     out.spriteClips = Object.keys(sprite).length;
     out.unresolved = [...names].filter(n => !sprite[n] && !nonClip.has(n));

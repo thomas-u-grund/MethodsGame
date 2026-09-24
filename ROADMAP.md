@@ -1069,6 +1069,54 @@ point — without dating the game.
 
 ---
 
+## 8y. The Corridor door did nothing — 2026-09-24 (user)
+
+> "The causality department door does not open despite having question and black swan." /
+> "There was no doorman."
+
+The gate itself was fine (question + Skeptic convinced opens it; `test-bugs` passed). The
+problem was the door: the Doorman only came for the small **bell** beside it, and using the
+door — or using the Question *on* the door, the obvious move with the Question in hand —
+answered "The door is locked." Now Use / Talk To on the door (with or without an item) knocks,
+and knocking fetches him exactly like the bell. `test-bugs` has a third run that opens the gate
+by using the Question on the door.
+
+## 8x. The Founders' Rap Battle — built 2026-09-24 (user)
+
+Design and verses: STORY.md, "The Founders' Rap Battle". What was built:
+
+- **Hall art.** `hall-bg.webp` now has recognisable **Marx, Durkheim, Weber** in portraits 1, 2
+  and 4 (3 unchanged) and Tobi's livestream kit on the floor: ring light, a DJ table with
+  laptop and guitar amp (the USB port), and a neon RAP BATTLE sign. Both were ChatGPT edits
+  merged back region-only (portraits; floor), so everything else is byte-identical.
+  `mouth-{marx,durkheim,weber}.webp` are full-frame transparent mouth layers (~11 KB each).
+- **Professor G** (`sprite-profg.png`): the author's alter ego, white hoodie hood up, from two
+  video frames of the author plus Tobi's sprite as the style reference. Stands at 64% of the
+  floor, silent until his turn. Four cutscene panels were planned; stage, close-up and mic
+  drop are in, the "founders stand up in their frames" panel is still to collect (the
+  choruses cut to the wide shot until then).
+- **Voices.** Founders: new LibriVox references — Marx = the German reader of the *Communist
+  Manifesto*, Weber = the reader of Freud's *Über Psychoanalyse*, Durkheim = the French reader
+  of *Candide* (`tools/tts/refs/lv-{manifest,freud,candide}.wav`), exag 0.45 / cfg 0.5 on
+  purpose: stiff gentlemen. **Tobi** = Rob Fogarty (freed when the student was recast), 14
+  battle lines in `CODEBOOK_VO`; his roaming lines elsewhere are still silent.
+- **Beat.** `tools/rap/beat.py`: original 90 BPM boom-bap + Karplus-Strong harpsichord,
+  synthesised, no samples. `tools/rap/verse.py` puts each line on the next beat after the last
+  (tightened ≤10%; a one-line-per-bar version needed 1.75× stretch and sounded warbly) and
+  writes `vo-<founder>-verse.mp3` — named `vo-<who>-` so that portrait's mouth moves.
+- **Professor G's verse** is the author's own recording (`profg-slimrap.mp3`, from the deck's
+  `media9.m4a`; `.m4a` is not a served type). `CODEBOOK_PLAY_RAP` is a timed cutscene: the
+  track is the clock, panels switch at set times, lyrics (from slides 17–23) follow a caption
+  table timed off the lyric-page changes in `slimrap.mp4` (+3.19 s track offset, found by
+  envelope cross-correlation), Esc/Space skips.
+- **Scene.** Tobi is pinned to the Hall until `rapDone` (host lines replace his rotation);
+  USB on the DJ table / Tobi / Professor G starts it: Tobi's intro → three verses (captions
+  per line, meter DING / applause / trumpets) → Professor G → the meter dies, the portraits stop
+  nodding, and the mechanism can be written openly instead of behind Weber.
+- Tests: `test-rapbattle.js`; `test-audio` treats the four music files as music.
+
+---
+
 ## 8w. Staged boot loading — 2026-09-24 (user)
 
 > "Can we do the preload in stages? First load the trailer and while that is playing we can
