@@ -793,6 +793,108 @@ One portrait somehow nods anyway.
 
 **Skeleton:** seated in the gallery, sign reading **"CITED 400 TIMES. EXPLAINED NOTHING."**
 
+### The Founders' Rap Battle — the Hall's set piece (designed 2026-09-24, not built)
+
+Taken from the author's Christmas lecture, where the founders battle and **Professor G** — the
+author's alter ego — closes with a Slim Shady rap. In the game it becomes the way the Hall's
+lesson lands: three grand, quotable, **untestable** verses make the Authority Meter ring every
+time, and then somebody asks for the evidence.
+
+**The set-up.** Tobi has turned the Hall into a livestream: ring light, a phone on a gimbal, a
+neon sign that says **RAP BATTLE**, and a banner reading *THE FOUNDERS' RAP BATTLE — powered by
+Strategic Visibility & the International Office*. He hosts. The three portraits — **Marx,
+Durkheim, Weber**, painted like the famous photographs — come alive in their frames and take a
+verse each. Professor G, the department's local professor, stands at the side in a white
+hoodie, hood up, and says nothing until it is his turn.
+
+**The puzzle (small).** Professor G will not go on without his beat, and his beat is on the
+**USB stick** from the Professor's desk in Act I (`theory_FINAL_v23_…` is not the only file
+on it). Give it to Tobi. Tobi: *"A physical USB. Iconic. Very retro. Very authentic."*
+
+**The payoff.** Professor G's verse is his own interlude: the lights drop, the full Slim Shady
+recording plays (4:45, the author's own), lyrics as karaoke captions, Esc to skip. *"Will the
+real social scientist please stand up"* blows the Authority Meter: the chandelier goes out, the
+trumpets deflate, and the portraits **stop nodding**. With the Founders no longer watching, the
+MECHANISM can be written openly — the crouch behind Weber becomes the fallback, not the only
+way.
+
+**Why this fits the room.** Every founder raps his own theory accurately, and every verse ends
+by refusing to be tested. The Hall applauds all three. Professor G's chorus — *"I like to see
+the evidence for what we are going to say / Explain the social world instead of bullshitting
+your way"* — is the room's lesson stated outright, and it is the only verse the Authority Meter
+cannot cope with.
+
+#### Tobi's intro
+
+> **TOBI:** "Hi hi HI, welcome back to UniLife Live! It's the Founders' Rap Battle, three
+> legends, one Hall, zero consent forms! In the gold frame on the left, the beard that launched
+> a thousand reading groups — **KARL MARX!** In the middle, the man who made suicide a
+> statistic — **ÉMILE DURKHEIM!** And on the right, locked in his own iron cage since 1920 —
+> **MAX WEBER!** Like, subscribe, and please do not touch the portraits."
+
+#### Marx
+
+> Yo, it's Karl, with the beard and the manifesto,
+> Two classes in the room and I'm seizing the whole studio.
+> You own the means of production? Cute. That's your beat.
+> I own the contradiction, and the proletariat's on its feet.
+> Surplus value, baby — you rap, the label keeps the profit,
+> Alienated from your rhymes, and you cannot even stop it.
+> History's a battle, every verse a class war,
+> Base and superstructure — and the base is on the floor.
+> Workers of the world, unite, you've got nothing but your chains —
+> And a mic, and a hook, and a theory that explains.
+> Don't ask me for a sample, don't bring me a test.
+> Material conditions. I already know the rest.
+
+#### Durkheim
+
+> Émile in the house, the founder of the discipline,
+> Treat my bars as things, 'cause they're facts. They're social. Listen in.
+> You think you rap alone? That's the individual's illusion,
+> The collective's in your throat, and that is my conclusion.
+> Anomie, anomie, when the norms all fall apart,
+> Suicide by region — I have maps, I have a chart.
+> Mechanical, organic, solidarity in rhyme,
+> Division of labour: you do the verse, I keep the time.
+> Society is God, and this crowd's in effervescence,
+> Every hand in the air is a ritual of our presence.
+> Ecological fallacy? I've never heard the phrase.
+> I've got Protestant provinces. Their rates. That's all it says.
+
+#### Weber
+
+> Max Weber on the mic, sociology's melancholy king,
+> I built an iron cage and now I'm living in the thing.
+> Protestant ethic: work, save, never party,
+> Predestined to be chosen, so I rap and I'm not sorry.
+> *Verstehen*, *Verstehen* — I understand your soul,
+> I don't need to ask you, I interpret on the whole.
+> This verse is an ideal type, it doesn't need to exist,
+> One-sided accentuation, and reality's dismissed.
+> Charisma on the mic, routinised by noon,
+> Bureaucracy takes over and the beat's in triplicate soon.
+> Value-free, they told me. I value every line.
+> Disenchantment of the world — but this enchantment here is mine.
+
+**The comedy is in the delivery.** They are not rappers; they are nineteenth-century gentlemen
+reading bars dead straight, in period accents, over a beat that is slightly too modern for
+them. After each verse the Authority Meter rings, the portraits applaud themselves, and Tobi
+says something like *"The engagement on that is INSANE."*
+
+**Each verse ends on the same move** — refusing a test (*"Don't ask me for a sample"*, the
+ecological-fallacy dodge, *"it doesn't need to exist"*) — so that Professor G's *"I like to see
+the evidence"* is an answer to all three, not a fourth opinion.
+
+#### Assets this needs
+- Painted portraits of Marx, Durkheim and Weber in the game's style, with mouth layers.
+- **Professor G**: an original character inspired by the *Revival* cover — white hoodie, hood
+  up, face half in shadow — with the author's features, plus a stage-lit interlude panel.
+- Tobi's livestream kit dressed into the Hall; a neon RAP BATTLE sign.
+- Voices: Tobi (still uncast), three founders (period German ×2, French ×1), a simple original
+  beat under the founders. Professor G uses the author's own recording.
+- Captions for the Slim Shady interlude, timed to the track.
+
 ### Feldstrom's Workshop — theory as scale, and where the hypothesis comes from
 
 A lean-to bolted onto the side of a respectable building, full of brass, steam and ambition. **Prof. Dr. Magnus Feldstrom** is thrilled that somebody has finally brought him a mechanism.
