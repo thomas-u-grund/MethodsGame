@@ -40,6 +40,14 @@ const enterOffice = `
     const mouth = document.getElementById('wp_profMouth');
     out.hasMouth      = !!mouth && mouth.getAttribute('data-voice') === 'prof'
                         && mouth.classList.contains('cb-mouth-solo') && mouth.naturalWidth > 0;
+    // The mouth layer covers her whole sprite box, so it must be transparent everywhere but
+    // the mouth: an opaque file flashed a black rectangle over her every time she spoke.
+    if (mouth){
+      const c = document.createElement('canvas'); c.width = mouth.naturalWidth; c.height = mouth.naturalHeight;
+      const g = c.getContext('2d'); g.drawImage(mouth, 0, 0);
+      const a = (x, y) => g.getImageData(x, y, 1, 1).data[3];
+      out.mouthTransparent = a(2, 2) === 0 && a(c.width - 3, c.height - 3) === 0 && a(c.width >> 1, 5) === 0;
+    }
     out.visible       = !!prof && getComputedStyle(prof).display !== 'none';
     out.bubblesAtStart = document.querySelectorAll('#wp_drops .full').length;
 
@@ -82,7 +90,7 @@ const enterOffice = `
 
   console.log(JSON.stringify({ ...r, ...back }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r && r.oneBackground && r.isSprite && r.animates && r.hasMouth && r.visible
+  const ok = r && r.oneBackground && r.isSprite && r.animates && r.hasMouth && r.mouthTransparent && r.visible
           && r.bubblesAtStart === 5 && r.sheLeft && r.roomSaysSo && r.wayOut && r.wayOutSurvivesWait
           && r.deskUnguarded
           && back.sheIsBack && back.bubbles === 5 && back.notSaved

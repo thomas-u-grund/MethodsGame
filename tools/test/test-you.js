@@ -6,7 +6,9 @@
 //      and the Professor's clip does not start until hers has ended.
 //   3. Space while she is answering skips only her: the reply starts at once and its
 //      caption stays up.
-//   4. her quoted lines resolve to her clips through CODEBOOK_VO ("Where is Professor
+//   4. asking Dr. Vossberg where she is voices the whole exchange in order: her question,
+//      his answer, her "So where is she?", the rest of his answer.
+//   5. her quoted lines resolve to her clips through CODEBOOK_VO ("Where is Professor
 //      Stellmacher?", the Lecture Theatre question, is the canary).
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
@@ -85,10 +87,37 @@ const spy = `
     return { mapped: clips.length === 1 && /^vo-you-/.test(clips[0]) };
   })()`);
 
+  // Asking Dr. Vossberg where she is: her question, then his answer with her "So where is
+  // she?" in the middle -- five clips, in the order they are written, his in his voice.
+  await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({ inventory:[], flags:{} }))`);
+  await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
+  const voss = await p.evaluate(`(async () => {
+    const w = ms => new Promise(r => setTimeout(r, ms));
+    const sp = document.getElementById('bootSplash'); if (sp) sp.remove();
+    window.CODEBOOK_START(); await w(800);
+    const asked = [];
+    const Q = window.CODEBOOK_PLAY_LINE_QUEUE;
+    window.CODEBOOK_PLAY_LINE_QUEUE = function(list, app){ (list || []).forEach(c => asked.push(c)); return Q.apply(this, arguments); };
+    [...document.querySelectorAll('button.campus-hotspot')]
+      .find(b => /Introduction to Systems Theory|Lecture/i.test(b.title)).click();
+    await w(1600);
+    [...document.querySelectorAll('#lt_verbGrid button')].find(b => /talk to/i.test(b.textContent)).click();
+    [...document.querySelectorAll('#lt_sceneWrap .door-zone')].find(el => el.style.left.indexOf('46') === 0).click();
+    await w(500);
+    asked.length = 0;
+    [...document.querySelectorAll('#lt_choices button')].find(b => /Stellmacher/i.test(b.textContent)).click();
+    await w(300);
+    window.CODEBOOK_STOP_LINE_AUDIO();
+    return { asked };
+  })()`);
+  const want = ['vo-you-b72b8d06.mp3', 'vo-lecturer-28c73279.mp3', 'vo-lecturer-ff5ebe20.mp3',
+                'vo-you-1defc53b.mp3', 'vo-lecturer-2ec472e1.mp3', 'vo-lecturer-fab0b3cc.mp3'];
+  voss.inOrder = JSON.stringify(voss.asked) === JSON.stringify(want);
+
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  console.log(JSON.stringify({ r, pond }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
+  console.log(JSON.stringify({ r, pond, voss }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   const ok = r && r.continueSilent && r.youFirst && r.profAfter && r.skipToReply && r.captionKept
-          && pond.mapped && !p.errors.length;
+          && pond.mapped && voss.inOrder && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');
   process.exit(ok ? 0 : 1);
 })();
