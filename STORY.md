@@ -1655,13 +1655,49 @@ world stays small while the stakes get bigger.*
 5. **The Office and the chute.** *"Oh. That. We used to call it Methods."* *"It's accurate. Send
    it."* The folder goes down the chute. Then the outro and Reviewer 2 as designed.
 
+### Loose monkeys — and one of them is Reviewer 2 *(author, 2026-09-25)*
+
+> Could we have some loose monkeys already in Act V? They broke out of a lab. Later it turns out
+> one of them is Reviewer 2.
+
+**The lab.** The Infinite Monkey Project, in the Psychology basement: monkeys at typewriters
+since 1974, waiting for *Hamlet*. Output to date: no *Hamlet*, a great deal of "asdfghjkl".
+On the first morning of the Annual Meeting, Tobi props the lab door open for a livestream
+shot, and the monkeys get out. They are loose for the whole act.
+
+**Running gags, one per room:**
+- **Poster Session (Mensa):** a monkey steals the free pens (the pen hunter is outraged) and
+  another sits eating the cook's *Schnitzel Causes Wisdom* poster.
+- **Keynote (Hall of Founders):** a monkey gets to Feldstrom's laptop and advances his slides at
+  random. Nobody can tell the difference.
+- **Replication Session (Seminar Room):** a monkey in the back row, taking notes.
+
+**One monkey is different.** The clues accumulate across the act, never commented on:
+- its lanyard is on backwards — the rumour about Reviewer 2 at the meeting;
+- early in the act it steals the Professor's red pen, and is never without it again;
+- it stamps **MAJOR CONCERNS** on the gold-rush posters (nobody knows where it got the stamp);
+- at the keynote it raises its hand in the Q&A, and Feldstrom takes the question;
+- at the Replication Session it sits in the chair beside the Visiting Fellow, nodding at each
+  finding that falls.
+
+**The payoff is the post-credits scene**, which becomes a reveal instead of an ambiguity: the
+same monkey — backwards lanyard, red pen — at the submission system, REVIEWER 2 mug beside it,
+types "asdfghjkl", and the field resolves to *"The theoretical contribution remains
+insufficiently developed."* (This supersedes the design note in *Post-credits: Reviewer 2*
+that the scene must not resolve who wrote the review.)
+
+**Tone guard:** the monkeys are never hurt, caught or mocked by the story; the joke is on the
+people around them, who treat a monkey with a red pen exactly as they would treat a senior
+colleague.
+
 ### What this reuses and what is new
 
 - **Reused as built:** KIRA's terminal and the Professor's check; the Bureau; the seal and the
   Skeptic; the Gap Registry, Writing Room and title puzzles (moved into the Print Shop); the
   reveal, the chute and the outro.
 - **Rebuilt:** the Basement as the Significance Casino.
-- **New:** the Act IV opening and closing interludes; Annual Meeting redressings of three existing
+- **New:** monkey sprites (a few poses: running, sitting, typing, the lead monkey with lanyard
+  and red pen); the Act IV opening and closing interludes; Annual Meeting redressings of three existing
   rooms (Mensa, Hall of Founders, Seminar Room: banners, poster boards, a replication board);
   the Poster Session mini-game; the Replication board. No new locations.
 - **Characters with new jobs:** the Fieldwork Director and the cook as gold-rush winners (and
@@ -1677,8 +1713,10 @@ world stays small while the stakes get bigger.*
    to the neighbouring gold-rush poster)?
 4. Reviewer 2: keep the outro as a cutscene, or make the decision letter a playable battle?
 5. Act V title: "Apparently Somebody Has to Present It", or keep "…Write It"?
-6. Reviewer 2 at the meeting: a figure glimpsed in the Keynote crowd (lanyard backwards), or keep
-   Reviewer 2 entirely off-screen until the post-credits monkey?
+6. ~~Reviewer 2 at the meeting~~ — answered: a loose lab monkey with a backwards lanyard and the
+   Professor's red pen (see *Loose monkeys*).
+7. How visible should the lead monkey be: a sprite that turns up in every Act V room, or a few
+   staged moments only?
 
 ---
 
