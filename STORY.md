@@ -1655,6 +1655,33 @@ world stays small while the stakes get bigger.*
 5. **The Office and the chute.** *"Oh. That. We used to call it Methods."* *"It's accurate. Send
    it."* The folder goes down the chute. Then the outro and Reviewer 2 as designed.
 
+### The Psych Lab — the Infinite Monkey Project *(new room, Act V)*
+
+A basement lab in the Psychology building: rows of typewriters on low tables, banana crates,
+a wall of framed output ("asdfghjkl", 1974–present), and a hand-lettered progress chart titled
+**HAMLET** with nothing on it. A second wall is covered in printouts stamped **p < .05**:
+thousands of them. *"We have eleven thousand significant results,"* says the lab head, *"and no
+Hamlet."* It is the whole of Act IV in one room: enough monkeys, enough analyses, and something
+always lights up.
+
+**Who runs it:** Dr. Ines Achterberg, a psychologist who lived through her field's replication
+crisis and came out of it running the Registered Replications track. She is tired, funny, and
+the only person on campus who is not excited about the Codebook. She is organising the Annual
+Meeting's **Replication Session**.
+
+**What happens here:** the act opens in this room. The coaches have arrived, Tobi has propped
+the lab door open for a livestream shot, and the cages are empty. Achterberg is counting
+monkeys on her fingers and losing. She needs findings for the Replication Session and the
+department has sent her only Codebook results. The player's sealed slip is the one thing that
+qualifies: a prediction written down before the data. She stamps the poster **REGISTERED**
+(it will matter in the Poster Session and pays off in the Replication Session), and the lead
+monkey — lanyard already on backwards — is last seen leaving with a red pen.
+
+**Puzzle, lightly:** Achterberg only takes a finding whose prediction can be shown to predate
+the data. The player has to prove it with what is in the folder (the seal's date, the slip
+itself), not by saying so; a Codebook printout is refused ("This was written after the
+analysis. I can tell. They always say *robust*.").
+
 ### Loose monkeys — and one of them is Reviewer 2 *(author, 2026-09-25)*
 
 > Could we have some loose monkeys already in Act V? They broke out of a lab. Later it turns out
@@ -1689,6 +1716,33 @@ that the scene must not resolve who wrote the review.)
 **Tone guard:** the monkeys are never hurt, caught or mocked by the story; the joke is on the
 people around them, who treat a monkey with a red pen exactly as they would treat a senior
 colleague.
+
+### All rooms, Acts IV and V *(draft)*
+
+"Angle" means the conference versions of existing rooms get a new painting from a different
+viewpoint (and the conference dressing), so they read as new places rather than redecorated old
+ones.
+
+| # | Room | Where | Job in the story | Set piece / puzzle | Build status |
+|---|---|---|---|---|---|
+| — | **Act IV opening interlude** | campus | two emails: the Annual Meeting is coming; KIRA has found the Codebook | trailer panels | new |
+| IV.1 | **KIRA's Terminal** | the Delegation Engine | the Codebook itself; everyone else leaves with spectacular printouts | find seven wrong lines; the Professor circles what you missed | built (8zp); add the gold-rush queue |
+| IV.2 | **The Significance Casino** | the Statistics Basement | the gold rush's trading floor; the seal is broken here | slot machines of analyses, a DISCOVERY board of other people's wins, the sealed slip as the only honest chip; the Skeptic in the doorway | rebuild |
+| IV.3 | **The Bureau of Implications** | the Bureau | what the number means; LARGE sold out, EXTRA LARGE on order | evidence on the counter | built; add the sold-out gag |
+| — | **Act IV closing beat** | the Office noticeboard | the meeting programme: Feldstrom's keynote, your Poster 312 by the bins | stamp EVIDENCE VERIFIED | new |
+| — | **Act V opening interlude** | campus gate | coaches, lanyards, banners; Tobi props the lab door; the monkeys get out | trailer panels | new |
+| V.1 | **The Psych Lab** | Psychology basement (new building on the map) | the Infinite Monkey Project; Achterberg registers your finding | prove the prediction predates the data | **new room** |
+| V.2 | **The Gap Registry** | the Registry | the poster's contribution, relative to three papers | as built (G1) | built |
+| V.3 | **The Writing Room** | the Writing Room | the poster's title and abstract; Feldstrom and KIRA both "help" | three words over the line; the honest title | built |
+| V.4 | **The Poster Session** | the Mensa, new angle: along the rows of poster boards | your poster by the bins, the gold-rush posters with balloons | visitor mini-game; monkeys steal the pens and eat the schnitzel poster | new angle + mini-game |
+| V.5 | **The Keynote** | the Hall of Founders, new angle: from the back of a packed audience | Feldstrom's *Civilisation Is Traffic*; slide 14 is your result, inflated | a monkey drives his slides; the lead monkey asks a question; your Q&A choice | new angle; reuses the rap-battle staging |
+| V.6 | **The Replication Session** | the Seminar Room, new angle: the panel table facing the room | the gold rush falls, live; yours holds; the Professor meets Feldstrom | the replication board; the lead monkey on the panel | new angle + board |
+| V.7 | **The Office and the chute** | the Seven-Second Office | "We used to call it Methods"; submission | as built (R1) | built |
+| — | **Outro** | campus, the Office | decision letter, Reviewer 2 | cutscene (or playable battle); post-credits monkey reveal | built; update the post-credits scene |
+
+**New paintings:** the Psych Lab; three conference angles (Mensa, Hall, Seminar Room); the
+Casino; interlude panels for both act openings. **New characters:** Dr. Ines Achterberg; the
+monkeys (a few poses, plus the lead monkey with lanyard and red pen).
 
 ### What this reuses and what is new
 
