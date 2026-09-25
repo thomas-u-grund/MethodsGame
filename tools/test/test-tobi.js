@@ -1,4 +1,4 @@
-// Tobi roams, can be sent to the Gap Registry, and clears the Registrar off the CLOSED drawer.
+// Tobi roams, turns up in rooms, and talks. (The Gap Registry errand left with the room, 8zv.)
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 (async () => {
@@ -26,19 +26,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.spriteInLibrary = !!document.getElementById('lb_spr_tobi');
     verb('lb','talk to'); document.querySelector('#lb_sceneWrap [data-id="tobi"]').click(); await w(500);
     out.spoke = /brand|carousel|gaps/i.test(document.getElementById('lb_line').textContent);
-    ch('lb','Gap Registry'); await w(600);
-    out.sent = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.tobiSentToRegistry;
-
-    // he goes there regardless of the reroll
-    await go('The Gap Registry');
-    out.hereNow = getComputedStyle(document.getElementById('gp_spr_tobi')).display !== 'none';
-    verb('gp','use'); document.querySelector('#gp_sceneWrap [data-id="closed"]').click(); await w(600);
-    out.drawer = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.gpDrawerOpen;
-    out.line = document.getElementById('gp_line').textContent.slice(0,120);
     return out;
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r.spriteInLibrary && r.spoke && r.sent && r.hereNow && r.drawer && !p.errors.length;
+  const ok = r.spriteInLibrary && r.spoke && !p.errors.length;
   console.log(ok?'PASS':'FAIL'); p.close(); process.exit(ok?0:1);
 })();

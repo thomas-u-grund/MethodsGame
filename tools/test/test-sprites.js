@@ -10,7 +10,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 const ROOMS = [
   ['The Library','lb'], ['The Hall of Founders','hf'], ["Feldstrom's Workshop",'ws'],
   ['The Seminar Room','sm'], ['Statistics Basement','sb'], ['The Delegation Engine','dl'],
-  ['The Bureau of Implications','bu'], ['The Gap Registry','gp'], ['The Writing Room','wr']
+  ['The Bureau of Implications','bu'], ['The Infinite Monkey Project','pl'], ['The Writing Room','wr']
 ];
 (async () => {
   const p = await connect(U + Date.now());

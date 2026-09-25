@@ -78,19 +78,23 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     ch('bu','Lodge it'); await wait(600);
     out.bureau = !!flags().bureauDone; out.actIV = !!flags().actIVDone;
 
-    // --- Gap Registry
-    await go('The Gap Registry');
-    // G1: no drawer label, no trip to KIRA -- the Registrar lays the papers out himself
-    verb('gp','talk to'); spot('registrar'); await wait(400);
-    out.papersLaid = !!flags().gpCompared;
-    ch('gp','confirms the three papers'); await wait(400);
-    out.gapWrongRefused = !flags().gapDone;
-    verb('gp','talk to'); spot('registrar'); await wait(400);
-    ch('gp','boundary condition'); await wait(600);
-    out.gap = !!flags().gapDone;
-
+    // --- Act V opens in the Psych Lab: register the sealed slip with Dr. Achterberg (8zv)
+    await go('The Infinite Monkey Project');
+    verb('pl','talk to'); spot('achterberg'); await wait(400);
+    ch('pl','your result'); await wait(300); out.resultRefused = !flags().labDone;
+    verb('pl','talk to'); spot('achterberg'); await wait(400);
+    ch('pl','sealed Prediction Slip'); await wait(500);
+    out.registered = !!flags().labDone;
     // --- Writing Room: find the three words, refuse the title
     await go('The Writing Room');
+    // The Registrar asks the Gap Registry's question here now (8zv)
+    verb('wr','talk to'); spot('registrar'); await wait(400);
+    out.papersLaid = !!flags().gpCompared;
+    ch('wr','confirms the three papers'); await wait(400);
+    out.gapWrongRefused = !flags().gapDone;
+    verb('wr','talk to'); spot('registrar'); await wait(400);
+    ch('wr','boundary condition'); await wait(600);
+    out.gap = !!flags().gapDone;
     // WR1: let Feldstrom inflate the title first; finishing must then be refused
     verb('wr','talk to'); spot('feldstrom'); await wait(400);
     verb('wr','talk to'); spot('feldstrom'); await wait(400);
@@ -105,7 +109,15 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.titleBlocks = !flags().writingDone;
     verb('wr','talk to'); spot('feldstrom'); await wait(400);
     ch('wr','Refuse him'); await wait(900);
-    out.writing = !!flags().writingDone; out.actV = !!flags().actVDone;
+    out.writing = !!flags().writingDone;
+    // --- the Poster Session: five visitors, answer each properly (8zv)
+    await go('The Poster Session');
+    verb('ps','use'); spot('poster'); await wait(3200);
+    for (let i = 0; i < 5; i++){ window.CODEBOOK_PS_ANSWER_RIGHT(); await wait(4800); }
+    await wait(600);
+    out.posters = !!flags().postersDone; out.audience = flags().posterCrowd;
+    out.actV = !!flags().actVDone;
+    out.dbg = JSON.stringify({lab:flags().labDone, wr:flags().writingDone, ps:flags().postersDone, crowd:flags().posterCrowd, v:flags().actVDone});
     out.overstated = !!flags().claim_overstated;
 
     // --- Office: reveal + submission
@@ -123,7 +135,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.titleBlocks && r.folderGone
+  const ok = r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.titleBlocks && r.folderGone
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
