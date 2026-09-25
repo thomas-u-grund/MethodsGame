@@ -1101,8 +1101,14 @@ point — without dating the game.
   The hook pole is now for the catalogue drawer alone.
 - **Seminar gate says so**: arriving before the Workshop, the intro says the board needs a
   claim small enough to be wrong, and to come back after Feldstrom's machine.
-- **Voices**: 167 missing lines generated (KIRA, the Registrar and Achterberg cast for the first
-  time: denton with a robot filter, hurlock, gesine), plus the keynote and poster-session lines.
+- **Voices**: 169 lines added (Whisper-checked; a handful re-rendered with seed 7), plus seven
+  narrator lines for the Act V opening and the Stockholm cutaway. First-time casting: KIRA =
+  lv-denton through a light robot filter (`asetrate` +5%, short echo, high-pass), the Registrar =
+  lv-hurlock (0.35/0.5), Achterberg and the Visiting Fellow = lv-gesine (0.45/0.5). One-word
+  Swedish fragments ("Lagom.", "Omedelbart.") stay unvoiced: every take came out garbled.
+  Bundles are now `voices-act1.mp3` 18 MB and `voices-act3.mp3` 21 MB, over the artifact host's
+  15 MB per-file limit, which only matters for a whole-game publish (not planned; split per act
+  if it ever is).
 
 ## 8zx. Simple controls — 2026-09-25 (user: "can we try this first before fully committing?")
 
