@@ -1070,6 +1070,47 @@ point — without dating the game.
 
 ---
 
+## 8zl. Puzzle audit, implemented — 2026-09-25 (user)
+
+> There is the general point that some puzzles seem overly complex or not clear. — ok, make
+> those changes. (Audit: one reader per act, every finding quoted from the code; eight
+> game-stoppers and twenty proposals.)
+
+- **Game-stoppers fixed** (block 1): p-hacking and the LARGE implication no longer strand the
+  player (both still hand over the item they cost); the Seminar cannot be skipped or failed
+  for good; Mensa's voucher and register; the Pond's flag; the Lecture completes on asking
+  Vossberg.
+- **Act I** (O1, L1, C1, P1): the Office states its goal and the citation backfires; lecture
+  worksheets and chalk are gone; the Corridor shows the case on arrival and after a fall; the
+  Pond's black swan glides in and the falsified ink washes back.
+- **Act II** (LB1, H1, W1, S1, SE1): the reading list is lodged as WHAT IS KNOWN from a KIRA
+  choice, with REF/REJECTED tags on the trolley; Professor G offers three sentences and
+  accepts only the one about worked examples; the Workshop's empty-room route takes one Use;
+  the Seminar alone writes the hypothesis, a two-line prediction with rival explanations; the
+  seal has a "Not yet."
+- **Act III** (SV1, E1, M1, F1, PR1): the Survey Lab's die is on the desk; Ethics shows four
+  wax seals and asks one question about names and linkage; Mensa lists every missing thing and
+  shows mug and SR-2 placed; Fieldwork only finishes its room, and the Professor's "where did
+  those numbers come from?" (140 / 12 / 9) ends the act.
+- **Act IV** (SB1, D1, BU1): the Basement asks which test to run (the one the slip names);
+  reading the Delegation log pauses KIRA's lever, no queue ticket; at the Bureau each
+  limitation is shown by putting its evidence on the counter (register, alternative card,
+  response-rate tile), and the icons stay there. The response-rate tile is no longer filed.
+- **Act V** (G1, WR1, R1): the Registrar needs no typed drawer label, lays the three papers
+  beside your result himself, and offers plausible wrong contributions; in the Writing Room
+  each red word offers three replacements, finishing needs the title back at its honest size,
+  and a repaired abstract clears `claim_overstated`; the reveal is two clicks, her verdict
+  follows the fail flags, and the folder goes down the chute.
+- **Form H-27 is gone.** Act III fills the folder's own DATA divider (nameplate
+  `DATA ☐☐☐☐`, state lines `☑ DATA: …`); the seal hands the slip back and opens the divider;
+  the Act III interlude loses the H-27 panel. Old saves drop the form. `h27issued` stays as
+  Act III's gate flag.
+- **The folder leads the inventory**, and hovering, focusing or clicking it opens it over the
+  scene: five dividers, what is filed in each, and the current act's four boxes.
+- Tests: `test-endgame` rewritten for D1/BU1/G1/WR1/R1; new `test-folderpanel`.
+- Still to do: voices for the new and changed lines; visual patches where a step is still
+  text-only.
+
 ## 8zk. Survey Lab, radically simpler: the DISCHARGED board — 2026-09-25 (user)
 
 > What if the Survey Lab has a "healed patients" board, and once we correct the questions the

@@ -47,6 +47,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     // ---- HALL again: the mechanism
     await go('The Hall of Founders');
     verb('hf','talk to'); spot('profg'); await wait(500);
+    choice('hf','worked examples'); await wait(500);
     out.steps.push(['mechanism', S.data().mechanismSound ? 'sound' : 'junk']);
 
     // ---- WORKSHOP: he refuses, so learn the extension

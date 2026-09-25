@@ -97,6 +97,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.meterBroken = /bent/.test(line());
     // after the battle Professor G dictates the mechanism (the save has a pen and a card)
     verb(/talk/i).click(); hot('profg').click(); await w(300);
+    { const b = [...document.querySelectorAll('#hf_choices button')].find(x => /worked examples/.test(x.textContent)); if (b){ b.click(); await w(300); } }
     out.mechanismFromG = !!(window.CODEBOOK_SLIP.data().mechanismSound);
     // the encore: Talk To Tobi offers the whole battle again
     verb(/talk/i).click(); hot('tobi').click(); await w(300);

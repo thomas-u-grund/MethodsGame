@@ -4,7 +4,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 (async () => {
   const p = await connect(U + Date.now());
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
-    inventory:['folder','pen','redacted','examrecords','worksheets','rateprint','altcard','readinglist','enrolreg','slip'],
+    inventory:['folder','redacted','examrecords','rateprint','altcard','readinglist','enrolreg','slip'],
     flags:{ corridorDone:true, whirlpoolDone:true, profAtOffice:true,
       slipSealed:true, h27issued:true, actIIIDone:true, provenanceGiven:true,
       act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true, act5IntroSeen:true,
@@ -26,15 +26,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       if(!b) throw new Error('no choice /'+re+'/ in '+p+': '+[...document.querySelectorAll('#'+p+'_choices button')].map(x=>x.textContent.slice(0,32)).join(' | ')); b.click(); };
     const flags = () => JSON.parse(localStorage.getItem('codebook_save_v1')).flags;
 
-    // --- Bureau first: the queue ticket is what pauses KIRA's lever
-    await go('The Bureau of Implications');
-    verb('bu','pick up'); spot('counter'); await wait(400);
-    out.ticket = !!document.querySelector('#bu_sideInv .side-inv-slot[data-item="ticket"]');
-
-    // --- Delegation Engine: pause the lever, read the log, check a record, instruct her
+    // --- Delegation Engine: reading the log pauses the lever (no queue ticket any more)
     await go('The Delegation Engine');
-    item('dl','ticket'); spot('lever'); await wait(400);
     verb('dl','look at'); spot('log'); await wait(400);
+    out.paused = !!flags().dlPaused;
     verb('dl','look at'); spot('record'); await wait(400);
     verb('dl','talk to'); spot('kira'); await wait(400);
     ch('dl','exact fix'); await wait(400);
@@ -53,52 +48,58 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     await go('The Bureau of Implications');
     verb('bu','talk to'); spot('clerk'); await wait(400);
     ch('bu','write my own'); await wait(400);
-    ch('bu','One course'); await wait(300);
-    ch('bu','cannot separate'); await wait(300);
-    ch('bu','never answered'); await wait(300);
+    // BU1: each limitation is shown, not ticked -- its evidence goes on the counter
+    for (const ev of ['enrolreg','altcard','rateprint']){ item('bu', ev); spot('clerk'); await wait(2900); }
+    out.evidenceIcons = document.querySelectorAll('#bu_evidence img, [id^=bu_ev] img').length;
     ch('bu','Lodge it'); await wait(600);
     out.bureau = !!flags().bureauDone; out.actIV = !!flags().actIVDone;
 
-    // --- Writing Room first: type the drawer label the Registry demands
-    await go('The Writing Room');
-    verb('wr','pick up'); spot('table'); await wait(450);
-    out.label = !!document.querySelector('#wr_sideInv .side-inv-slot[data-item="drawerlabel"]');
-
     // --- Gap Registry
     await go('The Gap Registry');
-    verb('gp','talk to'); spot('kira'); await wait(400);
-    ch('gp','survived checking'); await wait(500);
+    // G1: no drawer label, no trip to KIRA -- the Registrar lays the papers out himself
+    verb('gp','talk to'); spot('registrar'); await wait(400);
+    out.papersLaid = !!flags().gpCompared;
+    ch('gp','confirms the three papers'); await wait(400);
+    out.gapWrongRefused = !flags().gapDone;
     verb('gp','talk to'); spot('registrar'); await wait(400);
     ch('gp','boundary condition'); await wait(600);
     out.gap = !!flags().gapDone;
 
     // --- Writing Room: find the three words, refuse the title
     await go('The Writing Room');
+    // WR1: let Feldstrom inflate the title first; finishing must then be refused
+    verb('wr','talk to'); spot('feldstrom'); await wait(400);
+    verb('wr','talk to'); spot('feldstrom'); await wait(400);
+    ch('wr','bigger'); await wait(400);
     verb('wr','look at'); spot('abstract'); await wait(450);
-    ch('wr','improved'); await wait(2300);
-    ch('wr','demonstrate'); await wait(2300);
-    ch('wr','people'); await wait(2300);
-    ch('wr','This is what happened'); await wait(900);
+    ch('wr','improved'); await wait(300); ch('wr','^.caused'); await wait(2900);
+    out.wrongWordKept = [...document.querySelectorAll('#wr_choices button')].some(b => /improved/.test(b.textContent));
+    ch('wr','improved'); await wait(300); ch('wr','was associated'); await wait(2300);
+    ch('wr','demonstrate'); await wait(300); ch('wr','consistent with'); await wait(2300);
+    ch('wr','people'); await wait(300); ch('wr','first-year'); await wait(2300);
+    ch('wr','This is what happened'); await wait(600);
+    out.titleBlocks = !flags().writingDone;
+    verb('wr','talk to'); spot('feldstrom'); await wait(400);
+    ch('wr','Refuse him'); await wait(900);
     out.writing = !!flags().writingDone; out.actV = !!flags().actVDone;
     out.overstated = !!flags().claim_overstated;
 
     // --- Office: reveal + submission
     await go('The Seven-Second Office');
     out.revealStarts = /hourglass turns over/.test(document.getElementById('wp_line').textContent);
-    ch('wp','Wait'); await wait(300);
-    ch('wp','that.s it'); await wait(300);
-    ch('wp','The Codebook'); await wait(300);
-    ch('wp','Explain'); await wait(400);
-    out.codebookLine = /used to call it Methods/.test(document.getElementById('wp_line').textContent);
+    ch('wp','is that the Codebook'); await wait(400);
+    out.codebookLine = /used to call it Methods/.test(document.getElementById('wp_line').textContent)
+      && /accurate/.test(document.getElementById('wp_line').textContent);
     ch('wp','submission chute'); await wait(600);
     out.submitted = !!flags().submitted;
+    out.folderGone = !JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('folder');
     ch('wp','Leave the building'); await wait(1200);
     out.outroRunning = !!document.querySelector('.il-stage, .interlude, [class*=il-]');
     return out;
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r.ticket && r.cleandata && r.label
+  const ok = r.paused && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.titleBlocks && r.folderGone
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);

@@ -51,6 +51,9 @@ const CASES = {
         document.querySelector('#hf_sideInv .side-inv-slot[data-item="' + a[1] + '"]').click();
         hot(a[2]).click(); await w(500);
       }
+      // after the battle he offers three sentences (ROADMAP 8zl, H1): pick the mechanism
+      const pickRight = [...document.querySelectorAll('#hf_choices button')].find(b => /worked examples/.test(b.textContent));
+      if (pickRight){ pickRight.click(); await w(500); }
       const slip = JSON.parse(localStorage.getItem('codebook_save_v1')).flags.predictionSlip || {};
       const inv = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory;
       return { line: (document.getElementById('hf_line') || {}).textContent.replace(/\\s+/g, ' ').slice(0, 800),
@@ -67,7 +70,7 @@ const CASES = {
           && /USB stick/.test(out.gNoUsb.line)
           && none(out.gNoCard) && /something to write on/i.test(out.gNoCard.line)
           && none(out.gNoPen) && /something to write with/i.test(out.gNoPen.line)
-          && out.gGives.sound && out.gGives.card && /worked examples/.test(out.gGives.line) && out.gGives.voiced.length === 3
+          && out.gGives.sound && out.gGives.card && /mechanism/.test(out.gGives.line) && out.gGives.voiced.length >= 1
           && out.gCardOnHim.sound && out.gCardOnHim.card
           && none(out.weberPen) && /Professor G/.test(out.weberPen.line)
           && !p.errors.length;
