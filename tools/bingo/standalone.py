@@ -18,7 +18,7 @@ ROOT, WEB, GAME = R.ROOT, R.WEB, R.GAME
 OUT = os.path.join(ROOT, 'build', 'bingo')
 KEEP_ROOMS = {'lecture'}
 
-SEED = {'inventory': ['bingocard'], 'flags': {'actRenumberMigrated': True, 'bingocardTaken': True, 'profAtOffice': True}}
+SEED = {'inventory': ['bingocard'], 'flags': {'actRenumberMigrated': True, 'bingocardTaken': True}}
 
 HEAD = """<script>
 /* Lecture Bingo, standalone: a fresh save on every visit, straight into the lecture. The engine
