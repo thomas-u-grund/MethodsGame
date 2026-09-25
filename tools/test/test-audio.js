@@ -15,7 +15,8 @@ const { connect } = require('./cdp');
     // Music, not clips: the rap battle's three founder verses are full beat-and-voice mixes
     // and Professor G's track is 4:45 of recorded music, so they stream as their own files.
     const nonClip = new Set([...bundles, 'title-theme.mp3','office-bgm.mp3','lecture-bgm.mp3','sfx-act1.mp3','sfx-act3.mp3',
-      'rap-marx.mp3','rap-durkheim.mp3','rap-weber.mp3','profg-live.mp3','sfx-rap.mp3']);
+      'rap-marx.mp3','rap-durkheim.mp3','rap-weber.mp3','profg-live.mp3','sfx-rap.mp3',
+      'bingo-tense.mp3','bingo-tight.mp3','bingo-hit.mp3','bingo-miss.mp3']);
     out.referenced = names.size;
     out.spriteClips = Object.keys(sprite).length;
     out.unresolved = [...names].filter(n => !sprite[n] && !nonClip.has(n));
