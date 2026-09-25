@@ -26,14 +26,38 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       if(!b) throw new Error('no choice /'+re+'/ in '+p+': '+[...document.querySelectorAll('#'+p+'_choices button')].map(x=>x.textContent.slice(0,32)).join(' | ')); b.click(); };
     const flags = () => JSON.parse(localStorage.getItem('codebook_save_v1')).flags;
 
-    // --- Delegation Engine: reading the log pauses the lever (no queue ticket any more)
+    // --- Delegation Engine, now KIRA's terminal (ROADMAP 8zp): ask, flag the seven wrong
+    // lines (with the right reason), leave the three true ones, and take the data.
     await go('The Delegation Engine');
-    verb('dl','look at'); spot('log'); await wait(400);
-    out.paused = !!flags().dlPaused;
-    verb('dl','look at'); spot('record'); await wait(400);
     verb('dl','talk to'); spot('kira'); await wait(400);
-    ch('dl','exact fix'); await wait(400);
-    ch('dl','Re-merge on the pseudonymous'); await wait(600);
+    document.querySelector('#dl_termFoot [data-prompt="0"]').click(); await wait(5200);
+    const term = document.getElementById('dl_term');
+    // a true line must not count as wrong
+    term.querySelector('[data-claim="rr"]').click(); await wait(150);
+    [...term.querySelectorAll('#dl_termFoot [data-r]')].find(b => b.dataset.r === 'bad').click(); await wait(200);
+    out.trueNotFlagged = !term.querySelector('[data-claim="rr"]').classList.contains('flagged');
+    // a wrong reason must not flag
+    term.querySelector('[data-claim="n"]').click(); await wait(150);
+    [...term.querySelectorAll('#dl_termFoot [data-r]')].find(b => b.dataset.r !== '-1').click(); await wait(200);
+    out.wrongReasonNotFlagged = !term.querySelector('[data-claim="n"]').classList.contains('flagged');
+    // flag five yourself, then show her: she must circle the two you missed
+    for (const id of ['n','merge','miss','p','cause']){
+      term.querySelector('[data-claim="' + id + '"]').click(); await wait(150);
+      term.querySelector('#dl_termFoot [data-ok="1"]').click(); await wait(200);
+    }
+    document.getElementById('dl_showProf').click(); await wait(900 + 2*800 + 1400);
+    out.profCircled = term.querySelectorAll('.kt-claim.circled, .kt-fig.circled').length;   // cite (+chart line and figure)
+    out.noVerdictYet = !term.querySelector('#dl_termFoot [data-v]');
+    for (const id of ['cite','chart']){
+      term.querySelector('.kt-claim[data-claim="' + id + '"]').click(); await wait(150);
+      term.querySelector('#dl_termFoot [data-ok="1"]').click(); await wait(200);
+    }
+    document.getElementById('dl_showProf').click(); await wait(900 + 1400);
+    out.stamps = term.querySelectorAll('.kt-claim.flagged').length;
+    out.paused = !!flags().dlPaused;
+    term.querySelector('#dl_termFoot [data-v="fix"]').click(); await wait(200);
+    out.fixNotDone = !flags().delegationDone;
+    term.querySelector('#dl_termFoot [data-v="own"]').click(); await wait(600);
     out.delegation = !!flags().delegationDone;
     // the clean data is filed in the folder (ROADMAP 8zf), not an inventory slot of its own
     out.cleandata = window.CODEBOOK_IS_FILED('cleandata') && !document.querySelector('#dl_sideInv .side-inv-slot[data-item="cleandata"]');
@@ -99,7 +123,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r.paused && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.titleBlocks && r.folderGone
+  const ok = r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.titleBlocks && r.folderGone
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);

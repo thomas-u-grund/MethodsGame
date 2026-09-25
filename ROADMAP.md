@@ -1070,6 +1070,42 @@ point — without dating the game.
 
 ---
 
+## 8zp. The Delegation Engine becomes KIRA's terminal, with the Professor as the check — 2026-09-25 (user)
+
+> What if one types into a computer to analyse data and it gives bullshit results? Then the
+> task is to identify and judge that. — Replace Delegation. Picked prompts. — Maybe the female
+> Professor is in the room with the KIRA terminal, and she is the check: one produces stuff
+> with KIRA, and the Professor rejects the bullshit one did not correct oneself.
+
+- The room keeps its place, its doneFlag and its lever. Talking to KIRA (or using her
+  terminal) opens a chat window over the scene. You pick one of three prompts; KIRA streams a
+  confident report: emojis, a CONFIDENCE 99.7% bar, and a bar chart whose axis starts at 70.
+- **Ten lines, seven wrong**, all built from your own study: N = 140 (9 answered); linked by
+  surname (the Tribunal's IDs exist for this); 3 missing answers imputed as full attendance;
+  p < 0.001 (nine people, twenty models); "causes" 23% higher marks; "consistent with Müller &
+  Singh (2023)" (its conclusion says the effect vanished; she read the abstract); the misleading
+  chart. **Three are true**: 75% response rate, the design, what your hypothesis predicts.
+- Click a line, pick what is wrong with it from three reasons (plausible wrong reasons get a
+  correction). Flagging a true line raises her confidence instead. Each correct flag stamps the
+  line and drops the bar.
+- **Prof. Stellmacher is in the room** (her portrait in the terminal). "Show it to her" at any
+  time: she turns the hourglass and circles every wrong line you missed, in red pen, with a
+  one-line put-down each. You then have to say what is wrong with each circled line yourself
+  ("I am not your analyst") and show her again. Only her approval opens the verdict. How many
+  she had to catch is kept in `GAME.flags.dlProfCaught`.
+- **Verdict**: submit anyway (she stops the lever and rejects it), "KIRA, fix it" (a different
+  wrong answer, faster; "a mood"), or take the data linked on the IDs and run the test your slip
+  names yourself, which completes the room and hands over the clean data for the Basement.
+- The folder's DATA divider now shows the true numbers (register 140, drawn 12, answered 9,
+  linked by ID) to check her against.
+- Bug found by the screenshot: the first prompt (index 0) showed no report, because
+  `!state.prompt` treated 0 as unset. `test-endgame` now uses prompt 0, flags five lines,
+  checks she circles the rest and withholds the verdict, then finishes.
+- Also: **Lecture Bingo as a standalone artifact**, private until you share it
+  (https://claude.ai/artifact/1q6rocWvPkLQLeBUvoUjha), built by `tools/bingo/standalone.py`
+  (the rap-battle builder's approach): the Lecture Theatre only, a start screen (the click the
+  browser needs before music), and "Play again" after BINGO.
+
 ## 8zo. Lecture Bingo gets suspense music — 2026-09-25 (user)
 
 > For the bingo we should have some tense ("Who Wants to Be a Millionaire" style) background music.
