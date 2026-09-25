@@ -1070,6 +1070,29 @@ point — without dating the game.
 
 ---
 
+## 8zg. Playtest round: the Professor on demand, things that vanish when taken, voices — 2026-09-25 (user)
+
+> I am stuck: I need the female professor to leave her office again (after she has given me
+> the question I cannot lose her patience any more). The register and the catalogue card in
+> the Library should disappear when taken; the scissors in the Survey Lab too. The Survey Lab
+> welcome has no voice. The student and skeleton at the Mensa table are weirdly placed —
+> get rid of them. Putting the enrolment register into the frame needs a visual.
+
+- **Sending the Professor out.** Talk To her (before the interview or any time after it) offers
+  *"Dr. Vossberg asked for you. The projector in the Lecture Theatre is broken again."* — she
+  goes, the office is empty and the desk can be cleared; next visit she is back (nothing is
+  saved, like walking out on the interview). Voiced (the student; her reply). `test-profaway`.
+- **Taken means gone.** Library: region patches from ChatGPT edits of the painting — the shelf
+  without the register (`lib-patch-register.webp`), the box without its cards
+  (`lib-patch-cards.webp`); flags `libRegTaken` / `libCardTaken`, back-filled for old saves from
+  what the player has done. Survey Lab: the cabinet's empty mount (`sv-patch-scissors.webp`)
+  once the scissors are out, by either route.
+- **The sampling frame fills.** Putting a list into the Mensa's gilded frame draws numbered
+  cards stacking up inside it: packed to the top with the big newsletter list, stopping at
+  half height with the register's 140 — the point of the puzzle, drawn.
+- **Survey Lab welcome voiced** (three nurse clips, Golding).
+- **Mensa**: the n = 1 student and skeleton (and their table-for-one hotspot) removed.
+
 ## 8zf. The folder takes the paperwork; acts leave their spent objects behind — 2026-09-25 (user)
 
 > It still feels like the game has too many papers as inventory items. (Then: "make sure we
