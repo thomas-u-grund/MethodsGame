@@ -1657,7 +1657,7 @@ world stays small while the stakes get bigger.*
 
 ### The Psych Lab — the Infinite Monkey Project *(new room, Act V)*
 
-A basement lab in the Psychology building: rows of typewriters on low tables, banana crates,
+A basement lab across the corridor from the Statistics Basement (same stairs, no new building): rows of typewriters on low tables, banana crates,
 a wall of framed output ("asdfghjkl", 1974–present), and a hand-lettered progress chart titled
 **HAMLET** with nothing on it. A second wall is covered in printouts stamped **p < .05**:
 thousands of them. *"We have eleven thousand significant results,"* says the lab head, *"and no
@@ -1731,7 +1731,7 @@ ones.
 | IV.3 | **The Bureau of Implications** | the Bureau | what the number means; LARGE sold out, EXTRA LARGE on order | evidence on the counter | built; add the sold-out gag |
 | — | **Act IV closing beat** | the Office noticeboard | the meeting programme: Feldstrom's keynote, your Poster 312 by the bins | stamp EVIDENCE VERIFIED | new |
 | — | **Act V opening interlude** | campus gate | coaches, lanyards, banners; Tobi props the lab door; the monkeys get out | trailer panels | new |
-| V.1 | **The Psych Lab** | Psychology basement (new building on the map) | the Infinite Monkey Project; Achterberg registers your finding | prove the prediction predates the data | **new room** |
+| V.1 | **The Psych Lab** | the basement, across the corridor from the Statistics Basement | the Infinite Monkey Project; Achterberg registers your finding | prove the prediction predates the data | **new room** |
 | V.2 | **The Gap Registry** | the Registry | the poster's contribution, relative to three papers | as built (G1) | built |
 | V.3 | **The Writing Room** | the Writing Room | the poster's title and abstract; Feldstrom and KIRA both "help" | three words over the line; the honest title | built |
 | V.4 | **The Poster Session** | the Mensa, new angle: along the rows of poster boards | your poster by the bins, the gold-rush posters with balloons | visitor mini-game; monkeys steal the pens and eat the schnitzel poster | new angle + mini-game |
@@ -1840,7 +1840,10 @@ superseded by this list for Act V.
 4. ~~Merge the Gap Registry and the Writing Room~~ — merged.
 5. The Casino: replaces the Basement's switches, or the switches become the slot machines?
 6. Dr. Ines Achterberg: name and character OK?
-7. The Psych Lab on the map: a new building, or a basement of an existing one?
+7. ~~The Psych Lab on the map~~ — a basement (author), next door to the Statistics Basement: down
+   the same stairs as the Casino, so no new building on the map. The gold rush plays slot
+   machines on one side of the corridor; on the other, monkeys have been producing significant
+   results since 1974.
 
 ---
 
