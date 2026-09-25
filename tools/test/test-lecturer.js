@@ -51,19 +51,32 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     [...document.querySelectorAll('#lt_sceneWrap .door-zone')]
       .find(e => e.style.left.indexOf('46') === 0).click();
     await w(1400);
-    out.started = document.getElementById('lt_bingoPanel').style.display !== 'none';
+    out.started = document.getElementById('lt_show').style.display !== 'none';
 
-    // Click through the lecture until BINGO is offered, then take it.
-    let shouted = false;
-    for (let i = 0; i < 60 && !shouted; i++){
-      const btns = [...document.querySelectorAll('#lt_choices button')];
-      if (!btns.length) { await w(300); continue; }
-      const bingo = btns.find(b => /BINGO/i.test(b.textContent));
-      if (bingo){ bingo.click(); shouted = true; break; }
-      const keep = btns.find(b => /Keep listening/i.test(b.textContent)) || btns[0];
-      keep.click(); await w(150);
+    // ROADMAP 8zm: the game show. Wait for the intro, then play: try a wrong square once
+    // (it must not mark), dab whatever he has just said, skip his line with Space, repeat.
+    await w(9200);
+    out.show = document.getElementById('lt_show').style.display !== 'none' && !!document.getElementById('lt_crowdBg');
+    const grid = document.getElementById('lt_bingoGrid');
+    const space = () => document.dispatchEvent(new KeyboardEvent('keydown', { key:' ', code:'Space', bubbles:true }));
+    let shouted = false, triedWrong = false;
+    for (let i = 0; i < 40 && !shouted; i++){
+      const shout = document.getElementById('lt_bingoShout');
+      if (shout.classList.contains('on')){ shout.click(); shouted = true; break; }
+      const now = grid.dataset.now;
+      if (now && now !== 'decoy'){
+        const cell = grid.querySelector('[data-term="' + now + '"]');
+        if (!triedWrong){
+          triedWrong = true;
+          const other = [...grid.querySelectorAll('.bingo-cell:not(.marked):not(.free)')].find(c => c.dataset.term !== now);
+          other.click(); out.wrongNotMarked = !other.classList.contains('marked');
+        }
+        if (!cell.classList.contains('marked')) cell.click();
+      }
+      await w(250); space(); await w(2300);
     }
     out.shouted = shouted;
+    out.marks = document.querySelectorAll('#lt_bingoGrid .bingo-cell.marked').length;
     await w(11000);                              // the losing-the-thread beat, then the walk out
     const f = JSON.parse(localStorage.getItem('codebook_save_v1')).flags;
     out.lectureDone   = !!f.lectureDone;
@@ -133,7 +146,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
               '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = a && a.speaker === 'Dr. Vossberg' && a.poses && a.mouths && a.noProfSprite
-          && a.started && a.shouted && a.lectureDone && a.lecturerGone && a.profAtOffice
+          && a.started && a.show && a.wrongNotMarked && a.shouted && a.lectureDone && a.lecturerGone && a.profAtOffice
           && b.officeOccupied && c && d
           && e && !e.err && e.offered && !e.before && e.after   // asking alone brings her back
           && e.lecturerStillHere                                // without derailing anything

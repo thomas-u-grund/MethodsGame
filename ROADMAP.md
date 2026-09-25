@@ -1070,6 +1070,37 @@ point — without dating the game.
 
 ---
 
+## 8zm. Lecture Bingo, the game show — 2026-09-25 (user)
+
+> What if the card is bigger and the player needs to press the right field to mark it? — We
+> make it a bigger mini-game: weird trailer, visuals that give it a game-show feeling;
+> Vossberg does not notice any of it, but the students have a blast. — I like the students,
+> but the ink needs to be somewhere else now. — It should be more ridiculous: spotlights,
+> live commentary, light effects, confetti when bingo.
+
+- **The hall is full while he lectures** (`lecture-bg-bingo.webp`, ChatGPT edit of the room:
+  rows of students seen from behind, cards, daubers, party hats, a B-I-N-G-O sign; original in
+  `art/patches`). The front heads are cut out as `lecture-bingo-front.webp` and laid over him,
+  and he stands 4.6% further back (`.behind-crowd`), so he is on the stage behind the rows.
+  When he walks out, the audience goes with him (`applyPresence`).
+- **The ink** moved off the floor (now under students) to the cabinet by the bust, in both
+  paintings; hotspot and descriptions updated.
+- **The game.** Using the card starts a 7-second opening: white flash, airhorn, marquee with
+  chasing bulbs, LIVE badge, swinging spotlight beams, a disco ball lowering from the ceiling,
+  sparkles, and Tobi hosting from the back row in a whisper. Then his lines play on their own
+  (no more "Keep listening"), each with a timer bar on a big card, and **you dab the square he
+  has just said**. Three near-miss **decoy** lines (first-order observation, trust *increases*
+  complexity, open systems) punish careless dabbing. A missed term comes back: he always
+  repeats himself. Space skips his line.
+- **Commentary and effects**: a broadcast ticker (idle jokes plus live events: dabs, misses,
+  false dabs, decoys), a stats board with **VOSSBERG AWARENESS 0%**, instant-replay
+  lower-thirds, colour washes and confetti bursts on every dab, arms up from the rows, a
+  Mexican wave when one away. **BINGO**: strobe, 160 confetti, fireworks, flying letters,
+  airhorn, trumpets, and awareness spikes to 3% before he loses the thread and walks out.
+- Voices: 3 decoy lines (Vossberg, Geeson) and 9 host lines (Tobi, Fogarty), Whisper-checked.
+  `test-lecturer` plays the game (a wrong square must not mark).
+- Also in this entry: the 55 new or changed lines from 8zl are voiced and bundled.
+
 ## 8zl. Puzzle audit, implemented — 2026-09-25 (user)
 
 > There is the general point that some puzzles seem overly complex or not clear. — ok, make
@@ -1108,8 +1139,7 @@ point — without dating the game.
 - **The folder leads the inventory**, and hovering, focusing or clicking it opens it over the
   scene: five dividers, what is filed in each, and the current act's four boxes.
 - Tests: `test-endgame` rewritten for D1/BU1/G1/WR1/R1; new `test-folderpanel`.
-- Still to do: voices for the new and changed lines; visual patches where a step is still
-  text-only.
+- Still to do: visual patches where a step is still text-only. (Voices: done in 8zm.)
 
 ## 8zk. Survey Lab, radically simpler: the DISCHARGED board — 2026-09-25 (user)
 
