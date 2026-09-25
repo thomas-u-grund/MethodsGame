@@ -1788,15 +1788,47 @@ the response rate, the interval, the three papers — while an **applause meter*
 them and the livestream chat reacts. Wrong answers get laughs *for Feldstrom*. The DJ drops a
 sting on every good point. At the worst possible moment a loose monkey takes over the clicker.
 
-**The finish:** the last slide is the one with Stockholm on it. The player makes the final point
-— *"I'd rather have the part that's true."* — and the hall goes quiet. Feldstrom looks at the
-slide for a long time, then at the player.
+**The chair:** Dr. Vossberg is moderating, and cannot. Every time he is handed the microphone he
+garbles systems theory (*"the keynote is an autopoietic system observing its own observation,
+which is to say, questions from the floor"*). Somewhere at the back, the students start playing
+bingo again.
+
+**The turn:** the last slide is the one with Stockholm on it, and it is where the player starts
+to lose — the applause meter at its lowest, the room Feldstrom's. **Professor Stellmacher stands
+up.** She does not argue with his slides. She tells the hall about a paper with a magnificent
+title and twenty-three residents of Leicester, and who gave it that title:
+
+> **PROFESSOR:** "You did, Traffic. It was my data and your title. Twenty-two people. One moved."
+
+Then the one precise point that ends it — scope, design, what the evidence can carry — said so
+plainly that nobody can pretend not to have understood. She wins it with reason; the player
+won the ground she stands on. (This settles her backstory: **Feldstrom titled *The Death of
+Community*.** It is why she calls him "Traffic", and why she has claimed almost nothing since.)
+
+**The finish:** the player says it last — *"I'd rather have the part that's true."* — and the
+hall goes quiet. Feldstrom looks at the slide for a long time, then at the two of them.
 
 > **FELDSTROM:** "…that is the smallest thing anyone has ever said in this hall."
 > *(beat)*
 > **FELDSTROM:** "Write it down."
 
-The founders, in their frames, applaud. (Durkheim slowest.)
+The founders, in their frames, applaud. (Durkheim slowest.) Achterberg takes the stage with the
+live replication results, and the gold-rush findings fall on the big screen, his last.
+
+### Feldstrom's ending: Stockholm, again *(author, 2026-09-25)*
+
+After the replications fall, a cutaway to Sweden: the Nobel ceremony, full orchestra. The
+laureate is **KIRA**, "for extraordinary productivity". Her acceptance speech is her whole arc:
+*"Certainly! …What exactly do you mean?"* Standing ovation.
+
+Cut to Feldstrom in his workshop, finally wearing the tuxedo that has hung there since Act II,
+watching on a small television. Devastated. Then he reaches for a university prospectus and
+starts to leaf through it, deciding which discipline to revolutionise next:
+
+> **FELDSTROM:** "Biology. Cells are only traffic with walls." *(page)* "Linguistics. Sentences
+> queue." *(page)* "Ornithology…" *(he stops, delighted)* "Migration."
+
+He never settles on one. He is still leafing when the post-credits phone rings ("Stockholm?").
 
 The Writing Room keeps his title inflation as the rehearsal; the keynote is where it is
 performed in public, and where refusing him costs the most.
@@ -1835,11 +1867,13 @@ superseded by this list for Act V.
 ### Still open
 
 1. ~~Replication Session~~ — folded into the keynote.
-2. Act V title: "Apparently Somebody Has to Present It", or keep "…Write It"?
-3. The Professor's backstory: did Feldstrom give *The Death of Community* its title?
+2. ~~Act V title~~ — **"Apparently Somebody Has to Present It"** (judgement call, author delegated).
+3. ~~The Professor's backstory~~ — Feldstrom titled *The Death of Community* (judgement call; see
+   *The Keynote Showdown*).
 4. ~~Merge the Gap Registry and the Writing Room~~ — merged.
-5. The Casino: replaces the Basement's switches, or the switches become the slot machines?
-6. Dr. Ines Achterberg: name and character OK?
+5. ~~The Casino~~ — the Basement's twenty switches become the slot machines: the puzzle logic
+   survives, only the art changes (judgement call).
+6. ~~Dr. Ines Achterberg~~ — kept (judgement call).
 7. ~~The Psych Lab on the map~~ — a basement (author), next door to the Statistics Basement: down
    the same stairs as the Casino, so no new building on the map. The gold rush plays slot
    machines on one side of the corridor; on the other, monkeys have been producing significant
