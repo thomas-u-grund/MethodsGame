@@ -54,18 +54,8 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     verb('ws','look at'); spot('desk'); await wait(350);
     out.steps.push(['ext4173', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.wsExtension ? 'ok' : 'NO']);
 
-    // ---- LIBRARY: Nobel protocol, then the Stockholm call
+    // ---- LIBRARY: the Stockholm call. One requirement since ROADMAP 8zl: the hourglass.
     await go('The Library');
-    verb('lb','talk to'); spot('kira'); await wait(400);
-    choice('lb','Nobel'); await wait(600);
-    verb('lb','talk to'); spot('kira'); await wait(400);
-    choice('lb','place a call'); await wait(400);
-    choice('lb','4173'); await wait(600);
-    // He hangs up on the delivery, not the delay. The accent comes from Tobi and nowhere else.
-    out.steps.push(['accentNeeded', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.wsAccentNeeded ? 'ok' : 'NO']);
-    verb('lb','talk to'); spot('tobi'); await wait(400);
-    choice('lb','Swedish'); await wait(600);
-    out.steps.push(['accentCard', JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.indexOf('accentcard') !== -1 ? 'ok' : 'NO']);
     verb('lb','talk to'); spot('kira'); await wait(400);
     choice('lb','place a call'); await wait(400);
     choice('lb','4173'); await wait(600);
@@ -74,26 +64,31 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     choice('lb','fika'); await wait(600);
     choice('lb','confidential consultation'); await wait(600);
     out.steps.push(['feldstromOut', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.wsFeldstromOut ? 'ok' : 'NO']);
-    // the call worked, so the procedure and the phrasebook are spent (ROADMAP 8zf)
-    out.steps.push(['callCardsSpent', JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.filter(x => x === 'nobelproc' || x === 'accentcard').length === 0 ? 'ok' : 'NO']);
 
-    // ---- WORKSHOP: tape, register, derive
+    // ---- WORKSHOP: one Use opens the zoom; wind the drums left, feed in the register
     await go("Feldstrom's Workshop");
-    verb('ws','use'); spot('machine'); await wait(500);
-    out.steps.push(['tapeOff', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.wsTapeOff ? 'ok' : 'NO']);
-    verb('ws','use'); spot('machine'); await wait(600);
+    verb('ws','use'); spot('machine'); await wait(900);
+    out.steps.push(['zoomOpen', document.getElementById('ws_acc') ? 'ok' : 'NO']);
+    document.getElementById('ws_accReg').click(); await wait(400);          // refused: drums still point right
+    out.steps.push(['refusedRight', !S.data().scope ? 'ok' : 'NO']);
+    const lefts = [...document.querySelectorAll('.acc-crank')].filter(b => b.dataset.dir === '-1');
+    for (const b of lefts) for (let i = 0; i < 12; i++){ b.click(); await wait(30); }
+    await wait(300);
+    document.getElementById('ws_accReg').click(); await wait(2000);
     out.steps.push(['scope', S.data().scopeSound ? 'sound' : 'junk']);
+    out.steps.push(['workshopDone', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.workshopDone ? 'ok' : 'NO']);
+    out.steps.push(['noHypothesisYet', !S.data().hypothesis ? 'ok' : 'NO']);   // only the Seminar writes it
     await wait(2800);
-    verb('ws','use'); spot('machine'); await wait(500);
-    choice('ws','SPECIFY'); await wait(600);
-    out.steps.push(['candidate', S.data().hypothesis ? 'ok' : 'NO']);
 
-    // ---- SEMINAR: make it diagnostic
+    // ---- SEMINAR: two lines; a wrong card names its rival
     await go('The Seminar Room');
-    item('sm','chalk'); spot('board'); await wait(500);
-    choice('sm','WHERE: worked-example'); await wait(300);
-    choice('sm','WHOM: students already practising'); await wait(300);
-    choice('sm','DIR: larger'); await wait(300);
+    verb('sm','use'); spot('board'); await wait(500);
+    choice('sm','LARGER on all exam'); await wait(200);
+    choice('sm','SMALLER for students already practising'); await wait(200);
+    choice('sm','Write it on the board'); await wait(500);
+    out.steps.push(['rivalNamed', /SELECTION/.test(document.getElementById('sm_line').textContent) ? 'ok' : 'NO']);
+    await wait(2800);
+    choice('sm','LARGER on worked-example'); await wait(200);
     choice('sm','Write it on the board'); await wait(700);
     out.steps.push(['hypothesis', S.data().hypothesisSound ? 'sound' : 'junk']);
     out.coherence = S.coherence();
