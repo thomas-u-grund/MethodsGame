@@ -1070,6 +1070,23 @@ point — without dating the game.
 
 ---
 
+## 8zq. The bingo starts by asking Vossberg about Luhmann; standalone pages no longer need storage — 2026-09-25 (user)
+
+> In bingo, the lecture does not start. Maybe one needs to talk to Vossberg and ask him about
+> Luhmann; then he starts rambling.
+
+- Cause: the standalone reached the Lecture Theatre through sessionStorage (`cb_goroom`) and its
+  save through localStorage. An artifact's sandbox can refuse both, so the room never opened and
+  PLAY waited for it forever. The engine now reads `window.CODEBOOK_SEED` (in `loadGame`) and
+  `window.CODEBOOK_BOOT_ROOM` (in `CODEBOOK_START`) first; `tools/bingo/standalone.py` sets them.
+  Checked headless with both storages made to throw.
+- **Talk To Vossberg** now offers "Could you say a bit more about Luhmann?" whenever you hold the
+  bingo card: he lights up ("Luhmann. Where to begin.") and the show starts. "Where is Professor
+  Stellmacher?" stays in the same menu while it is still needed. Using the card on him still works.
+- The standalone's PLAY puts that question in front of you instead of starting by itself.
+- The rap battle standalone still seeds through storage; it needs the same two globals when it
+  is next rebuilt.
+
 ## 8zp. The Delegation Engine becomes KIRA's terminal, with the Professor as the check — 2026-09-25 (user)
 
 > What if one types into a computer to analyse data and it gives bullshit results? Then the

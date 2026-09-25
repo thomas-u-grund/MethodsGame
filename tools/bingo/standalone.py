@@ -18,10 +18,13 @@ ROOT, WEB, GAME = R.ROOT, R.WEB, R.GAME
 OUT = os.path.join(ROOT, 'build', 'bingo')
 KEEP_ROOMS = {'lecture'}
 
-SEED = {'inventory': ['bingocard'], 'flags': {'actRenumberMigrated': True, 'bingocardTaken': True}}
+SEED = {'inventory': ['bingocard'], 'flags': {'actRenumberMigrated': True, 'bingocardTaken': True, 'profAtOffice': True}}
 
 HEAD = """<script>
-/* Lecture Bingo, standalone: a fresh save on every visit, straight into the lecture. */
+/* Lecture Bingo, standalone: a fresh save on every visit, straight into the lecture. The engine
+   reads these globals first -- an artifact's sandbox may refuse localStorage/sessionStorage. */
+window.CODEBOOK_SEED = JSON.parse(%s);
+window.CODEBOOK_BOOT_ROOM = 'lecture';
 try {
   localStorage.setItem('codebook_save_v1', %s);
   sessionStorage.setItem('cb_goroom', 'lecture');
@@ -36,17 +39,17 @@ try {
   #bgStart button{ font:900 clamp(16px,2vw,24px) Fraunces, Georgia, serif; letter-spacing:.1em; padding:14px 34px; border:0; border-radius:999px; cursor:pointer;
     color:#fff; background:#b3261e; box-shadow:0 0 0 4px #f5c542, 0 12px 30px rgba(0,0,0,.5); }
 </style>
-""" % json.dumps(json.dumps(SEED))
+""" % (json.dumps(json.dumps(SEED)), json.dumps(json.dumps(SEED)))
 
 BOOT = """<script>
 window.CODEBOOK_START();
 (function(){
   var o = document.createElement('div'); o.id = 'bgStart';
-  o.innerHTML = '<h1>LECTURE BINGO!</h1><p>Dr. Vossberg is lecturing on systems theory. The whole back half of the hall is playing bingo. Dab each buzzword the moment he says it. Watch out for decoys. He will not notice. He never does.</p><button id="bgGo">&#9654; PLAY</button><p style="font-size:13px;opacity:.7">Sound on. From <i>The Secret of the Lost Codebook</i>.</p>';
+  o.innerHTML = '<h1>LECTURE BINGO!</h1><p>Dr. Vossberg is lecturing on systems theory, and the whole back half of the hall has a bingo card. Ask him about Luhmann to set him off, then dab each buzzword the moment he says it. Watch out for decoys. He will not notice. He never does.</p><button id="bgGo">&#9654; PLAY</button><p style="font-size:13px;opacity:.7">Sound on. From <i>The Secret of the Lost Codebook</i>.</p>';
   document.body.appendChild(o);
   document.getElementById('bgGo').addEventListener('click', function(){
     o.remove();
-    var go = function(){ if (window.CODEBOOK_LT_START_BINGO) window.CODEBOOK_LT_START_BINGO(); else setTimeout(go, 200); };
+    var go = function(){ if (window.CODEBOOK_LT_ASK) window.CODEBOOK_LT_ASK(); else setTimeout(go, 200); };
     go();
   });
 })();
