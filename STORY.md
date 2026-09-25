@@ -1816,13 +1816,28 @@ honest paper wins **REVISE AND RESUBMIT**; `claim_overstated` makes the fight mu
 overclaim on a slide*; the Reviewer 2 battle is written, private and about *answering an
 objection with evidence*.
 
+### Act V trimmed to four rooms *(author: "can we reduce number of rooms in act V?")*
+
+1. **The Psych Lab** — unchanged.
+2. **The Writing Room** — absorbs the Gap Registry: the poster's contribution (the Registrar's
+   three papers move here), the abstract (KIRA's three words) and the title (Feldstrom's
+   rehearsal for the keynote), in one stop.
+3. **The Poster Session** (the Mensa) — unchanged.
+4. **The Keynote Showdown** (the Hall of Founders) — absorbs the Replication Session: after the
+   showdown, Achterberg takes the stage with the live replication results and the gold-rush
+   findings fall on the big screen, Feldstrom's last. The Professor faces Feldstrom there, in
+   the hall, while it is still echoing.
+
+Then the Office and the chute as a short epilogue (as built). Cut: the Gap Registry as a room of
+its own, and the Seminar Room's conference angle (one painting fewer). The room table above is
+superseded by this list for Act V.
+
 ### Still open
 
-1. Replication Session: still in, now that the keynote carries the Feldstrom confrontation?
-   (It would keep the Professor's own moment with Feldstrom, and the gold rush falling.)
+1. ~~Replication Session~~ — folded into the keynote.
 2. Act V title: "Apparently Somebody Has to Present It", or keep "…Write It"?
 3. The Professor's backstory: did Feldstrom give *The Death of Community* its title?
-4. Act V has eight stops: merge the Gap Registry and the Writing Room?
+4. ~~Merge the Gap Registry and the Writing Room~~ — merged.
 5. The Casino: replaces the Basement's switches, or the switches become the slot machines?
 6. Dr. Ines Achterberg: name and character OK?
 7. The Psych Lab on the map: a new building, or a basement of an existing one?
