@@ -1758,19 +1758,74 @@ monkeys (a few poses, plus the lead monkey with lanyard and red pen).
   replication casualties); the Visiting Fellow as a poster visitor; Tobi livestreaming the
   keynote; the Professor at the Replication Session.
 
-### Open questions
+### Decided *(author, 2026-09-25)*
 
-1. Replication Session: in, or does the conference end with the keynote?
-2. Does the player stand up in Feldstrom's Q&A (a confrontation), or does the Replication
-   Session carry that alone?
-3. Poster Session: how many visitors, and what is the cost of a bad answer (the crowd drifts
-   to the neighbouring gold-rush poster)?
-4. Reviewer 2: keep the outro as a cutscene, or make the decision letter a playable battle?
-5. Act V title: "Apparently Somebody Has to Present It", or keep "…Write It"?
-6. ~~Reviewer 2 at the meeting~~ — answered: a loose lab monkey with a backwards lanyard and the
-   Professor's red pen (see *Loose monkeys*).
-7. How visible should the lead monkey be: a sprite that turns up in every Act V room, or a few
-   staged moments only?
+- **The Feldstrom confrontation happens at the keynote, and it is epic** — the Act V set piece,
+  on the scale of the rap battle (see *The Keynote Showdown* below).
+- **Poster Session:** a bad answer makes that visitor leave and lose interest; the crowd at
+  Poster 312 thins while the gold-rush posters fill. No fail screen.
+- **Reviewer 2 is a playable battle** (see *The Reviewer 2 battle* below).
+- **The lead monkey appears only at a few staged moments**, not in every room — as with the
+  skeletons, a gag in every room stops being a gag. Its staged moments: leaving the Psych Lab
+  with the red pen; stamping MAJOR CONCERNS on a gold-rush poster; its question at the keynote;
+  its seat on the replication panel; the post-credits reveal.
+
+### The Keynote Showdown *(the Act V set piece)*
+
+The Hall of Founders, packed, from the back of the audience. The rap-battle staging returns:
+the stage, the DJ, Tobi's livestream with a chat scrolling up the side, the founders in their
+frames. Feldstrom takes the stage to a standing ovation for **CIVILISATION IS TRAFFIC**.
+
+**The provocation:** slide 14 is the player's own result — the small, sealed, registered
+finding — blown up into *"a universal law of educational flow"*, credited to "a promising
+young collaborator". Without asking.
+
+**The showdown:** the player stands up in the Q&A, and it becomes a duel in front of the whole
+discipline. Feldstrom advances a slide; each slide makes one inflated claim out of the player's
+work (from *"attendance causes learning"* to *"society is a traffic system"*). The player
+answers each one by pointing at the right thing in their own evidence — the scope, the design,
+the response rate, the interval, the three papers — while an **applause meter** swings between
+them and the livestream chat reacts. Wrong answers get laughs *for Feldstrom*. The DJ drops a
+sting on every good point. At the worst possible moment a loose monkey takes over the clicker.
+
+**The finish:** the last slide is the one with Stockholm on it. The player makes the final point
+— *"I'd rather have the part that's true."* — and the hall goes quiet. Feldstrom looks at the
+slide for a long time, then at the player.
+
+> **FELDSTROM:** "…that is the smallest thing anyone has ever said in this hall."
+> *(beat)*
+> **FELDSTROM:** "Write it down."
+
+The founders, in their frames, applaud. (Durkheim slowest.)
+
+The Writing Room keeps his title inflation as the rehearsal; the keynote is where it is
+performed in public, and where refusing him costs the most.
+
+### The Reviewer 2 battle *(the outro)*
+
+The decision letter becomes a turn-based battle. Reviewer 2's comments are attacks
+(*"17. The authors have not adequately ruled out selection."*, *"31. Please cite Smith (1987)."*,
+*"42. …greater theoretical ambition."* against *"43. …claims beyond the evidence."*); the player
+answers with cards from the folder — the sealed slip, the written limitations, the clean data,
+the 1994 study, the replication result. Defensive or overclaiming answers cost; honest
+concessions heal. Comment 17 is the boss move, and it can only be parried with the limitation
+the player wrote in Act IV. Smith (1987) does not exist, and saying so is a valid move. An
+honest paper wins **REVISE AND RESUBMIT**; `claim_overstated` makes the fight much longer.
+
+**Keeping the two duels apart:** the keynote is live, public and about *pointing at the
+overclaim on a slide*; the Reviewer 2 battle is written, private and about *answering an
+objection with evidence*.
+
+### Still open
+
+1. Replication Session: still in, now that the keynote carries the Feldstrom confrontation?
+   (It would keep the Professor's own moment with Feldstrom, and the gold rush falling.)
+2. Act V title: "Apparently Somebody Has to Present It", or keep "…Write It"?
+3. The Professor's backstory: did Feldstrom give *The Death of Community* its title?
+4. Act V has eight stops: merge the Gap Registry and the Writing Room?
+5. The Casino: replaces the Basement's switches, or the switches become the slot machines?
+6. Dr. Ines Achterberg: name and character OK?
+7. The Psych Lab on the map: a new building, or a basement of an existing one?
 
 ---
 
