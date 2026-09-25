@@ -15,12 +15,13 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     const out = { simple: document.body.classList.contains('cb-simple'), verbRowHidden: getComputedStyle(document.querySelector('.verb-grid')).display === 'none',
                   toggle: (document.getElementById('ctrlToggle') || {}).textContent };
     const click = el => { const r = el.getBoundingClientRect(); el.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true, clientX:r.left + r.width/2, clientY:r.top + r.height/2 })); };
-    // KIRA answers look and talk: icons appear over her
-    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="kira"]')); await w(250);
+    // one action (KIRA: Talk) is done by one click; two actions (the trolley: Look, Use) show icons
+    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="kira"]')); await w(400);
+    out.talked = /Certainly/.test(document.getElementById('lb_line').textContent) && !document.querySelector('.cb-icons');
+    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="trolley"]')); await w(250);
     out.icons = [...document.querySelectorAll('.cb-icons button')].map(b => b.dataset.v).join(',');
     out.noUseWithEmptyHand = !/usewith/.test(out.icons);
-    document.querySelector('.cb-icons button[data-v="talkto"]').click(); await w(400);
-    out.talked = /Certainly/.test(document.getElementById('lb_line').textContent);
+    document.body.click(); await w(100);
     // the register is takeable: one click takes it
     const reg = document.querySelector('#lb_sceneWrap .hotspot[data-verbs~="pickup"]');
     out.takeable = reg ? reg.dataset.id : null;
@@ -37,6 +38,6 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1'); localStorage.setItem('cb_controls','classic')`);
-  const ok = r.simple && r.verbRowHidden && /Simple/.test(r.toggle) && /lookat/.test(r.icons) && /talkto/.test(r.icons) && r.talked && r.takeable && r.useArmed && r.onlyUseWith && r.usedOnKira && r.noUseWithEmptyHand && !p.errors.length;
+  const ok = r.simple && r.verbRowHidden && /Simple/.test(r.toggle) && r.icons === 'lookat,use' && r.talked && r.takeable && r.useArmed && r.onlyUseWith && r.usedOnKira && r.noUseWithEmptyHand && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
 })();
