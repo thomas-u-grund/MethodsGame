@@ -1070,6 +1070,27 @@ point — without dating the game.
 
 ---
 
+## 8zh. The USB stick has a story: the Professor is a Professor G fan — 2026-09-25 (user)
+
+> We need to connect the USB stick better to the rap battle: what is its back story, why is it
+> in the Professor's office? — Have the Professor be a fan of Prof G; maybe an autograph card
+> in her office. A bit of Prof G loving.
+
+- She asked Professor G for his beat after his Christmas lecture and never gave it back; she
+  has been saving her drafts on the same stick (hence FINAL_v23). The stick is labelled
+  **PROF G — BEATS — ON LOAN** in masking tape, her filename underneath.
+- **Autograph card** painted into her corkboard (ChatGPT region edit, baked into
+  `office-bg-empty.webp`; original kept in `art/patches`): Professor G mid-rap, signed
+  "Prof G ♡", a pink sticky note "Christmas lecture — front row!!". Own hotspot: Look / Talk /
+  Pick up ("Some things on this desk you borrow. This one you would never be forgiven for.").
+- **She admits it** (Talk To after the question): "It is a *document*." — "I asked him for the
+  beat as well. For research." — "If you see him, tell him the stick is perfectly safe."
+- **The Hall points at her office**: Tobi — "his beat is on a USB stick in Professor
+  Stellmacher's office … She is, like, his biggest fan"; Professor G without the stick — "And
+  Stellmacher still has my beat. She said one more listen. That was December." Plugged in,
+  the laptop shows her drafts next to BEATS (DO NOT GRADE).
+- 7 new clips (Tobi, Professor G, her, the student), all checked with Whisper.
+
 ## 8zg. Playtest round: the Professor on demand, things that vanish when taken, voices — 2026-09-25 (user)
 
 > I am stuck: I need the female professor to leave her office again (after she has given me

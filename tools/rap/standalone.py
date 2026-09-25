@@ -91,7 +91,7 @@ def prune(h):
     h = cut_object(h, 'var ITEM_LABELS = {', '\n  };', "var ITEM_LABELS = { usb: 'A USB Drive' };")
     h = cut_object(h, 'var ITEM_ICONS = {', '\n  };', "var ITEM_ICONS = { usb: 'icon-usb.png' };")
     h = cut_object(h, 'var ITEM_LOOK = {', '\n  };',
-                   "var ITEM_LOOK = { usb: 'Unlabelled. There is a folder on it called BEATS (DO NOT GRADE).' };")
+                   "var ITEM_LOOK = { usb: 'Masking tape: <b>PROF G &mdash; BEATS &mdash; ON LOAN</b>. Underneath, in the Professor&rsquo;s handwriting, <i>FINAL_v23</i>.' };")
     h = cut_object(h, 'var TOBI_LINES = {', '\n  };',
                    "var TOBI_LINES = { hall: '&ldquo;Big heritage moment. Do any of them have socials?&rdquo;' };")
     h = cut_object(h, 'var TOBI_BEG = [', '\n  ];', 'var TOBI_BEG = [];')
