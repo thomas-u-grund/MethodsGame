@@ -29,61 +29,42 @@
 
 ## 1. Where the game stands today
 
-*Board last verified against the file and the `web/` directory on 2026-09-21. Every ✅ below
-was checked, not remembered.*
+*Board last verified against the file, `web/` and the test suite on 2026-09-26.*
 
-- **Live artifact:** v51 at https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 — **stale**, and
-  will stay stale until the user asks for a publish. **Repo:**
-  https://github.com/thomas-u-grund/MethodsGame (`main`) — **79 commits unpushed.**
-- **Everything is one file:** `web/the-secret-of-the-codebook.html` (**7,148 lines**). No build step.
-- **All 17 rooms are built, painted and playable, end to end**, Act I through the outro. The
-  data act was renumbered to Act III long ago (WP-0.2 is done).
-- **The game is completable.** A player can go from the Office interview to the submission
-  chute and the Reviewer 2 outro without touching a placeholder room.
-- **The gap is audio and cutscene art, not rooms.** Acts II, IV and V have no recorded voices,
-  and the interludes and outro still run on designed SVG cards.
-- **Local asset state:** **204 files, 57 MB** in `web/`. Inside the artifact host's 255-file
-  limit, with about 50 files of margin; converting the remaining icon PNGs to webp is the
-  cheapest reclaim if it ever binds (§8d).
-- **No placeholder art remains.** Every background, sprite, icon, interlude panel and outro
-  panel is painted; `web/` contains no `.svg` at all.
-- **Tests:** 26 CDP tests, all green (`tools/test/run-all.sh`). Run them **alone** — every
-  test shares one headless page, so anything else driving that tab produces phantom failures
-  (a lost `localStorage` save, or an audio test whose clip was killed mid-play). Both were
-  mistaken for regressions today and neither was one.
+- **Sharing:** only the standalone pages are shared, never the whole game (author). **The
+  Founders' Rap Battle** (v12, https://claude.ai/artifact/JuphmaQKxKgwC5s4AURpD5, built by
+  `tools/rap/standalone.py`) and **Systems Theory Bingo** (v5,
+  https://claude.ai/artifact/1q6rocWvPkLQLeBUvoUjha, `tools/bingo/standalone.py`). Both boot
+  from the `CODEBOOK_SEED` / `CODEBOOK_BOOT_ROOM` globals, so they work where storage is
+  refused. The whole-game artifact (v51, 1VJHdVezyJFxnsZXS3kRi6) is stale on purpose.
+  **Repo:** https://github.com/thomas-u-grund/MethodsGame (`main`), 181 commits unpushed.
+- **Everything is one file:** `web/the-secret-of-the-codebook.html` (**12,800 lines**). No build step.
+- **19 rooms on the map, Act I through Act V**, plus the outro. The Gap Registry is still in
+  the file but off the map since 8zv (its puzzle moved into the Writing Room).
+- **The game is completable** from the Office interview to REVISE AND RESUBMIT and the
+  post-credits monkey (`test-endgame` plays Acts IV and V, the keynote and the reveal).
+- **Every act ends at once** on its last puzzle, with a CHAPTER N COMPLETE slide (8zw).
+- **Controls:** simple by default, classic as an option, always simple on phones (8zx).
+- **Local assets:** **273 files, 94 MB** in `web/`. That is over the artifact host's 255-file
+  limit for a whole-game publish; the standalone pages are 36-40 files each and unaffected.
+- **Tests:** 43 CDP tests (`tools/test/run-all.sh`), green as of 2026-09-26. Run them **alone**:
+  every test shares one headless page. For screenshots alongside a run, start a second headless
+  Chrome and set `CDP_PORT` (cdp.js reads it).
 
 ### Build status board
 
-**Code / Story / Art** — what a player sees:
+| Act | Rooms | Built | Voices | Interludes |
+|---|---|---|---|---|
+| **I — The Question** | Office, Lecture Theatre, Corridor, Pond | ✅ | ✅ | ✅ |
+| **II — Theory** | Library, Hall of Founders, Workshop, Seminar Room | ✅ | ✅ (incl. the new call, 8zy) | ✅ |
+| **III — Data** | Survey Lab, Ethics, Mensa, Fieldwork | ✅ | ✅ | ✅ |
+| **IV — Evidence** | Significance Casino, Delegation Engine (KIRA), Bureau | ✅ | ✅ (8zy) | ✅ |
+| **V — Apparently Somebody Has to Present It** | Psych Lab, Writing Room, Poster Session, Keynote Showdown | ✅ | ✅ (8zy) | ✅ opening, Stockholm cutaway |
+| **Outro** | the letter, the Reviewer 2 battle, the verdict, the monkey | ✅ | narration only | ✅ |
 
-| Act | Rooms | Story | Room art | Sprites | Code | Puzzles |
-|---|---|---|---|---|---|---|
-| **I — The Question** | Office, Lecture Theatre, Corridor, Pond | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **II — Theory** | Library, Hall of Founders, Workshop, Seminar Room | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **III — Data** | Survey Lab, Ethics, Mensa, Fieldwork | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **IV — Evidence** | Stats Basement, Delegation Engine, Bureau of Implications | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **V — Writing** | Gap Registry, Writing Room | ✅ | ✅ | ✅ | ✅ | ✅ |
-| **Outro** | Reviewer 2 cutscene | ✅ | ✅ | ✅ | ✅ | — |
-
-**Audio / cutscene art** — what is actually outstanding:
-
-| Act | Voices | SFX | Ambience | Interlude art | Notes |
-|---|---|---|---|---|---|
-| **I** | ✅ 38 clips | ✅ | ✅ | ✅ painted | complete |
-| **II** | ⬜ none | ✅ | ✅ | ✅ painted | |
-| **III** | ✅ 107 clips | ✅ | ✅ | ✅ painted | complete |
-| **IV** | ⬜ none | ✅ | ✅ | ✅ painted | |
-| **V** | ⬜ none | ✅ | ✅ | ✅ painted | |
-| **Outro** | ⬜ none | ✅ | — | ✅ painted | |
-
-SFX and ambience are ✅ everywhere because they are two shared bundles (`sfx-act1.mp3`,
-`sfx-act3.mp3`) covering 36 named cues, and the later acts draw from the same library rather
-than needing their own. Voices are the opposite: 145 clips exist, all of them Act I or Act III,
-and the later acts cannot be recorded until the user makes the casting decisions in §7.
-
-**So, in one line:** the game is built, finishable and fully painted; what is left is
-**voices for three acts** (blocked on casting, §7) and the §8 items — of which the live ones
-are **8k** the Accelerator mini-game and the last two cast reuses.
+**Still open:** per-act music (drop `act1-theme.mp3` … `act5-theme.mp3` into `web/`; the map
+already plays them, 8zy), narrator voice for the new interlude panels (Act V opening, Stockholm),
+and whatever the next playtest finds.
 
 ---
 
@@ -1101,7 +1082,7 @@ point — without dating the game.
   in the outro). Comments are attacks; seven folder cards are answers. Wrong cards cost
   composure, "robust and generalisable" costs most; honest concessions heal; at zero you walk
   round the pond and come back (no fail). Smith (1987) is parried by saying it does not exist;
-  42/43 by conceding 42; comment 17 is last and only the Act IV limitation answers it.
+  comment 1 by naming the three papers on the reading list; 42/43 by conceding 42; comment 17 is last and only the Act IV limitation answers it.
   `analysis_p_hacked` and `theory_empty` add a comment each (they were two text panels);
   `claim_overstated` adds two. Win: REVISE AND RESUBMIT, flag `r2Won`. `test-r2battle.js`.
 - **Post-credits**: the monkey at the keyboard has the backwards lanyard and the red pen, and

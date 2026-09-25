@@ -4,7 +4,12 @@
 
 A LucasArts-style point-and-click adventure teaching Research Methods, built as a single self-contained HTML file. This is the orientation doc for picking the project back up — what's live, how it's wired together, and what's still open.
 
-**Play the current build:** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 (v51 · 2026-09-20 · Acts I–V; Act II fully built, voiced, animated)
+> **Current state (2026-09-26): read `ROADMAP.md` §1 first.** This document is the history of how the
+> engine was built (sections 01b onwards, frozen at 2026-09-24). Since then: Acts IV and V rebuilt
+> (8zu–8zy), the Keynote Showdown, the Reviewer 2 battle, simple controls, per-act endings. Only the
+> standalone Rap Battle and Bingo pages are shared; the whole-game artifact below is stale on purpose.
+
+**Old whole-game build (stale):** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 (v51 · 2026-09-20)
 
 **v51 is live (2026-09-20)** and matches the local build and GitHub `main` (https://github.com/thomas-u-grund/MethodsGame): everything in sections 01b–01k is published — all of Act I (voiced), all four Act II rooms with character sprites, the Doorman, the Act I/Act II "Starring" posters and ACT title cards, the Act II trailer interlude, and per-act preloading with progress bars. **Lesson that keeps recurring: local edits and headless-Chrome "it worked" do NOT mean the change is live** — the Artifact must be republished explicitly, with every new/changed asset passed in `files` (recipe in section 01k).
 

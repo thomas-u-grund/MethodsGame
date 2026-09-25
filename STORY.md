@@ -1831,6 +1831,14 @@ hall goes quiet. Feldstrom looks at the slide for a long time, then at the two o
 The founders, in their frames, applaud. (Durkheim slowest.) Achterberg takes the stage with the
 live replication results, and the gold-rush findings fall on the big screen, his last.
 
+**As built (ROADMAP 8zy, 2026-09-26).** Four slides after slide 14, each answered by one piece of
+evidence: *attendance causes learning* → the design; *every student, everywhere* → the scope; *an
+enormous effect* → the interval (the monkey has the clicker on this one); *never before discovered*
+→ the three papers on the reading list. The response rate is not a slide (it is the Poster
+Session's). The DJ is an airhorn sting rather than a figure on stage. The Professor stands up in
+the rows, not on stage. The Replication Session's board is shown on the keynote screen by
+Achterberg, as planned.
+
 ### Feldstrom's ending: Stockholm, again *(author, 2026-09-25)*
 
 After the replications fall, a cutaway to Sweden: the Nobel ceremony, full orchestra. The
@@ -1859,6 +1867,13 @@ the 1994 study, the replication result. Defensive or overclaiming answers cost; 
 concessions heal. Comment 17 is the boss move, and it can only be parried with the limitation
 the player wrote in Act IV. Smith (1987) does not exist, and saying so is a valid move. An
 honest paper wins **REVISE AND RESUBMIT**; `claim_overstated` makes the fight much longer.
+
+**As built (ROADMAP 8zy).** Seven cards: the three papers on the reading list, "There is no Smith
+(1987)", Concede it honestly (heals), the sealed slip, the written limitation, the live replication,
+and "robust and generalisable" (the overclaim, costs most). Comments 1, 31, 42/43 and 17, plus 9
+(`analysis_p_hacked`), 14 (`theory_empty`), 12 and 38 (`claim_overstated`). At zero composure you
+walk round the pond and come back: no fail screen. The 1994 study stayed in the Gap Registry, which
+is off the map, so the papers card is the reading list's three.
 
 **Keeping the two duels apart:** the keynote is live, public and about *pointing at the
 overclaim on a slide*; the Reviewer 2 battle is written, private and about *answering an

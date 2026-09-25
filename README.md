@@ -2,7 +2,7 @@
 
 A LucasArts-style point-and-click adventure that teaches research methods, built as a single self-contained HTML5 file — no build step, no server, no dependencies.
 
-**Play it:** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6
+**Play it:** locally (below). Two scenes are shared on their own: *The Founders' Rap Battle* (https://claude.ai/artifact/JuphmaQKxKgwC5s4AURpD5) and *Systems Theory Bingo* (https://claude.ai/artifact/1q6rocWvPkLQLeBUvoUjha), built by `tools/rap/standalone.py` and `tools/bingo/standalone.py`.
 
 > A grad student, panicking over an empty research folder and a deadline that isn't moving, sets out to get one real question out of the one professor with a reputation for producing them — and ends up spending the rest of the semester turning that question into an entire research project, one increasingly absurd department "chapter" at a time, before discovering that the mythical Codebook everyone's been whispering about was never anything more than... Methods.
 
@@ -28,8 +28,15 @@ Then visit `http://localhost:8080/the-secret-of-the-codebook.html`.
 
 ## Status
 
-- **Act I** (Office, Lecture Theatre, Causality Corridor, Probability Pond) is fully built, art-passed and voice-acted, with a "Starring" cast poster and an ACT I title card at the end of the opening trailer.
-- **Act II** (Survey Lab, Ethics Tribunal, Mensa, Fieldwork Arena) is fully built as painted verb-grid rooms with character sprites and the H-27 cross-room puzzle chain, introduced by its own trailer-style interlude (and "Starring" poster).
-- **Acts III–V** exist as functional puzzle rooms but don't yet have the art or narrative pass.
+All five acts and the outro are built, painted, voiced and playable end to end (19 rooms on the campus map):
+
+- **Act I — The Question:** Office, Lecture Theatre (Systems Theory Bingo), Causality Corridor, Probability Pond.
+- **Act II — Theory:** Library, Hall of Founders (the Founders' Rap Battle), Feldstrom's Workshop (and the Stockholm call), Seminar Room.
+- **Act III — Data:** Survey Lab, Ethics Tribunal, Mensa, Fieldwork Arena.
+- **Act IV — Evidence:** the Significance Casino, KIRA's Delegation Engine, the Bureau of Implications.
+- **Act V — Apparently Somebody Has to Present It:** Psych Lab, Writing Room, Poster Session, the Keynote Showdown.
+- **Outro:** the Reviewer 2 battle, REVISE AND RESUBMIT, and the monkey after the credits.
+
+Tests: `bash tools/test/run-all.sh` (headless Chrome on port 9333, the game served on 8934; see `tools/test/README.md`). A step-by-step solution is in `WALKTHROUGH.md`.
 
 Each act's assets are preloaded behind a progress bar, and the next act is fetched in the background. Large images ship as WebP; the full-size PNG originals are kept out of the repo. See `HANDOVER.md` for the current state and open items.
