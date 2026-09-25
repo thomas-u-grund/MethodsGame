@@ -1559,8 +1559,9 @@ describe the game as built; once approved they are rewritten to match this.*
 In Act IV the department finds "the Codebook" — KIRA's engine that turns any dataset into a
 finding — and a gold rush breaks out. Every department comes back with a spectacular result.
 The player alone runs the one boring test their sealed slip names, and gets something small.
-In Act V everybody takes their results to **the Annual Meeting**: the gold-rush findings get
-keynotes and crowds; the player gets Poster 312, Hall C, next to the bins. The conference is
+In Act V everybody takes their results to **Methods Day**, the department's own mini conference,
+held on campus: the gold-rush findings get the keynote and the crowds; the player gets
+Poster 312, in the Mensa, next to the bins. The conference is
 where the claims meet an audience, and — in the Replication Session — the test of time,
 compressed to ninety minutes. Then home, the submission chute, and Reviewer 2.
 
@@ -1600,52 +1601,50 @@ Act V: the Professor has never heard of *the* Codebook. "We used to call it Meth
    one) and is taking orders for EXTRA LARGE. The player writes their own interpretation with
    the evidence on the counter, as now.
 
-**End of act — the humiliation beat.** The conference programme arrives. Feldstrom: keynote.
-The Fieldwork Director: plenary. The cook: best paper award. The player: *Poster 312, Hall C,
-next to the bins.* The folder is stamped EVIDENCE VERIFIED, and it has never felt less like a
+**End of act — the humiliation beat.** The Methods Day programme is pinned up. Feldstrom: keynote,
+in the Hall of Founders. The Fieldwork Director: plenary. The cook: shortlisted for best poster.
+The player: *Poster 312, the Mensa, next to the bins.* The folder is stamped EVIDENCE VERIFIED, and it has never felt less like a
 prize.
 
 ---
 
-### Act V — "Apparently Somebody Has to Present It": the Annual Meeting
+### Act V — "Apparently Somebody Has to Present It": Methods Day
 
-The only act off campus. A conference centre with carpet you could lose a child in,
-lanyards, and a coffee urn that is always empty.
+*Revised the same day: the author proposed staying on campus for a mini conference. The
+department's own research day — a banner over the gate, lanyards, a coffee urn that is always
+empty — held in rooms the player already knows. Nothing new to build as a location; the rooms
+are redressed, and the world stays small.*
 
-1. **Registration & the Poster Print Shop** (absorbs the Gap Registry and the Writing Room).
-   The poster has to be written before it can be printed, and everyone helps:
-   - the **contribution** box — a Novelty Booth hands out pre-approved gaps; the player states
-     what their result changes relative to the three papers (the Gap Registry puzzle);
-   - the **title** — Feldstrom leans over the counter with bigger ones (as now), and the
-     IMPACT gauge climbs;
-   - the **abstract** — KIRA's version, three words over the line (the Writing Room puzzle).
+1. **Preparation: the Gap Registry and the Writing Room** (as built). The poster has to be
+   written before Methods Day: the contribution relative to the three papers (Registry), the
+   title Feldstrom keeps enlarging and the three words KIRA pushed over the line (Writing Room).
    The printer only takes the poster once the claim is proportionate.
-2. **The Poster Session** (set piece; its own mini-game). The player stands by Poster 312 for
-   one hour of conference time. Visitors arrive one by one and ask things; the player answers
-   with what is in the folder:
+2. **The Poster Session — in the Mensa** (set piece; its own mini-game). The dining tables are
+   poster boards between the lunch queues. The player stands by Poster 312, next to the bins,
+   for one hour of conference time; visitors arrive one by one and the player answers with what
+   is in the folder:
    - the Helpful Stranger (a genuine question — answer it properly);
    - the person with "more of a comment than a question";
    - the one who only wants the free pens;
    - the Visiting Fellow, one raised finger: *"Selection?"* (the Act II card, the Act IV
      limitation — point at the sentence);
    - a Codebook enthusiast who asks why the effect is so *small*.
-   Meanwhile the gold-rush posters on either side have queues and balloons.
-3. **Feldstrom's Keynote** (set piece). *Civilisation Is Traffic*, on a screen the size of a
-   house — and slide 14 is the player's own result, inflated into a law of social flow,
-   without asking. The player can stand up in the Q&A.
-4. **The Replication Session** *(proposed — this is what makes Act IV pay off)*. A small room,
-   a long table, a panel of replicators. The gold-rush findings are re-run on fresh data, live,
-   on a big board, and fall one by one: schnitzel, the 100%, civilisation. The player's result
-   is the one that holds, because it was sealed in advance and claimed only what it showed.
-   **The Professor is in the room.** She has sat in this seat before — *The Death of
-   Community* was taken apart in exactly this kind of session — and when Feldstrom's law
-   falls, the two of them finally face each other. A few lines, no more: her past, his, and
-   the player standing between them with the only claim in the room that survived.
-5. **Home.** The player comes back to campus with the poster rolled under one arm. The Office:
-   *"Oh. That. We used to call it Methods."* *"It's accurate. Send it."* The submission chute.
-   Then the outro and Reviewer 2 as already designed (optionally as a playable battle).
-
----
+   The neighbouring gold-rush posters (the cook's *Schnitzel Causes Wisdom*, the Director's 100%)
+   have queues and balloons. The Sampling Officer judges the best-poster prize by raffle.
+3. **The Keynote — in the Hall of Founders** (set piece). The rap-battle staging, reused: the
+   stage, Tobi livestreaming, the DJ, the crowd. Feldstrom presents *Civilisation Is Traffic* —
+   and slide 14 is the player's own result, inflated into a law of social flow, without asking.
+   The founders watch from their frames. The player can stand up in the Q&A.
+4. **The Replication Session — in the Seminar Room** *(proposed; this is what makes Act IV pay
+   off)*. The Visiting Fellow chairs it. The consequence board becomes the replication board:
+   the gold-rush findings are re-run on fresh data, live, and fall one by one — schnitzel, the
+   100%, civilisation. The player's result is the one that holds, because it was sealed in
+   advance and claimed only what it showed. **The Professor is in the room.** She has sat in
+   this seat before — *The Death of Community* was taken apart in exactly this kind of session —
+   and when Feldstrom's law falls, the two of them finally face each other. A few lines, no
+   more; the player stands between them with the only claim in the room that survived.
+5. **The Office and the chute.** *"Oh. That. We used to call it Methods."* *"It's accurate. Send
+   it."* The folder goes down the chute. Then the outro and Reviewer 2 as designed.
 
 ### What this reuses and what is new
 
@@ -1653,9 +1652,9 @@ lanyards, and a coffee urn that is always empty.
   Skeptic; the Gap Registry, Writing Room and title puzzles (moved into the Print Shop); the
   reveal, the chute and the outro.
 - **Rebuilt:** the Basement as the Significance Casino.
-- **New:** the Act IV opening and closing interludes; the conference centre (3–4 locations:
-  Print Shop, Poster Hall, Keynote Hall, Replication Room); the Poster Session mini-game; the
-  Replication board.
+- **New:** the Act IV opening and closing interludes; Methods Day redressings of three existing
+  rooms (Mensa, Hall of Founders, Seminar Room: banners, poster boards, a replication board);
+  the Poster Session mini-game; the Replication board. No new locations.
 - **Characters with new jobs:** the Fieldwork Director and the cook as gold-rush winners (and
   replication casualties); the Visiting Fellow as a poster visitor; Tobi livestreaming the
   keynote; the Professor at the Replication Session.
@@ -1669,6 +1668,7 @@ lanyards, and a coffee urn that is always empty.
    to the neighbouring gold-rush poster)?
 4. Reviewer 2: keep the outro as a cutscene, or make the decision letter a playable battle?
 5. Act V title: "Apparently Somebody Has to Present It", or keep "…Write It"?
+6. The Act IV humiliation beat now reads the Methods Day programme, not a conference's.
 
 ---
 
