@@ -1070,6 +1070,22 @@ point — without dating the game.
 
 ---
 
+## 8zo. Lecture Bingo gets suspense music — 2026-09-25 (user)
+
+> For the bingo we should have some tense ("Who Wants to Be a Millionaire" style) background music.
+
+- Synthesised, not licensed: `tools/music/bingo_music.py` renders `bingo-tense.mp3` (pulsing
+  square-wave bass in eighths, A minor drone, heartbeat, clock ticks; 8 bars at 92 BPM, 20.87 s)
+  and `bingo-tight.mp3` (the same plus E/F tremolo strings, a rising noise filter and a timpani
+  roll into the loop point), and two stings: `bingo-hit.mp3` (climbing A-major chime) and
+  `bingo-miss.mp3` (a sour low minor second).
+- Played through Web Audio (gapless loop, `loopEnd` set to the exact bar length), because
+  `<audio loop>` leaves an mp3 gap. The lecture's own music stops when the show starts. The
+  tight version takes over on the beat when you are one square away, stings on dabs and false
+  dabs, a big sting on BINGO, and the lecture music returns after he has left. A watcher stops
+  it if you leave the room. Mixkit had nothing in this style.
+- `test-lecturer` asserts the tense loop is running during play and the tight one before the shout.
+
 ## 8zn. Visual patches: nothing text-only — 2026-09-25 (user)
 
 > Do the visual patches. — In the lecture theatre, some student should throw a paper plane.

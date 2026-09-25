@@ -57,12 +57,13 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     // (it must not mark), dab whatever he has just said, skip his line with Space, repeat.
     await w(9200);
     out.show = document.getElementById('lt_show').style.display !== 'none' && !!document.getElementById('lt_crowdBg');
+    out.music = window.CODEBOOK_BINGO_MUSIC();
     const grid = document.getElementById('lt_bingoGrid');
     const space = () => document.dispatchEvent(new KeyboardEvent('keydown', { key:' ', code:'Space', bubbles:true }));
     let shouted = false, triedWrong = false;
     for (let i = 0; i < 40 && !shouted; i++){
       const shout = document.getElementById('lt_bingoShout');
-      if (shout.classList.contains('on')){ shout.click(); shouted = true; break; }
+      if (shout.classList.contains('on')){ out.musicBeforeShout = window.CODEBOOK_BINGO_MUSIC(); shout.click(); shouted = true; break; }
       const now = grid.dataset.now;
       if (now && now !== 'decoy'){
         const cell = grid.querySelector('[data-term="' + now + '"]');
@@ -75,6 +76,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       }
       await w(250); space(); await w(2300);
     }
+    out.musicBeforeShout = out.musicBeforeShout || null;
     out.shouted = shouted;
     out.marks = document.querySelectorAll('#lt_bingoGrid .bingo-cell.marked').length;
     await w(11000);                              // the losing-the-thread beat, then the walk out
@@ -146,7 +148,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
               '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = a && a.speaker === 'Dr. Vossberg' && a.poses && a.mouths && a.noProfSprite
-          && a.started && a.show && a.wrongNotMarked && a.shouted && a.lectureDone && a.lecturerGone && a.profAtOffice
+          && a.started && a.show && /^tense:running/.test(a.music || '') && /^tight/.test(a.musicBeforeShout || '') && a.wrongNotMarked && a.shouted && a.lectureDone && a.lecturerGone && a.profAtOffice
           && b.officeOccupied && c && d
           && e && !e.err && e.offered && !e.before && e.after   // asking alone brings her back
           && e.lecturerStillHere                                // without derailing anything
