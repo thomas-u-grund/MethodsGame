@@ -23,7 +23,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     document.querySelector('[data-id="bell"], .door-zone, [data-extra="bell"]');
     const bell = [...document.querySelectorAll('#cc_sceneWrap *')].find(e => e.dataset && (e.dataset.id === 'bell' || e.dataset.extra === 'bell'));
     bell.click(); await w(1500); skip(); await w(2500);
-    const out = { caseShown: /A note pinned to the wall reads/.test(line()), firstTag: tag(), wrongKept: null, sameCase: null, cases: 0 };
+    const out = { caseShown: /You read the note on the wall aloud/.test(line()), firstTag: tag(), wrongKept: null, sameCase: null, cases: 0 };
     for (let c = 0; c < 4; c++){
       const doors = [...document.querySelectorAll('.door-zone')].map(d => d.dataset.door);
       for (const d of doors){
