@@ -28,10 +28,15 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     for (let i = 0; i < 30; i++){ await w(500); if (/office is empty/i.test((document.getElementById('wp_line') || {}).textContent || '')) break; }
     out.line = ((document.getElementById('wp_line') || {}).textContent || '').slice(0, 60);
     out.goneAfter = !!prof && getComputedStyle(prof).display === 'none';
+    // every item gained shows the receive animation (ROADMAP 8zi)
+    window.__recv = 0;
+    new MutationObserver(ms => ms.forEach(m => m.addedNodes.forEach(n => { if (n.classList && n.classList.contains('cb-recv')) window.__recv++; })))
+      .observe(document.body, { childList:true });
     verb(/^pick up$/i).click(); document.querySelector('[data-id="usb"]').click(); await w(2500);
     verb(/^pick up$/i).click(); document.querySelector('[data-id="penjar"]').click(); await w(2500);
     const inv = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory;
     out.gotUsb = inv.indexOf('usb') !== -1; out.gotPen = inv.indexOf('pen') !== -1;
+    await w(1500); out.receiveShown = window.__recv;
     return out; })()`);
   // come back: she is at her desk again
   await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
@@ -39,7 +44,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   r.backAgain = await p.evaluate(`(() => { const prof = document.getElementById('wp_prof') || document.querySelector('[data-voice="prof"]'); return !!prof && getComputedStyle(prof).display !== 'none'; })()`);
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
-  const ok = r.hereBefore && r.offered && r.goneAfter && r.gotUsb && r.gotPen && r.backAgain && !p.errors.length;
+  const ok = r.hereBefore && r.offered && r.goneAfter && r.gotUsb && r.gotPen && r.receiveShown === 2 && r.backAgain && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');
   p.close(); process.exit(ok ? 0 : 1);
 })();
