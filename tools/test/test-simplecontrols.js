@@ -18,6 +18,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     // KIRA answers look and talk: icons appear over her
     click(document.querySelector('#lb_sceneWrap .hotspot[data-id="kira"]')); await w(250);
     out.icons = [...document.querySelectorAll('.cb-icons button')].map(b => b.dataset.v).join(',');
+    out.hasUseWith = /usewith/.test(out.icons);
     document.querySelector('.cb-icons button[data-v="talkto"]').click(); await w(400);
     out.talked = /Certainly/.test(document.getElementById('lb_line').textContent);
     // the register is takeable: one click takes it
