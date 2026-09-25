@@ -1548,7 +1548,7 @@ A **RECORD HIGH** banner drops, a dot-matrix printer buries the floor in paper, 
 
 (setting up Act III).
 
-## Acts IV and V — redesign (DRAFT, 2026-09-25, for discussion)
+## Acts IV and V — redesign (DRAFT, 2026-09-25, for discussion): the gold rush and the Annual Meeting
 
 *The author picked Act IV from the "Replication Crisis" option and Act V from the "Conference"
 option. This outline joins them. Until it is approved, the Act IV and Act V sections below
@@ -1556,12 +1556,17 @@ describe the game as built; once approved they are rewritten to match this.*
 
 ### The shape in one paragraph
 
-In Act IV the department finds "the Codebook" — KIRA's engine that turns any dataset into a
+*Revised again: the Annual Meeting of the discipline comes to this campus. That gives the gold
+rush a motive and the conference an audience from outside.*
+
+The Society's Annual Meeting is coming to campus this year, and the department is desperate to
+impress. In Act IV the department finds "the Codebook" — KIRA's engine that turns any dataset into a
 finding — and a gold rush breaks out. Every department comes back with a spectacular result.
 The player alone runs the one boring test their sealed slip names, and gets something small.
-In Act V everybody takes their results to **Methods Day**, the department's own mini conference,
-held on campus: the gold-rush findings get the keynote and the crowds; the player gets
-Poster 312, in the Mensa, next to the bins. The conference is
+In Act V the Annual Meeting arrives and takes over the rooms the player knows: the gold-rush
+findings get the keynote and the crowds; the player gets Poster 312, in the Mensa, next to the
+bins. The whole discipline is watching — the journal's editor among them, and, rumour has it,
+Reviewer 2, lanyard turned the wrong way round. The conference is
 where the claims meet an audience, and — in the Replication Session — the test of time,
 compressed to ninety minutes. Then home, the submission chute, and Reviewer 2.
 
@@ -1573,8 +1578,10 @@ said much more and are being applauded for it).
 
 ### Act IV — "Apparently Numbers Don't Speak for Themselves": the Gold Rush
 
-**Opening interlude.** The reel of clean data arrives in the folder. Before the player can do
-anything, a campus-wide email: **KIRA HAS FOUND THE CODEBOOK.** It is a procedure — "run every
+**Opening interlude.** The reel of clean data arrives in the folder. Two campus-wide emails,
+one after the other. The first: **THE ANNUAL MEETING IS COMING TO US** — six weeks, the whole
+discipline, "a unique opportunity to showcase our research excellence". The second, an hour
+later: **KIRA HAS FOUND THE CODEBOOK.** It is a procedure — "run every
 model, keep the one that works, describe it with confidence" — and it has a queue outside
 KIRA's room within the hour. The Professor, reading it: *"Now the dangerous part. Nobody will
 stop you."*
@@ -1601,19 +1608,21 @@ Act V: the Professor has never heard of *the* Codebook. "We used to call it Meth
    one) and is taking orders for EXTRA LARGE. The player writes their own interpretation with
    the evidence on the counter, as now.
 
-**End of act — the humiliation beat.** The Methods Day programme is pinned up. Feldstrom: keynote,
+**End of act — the humiliation beat.** The Annual Meeting programme is pinned up. Feldstrom: keynote,
 in the Hall of Founders. The Fieldwork Director: plenary. The cook: shortlisted for best poster.
 The player: *Poster 312, the Mensa, next to the bins.* The folder is stamped EVIDENCE VERIFIED, and it has never felt less like a
 prize.
 
 ---
 
-### Act V — "Apparently Somebody Has to Present It": Methods Day
+### Act V — "Apparently Somebody Has to Present It": the Annual Meeting comes to campus
 
-*Revised the same day: the author proposed staying on campus for a mini conference. The
-department's own research day — a banner over the gate, lanyards, a coffee urn that is always
-empty — held in rooms the player already knows. Nothing new to build as a location; the rooms
-are redressed, and the world stays small.*
+*Revised the same day: first to stay on campus, then — the author again — "maybe the annual
+meeting comes to the campus". The discipline's Annual Meeting, hosted here this year: a banner
+over the gate, lanyards, coach parties of visiting academics, a coffee urn that is always
+empty, and Tobi's International Growth office in a state of rapture. It is held in rooms the
+player already knows — nothing new to build as a location; the rooms are redressed, and the
+world stays small while the stakes get bigger.*
 
 1. **Preparation: the Gap Registry and the Writing Room** (as built). The poster has to be
    written before Methods Day: the contribution relative to the three papers (Registry), the
@@ -1652,7 +1661,7 @@ are redressed, and the world stays small.*
   Skeptic; the Gap Registry, Writing Room and title puzzles (moved into the Print Shop); the
   reveal, the chute and the outro.
 - **Rebuilt:** the Basement as the Significance Casino.
-- **New:** the Act IV opening and closing interludes; Methods Day redressings of three existing
+- **New:** the Act IV opening and closing interludes; Annual Meeting redressings of three existing
   rooms (Mensa, Hall of Founders, Seminar Room: banners, poster boards, a replication board);
   the Poster Session mini-game; the Replication board. No new locations.
 - **Characters with new jobs:** the Fieldwork Director and the cook as gold-rush winners (and
@@ -1668,7 +1677,8 @@ are redressed, and the world stays small.*
    to the neighbouring gold-rush poster)?
 4. Reviewer 2: keep the outro as a cutscene, or make the decision letter a playable battle?
 5. Act V title: "Apparently Somebody Has to Present It", or keep "…Write It"?
-6. The Act IV humiliation beat now reads the Methods Day programme, not a conference's.
+6. Reviewer 2 at the meeting: a figure glimpsed in the Keynote crowd (lanyard backwards), or keep
+   Reviewer 2 entirely off-screen until the post-credits monkey?
 
 ---
 
