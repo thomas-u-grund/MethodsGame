@@ -1070,6 +1070,35 @@ point — without dating the game.
 
 ---
 
+## 8zu. Act IV rebuilt as the gold rush — 2026-09-25 (user: "lock that story in. implement it.")
+
+Story locked in STORY.md (*Acts IV and V — the gold rush and the Annual Meeting*). Act IV built:
+
+- **Opening** (`CODEBOOK_ACT4_INTERLUDE`, narrated, 5 new narrator lines, Whisper-checked): two
+  emails an hour apart, drawn as inbox cards over the art: *THE ANNUAL MEETING IS COMING TO US*
+  (from Tobi's office) and *I HAVE FOUND THE CODEBOOK* (from KIRA); the Professor's "Now the
+  dangerous part. Nobody will stop you."; the three rooms (the triptych's left third is now the
+  Casino); the cast; the title "Everybody else is winning."
+- **KIRA's terminal** is the Codebook. Feldstrom, the Fieldwork Director and the Sampling Officer
+  queue in the back aisle, each holding a glowing printout (*Civilisation Is Traffic, p < .0001*,
+  *100% response, again*, *a perfectly random finding*); talking to the queue cycles their lines,
+  and Feldstrom promises "a slide for your little result, bigger".
+- **The Significance Casino** replaces the Statistics Basement (room id and map entry kept;
+  `casino-bg.webp` painted fresh by ChatGPT at the author's request — "start from scratch …
+  space for folks to queue … no skeletons"): five slot machines, the DISCOVERIES board, a
+  velvet-rope queue lane (the Nurse, the Doorman and the Registrar waiting for a machine), the
+  sealed slip on a lectern under its own lamp, the stairs, and the INFINITE MONKEY PROJECT door
+  (locked, typewriters behind it; Act V opens it). The Skeptic is on the stairs from the start and
+  states the goal ("the only chip in here that pays out honestly"). Pulling a lever spins that
+  machine's reels in place (SHOE SIZE · EXAM MARKS · p = .38 …); the third pull hits
+  VEGETARIANS · STRESS · p = .049 with a bell, spilling coins and the banner flashing, then the
+  existing take-it / leave-it choice. The board flips a new row every 3.8 s and shows *YOU ·
+  VEGETARIANS ARE STRESSED* if you took the jackpot. The seal is broken on the new lectern.
+- **The Bureau**: a SOLD OUT card over the LARGE sign; asking for LARGE gets "the whole department
+  had one this week … I can do you an EXTRA LARGE", which still sets `claim_overstated`.
+- **Closing beat** (first panel of `CODEBOOK_ACT5_INTERLUDE`, narrated): the Annual Meeting
+  programme on the Office noticeboard, Poster 312 by the bins highlighted.
+
 ## 8zt. Systems Theory Bingo: painted sign, painted celebration — 2026-09-25 (user)
 
 > The bingo celebration screen is odd; the artwork does not fit with the rest. — In bingo there

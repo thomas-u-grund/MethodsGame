@@ -1548,11 +1548,12 @@ A **RECORD HIGH** banner drops, a dot-matrix printer buries the floor in paper, 
 
 (setting up Act III).
 
-## Acts IV and V — redesign (DRAFT, 2026-09-25, for discussion): the gold rush and the Annual Meeting
+## Acts IV and V — the gold rush and the Annual Meeting (LOCKED 2026-09-25)
 
-*The author picked Act IV from the "Replication Crisis" option and Act V from the "Conference"
-option. This outline joins them. Until it is approved, the Act IV and Act V sections below
-describe the game as built; once approved they are rewritten to match this.*
+*Locked by the author on 2026-09-25 ("love it! lock that story in. implement it."). This is the
+canonical design for Acts IV and V. The older Act IV and Act V sections below remain as the
+detailed reference for the puzzles that carry over (the seal, the Bureau, the Registry, the
+Writing Room, the outro), and are superseded wherever they conflict with this section.*
 
 ### The shape in one paragraph
 
@@ -1593,9 +1594,10 @@ Act V: the Professor has never heard of *the* Codebook. "We used to call it Meth
 **The rooms, and what the gold rush does to each:**
 
 1. **KIRA's terminal** (built as 8zp). Now framed as the Codebook itself. A queue of familiar
-   faces is visible, each leaving with a printout: Feldstrom (*"Civilisation Is Traffic,
-   p < 0.0001"*), the Fieldwork Director (*"100% response rate, again"*), the Mensa cook
-   (*"Schnitzel causes wisdom"*). The player gets their own Codebook report, finds its seven
+   faces is visible, each holding a printout: Feldstrom (*"Civilisation Is Traffic,
+   p < 0.0001"*), the Fieldwork Director (*"100% response rate, again"*), the Sampling Officer
+   (*"A perfectly random finding"*). (As built; the cook's *Schnitzel Causes Wisdom* is on the
+   Casino's board instead.) The player gets their own Codebook report, finds its seven
    wrong lines, and the Professor circles what they missed. She stops at "p < 0.001":
    *"I had one of those once."* First crack in her armour.
 2. **The Significance Casino** (the Basement, rebuilt as the act's set piece). The gold rush's
