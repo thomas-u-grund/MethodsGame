@@ -45,7 +45,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
     // --- Statistics Basement: now it can actually be analysed
     await go('Statistics Basement');
-    verb('sb','use'); spot('seal'); await wait(500); ch('sb','Run it'); await wait(700);
+    verb('sb','use'); spot('seal'); await wait(500); ch('sb','The one the slip names'); await wait(700);
     out.stats = !!flags().statsDone;
     out.resultKind = flags().resultHolds ? 'holds' : flags().resultNull ? 'null' : '?';
 

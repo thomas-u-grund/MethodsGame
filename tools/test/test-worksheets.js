@@ -1,5 +1,6 @@
-// The Act IV seal needs the merged data (Delegation), the Act III exam records and the
-// Act I worked-example handouts. This test covers the last two; cleandata is assumed.
+// The Act IV seal needs the merged data (Delegation) and the Act III exam records. The
+// worked-example sheets are pinned up in the basement since ROADMAP 8zl (SB1), and breaking
+// the seal is a choice of test: the one the slip names, or two tempting wrong ones.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 async function run(inv) {
@@ -24,13 +25,13 @@ async function run(inv) {
 (async () => {
   const none  = await run(['folder','cleandata']);
   const marks = await run(['folder','cleandata','examrecords']);
-  const both  = await run(['folder','cleandata','examrecords','worksheets']);
+  const both  = marks;
   console.log('nothing:   ', JSON.stringify(none));
   console.log('\nmarks only:', JSON.stringify(marks));
   console.log('\nboth:      ', JSON.stringify(both));
   const ok = /particular questions/.test(none.line) && none.choices.length === 0
-    && /which of those forty/.test(marks.line) && marks.choices.length === 0
-    && both.choices.some(c => /Run it/i.test(c))
+    && /Which one\?/.test(marks.line) && marks.choices.length === 3
+    && both.choices.some(c => /The one the/i.test(c))
     && ![none,marks,both].some(x => x.errors.length);
   console.log('\n' + (ok ? 'PASS' : 'FAIL')); process.exit(ok ? 0 : 1);
 })();

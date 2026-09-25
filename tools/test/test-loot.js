@@ -11,7 +11,9 @@
 // the interview is still ahead of you.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
-const SPOTS = ['penjar','bingocard','glassdesk','hourglass','likertdie','usb','stamp','mug','shelfR'];
+// The mug, the Likert die and the raffle drum (on shelfR) are no longer hers to lose: the
+// Mensa and the Survey Lab have their own since ROADMAP 8zl (O1).
+const SPOTS = ['penjar','bingocard','glassdesk','hourglass','usb','stamp'];
 
 async function visit(p, flags){
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
