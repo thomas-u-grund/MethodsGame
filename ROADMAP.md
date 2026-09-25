@@ -1070,6 +1070,45 @@ point — without dating the game.
 
 ---
 
+## 8zn. Visual patches: nothing text-only — 2026-09-25 (user)
+
+> Do the visual patches. — In the lecture theatre, some student should throw a paper plane.
+
+A read-only audit of every take, use and hand-over found 4 clear and about 12 likely
+text-only moments (receiving an item was already covered by the fly-in). All fixed:
+
+- **Painted objects that now leave the painting** (ChatGPT region edits, feathered patches,
+  originals in `art/patches`):
+  - Corridor, room 2: the rubber duck (`cc-patch-duck.webp`), through a new generic
+    `patch:` field on corridor pickups.
+  - Hall: the hook pole comes off the ladder and the empty clips stay (`hall-patch-pole.webp`,
+    flag `hallPoleTaken`).
+  - Workshop: the masking tape comes off the control panel, uncovering three brass dials
+    (`ws-patch-tape.webp`).
+- **Uses and hand-overs that now change the scene:**
+  - Office: the fabricated citation lands on the desk and the counter reads 10,000; then the
+    slip goes in the bin and the counter clicks back to 9,999.
+  - Office, seal: the preregistration device comes down on its brass arm holding your slip,
+    and the wax goes on (on fire if the theory is empty) before the slip flies to you.
+  - Office, submission: the folder slides off towards the chute, and a SUBMISSION RECEIVED
+    card comes back up.
+  - Seminar: your two lines are chalked into the first column as you pick them, the rivals'
+    lines go in the second, and the third column fills once nothing slides underneath. A
+    wrong line gets a red rival card pinned beneath it.
+  - Workshop: Feldstrom's sprite actually leaves when the phone call sends him out, and comes
+    back with him.
+  - Mensa: the tote-bag list is pinned on the wall above the till.
+  - Fieldwork: the bagged ballot box stands on the stage from the moment the round runs.
+  - Basement: the envelope on the lectern becomes an open slip and two halves of red wax.
+  - Delegation: a PAUSED tag hangs on the lever and the 12:00 auto-submit row is struck
+    through; the checked record is stamped MISMATCH; finishing turns the tag to LOCKED OUT
+    and the row to CANCELLED.
+  - Gap Registry: a brass CLOSED plate on one drawer, which slides out with its 1994 card
+    once opened; the three papers (2009, 2014, 2021) lie on the desk beside your result.
+- **Paper planes** in the Lecture Theatre: while he lectures, someone in the rows throws one
+  every 9 to 21 seconds (an arc over the heads, stalling towards the stage). Half the dabs in
+  the bingo add one, and BINGO launches a volley of five. He does not notice.
+
 ## 8zm. Lecture Bingo, the game show — 2026-09-25 (user)
 
 > What if the card is bigger and the player needs to press the right field to mark it? — We
