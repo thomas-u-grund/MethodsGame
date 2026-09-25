@@ -38,7 +38,11 @@ async function connect(url) {
     const t0 = Date.now();
     for (;;) {
       const ok = await evaluateRaw(`!!(window.CODEBOOK_START && window.CODEBOOK_VOICE_SPRITE && document.readyState === 'complete')`);
-      if (ok) { await new Promise(r => setTimeout(r, 120)); return true; }
+      if (ok) {
+        // the tests drive the classic verb buttons; simple controls (8zx) are tested on their own
+        if (!process.env.CB_SIMPLE) await evaluateRaw(`(function(){ try { localStorage.setItem('cb_controls','classic'); } catch(e){} if (window.CODEBOOK_SIMPLE_CONTROLS) window.CODEBOOK_SIMPLE_CONTROLS(); })()`);
+        await new Promise(r => setTimeout(r, 120)); return true;
+      }
       if (Date.now() - t0 > timeoutMs) return false;
       await new Promise(r => setTimeout(r, 60));
     }

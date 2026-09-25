@@ -25,8 +25,9 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     btns()[2].click(); await wait(600);                       // frame, draw, response rate
     out.stamped = /QUESTION HAS DATA/.test(line());
     out.flag = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.provenanceGiven;
-    btns()[0].click(); await wait(400);
-    out.pointsAtActIV = /basement/i.test(line());
+    // 8zw: Act III ends here -- straight on to the map and Act IV's opening, no extra click
+    for (let i = 0; i < 40 && !document.getElementById('interlude'); i++) await wait(500);
+    out.pointsAtActIV = !!document.getElementById('interlude') && /Chapter Three/i.test(document.body.textContent);
     return out;
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
