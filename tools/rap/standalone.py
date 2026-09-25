@@ -20,7 +20,8 @@ OUT = os.path.join(ROOT, 'build', 'rapbattle')
 KEEP_ROOMS = {'hall'}
 DROP_MARKERS = ['ACT INTERLUDES', 'THE OUTRO', 'ACT III INTERLUDE']
 
-ASSETS = ['hall-bg.webp', 'hall-founders-group.webp', 'sprite-profg.png',
+ASSETS = ['hall-bg.webp', 'hall-founders-group.webp', 'hall-patch-pole.webp',
+          'hall-dial-1.webp', 'hall-dial-2.webp', 'hall-dial-3.webp', 'sprite-profg.png',
           'sprite-tobi.png', 'sprite-tobi-reach.webp', 'sprite-tobi-crouch.webp', 'sprite-tobi-piece.webp',
           'mouth-marx.webp', 'mouth-durkheim.webp', 'mouth-weber.webp',
           'rap-marx.mp3', 'rap-durkheim.mp3', 'rap-weber.mp3', 'profg-live.mp3',
@@ -35,7 +36,11 @@ SEED = {'inventory': ['usb'],
                   'profAtOffice': True, 'lecturerGone': True}}
 
 HEAD = """<script>
-/* The Founders' Rap Battle, standalone: a fresh save on every visit, straight into the Hall. */
+/* The Founders' Rap Battle, standalone: a fresh save on every visit, straight into the Hall. The
+   engine reads these globals first -- an artifact's sandbox may refuse localStorage/sessionStorage. */
+window.CODEBOOK_SEED = JSON.parse(%s);
+window.CODEBOOK_BOOT_ROOM = 'hall';
+window.CODEBOOK_RAP_OFFER = true;
 try {
   localStorage.setItem('codebook_save_v1', %s);
   sessionStorage.setItem('cb_goroom', 'hall');
@@ -46,7 +51,7 @@ try {
   /* only the Hall exists here: no map button, no game title bar, no H-27 form */
   #gameHud, #root > div:has(> #backToMap), #hf_h27{ display:none !important; }
 </style>
-""" % json.dumps(json.dumps(SEED))
+""" % (json.dumps(json.dumps(SEED)), json.dumps(json.dumps(SEED)))
 
 BOOT = """<script>
 /* Standalone boot: no splash, no trailer. CODEBOOK_START reads cb_goroom and enters the Hall. */
