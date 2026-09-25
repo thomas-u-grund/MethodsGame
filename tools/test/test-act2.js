@@ -38,7 +38,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     verb('lb','pick up'); spot('register'); await wait(350);
     item('lb','magnifyingglass'); spot('trolley'); await wait(400);
     verb('lb','use'); spot('catalogue'); await wait(400);
-    verb('lb','use'); spot('framed'); await wait(400);
+    verb('lb','use'); spot('conveyor'); await wait(400);          // the full paper, off the belt (8zy)
     out.steps.push(['caught3', ['libCatchJournal','libCatchOpposite','libCatchCausal'].every(f => JSON.parse(localStorage.getItem('codebook_save_v1')).flags[f]) ? 'ok' : 'NO']);
     verb('lb','pick up'); spot('trolley'); await wait(400);
     choice('lb','survive checking'); await wait(500);
@@ -55,14 +55,17 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     verb('ws','look at'); spot('desk'); await wait(350);
     out.steps.push(['ext4173', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.wsExtension ? 'ok' : 'NO']);
 
-    // ---- LIBRARY: the Stockholm call. One requirement since ROADMAP 8zl: the hourglass.
+    // ---- LIBRARY: the Stockholm call (8zy): the phrasebook from the stacks, then KIRA's phone.
     await go('The Library');
+    verb('lb','pick up'); spot('stacks'); await wait(400);
+    out.steps.push(['phrasebook', JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('swedebook') ? 'ok' : 'NO']);
     verb('lb','talk to'); spot('kira'); await wait(400);
     choice('lb','place a call'); await wait(400);
-    choice('lb','4173'); await wait(600);
+    choice('lb','Feldstrom, please'); await wait(600);
+    out.steps.push(['splitScreen', document.querySelector('.lb-call') ? 'ok' : 'NO']);
     choice('lb','This is Stockholm'); await wait(600);
+    choice('lb','lagom'); await wait(600);
     choice('lb','remains under discussion'); await wait(600);
-    choice('lb','fika'); await wait(600);
     choice('lb','confidential consultation'); await wait(600);
     out.steps.push(['feldstromOut', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.wsFeldstromOut ? 'ok' : 'NO']);
 

@@ -42,7 +42,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     // ROADMAP 8ze: the zoom says what the job is, and lodging the honest setting it opens
     // on is refused out loud rather than simply not offered.
     const job = document.getElementById('ws_accJob');
-    out.jobCard = !!job && /small enough to be wrong/.test(job.textContent) && /Stockholm/.test(job.textContent) && /4173/.test(job.textContent);
+    out.jobCard = !!job && /small enough to be wrong/.test(job.textContent) && /Stockholm/.test(job.textContent) && /Library has a telephone/.test(job.textContent);
     out.registerTicked = !!job && !!job.querySelector('.it.ok');   // the save holds the register
     document.getElementById('ws_accLodge').click(); await w(300);
     out.honestRefused = /could be wrong/.test(feld()) && !!document.getElementById('ws_acc');

@@ -92,7 +92,7 @@ A student wants to finish a project quickly. They are refused five times, and ea
 | **II — Apparently We Need a Theory** | to go and collect data | you cannot interpret data you had no expectation about | an idea about how the world works, plus one testable hypothesis derived from it, sealed while it could still be wrong |
 | **III — Apparently We Need Data** | to ask some students | you may not approach human beings without permission, an instrument, and a defensible sample | real answers from real people, with a known response rate and a documented sampling frame |
 | **IV — Apparently Numbers Don't Speak for Themselves** | a result | a number is not evidence until somebody checks it is the number you promised, and it means nothing until somebody says what it means | an analysis that matches the sealed slip, an audit it survived, and an honest interpretation |
-| **V — Apparently Somebody Has to Write It** | to be done | a finding is not a contribution, and a contribution is not a paper | a claim proportional to what was shown, written down, and submitted |
+| **V — Apparently Somebody Has to Present It** | to be done | a finding is not a contribution, and a contribution is not a paper | a claim proportional to what was shown, written down, and submitted |
 
 Five acts, five refusals, and the same underlying joke each time: **the department is ridiculous and it is also right.** If either half fails, the game fails — a department that is merely absurd teaches cynicism, and a department that is merely correct is a textbook with jokes on it.
 
@@ -1125,7 +1125,21 @@ Because he is an ex-physicist, he knows exactly how the process works, which clo
 
 > **FELDSTROM:** "The announcement is not made this way." *(click)*
 
-**What the player needs — exactly three things.** The temptation here is to make the scam require five collectibles, which turns the act's best set-piece into a fetch quest. **Three are mandatory:**
+**As built (ROADMAP 8zy, author 2026-09-26: "the stockholm puzzle should be simplified. add a
+funny Sweden book"; "split screen, big phone on left, zoom into Feldstrom's room on right").**
+The whole puzzle is in the Library, and it needs one thing: *Swedish for Nobel Laureates (and
+the People Who Ring Them)*, a yellow-and-blue phrasebook sticking out of the stacks. KIRA puts
+you through by name (no extension card, no hourglass; the card on his door stays as set
+dressing). The call is a split screen: the receiver on the left with the phrasebook open on the
+desk, his workshop zoomed on the right. He answers *"Feldstrom."*, and to "This is Stockholm"
+says only *"…Say something in Swedish."* Without the book: "Abba" ("Anybody can say Abba"),
+"Ikea" ("That is a furniture shop"), click. With it: *Grattis!* first is wrong (Chapter One:
+Stockholm never says congratulations first); *"Hej. Kommittén är lagom nöjd. Men först: fika."*
+knocks a chair over. Then the category, then the Committee downstairs, as below. The design
+notes that follow (three mandatory clues, the hourglass, the procedure) are the superseded
+version, kept for the reasoning about optional clues.
+
+~~**What the player needs — exactly three things.**~~  The temptation here is to make the scam require five collectibles, which turns the act's best set-piece into a fetch quest. **Three are mandatory:**
 
 1. **Extension 4173** and the knowledge that he is waiting for Stockholm — the Workshop.
 2. **Nobel notification protocol** — ask KIRA. She prints `PROCEDURE FOR NOTIFYING NOBEL LAUREATES` with the useful phrases highlighted and roughly half the document fabricated, which is *exactly* enough authentic-sounding language to bluff a man who wants to be fooled.
@@ -1228,7 +1242,7 @@ The four rooms are not four errands. They are mechanically interdependent — an
 
 | From | Object | To | Why |
 |---|---|---|---|
-| Hall of Founders | ceremonial stepladder (with hook pole) | Library | the catalogue drawer is on the top shelf **and** the contradicting paper is framed — one object, two uses |
+| Hall of Founders | ceremonial stepladder (with hook pole) | Library | the catalogue drawer is on the top shelf (the framed paper is only the abstract now; the full text is grabbed off the conveyor — 8zy) |
 | Hall of Founders | newspaper clipping (knowledge) | Feldstrom (by phone) | *optional* — the correct name of the economics prize |
 | Hall of Founders | Quotation Dispenser phrase | Feldstrom (by phone) | *optional* — grandiose enough to be believed first time |
 | Library | blank catalogue card | Hall of Founders | the mechanism has to be written on something |
@@ -1339,7 +1353,7 @@ Act II deliberately reuses a *few* Act I objects, because that is what makes the
   > **FELDSTROM:** "…disturbing."
 - **The magnifying glass** — gains a new meaning here: in Act I it meant *look closer*, in Act II it means *look past the presentation*. It reads DOIs, journal titles, publication metadata, and the tiny superscript on the abstract: `*association attenuated to zero after adjustment`.
   > **KIRA:** "The asterisk appeared statistically insignificant."
-- **The seven-second hourglass** — the international-call delay in the Stockholm scam (above). It also has a pure character beat with no puzzle outcome: put it beside Feldstrom's telephone and wait. Nothing happens. He turns it over. Nothing. Again.
+- **The seven-second hourglass** — no longer needed for the Stockholm call (8zy: the phrasebook replaced it). It also has a pure character beat with no puzzle outcome: put it beside Feldstrom's telephone and wait. Nothing happens. He turns it over. Nothing. Again.
   > **PLAYER:** "How long have you been waiting?"
   > **FELDSTROM:** "Since 2009."
   > **PLAYER:** "For Stockholm?"
@@ -1962,7 +1976,7 @@ The clerk does not read the number. The clerk reads the *size you asked for*. Th
 
 ---
 
-## Act V — "Apparently Somebody Has to Write It"
+## Act V — "Apparently Somebody Has to Present It"
 
 *Rooms: The Gap Registry · The Writing Room*
 

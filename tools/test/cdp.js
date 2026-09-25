@@ -4,7 +4,7 @@ const WebSocket = require('ws');
 
 function get(path) {
   return new Promise((res, rej) => {
-    http.get({ host: '127.0.0.1', port: 9333, path }, r => {
+    http.get({ host: '127.0.0.1', port: +(process.env.CDP_PORT || 9333), path }, r => {
       let d = ''; r.on('data', c => d += c); r.on('end', () => res(JSON.parse(d)));
     }).on('error', rej);
   });

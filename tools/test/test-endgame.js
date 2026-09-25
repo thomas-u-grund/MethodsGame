@@ -116,7 +116,36 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     for (let i = 0; i < 5; i++){ window.CODEBOOK_PS_ANSWER_RIGHT(); await wait(4800); }
     await wait(600);
     out.posters = !!flags().postersDone; out.audience = flags().posterCrowd;
+    out.actVNotYet = !flags().actVDone;
+    // --- the Keynote Showdown (8zy): four slides, answered with the right evidence
+    window.CODEBOOK_KN_SPEED = 0.05; window.CODEBOOK_KN_NO_CUTAWAY = true;
+    await go('The Keynote Showdown');
+    const until = async (fn, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms){ if (fn()) return true; await wait(100); } return false; };
+    const hasCh = re => [...document.querySelectorAll('#kn_choices button')].some(x => new RegExp(re,'i').test(x.textContent));
+    out.knOpened = await until(() => hasCh('Stand up'), 12000);
+    out.knSlide14 = /UNIVERSAL LAW/.test(document.getElementById('kn_screen').textContent);
+    ch('kn','Stand up');
+    await until(() => hasCh('Point at the scope'), 8000);
+    const needle = () => document.getElementById('kn_needle').style.transform;
+    const n0 = needle();
+    ch('kn','Point at the scope');                 // wrong for slide 15 (it is the design)
+    await until(() => hasCh('Point at the design'), 8000);
+    out.knWrongStays = /CAUSES/.test(document.getElementById('kn_screen').textContent) && needle() !== n0;
+    for (let i = 0; i < 4; i++){
+      await until(() => hasCh('Point at the design'), 12000);
+      out['knR' + i] = window.CODEBOOK_KN_ANSWER_RIGHT();
+      await wait(300);
+    }
+    out.knProf = await until(() => hasCh('rather have the part'), 20000);
+    out.knProfUp = !!document.querySelector('.kn-fig img[src="sprite-prof-stand.webp"]');
+    ch('kn','rather have the part');
+    out.knContinue = await until(() => hasCh('^Continue'), 25000);
+    out.knFell = document.querySelectorAll('#kn_screen .kn-row.kn-fell').length;
+    out.knHeld = document.querySelectorAll('#kn_screen .kn-row.kn-held').length;
+    ch('kn','^Continue'); await wait(400);
+    out.keynote = !!flags().keynoteDone;
     out.actV = !!flags().actVDone;
+    out.stockholmPanels = (window.CODEBOOK_STOCKHOLM_PANELS || []).length;
     out.dbg = JSON.stringify({lab:flags().labDone, wr:flags().writingDone, ps:flags().postersDone, crowd:flags().posterCrowd, v:flags().actVDone});
     out.overstated = !!flags().claim_overstated;
 
@@ -136,6 +165,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.titleBlocks && r.folderGone
+    && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 4
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);

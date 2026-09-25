@@ -48,7 +48,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
     // --- repair it: find the three problems, then lodge the survivors
     item('magnifyingglass'); spot('trolley'); await w(500);
-    verb('use'); spot('framed'); await w(500);
+    verb('use'); spot('conveyor'); await w(500);
     verb('use'); spot('catalogue'); await w(500);
     out.caught3 = ['libCatchJournal','libCatchOpposite','libCatchCausal'].every(f => flags()[f]);
 

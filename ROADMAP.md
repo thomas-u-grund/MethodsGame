@@ -1070,6 +1070,80 @@ point — without dating the game.
 
 ---
 
+## 8zy. The Keynote Showdown, Stockholm, Reviewer 2, and three puzzle fixes — 2026-09-26 (user: "focus on these open items"; "work your way independently through the open items")
+
+- **The Keynote Showdown** (`keynote`, prefix `kn`, doneFlag `keynoteDone`, now the fourth Act V
+  flag). The Hall of Founders from the back of a packed audience (`keynote-bg.webp`, ChatGPT from
+  the old Hall as reference; `keynote-front.webp` is the audience rows and the lectern, so
+  Feldstrom stands behind it). On the Hall's map box; opens after the Poster Session. Plays
+  itself up to the Q&A: CIVILISATION IS TRAFFIC, Vossberg garbling in the chair, slide 14 (your
+  chart, the small bar grown to the top, "a promising young collaborator"). "Stand up", then four
+  slides, each one inflated claim (causes / everywhere / enormous / never before). You answer by
+  pointing at the right evidence: design, scope, interval, the three papers. Right: OVERCLAIM
+  stamped on the slide, DJ airhorn, applause, the meter swings your way. Wrong: Feldstrom's
+  rebuttal, the hall laughs with him, the slide waits. A monkey takes the clicker on slide 17.
+  The Stockholm slide; the lead monkey's question (backwards lanyard, red pen, says nothing);
+  Feldstrom's "never big enough"; the meter pinned to him. The Professor stands up in the rows
+  (`sprite-prof-stand.webp`, new): "You did, Traffic… Twenty-two people. One moved." Your line,
+  his two, the founders applaud in their frames (portrait cut-outs, Durkheim slowest), Achterberg
+  walks on with the replication board and five findings fall, Feldstrom's last; Poster 312 holds.
+  Animated applause meter (top left) and Tobi's livestream chat (top right) throughout.
+  Test hooks: `CODEBOOK_KN_SPEED`, `CODEBOOK_KN_NO_CUTAWAY`, `CODEBOOK_KN_ANSWER_RIGHT`.
+- **Stockholm cutaway** (`CODEBOOK_STOCKHOLM_PANELS`, four panels, `stockholm-nobel.webp`,
+  `stockholm-feldstrom.webp`): KIRA's Nobel "for extraordinary productivity", "Certainly! …What
+  exactly do you mean?"; Feldstrom in the tuxedo, the television, the prospectus (Biology,
+  Linguistics, Ornithology… Migration). Plays after the keynote, before the Office.
+- **Act V opening**: the Gap Registry panel is gone; `il5-monkeys.webp` (new): coaches and
+  lanyards, Tobi propping the Psych Lab door for a livestream shot, the monkeys leaving, the lead
+  monkey last. Cast panel and title card updated to the locked title *Apparently Somebody Has to
+  Present It*.
+- **Reviewer 2 is a playable battle** (`CODEBOOK_R2_BATTLE`, between the letter and the verdict
+  in the outro). Comments are attacks; seven folder cards are answers. Wrong cards cost
+  composure, "robust and generalisable" costs most; honest concessions heal; at zero you walk
+  round the pond and come back (no fail). Smith (1987) is parried by saying it does not exist;
+  42/43 by conceding 42; comment 17 is last and only the Act IV limitation answers it.
+  `analysis_p_hacked` and `theory_empty` add a comment each (they were two text panels);
+  `claim_overstated` adds two. Win: REVISE AND RESUBMIT, flag `r2Won`. `test-r2battle.js`.
+- **Post-credits**: the monkey at the keyboard has the backwards lanyard and the red pen, and
+  "asked a question at the keynote".
+- **The Stockholm call, simplified** (author: "add a funny Sweden book"; "split screen, big
+  phone on left, zoom into Feldstrom's room on right"). All in the Library now: no extension
+  card, no hourglass. *Swedish for Nobel Laureates (and the People Who Ring Them)* sticks out of
+  the stacks (a yellow-and-blue spine, gone once taken; item `swedebook`, spent at the seal).
+  KIRA puts you through; the call is a split screen (`call-phone.webp` left, the Workshop zoomed
+  on his telephone right, Feldstrom jolting at the crash and running off at the end, CLICK when
+  he hangs up). He asks for Swedish: without the book, "Abba" and "Ikea" get you hung up on;
+  with it, *Grattis* first is wrong (Chapter One says so), *Hej. Kommittén är lagom nöjd. Men
+  först: fika.* works.
+- **Library, second catch**: the framed abstract no longer needs the hook pole. It is only the
+  abstract; the full paper is on the conveyor: Use the conveyor to grab it and read page nine.
+  The hook pole is now for the catalogue drawer alone.
+- **Seminar gate says so**: arriving before the Workshop, the intro says the board needs a
+  claim small enough to be wrong, and to come back after Feldstrom's machine.
+- **Voices**: 167 missing lines generated (KIRA, the Registrar and Achterberg cast for the first
+  time: denton with a robot filter, hurlock, gesine), plus the keynote and poster-session lines.
+
+## 8zx. Simple controls — 2026-09-25 (user: "can we try this first before fully committing?")
+
+Desktop default (toggle *Controls: Simple / Classic*), always on phones. Hovering names the
+action; one action is one click; icons appear only for a real choice; *Use with* only with an
+item in hand, and the item is put down after use. `ROOM_VERBS` lists each hotspot's verbs per
+room ("only show the icons that are really needed"). Inventory is a thin two-column panel.
+Items appear in the inventory only after the fly-in. Tests force classic unless `CB_SIMPLE`.
+
+## 8zw. Act endings happen at once, with CHAPTER N COMPLETE — 2026-09-25 (user)
+
+`finaleDue()` / `runFinale(n)`: the moment an act's last room flag is set, wherever that was,
+the act ends: II seals the slip as a cutscene, III goes to the Office, IV to the map (Act V's
+interlude opens with CHAPTER FOUR COMPLETE), V to the Office reveal.
+
+## 8zv. Act V: the Psych Lab, the Poster Session, the Writing Room — 2026-09-25 (user)
+
+Psych Lab (Achterberg, who is the Visiting Fellow; show her the sealed slip to register); the
+Poster Session in the Mensa (five visitors, an audience meter, the pen monkey, MAJOR CONCERNS);
+the Gap Registry folded into the Writing Room. The Hall's Authority Meter animated. The
+Professor's next-puzzle hints (`CODEBOOK_NEXT_HINT`).
+
 ## 8zu. Act IV rebuilt as the gold rush — 2026-09-25 (user: "lock that story in. implement it.")
 
 Story locked in STORY.md (*Acts IV and V — the gold rush and the Annual Meeting*). Act IV built:
