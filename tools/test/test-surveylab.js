@@ -26,23 +26,13 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     const verb = v => [...document.querySelectorAll('#sv_verbGrid button')].find(b => new RegExp(v,'i').test(b.textContent)).click();
     const spot = id => document.querySelector('[data-id="' + id + '"]').click();
 
-    // all four patients stable -> the nurse asks for the fifth question, naming the hypothesis
-    verb('talk'); spot('nurse'); await wait(600);
-    out.machineRefuses = /Write me the fifth/.test(line());
-    out.namesHypothesis = /practice elsewhere|getting that practice|practise/.test(line());
-    out.boxBefore = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.surveyDone;
-    const choices = [...document.querySelectorAll('#sv_choices button')].map(b => b.textContent.slice(0,40));
-    out.choices = choices.length;
-    // wrong one first
-    document.querySelectorAll('#sv_choices button')[0]?.click(); await wait(400);
-    out.wrongRejected = !JSON.parse(localStorage.getItem('codebook_save_v1')).flags.svFixPractice;
-    verb('talk'); spot('nurse'); await wait(400);
-    const btns = [...document.querySelectorAll('#sv_choices button')];
-    btns[btns.length-1]?.click(); await wait(600);
-    out.practiceWritten = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.svFixPractice;
-
-    out.boxAfter = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.surveyDone;
-    out.machineGreen = !!document.getElementById('sv_green');
+    // ROADMAP 8zk: four healed patients on the DISCHARGED board IS the room. A save with all
+    // four fixed (from before the board) is finished on entry.
+    await wait(1800);
+    const g = JSON.parse(localStorage.getItem('codebook_save_v1'));
+    out.boxAfter = !!g.flags.surveyDone;
+    out.gotQuestionnaire = (g.filed || []).concat(g.inventory).indexOf('questionnaire') !== -1;
+    out.pinned = document.querySelectorAll('#sv_board .sv-pinned').length;
     return out;
   })()`);
 
@@ -65,7 +55,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       .filter(k => (document.getElementById(k) || {}).innerHTML);
 
     out.chartsAtStart = charts().length;                 // four patients hanging
-    out.cardsAtStart  = inv().filter(i => /^q(satisfaction|policy|lectures|support)$/.test(i)).length;
+    out.cardsAtStart  = document.querySelectorAll('#sv_board .sv-pinned').length;
 
     // patient 2: the pen crosses the leading words out, visibly, then it is discharged
     verb('look'); spot('gurney2'); await wait(400);
@@ -73,7 +63,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     spot('gurney2'); await wait(300);
     out.struckVisible = !!document.querySelector('#sv_p2 .sv-strike');
     await wait(2000);
-    out.gotPolicyCard = inv().indexOf('qpolicy') >= 0;
+    out.gotPolicyCard = document.querySelectorAll('#sv_board .sv-pinned').length === 1;   // pinned, not carried
     out.chartGone     = charts().indexOf('sv_p2') < 0;
 
     // patient 3 takes the calendar page from the Ethics Tribunal.
@@ -84,7 +74,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     verb('use');
     document.querySelector('#sv_sideInv .side-inv-slot[data-item="calendarpage"]').click();
     spot('gurney3'); await wait(500);
-    out.gotLecturesCard = inv().indexOf('qlectures') >= 0;
+    await wait(300); out.gotLecturesCard = document.querySelectorAll('#sv_board .sv-pinned').length === 2;
 
     // patient 4 is the clipboard, and it must announce itself as a patient
     out.clipboardLabel = (document.querySelector('[data-id="clipboard"]') || {}).dataset
@@ -92,16 +82,15 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     verb('use');
     document.querySelector('#sv_sideInv .side-inv-slot[data-item="likertdie"]').click();
     spot('clipboard'); await wait(500);
-    out.gotSupportCard = inv().indexOf('qsupport') >= 0;
+    await wait(300); out.gotSupportCard = document.querySelectorAll('#sv_board .sv-pinned').length === 3;
     out.chartsLeft = charts().length;
     return out;
   })()`);
   console.log(JSON.stringify({ ...r, carry }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r.machineRefuses && !r.boxBefore && r.choices === 3 && r.wrongRejected
-          && r.practiceWritten && r.boxAfter && r.machineGreen && carry.struckVisible
+  const ok = r.boxAfter && r.gotQuestionnaire && r.pinned === 4 && carry.struckVisible
           && carry.chartsAtStart === 4 && carry.cardsAtStart === 0
-          && carry.gotPolicyCard && carry.chartGone          // healed -> carried, bed empty
+          && carry.gotPolicyCard && carry.chartGone          // healed -> pinned on the board, bed empty
           && carry.gotLecturesCard && carry.gotSupportCard
           && /[Pp]atient/.test(carry.clipboardLabel)          // the clipboard IS patient 4
           && carry.chartsLeft === 1                           // only the double-barrel left

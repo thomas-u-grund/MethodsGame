@@ -1070,6 +1070,23 @@ point — without dating the game.
 
 ---
 
+## 8zk. Survey Lab, radically simpler: the DISCHARGED board — 2026-09-25 (user)
+
+> What if the Survey Lab has a "healed patients" board, and once we correct the questions the
+> nurse moves them there — and that is the whole puzzle; then we get what we need. Get rid of
+> the machine. (And generally: some puzzles seem overly complex or not clear.)
+
+- The FIT FOR HUMAN ADMINISTRATION machine is gone: repainted into a **DISCHARGED** board with
+  four chart clips (ChatGPT region edit merged into `surveylab-bg.webp`, both posters kept from
+  the original; original in `art/patches`). Hotspot `board`.
+- **Each healed patient** is walked over by the nurse and pinned on the board (`discharge()`),
+  visibly; nothing is carried. **Four on the board is the room**: she staples copies into one
+  item, **The Questionnaire** (filed under DATA), and stamps H-27. The fifth (practice) question
+  and the machine step are gone; nothing later depended on them.
+- Old saves: the four Q-cards become the questionnaire; a save with all four healed but not
+  cleared finishes on entry. `test-surveylab` rewritten around the board; `test-itemlook`
+  counts 53 item types.
+
 ## 8zj. Survey Lab, simplified: the pen does the work, the nurse asks for the fifth question — 2026-09-25 (user)
 
 > "Use" is weird to solve the second question — what if we use the pen to delete parts of it?
