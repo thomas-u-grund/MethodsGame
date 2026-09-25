@@ -1070,6 +1070,34 @@ point — without dating the game.
 
 ---
 
+## 8zj. Survey Lab, simplified: the pen does the work, the nurse asks for the fifth question — 2026-09-25 (user)
+
+> "Use" is weird to solve the second question — what if we use the pen to delete parts of it?
+> After solving the questions it is not clear why one would edit the clipboard, and giving it
+> to the machine is weird; one does not get the "fit for human administration" machine.
+
+- **Patient 2** (leading): the chewed pen crosses out "Don't you agree that" and "excellent" —
+  visibly struck through on the chart — then it is discharged. Bare-hands Use now says the
+  words are printed on and you need something to cross them out with.
+- **The fifth question** no longer hides behind the machine. The moment the fourth patient is
+  out, the nurse names the hypothesis and asks for it ("Four healthy questions, and not one of
+  them asks whether they practise anywhere else. Write me the fifth."); the three candidates
+  are offered right there, and the right one finishes the room (Talk To her, the clipboard or
+  the machine all bring the same question back if you wander off).
+- **The machine** is no longer a step: it glows green (`sv_green` overlay) when the instrument
+  is done, and says which patients are still unwell before that.
+- The scissors go back on their mount after the cut (the empty-mount patch hides again).
+- 11 nurse lines voiced (new and previously silent ones). `test-surveylab` updated
+  (strike-through visible, green machine, no machine step).
+
+## 8zi. Receiving an item — 2026-09-25 (user: "I love the items showing in the middle before
+they fly to the inventory")
+
+`CODEBOOK_RECEIVE`, called from `addItem()`: the item appears large over the scene with its
+name (and "Filed in the folder · DIVIDER" for documents), then flies to its slot — or into the
+folder — and the slot flashes. Queued, so several at once play in turn; waits for interludes;
+reduced-motion gets a fade. `test-profaway` checks it fires on pickups.
+
 ## 8zh. The USB stick has a story: the Professor is a Professor G fan — 2026-09-25 (user)
 
 > We need to connect the USB stick better to the rap battle: what is its back story, why is it

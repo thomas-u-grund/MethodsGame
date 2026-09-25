@@ -1,4 +1,7 @@
 // WP-2.1: the instrument is not finished until it measures what the hypothesis needs.
+// ROADMAP 8zj: no machine step any more. With four patients out the nurse asks for the fifth
+// question herself (on Talk To, or on the clipboard/machine), the pen writes it, the room is
+// done and the machine glows green. Patient 2 is healed by crossing words out with the pen.
 //
 // ...and the four questions are things you CARRY. Each one, once made fit for human
 // administration, is unclipped from its bed and handed over -- filed into the folder, under
@@ -23,27 +26,23 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     const verb = v => [...document.querySelectorAll('#sv_verbGrid button')].find(b => new RegExp(v,'i').test(b.textContent)).click();
     const spot = id => document.querySelector('[data-id="' + id + '"]').click();
 
-    // all four patients stable -> the machine should still refuse
-    verb('use'); spot('machine'); await wait(600);
-    out.machineRefuses = /INSTRUMENT INCOMPLETE/.test(line());
-    out.namesHypothesis = /practice elsewhere|getting that practice/.test(line());
+    // all four patients stable -> the nurse asks for the fifth question, naming the hypothesis
+    verb('talk'); spot('nurse'); await wait(600);
+    out.machineRefuses = /Write me the fifth/.test(line());
+    out.namesHypothesis = /practice elsewhere|getting that practice|practise/.test(line());
     out.boxBefore = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.surveyDone;
-
-    // write the missing item with the Act I chewed pen
-    document.querySelector('#sv_sideInv .side-inv-slot[data-item="pen"]').click();
-    spot('clipboard'); await wait(500);
     const choices = [...document.querySelectorAll('#sv_choices button')].map(b => b.textContent.slice(0,40));
     out.choices = choices.length;
     // wrong one first
     document.querySelectorAll('#sv_choices button')[0]?.click(); await wait(400);
     out.wrongRejected = !JSON.parse(localStorage.getItem('codebook_save_v1')).flags.svFixPractice;
-    spot('clipboard'); await wait(400);
+    verb('talk'); spot('nurse'); await wait(400);
     const btns = [...document.querySelectorAll('#sv_choices button')];
     btns[btns.length-1]?.click(); await wait(600);
     out.practiceWritten = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.svFixPractice;
 
-    verb('use'); spot('machine'); await wait(700);
     out.boxAfter = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.surveyDone;
+    out.machineGreen = !!document.getElementById('sv_green');
     return out;
   })()`);
 
@@ -68,9 +67,12 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.chartsAtStart = charts().length;                 // four patients hanging
     out.cardsAtStart  = inv().filter(i => /^q(satisfaction|policy|lectures|support)$/.test(i)).length;
 
-    // patient 2 needs nothing but bare hands -- the cheapest one to drive here
+    // patient 2: the pen crosses the leading words out, visibly, then it is discharged
     verb('look'); spot('gurney2'); await wait(400);
-    verb('use');  spot('gurney2'); await wait(500);
+    verb('use'); document.querySelector('#sv_sideInv .side-inv-slot[data-item="pen"]').click();
+    spot('gurney2'); await wait(300);
+    out.struckVisible = !!document.querySelector('#sv_p2 .sv-strike');
+    await wait(2000);
     out.gotPolicyCard = inv().indexOf('qpolicy') >= 0;
     out.chartGone     = charts().indexOf('sv_p2') < 0;
 
@@ -97,7 +99,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   console.log(JSON.stringify({ ...r, carry }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = r.machineRefuses && !r.boxBefore && r.choices === 3 && r.wrongRejected
-          && r.practiceWritten && r.boxAfter
+          && r.practiceWritten && r.boxAfter && r.machineGreen && carry.struckVisible
           && carry.chartsAtStart === 4 && carry.cardsAtStart === 0
           && carry.gotPolicyCard && carry.chartGone          // healed -> carried, bed empty
           && carry.gotLecturesCard && carry.gotSupportCard
