@@ -1,0 +1,15 @@
+cff-version: 1.2.0
+message: "If you use this game in teaching or research, please cite it as below."
+title: "The Secret of the Lost Codebook: a point-and-click adventure about research methods"
+type: software
+authors:
+  - family-names: Grund
+    given-names: Thomas U.
+repository-code: "https://github.com/thomas-u-grund/MethodsGame"
+date-released: 2026-09-26
+keywords:
+  - research methods
+  - sociology
+  - teaching
+  - game-based learning
+  - point-and-click adventure

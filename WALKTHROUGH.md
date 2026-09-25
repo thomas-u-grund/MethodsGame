@@ -1,15 +1,24 @@
 # THE SECRET OF THE LOST CODEBOOK — Walkthrough
 
 Every task and puzzle, act by act. Written from the code, not from memory.
-Last checked against the code **2026-09-23**.
+Last checked against the code **2026-09-26**.
 
 This is a **complete** walkthrough: it gives the solutions. It also flags the wrong branches
 worth walking on purpose, because several of them are where the teaching actually happens —
-the game lets you do the bad thing, stamps it, and makes you live with it four acts later.
+the game lets you do the bad thing, stamps it, and makes you live with it later.
 
 **How to read the room entries.** *Needs* = what you must be carrying or have already done.
-*Gives* = what you leave with. *Do* = the solution in order. Each act ends with a **hand-off**
-back to the Office, which is where the folder gets stamped and the next act unlocks.
+*Gives* = what you leave with. *Do* = the solution in order. When the last puzzle of an act is
+solved, the game goes straight to that act's ending (a cutscene, the Office, or the map).
+
+> **Controls.** The game starts in **simple controls** (switch with *Controls: Simple/Classic*
+> in the room bar; phones are always simple). Hovering names what a click will do; a thing with
+> one action does it on one click; a thing with several shows small icons (Look / Talk / Use /
+> Take). This document still writes steps as verb + object:
+> - **Look at / Talk to / Use / Pick up X** — click X (pick the icon if it offers several).
+> - **Use item on X** — click the item in the inventory (it follows the cursor as *Use … on*),
+>   then click X and press the **Use with** icon. A second click on a readied item describes
+>   it instead; Esc or a click on empty floor puts it down.
 
 ---
 
@@ -23,25 +32,27 @@ You are trying to fill a cardboard folder. That is the whole game.
 | II | What do you expect to find, and why? | A theory, and a sealed prediction |
 | III | Who are you asking, and are you allowed? | Data |
 | IV | What does the number actually say? | A result, and its limits |
-| V | What does it add? | A contribution, and four honest sentences |
+| V | What does it add? | A contribution, a poster, and a keynote you did not give |
 
-Five items you pick up in **Act I** are still load-bearing in **Act V**. Nothing you take is
-decoration: the chewed pen writes the abstract, the worksheets from the lecture are what the
-statistics are run against, the cracked hourglass is how you fake an international phone call.
+Few things you pick up are decoration. The USB stick on the Professor's desk starts a rap
+battle in Act II; the chewed pen writes your mechanism, straightens a leading question and
+writes a way out of the Ethics chair; the sealed slip is what gets you registered in Act V.
 
 ---
 
 ## The three flags that follow you
 
 Only three failure states cross act boundaries. Each is set by a choice the game presents
-attractively, each completes the room you are in, and each is read out loud by Reviewer 2 at
-the very end.
+attractively, and each is read out at the end.
 
 | Flag | Where you earn it | What it costs you |
 |---|---|---|
-| `theory_empty` | Sealing a Prediction Slip with any unsound box | Act IV's result comes back **vacuous** — "something will probably happen" — and cannot be learned from |
-| `analysis_p_hacked` | Stats Basement: taking the DISCOVERY! banner | You never break the seal; the outro asks how many tests you ran |
-| `claim_overstated` | Bureau "LARGE", or the Writing Room title ladder, or leaving the abstract alone | The outro's verdict line changes: your claim is one you did not defend |
+| `theory_empty` | Sealing the Prediction Slip with an unsound box (in practice: lodging all six references and sealing in the Office anyway) | The Casino result comes back **vacuous**; the Professor and Reviewer 2 (comment 14) both ask what you expected |
+| `analysis_p_hacked` | Significance Casino: taking the DISCOVERY! banner | You never break the seal; Reviewer 2's comment 9 asks how many tests you ran |
+| `claim_overstated` | Bureau **EXTRA LARGE**, the Writing Room title ladder, or "It reads fine. Leave it." | Meant to add comments 12 and 38 to the Reviewer 2 battle — but see the note below |
+
+> **Note (current build):** finishing the Writing Room clears `claim_overstated`, and the
+> Writing Room can only be finished the honest way, so the flag never reaches the outro.
 
 None of them is a game over. All of them are stamped, filed and approved by somebody.
 
@@ -49,92 +60,76 @@ None of them is a game over. All of them are stamped, filed and approved by some
 
 ## ACT I — THE QUESTION
 
-Four rooms, no locks. **Order matters here more than anywhere else in the game.**
+Four rooms, no locks.
 
 > **Two different people.** *Prof. Stellmacher* — "the Professor" — is a woman, and the Office
-> is hers. *Dr. Vossberg* is the man in the Lecture Theatre, covering her nine o'clock. They
-> used to be one character; if you have read an older copy of this document, that is what
-> changed.
+> is hers. *Dr. Vossberg* is the man in the Lecture Theatre, covering her nine o'clock.
 
-> ⚠️ **Loot the Office before you fetch her.** On a fresh save the Office is empty — she
-> refuses to be in the building while a class runs under her name that she did not design —
-> and that is the only comfortable window for the eight pickups on her desk. Everything there
-> is blocked while she is sitting in it.
->
-> If you loot late, you are not stuck: **burn her patience on purpose.** She walks out, the
-> desk is unattended, and she is back at her desk the next time you enter, with five fresh
-> bubbles. Nothing about a lost interview is saved.
+> **Loot the Office.** On a fresh save she is out: she will not be in the building while a
+> class runs under her name that she did not design. Her desk is blocked only *during* the
+> interview; once she has given you the question you can take things in front of her. If you
+> need her gone, tell her **"Dr. Vossberg asked for you. The projector in the Lecture Theatre is
+> broken again."** — she walks out.
 
 ### I.1 The Seven-Second Office (part one — the robbery)
 
-**Do:** take everything while it is empty. `pen` (pen jar) · `mug` · `likertdie` ·
-`hourglass` · `usb` · `stamp` · `magnifyingglass` (desk) · `bingocard` · `raffle`
-(Pick Up the right-hand bookshelf).
+**Do:** Pick up `pen` (pen jar) · `hourglass` · `usb` (taped to her book: *PROF G — BEATS — ON
+LOAN*) · `stamp` · `magnifyingglass` (desk) · `bingocard`. The mug and the Likert die are
+Look-only now; the Mensa and the Survey Lab have their own.
 
 **Optional:** magnifying glass on the right-hand shelf → her offprint, *The Death of
 Community: Evidence from Twenty-Three Residents of Leicester*. That is the Professor's
-backstory in one spine. Try it while she is watching and she tells you to put it back.
-
-**Also:** Look At the corkboard. The departmental timetable pinned over it is what tells you
-Dr. Vossberg exists: the nine o'clock is **INTRODUCTION TO SYSTEMS THEORY · PROF. STELLMACHER**,
-ringed twice in red with **NOT MINE** beside it, and underneath, in another hand, *cover —
-Dr. Vossberg*.
+backstory in one spine, and it comes back at the keynote. Look at the autograph on the
+corkboard: she is Professor G's biggest fan.
 
 **Easter egg:** pen on the corkboard → a **Fabricated Citation**. Use it on her later.
 
 ### I.2 Introduction to Systems Theory
 
-**Needs:** nothing (the bingo game needs `bingocard`). **Gives:** `chalk`, `worksheets`,
-`blackink`, and the Professor back in her office.
+**Needs:** nothing (the bingo game needs `bingocard`). **Gives:** `blackink` (a decoy — see the
+Pond), and the Professor back in her office.
 
 **Do:**
-1. Pick up the chalk, the worksheets and the ink. All three are needed later — the worksheets
-   not until **Act IV**.
-2. **Talk To Dr. Vossberg and ask "Where is Professor Stellmacher?"** He stops dead, which
-   nothing else in the room manages, and explains that she will not be in the building while
-   this runs under her name. *She is now in her office.* This needs no items and can be done
-   the moment you walk in.
-3. The bingo game is **optional** and worth playing anyway:
-   - Use `bingocard` on Dr. Vossberg.
-   - Click **"Keep listening…"** until a row, column or diagonal fills. Terms: autopoiesis,
-     trust, contingency, coupling, FREE, second-order, environment, closure, communication.
-   - **"Shout 'BINGO!'"** — he loses the thread and walks out, ending the nine o'clock forty
-     minutes early. That also puts her back in her office, if you did not just ask.
-4. Chalk on the blackboard summons **him** back (he cannot resist correcting a wrong arrow).
-   It does not send **her** away — that was the old one-person behaviour.
+1. **Talk To Dr. Vossberg → "Where is Professor Stellmacher?"** He stops dead and explains she
+   will not be in the building while this runs under her name. *She is now in her office*, and
+   the room is done.
+2. The bingo game is **optional** and worth playing: Use `bingocard` on him (or ask *"Could you
+   say a bit more about Luhmann?"*). Dab each square the moment he *says* the term (decoys are
+   near-misses; a missed term comes round again), and press **BINGO!** on the card when a row,
+   column or diagonal fills. He loses the thread and walks out forty minutes early — which also
+   sends her back to her office.
+3. Use the blackboard to summon him back (he cannot resist a wrong arrow).
 
 ### I.3 The Seven-Second Office (part two — the interview)
 
-**Gives:** `question`. Five patience bubbles; a wrong answer spends one, a right answer
-never loses.
+**Gives:** `question`. Five patience drops; a wrong answer spends one, a right answer never loses.
 
 1. *Highest crime rate per capita in the world* → **"The Vatican — but I don't buy it.
    Something's off in how that number's built."**
 2. → **"The crimes are pickpocketing against tourists — millions a year — but they divide by
    the 800 residents, not the visitors."**
 3. → **"Do students who attend more lectures get better exam results?"**
-4. Specify it: **WHO** first-years in the Methods lecture · **WHAT** lectures attended and
-   final exam grade · **WHEN** winter term 2025/26 · **DIRECTION** left open.
+4. → **WHO** first-years in the Methods lecture · **WHAT** lectures attended & final exam grade ·
+   **WHEN** this winter term · **DIRECTION** left open.
 
 Leaving the direction open is the right answer. You are not allowed to expect the result yet.
 
 ### I.4 Probability Pond
 
-**Needs:** `blackink`. **Both steps are required.**
+**Needs:** nothing.
 
-1. Use `blackink` on the **right-hand swan**. One black swan falsifies "all swans are white".
-   The left swan paddles away when the bottle comes out.
-2. **Talk to the philosopher afterwards** → `philosopherConvinced`. Before falsification she
-   only refuses. The Doorman checks this.
+**Look at the open water** (towards the bridge) and wait. A real black swan glides out from
+under the bridge; the Skeptic on the bench is convinced on the spot (`philosopherConvinced`).
+
+**Wrong branch:** `blackink` on the right-hand swan. *"You made that. A counterexample you
+manufactured is not evidence. It is a craft project."* The swan ducks and comes up white.
 
 ### I.5 Causality Corridor
 
-**Needs:** `question`, `philosopherConvinced`, `magnifyingglass`. **Gives:** `folder`
-(consumes `question`).
+**Needs:** `question`, `philosopherConvinced`. **Gives:** `folder` (consumes `question`).
 
-1. Ring the bell. He checks both things.
-2. Four case rooms. Use the magnifying glass on the pinned note to read each case, then pick
-   the door:
+1. Ring the bell (or just use the door). He checks both things.
+2. Four case rooms. Look at the pinned note to read each case, then pick the door:
 
 | Case | Answer |
 |---|---|
@@ -145,10 +140,10 @@ Leaving the direction open is the right answer. You are not allowed to expect th
 
 3. "Step through the archway." The Doorman takes the question and gives you the folder.
 
-**Wrong door:** the floor gives way. No permanent penalty, but you restart at Case 1.
+**Wrong door:** the floor gives way, you are walked back up to **the same case**, and the
+explanation stays on screen. No penalty.
 
-**Pick up on the way:** the rubber duck marked **Z?** (Case 2) and the brass **Z** nameplate
-(Case 4). Pure flavour, and the best two jokes in the act.
+**Pick up on the way:** the rubber duck marked **Z?** (Case 2). Pure flavour.
 
 **→ Act II unlocks.**
 
@@ -156,136 +151,120 @@ Leaving the direction open is the right answer. You are not allowed to expect th
 
 ## ACT II — THEORY
 
-*"Apparently, we need a theory."* Four rooms, all open at once, but they interlock heavily.
-This act fills the **Prediction Slip**: four boxes, and a brass needle along the bottom that
-is the only thing in the building that reads all four **together**.
+*"Apparently, we need a theory."* Four rooms, all open at once, but they interlock. This act
+fills the **Prediction Slip**: four boxes (WHAT IS KNOWN · MECHANISM · SCOPE · HYPOTHESIS AND
+FALSIFIER). Some rooms will happily file junk into a box; only a sound entry completes a room.
 
-Each room will happily stamp nonsense. Filling the boxes independently is exactly the mistake
-the act is about, and the needle degrades one notch per junk entry:
-**EXEMPLARY → ADEQUATE → CONCERNING → THEORETICALLY BUSY → EVERYTHING EXPLAINS EVERYTHING.**
-
-**Suggested order: Hall (ladder) → Library (cards, register, checking) → Workshop (extension)
-→ Library (the phone call) → Workshop (scope + hypothesis) → Seminar → Office.**
+**Suggested order: Hall (rap battle, hook pole) → Library (everything, including the phone
+call) → Hall (Professor G) → Workshop → Seminar.** The seal happens by itself.
 
 ### II.1 The Hall of Founders — MECHANISM
 
-**Needs:** `pen` + `blankcard` (from the Library desk). **Gives:** `stepladder`.
+**Needs:** `usb`, then `pen` + `blankcard` (from the Library desk). **Gives:** `stepladder`
+(the *Ceremonial Hook Pole*), the MECHANISM box.
 
-1. **Pick up the ceremonial stepladder first.** The Library needs it twice and nothing else
-   in the game provides one.
-2. Use pen or talk to **Weber** → crouch behind the frame → two cards:
+1. **Pick up the stepladder** → the hook pole comes off it. The Library's catalogue drawer needs it.
+2. **Use `usb` on the DJ** (or the DJ table). Tobi is livestreaming the **Founders' Rap
+   Battle**: Marx, Durkheim, Weber, then Professor G. Let it play to the end; the Authority
+   Meter falls to zero and the portraits stop nodding (`rapDone`).
+3. With the blank card and the pen, **Talk to Professor G** (before the battle he is too
+   nervous). Three sentences:
    - *"As Weber reminds us, education mediates the institutional reproduction of structured
-     sociality."* → every portrait nods, **MECHANISM DETECTED: NO**. Junk. Recoverable: fetch
-     another blank card and rewrite.
-   - ✅ **"Students attending lectures repeatedly encounter worked examples, so they practise
-     the type of reasoning the exam assesses."** → **MECHANISM: PRESENT.**
+     sociality."* → the portraits nod. Junk; he asks again.
+   - *"Attendance works through exposure to the lecture environment."* → "a mood, not a
+     mechanism". Again.
+   - ✅ **"Students who go to lectures keep meeting worked examples, so they practise exactly
+     the kind of reasoning the exam asks for."** → **MECHANISM: PRESENT**, and the card becomes
+     `mechanismcard`.
 
-**Flavour worth your time:** the AUTHORITY METER (say "Following Durkheim and Weber…" and get
-stamped THEORETICALLY GROUNDED), the Quotation Dispenser on setting **EXTREMELY GERMAN**, and
-the yellowed clipping, which quietly tells you the economics prize's real name.
+**Flavour:** the AUTHORITY METER (feed it "Following Durkheim and Weber…" and get stamped
+THEORETICALLY GROUNDED), the Quotation Dispenser on **EXTREMELY GERMAN** (gives *An Extremely
+Grand Phrase*, a decoy — Weber nods at it, which is the problem), the yellowed clipping, and
+Look at the portraits six times. Tobi offers an encore afterwards.
 
 ### II.2 The Library — WHAT IS KNOWN
 
 **Needs:** `magnifyingglass`, `stepladder`. **Gives:** `readinglist`, plus `enrolreg`,
-`blankcard`, `nobelproc`, `altpaper`.
+`blankcard`, `swedebook`.
 
-**Side pickups, all of them needed elsewhere:**
+**Side pickups:**
 - **Pick up the register** → `enrolreg`. Used by the Workshop, the Mensa **and** the Bureau.
-- **Pick up the desk** → `blankcard`. The Hall consumes it.
-- **Talk to KIRA** → *"Ask how the Nobel Committee contacts a laureate"* → `nobelproc`.
+- **Pick up the desk** → `blankcard`. Professor G writes on it.
+- **Pick up the stacks** → `swedebook`, *Swedish for Nobel Laureates*. The phone call needs it.
 
-**Catch all three bad references.** You cannot lodge a good list until you have found all
-three problems:
+**Catch all three bad references** (a red REJECTED tag appears on the trolley for each):
 
 | Problem | How |
 |---|---|
 | *It does not exist* | Magnifying glass on the **trolley** — reference 4's DOI resolves to a recipe for soup |
-| *It does not say that* | Pick up the **framed abstract** with the stepladder — Müller & Singh (2023), turned over: the association vanished after adjustment |
-| *It cannot establish that* | Pick up the **card catalogue** with the stepladder, after the first catch — a cross-sectional study filed as LECTURES CAUSE SUCCESS |
+| *It does not say that* | **Use the conveyor** → you snatch the full Müller & Singh (2023) off the belt; page nine says the association vanished after adjustment. The framed abstract is only a pointer |
+| *It cannot establish that* | **Use the card catalogue** with the hook pole — a cross-sectional study filed as LECTURES CAUSE SUCCESS |
 
-Then **Pick Up the trolley**:
-- *"Lodge all six — they are beautifully formatted"* → junk. The needle drops and the room
-  does not complete. **You can come back and redo it** once you have found all three, and the
-  needle recovers — but there is no reason to take this branch except to watch the Registry
-  accept a list without reading it.
-- ✅ **"Lodge only the ones that survive checking"** → the box is filled soundly, and you get
-  the `readinglist`. **Act V needs it.**
-
-### II.3 Feldstrom's Workshop — SCOPE and HYPOTHESIS
-
-**Needs:** `enrolreg`, the MECHANISM box filled, and Feldstrom **out of the room**.
-
-1. **Look at the desk** → you learn **Extension 4173**. Do this before anything else; the
-   Library phone is useless without it.
-2. Go and make the Stockholm call (below). Come back to an empty workshop.
-3. Use the **Accelerator** → peel the masking tape off the control panel. It will now run
-   both ways: not just how big a claim can be made, but how small.
-4. Use the Accelerator with `enrolreg` → **SCOPE**: first-year Methods students at this
-   university, winter term 2025/26. The THINGS THIS FORBIDS gauge climbs off zero for the
-   first time in years. Feldstrom comes back 2.6 seconds too late.
-5. Use it once more → **"Turn SPECIFY"** → the candidate hypothesis. Room complete.
-
-**The wrong branch, while he is still in the room:** *"Lodge the civilisation-scale version"*
-→ SCOPE: *Human civilisation.* The gauge reads zero. "It explains everything, forbids nothing,
-and cannot be wrong." Recoverable — scoping properly afterwards overwrites it and the needle
-climbs back.
+Then **Use the trolley** (or ask KIRA):
+- *"Lodge all six — they are beautifully formatted"* → junk. The box is filled but the room
+  does not complete. You can come back and lodge properly.
+- ✅ **"Lodge only the ones that survive checking"** (needs all three catches) → `readinglist`.
+  **Act V needs it.**
 
 ### The Stockholm call — getting Feldstrom out of his workshop
 
-Placed from the **Library** desk phone (or ask KIRA). Choose **"Professor Feldstrom.
-Extension 4173."** Three requirements, and the game teaches you each one by hanging up:
+**Needs:** `swedebook`. Talk to **KIRA → "Ask her to place a call"** (or use the desk phone) →
+**"Professor Feldstrom, please."** The screen splits: you on the left, his workshop on the right.
 
-| Missing | What he says |
-|---|---|
-| `nobelproc` | *"…the city?"* **Click.** |
-| `hourglass` | *"You are not calling internationally."* **Click.** — he judges the line by the delay |
-| `accentcard` | *"You are from Dortmund."* **Click.** — the delay was right, the voice was wrong |
+1. **"Hej. This is Stockholm."** → *"…Say something in Swedish."*
+2. ✅ **Read from the book: "Hej. Kommittén är lagom nöjd. Men först: fika."** (Without the
+   book you only have *Abba* and *Ikea*. *"Grattis! You have won!"* hangs up: Stockholm never
+   says congratulations first.)
+3. *"…Which category?"* → ✅ **"That remains under discussion."** (*Physics* hangs up.)
+4. ✅ **"The Committee requires you downstairs, for a confidential consultation."**
 
-**The accent comes from Tobi and nowhere else.** After that third rejection, find him
-(he roams — see below) and ask **"Do you speak Swedish?"** He hands over a World Cultures
-Conference lanyard card with a palm tree on it. The five phrases on it are correct Swedish and
-completely useless for impersonating the Nobel Committee.
+*"Will there be photographers?" — "…ja." — "I'll bring the derivation."* He runs out.
 
-Then: turn the hourglass, **"Hej. This is Stockholm."** → *"Which category?"* → ✅ **"That
-remains under discussion."** (Physics and Economics both hang up, one of them sadly.) →
-consult the card: **IKEA**, **lagom** or **fika** — all three work, and he treats each as a
-stage of a procedure. *"Ah. The fika stage."* → ✅ **"The Committee requires you downstairs for
-a confidential consultation."**
+*"Congratulations, you've won the Nobel Prize"* as an opener gets *"Which one?"* and a click.
+*"The Committee is concerned the scope is too narrow"* cranks the Accelerator up to
+CONSCIOUSNESS IS ATTENDANCE. Wrong, not fatal. Every hang-up can be redialled.
 
-*"Will there be photographers?" — "…yes." — "I'll bring the derivation."*
+### II.3 Feldstrom's Workshop — SCOPE
 
-The other option, *"the scope is too narrow"*, cranks the Accelerator up to CONSCIOUSNESS IS
-ATTENDANCE. Wrong, not fatal.
+**Needs:** `enrolreg`, Feldstrom **out of the room** (the call).
+
+1. **Use the Accelerator.** The work order on the panel says it all: turn every drum
+   (Population, Mechanism, Scale) all the way **left**.
+2. **"Feed in the enrolment register"** → **SCOPE: first-year Methods students, this
+   university, this winter term.** THINGS THIS FORBIDS swings up. Feldstrom comes back too late:
+   *"You've made it terribly small." — "Yes." — "…brave."*
+
+While he is in the room he winds the drums back up, bins the register, and refuses a small
+version. **Wrong branch:** crank right and **"Lodge this version"** → SCOPE: *Human
+civilisation*, gauge at zero. Recoverable — scoping properly overwrites it.
+
+Optional: post `mechanismcard` into the hopper, or Show him the mechanism (*"Flow."*).
 
 ### II.4 The Seminar Room — HYPOTHESIS AND FALSIFIER
 
-**Needs:** `chalk`, and the hypothesis box already filled by the Workshop.
-**Gives:** `altcard` — **Act IV needs it.**
+**Needs:** a sound SCOPE — on arrival the room tells you to come back once Feldstrom's machine
+has made your claim smaller. **Gives:** `altcard` — **Act IV needs it.**
 
-Use the chalk on the consequence board. Three slots, exactly one accepted combination:
+Use the consequence board. Two choices:
 
-- **WHERE:** worked-example questions
-- **FOR WHOM:** students already practising elsewhere
-- **DIRECTION:** larger
+- **LARGER on:** ✅ worked-example questions
+- **SMALLER for:** ✅ students already practising elsewhere
 
 → **"Write it on the board."**
 
-Anything else and a rival card slides underneath yours, labelled **SELECTION** (if you said
-"everyone") or **MOTIVATION**, and the Visiting Fellow raises one finger. No penalty. She is
-the only person in the building who is right about everything, and she never says so.
+Anything else and a rival card slides underneath yours (**SELECTION**, **MOTIVATION**, or
+YOUR OWN MECHANISM) and the Visiting Fellow raises one finger. No penalty. She signs, and hands
+you her SELECTION card: *"Somebody will ask you about it later."*
 
-### Hand-off: seal the slip
+### The seal
 
-Back to the **Office** with all four boxes filled → the seal scene.
+When the fourth room completes, the seal plays as a cutscene: wax, a date, *"What if I'm
+wrong?" — "Then you will have learned something."* You get the sealed `slip`.
 
-There is a button marked **I WOULD LIKE TO SEE THE DATA FIRST**. Press it. A klaxon goes off,
-and the request is noted. Then say **YES**.
-
-Metal clamps, wax, a date punched in with considerable force. *"What if I'm wrong?" — "Then
-you'll have found something out."*
-
-**If any box was unsound, sealing sets `theory_empty` here.** The Registry approves it anyway,
-prints INFORMATION CONTENT: 0, and something catches fire.
+If a box is junk (the six-reference list), the act cannot complete that way. Take it to the
+**Office** instead: the Professor lowers the sealing device, with a button marked **I WOULD LIKE
+TO SEE THE DATA FIRST** (a klaxon; request noted). Sealing then sets `theory_empty` and the
+slip comes back on fire: THEORY EXISTS · INFORMATION CONTENT: 0 · APPROVED.
 
 **→ Act III unlocks.**
 
@@ -293,132 +272,95 @@ prints INFORMATION CONTENT: 0, and something catches fire.
 
 ## ACT III — DATA
 
-Three rooms open, plus the Fieldwork Arena which is gated by the other three. This act fills
-the four boxes of **Application H-27**.
+Four rooms, filling four boxes. The Fieldwork Arena needs the other three first.
+**Suggested order: Ethics → Survey Lab → Mensa → Fieldwork.** The calendar page from Ethics
+is needed in the Survey Lab.
 
-**Forced order: Ethics (approval) → Mensa (lunch bag, voucher) → Ethics (ballot box) → Survey
-Lab → Fieldwork.** The calendar page in Ethics is needed in the Survey Lab, and the lunch bag
-from the Mensa is needed back in Ethics.
+### III.1 The Ethics Tribunal — four seals
 
-### III.1 The Ethics Tribunal — ☑ HUMANS MAY BE APPROACHED
+**Needs:** `pen`. **Gives:** `consentplain`, `calendarpage`, `redacted`, and on approval
+`pseudolist` + `altquestionnaire` + `examrecords` + `ballotboxwrapped`.
 
-**Needs:** `pen` (twice), `lunchbag` (from the Mensa).
-**Gives:** `consentplain`, `calendarpage`, `redacted`, `ballotboxwrapped`, and on approval
-`pseudolist` + `altquestionnaire` + `examrecords`.
+1. **Consent** — pick up the plain-language form from the right-hand pew, use it on the Tribunal.
+2. **Withdrawal** — `pen` on the **Irreversible Participation Device**. You write WITHDRAW on
+   the buckle.
+3. **Names + linkage** — Talk to the Tribunal → *"Ask about names, and linking answers to exam
+   results"*:
+   - *"Stamp REDACTED over every name **and** every number"* → **`overRedacted`**: nothing left
+     to join. Ask again. (Until you do, the reminder postcards in Fieldwork are useless.)
+   - *"Keep the names"* → refused.
+   - ✅ **"Number each form with a pen, redact only the names, keep the key in the Ledger"** —
+     fills both seals.
 
-Four thumbs required:
+When all four seals are red: **ETHICAL APPROVAL**, *subject to fourteen minor amendments*, and
+the Keeper hands down the list, the paper questionnaires, the question-level exam records and
+the bagged ballot box.
 
-1. **Consent** — pick up the plain-language form from the right-hand pew, then use it on the
-   Tribunal.
-2. **Withdrawal** — use `pen` on the **Irreversible Participation Device**. You pry the buckle
-   open and write WITHDRAW on it.
-3. **Redaction** — talk to the Tribunal → *"Ask about data protection"*:
-   - *"Stamp REDACTED over every name **and** every number"* → **`overRedacted`**. This is the
-     seductive wrong answer and it bites twice later.
-   - ✅ **"Number each form with a pen, redact only the names, keep the key in the Ledger."**
-4. **Linkage** — *"Ask to link the answers to exam results"* → ✅ **"Question by question, not
-   just the overall mark."** One number per student cannot test your hypothesis.
+**Also here:** pick up the **calendar page** (the Survey Lab needs it).
 
-> **If you over-redacted:** the linkage request is refused outright — *"It is the most private
-> dataset this Tribunal has ever seen. It is also useless."* The menu offers **"Admit the
-> redaction went too far, and redo it."** Take it. Over-redaction also breaks the reminder
-> postcards in the Fieldwork Arena, because you cannot chase a number you have erased.
+### III.2 The Survey Lab (Emergency Department) — INSTRUMENT EXISTS
 
-**Also here:** pick up the **calendar page** (the Survey Lab needs it). And once you have the
-lunch bag: use it on the side table → then **pick up the ballot box**. The Keeper will not let
-a glass box leave the room unwrapped.
+**Needs:** `calendarpage`, `pen`. **Gives:** the `questionnaire`.
 
-### III.2 The Mensa — ☑ SAMPLE DRAWN
-
-**Needs:** `enrolreg` (or `pseudolist`), `mug`, `raffle`. **Gives:** `lunchbag`, `voucher`.
-
-> **Feed the small list into the frame and keep the big one.** The frame consumes whichever
-> list you give it, and the Bureau in Act IV needs one of them as evidence. Using `enrolreg`
-> keeps `pseudolist` in your pocket. (If you run out, the Library register can be picked up
-> again.)
-
-1. Use **`enrolreg`** on the gilded frame. It fills and stops well short of the top.
-   *"The small one has a hundred and forty names." — "It has the* right *hundred and forty
-   names." … "…my father would not have liked you."*
-   - If you use `pseudolist` instead, the frame fills gloriously with four thousand cards and
-     the Officer breathes *"A POPULATION."* You then have to use the **magnifying glass** on
-     it to find the microscopic print: *"Includes only students registered for the university
-     newsletter."* — *"But it's a very* large *list." — "That's not the same thing." — "It's
-     alphabetised."*
-2. Use the **mug** on the Officer. WORLD'S OKAYEST SAMPLE SIZE. *"Adequate."*
-3. Use the **raffle drum** on him — the Great Randomisation Drum is ceremonial and its crank
-   came off in 1974.
-4. Talk to him → trumpets, confetti, box ticked.
-
-**The wrong branch that you should walk anyway:** before loading the frame, **use it with no
-item** → you swing it round to face the lunch queue and draw twelve people who are all
-carrying the same tote bag. Then use the **tote-bag sample** on the counters: the Cook pins it
-above the till and gives you a **Free Lunch Voucher**. *"An early mistake, converted into a
-resource."* You need that voucher in the Fieldwork Arena.
-
-**Also:** pick up a **brown paper lunch bag** from the counters, for the Ethics ballot box.
-
-### III.3 The Survey Lab (Emergency Department) — ☑ INSTRUMENT EXISTS
-
-**Needs:** `calendarpage`, `likertdie`, `pen`. **Gives:** `scissors`, `reminders`, and the
-four question cards — `qsatisfaction`, `qpolicy`, `qlectures`, `qsupport`.
-
-Four sick questions, and then a fifth thing nobody asked for. **Three are on the gurneys; the
-fourth is on the triage desk at the nurse's elbow, on a clipboard, because they ran out of
-beds.** It is Patient 4 and it is easy to walk past — she names it in her opening line.
+Four sick questions. Three are on the gurneys; the fourth is on a clipboard on the triage desk.
 
 | Patient | Where | Diagnosis | Cure |
 |---|---|---|---|
-| 1 | First gurney | Double-barrelled | **Look At or Talk To** it first to diagnose, get the **scissors** from the cabinet, then cut |
-| 2 | Second gurney | Leading | **Use with no item** — you pry "Don't you agree that" and "excellent" off it. Adding things won't straighten it |
-| 3 | Third gurney | Vague — "often" | Use the **calendar page**. "Recently" is not a question; "in the last four weeks" is |
-| 4 | Triage desk | Two response categories | Use the **Likert die** |
+| 1 | First gurney | Double-barrelled | **Look at** it to diagnose, pick up the **scissors** from the cabinet, use them on it |
+| 2 | Second gurney | Leading | Use the **pen** — strike out "Don't you agree that" and "excellent" |
+| 3 | Third gurney | Vague — "often" | Use the **calendar page** |
+| 4 | Triage desk | Two response categories | Pick up the **Likert die** from the desk and use it (she traces it; do not roll it) |
 
-**You carry them out.** Each question, once it is fit for human administration, is unclipped
-from its bed and handed to you as an inventory card — and *the bed it came from empties*. Four
-stripped beds is the progress bar. The cards are the instrument; you are meant to leave with
-it in your hands rather than with four flags set invisibly.
-
-> **Watch the verb.** With **LOOK AT** selected, clicking an inventory item examines it rather
-> than picking it up to use. Select **USE** first, then click the die or the calendar page,
-> then click the patient.
-
-Then the machine says **INSTRUMENT INCOMPLETE**: nothing on it asks whether they practise
-anywhere else, which is the alternative explanation your own hypothesis names. Use the `pen`
-on the clipboard → ✅ **"In the last four weeks, how often did you practise exam-style problems
-using anything other than the lectures?"**
-
-**Also:** pick up the **rotary phone** → reminder postcards.
+Each healed chart is pinned on the DISCHARGED board; four on the board and the nurse staples
+them into your questionnaire.
 
 **The Tobi route:** if Tobi owes you a favour and is in the room, you can get the scissors
-without diagnosing anything — *"Hey, can he borrow the scissors? He's doing a whole thing."* —
-*"Of course he can,"* says the nurse, warmly. You are then holding a pair of scissors and you
-still have no idea what is wrong with the patient. **You skip the asking, not the cutting.**
+without diagnosing anything — *"Hey, can he borrow the scissors? He's doing a whole thing."*
+You are then holding scissors with no idea what is wrong. **You skip the asking, not the cutting.**
 
-### III.4 The Fieldwork Arena — ☑ RESPONSES ACQUIRED
+### III.3 The Mensa — SAMPLE DRAWN
 
-**Needs:** the other three boxes, `ballotboxwrapped`, `reminders`, `altquestionnaire`,
+**Needs:** `enrolreg` (or `pseudolist`). **Gives:** the drawn sample; optionally `voucher`.
+
+1. **Talk to the lunch queue** (the Cook): borrow a **mug** and the **SR-2 raffle drum**.
+2. Use **`enrolreg`** on the gilded frame. It fills and stops well short of the top. *"It has
+   the* right *hundred and forty names." … "…my father would not have liked you."* You keep the
+   register — the Bureau needs it.
+   - If you use `pseudolist` instead, the frame fills gloriously — *"A POPULATION."* — and you
+     need the **magnifying glass** on it: *"Includes only students registered for the university
+     newsletter."* The Officer then swaps in the register.
+3. Use the **mug** on the Sampling Officer (*"Adequate."*) and the **raffle drum** (the Great
+   Drum is ceremonial; the SR-2 does the work).
+4. Talk to him → trumpets, confetti, box ticked.
+
+**The wrong branch worth walking:** before loading the frame, **use it with no item** → twelve
+people from the lunch queue, all with the same tote bag. Give the **tote-bag sample** to the
+Cook: she pins it above the till and gives you a **Free Lunch Voucher**. *"An early mistake,
+converted into a resource."*
+
+### III.4 The Fieldwork Arena — RESPONSES ACQUIRED
+
+**Needs:** the other three boxes, `ballotboxwrapped`, then `reminders`, `altquestionnaire`,
 `voucher`. **Gives:** `rateprint`.
 
-1. Talk to the Director. First run **without** the ballot box: everybody answers "Zero" into a
-   microphone in front of an audience, and the board reads **100%**.
-2. Run it again **with** the ballot box. Private answers. The board decays 100 → 92 → 83 → 67 →
-   **58%**, and a big red button lights up.
-3. Three fixes, each used on the **podiums**: `reminders` → 64%, `altquestionnaire` → 70%
-   (podium 9 refuses to answer on a screen), `voucher` → **75%** (a commuter halfway through
-   the TOO BUSY door turns around).
+1. Talk to the Director. The bagged ballot box goes on stage: private answers, and the board
+   decays 100 → 92 → 83 → 67 → **58%**. A big red button lights up.
+2. Three fixes, each used on the **podiums**: `reminders` (pick up the postcards by the
+   Arena's telephone) → 64%, `altquestionnaire` → 70% (podium 9 will not answer on a screen),
+   `voucher` → **75%**. No voucher? Ask the Director *"Could we offer them something for their
+   time?"*
 
-**The big red button** reads *REPLACE MISSING RESPONDENTS WITH NEAREST AVAILABLE PERSON*. Press
-it: the board snaps to 100% and the Sampling Officer bursts in — **"THOSE PEOPLE WERE NOT
-DRAWN!"** Convenience substitution is not a repaired sample. It is a different one with no
-paperwork.
+**The big red button** (use the host's podium while live): *REPLACE MISSING RESPONDENTS WITH
+NEAREST AVAILABLE PERSON*. The board snaps to 100% and the Sampling Officer bursts in —
+**"THOSE PEOPLE WERE NOT DRAWN!"**
 
 ### Hand-off: provenance
 
-Back at the **Office** → *where did these come from?* → ✅ **"Random draw from the first-year
-Methods register. Seventy-five per cent answered, and I know which quarter didn't."**
+The game takes you to the **Office** → *where exactly did those numbers come from?* → ✅ **"The
+frame was the first-year Methods register, a hundred and forty names. Twelve drawn at random.
+Nine answered — seventy-five per cent — and I know which three didn't."**
 
-Not "a hundred and forty is a big number", and not "the survey system exported them".
+Not "a big dataset", and not "the survey system exported them".
 
 **→ Act IV unlocks.**
 
@@ -426,137 +368,107 @@ Not "a hundred and forty is a big number", and not "the survey system exported t
 
 ## ACT IV — EVIDENCE
 
-*"Everything here says yes."* **Forced order: Bureau (take a ticket) → Delegation → Stats
-Basement → Bureau again.**
+*"Everything here says yes."* **Order: Delegation Engine → Significance Casino → Bureau.**
 
-### IV.1 The Bureau of Implications — take a ticket
+### IV.1 The Delegation Engine
 
-**Do this on your first visit and then leave:** **pick up the counter** → **Queue Ticket A73**.
-It is free, and the Delegation Engine will not deal with you without it.
+**Needs:** nothing. **Gives:** `cleandata`.
 
-### IV.2 The Delegation Engine
+KIRA thinks she has found the Codebook. A lever descends towards AUTO-SUBMIT; the Professor
+watches with an hourglass and a red pen.
 
-**Needs:** `ticket`, `redacted`. **Gives:** `cleandata`.
+1. Talk to KIRA (or use her terminal) and pick any question. She streams a ten-line report.
+2. **Click each wrong line and say why.** Seven are wrong:
 
-A lever is descending towards AUTO-SUBMIT. KIRA has already done the analysis.
+| Line | Stamp | Right reason |
+|---|---|---|
+| N = 140 | WRONG N | 140 is the register. Only 9 people answered |
+| Linked by surname | WRONG KEY | Link on the pseudonymous IDs; surnames collide |
+| 3 missing imputed as full attendance | MADE UP | Filling in the answer you hoped for manufactures the result |
+| p < 0.001 | FORKING PATHS | Nine people, twenty models, kept the best |
+| *causes* 23% higher marks | NOT CAUSAL | It is a survey: associated with, not causes |
+| consistent with Müller & Singh | ABSTRACT ONLY | Its conclusion says the effect vanished; she read the abstract |
+| Figure 1 | Y-AXIS AT 70 | The axis starts at 70 |
 
-1. **Use the ticket on the lever.** *"Ticket A73 registers you as an interested party. The
-   schedule is now paused pending clarification."* Without this, every instruction gets
-   *"Certainly! I will action that after submission."*
-2. **Read the merge log** → page 31: *matched survey responses to exam records on **surname**.
-   12 non-matches dropped. 3 duplicate surnames merged.*
-3. **Check one printed record** with the redacted questionnaires in hand → respondent 041 now
-   attends 40% of lectures and 110% of tutorials.
-4. Talk to KIRA → **"Tell her the exact fix"**:
-   - *"Try again, properly this time."* → another wrong file, faster. *"'Try again' is not an
-     instruction. It is a mood."*
-   - ✅ **"Re-merge on the pseudonymous ID, not the surname. Do not drop non-matches — list
-     them."**
+   Response rate (75%), design and your hypothesis are **true** — answer *"…actually, nothing."*
+3. **Show it to Prof. Stellmacher.** Anything you missed she circles; say what is wrong with
+   each, then show her again.
+4. ✅ **"Give me the data, linked on the IDs. I will run the test my slip names myself."** The
+   lever locks out. *"Certainly. …What exactly do you mean?"*
 
-The lever locks out four inches above AUTO-SUBMIT, and KIRA asks the first question she has
-ever asked: *"Certainly. …What exactly do you mean?"*
+*"KIRA, fix it"* → a different wrong answer, faster: *"'Fix it' is not an instruction. It is a
+mood."* *"Submit it anyway"* → she rejects it herself.
 
-### IV.3 The Statistics Basement
+### IV.2 The Significance Casino (the old Statistics Basement)
 
-**Needs:** `cleandata`, `examrecords`, **`worksheets`** (from the Act I lecture).
-**Gives:** `resultprint`.
+**Needs:** `cleandata`, `examrecords`. **Gives:** `resultprint`.
 
-Use the **sealed Prediction Slip**. Three guards, each naming what is missing — and the third
-is the payoff for having picked up a stack of handouts in Act I: without the worksheets there
-is *no way whatsoever to tell which of those forty questions resemble the worked examples.*
-
-Then **"Run it."**
+Use the **sealed Prediction Slip** on the lectern. (Vossberg's worked-example sheets are pinned
+above the desk.) ✅ **"The one the slip names: is the gap larger on the worked-example
+questions, and smaller for students already practising elsewhere?"** Overall marks, or all forty
+questions one by one, are both turned down.
 
 - If you sealed an empty theory: **the result is vacuous.** *"Something will probably happen."*
-  It is consistent with the slip, with the opposite of the slip, and with anything. Four acts
-  of honest work, and nothing learnable at the end of it.
-- Otherwise the result either **holds** (the gap is larger on worked-example questions, and
-  smaller among students already practising elsewhere) or is **null** — flat, and
-  informatively so. The Skeptic comes down the stairs with Volume XI: *"You have removed an
-  explanation from circulation."* Both are wins.
+- Otherwise the result either **holds**, modestly, or is **null** — flat, and informatively so
+  (it is a coin toss). The Skeptic: *"You have removed an explanation from circulation."*
+  Both are wins.
 
 > ### ⚠️ The p-hacking trap
-> There are twenty switches on the wall. Flip three and a bell rings, a green lamp comes on,
-> and a mechanical banner springs up: **DISCOVERY! Vegetarians report more stress. p = .049.**
+> Pull the slot machines three times: bell, coins, **DISCOVERY! Vegetarians report more
+> stress. p = .049.**
 >
-> **"Take it. Print the banner."** completes the room. You never break the seal, you never get
-> a result, and Reviewer 2 asks how many tests you ran.
->
-> ✅ **"Leave it. You promised to test something else."** The sealed slip names exactly one test.
+> **"Take it. Print the banner."** completes the room with a result of sorts and sets
+> `analysis_p_hacked`. ✅ **"Leave it. You promised to test something else."**
 
-### IV.4 The Bureau of Implications — the interpretation
+### IV.3 The Bureau of Implications
 
 **Needs:** `resultprint`, plus `enrolreg`/`pseudolist`, `altcard`, `rateprint`.
 **Gives:** `interpretation`.
 
 The Clerk: *"Number, please. And what size would you like it to mean?"*
 
-- **"LARGE."** → `claim_overstated`, and the room completes. *"We don't stock true. We stock
-  sizes."*
+- **"LARGE."** → SOLD OUT (the whole department had one this week) → **"EXTRA LARGE, then."**
+  → `claim_overstated`, room complete. *"We don't stock true. We stock sizes."*
 - ✅ **"I'd like to write my own."**
 
-Then write all three limitations. **Each one is evidence-gated** — you cannot assert a
-limitation you have no grounds for, because that is just a ritual apology:
+Then use the evidence for each limitation **on the clerk**:
 
-| Limitation | Evidence he demands |
+| Limitation | Evidence |
 |---|---|
-| One course, one university, one term | the frame you actually drew from (`enrolreg`/`pseudolist`) |
-| The design cannot separate attendance from motivation | the **ALTERNATIVE EXPLANATION card** from the Seminar |
-| A quarter of them never answered | the **rate and its denominator** (`rateprint`) |
+| One course, one university, one term | the frame (`enrolreg` or `pseudolist`) |
+| The design cannot rule out selection | the **ALTERNATIVE EXPLANATION card** from the Seminar |
+| A quarter of them never answered | the **75 tile** (`rateprint`) |
 
-There is a fourth option, **"Further research is needed."** The Clerk brightens and gestures at
-a wall of hundreds of identical brass plaques. *"It is not a limitation. It is a way of not
-naming one."* It never counts.
+**"Further research is needed"** gets a plaque from the wall and never counts. With all three
+ticked → **Lodge it**.
 
-**→ Act V unlocks.**
+**→ Act V unlocks** (the programme goes up: you are Poster 312, next to the bins).
 
 ---
 
-## ACT V — WRITING
+## ACT V — THE ANNUAL MEETING
 
-**Forced order: Writing Room (type a label) → Gap Registry → Writing Room (finish it).**
+**Order: Psych Lab (any time) · Writing Room → Poster Session → Keynote.** Do the Psych Lab
+before the keynote: the ending waits until all four rooms are done.
 
-### V.1 The Writing Room — the typewriter
+### V.1 The Infinite Monkey Project (Psych Lab)
 
-**Pick up the long table** → the typewriter gives you a **typed drawer label**. The Registry
-files nothing that was written by hand.
+Talk to **Dr. Achterberg** (the Visiting Fellow) → ✅ **"Show her the sealed Prediction
+Slip"**. **REGISTERED.** Your result, data or interpretation are all turned away: *"Anyone can
+predict yesterday."*
 
-### V.2 The Gap Registry
+### V.2 The Writing Room
 
-**Needs:** `drawerlabel`, `interpretation`, `readinglist`, `resultprint`.
-**Gives:** `contribution`.
+**Needs:** `interpretation`, `readinglist`. **Gives:** `contribution`, the poster.
 
-1. Talk to **KIRA** → **"The three that survived checking. Line them up against what I
-   found."** Two are cross-sectional; the third adjusted for nothing and reports an estimate
-   twice the size of yours. This is the step everyone skips.
-2. Talk to the **Registrar**. He will ask, in order, for the label, the interpretation, the
-   reading list, and the comparison. Then: *"Right. What is the contribution?"*
+1. Talk to the **Registrar**. He lines up the three papers against your result, then asks for
+   the contribution:
+   - *"It confirms the three papers"* → *"That is not confirming them. That is correcting them."*
+   - *"It shows that lectures cause better exam results"* → observational.
    - *"Nobody has studied this at this university before."* → *"Correct, and irrelevant."*
-   - *"A general law of educational flow."* → *"That is not a contribution, that is a* weather
-     forecast for everywhere. *… Has Feldstrom been talking to you?"*
-   - ✅ **"A boundary condition on three existing papers: the association is concentrated where
-     the practice mechanism predicts, and it is smaller than their unadjusted estimates."**
-
-He writes it down himself, which he has not done in some time, and presses it into a small
-brass tag one letter at a time. *"Small. Specific.* Attached *to something."*
-
-Then, from the doorway: *"Your contribution is a general law of social flow." — "My
-contribution is a boundary condition on three existing papers." — "That is not a contribution.
-That is a* footnote." — *"It's a true footnote." — "…"* (he writes it down)
-
-**Optional, and worth it:** a drawer marked **CLOSED — NOT CURRENTLY IN CIRCULATION** sits
-directly behind the Registrar, who never moves. If you have sent **Tobi** here, he flees into
-the stacks and the drawer slides open: a card from **1994** describing a study that asked
-almost your question, of almost your students, and found almost your answer. *Your contribution
-is smaller than it was ten minutes ago, and truer.*
-
-### V.3 The Writing Room — the abstract
-
-**Needs:** `contribution`, `pen`, `slip`.
-
-KIRA has written four sentences. Three words in them are wrong, and you are crossing them out
-on paper, with the sealed slip open beside you to check what you said you would find against
-what you are about to claim you found:
+   - ✅ **"A boundary condition on three existing papers: the association is concentrated
+     where the practice mechanism predicts, and it is smaller than their unadjusted estimates."**
+2. Use the **table** (or the abstract). Three words in KIRA's abstract are over the line:
 
 | Her word | Your word |
 |---|---|
@@ -564,75 +476,99 @@ what you are about to claim you found:
 | demonstrate | **are consistent with** |
 | people | **first-year Methods students** |
 
-Then **"This is what happened. Finish it."** Feldstrom stamps the folder **CLAIM DEFENSIBLE**.
+3. **"This is what happened. Finish it."** → **CLAIM DEFENSIBLE**. The phone rings (a vehicle
+   warranty). **"Take the poster to the Mensa."**
 
 > ### ⚠️ Feldstrom's title ladder
-> Talk to him and let him make the title bigger, one step at a time:
+> Talk to him → **Let him make it bigger**: *Lecture Attendance and Exam Performance in a
+> First-Year Methods Course* → *What Makes Students Learn* → *Educational Exposure and Human
+> Capital Formation* → *Institutions and the Production of Human Capacity* → **CIVILISATION IS
+> TRAFFIC**. IMPACT: Modest Contribution → Paradigm Shift → Nobel Adjacent → **PRESS OFFICE HAS
+> BEEN ALERTED**. Enlarging past the top sets `claim_overstated`.
 >
-> *Lecture Attendance and Exam Performance in a First-Year Methods Course* → *What Makes
-> Students Learn* → *Educational Exposure and Human Capital Formation* → *Institutions and the
-> Production of Human Capacity* → **CIVILISATION IS TRAFFIC**
->
-> The IMPACT gauge goes Modest Contribution → Paradigm Shift → Nobel Adjacent → Nobel Adjacent
-> → **PRESS OFFICE HAS BEEN ALERTED**. Enlarging at the last stage sets `claim_overstated`.
-> *"The claim has left the building."*
->
-> You can **wind the title back down** one step at a time. There is no lever for it; you just
-> have to cross it out and write the smaller one back in.
->
-> The third route to the same flag is the laziest: in the abstract menu, **"It reads fine.
-> Leave it."**
+> **Wind the title back down** one step at a time, or **Refuse him** (small title back at
+> once). You cannot finish with a big title on the front page. *"It reads fine. Leave it."* in
+> the abstract menu also sets the flag, and finishes nothing.
+
+### V.3 The Poster Session (the Mensa)
+
+**Needs:** the Writing Room done. Use **Poster 312**. Five visitors; each answer is shuffled.
+A good answer keeps them at your board; a bad one sends them away. No fail state.
+
+| Visitor | Asks | ✅ Answer |
+|---|---|---|
+| Fieldwork Director | Why so *small*? | "Because I ran the one test I promised, and small is what it is." |
+| The Doorman | More of a comment | "Thank you. Would you like the one-sentence version?" |
+| Dr. Achterberg | "Selection?" | Point at the limitations box: selection predicts a gap on *every* question |
+| Sampling Officer | Are the pens free? | "They are. And the finding, in one sentence…" |
+| The Skeptic | How sure are you? | The interval line (rules out no effect and a large one / rules out what the mechanism needed) |
+
+Then a monkey stamps the BEST POSTER **MAJOR CONCERNS**, and Achterberg warns you: *"Feldstrom
+has a slide about you. Slide fourteen."* **"Go to the keynote."**
+
+### V.4 The Keynote Showdown (Hall of Founders)
+
+Opens after the Poster Session and starts on its own. Slide 14 is your chart, with the small
+bar grown to the top and your name gone. When the floor opens: **"Stand up"**.
+
+Four slides; answer each with the right evidence (a wrong pick gets a laugh, and you try again):
+
+| Slide | Claim | ✅ Evidence |
+|---|---|---|
+| 15 | ATTENDANCE CAUSES LEARNING | **Point at the design** |
+| 16 | TRUE FOR EVERY STUDENT, EVERYWHERE | **Point at the scope** |
+| 17 | AN ENORMOUS EFFECT | **Point at the interval** |
+| 18 | NEVER BEFORE DISCOVERED | **Point at the three papers** |
+
+Then slide 23, **STOCKHOLM**. The hall is his — until the Professor stands up: *"You did,
+Traffic."* Twenty-three residents of Leicester. → ✅ **"I'd rather have the part that's
+true."** → *"…Write it down."* The founders applaud; Achterberg runs the live replications and
+only Poster 312 holds. **Continue** → the Stockholm cutaway (KIRA gets the prize) → the Office.
 
 ### The ending
 
-Back to the **Office**. Talk to the professor.
-
-*"So… that's it?"* → **"The Codebook."** → explain: the Corridor, the Doorman, the chapters,
-the rumours → *"Oh. That."* … *"We used to call it Methods."*
-
-Take it to the submission chute.
+At the **Office**: **"So… is that the Codebook?"** → *"The what?" … "Oh. That. We used to call
+it Methods."* → **"Take it to the submission chute"** → **"Leave the building."**
 
 ---
 
 ## The outro
 
-Reviewer 2 is a monkey. The verdict is **REVISE AND RESUBMIT** no matter what you did — but
-what you did changes what is said about it:
+The walk back, the envelope, Reviewer 2's letter — and then the **Reviewer 2 battle**: each
+comment is an attack, each card from the folder an answer. A wrong card costs composure (an
+overclaim costs most); at zero you walk round the pond and come back. No fail state.
 
-- **`claim_overstated`** → comment 17 lands on a claim you did not defend. Otherwise it is
-  already answered on page four, and you can point at the sentence.
-- **`theory_empty`** → *"What did the authors expect to find?"*
-- **`analysis_p_hacked`** → *"How many tests did the authors run?"*
-- **Showed Tobi a number** → a screenshot of a post with four thousand likes.
+| Comment | ✅ Card |
+|---|---|
+| 1 · The literature review omits a substantial body of work | **The three papers on your reading list** |
+| 31 · Please cite Smith (1987) | **"There is no Smith (1987)."** |
+| 9 · How many tests did the authors run? *(p-hacked only)* | **Concede it, honestly** |
+| 14 · What did the authors expect to find? *(empty theory only)* | **Concede it, honestly** |
+| 42 / 43 · More ambition / claims beyond the evidence | **Concede it, honestly** (42, and keep 43) |
+| 12 · The title claims more than the design allows *(overstated only)* | **Concede it, honestly** |
+| 38 · The abstract says "causes" *(overstated only)* | **Concede it, honestly** |
+| 17 · Selection not ruled out *(the boss, always last)* | **The limitation you wrote down (p. 4)** |
 
-Then the armchair skeleton, the credits, and the monkey.
+Never play *"Our findings are robust and generalisable."* → **REVISE AND RESUBMIT**, the armchair
+skeleton (*WELCOME TO ACADEMIA*), and the monkey. If you **showed Tobi a number**, a screenshot
+with four thousand likes is in the envelope too.
 
 ---
 
 ## Tobi
 
-Tobi has no room. He is rerolled every time the campus map is drawn: about a third of the
-time he is "in a meeting" and nowhere at all; otherwise he is in one of the seventeen rooms,
-picked at random. If you cannot find him, go back to the map and come out again.
-
-He is worth finding four times:
+Tobi has no room. Until the rap battle he is pinned in the **Hall of Founders**, hosting it.
+After that he is rerolled every time the campus map is drawn: about a third of the time he is
+"in a meeting" and nowhere at all; otherwise he is in one of sixteen rooms at random.
 
 | Ask | Requires | Gets you |
 |---|---|---|
-| **"Do you speak Swedish?"** | the phone has already hung up on your accent | the **accent card** — the only way into the Stockholm call |
-| **"There's a story in the Gap Registry."** | — | he relocates there permanently and scares the Registrar off the CLOSED drawer |
-| *(he asks you)* **the photograph** | four conversations | he owes you a favour, and does not know it is one |
+| *(he asks you)* **the photograph** | refuse three times; the give-in appears on the fourth ask | he owes you a favour (the scissors, in the Survey Lab), and does not know it is one |
 | **"Show him a number"** | `resultprint` | *"Okay so this says lectures make you smarter."* → an extra outro panel |
+| **Encore** (Hall, after the battle) | `rapDone` | the rap battle again |
 
-**The photograph is his idea, not yours, and you cannot say yes.** He opens with it every time
-you talk to him, and on the first three asks the *only* option is to refuse — he takes it
-extremely well each time, which is the joke, and does not lower the phone. The give-in
-(*"…fine. One photograph."*) appears on the **fourth** ask, by which point refusing has become
-more effort than posing. He takes eleven and posts the one you are barely in, captioned *big
-ideas happening in the Methods dept today 🔬✨*.
-
-He does **not** follow you around afterwards — that was the old behaviour, and having him
-turn up in every room was too much of him. There is exactly one post.
+He takes eleven photographs and posts the one you are barely in: *big ideas happening in the
+Methods dept today 🔬✨*. There is exactly one post.
 
 **The line the two solutions never cross:** you can social-engineer a **person**. You cannot
 social-engineer the **evidence**. Tobi can get you the scissors without a diagnosis; he cannot
@@ -646,18 +582,20 @@ Everything here is recoverable, and most of it is where the jokes live.
 
 | Do this | Get this |
 |---|---|
-| Fabricate a citation (pen on the Office corkboard) and show it to the professor | the counter ticks to 10,000 |
+| Fabricate a citation (pen on the Office corkboard) and show it to the Professor | the counter ticks to 10,000, and back |
+| Pour black ink on the swan | *"It is a craft project."* |
+| Take the wrong door in the Corridor | the floor gives way |
 | Lodge all six references | the Registry files a list without reading it |
-| Write the Weber sentence | every portrait in the Hall nods at once |
-| Lodge the civilisation-scale scope | THINGS THIS FORBIDS reads zero |
-| Draw the sample from the lunch queue | twelve people in matching tote bags, and a free lunch |
-| Press **I WOULD LIKE TO SEE THE DATA FIRST** | a klaxon, and your request is noted |
+| Give Professor G the Weber sentence | every portrait nods at once |
+| Crank the Accelerator right and lodge it | THINGS THIS FORBIDS reads zero |
+| Draw the sample from the lunch queue | twelve matching tote bags, and a free lunch |
+| Press **I WOULD LIKE TO SEE THE DATA FIRST** (Office seal only) | a klaxon, and your request is noted |
 | Press the big red button in the Fieldwork Arena | *"THOSE PEOPLE WERE NOT DRAWN!"* |
-| Flip three switches in the basement | **DISCOVERY! Vegetarians report more stress. p = .049** |
-| Ask the Bureau for **LARGE** | *"We don't stock true. We stock sizes."* |
+| "KIRA, fix it." | *"It is a mood."* |
+| Pull the slot machines three times | **DISCOVERY! Vegetarians report more stress. p = .049** |
+| Ask the Bureau for **LARGE** | SOLD OUT — *"I can do you an EXTRA LARGE."* |
 | Say "further research is needed" | a wall of hundreds of identical plaques |
 | Let Feldstrom name the paper | **CIVILISATION IS TRAFFIC** |
-| Take the wrong door in the Corridor | the floor gives way |
 
 ---
 
@@ -666,50 +604,40 @@ Everything here is recoverable, and most of it is where the jokes live.
 | Item | From | Needed by |
 |---|---|---|
 | A Precisely Worded Question | Office interview | Corridor gate *(consumed)* |
-| Research Folder | Corridor | carried to the end; relabelled five times |
-| A Chewed Pen | Office | Hall, Ethics ×2, Survey Lab, **Writing Room** |
-| A Mug of Fossilized Coffee | Office | Mensa |
-| A Likert-Scale Die | Office | Survey Lab |
-| A Cracked Hourglass | Office | **the Stockholm call** |
-| A Magnifying Glass | Office | Corridor notes, Library trolley, Mensa frame |
-| A Bingo Card | Office | Lecture Theatre |
-| Lunch Raffle Drum | Office | Mensa |
-| A Bottle of Black Ink | Lecture | Pond *(consumed)* |
-| The Worked-Example Sheets | Lecture | **Statistics Basement** *(Act IV)* |
-| A Stub of Chalk | Lecture | Seminar board |
-| Ceremonial Stepladder | Hall | Library, twice |
-| Blank Catalogue Card | Library desk | Hall *(consumed)* |
-| A Written Mechanism | Hall, written on the blank card | **Feldstrom's Workshop** |
-| Enrolment Register | Library | Workshop, Mensa *(consumed)*, Bureau |
-| Nobel Notification Procedure | Library (KIRA) | the Stockholm call |
-| A Laminated Card of Swedish (Approx.) | **Tobi** | the Stockholm call |
-| Reading List | Library | **Gap Registry** *(Act V)* |
-| ALTERNATIVE EXPLANATION card | Seminar | **Bureau** *(Act IV)* |
-| Prediction Slip (Form P-1) | Office seal scene | Stats Basement, Writing Room |
-| Torn Calendar Page | Ethics | Survey Lab *(consumed)* |
-| Plain-Language Consent Form | Ethics pew | Ethics Tribunal *(consumed)* |
-| Redacted Questionnaires | Ethics | Delegation Engine |
-| Official University List | Ethics approval | Mensa *(consumed)*, Bureau |
-| Paper Questionnaire | Ethics approval | Fieldwork *(consumed)* |
-| Exam Records (by question) | Ethics approval | **Statistics Basement** |
-| Brown Paper Lunch Bag | Mensa | Ethics *(consumed)* |
-| Ballot Box, Discreetly Bagged | Ethics | Fieldwork |
-| The Tote-Bag Sample | Mensa, wrong branch | the Cook *(consumed)* |
-| Free Lunch Voucher | the Cook | Fieldwork *(consumed)* |
-| Single-Concept Scissors | Survey Lab cabinet | Survey Lab *(consumed)* |
-| Q1 — Satisfaction (separated) | Survey Lab, patient 1 | the instrument you leave with |
-| Q2 — Attendance Policy (neutral) | Survey Lab, patient 2 | the instrument you leave with |
-| Q3 — Lectures Missed (last 4 weeks) | Survey Lab, patient 3 | the instrument you leave with |
-| Q4 — Support (5-point scale) | Survey Lab, patient 4 | the instrument you leave with |
-| Reminder Postcards | Survey Lab phone | Fieldwork *(consumed)* |
+| Research Folder | Corridor | carried to the end; goes down the chute |
+| A Chewed Pen | Office | Hall (Professor G), Survey Lab patient 2, Ethics ×2 |
+| A USB Drive | Office | **Hall DJ** — the rap battle |
+| A Magnifying Glass | Office | Library trolley; Mensa frame (if you fed it the big list) |
+| A Bingo Card | Office | Lecture bingo *(optional)* |
+| A Cracked Hourglass · A Rubber Stamp | Office | flavour only |
+| A Bottle of Black Ink | Lecture | nothing — the Pond's wrong branch |
+| Ceremonial Hook Pole | Hall stepladder | Library catalogue drawer |
+| Blank Catalogue Card | Library desk | Professor G *(becomes A Written Mechanism)* |
+| Enrolment Register | Library | Workshop, Mensa, Bureau |
+| Swedish for Nobel Laureates | Library stacks | the Stockholm call |
+| An Extremely Grand Phrase | Hall dispenser | nothing — a decoy |
+| Reading List | Library | **Writing Room** (the Registrar) |
+| ALTERNATIVE EXPLANATION card | Seminar | **Bureau** |
+| Prediction Slip (Form P-1) | the seal | Casino lectern, **Psych Lab** |
+| Torn Calendar Page | Ethics | Survey Lab patient 3 |
+| Plain-Language Consent Form | Ethics pew | Ethics Tribunal |
+| Single-Concept Scissors | Survey Lab cabinet | Survey Lab patient 1 |
+| A Likert-Scale Die | Survey Lab triage desk | Survey Lab patient 4 |
+| The Questionnaire | Survey Lab | the instrument you leave with |
+| Official University List | Ethics approval | Mensa (the wrong frame), Bureau |
+| Paper Questionnaire | Ethics approval | Fieldwork |
+| Exam Records (by question) | Ethics approval | **Casino** |
+| Ballot Box, Discreetly Bagged | Ethics approval | Fieldwork |
+| A Mug · Lunch Raffle Drum (SR-2) | Mensa cook | Sampling Officer |
+| The Tote-Bag Sample | Mensa, wrong branch | the Cook |
+| Free Lunch Voucher | the Cook, or the Fieldwork Director | Fieldwork |
+| Reminder Postcards | Fieldwork telephone | Fieldwork |
 | A Scoreboard Tile Reading 75 | Fieldwork | Bureau |
-| Queue Ticket A73 | Bureau counter | Delegation Engine |
-| A Tape Reel Marked DATA | Delegation Engine | Statistics Basement |
-| The Interval, On A Brass Slide | Statistics Basement | Bureau, Gap Registry, Tobi |
-| A Brass Plaque, Engraved By You | Bureau | Gap Registry |
-| A Typed Drawer Label | Writing Room typewriter | Gap Registry |
-| A Brass Tag ("A Boundary Condition") | Gap Registry | Writing Room abstract |
+| A Tape Reel Marked DATA | Delegation Engine | Casino |
+| The Interval, On A Brass Slide | Casino | Bureau, Tobi |
+| A Brass Plaque, Engraved By You | Bureau | Writing Room (the Registrar) |
+| A Brass Tag ("A Boundary Condition") | Writing Room (the Registrar) | the abstract |
 
-**Tip:** with the verb set to **look at**, click anything in your inventory. Every item has a
-description, and several of them contain a nudge about what the thing is for. The folder lists
-what is actually in it, which makes it the fastest way to see how far you have got.
+**Tip:** Look at anything in your inventory (in simple controls: click it twice). Every item has
+a description, and several contain a nudge. The folder lists what is actually in it. Stuck?
+Ask the Professor **"What should I do next?"**, then **"And how exactly?"**
