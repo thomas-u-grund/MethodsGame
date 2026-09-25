@@ -1548,6 +1548,130 @@ A **RECORD HIGH** banner drops, a dot-matrix printer buries the floor in paper, 
 
 (setting up Act III).
 
+## Acts IV and V — redesign (DRAFT, 2026-09-25, for discussion)
+
+*The author picked Act IV from the "Replication Crisis" option and Act V from the "Conference"
+option. This outline joins them. Until it is approved, the Act IV and Act V sections below
+describe the game as built; once approved they are rewritten to match this.*
+
+### The shape in one paragraph
+
+In Act IV the department finds "the Codebook" — KIRA's engine that turns any dataset into a
+finding — and a gold rush breaks out. Every department comes back with a spectacular result.
+The player alone runs the one boring test their sealed slip names, and gets something small.
+In Act V everybody takes their results to **the Annual Meeting**: the gold-rush findings get
+keynotes and crowds; the player gets Poster 312, Hall C, next to the bins. The conference is
+where the claims meet an audience, and — in the Replication Session — the test of time,
+compressed to ninety minutes. Then home, the submission chute, and Reviewer 2.
+
+The spine does not change: **temptation** (Act IV — nobody stops you, everyone else is winning)
+then **integrity in public** (Act V — you say only what you found, in front of people who
+said much more and are being applauded for it).
+
+---
+
+### Act IV — "Apparently Numbers Don't Speak for Themselves": the Gold Rush
+
+**Opening interlude.** The reel of clean data arrives in the folder. Before the player can do
+anything, a campus-wide email: **KIRA HAS FOUND THE CODEBOOK.** It is a procedure — "run every
+model, keep the one that works, describe it with confidence" — and it has a queue outside
+KIRA's room within the hour. The Professor, reading it: *"Now the dangerous part. Nobody will
+stop you."*
+
+This is the Codebook mystery's cruellest turn: the thing the player has chased since Act I is
+announced as found, and it is a p-hacking machine. (Stage two of the reveal still lands in
+Act V: the Professor has never heard of *the* Codebook. "We used to call it Methods.")
+
+**The rooms, and what the gold rush does to each:**
+
+1. **KIRA's terminal** (built as 8zp). Now framed as the Codebook itself. A queue of familiar
+   faces is visible, each leaving with a printout: Feldstrom (*"Civilisation Is Traffic,
+   p < 0.0001"*), the Fieldwork Director (*"100% response rate, again"*), the Mensa cook
+   (*"Schnitzel causes wisdom"*). The player gets their own Codebook report, finds its seven
+   wrong lines, and the Professor circles what they missed. She stops at "p < 0.001":
+   *"I had one of those once."* First crack in her armour.
+2. **The Significance Casino** (the Basement, rebuilt as the act's set piece). The gold rush's
+   trading floor: green lamps, slot machines of analyses, and a **DISCOVERY BOARD** announcing
+   other people's wins in real time. Every pull pays out eventually. The sealed slip is the
+   only chip that cashes honestly. The Skeptic leans in the doorway, the only person not
+   playing. Breaking the seal stays the act's best moment; if the result is null, she is
+   delighted, and everyone else on the floor looks at you with pity.
+3. **The Bureau of Implications.** The clerk has sold out of LARGE (the whole department bought
+   one) and is taking orders for EXTRA LARGE. The player writes their own interpretation with
+   the evidence on the counter, as now.
+
+**End of act — the humiliation beat.** The conference programme arrives. Feldstrom: keynote.
+The Fieldwork Director: plenary. The cook: best paper award. The player: *Poster 312, Hall C,
+next to the bins.* The folder is stamped EVIDENCE VERIFIED, and it has never felt less like a
+prize.
+
+---
+
+### Act V — "Apparently Somebody Has to Present It": the Annual Meeting
+
+The only act off campus. A conference centre with carpet you could lose a child in,
+lanyards, and a coffee urn that is always empty.
+
+1. **Registration & the Poster Print Shop** (absorbs the Gap Registry and the Writing Room).
+   The poster has to be written before it can be printed, and everyone helps:
+   - the **contribution** box — a Novelty Booth hands out pre-approved gaps; the player states
+     what their result changes relative to the three papers (the Gap Registry puzzle);
+   - the **title** — Feldstrom leans over the counter with bigger ones (as now), and the
+     IMPACT gauge climbs;
+   - the **abstract** — KIRA's version, three words over the line (the Writing Room puzzle).
+   The printer only takes the poster once the claim is proportionate.
+2. **The Poster Session** (set piece; its own mini-game). The player stands by Poster 312 for
+   one hour of conference time. Visitors arrive one by one and ask things; the player answers
+   with what is in the folder:
+   - the Helpful Stranger (a genuine question — answer it properly);
+   - the person with "more of a comment than a question";
+   - the one who only wants the free pens;
+   - the Visiting Fellow, one raised finger: *"Selection?"* (the Act II card, the Act IV
+     limitation — point at the sentence);
+   - a Codebook enthusiast who asks why the effect is so *small*.
+   Meanwhile the gold-rush posters on either side have queues and balloons.
+3. **Feldstrom's Keynote** (set piece). *Civilisation Is Traffic*, on a screen the size of a
+   house — and slide 14 is the player's own result, inflated into a law of social flow,
+   without asking. The player can stand up in the Q&A.
+4. **The Replication Session** *(proposed — this is what makes Act IV pay off)*. A small room,
+   a long table, a panel of replicators. The gold-rush findings are re-run on fresh data, live,
+   on a big board, and fall one by one: schnitzel, the 100%, civilisation. The player's result
+   is the one that holds, because it was sealed in advance and claimed only what it showed.
+   **The Professor is in the room.** She has sat in this seat before — *The Death of
+   Community* was taken apart in exactly this kind of session — and when Feldstrom's law
+   falls, the two of them finally face each other. A few lines, no more: her past, his, and
+   the player standing between them with the only claim in the room that survived.
+5. **Home.** The player comes back to campus with the poster rolled under one arm. The Office:
+   *"Oh. That. We used to call it Methods."* *"It's accurate. Send it."* The submission chute.
+   Then the outro and Reviewer 2 as already designed (optionally as a playable battle).
+
+---
+
+### What this reuses and what is new
+
+- **Reused as built:** KIRA's terminal and the Professor's check; the Bureau; the seal and the
+  Skeptic; the Gap Registry, Writing Room and title puzzles (moved into the Print Shop); the
+  reveal, the chute and the outro.
+- **Rebuilt:** the Basement as the Significance Casino.
+- **New:** the Act IV opening and closing interludes; the conference centre (3–4 locations:
+  Print Shop, Poster Hall, Keynote Hall, Replication Room); the Poster Session mini-game; the
+  Replication board.
+- **Characters with new jobs:** the Fieldwork Director and the cook as gold-rush winners (and
+  replication casualties); the Visiting Fellow as a poster visitor; Tobi livestreaming the
+  keynote; the Professor at the Replication Session.
+
+### Open questions
+
+1. Replication Session: in, or does the conference end with the keynote?
+2. Does the player stand up in Feldstrom's Q&A (a confrontation), or does the Replication
+   Session carry that alone?
+3. Poster Session: how many visitors, and what is the cost of a bad answer (the crowd drifts
+   to the neighbouring gold-rush poster)?
+4. Reviewer 2: keep the outro as a cutscene, or make the decision letter a playable battle?
+5. Act V title: "Apparently Somebody Has to Present It", or keep "…Write It"?
+
+---
+
 ## Act IV — "Apparently Numbers Don't Speak for Themselves"
 
 *Rooms: The Statistics Basement · The Delegation Engine · The Bureau of Implications*
