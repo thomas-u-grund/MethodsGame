@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build the standalone Lecture Bingo page from the game, for sharing on its own.
+"""Build the standalone Systems Theory Bingo page from the game, for sharing on its own.
 
     python3 tools/bingo/standalone.py            -> build/bingo/ (index.html + the assets it uses)
 
@@ -21,7 +21,7 @@ KEEP_ROOMS = {'lecture'}
 SEED = {'inventory': ['bingocard'], 'flags': {'actRenumberMigrated': True, 'bingocardTaken': True}}
 
 HEAD = """<script>
-/* Lecture Bingo, standalone: a fresh save on every visit, straight into the lecture. The engine
+/* Systems Theory Bingo, standalone: a fresh save on every visit, straight into the lecture. The engine
    reads these globals first -- an artifact's sandbox may refuse localStorage/sessionStorage. */
 window.CODEBOOK_SEED = JSON.parse(%s);
 window.CODEBOOK_BOOT_ROOM = 'lecture';
@@ -45,7 +45,7 @@ BOOT = """<script>
 window.CODEBOOK_START();
 (function(){
   var o = document.createElement('div'); o.id = 'bgStart';
-  o.innerHTML = '<h1>LECTURE BINGO!</h1><p>Dr. Vossberg is lecturing on systems theory, and the whole back half of the hall has a bingo card. Ask him about Luhmann to set him off, then dab each buzzword the moment he says it. Watch out for decoys. He will not notice. He never does.</p><button id="bgGo">&#9654; PLAY</button><p style="font-size:13px;opacity:.7">Sound on. From <i>The Secret of the Lost Codebook</i>.</p>';
+  o.innerHTML = '<img src="bingo-logo.webp" alt="Systems Theory Bingo!" style="width:min(620px,92vw);filter:drop-shadow(0 14px 30px rgba(0,0,0,.6))"><p>Dr. Vossberg is lecturing on systems theory, and the whole back half of the hall has a bingo card. Ask him about Luhmann to set him off, then dab each buzzword the moment he says it. Watch out for decoys. He will not notice. He never does.</p><button id="bgGo">&#9654; PLAY</button><p style="font-size:13px;opacity:.7">Sound on. From <i>The Secret of the Lost Codebook</i>.</p>';
   document.body.appendChild(o);
   document.getElementById('bgGo').addEventListener('click', function(){
     o.remove();
@@ -72,7 +72,7 @@ def main():
     out.append(s[last:])
     h = ''.join(out)
     h = re.sub(r'<div id="bootSplash">.*?</div>\s*(?=<div class="stage">)', '', h, flags=re.S)
-    h = re.sub(r'<title>.*?</title>', '<title>Lecture Bingo</title>', h, count=1)
+    h = re.sub(r'<title>.*?</title>', '<title>Systems Theory Bingo</title>', h, count=1)
     first = h.index('<script>'); h = h[:first] + HEAD + h[first:]
     # after BINGO: play again, not the campus map
     n0 = h.count("btn.textContent = 'Continue to Campus Map →';")

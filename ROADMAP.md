@@ -1070,6 +1070,57 @@ point — without dating the game.
 
 ---
 
+## 8zt. Systems Theory Bingo: painted sign, painted celebration — 2026-09-25 (user)
+
+> The bingo celebration screen is odd; the artwork does not fit with the rest. — In bingo there
+> is a weird raster of dots all over the screen; remove them, and fewer spotlights. — I don't
+> like the bingo font; can we generate celebration overlays with ChatGPT in the style of the
+> rest of the game? — What if we call the whole thing Systems Theory Bingo?
+
+- Renamed **Systems Theory Bingo** (it is the course on the door): ticker, standalone title and
+  start screen, and Tobi's intro, re-recorded and Whisper-checked (`vo-tobi-1a244fa8`).
+- **`bingo-logo.webp`** (ChatGPT, keyed off green, original in `art/patches`): a varnished
+  plaque with marquee bulbs, the crest, gold "SYSTEMS THEORY / BINGO!" and bingo balls. It
+  replaces the typed marquee in the opening, heads the card instead of the letter-spaced
+  "B I N G O", and swings into the middle of the room on BINGO.
+- **`lecture-bg-cheer.webp`** (ChatGPT, same framing): the rows on their feet, cards and
+  confetti in the air, the B-I-N-G-O sign held high, a hug, the stage left clear for
+  Vossberg's sprite. The crowd crossfades to it on BINGO and stays for the rest of that visit;
+  the leaving line says so ("somebody has started a slow clap for Luhmann") instead of "the
+  theatre is empty".
+- Removed: the white strobe, the flat rectangle confetti, the fireworks, the flying letters,
+  the sparkle-dot layer and the sweep light. Two softer beams remain.
+- The inventory stays hidden until he has walked out.
+
+## 8zs. Phones: the dialogue never covers the room; tap does the obvious thing — 2026-09-25 (user)
+
+> We should optimise the entire game to render well on computer and mobile; one aspect is the
+> dialog boxes blocking the room on mobile. — In mobile mode we lose too much real estate: get
+> rid of the verb buttons and have options appear when one clicks on something. — What if it
+> automatically shows the correct action when one goes over an area? — Optimise for mobile
+> horizontal view.
+
+- `CODEBOOK_PHONE_LAYOUT()` (run on every room entry and rotation) sets `body.cb-phone-p`
+  (portrait, width ≤ 820) or `cb-phone-l` (landscape, height ≤ 520) and moves the few nodes CSS
+  cannot: Act I's speech bubbles go under the scene in portrait; in landscape the dialogue
+  panel and bubbles go to the top of the side column. Every moved node remembers its home and
+  goes back on a bigger screen. Computers are unchanged.
+- **Portrait**: scene at full width, the dialogue as a normal panel under it, the item strip
+  (swipeable, 52 px tiles, no preview box) below. **Landscape**: the scene as tall as the
+  screen (hud hidden, map button in the corner), everything else in the column beside it.
+- **No verb row on phones.** Tapping a hotspot does its obvious verb at once and shows a chip
+  ("Talk to · KIRA ···"); "···" opens the full verb menu at the finger. The obvious verb is read
+  off each adventure room's own handler (a character whose block answers Talk To: talk; a block
+  that answers Pick Up: take; otherwise look), and tagged by hand in the Act I rooms (Office
+  pickups and the Professor, lecture and corridor zones). With an item readied from the strip
+  (first tap readies it, a second tap describes it) the next tap goes through as "use it here".
+- Full-screen sheets on phones for KIRA's terminal and the open folder; the folder closes on the
+  next tap (touch has no mouseleave).
+- Lecture Bingo on phones: the line and the card dock under the room (portrait) or beside it
+  (landscape); the verbs and inventory are hidden during the show on every screen.
+- The standalone bingo seeded `profAtOffice`, which an old-save migration reads as "the
+  lecturer has left": the room began empty. Removed.
+
 ## 8zq. The bingo starts by asking Vossberg about Luhmann; standalone pages no longer need storage — 2026-09-25 (user)
 
 > In bingo, the lecture does not start. Maybe one needs to talk to Vossberg and ask him about
