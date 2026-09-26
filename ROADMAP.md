@@ -1051,6 +1051,22 @@ point — without dating the game.
 
 ---
 
+## 8zz. A character in another room gets another pose — 2026-09-26 (user: "when the same characters reappear in other rooms they should have slightly different poses")
+
+Each character keeps its original sprite in its home room and gets a new pose everywhere else
+(ChatGPT pose sheets from the original as reference, green-keyed and split by
+`scratchpad/split.py`; sheets kept in `art/patches/sheet-*.png`):
+Feldstrom (queue with printout, keynote gesture, pen and paper; on the phone in the call),
+Achterberg (clipboard in the Psych Lab, one finger at the Poster Session, presenting at the
+keynote), the Fieldwork Director (printout, visitor), the Doorman (arms crossed in the Casino
+queue, "more of a comment"), the Sampling Officer (clipboard at Fieldwork, printout, pens), KIRA
+(presenting at the Delegation Engine, a stack of pages in the Writing Room), the Nurse (cup of
+coins), the Registrar (ticket in the queue, three papers in the Writing Room), the Skeptic
+(studying a poster), the Professor (arms folded in the Delegation Engine), Vossberg (chairing
+with a microphone), the lead monkey (stamping MAJOR CONCERNS, hand up at the keynote). The
+remaining shared sprites are deliberate: Feldstrom running out of his own workshop in the
+split screen, and the outro's replay of the lecture.
+
 ## 8zy. The Keynote Showdown, Stockholm, Reviewer 2, and three puzzle fixes — 2026-09-26 (user: "focus on these open items"; "work your way independently through the open items")
 
 - **The Keynote Showdown** (`keynote`, prefix `kn`, doneFlag `keynoteDone`, now the fourth Act V
