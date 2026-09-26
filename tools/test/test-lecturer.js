@@ -40,7 +40,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     });
     out.mouths   = ['L','P'].every(k => {
       const img = document.querySelector('#lt_mouthWrap' + k + ' img');
-      return img && /^mouth-vossberg-/.test(img.getAttribute('src'));
+      return img && /^mouth-vossberg2?-/.test(img.getAttribute('src'));
     });
     out.noProfSprite = !document.querySelector('#lt_sceneWrap [src^="prof-"]');
 
