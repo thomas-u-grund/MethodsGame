@@ -13,7 +13,8 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     window.CODEBOOK_START(); await w(700);
     [...document.querySelectorAll('button.campus-hotspot')].find(b => b.title.indexOf('The Library') === 0).click(); await w(1600);
     const out = { simple: document.body.classList.contains('cb-simple'), verbRowHidden: getComputedStyle(document.querySelector('.verb-grid')).display === 'none',
-                  toggle: (document.getElementById('ctrlToggle') || {}).textContent };
+                  toggle: (CODEBOOK_SETTINGS(), document.querySelector('#cbSettings [data-ctl="simple"].on') ? 'Simple' : '') };
+    document.getElementById('cbSettings').remove();
     const click = el => { const r = el.getBoundingClientRect(); el.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true, clientX:r.left + r.width/2, clientY:r.top + r.height/2 })); };
     // one action (KIRA: Talk) is done by one click; two actions (the trolley: Look, Use) show icons
     click(document.querySelector('#lb_sceneWrap .hotspot[data-id="kira"]')); await w(400);
