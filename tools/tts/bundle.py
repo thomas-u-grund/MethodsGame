@@ -106,7 +106,7 @@ def main():
                         # With VBR that estimate was 1.6s short of the real stream, so a
                         # clip near the end resolved past what the browser thought was the
                         # end and played silence. At a constant bitrate the estimate is exact.
-                        '-i', lst, '-codec:a', 'libmp3lame', '-b:a', '96k', out], check=True)
+                        '-i', lst, '-codec:a', 'libmp3lame', '-b:a', '48k', out], check=True)
 
     real = decoded_duration(out)
     print('  wrote %s  %.1fs decoded  %.1f MB' % (bundle_name, real, os.path.getsize(out) / 1e6))
