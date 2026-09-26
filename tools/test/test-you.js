@@ -112,7 +112,8 @@ const spy = `
   })()`);
   const want = ['vo-you-b72b8d06.mp3', 'vo-lecturer-28c73279.mp3', 'vo-lecturer-ff5ebe20.mp3',
                 'vo-you-1defc53b.mp3', 'vo-lecturer-2ec472e1.mp3', 'vo-lecturer-fab0b3cc.mp3'];
-  voss.inOrder = JSON.stringify(voss.asked) === JSON.stringify(want);
+  // the narrator (8zz) reads the prose between the quotes; the characters' lines must still come in order
+  voss.inOrder = JSON.stringify(voss.asked.filter(c => !/^vo-narr-/.test(c))) === JSON.stringify(want);
 
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   console.log(JSON.stringify({ r, pond, voss }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
