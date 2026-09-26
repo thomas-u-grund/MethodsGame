@@ -25,7 +25,7 @@ async function call(p, inventory, takeBook){
       gotBook = spine && !document.getElementById('lb_book') && JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('swedebook');
     }
     verb('talk to'); document.querySelector('[data-id="kira"]').click(); await w(400);
-    ch(/place a call/); await w(300); ch(/Feldstrom, please/); await w(600);
+    ch(/place a call/); await w(300); ch(/Feldstrom, please/); await w(3200);
     const split = !!document.querySelector('.lb-call #lb_callFeld');
     ch(/This is Stockholm/); await w(400);
     const asks = /Say something in Swedish/.test(document.getElementById('lb_line').textContent);

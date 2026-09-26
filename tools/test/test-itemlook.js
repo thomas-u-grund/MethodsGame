@@ -65,7 +65,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   // The count is a tripwire, not a fact about the world: bump it deliberately when items
   // are added, so a new item cannot slip in without a description. 48 -> 52 when the Survey
   // Lab's four question cards became things you carry.
-  const ok = r && r.count === 54 && r.fellBack.length === 0 && r.namesRoom.length === 0 &&
+  const ok = r && r.count === 56 && r.fellBack.length === 0 && r.namesRoom.length === 0 &&
              r.tellsVerb.length === 0 && r.advWorks && r.armed && r.actIWorks &&
              r.folderAfter !== r.folderBefore && /Data/.test(r.folderAfter) &&
              r.slipAfter !== r.slipBefore && /wax/i.test(r.slipAfter) && !p.errors.length;

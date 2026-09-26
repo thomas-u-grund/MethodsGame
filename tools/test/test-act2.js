@@ -61,7 +61,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     out.steps.push(['phrasebook', JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('swedebook') ? 'ok' : 'NO']);
     verb('lb','talk to'); spot('kira'); await wait(400);
     choice('lb','place a call'); await wait(400);
-    choice('lb','Feldstrom, please'); await wait(600);
+    choice('lb','Feldstrom, please'); await wait(3200);
     out.steps.push(['splitScreen', document.querySelector('.lb-call') ? 'ok' : 'NO']);
     choice('lb','This is Stockholm'); await wait(600);
     choice('lb','lagom'); await wait(600);
