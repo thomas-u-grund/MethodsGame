@@ -31,9 +31,9 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     // a selected inventory item is used on the next thing clicked
     const slot = document.querySelector('#lb_sideInv .side-inv-slot[data-item="question"]'); slot.click(); await w(150);
     out.useArmed = document.querySelector('#lb_verbGrid [data-verb="use"]').classList.contains('active');
-    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="kira"]')); await w(300);
-    out.onlyUseWith = [...document.querySelectorAll('.cb-icons button')].map(b => b.dataset.v).join(',') === 'usewith';
-    document.querySelector('.cb-icons button[data-v="usewith"]').click(); await w(400);
+    // the next click uses it straight away -- no "Use with" icon -- and puts it down (author, 2026-09-26)
+    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="kira"]')); await w(400);
+    out.onlyUseWith = !document.querySelector('.cb-icons');
     out.usedOnKira = !document.querySelector('#lb_sideInv .side-inv-slot.selected');
     return out;
   })()`);
