@@ -1,7 +1,7 @@
 // The MECHANISM box: without it the Prediction Slip cannot be sealed and Act III never
 // opens. Since the rap battle rework (ROADMAP 8zc) it comes from Professor G, who is too
 // nervous to talk before his set and dictates it afterwards -- if you have a card and a pen.
-// The founders talk (Weber on his own hotspot, Marx and Durkheim via the portraits) but
+// The founders talk (each founder on his own hotspot) but
 // never give you one.
 //
 // History worth keeping: this used to be written behind the Weber portrait, and once shipped
@@ -13,7 +13,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 // name -> [inventory, extra flags, what to do]
 const CASES = {
   weber:      [['folder','pen','blankcard'], {}, 'talk:weber'],
-  marx:       [['folder','pen','blankcard'], {}, 'talk:portraits:Marx'],
+  marx:       [['folder','pen','blankcard'], {}, 'talk:marx'],
   gBefore:    [['folder','pen','blankcard','usb'], {}, 'talk:profg'],
   gNoUsb:     [['folder','pen','blankcard'], {}, 'talk:profg'],
   gNoCard:    [['folder','pen'], { rapDone:true }, 'talk:profg'],

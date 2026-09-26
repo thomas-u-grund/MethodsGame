@@ -2,7 +2,7 @@
 // through; what makes you Stockholm is the phrasebook in the stacks.
 //   1. Without the book he asks for some Swedish, and "Abba" gets you hung up on.
 //   2. With it, the book's phrase gets him out of the workshop. The call is a split screen.
-//   3. Picking the book off the stacks gives it to you.
+//   3. Picking the book off the side table gives it to you, and the table is bare afterwards.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
@@ -20,9 +20,12 @@ async function call(p, inventory, takeBook){
     const verb = v => [...document.querySelectorAll('#lb_verbGrid button')].find(b => new RegExp(v, 'i').test(b.textContent)).click();
     let gotBook = null;
     if (${takeBook ? 'true' : 'false'}){
-      const spine = !!document.getElementById('lb_book');
-      verb('pick up'); document.querySelector('[data-id="stacks"]').click(); await w(500);
-      gotBook = spine && !document.getElementById('lb_book') && JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('swedebook');
+      // the book is painted on the side table; taking it shows the bare table (patchBook)
+      const patch = () => document.querySelector('[id$="spr_patchBook"]');
+      const shown = () => patch() && getComputedStyle(patch()).display !== 'none';
+      const before = !shown();
+      verb('pick up'); document.querySelector('[data-id="swbook"]').click(); await w(500);
+      gotBook = before && shown() && JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('swedebook');
     }
     verb('talk to'); document.querySelector('[data-id="kira"]').click(); await w(400);
     ch(/place a call/); await w(300); ch(/Feldstrom, please/); await w(3200);
