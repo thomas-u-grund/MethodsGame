@@ -36,7 +36,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.speaker  = document.getElementById('lt_speaker').textContent.trim();
     out.poses    = ['Lecturing','Walking','Pointing'].every(k => {
       const el = document.getElementById('lt_lect' + k);
-      return el && /^vossberg-/.test(el.getAttribute('src')) && el.getAttribute('data-voice') === 'lecturer';
+      return el && /^vossberg2?-/.test(el.getAttribute('src')) && el.getAttribute('data-voice') === 'lecturer';
     });
     out.mouths   = ['L','P'].every(k => {
       const img = document.querySelector('#lt_mouthWrap' + k + ' img');

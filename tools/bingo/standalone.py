@@ -81,7 +81,7 @@ def main():
     assert "Play again" in h, 'play-again swap did not match (%d candidates)' % n0
     # prune like the rap build, with the bingo card as the only item
     h = R.cut_object(h, 'var ITEM_LABELS = {', '\n  };', "var ITEM_LABELS = { bingocard: 'A Bingo Card' };")
-    h = R.cut_object(h, 'var ITEM_ICONS = {', '\n  };', "var ITEM_ICONS = { bingocard: 'icon-bingocard.png' };")
+    h = R.cut_object(h, 'var ITEM_ICONS = {', '\n  };', "var ITEM_ICONS = { bingocard: 'icon-bingocard.webp' };")
     h = R.cut_object(h, 'var ITEM_LOOK = {', '\n  };', "var ITEM_LOOK = { bingocard: 'METHODOLOGICALLY SPEAKING &middot; AS WE SHALL SEE &middot; THE LITERATURE IS DIVIDED.' };")
     h = R.cut_object(h, 'var TOBI_LINES = {', '\n  };', "var TOBI_LINES = {};")
     h = R.cut_object(h, 'var TOBI_BEG = [', '\n  ];', 'var TOBI_BEG = [];')
@@ -118,7 +118,7 @@ def main():
 
     # assets: whatever the lecture names, plus the engine's sound bundles and the crowd arms
     names = set(re.findall(r"([A-Za-z0-9_-]+\.(?:webp|png|mp3))", lecture)) - set(sprite_all)
-    names |= {'sfx-act1.mp3', 'sfx-act3.mp3', 'sfx-rap.mp3', 'icon-bingocard.png', 'rig-prof-head.webp', 'rig-prof-torso.webp',
+    names |= {'sfx-act1.mp3', 'sfx-act3.mp3', 'sfx-rap.mp3', 'icon-bingocard.webp', 'rig-prof-head.webp', 'rig-prof-torso.webp',
               'rig-prof-upperarm.webp', 'rig-prof-forearm.webp', 'rig-prof-thigh.webp', 'rig-prof-shin.webp'}
     names |= {'crowd-arm-%d.webp' % i for i in range(1, 9)}
     names |= {'bingo-tense.mp3', 'bingo-tight.mp3', 'bingo-hit.mp3', 'bingo-miss.mp3'}   # named at runtime

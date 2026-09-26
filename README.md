@@ -2,7 +2,7 @@
 
 A LucasArts-style point-and-click adventure that teaches research methods, built as a single self-contained HTML5 file — no build step, no server, no dependencies.
 
-**Play it:** locally (below). Two scenes are shared on their own: *The Founders' Rap Battle* (https://claude.ai/artifact/JuphmaQKxKgwC5s4AURpD5) and *Systems Theory Bingo* (https://claude.ai/artifact/1q6rocWvPkLQLeBUvoUjha), built by `tools/rap/standalone.py` and `tools/bingo/standalone.py`.
+**Play it:** https://thomas-u-grund.github.io/MethodsGame/ (GitHub Pages, redeployed on every push to `main`), or locally (below). Two scenes are shared on their own: *The Founders' Rap Battle* (https://claude.ai/artifact/JuphmaQKxKgwC5s4AURpD5) and *Systems Theory Bingo* (https://claude.ai/artifact/1q6rocWvPkLQLeBUvoUjha), built by `tools/rap/standalone.py` and `tools/bingo/standalone.py`.
 
 > A grad student, panicking over an empty research folder and a deadline that isn't moving, sets out to get one real question out of the one professor with a reputation for producing them — and ends up spending the rest of the semester turning that question into an entire research project, one increasingly absurd department "chapter" at a time, before discovering that the mythical Codebook everyone's been whispering about was never anything more than... Methods.
 

@@ -31,12 +31,13 @@
 
 *Board last verified against the file, `web/` and the test suite on 2026-09-26.*
 
-- **Sharing:** only the standalone pages are shared, never the whole game (author). **The
+- **Hosting (2026-09-26):** the whole game is on GitHub Pages, https://thomas-u-grund.github.io/MethodsGame/ , deployed by `.github/workflows/pages.yml` on every push to `main` (it publishes `web/`). The artifact host's 255-file and 15 MB limits no longer apply to the game. Voices are four bundles, each preloaded with its act: `voices-act1` (Act I and the Office), `voices-act2`, `voices-act3`, `voices-act45` (Acts IV, V and the outro).
+- **Standalone pages:** the rap battle and the bingo stay as claude.ai artifacts. **The
   Founders' Rap Battle** (v12, https://claude.ai/artifact/JuphmaQKxKgwC5s4AURpD5, built by
   `tools/rap/standalone.py`) and **Systems Theory Bingo** (v5,
   https://claude.ai/artifact/1q6rocWvPkLQLeBUvoUjha, `tools/bingo/standalone.py`). Both boot
   from the `CODEBOOK_SEED` / `CODEBOOK_BOOT_ROOM` globals, so they work where storage is
-  refused. The whole-game artifact (v51, 1VJHdVezyJFxnsZXS3kRi6) is stale on purpose.
+  refused. The old whole-game artifact (v51, 1VJHdVezyJFxnsZXS3kRi6) is stale and superseded by Pages.
   **Repo:** https://github.com/thomas-u-grund/MethodsGame (`main`), 181 commits unpushed.
 - **Everything is one file:** `web/the-secret-of-the-codebook.html` (**12,800 lines**). No build step.
 - **19 rooms on the map, Act I through Act V**, plus the outro. The Gap Registry is still in
@@ -45,8 +46,7 @@
   post-credits monkey (`test-endgame` plays Acts IV and V, the keynote and the reveal).
 - **Every act ends at once** on its last puzzle, with a CHAPTER N COMPLETE slide (8zw).
 - **Controls:** simple by default, classic as an option, always simple on phones (8zx).
-- **Local assets:** **273 files, 94 MB** in `web/`. That is over the artifact host's 255-file
-  limit for a whole-game publish; the standalone pages are 36-40 files each and unaffected.
+- **Local assets:** about 290 files, ~80 MB in `web/` (all images WebP since 2026-09-26; PNG originals in `art/png-originals/`, unused art in `art/unused/`).
 - **Tests:** 43 CDP tests (`tools/test/run-all.sh`), green as of 2026-09-26. Run them **alone**:
   every test shares one headless page. For screenshots alongside a run, start a second headless
   Chrome and set `CDP_PORT` (cdp.js reads it).

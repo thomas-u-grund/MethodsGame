@@ -33,7 +33,7 @@ def main():
     ImageDraw.Draw(sh).ellipse([FOOT_X - 70, FOOT_Y - 12, FOOT_X + 70, FOOT_Y + 12], fill=150)
     sh = sh.filter(ImageFilter.GaussianBlur(9))
     out.alpha_composite(Image.merge('RGBA', [Image.new('L', out.size, 0)] * 3 + [sh]))
-    g = Image.open(os.path.join(ROOT, 'web', 'sprite-profg.png')).convert('RGBA')
+    g = Image.open(os.path.join(ROOT, 'web', 'sprite-profg.webp')).convert('RGBA')
     bb = g.getbbox(); g = g.crop(bb)
     g = g.resize((round(g.width * HEIGHT / g.height), HEIGHT), Image.LANCZOS)
     # the other four stand in the poster's warm, dim stage light; a white hoodie glows otherwise

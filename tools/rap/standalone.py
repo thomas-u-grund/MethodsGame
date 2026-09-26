@@ -21,13 +21,13 @@ KEEP_ROOMS = {'hall'}
 DROP_MARKERS = ['ACT INTERLUDES', 'THE OUTRO', 'ACT III INTERLUDE']
 
 ASSETS = ['hall-bg.webp', 'hall-founders-group.webp', 'hall-patch-pole.webp',
-          'hall-dial-1.webp', 'hall-dial-2.webp', 'hall-dial-3.webp', 'sprite-profg.png',
-          'sprite-tobi.png', 'sprite-tobi-reach.webp', 'sprite-tobi-crouch.webp', 'sprite-tobi-piece.webp',
+          'hall-dial-1.webp', 'hall-dial-2.webp', 'hall-dial-3.webp', 'sprite-profg.webp',
+          'sprite-tobi.webp', 'sprite-tobi-reach.webp', 'sprite-tobi-crouch.webp', 'sprite-tobi-piece.webp',
           'mouth-marx.webp', 'mouth-durkheim.webp', 'mouth-weber.webp',
           'rap-marx.mp3', 'rap-durkheim.mp3', 'rap-weber.mp3', 'profg-live.mp3',
           'profg-panel-stage.webp', 'profg-panel-close.webp', 'profg-panel-micdrop.webp',
           'profg-panel-stage-mouth.webp', 'profg-panel-close-mouth.webp',
-          'sfx-act1.mp3', 'sfx-act3.mp3', 'sfx-rap.mp3', 'icon-usb.png',
+          'sfx-act1.mp3', 'sfx-act3.mp3', 'sfx-rap.mp3', 'icon-usb.webp',
           'crowd-heads.webp', 'dj-a.webp', 'dj-b.webp'] + ['crowd-arm-%d.webp' % i for i in range(1, 9)]
 
 SEED = {'inventory': ['usb'],
@@ -94,7 +94,7 @@ def prune(h):
     (Gap Registry, Swedish, the photograph), and every full-line comment -- the comments
     explain the whole game's structure."""
     h = cut_object(h, 'var ITEM_LABELS = {', '\n  };', "var ITEM_LABELS = { usb: 'A USB Drive' };")
-    h = cut_object(h, 'var ITEM_ICONS = {', '\n  };', "var ITEM_ICONS = { usb: 'icon-usb.png' };")
+    h = cut_object(h, 'var ITEM_ICONS = {', '\n  };', "var ITEM_ICONS = { usb: 'icon-usb.webp' };")
     h = cut_object(h, 'var ITEM_LOOK = {', '\n  };',
                    "var ITEM_LOOK = { usb: 'Masking tape: <b>PROF G &mdash; BEATS &mdash; ON LOAN</b>. Underneath, in the Professor&rsquo;s handwriting, <i>FINAL_v23</i>.' };")
     h = cut_object(h, 'var TOBI_LINES = {', '\n  };',

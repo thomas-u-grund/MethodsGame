@@ -9,8 +9,7 @@
 //   3. her hotspot moves with her, or you are left clicking the floor she used to be on.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
-const ROOMS = [['lb','The Library'], ['dl','The Delegation Engine'],
-               ['gp','The Gap Registry'], ['wr','The Writing Room']];
+const ROOMS = [['lb','The Library'], ['dl','The Delegation Engine'], ['wr','The Writing Room']];
 
 (async () => {
   const p = await connect(U + Date.now());
