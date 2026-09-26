@@ -1051,6 +1051,22 @@ point — without dating the game.
 
 ---
 
+## 9a. Sociologist cameos, spread over the acts — 2026-09-26 (author: "I like all cameos. Spread them out over the acts")
+
+Small, optional, Look and Talk only (three lines each, cycling); no puzzle depends on them.
+Act I: James Coleman rowing Coleman's boat on the Pond; Erving Goffman backstage at the Lecture
+Theatre's side door. Act II: Robert K. Merton in the Library aisle hoarding citations (Matthew
+effect); Howard Becker's jazz trio outside the Seminar Room window. Act III: Glaser & Strauss
+digging for grounded theory at the Fieldwork Arena; Bourdieu judging lunches in the Mensa;
+Durkheim with his 1897 rates in the Ethics Tribunal. Act IV: Weber's iron cage (a tiny bureaucrat)
+in the Bureau; Latour's CO-AUTHOR: THE LEVER card in the Delegation Engine. Act V: Granovetter's
+washing line of lanyards at the Poster Session. All ten are PAINTED INTO the room backgrounds (author: "just redo the background and integrate
+them there"): ChatGPT edits of each background, re-registered onto the original with OpenCV and
+pasted back only inside the cameo's box (`scratchpad/patch.py`), so nothing else in a room moves.
+Original cut-outs kept in `art/unused/`. `CODEBOOK_CAMEOS[prefix]` now only adds the hotspot;
+Coleman and Goffman hotspots live in their rooms' own code. Goffman is in lecture-bg and
+lecture-bg-bingo, not the cheering frame (the standing crowd hides the door).
+
 ## 8zz. A character in another room gets another pose — 2026-09-26 (user: "when the same characters reappear in other rooms they should have slightly different poses")
 
 Each character keeps its original sprite in its home room and gets a new pose everywhere else
