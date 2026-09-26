@@ -1056,7 +1056,7 @@ point — without dating the game.
 Each character keeps its original sprite in its home room and gets a new pose everywhere else
 (ChatGPT pose sheets from the original as reference, green-keyed and split by
 `scratchpad/split.py`; sheets kept in `art/patches/sheet-*.png`):
-Feldstrom (queue with printout, keynote gesture, pen and paper; on the phone in the call),
+Feldstrom (queue with printout, keynote gesture, pen and paper; in the call a painted close-up, `call-feldstrom.webp`, receiver to his ear and an I ♥ SWEDEN sticker on his chest),
 Achterberg (clipboard in the Psych Lab, one finger at the Poster Session, presenting at the
 keynote), the Fieldwork Director (printout, visitor), the Doorman (arms crossed in the Casino
 queue, "more of a comment"), the Sampling Officer (clipboard at Fieldwork, printout, pens), KIRA
