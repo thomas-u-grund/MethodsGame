@@ -165,7 +165,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.titleBlocks && r.folderGone
-    && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 4
+    && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 5
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
