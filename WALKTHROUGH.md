@@ -74,8 +74,8 @@ Four rooms, no locks.
 ### I.1 The Seven-Second Office (part one — the robbery)
 
 **Do:** Pick up `pen` (pen jar) · `hourglass` · `usb` (taped to her book: *PROF G — BEATS — ON
-LOAN*) · `stamp` · `magnifyingglass` (desk) · `bingocard`. The mug and the Likert die are
-Look-only now; the Mensa and the Survey Lab have their own.
+LOAN*) · `stamp` · `magnifyingglass` (desk) · `bingocard`. The mug is Look-only; the Likert die on the
+shelf can be taken from Act III on (the Survey Lab needs it).
 
 **Optional:** magnifying glass on the right-hand shelf → her offprint, *The Death of
 Community: Evidence from Twenty-Three Residents of Leicester*. That is the Professor's
@@ -196,19 +196,24 @@ Look at the portraits six times. Tobi offers an encore afterwards.
 - **Pick up the yellow book** on the side table by the globe → `swedebook`, *Swedish for Nobel
   Laureates*. The phone call needs it.
 
-**Catch all three bad references** (a red REJECTED tag appears on the trolley for each):
+**Get KIRA's review first:** talk to **KIRA → "Could you write me a literature review on lecture
+attendance?"** (cutscene: she prints six references) → `litreview` in your hand.
+
+**Try to leave with it** (map button): the monkey drops from the top shelf and **eats it**
+(cutscene). You stay in the Library, and KIRA keeps a second copy on her tray. The monkey eats
+any unchecked list, so there is no way to walk off with the six.
+
+**Catch all three bad references** on her copy (a red REJECTED tag appears on it for each):
 
 | Problem | How |
 |---|---|
-| *It does not exist* | Magnifying glass on the **trolley** — reference 4's DOI resolves to a recipe for soup |
-| *It does not say that* | **Use the conveyor** → you snatch the full Müller & Singh (2023) off the belt; page nine says the association vanished after adjustment. The framed abstract is only a pointer |
+| *It does not exist* | Magnifying glass on **KIRA** (her printout) — reference 4's DOI resolves to a recipe for soup |
+| *It does not say that* | **Look at the framed abstract** (only the abstract was ever read), then talk to **KIRA → "Print me the whole Müller & Singh paper"** — page nine says the association vanished after adjustment |
 | *It cannot establish that* | **Use the card catalogue** with the hook pole — a cross-sectional study filed as LECTURES CAUSE SUCCESS |
 
-Then **Use the trolley** (or ask KIRA):
-- *"Lodge all six — they are beautifully formatted"* → junk. The box is filled but the room
-  does not complete. You can come back and lodge properly.
-- ✅ **"Lodge only the ones that survive checking"** (needs all three catches) → `readinglist`.
-  **Act V needs it.**
+Then talk to **KIRA → "Print the list again, without the three that failed"** → `readinglist`,
+WHAT IS KNOWN filled (sound), room done. **Act V needs it.** Leaving with it, the monkey sniffs
+the new list and shrugs (cutscene, once).
 
 ### The Stockholm call — getting Feldstrom out of his workshop
 
@@ -288,9 +293,10 @@ is needed in the Survey Lab.
 **Needs:** `pen`. **Gives:** `consentplain`, `calendarpage`, `redacted`, and on approval
 `pseudolist` + `altquestionnaire` + `examrecords` + `ballotboxwrapped`.
 
-1. **Consent** — pick up the plain-language form from the right-hand pew, use it on the Tribunal.
-2. **Withdrawal** — `pen` on the **Irreversible Participation Device**. You write WITHDRAW on
-   the buckle.
+1. **Consent** — pick up the plain-language form from the right-hand pew, use it on the Tribunal
+   (a close-up shows the one-page form next to the twelve-page original).
+2. **Withdrawal** — `pen` on the **Irreversible Participation Device**. A close-up shows you writing
+   WITHDRAW on the strap; the scrawl stays on the chair.
 3. **Names + linkage** — Talk to the Tribunal → *"Ask about names, and linking answers to exam
    results"*:
    - *"Stamp REDACTED over every name **and** every number"* → **`overRedacted`**: nothing left
@@ -316,7 +322,7 @@ Four sick questions. Three are on the gurneys; the fourth is on a clipboard on t
 | 1 | First gurney | Double-barrelled | **Look at** it to diagnose, pick up the **scissors** from the cabinet, use them on it |
 | 2 | Second gurney | Leading | Use the **pen** — strike out "Don't you agree that" and "excellent" |
 | 3 | Third gurney | Vague — "often" | Use the **calendar page** |
-| 4 | Triage desk | Two response categories | Pick up the **Likert die** from the desk and use it (she traces it; do not roll it) |
+| 4 | Triage desk | Two response categories | Take the **Likert die** from Stellmacher's shelf in the Office (from Act III) and use it (she traces it; do not roll it) |
 
 Each healed chart is pinned on the DISCHARGED board; four on the board and the nurse staples
 them into your questionnaire.
@@ -614,7 +620,7 @@ Everything here is recoverable, and most of it is where the jokes live.
 | Research Folder | Corridor | carried to the end; goes down the chute |
 | A Chewed Pen | Office | Hall (Professor G), Survey Lab patient 2, Ethics ×2 |
 | A USB Drive | Office | **Hall DJ** — the rap battle |
-| A Magnifying Glass | Office | Library trolley; Mensa frame (if you fed it the big list) |
+| A Magnifying Glass | Office | KIRA's printout in the Library; Mensa frame (if you fed it the big list) |
 | A Bingo Card | Office | Lecture bingo — it gets you the ink |
 | A Cracked Hourglass · A Rubber Stamp | Office | flavour only |
 | A Bottle of Black Ink | Lecture (after the bingo) | **Pond** — the right-hand swan |
@@ -629,7 +635,7 @@ Everything here is recoverable, and most of it is where the jokes live.
 | Torn Calendar Page | Ethics | Survey Lab patient 3 |
 | Plain-Language Consent Form | Ethics pew | Ethics Tribunal |
 | Single-Concept Scissors | Survey Lab cabinet | Survey Lab patient 1 |
-| A Likert-Scale Die | Survey Lab triage desk | Survey Lab patient 4 |
+| A Likert-Scale Die | Office shelf (from Act III) | Survey Lab patient 4 |
 | The Questionnaire | Survey Lab | the instrument you leave with |
 | Official University List | Ethics approval | Mensa (the wrong frame), Bureau |
 | Paper Questionnaire | Ethics approval | Fieldwork |

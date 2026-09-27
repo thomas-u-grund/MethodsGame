@@ -16,10 +16,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
                   toggle: (CODEBOOK_SETTINGS(), document.querySelector('#cbSettings [data-ctl="simple"].on') ? 'Simple' : '') };
     document.getElementById('cbSettings').remove();
     const click = el => { const r = el.getBoundingClientRect(); el.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true, clientX:r.left + r.width/2, clientY:r.top + r.height/2 })); };
-    // one action (KIRA: Talk) is done by one click; two actions (the trolley: Look, Use) show icons
+    // one action (KIRA: Talk) is done by one click; two actions (the conveyor: Look, Use) show icons
     click(document.querySelector('#lb_sceneWrap .hotspot[data-id="kira"]')); await w(400);
     out.talked = /Certainly/.test(document.getElementById('lb_line').textContent) && !document.querySelector('.cb-icons');
-    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="trolley"]')); await w(250);
+    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="conveyor"]')); await w(250);
     out.icons = [...document.querySelectorAll('.cb-icons button')].map(b => b.dataset.v).join(',');
     out.noUseWithEmptyHand = !/usewith/.test(out.icons);
     document.body.click(); await w(100);

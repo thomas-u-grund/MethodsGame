@@ -32,16 +32,23 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
     verb('hf','pick up'); spot('ladder'); await wait(400);
     out.steps.push(['ladder', document.querySelector('#hf_sideInv .side-inv-slot[data-item="stepladder"]') ? 'ok' : 'MISSING']);
 
-    // ---- LIBRARY: blank card, register, catch all three, lodge the good list
+    // ---- LIBRARY: KIRA prints a review, the monkey eats it, catch all three, a clean copy
+    const skipIL = () => document.dispatchEvent(new KeyboardEvent('keydown', { code:'Escape', key:'Escape', bubbles:true }));
     await go('The Library');
     verb('lb','pick up'); spot('desk'); await wait(350);
     verb('lb','pick up'); spot('register'); await wait(350);
-    item('lb','magnifyingglass'); spot('trolley'); await wait(400);
+    verb('lb','talk to'); spot('kira'); await wait(400);
+    choice('lb','literature review'); await wait(900); skipIL(); await wait(600);
+    document.getElementById('backToMap').click(); await wait(900); skipIL(); await wait(600);   // the monkey
+    out.steps.push(['eaten', JSON.parse(localStorage.getItem('codebook_save_v1')).flags.libMonkeyAte && !JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('litreview') ? 'ok' : 'NO']);
+    item('lb','magnifyingglass'); spot('kira'); await wait(400);
     verb('lb','use'); spot('catalogue'); await wait(400);
-    verb('lb','use'); spot('conveyor'); await wait(400);          // the full paper, off the belt (8zy)
+    verb('lb','look at'); spot('framed'); await wait(400);
+    verb('lb','talk to'); spot('kira'); await wait(400);
+    choice('lb','whole'); await wait(500);
     out.steps.push(['caught3', ['libCatchJournal','libCatchOpposite','libCatchCausal'].every(f => JSON.parse(localStorage.getItem('codebook_save_v1')).flags[f]) ? 'ok' : 'NO']);
-    verb('lb','pick up'); spot('trolley'); await wait(400);
-    choice('lb','survive checking'); await wait(500);
+    verb('lb','talk to'); spot('kira'); await wait(400);
+    choice('lb','Print the list again'); await wait(500);
     out.steps.push(['known', S.data().knownSound ? 'sound' : 'junk']);
 
     // ---- HALL again: the mechanism
