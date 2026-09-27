@@ -47,9 +47,9 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     // Use the card on him to start the game.
     [...document.querySelectorAll('#lt_verbGrid button')].find(b => /^use$/i.test(b.textContent.trim())).click();
     document.querySelector('#lt_sideInv .side-inv-slot[data-item="bingocard"]').click();
-    // the room's hotspots are bare .door-zone divs; his is the one at left:46%
+    // the room's hotspots are bare .door-zone divs; his is the one at left:43%
     [...document.querySelectorAll('#lt_sceneWrap .door-zone')]
-      .find(e => e.style.left.indexOf('46') === 0).click();
+      .find(e => e.style.left.indexOf('43') === 0).click();
     await w(1400);
     out.started = document.getElementById('lt_show').style.display !== 'none';
 
@@ -114,9 +114,9 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     const vb = [...document.querySelectorAll('#lt_verbGrid button')].find(b => /talk to/i.test(b.textContent));
     if (!vb) return { err: 'no talk-to verb' };
     vb.click();
-    // his zone is the bare .door-zone div at left:46% -- same selector the bingo run uses
+    // his zone is the bare .door-zone div at left:43% -- same selector the bingo run uses
     const hot = [...document.querySelectorAll('#lt_sceneWrap .door-zone')]
-      .find(el => el.style.left.indexOf('46') === 0);
+      .find(el => el.style.left.indexOf('43') === 0);
     if (!hot) return { err: 'no lecturer hotspot' };
     hot.click(); await w(600);
     const ask = [...document.querySelectorAll('#lt_choices button')]

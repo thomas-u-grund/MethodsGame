@@ -103,7 +103,7 @@ const spy = `
       .find(b => /Introduction to Systems Theory|Lecture/i.test(b.title)).click();
     await w(1600);
     [...document.querySelectorAll('#lt_verbGrid button')].find(b => /talk to/i.test(b.textContent)).click();
-    [...document.querySelectorAll('#lt_sceneWrap .door-zone')].find(el => el.style.left.indexOf('46') === 0).click();
+    [...document.querySelectorAll('#lt_sceneWrap .door-zone')].find(el => el.style.left.indexOf('43') === 0).click();
     await w(500);
     asked.length = 0;
     [...document.querySelectorAll('#lt_choices button')].find(b => /Stellmacher/i.test(b.textContent)).click();
