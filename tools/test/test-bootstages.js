@@ -22,6 +22,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
   const out = {};
   const t0 = Date.now();
+  // the logo holds until the trailer is in, then says "Tap to start"; the tap opens the title
+  let tap = false;
+  for (let i = 0; i < 200 && !tap; i++){ await w(150); tap = await ev(`!!document.querySelector('#bootTap.show')`); }
+  await ev(`document.getElementById('bootSplash').click(), 0`);
   let begin = false;
   for (let i = 0; i < 200 && !begin; i++){
     await w(150);
