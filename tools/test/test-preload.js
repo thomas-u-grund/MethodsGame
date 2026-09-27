@@ -4,7 +4,7 @@ const { connect } = require('./cdp');
   const r = await p.evaluate(`(async () => {
     const out = {};
     const t0 = performance.now();
-    await new Promise(res => window.CODEBOOK_PRELOAD(['voices-act3.mp3'], null, res));
+    await new Promise(res => window.CODEBOOK_PRELOAD([window.CODEBOOK_VOICE_SPRITE['vo-director-0b041277.mp3'][0]], null, res)   /* one file per clip */);
     out.preloadMs = Math.round(performance.now() - t0);
     const t1 = performance.now();
     const snd = window.CODEBOOK_VOICE('vo-director-0b041277.mp3');

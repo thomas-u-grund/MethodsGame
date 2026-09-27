@@ -40,9 +40,9 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       }
     }
     await w(1500);
-    const arch = [...document.querySelectorAll('#cc_choices button')].find(b => /Step through/.test(b.textContent));
-    if (arch) arch.click();
-    await w(15500);
+    // you walk through the archway on your own now (no button): wait for the Doorman and the folder
+    for (let k = 0; k < 60 && !(JSON.parse(localStorage.getItem('codebook_save_v1')).flags.corridorDone); k++) await w(500);
+    await w(500);
     const g = JSON.parse(localStorage.getItem('codebook_save_v1'));
     out.done = !!g.flags.corridorDone; out.folder = g.inventory.indexOf('folder') !== -1;
     return out;

@@ -1,4 +1,4 @@
-// WP-0.1 acceptance: every voiced clip resolves through the bundle, and audio actually advances.
+// WP-0.1 acceptance: every voiced clip resolves to its own file, and audio actually advances.
 const { connect } = require('./cdp');
 
 (async () => {
@@ -21,16 +21,22 @@ const { connect } = require('./cdp');
     out.spriteClips = Object.keys(sprite).length;
     out.unresolved = [...names].filter(n => !sprite[n] && !nonClip.has(n));
 
-    // every clip a bundle claims must fit inside that bundle's real duration
+    // one file per clip (2026-09-27): every file the table names must exist, and a random
+    // sample must be as long as the table says (a wrong length cuts a line short)
     out.bundles = {};
-    for (const b of bundles) {
-      const a = new Audio(b);
+    const files = [...bundles];
+    // in batches: 1,700 requests at once overwhelm the little local test server
+    const heads = [];
+    for (let i = 0; i < files.length; i += 50)
+      heads.push(...await Promise.all(files.slice(i, i + 50).map(f => fetch(f, { method:'HEAD', cache:'no-store' }).then(r => r.ok).catch(() => false))));
+    out.missingFiles = files.filter((f, i) => !heads[i]);
+    const sample = Object.entries(sprite).sort(() => Math.random() - 0.5).slice(0, 60);
+    for (const [k, v] of sample) {
+      const a = new Audio(v[0]);
       await new Promise(res => { a.addEventListener('loadedmetadata', res, {once:true}); a.addEventListener('error', res, {once:true}); });
-      out.bundles[b] = a.duration;
+      out.bundles[v[0]] = a.duration;
     }
-    out.overruns = Object.entries(sprite)
-      .filter(([k,v]) => out.bundles[v[0]] && (v[1]+v[2]) > out.bundles[v[0]] + 0.5)
-      .map(([k,v]) => k);
+    out.overruns = sample.filter(([k,v]) => !(Math.abs(out.bundles[v[0]] - (v[1] + v[2])) < 0.35)).map(([k,v]) => k + ' ' + out.bundles[v[0]] + ' vs ' + v[2]);
 
     // actually play clips through the real code path and prove each one ENDS on schedule
     async function probe(name){
@@ -46,7 +52,9 @@ const { connect } = require('./cdp');
     // Warm the bundles through the game's own loader before timing anything: the first
     // play() otherwise pays for a multi-megabyte fetch and the timing means nothing.
     out.warmup = [];
-    for (const b of bundles){ const t = performance.now();
+    // (per-clip files: warm only the two probed clips)
+    const byDur0 = Object.keys(sprite).sort((a,b) => sprite[a][2]-sprite[b][2]);
+    for (const b of [sprite[byDur0[0]][0], sprite['doorman-chapterone.mp3'][0]]){ const t = performance.now();
       await new Promise(res => window.CODEBOOK_PRELOAD([b], null, res));
       out.warmup.push([b, Math.round(performance.now() - t)]); }
 
@@ -60,7 +68,7 @@ const { connect } = require('./cdp');
 
   console.log(JSON.stringify(r, null, 2));
   console.log('page errors:', p.errors.length ? p.errors : 'none');
-  const ok = r && r.unresolved.length === 0 && r.overruns.length === 0 && r.allPlayed && p.errors.length === 0;
+  const ok = r && r.unresolved.length === 0 && r.overruns.length === 0 && r.missingFiles.length === 0 && r.allPlayed && p.errors.length === 0;
   console.log(ok ? '\nPASS' : '\nFAIL');
   p.close(); process.exit(ok ? 0 : 1);
 })();

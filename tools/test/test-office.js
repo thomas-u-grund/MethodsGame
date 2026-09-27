@@ -62,8 +62,8 @@ const enterOffice = `
     await w(5800);   // she leaves when her line ends (AFTER_LINE, 4.5 s cap) + 650 ms fade
     out.sheLeft      = getComputedStyle(prof).display === 'none';
     out.roomSaysSo   = /empty/i.test(document.getElementById('wp_line').textContent);
-    const wayOut = () => [...document.querySelectorAll('#wp_choices button')]
-      .some(b => /come back when she has cooled off/i.test(b.textContent));
+    // the way out is the Campus Map button (the "Leave" dialog was removed, 2026-09-27)
+    const wayOut = () => !!document.getElementById('backToMap');
     out.wayOut = wayOut();
     // ...and pressing "Wait" re-renders the choices without eating the way out
     const wait = [...document.querySelectorAll('#wp_choices button')].find(b => /^Wait/.test(b.textContent));
