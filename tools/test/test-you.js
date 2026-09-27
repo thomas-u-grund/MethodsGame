@@ -1,7 +1,7 @@
 // The student speaks (ROADMAP 8v). Clicking a quoted choice plays her clip, and the reply
 // that choice triggers waits for her instead of cutting her off.
 //
-//   1. in the Office, "Continue..." is an action, not speech: no vo-you clip.
+//   1. in the Office, the interview's first step says nothing in your voice (it used to be "Continue...").
 //   2. choice A at W1 is quoted: her clip plays FIRST, then the Professor's retry line,
 //      and the Professor's clip does not start until hers has ended.
 //   3. Space while she is answering skips only her: the reply starts at once and its
@@ -46,7 +46,8 @@ const spy = `
     const btn = re => [...document.querySelectorAll('#wp_choices button')].find(b => re.test(b.textContent));
     window.CODEBOOK_STOP_LINE_AUDIO();
     window.__played.length = 0;
-    btn(/^Continue/).click(); await w(400);
+    // no "Continue..." any more: the interview moves on by itself once her line is done
+    for (let i = 0; i < 60 && !btn(/^A\\)/); i++) await w(200);
     out.continueSilent = !window.__played.some(x => /^vo-you-/.test(x.name));
     window.CODEBOOK_STOP_LINE_AUDIO();
     window.__played.length = 0;
