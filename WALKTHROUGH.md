@@ -207,7 +207,7 @@ any unchecked list, so there is no way to walk off with the six.
 
 | Problem | How |
 |---|---|
-| *It does not exist* | Magnifying glass on **KIRA** (her printout) — reference 4's DOI resolves to a recipe for soup |
+| *It does not exist* | Magnifying glass on **KIRA** or on her **printer** (the printout) — reference 4's DOI resolves to a recipe for soup |
 | *It does not say that* | **Look at the framed abstract** (only the abstract was ever read), then talk to **KIRA → "Print me the whole Müller & Singh paper"** — page nine says the association vanished after adjustment |
 | *It cannot establish that* | **Use the card catalogue** with the hook pole — a cross-sectional study filed as LECTURES CAUSE SUCCESS |
 
