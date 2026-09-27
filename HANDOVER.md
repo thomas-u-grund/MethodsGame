@@ -1,17 +1,113 @@
 # The Secret of the Lost Codebook — Handover
 
-*Project handover / internal reference — compiled 2026-09-15, last updated 2026-09-19 after the Act II build, sprites, interludes, preloading and the v49 publish*
+*Project handover / internal reference — compiled 2026-09-15, last updated 2026-09-27 (section 00 is current; everything below it is history)*
 
 A LucasArts-style point-and-click adventure teaching Research Methods, built as a single self-contained HTML file. This is the orientation doc for picking the project back up — what's live, how it's wired together, and what's still open.
 
-> **Current state (2026-09-26): read `ROADMAP.md` §1 first.** This document is the history of how the
-> engine was built (sections 01b onwards, frozen at 2026-09-24). Since then: Acts IV and V rebuilt
-> (8zu–8zy), the Keynote Showdown, the Reviewer 2 battle, simple controls, per-act endings. Only the
-> standalone Rap Battle and Bingo pages are shared; the whole-game artifact below is stale on purpose.
+> **Current state: section 00 below (2026-09-27).** `ROADMAP.md` §1 has the build plan. Sections 01b
+> onwards are the history of how the engine was built and are frozen; their tables and backlogs are
+> out of date. The game is played from GitHub Pages; the whole-game artifact below is stale on purpose.
 
 **Old whole-game build (stale):** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 (v51 · 2026-09-20)
 
 **v51 is live (2026-09-20)** and matches the local build and GitHub `main` (https://github.com/thomas-u-grund/MethodsGame): everything in sections 01b–01k is published — all of Act I (voiced), all four Act II rooms with character sprites, the Doorman, the Act I/Act II "Starring" posters and ACT title cards, the Act II trailer interlude, and per-act preloading with progress bars. **Lesson that keeps recurring: local edits and headless-Chrome "it worked" do NOT mean the change is live** — the Artifact must be republished explicitly, with every new/changed asset passed in `files` (recipe in section 01k).
+
+---
+
+## 00. Current state (2026-09-27)
+
+**Live:** https://thomas-u-grund.github.io/MethodsGame/ — GitHub Pages redeploys on every push to
+`main` (about a minute). **"push" means:** run the tests, commit, `git push origin main`, confirm the
+Pages run (`gh run list --limit 1`), give the link. Never add the untracked `godot-prototype/` folder.
+At the time of writing, **6 commits are local and unpushed** (Lecture Theatre repaint, office fixes,
+cameo lines, slip markings, the new Library, the printer); the full suite has not been run since the
+Library rework.
+
+**The game:** one file, `web/the-secret-of-the-codebook.html` (~14,400 lines), 19 rooms in five acts
+plus the outro, all painted, voiced (1,838 clips) and finishable. Step-by-step solution in
+`WALKTHROUGH.md`; room list in `README.md`.
+
+### How a new game starts (rebuilt 2026-09-27)
+
+Grund Arts logo while the trailer preloads → **"Tap to start"** (unlocks audio) → title screen with
+music, rotating tips (`#titleTip`, every 5.2 s) and a Settings gear → **trailer**: deadline, "this is
+you", the panicked student (`trailer-panel2b-spiral`), the rumour, the Codebook legend over the
+Professor, then **the bell** (`trailer-panel5-bell`: plaque PROF. STELLMACHER, a student's hand) with
+the narration, the ring and her intercom answer on one panel (`then:` in the panel list) → ACT I over
+the cast. A new game (`flags.newGame`) lands on the **campus map with her office glowing**
+(`.cb-beacon`); in the office she explains the game, hands over her card and the phone help, then
+leaves for her lecture. A save already under way skips the trailer and preloads its own act.
+
+### Systems added since 2026-09-24 (what to know before touching them)
+
+| System | Where / how |
+|---|---|
+| **Voices, one file per clip** | `web/voices/*.mp3`, table `CODEBOOK_VOICE_SPRITE` (`[file, 0, dur]`). `CODEBOOK_ROOM_CLIPS` lists each room's clips for background prefetch (`act1-core`, `common`, `intro` are special keys). |
+| **Which clip plays** | `CODEBOOK_VO` maps the text *inside* quotes to a character clip; `CODEBOOK_NARR` maps narration (text outside quotes, decoded, whitespace-collapsed) to a narrator clip. A quote with no clip is folded into the narration. Harvest missing lines: `localStorage.cb_narr_harvest='1'` → misses collect in `cb_narr_miss`. |
+| **Playback** | `WebVoice` (Web Audio, AudioContext unlocked on the first tap, decoded buffers cached, gain ×1.4) with `SegmentSound` (pooled audio elements) as fallback. Opened as `file://`, `fetch` is refused, so voices use the elements there. iPhone: `navigator.audioSession.type='playback'` (silent keep-alive element on older iOS) so the ring/silent switch does not mute voices. |
+| **Skipping** | Space / a tap stops the line (`CODEBOOK_STOP_LINE_AUDIO`); `CODEBOOK_AFTER_LINE` fires on end *or* skip. When you click a quoted answer, your clip plays and the reply queues behind it; **one skip silences both** (`CODEBOOK_SKIP_CHOICE_LINE`) and keeps the reply's caption. |
+| **Mix** | `CODEBOOK_SFX(name, vol)`: one-shots ×0.6, loops ×0.45, `amb-clock` ×0.5 more; room music ×0.75; phone calls duck music and ambience. |
+| **Cutscenes** | `CODEBOOK_PLAY_INTERLUDE(panels, done, {label})`; a panel is `{src, text, voice, sfx:[[name, vol, delayMs]], then:{sfx, delay, voice, text}}`. Esc/Space skips the whole cutscene (tests use this). |
+| **Leaving a room** | `window.CODEBOOK_LEAVE_GUARD` — a room may set it; the Campus Map button calls it first and does not leave if it returns true. Reset on every `enterRoom`. The Library's monkey uses it. |
+| **Course certificate** | `?course=<id>` loads `web/courses/<id>.json`; code = HMAC-SHA256(secret, id\|studentId\|date); `web/verify.html` checks one or a whole form export. See README "Bonus points for your course". |
+| **Prediction Slip** | an entry a room accepted that says nothing (`sound:false`) now shows as an amber ☒ in the room bar and in the open folder, with the coherence rating. |
+
+### Rooms changed this week
+
+- **Lecture Theatre** — repainted in stages (empty hall with a **stage** → Goffman at the side door →
+  bingo crowd → cheer), front-row overlays cut by diffing crowd against empty
+  (`lecture-bingo-front`, `lecture-cheer-front`). Vossberg stands on the boards (`left:50%;
+  bottom:38.6%; height:32%`) with a contact shadow; his click zone is `l:43`.
+- **Library** — the trolley is gone (painted over with **KIRA's printer**). KIRA writes a literature
+  review on request (cutscene), the **monkey eats any unchecked list** on the way out (cutscenes
+  `lib-cut-*.webp`), the three checks run on her copy (glass on KIRA/printer; framed abstract → she
+  prints the whole paper; catalogue drawer with the stepladder), and a clean copy gives the Reading
+  List. No junk path any more. Test: `test-libmonkey.js`.
+- **Office** — "Continue" beside "send her out"; the Precisely Worded Question is handed over after
+  her last line.
+- **Cameos** — all look lines short ("It seems to be Robert K. Merton… collecting other people's
+  citations.") and narrated.
+- **Stockholm** — a "Three months later" panel before the prize, so the keynote comes first (story
+  option A for Acts IV/V).
+
+### Pipelines
+
+- **Voices** (Chatterbox, local): `.venv-tts/bin/python tools/tts/gen.py jobs.json` → trim +
+  `loudnorm` with ffmpeg into `audio/voices/` → `python3 tools/tts/clips.py --add a.mp3 b.mp3` (in
+  zsh pass the names as separate words, e.g. `"${arr[@]}"`) → add to `CODEBOOK_VO`/`CODEBOOK_NARR`
+  and the room's `CODEBOOK_ROOM_CLIPS`. Refs in `tools/tts/refs/`: narrator `lv-marksmith` (0.7/0.35),
+  Professor `lv-lauravictoria` (0.55/0.45), you `lv-eastman` (0.6/0.4), KIRA `lv-golding` (0.85/0.3,
+  then `asetrate=24000*1.06,aresample=24000`), Feldstrom `lv-bernd` (0.95/0.28, seed 3).
+- **Art** (ChatGPT in Chrome): attach references, ask for an edit that keeps everything else, then
+  paste only the changed region back into the existing background with a feathered mask, so patches
+  and hotspots stay aligned. Very long ChatGPT conversations stop loading; start a new chat. A
+  generation stuck on "Preview" is usually finished: reload the chat.
+- **The player** looks like the trailer's student: curly dark hair, dark charcoal hoodie, seen from
+  behind.
+
+### Tests
+
+`bash tools/test/run-all.sh` — 44 tests, headless Chrome on 9333, game served on 8934, about 20
+minutes; one run at a time. Spare Chrome on 9334 for screenshots (`CDP_PORT=9334`). The test Chromes
+run with autoplay unrestricted, so they cannot catch autoplay bugs: start one without
+`--autoplay-policy` and click with `Input.dispatchMouseEvent` for that.
+
+### Open list
+
+1. Run the suite and **push** the 6 local commits; play-test the new opening, Lecture Theatre and
+   Library on a phone (and the silent-switch fix on an iPhone).
+2. **Laser Pointer Duel** for the Keynote: prototype approved in principle
+   (https://claude.ai/artifact/8cdPYbLn4xzNYDzvhCtyHc — aim at the flaw on Feldstrom's slides; hit
+   quality sets the argument's strength; a strong hit steadies your hand). To build into
+   `keynote`: four slides with flaws and decoys, ~12 voiced lines for you and ~8 for Feldstrom,
+   meter and replication board wired in.
+3. Small: a cut-out icon for KIRA's printout (`icon-litreview` is a square crop); the Library title
+   bar still says "Ready to Cite"; the walls shift slightly when the lecture crowd fades in.
+4. Voice takes nobody has listened to yet: Stellmacher's intercom and office intro, the cameo lines,
+   the Library lines.
+5. Older: ~72 long pieced-together narration lines; tips on the act loading bars; README/ROADMAP for
+   this week; Suno music (prompts ready); more monkey hints; drop `?config=`; save export/import; an
+   Act IV set piece (the Casino).
 
 ---
 
@@ -276,7 +372,7 @@ All of the above verified end-to-end via headless Chrome/CDP this session (panel
 
 ---
 
-## 01. What's actually playable right now
+## 01. What was playable on 2026-09-20 (history; see section 00)
 
 Acts I and II are the finished slices: painted backgrounds, verb-grid/inventory UI, character sprites, trailer-style act openers. Acts III–V are functionally playable but still in the older flat SVG style with the older UI (see section 03).
 
@@ -486,7 +582,7 @@ This doc is how the code and pipelines work; **`ROADMAP.md` is the master build 
 
 ---
 
-## 06b. The game as of 2026-09-20: all five acts exist in code
+## 06b. The game as of 2026-09-20: all five acts exist in code (history; see section 00)
 
 Seventeen rooms, in five acts, all reachable and all finishable:
 
@@ -516,7 +612,7 @@ Seventeen rooms, in five acts, all reachable and all finishable:
 
 ---
 
-## 07. Open backlog, condensed
+## 07. Open backlog, condensed (2026-09-20, superseded by section 00's open list)
 
 - **Office hand-off scene to Act II/III** isn't built as an in-room scene; Act II is introduced by the interlude instead, and the "Where did these numbers come from?" hand-off to Act III doesn't exist yet.
 - **Acts II, IV and V need art and voices.** The rooms are built on `CODEBOOK_ADV_HTML`/`CODEBOOK_ADV_ROOM` with placeholder backgrounds and no sprites; each act also needs an interlude, a "Starring" poster and an ACT card (Act III's are the model). See `ROADMAP.md` §9.
@@ -524,4 +620,4 @@ Seventeen rooms, in five acts, all reachable and all finishable:
 
 ---
 
-*the-secret-of-the-codebook.html · ~5,000 lines · single file, no build step*
+*the-secret-of-the-codebook.html · ~14,400 lines · single file, no build step*
