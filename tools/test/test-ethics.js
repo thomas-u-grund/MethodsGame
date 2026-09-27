@@ -3,7 +3,7 @@
 // results possible. With consent and withdrawal already met:
 //   over-redact  -> no linkage, and the Chair says why on the spot
 //   keep names   -> refused
-//   number forms -> linkage, approval, and the bagged ballot box handed down with it;
+//   number forms -> linkage, approval; the ballot box goes into the Mensa's lunch bag and comes with you;
 //                   four red seals on the bench.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
@@ -11,7 +11,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 async function run(pick) {
   const p = await connect(U + Date.now());
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
-    inventory:['pen','folder'], flags:{ corridorDone:true, h27issued:true, slipSealed:true, act3IntroSeen:true, etConsent:true, etWithdraw:true } }))`);
+    inventory:['pen','folder','lunchbag'], flags:{ corridorDone:true, h27issued:true, slipSealed:true, act3IntroSeen:true, etConsent:true, etWithdraw:true } }))`);
   await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const r = await p.evaluate(`(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));
@@ -25,9 +25,14 @@ async function run(pick) {
     const q = btn('names, and linking'); if (!q) return { noOption: true };
     q.click(); await wait(500);
     btn('${pick}').click(); await wait(900);
+    const line0 = document.getElementById('et_line').textContent.slice(0,500);
+    // the box leaves only once it is bagged: the Mensa's lunch bag, then pick it up (2026-09-27)
+    const vb = v => [...document.querySelectorAll('#et_verbGrid button')].find(b=>new RegExp(v,'i').test(b.textContent));
+    vb('^use$').click(); const bag = document.querySelector('#et_sideInv [data-item="lunchbag"]'); if (bag){ bag.click(); document.querySelector('[data-id="table"]').click(); await wait(400); }
+    vb('pick up').click(); document.querySelector('[data-id="table"]').click(); await wait(400);
     const g = JSON.parse(localStorage.getItem('codebook_save_v1'));
     const red = [...document.querySelectorAll('#et_seals > div > div:first-child')].filter(d => /9c1f16/.test(d.getAttribute('style'))).length;
-    return { named, line: document.getElementById('et_line').textContent.slice(0,500), etLinkage: !!g.flags.etLinkage, ethicsDone: !!g.flags.ethicsDone,
+    return { named, line: line0, etLinkage: !!g.flags.etLinkage, ethicsDone: !!g.flags.ethicsDone,
              box: g.inventory.indexOf('ballotboxwrapped') !== -1, red };
   })()`);
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
