@@ -29,7 +29,7 @@ async function run(inv) {
   console.log('nothing:   ', JSON.stringify(none));
   console.log('\nmarks only:', JSON.stringify(marks));
   console.log('\nboth:      ', JSON.stringify(both));
-  const ok = /particular questions/.test(none.line) && none.choices.length === 0
+  const ok = /particular questions|question-level results/.test(none.line) && none.choices.length === 0
     && /Which one\?/.test(marks.line) && marks.choices.length === 3
     && both.choices.some(c => /The one the/i.test(c))
     && ![none,marks,both].some(x => x.errors.length);

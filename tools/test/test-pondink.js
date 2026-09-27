@@ -19,7 +19,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     CODEBOOK_ENTER_ROOM('lecture'); await w(1500);
     [...document.querySelectorAll('.verb-grid button')].find(b => /pick up/i.test(b.textContent)).click();
     const z = document.querySelector('#lt_sceneWrap .door-zone[data-zone="ink"]'); z.click(); await w(300);
-    return !JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('blackink') && /halfway to the lectern/.test(document.getElementById('lt_line').textContent);`);
+    return !JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('blackink') && /Not while he is standing next to it/.test(document.getElementById('lt_line').textContent);`);
   const pond = await run({ inventory:['blackink'], flags:{ actRenumberMigrated:true, whirlpoolDone:true, lecturerGone:true, lectureInkTaken:true } }, `
     CODEBOOK_ENTER_ROOM('pond'); await w(1500);
     const noWater = !document.querySelector('#pd_sceneWrap [data-id="water"]');

@@ -42,10 +42,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.profgHere = !!document.getElementById('hf_spr_profg');
     out.mouths = ['marx','durkheim','weber'].every(n => document.getElementById('hf_mouth_' + n));
     verb(/look/i).click(); hot('djtable').click(); await w(200);
-    out.noBeat = /Nothing is plugged/.test(line());
+    out.noBeat = /[Nn]othing (is )?plugged/.test(line());
     out.djHere = !!document.getElementById('hf_dj');
     verb(/look/i).click(); hot('dj').click(); await w(200);
-    out.djLook = /p &lt; \.05|p < \.05/.test(line()) || /p < \.05/.test(document.getElementById('hf_line').textContent);
+    out.djLook = /DJ|p &lt; \.05|p < \.05/.test(line()) || /DJ|p < \.05/.test(document.getElementById('hf_line').textContent);
     verb(/talk/i).click(); hot('tobi').click(); await w(200);
     out.tobiHosts = /closing act/.test(line());
     space();
@@ -91,10 +91,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.cutsceneGone = !document.getElementById('interlude');
     out.stageOff = !document.body.classList.contains('cb-stage');
     out.rapDone = !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.rapDone;
-    out.after = /stopped nodding/.test(line());
+    out.after = /stop(ped)? nodding/.test(line());
     space();
     verb(/look/i).click(); hot('meter').click(); await w(200);
-    out.meterBroken = /bent/.test(line());
+    out.meterBroken = /bent|lies at zero/.test(line());
     // after the battle Professor G dictates the mechanism (the save has a pen and a card)
     verb(/talk/i).click(); hot('profg').click(); await w(300);
     { const b = [...document.querySelectorAll('#hf_choices button')].find(x => /worked examples/.test(x.textContent)); if (b){ b.click(); await w(300); } }

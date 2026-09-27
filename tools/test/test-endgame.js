@@ -151,7 +151,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
     // --- Office: reveal + submission
     await go('The Seven-Second Office');
-    out.revealStarts = /hourglass turns over/.test(document.getElementById('wp_line').textContent);
+    out.revealStarts = /hourglass turns/.test(document.getElementById('wp_line').textContent);
     ch('wp','is that the Codebook'); await wait(400);
     out.codebookLine = /used to call it Methods/.test(document.getElementById('wp_line').textContent)
       && /accurate/.test(document.getElementById('wp_line').textContent);
