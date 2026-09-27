@@ -1,11 +1,11 @@
 // The student speaks (ROADMAP 8v). Clicking a quoted choice plays her clip, and the reply
 // that choice triggers waits for her instead of cutting her off.
 //
-//   1. in the Office, the interview's first step says nothing in your voice (it used to be "Continue...").
+//   1. in the Office, the interview's first step says nothing in your voice (its "Continue" is unquoted).
 //   2. choice A at W1 is quoted: her clip plays FIRST, then the Professor's retry line,
 //      and the Professor's clip does not start until hers has ended.
-//   3. Space while she is answering skips only her: the reply starts at once and its
-//      caption stays up.
+//   3. Space while she is answering skips her AND the reply queued behind her (author,
+//      2026-09-27: "all voices should skip"); the reply's caption stays up to be read.
 //   4. asking Dr. Vossberg where she is voices the whole exchange in order: her question,
 //      his answer, her "So where is she?", the rest of his answer.
 //   5. her quoted lines resolve to her clips through CODEBOOK_VO ("Where is Professor
@@ -58,7 +58,7 @@ const spy = `
     out.youFirst  = !!a && /^vo-you-/.test(a.name);
     out.profAfter = !!b && /^office-/.test(b.name) && !!a.end && b.t >= a.end - 50;
 
-    // Space mid-answer skips HER, and the reply starts at once instead of being lost.
+    // Space mid-answer skips her and the reply behind her: nothing else starts.
     await w(1500);
     btn(/^Try again/).click(); await w(400);
     window.CODEBOOK_STOP_LINE_AUDIO();
@@ -68,10 +68,9 @@ const spy = `
     await w(300);
     const t0 = performance.now();
     document.body.dispatchEvent(new KeyboardEvent('keydown', { code:'Space', key:' ', bubbles:true }));
-    for (let i = 0; i < 30 && window.__played.length < 2; i++) await w(100);
-    const reply = window.__played[1];
+    await w(1500);
     out.skipOrder  = window.__played.map(x => x.name);
-    out.skipToReply = !!reply && /^office-/.test(reply.name) && reply.t - t0 < 1500;
+    out.skipAll = /^vo-you-/.test((window.__played[0] || {}).name || '') && !window.__played.some(x => /^office-/.test(x.name));   // her reply never starts
     out.captionKept = !document.querySelector('.scene-caption.caption-dismissed');
     return out;
   })()`);
@@ -118,7 +117,7 @@ const spy = `
 
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   console.log(JSON.stringify({ r, pond, voss }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
-  const ok = r && r.continueSilent && r.youFirst && r.profAfter && r.skipToReply && r.captionKept
+  const ok = r && r.continueSilent && r.youFirst && r.profAfter && r.skipAll && r.captionKept
           && pond.mapped && voss.inOrder && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');
   process.exit(ok ? 0 : 1);
