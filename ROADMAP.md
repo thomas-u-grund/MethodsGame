@@ -31,6 +31,15 @@
 
 *Board last verified against the file, `web/` and the test suite on 2026-09-26.*
 
+- **2026-09-26/27, since the last board check:**
+  - *Settings menu* (⚙ in every room and on the map): dialogue text on/off (voice only is the default), simple/classic controls (hidden on phones), music, three save slots, reset, and the course certificate when a course is set.
+  - *Full screen everywhere*, including phones in landscape; on phones the bingo is a split screen (Vossberg left, card right). With simple controls the inventory folds away behind a bag button so nothing at a room's right edge is covered.
+  - *Voices:* a fifth bundle, `voices-common` (2.4 MB, preloaded in every act), holds everything that can play on a phone call (both voicemails, Stellmacher's hints, the Stockholm script). Voices play through a pool of elements unlocked on the first tap, so phones do not block timer-started lines; a clip that fails counts as finished, so cutscenes never stall. KIRA recast (natural voice, light metallic chorus) instead of the DECtalk voice.
+  - *Narration:* the narrator reads descriptions (≈1,000 clips). A quote nobody speaks (a sign, a label) is read as part of his sentence. Lines found by the harvest hook (`localStorage.cb_narr_harvest = '1'` collects unvoiced lines into `cb_narr_miss`) and a room-by-room sweep.
+  - *Puzzles:* the bingo gates the ink, and the ink brings the real black swan (no more watching the lake). The Corridor plays each case's own recording (it used to play by position in the shuffled order). Stellmacher's hints follow the room you are in. You can ring Feldstrom from your own phone (contacts), with prank lines for a wrong answer; he hands you his extension, which is also painted by his telephone.
+  - *Art:* Coleman twice the size; the Swedish book painted into the Library; ticked P-1 and a painted wax seal in the Act II ending; Feldstrom's four poses and KIRA's talk pose have real closed/open mouths; **the third founder is a bearded monkey** (Hall, rap battle panels, keynote hall), the first plant for the ending's reveal.
+  - *Course certificate:* see README, "Bonus points for your course". `courses/<id>.json` per course, `verify.html` for checking codes.
+
 - **Hosting (2026-09-26):** the whole game is on GitHub Pages, https://thomas-u-grund.github.io/MethodsGame/ , deployed by `.github/workflows/pages.yml` on every push to `main` (it publishes `web/`). The artifact host's 255-file and 15 MB limits no longer apply to the game. Voices are four bundles, each preloaded with its act: `voices-act1` (Act I and the Office), `voices-act2`, `voices-act3`, `voices-act45` (Acts IV, V and the outro).
 - **Standalone pages:** the rap battle and the bingo stay as claude.ai artifacts. **The
   Founders' Rap Battle** (v12, https://claude.ai/artifact/JuphmaQKxKgwC5s4AURpD5, built by

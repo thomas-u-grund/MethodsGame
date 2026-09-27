@@ -86,18 +86,19 @@ corkboard: she is Professor G's biggest fan.
 
 ### I.2 Introduction to Systems Theory
 
-**Needs:** nothing (the bingo game needs `bingocard`). **Gives:** `blackink` (a decoy — see the
-Pond), and the Professor back in her office.
+**Needs:** `bingocard` (from her desk). **Gives:** `blackink` — the Pond needs it — and the
+Professor back in her office.
 
 **Do:**
 1. **Talk To Dr. Vossberg → "Where is Professor Stellmacher?"** He stops dead and explains she
    will not be in the building while this runs under her name. *She is now in her office*, and
    the room is done.
-2. The bingo game is **optional** and worth playing: Use `bingocard` on him (or ask *"Could you
-   say a bit more about Luhmann?"*). Dab each square the moment he *says* the term (decoys are
-   near-misses; a missed term comes round again), and press **BINGO!** on the card when a row,
-   column or diagonal fills. He loses the thread and walks out forty minutes early — which also
-   sends her back to her office.
+2. **The bingo is the way to the ink.** The bottle sits at his elbow on the lectern; while he
+   lectures, reaching for it gets a look (*"Not while he is standing next to it"*). Use
+   `bingocard` on him (or ask *"Could you say a bit more about Luhmann?"*). Dab each square the
+   moment he *says* the term (decoys are near-misses; a missed term comes round again), and press
+   **BINGO!** on the card when a row, column or diagonal fills. He loses the thread and walks out
+   forty minutes early. **Now pick up the ink** (`blackink`).
 3. Use the blackboard to summon him back (he cannot resist a wrong arrow).
 
 ### I.3 The Seven-Second Office (part two — the interview)
@@ -116,13 +117,15 @@ Leaving the direction open is the right answer. You are not allowed to expect th
 
 ### I.4 Probability Pond
 
-**Needs:** nothing.
+**Needs:** `blackink` (from the Lecture Theatre, after the bingo).
 
-**Look at the open water** (towards the bridge) and wait. A real black swan glides out from
-under the bridge; the Skeptic on the bench is convinced on the spot (`philosopherConvinced`).
+**Use `blackink` on the right-hand swan.** The Skeptic is not impressed: *"You made that. A
+counterexample you manufactured is not evidence. It is a craft project."* The swan ducks and
+comes up white — but all the splashing has drawn attention, and a **real black swan** glides out
+from under the bridge. Nobody put it there; she is convinced on the spot
+(`philosopherConvinced`). Found, not made.
 
-**Wrong branch:** `blackink` on the right-hand swan. *"You made that. A counterexample you
-manufactured is not evidence. It is a craft project."* The swan ducks and comes up white.
+(James Coleman rows past in his boat, drawing his trapezoid; look at him for the joke.)
 
 ### I.5 Causality Corridor
 
@@ -189,8 +192,9 @@ Look at the portraits six times. Tobi offers an encore afterwards.
 
 **Side pickups:**
 - **Pick up the register** → `enrolreg`. Used by the Workshop, the Mensa **and** the Bureau.
-- **Pick up the desk** → `blankcard`. Professor G writes on it.
-- **Pick up the stacks** → `swedebook`, *Swedish for Nobel Laureates*. The phone call needs it.
+- **Pick up the card box** on the information desk → `blankcard`. Professor G writes on it.
+- **Pick up the yellow book** on the side table by the globe → `swedebook`, *Swedish for Nobel
+  Laureates*. The phone call needs it.
 
 **Catch all three bad references** (a red REJECTED tag appears on the trolley for each):
 
@@ -208,8 +212,11 @@ Then **Use the trolley** (or ask KIRA):
 
 ### The Stockholm call — getting Feldstrom out of his workshop
 
-**Needs:** `swedebook`. Talk to **KIRA → "Ask her to place a call"** (or use the desk phone) →
-**"Professor Feldstrom, please."** The screen splits: you on the left, his workshop on the right.
+**Needs:** `swedebook`. Talk to **KIRA → "Ask her to place a call"** (or use the telephone) →
+**"Professor Feldstrom, please."** — or ring him from **your own phone** (inventory) anywhere:
+his extension, 4173, is on the card by his telephone and he hands it to you the first time you
+talk to him. The screen splits: you on the left, him on the right. A wrong answer gets *"This
+sounds like a prank"* and a click.
 
 1. **"Hej. This is Stockholm."** → *"…Say something in Swedish."*
 2. ✅ **Read from the book: "Hej. Kommittén är lagom nöjd. Men först: fika."** (Without the
@@ -583,7 +590,7 @@ Everything here is recoverable, and most of it is where the jokes live.
 | Do this | Get this |
 |---|---|
 | Fabricate a citation (pen on the Office corkboard) and show it to the Professor | the counter ticks to 10,000, and back |
-| Pour black ink on the swan | *"It is a craft project."* |
+| Pour black ink on the swan | *"It is a craft project."* — and then the real one turns up |
 | Take the wrong door in the Corridor | the floor gives way |
 | Lodge all six references | the Registry files a list without reading it |
 | Give Professor G the Weber sentence | every portrait nods at once |
@@ -608,11 +615,11 @@ Everything here is recoverable, and most of it is where the jokes live.
 | A Chewed Pen | Office | Hall (Professor G), Survey Lab patient 2, Ethics ×2 |
 | A USB Drive | Office | **Hall DJ** — the rap battle |
 | A Magnifying Glass | Office | Library trolley; Mensa frame (if you fed it the big list) |
-| A Bingo Card | Office | Lecture bingo *(optional)* |
+| A Bingo Card | Office | Lecture bingo — it gets you the ink |
 | A Cracked Hourglass · A Rubber Stamp | Office | flavour only |
-| A Bottle of Black Ink | Lecture | nothing — the Pond's wrong branch |
+| A Bottle of Black Ink | Lecture (after the bingo) | **Pond** — the right-hand swan |
 | Ceremonial Hook Pole | Hall stepladder | Library catalogue drawer |
-| Blank Catalogue Card | Library desk | Professor G *(becomes A Written Mechanism)* |
+| Blank Catalogue Card | Library card box | Professor G *(becomes A Written Mechanism)* |
 | Enrolment Register | Library | Workshop, Mensa, Bureau |
 | Swedish for Nobel Laureates | Library stacks | the Stockholm call |
 | An Extremely Grand Phrase | Hall dispenser | nothing — a decoy |

@@ -17,6 +17,19 @@ python3 -m http.server 8080
 
 Then visit `http://localhost:8080/the-secret-of-the-codebook.html`.
 
+## Bonus points for your course
+
+The game is free to play. A lecturer can also hand out a course link, and students who finish all five acts get a **completion certificate with a verification code** that can count towards exam bonus points. Nothing about a course lives in the game code: a course is one small JSON file.
+
+1. Copy `web/courses/example.json` to e.g. `web/courses/methods-ws26.json` and fill in the course name, term, reward text, deadline, the fields students enter (name, student ID…) and, optionally, a form link with prefill parameters (Google Forms, MS Forms, Moodle feedback — anything that takes URL parameters).
+2. Put a fresh secret in it: open `verify.html?course=methods-ws26`, press **Make a new secret**, paste it into the file.
+3. Give students `the-secret-of-the-codebook.html?course=methods-ws26`. The course is remembered on their device. At the very end of the game (and afterwards under **Settings → Course certificate**) they enter their details, get a certificate and code, and submit it through your form.
+4. Check codes on `verify.html?course=methods-ws26`: one at a time, or paste the whole form export (one row per student) to check them all at once.
+
+A course file can also be served from elsewhere: `?config=https://…/course.json` (the server must allow cross-origin requests).
+
+The code is `HMAC-SHA256(secret, course id | student ID | date)`, shortened, with the date readable in the code itself. It cannot be moved to another student ID or guessed. The game is a static website, though, so a determined student could read the secret from the course file; only a server-side check would stop that. Change the secret every term.
+
 ## Structure
 
 - **`web/`** — the game itself: `the-secret-of-the-codebook.html` plus every image and audio asset it loads.
