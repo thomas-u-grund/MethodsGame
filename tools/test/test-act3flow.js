@@ -35,20 +35,13 @@ async function inRoom(p, inv, flags, room, body){
   const mensa = await inRoom(p, ['folder','enrolreg'], {}, 'The Mensa', `
     const out = {};
     verb('mn', /talk to/i); spot('herald'); await w(400);
-    out.listsAll = /receptacle/.test(line('mn')) && /randomiser/.test(line('mn')) && /frame/i.test(line('mn'));
+    out.listsAll = /frame/i.test(line('mn'));                    // one requirement: the list in the frame
     use('mn', 'enrolreg', 'frame'); await w(500);
     out.keptRegister = has('enrolreg');
-    verb('mn', /talk to/i); spot('counters'); await w(400);
-    ch('mn', /borrow a mug/); await w(500);
-    verb('mn', /talk to/i); spot('counters'); await w(400);
-    ch('mn', /SR-2/); await w(500);
-    out.gotBoth = has('mug') && has('raffle');
-    use('mn', 'mug', 'herald'); await w(400);
-    use('mn', 'raffle', 'herald'); await w(400);
-    const vis = id => { const e = document.getElementById('mn_spr_' + id); return !!e && getComputedStyle(e).display !== 'none'; };
-    out.placedVisible = vis('placedMug') && vis('placedSR2');
     verb('mn', /talk to/i); spot('herald'); await w(500);
     out.done = !!g().flags.mensaDone;
+    await w(3500);
+    out.balls = document.querySelectorAll('#mn_draw .ball').length === 12;   // the draw is shown
     return out;`);
 
   const field = await inRoom(p, ['folder','ballotboxwrapped','altquestionnaire'], { surveyDone:true, ethicsDone:true, mensaDone:true }, 'The Fieldwork Arena', `
@@ -77,7 +70,7 @@ async function inRoom(p, inv, flags, room, body){
 
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   console.log(JSON.stringify({ mensa, field, office }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
-  const ok = mensa.listsAll && mensa.keptRegister && mensa.gotBoth && mensa.placedVisible && mensa.done
+  const ok = mensa.listsAll && mensa.keptRegister && mensa.balls && mensa.done
           && field.running && field.voucherOffered && field.gotBoth && field.roomDone && field.actNotYet && field.pointsToProf
           && office.asked && office.actDone && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
