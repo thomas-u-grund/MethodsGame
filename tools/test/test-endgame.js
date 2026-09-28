@@ -95,10 +95,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     verb('wr','talk to'); spot('registrar'); await wait(400);
     ch('wr','boundary condition'); await wait(600);
     out.gap = !!flags().gapDone;
-    // WR1: let Feldstrom inflate the title first; finishing must then be refused
-    verb('wr','talk to'); spot('feldstrom'); await wait(400);
-    verb('wr','talk to'); spot('feldstrom'); await wait(400);
-    ch('wr','bigger'); await wait(400);
+    // The three words, then finishing is blocked until Hedstrom's clarity pass (2026-09-28)
     verb('wr','look at'); spot('abstract'); await wait(450);
     ch('wr','improved'); await wait(300); ch('wr','^.caused'); await wait(2900);
     out.wrongWordKept = [...document.querySelectorAll('#wr_choices button')].some(b => /improved/.test(b.textContent));
@@ -106,12 +103,28 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     ch('wr','demonstrate'); await wait(300); ch('wr','consistent with'); await wait(2300);
     ch('wr','people'); await wait(300); ch('wr','first-year'); await wait(2300);
     ch('wr','This is what happened'); await wait(600);
-    out.titleBlocks = !flags().writingDone;
-    verb('wr','talk to'); spot('feldstrom'); await wait(400);
-    ch('wr','Refuse him'); await wait(900);
+    out.fogBlocks = !flags().writingDone;
+    verb('wr','talk to'); spot('prof'); await wait(400);
+    ch('wr','first one'); await wait(400);
+    ch('wr','co-constitutes'); await wait(2900);                       // jargon: refused, same sentence again
+    out.fogWrongKept = !document.querySelector('#wr_draft b');
+    for (const re of ['did better on the worked-example', 'practise the worked examples', 'could not rule out selection']){ ch('wr', re); await wait(2900); }
+    out.draftClear = document.querySelectorAll('#wr_draft b').length === 3 && !!flags().wrClear;
+    verb('wr','look at'); spot('abstract'); await wait(450);
+    ch('wr','This is what happened'); await wait(600);
     out.writing = !!flags().writingDone;
-    // --- the Poster Session: five visitors, answer each properly (8zv)
+    // --- the Poster Session: Feldstrom at your poster first, then five visitors (8zv; 2026-09-28)
     await go('The Poster Session');
+    verb('ps','use'); spot('poster'); await wait(500);
+    ch('ps','What improvement'); await wait(400);
+    ch('ps','What are you doing'); await wait(400);
+    ch('ps','bigger'); await wait(400);
+    out.titleGrew = /WHAT MAKES STUDENTS LEARN/.test(document.getElementById('ps_title').textContent);
+    verb('ps','use'); spot('poster'); await wait(400);
+    out.visitorsWait = !document.querySelector('#ps_sceneWrap .ps-fig');
+    verb('ps','talk to'); spot('feldstrom'); await wait(400);
+    ch('ps','Refuse him'); await wait(900);
+    out.feldGone = !!flags().psFeldGone && /FIRST-YEAR METHODS COURSE/.test(document.getElementById('ps_title').textContent);
     verb('ps','use'); spot('poster'); await wait(3200);
     for (let i = 0; i < 5; i++){ window.CODEBOOK_PS_ANSWER_RIGHT(); await wait(4800); }
     await wait(600);
@@ -164,9 +177,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.titleBlocks && r.folderGone
+  const ok = r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.fogBlocks && r.folderGone
     && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 5
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
+    && r.fogWrongKept && r.draftClear && r.titleGrew && r.visitorsWait && r.feldGone
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
 })();
