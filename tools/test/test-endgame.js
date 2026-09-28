@@ -104,12 +104,11 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     ch('wr','people'); await wait(300); ch('wr','first-year'); await wait(2300);
     ch('wr','This is what happened'); await wait(600);
     out.fogBlocks = !flags().writingDone;
-    verb('wr','talk to'); spot('prof'); await wait(6600);              // Stellmacher, Vossberg ("I took ze liberty"), Stellmacher
-    ch('wr','first one'); await wait(3600);                             // she reads it out, he defends it
-    out.vossDefends = /re-enacts/.test(document.getElementById('wr_line').textContent);
-    ch('wr','co-constitutes'); await wait(2600 + 3600);                  // jargon: refused, same sentence again
-    out.fogWrongKept = !document.querySelector('#wr_draft b');
-    for (const re of ['did better on the worked-example', 'practise the worked examples', 'could not rule out selection']){ ch('wr', re); await wait(5800 + 3600); }
+    verb('wr','talk to'); spot('prof');                                 // Stellmacher, Vossberg ("I took ze liberty"), Stellmacher
+    for (let t = 0; t < 250 && ![...document.querySelectorAll('#wr_choices button')].some(b => /Start cutting/.test(b.textContent)); t++) await wait(100);   // voiced: replies wait for the line
+    ch('wr','Start cutting'); await wait(2600);                         // Cut the Fog (2026-09-28)
+    out.fogGame = !!document.getElementById('wr_fog') && document.querySelectorAll('#wr_fog .wf-fog').length > 0;
+    window.CODEBOOK_WR_FOG_WIN(); await wait(3800);
     out.draftClear = document.querySelectorAll('#wr_draft b').length === 3 && !!flags().wrClear;
     verb('wr','look at'); spot('abstract'); await wait(450);
     ch('wr','This is what happened'); await wait(600);
@@ -185,7 +184,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   const ok = r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.fogBlocks && r.folderGone
     && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 6
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
-    && r.fogWrongKept && r.draftClear && r.vossDefends && r.knCoda && r.titleGrew && r.visitorsWait && r.feldGone
+    && r.fogGame && r.draftClear && r.knCoda && r.titleGrew && r.visitorsWait && r.feldGone
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
 })();
