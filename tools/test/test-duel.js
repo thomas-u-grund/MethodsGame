@@ -23,7 +23,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.speaks = await until(() => (f.contentDocument.getElementById('line') || {}).textContent, 8000);
     window.CODEBOOK_KN_DUEL_WIN(); await w(400);
     out.handedBack = !document.getElementById('kn_duel') && !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.knDuelWon;
-    out.stockholm = await until(() => /STOCKHOLM/.test((document.getElementById('kn_screen') || {}).textContent || ''), 8000);
+    // Vossberg's coda comes first (2026-09-28): the falsifier question ends it
+    out.coda = await until(() => [...document.querySelectorAll('#kn_choices button')].some(b => /prove it wrong/.test(b.textContent)), 20000);
+    [...document.querySelectorAll('#kn_choices button')].find(b => /prove it wrong/.test(b.textContent)).click();
+    out.stockholm = await until(() => /STOCKHOLM/.test((document.getElementById('kn_screen') || {}).textContent || ''), 20000);
     out.profChoice = await until(() => [...document.querySelectorAll('#kn_choices button')].some(b => /rather have the part/.test(b.textContent)), 20000);
     return out;
   })()`);
