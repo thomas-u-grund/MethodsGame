@@ -16,6 +16,8 @@ const { connect } = require('./cdp');
     // and Professor G's track is 4:45 of recorded music, so they stream as their own files.
     const nonClip = new Set([...bundles, 'title-theme.mp3','office-bgm.mp3','lecture-bgm.mp3','sfx-act1.mp3','sfx-act3.mp3',
       'rap-marx.mp3','rap-durkheim.mp3','rap-weber.mp3','profg-live.mp3','sfx-rap.mp3',
+      // the set-piece music (author's Suno tracks, 2026-09-28)
+      'fieldwork-show.mp3','casino-lounge.mp3','ceremony-fanfare.mp3','reviewer2-battle.mp3',
       'bingo-tense.mp3','bingo-tight.mp3','bingo-hit.mp3','bingo-miss.mp3','sfx-ringback.mp3','sfx-phone-bell.mp3','silence.mp3','sfx-monkey-1.mp3','sfx-monkey-2.mp3','sfx-typewriter.mp3','sfx-drawer.mp3','sfx-knock.mp3','sfx-lever.mp3','sfx-chair-crash.mp3']);   // silence: unlocks the voice players on the first tap
     out.referenced = names.size;
     out.spriteClips = Object.keys(sprite).length;
