@@ -6,9 +6,9 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   await p.send('Emulation.setDeviceMetricsOverride', { width:1600, height:900, deviceScaleFactor:1, mobile:false });
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
     inventory:['folder','resultprint','readinglist','interpretation','drawerlabel'],
-    flags:{ corridorDone:true, slipSealed:true, h27issued:true, actIIIDone:true, actIVDone:true,
-            act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true, act5IntroSeen:true,
-            tobiRoom:'library' }}))`);
+    flags:{ corridorDone:true, slipSealed:true, h27issued:true, actIIIDone:true,
+            act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true,
+            tobiRoom:'library' }}))   // Act IV: the Library is the Writing Room in Act V`);
   await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const r = await p.evaluate(`(async () => {
     const w = ms => new Promise(r => setTimeout(r, ms));

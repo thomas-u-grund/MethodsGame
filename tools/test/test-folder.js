@@ -55,8 +55,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   console.log(JSON.stringify({ ...r, noFolder, tidy }, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   const has = (a, x) => (a || []).indexOf(x) !== -1;
   const ok = has(r.inv, 'pen') && has(r.inv, 'usb') && has(r.inv, 'folder')
-          && !has(r.inv, 'readinglist') && !has(r.inv, 'slip') && !has(r.inv, 'resultprint')
-          && has(r.filed, 'readinglist') && has(r.filed, 'slip') && has(r.filed, 'resultprint')
+          && !has(r.inv, 'readinglist') && !has(r.inv, 'resultprint')
+          // the sealed slip is a thing in your hands, not a folder entry (author, 2026-09-28)
+          && has(r.inv, 'slip') && !has(r.filed, 'slip')
+          && has(r.filed, 'readinglist') && has(r.filed, 'resultprint')
           && !has(r.slots, 'readinglist') && has(r.slots, 'folder')
           && /Filed behind the dividers/.test(r.look) && /Reading List/.test(r.look) && /RESULT:/.test(r.look)
           && noFolder

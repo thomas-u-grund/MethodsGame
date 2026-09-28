@@ -26,8 +26,10 @@ const ROOMS = [
       const sp=document.getElementById('bootSplash'); if(sp) sp.remove();
       window.CODEBOOK_START(); await w(700);
       const b=[...document.querySelectorAll('button.campus-hotspot')].find(x=>x.title.indexOf(${JSON.stringify(title)})===0);
-      if(!b) return {err:'no map button'};
-      b.click(); await w(1300);
+      // in Act V these three buildings belong to the Writing Room, Keynote and Poster Session: go straight in
+      const TAKEN={'The Library':'library','The Hall of Founders':'hall','The Mensa':'mensa'};
+      if(!b && !TAKEN[${JSON.stringify(title)}]) return {err:'no map button'};
+      if (b) b.click(); else window.CODEBOOK_ENTER_ROOM(TAKEN[${JSON.stringify(title)}]); await w(1300);
       const scene=document.getElementById('${pre}_sceneWrap'); if(!scene) return {err:'no scene'};
       const s=scene.getBoundingClientRect();
       const out=[];

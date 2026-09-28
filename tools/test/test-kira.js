@@ -47,7 +47,7 @@ const ROOMS = [['lb','The Library'], ['dl','The Delegation Engine'], ['wr','The 
   const move = await p.evaluate(`(async () => {
     const w = ms => new Promise(r => setTimeout(r, ms));
     window.CODEBOOK_START(); await w(700);
-    [...document.querySelectorAll('button.campus-hotspot')].find(b => b.title.indexOf('The Library') === 0).click();
+    window.CODEBOOK_ENTER_ROOM('library');   // Act V save: the Library building is the Writing Room on the map
     await w(1500);
     const foot = document.getElementById('lb_foot_kira');
     const spot = document.querySelector('#lb_sceneWrap button.hotspot[data-id="kira"]');
