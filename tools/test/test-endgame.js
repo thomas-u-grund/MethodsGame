@@ -118,7 +118,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.posters = !!flags().postersDone; out.audience = flags().posterCrowd;
     out.actVNotYet = !flags().actVDone;
     // --- the Keynote Showdown (8zy): four slides, answered with the right evidence
-    window.CODEBOOK_KN_SPEED = 0.05; window.CODEBOOK_KN_NO_CUTAWAY = true;
+    window.CODEBOOK_KN_SPEED = 0.05; window.CODEBOOK_KN_NO_CUTAWAY = true; window.CODEBOOK_KN_NO_DUEL = true;   // the four-slide path; test-duel covers the duel
     await go('The Keynote Showdown');
     const until = async (fn, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms){ if (fn()) return true; await wait(100); } return false; };
     const hasCh = re => [...document.querySelectorAll('#kn_choices button')].some(x => new RegExp(re,'i').test(x.textContent));
