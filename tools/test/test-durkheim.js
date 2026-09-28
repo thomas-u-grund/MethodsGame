@@ -20,7 +20,6 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.talkPrimary = hs.dataset.primary === 'talkto';
     const line = () => document.getElementById('et_line').textContent;
     const ch = re => [...document.querySelectorAll('#et_choices button')].find(b => new RegExp(re,'i').test(b.textContent)).click();
-    [...document.querySelectorAll('#et_verbGrid button')].find(b => /talk/i.test(b.textContent)).click();
     hs.click(); await w(300);
     out.greets = /where numbers come from/.test(line());
     ch('rap battle'); await w(200); out.rap = /Rates, not people/.test(line());
