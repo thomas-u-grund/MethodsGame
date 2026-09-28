@@ -105,10 +105,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     ch('wr','This is what happened'); await wait(600);
     out.fogBlocks = !flags().writingDone;
     verb('wr','talk to'); spot('prof');                                 // Stellmacher, Vossberg ("I took ze liberty"), Stellmacher
-    for (let t = 0; t < 250 && ![...document.querySelectorAll('#wr_choices button')].some(b => /Start cutting/.test(b.textContent)); t++) await wait(100);   // voiced: replies wait for the line
-    ch('wr','Start cutting'); await wait(2600);                         // Cut the Fog (2026-09-28)
-    out.fogGame = !!document.getElementById('wr_fog') && document.querySelectorAll('#wr_fog .wf-fog').length > 0;
-    window.CODEBOOK_WR_FOG_WIN(); await wait(3800);
+    for (let t = 0; t < 250 && ![...document.querySelectorAll('#wr_choices button')].some(b => /Read the abstract/.test(b.textContent)); t++) await wait(100);   // voiced: replies wait for the line
+    ch('wr','Read the abstract'); await wait(2600);                         // Cut the Fog (2026-09-28)
+    out.fogGame = !!document.getElementById('wr_fog') && document.querySelectorAll('#wr_fog .wf-s').length === 9;   // the Bullshit Detector
+    window.CODEBOOK_WR_FOG_WIN(); await wait(7200);
     out.draftClear = document.querySelectorAll('#wr_draft b').length === 3 && !!flags().wrClear;
     verb('wr','look at'); spot('abstract'); await wait(450);
     ch('wr','This is what happened'); await wait(600);
