@@ -38,6 +38,10 @@ Few things you pick up are decoration. The USB stick on the Professor's desk sta
 battle in Act II; the chewed pen writes your mechanism, straightens a leading question and
 writes a way out of the Ethics chair; the sealed slip is what gets you registered in Act V.
 
+Every act ends on a narrated **"what we learned"** card, one line per room (Acts II–IV open the
+next act's interlude with it; Act V's opens the outro). Hovering the folder opens it as the
+interlude painting: the question card in its slot, the contents written on the left-hand page.
+
 ---
 
 ## The three flags that follow you
@@ -200,8 +204,8 @@ Look at the portraits six times. Tobi offers an encore afterwards.
 attendance?"** (cutscene: she prints six references) → `litreview` in your hand.
 
 **Try to leave with it** (map button): the monkey drops from the top shelf and **eats it**
-(cutscene). You stay in the Library, and KIRA keeps a second copy on her tray. The monkey eats
-any unchecked list, so there is no way to walk off with the six.
+(cutscene). You stay in the Library. The reprint lies on top of KIRA's printer: **pick it up**
+to work on it. The monkey eats any unchecked list, so there is no way to walk off with the six.
 
 **Catch all three bad references** on her copy (a red REJECTED tag appears on it for each):
 
@@ -311,6 +315,12 @@ the bagged ballot box.
 
 **Also here:** pick up the **calendar page** (the Survey Lab needs it).
 
+**Flavour:** **talk to Émile Durkheim** (the bearded man with the charts, one click) — he speaks
+in his rap-battle voice about the rap battle and about the **ecological fallacy**: his regions
+with more Protestants had more suicides, which does not mean the Protestants were the ones who
+died. Your data are about individual students, so the fallacy runs the other way for you: don't
+read them back as a claim about whole universities.
+
 ### III.2 The Survey Lab (Emergency Department) — INSTRUMENT EXISTS
 
 **Needs:** `calendarpage`, `pen`. **Gives:** the `questionnaire`.
@@ -327,24 +337,26 @@ Four sick questions. Three are on the gurneys; the fourth is on a clipboard on t
 Each healed chart is pinned on the DISCHARGED board; four on the board and the nurse staples
 them into your questionnaire.
 
-**The Tobi route:** if Tobi owes you a favour and is in the room, you can get the scissors
-without diagnosing anything — *"Hey, can he borrow the scissors? He's doing a whole thing."*
-You are then holding scissors with no idea what is wrong. **You skip the asking, not the cutting.**
+(Tobi no longer turns up in any Act III room, so the old "Tobi fetches the scissors" shortcut is
+gone: diagnose, then cut.)
 
 ### III.3 The Mensa — SAMPLE DRAWN
 
 **Needs:** `enrolreg` (or `pseudolist`). **Gives:** the drawn sample; optionally `voucher`.
 
-1. **Talk to the lunch queue** (the Cook): borrow a **mug** and the **SR-2 raffle drum**.
+1. **Talk to the Sampling Officer** first if you like: before any spin, *the frame must be filled
+   with exactly the people your question is about. All of them, and nobody else.*
 2. Use **`enrolreg`** on the gilded frame. It fills and stops well short of the top. *"It has
    the* right *hundred and forty names." … "…my father would not have liked you."* You keep the
    register — the Bureau needs it.
    - If you use `pseudolist` instead, the frame fills gloriously — *"A POPULATION."* — and you
      need the **magnifying glass** on it: *"Includes only students registered for the university
      newsletter."* The Officer then swaps in the register.
-3. Use the **mug** on the Sampling Officer (*"Adequate."*) and the **raffle drum** (the Great
-   Drum is ceremonial; the SR-2 does the work).
-4. Talk to him → trumpets, confetti, box ticked.
+3. Talk to him → **the Great Drum spins** and draws: twelve numbered balls drop into the tray
+   (*SAMPLE · n = 12 of 140*), trumpets, confetti, box ticked.
+
+**The lunch bag** (the Ethics ballot box needs it): talk to the lunch queue → *"Could I have one
+of your paper lunch bags?"* The cook hands it across the counter.
 
 **The wrong branch worth walking:** before loading the frame, **use it with no item** → twelve
 people from the lunch queue, all with the same tote bag. Give the **tote-bag sample** to the
