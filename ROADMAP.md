@@ -479,6 +479,39 @@ Ask these at the natural moment, not all at once:
 
 ---
 
+## 8-BONUS. Course bonus points: instructors register, students claim — logged 2026-09-29 (user) — TODO
+
+**Idea.** Instructors can let their students claim course bonus points for playing the game. Entirely
+optional: the public game at the normal URL never shows any of this.
+
+**Instructor side (a small website next to the game).**
+- Register a course: instructor name, email, university, course name, country, term (and so on).
+- Choose the claim mode: **after each completed act**, or **only at the end** of the game.
+- Set deadlines: one per act in per-act mode, or one for the whole game.
+- Registering generates a **course-specific link to the game** (a unique course code) that the
+  instructor hands to their students.
+- When a deadline passes, the instructor gets an **email with the results** in a clean format
+  (a table: student number, name, which acts were claimed and when; plus a CSV attachment).
+
+**Game side.**
+- Opened through a course link, the game remembers the course code. Depending on the course's mode,
+  a **"Claim your bonus point"** button or slide appears at the end of each act, or only at the end.
+- The button sends the student back to the website with the course code preselected, where they
+  enter their student number and name.
+
+**One claim, once.** Each claim can be made only once. Proposal: at the end of an act, the game
+generates a **single-use claim key** for this device and this save (course code + act + a random
+nonce, signed by the server when the course link is first opened, or registered with the server when
+the key is generated). The website accepts a key once and ties it to one student number. The same
+student number can claim each act only once per course.
+- Open questions: how hard to make it to cheat (a signed key per act is enough for bonus points; this
+  is not an exam); whether a claim should also carry the act's flags as proof of play (for example
+  that the act was finished without the p-hacking path); data protection (store the minimum:
+  student number, name, course and timestamps; delete after the results email plus a retention
+  period; say so on the claim page).
+- Needs a backend (GitHub Pages is static): for example a small serverless function with a database
+  (Cloudflare Workers + D1, or Supabase), and an email service for the deadline reports.
+
 ## 8-INDEX. What is live and what is finished
 
 §8 has grown by accretion and its sections are not in order. This is the index; work from
