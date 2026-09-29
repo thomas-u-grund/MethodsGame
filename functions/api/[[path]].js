@@ -13,6 +13,7 @@
 //   GET  /api/course/CODE                         public course info (game + claim page)
 //   POST /api/claim          {code, act, key, number, name}
 //   POST /api/report         (x-report-secret)    email the results of passed deadlines (daily)
+//   GET  /api/health                              which settings are present (yes/no only)
 
 const SESSION_DAYS = 7, CODE_MINUTES = 60, MAX_ATTEMPTS = 5, RESEND_SECONDS = 60;
 const ACTS = ['1', '2', '3', '4', '5'];
@@ -39,7 +40,11 @@ function cookieOf(req, name) {
 async function body(req) { try { return await req.json(); } catch { return {}; } }
 
 async function sendMail(env, { to, name, subject, html, attachment }) {
-  if (!env.BREVO_API_KEY) { console.log('[mail, not sent: no BREVO_API_KEY]', to, subject, html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')); return true; }
+  if (!env.BREVO_API_KEY || !env.SENDER_EMAIL) {
+    // local development prints the email; the live site must not pretend it sent one
+    if (env.DEV === '1') { console.log('[mail, not sent]', to, subject, html.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ')); return true; }
+    console.error('mail not configured: BREVO_API_KEY / SENDER_EMAIL missing'); return false;
+  }
   const r = await fetch('https://api.brevo.com/v3/smtp/email', {
     method: 'POST',
     headers: { 'api-key': env.BREVO_API_KEY, 'content-type': 'application/json' },
@@ -205,6 +210,9 @@ export async function onRequest({ request: req, env, params }) {
     if (m === 'GET' && path.startsWith('course/')) return await publicCourse(clean(path.slice(7), 16).toUpperCase(), env);
     if (m === 'POST' && path === 'claim') return await claim(req, env);
     if (m === 'POST' && path === 'report') return await report(req, env);
+    // which settings are present (never their values), for checking a deployment
+    if (m === 'GET' && path === 'health') return json({ ok: true, db: !!(await env.DB.prepare('SELECT 1 AS x').first()),
+      mail: !!(env.BREVO_API_KEY && env.SENDER_EMAIL), sender: env.SENDER_EMAIL ? env.SENDER_EMAIL.replace(/^[^@]+/, '…') : null, report: !!env.REPORT_SECRET });
     const email = await signedIn(req, env);
     if (m === 'GET' && path === 'me') return json({ ok: true, email });
     if (!email) return fail('Please sign in.', 401);
