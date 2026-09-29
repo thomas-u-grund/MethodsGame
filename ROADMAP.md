@@ -512,6 +512,27 @@ student number can claim each act only once per course.
 - Needs a backend (GitHub Pages is static): for example a small serverless function with a database
   (Cloudflare Workers + D1, or Supabase), and an email service for the deadline reports.
 
+## 8-SUPPORT. A small Patreon link, never begging — logged 2026-09-29 (user) — TODO
+
+**Aim.** Make support possible for people who liked the game, individually or as instructors, without
+ever asking mid-game. Never during play, never as a pop-up, never as a gate.
+
+**Where (proposal, in order of preference).**
+1. **End credits / outro, last card.** After the outro, a quiet line under the credits: *"Made by one
+   sociologist and a lot of late evenings. If the game was useful to you or your course, you can
+   support it on Patreon."* This is the moment people liked it most.
+2. **Settings panel, an "About" row** (who made it, contact, version) with a small Patreon link.
+   Always there, never in the way.
+3. **Instructor website** (see 8-BONUS): a short "Support the game" section on the course dashboard
+   and in the footer of the deadline results email, one line. Instructors using it for a whole course
+   are the most likely supporters.
+4. **README / GitHub page** and the site footer outside the game.
+
+**Not:** the title screen, act interludes, the map, any in-character line (no NPC asks for money), or
+anything that interrupts, counts down or needs dismissing. Optionally a gentle in-joke in the credits
+(the Schnitzel Hotline "accepts donations, in schnitzel") that links to the same page.
+- The link opens in a new tab; the game must never lose progress because of it.
+
 ## 8-INDEX. What is live and what is finished
 
 §8 has grown by accretion and its sections are not in order. This is the index; work from
