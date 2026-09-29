@@ -39,8 +39,13 @@ battle in Act II; the chewed pen writes your mechanism, straightens a leading qu
 writes a way out of the Ethics chair; the sealed slip is what gets you registered in Act V.
 
 Every act ends on a narrated **"what we learned"** card, one line per room (Acts II–IV open the
-next act's interlude with it; Act V's opens the outro). Hovering the folder opens it as the
-interlude painting: the question card in its slot, the contents written on the left-hand page.
+next act's interlude with it; Act V's opens the outro). Hovering the folder opens it on the desk,
+seen from above: the contents written on the left page, the question card on the right.
+
+**The map changes with the acts.** Each act has its own season (autumn, a rainy late autumn,
+winter for Acts III–IV, spring for the Annual Meeting), with leaves, snow or blossom falling and
+the odd flock of birds. Only the current act's rooms are signed, and **rooms of finished acts
+close** — the Professor's Office is the one room open in every act.
 
 ---
 
@@ -53,10 +58,11 @@ attractively, and each is read out at the end.
 |---|---|---|
 | `theory_empty` | Sealing the Prediction Slip with an unsound box (in practice: lodging all six references and sealing in the Office anyway) | The Casino result comes back **vacuous**; the Professor and Reviewer 2 (comment 14) both ask what you expected |
 | `analysis_p_hacked` | Significance Casino: taking the DISCOVERY! banner | You never break the seal; Reviewer 2's comment 9 asks how many tests you ran |
-| `claim_overstated` | Bureau **EXTRA LARGE**, the Writing Room title ladder, or "It reads fine. Leave it." | Meant to add comments 12 and 38 to the Reviewer 2 battle — but see the note below |
+| `claim_overstated` | Bureau **EXTRA LARGE**, or Feldstrom's title ladder at the Poster Session | Meant to add comments 12 and 38 to the Reviewer 2 battle — but see the note below |
 
-> **Note (current build):** finishing the Writing Room clears `claim_overstated`, and the
-> Writing Room can only be finished the honest way, so the flag never reaches the outro.
+> **Note (current build):** finishing the Writing Room and refusing Feldstrom at the poster both
+> clear `claim_overstated` (leaving a quieter trace, `claimOnceOverstated`), so the flag rarely
+> reaches the outro.
 
 None of them is a game over. All of them are stamped, filed and approved by somebody.
 
@@ -212,7 +218,7 @@ to work on it. The monkey eats any unchecked list, so there is no way to walk of
 | Problem | How |
 |---|---|
 | *It does not exist* | Magnifying glass on **KIRA** or on her **printer** (the printout) — reference 4's DOI resolves to a recipe for soup |
-| *It does not say that* | **Look at the framed abstract** (only the abstract was ever read), then talk to **KIRA → "Print me the whole Müller & Singh paper"** — page nine says the association vanished after adjustment |
+| *It does not say that* | **Look at the framed abstract** (only the abstract was ever read), then talk to **KIRA → "Print me the whole Müller & Singh paper"** — page nine says the association vanished after adjustment. (The frame glints while this check is open, and KIRA lets slip she has only read the abstract.) |
 | *It cannot establish that* | **Use the card catalogue** with the hook pole — a cross-sectional study filed as LECTURES CAUSE SUCCESS |
 
 Then talk to **KIRA → "Print the list again, without the three that failed"** → `readinglist`,
@@ -484,6 +490,10 @@ predict yesterday."*
 
 ### V.2 The Writing Room
 
+A big writing hall: students on term papers, an assistant professor racing his TENURE CLOCK, the
+Mensa cook writing *THE SCHNITZEL: A LONGITUDINAL STUDY*, and Howard Becker by the piano (all
+clickable, all flavour).
+
 **Needs:** `interpretation`, `readinglist`. **Gives:** `contribution`, the poster.
 
 1. Talk to the **Registrar**. He lines up the three papers against your result, then asks for
@@ -493,7 +503,23 @@ predict yesterday."*
    - *"Nobody has studied this at this university before."* → *"Correct, and irrelevant."*
    - ✅ **"A boundary condition on three existing papers: the association is concentrated
      where the practice mechanism predicts, and it is smaller than their unadjusted estimates."**
-2. Use the **table** (or the abstract). Three words in KIRA's abstract are over the line:
+2. **The Bullshit Detector.** Talk to **Stellmacher** (red pen). Dr. Vossberg has "taken the
+   liberty of theorising" your abstract. It zooms in: nine sentences, tap every one that does not
+   make sense, then **Show Stellmacher**. No timer. The five to cut:
+
+| Sentence | Kind | Her test |
+|---|---|---|
+| *"…a performative modality through which academic success is continuously re-enacted."* | jargon fog | Who does what? |
+| *"…the co-constitution of pedagogical exposure and epistemic attainment."* | jargon that sounds like science | no new claim |
+| *"Attendance may matter in complex ways for some students under some conditions."* | unfalsifiable | What would prove it wrong? |
+| *"Lectures cause learning, for students everywhere."* | overclaim | one course, one term, a survey |
+| *"Further research is needed to understand these rich dynamics."* | empty hedge | always true |
+
+   Keep the four findings (the question, the nine respondents, the worked-example gap, the
+   selection limitation). **Jokers**, one use each: **Ask Stellmacher** (points at one wrong
+   mark), **50:50** (two fine sentences confirmed), **Ask the Hall** (Tobi's livestream votes —
+   right on average, split only on the most scientific-sounding jargon).
+3. Fix the three over-the-line words in **KIRA's abstract** (the table or the ABSTRACT poster):
 
 | Her word | Your word |
 |---|---|
@@ -501,24 +527,23 @@ predict yesterday."*
 | demonstrate | **are consistent with** |
 | people | **first-year Methods students** |
 
-3. **"This is what happened. Finish it."** → **CLAIM DEFENSIBLE**. The phone rings (a vehicle
-   warranty). **"Take the poster to the Mensa."**
-
-> ### ⚠️ Feldstrom's title ladder
-> Talk to him → **Let him make it bigger**: *Lecture Attendance and Exam Performance in a
-> First-Year Methods Course* → *What Makes Students Learn* → *Educational Exposure and Human
-> Capital Formation* → *Institutions and the Production of Human Capacity* → **CIVILISATION IS
-> TRAFFIC**. IMPACT: Modest Contribution → Paradigm Shift → Nobel Adjacent → **PRESS OFFICE HAS
-> BEEN ALERTED**. Enlarging past the top sets `claim_overstated`.
->
-> **Wind the title back down** one step at a time, or **Refuse him** (small title back at
-> once). You cannot finish with a big title on the front page. *"It reads fine. Leave it."* in
-> the abstract menu also sets the flag, and finishes nothing.
+4. **"This is what happened. Finish it."** → the Registrar stamps **CLAIM DEFENSIBLE**.
+   **"Take the poster to the Mensa."**
 
 ### V.3 The Poster Session (the Mensa)
 
-**Needs:** the Writing Room done. Use **Poster 312**. Five visitors; each answer is shuffled.
-A good answer keeps them at your board; a bad one sends them away. No fail state.
+**Needs:** the Writing Room done. Mark Granovetter is in the aisle with an armful of neckties:
+talk to him for **A Weak Tie** (flavour).
+
+> ### ⚠️ Feldstrom at your poster
+> He is waiting at Poster 312 to "improve" the title, and the visitors do not come until he is
+> gone. **Let him make it bigger** and the title on the poster grows: *What Makes Students Learn*
+> → … → **CIVILISATION IS TRAFFIC** (sets `claim_overstated`). ✅ **Refuse him** — *"Not with my
+> name on it."* He photographs your poster on the way out: *"Tiny now. Wait until you see what it
+> becomes on slide 14."*
+
+Then use **Poster 312**. Five visitors; each answer is shuffled. A good answer keeps them at your
+board; a bad one sends them away. No fail state.
 
 | Visitor | Asks | ✅ Answer |
 |---|---|---|
@@ -528,27 +553,30 @@ A good answer keeps them at your board; a bad one sends them away. No fail state
 | Sampling Officer | Are the pens free? | "They are. And the finding, in one sentence…" |
 | The Skeptic | How sure are you? | The interval line (rules out no effect and a large one / rules out what the mechanism needed) |
 
-Then a monkey stamps the BEST POSTER **MAJOR CONCERNS**, and Achterberg warns you: *"Feldstrom
-has a slide about you. Slide fourteen."* **"Go to the keynote."**
+Then a monkey stamps the BEST POSTER (*Schnitzel Causes Wisdom*) **MAJOR CONCERNS**, and
+Achterberg warns you: *"Feldstrom has a slide about you. Slide fourteen."* **"Go to the keynote."**
 
 ### V.4 The Keynote Showdown (Hall of Founders)
 
-Opens after the Poster Session and starts on its own. Slide 14 is your chart, with the small
-bar grown to the top and your name gone. When the floor opens: **"Stand up"**.
+Opens after the Poster Session and starts on its own. Feldstrom — *47,012 citations* — puts up
+slide 14: your chart, the small bar grown to the top, your name gone. You stand up, Stellmacher
+in your corner, and it becomes a **laser-pointer duel**, full screen:
 
-Four slides; answer each with the right evidence (a wrong pick gets a laugh, and you try again):
+- Each round a slide goes up; aim the red dot at the flaw on it and hold still. Dead centre is a
+  strong hit, near is a weak one, anything else gets the hall laughing with him.
+- Call your corner (Stellmacher) any time for a hint.
+- Strong hits knock his citation counter down; the chat retracts its citations. Fall too far and
+  you are knocked down — get up, he puts up new slides.
 
-| Slide | Claim | ✅ Evidence |
-|---|---|---|
-| 15 | ATTENDANCE CAUSES LEARNING | **Point at the design** |
-| 16 | TRUE FOR EVERY STUDENT, EVERYWHERE | **Point at the scope** |
-| 17 | AN ENORMOUS EFFECT | **Point at the interval** |
-| 18 | NEVER BEFORE DISCOVERED | **Point at the three papers** |
+After the knockout, **Dr. Vossberg** tries to rescue the hall with one last all-words slide.
+*"Contingent"* only gets you *"Contingently."*; nodding gets you nothing. ✅ **"What result would
+prove it wrong?"** → *"…None. Zat is its strength."* The hall laughs at the right person.
 
 Then slide 23, **STOCKHOLM**. The hall is his — until the Professor stands up: *"You did,
 Traffic."* Twenty-three residents of Leicester. → ✅ **"I'd rather have the part that's
 true."** → *"…Write it down."* The founders applaud; Achterberg runs the live replications and
-only Poster 312 holds. **Continue** → the Stockholm cutaway (KIRA gets the prize) → the Office.
+only Poster 312 holds. **Continue** → Stockholm (KIRA gets the prize; Vossberg a lifetime award
+*"for a theory that has never once been wrong"*; Feldstrom a prospectus) → the Office.
 
 ### The ending
 
@@ -584,20 +612,30 @@ with four thousand likes is in the envelope too.
 
 Tobi has no room. Until the rap battle he is pinned in the **Hall of Founders**, hosting it.
 After that he is rerolled every time the campus map is drawn: about a third of the time he is
-"in a meeting" and nowhere at all; otherwise he is in one of sixteen rooms at random.
+"in a meeting" and nowhere at all; otherwise he is in one of the rooms that are open this act.
+He stays out of Act III's rooms.
 
 | Ask | Requires | Gets you |
 |---|---|---|
-| *(he asks you)* **the photograph** | refuse three times; the give-in appears on the fourth ask | he owes you a favour (the scissors, in the Survey Lab), and does not know it is one |
+| *(he asks you)* **the photograph** | refuse three times; the give-in appears on the fourth ask | the one post, and he does not know he owes you |
 | **"Show him a number"** | `resultprint` | *"Okay so this says lectures make you smarter."* → an extra outro panel |
 | **Encore** (Hall, after the battle) | `rapDone` | the rap battle again |
 
 He takes eleven photographs and posts the one you are barely in: *big ideas happening in the
 Methods dept today 🔬✨*. There is exactly one post.
 
-**The line the two solutions never cross:** you can social-engineer a **person**. You cannot
-social-engineer the **evidence**. Tobi can get you the scissors without a diagnosis; he cannot
-cut the question for you.
+---
+
+## Side gags (no effect on any puzzle)
+
+- **The Schnitzel Hotline.** Talk to the cook the first time in the Mensa and he gives you his
+  number. Call it from your phone anywhere he is not: order a schnitzel (collect it at the Mensa
+  counter while the Mensa is open; later he delivers), ask for the curry nobody has ever ordered,
+  and every third call gets his voicebox.
+- **PAC-SOC**, the 1983 arcade cabinet in the Significance Casino: Pac-Man, but the ghosts are
+  Marx, Durkheim, Comte and Weber. PEER REVIEW pellets make them edible. Esc to leave.
+- **Durkheim** in the Ethics Tribunal talks (rap battle, ecological fallacy); **Granovetter** gives
+  you a weak tie; **Bourdieu** judges lunches in the Mensa.
 
 ---
 
@@ -620,7 +658,8 @@ Everything here is recoverable, and most of it is where the jokes live.
 | Pull the slot machines three times | **DISCOVERY! Vegetarians report more stress. p = .049** |
 | Ask the Bureau for **LARGE** | SOLD OUT — *"I can do you an EXTRA LARGE."* |
 | Say "further research is needed" | a wall of hundreds of identical plaques |
-| Let Feldstrom name the paper | **CIVILISATION IS TRAFFIC** |
+| Let Feldstrom name the poster | **CIVILISATION IS TRAFFIC** |
+| Keep a finding in the Bullshit Detector's cut | *"That one was a finding. You can check it."* |
 
 ---
 
@@ -653,7 +692,7 @@ Everything here is recoverable, and most of it is where the jokes live.
 | Paper Questionnaire | Ethics approval | Fieldwork |
 | Exam Records (by question) | Ethics approval | **Casino** |
 | Ballot Box, Discreetly Bagged | Ethics approval | Fieldwork |
-| A Mug · Lunch Raffle Drum (SR-2) | Mensa cook | Sampling Officer |
+| A Brown Paper Lunch Bag | Mensa cook | Ethics (the ballot box) |
 | The Tote-Bag Sample | Mensa, wrong branch | the Cook |
 | Free Lunch Voucher | the Cook, or the Fieldwork Director | Fieldwork |
 | Reminder Postcards | Fieldwork telephone | Fieldwork |
@@ -662,6 +701,7 @@ Everything here is recoverable, and most of it is where the jokes live.
 | The Interval, On A Brass Slide | Casino | Bureau, Tobi |
 | A Brass Plaque, Engraved By You | Bureau | Writing Room (the Registrar) |
 | A Brass Tag ("A Boundary Condition") | Writing Room (the Registrar) | the abstract |
+| A Weak Tie · A Schnitzel | Granovetter · the Hotline | nothing — gimmicks |
 
 **Tip:** Look at anything in your inventory (in simple controls: click it twice). Every item has
 a description, and several contain a nudge. The folder lists what is actually in it. Stuck?
