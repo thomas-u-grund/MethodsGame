@@ -82,7 +82,9 @@
   var CFG = window.CB_BONUS || {}, $ = function(id){ return document.getElementById(id); };
   var SUP = window.CB_SUPPORT || {};   // one line, for instructors who use it for a whole course (8-SUPPORT)
   if (SUP.contact) $('contactLine').innerHTML = 'Questions or problems? Write to <a href="mailto:' + SUP.contact + '">' + SUP.contact + '</a>.';
-  if (SUP.url) $('support').innerHTML = 'Using the game in your course? It is free, and made in spare time. If you would like to support it: <a href="' + SUP.url + '" target="_blank" rel="noopener">' + (SUP.label || 'Patreon') + '</a>.';
+  if (SUP.url || SUP.once) $('support').innerHTML = 'Using the game in your course? It is free, and made in spare time. If you would like to support it: ' +
+    [SUP.url ? '<a href="' + SUP.url + '" target="_blank" rel="noopener">' + (SUP.label || 'Patreon') + '</a> (monthly)' : '',
+     SUP.once ? '<a href="' + SUP.once + '" target="_blank" rel="noopener">' + (SUP.onceLabel || 'Ko-fi') + '</a> (once)' : ''].filter(Boolean).join(' or ') + '.';
   if (!CFG.enabled){ $('off').hidden = false; return; }
   var ACTS = ['1','2','3','4','5'], ACT_NAME = { '1':'Act I', '2':'Act II', '3':'Act III', '4':'Act IV', '5':'Act V', end:'End of game' };
   function msg(id, text, ok){ var m = $(id); m.textContent = text || ''; m.className = 'msg ' + (ok ? 'ok' : 'err'); }
