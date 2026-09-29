@@ -504,18 +504,13 @@ Your result, data or interpretation are all turned away: *"Anyone can predict ye
 
 A big writing hall: students on term papers, an assistant professor racing his TENURE CLOCK, the
 Mensa cook writing *THE SCHNITZEL: A LONGITUDINAL STUDY*, and Howard Becker by the piano (all
-clickable, all flavour).
+clickable, all flavour). A monkey sits on the piano with Achterberg's stamp (see V.1).
 
-**Needs:** `interpretation`, `readinglist`. **Gives:** `contribution`, the poster.
+**Needs:** `interpretation`, `readinglist`. **Gives:** `contribution`, **Your Poster, Rolled Up**.
 
-1. Talk to the **Registrar**. He lines up the three papers against your result, then asks for
-   the contribution:
-   - *"It confirms the three papers"* → *"That is not confirming them. That is correcting them."*
-   - *"It shows that lectures cause better exam results"* → observational.
-   - *"Nobody has studied this at this university before."* → *"Correct, and irrelevant."*
-   - ✅ **"A boundary condition on three existing papers: the association is concentrated
-     where the practice mechanism predicts, and it is smaller than their unadjusted estimates."**
-2. **The Bullshit Detector.** Talk to **Stellmacher** (red pen). Dr. Vossberg has "taken the
+Three things, in any order; when all three are right, **KIRA prints the poster by herself**.
+
+1. **The Bullshit Detector.** Talk to **Stellmacher** (red pen). Dr. Vossberg has "taken the
    liberty of theorising" your abstract. It zooms in: nine sentences, tap every one that does not
    make sense, then **Show Stellmacher**. No timer. The five to cut:
 
@@ -529,8 +524,14 @@ clickable, all flavour).
 
    Keep the four findings (the question, the nine respondents, the worked-example gap, the
    selection limitation). **Jokers**, one use each: **Ask Stellmacher** (points at one wrong
-   mark), **50:50** (two fine sentences confirmed), **Ask the Hall** (Tobi's livestream votes —
-   right on average, split only on the most scientific-sounding jargon).
+   mark), **50:50** (two fine sentences confirmed), **Ask the Hall** (Tobi's livestream votes).
+2. **What it adds.** Right after the red pen, Stellmacher lays three papers from your reading list
+   beside your result: *"Against these three: what does yours add?"*
+   - *"It confirms the three papers"* → *"That is not confirming them; it is correcting them."*
+   - *"It shows that lectures cause better exam results"* → observational.
+   - *"Nobody has studied this at this university before."* → *"Correct, and irrelevant."*
+   - ✅ **"A boundary condition on three existing papers: the association is concentrated where
+     the practice mechanism predicts, and it is smaller than their unadjusted estimates."**
 3. Fix the three over-the-line words in **KIRA's abstract** (the table or the ABSTRACT poster):
 
 | Her word | Your word |
@@ -539,8 +540,9 @@ clickable, all flavour).
 | demonstrate | **are consistent with** |
 | people | **first-year Methods students** |
 
-4. **"This is what happened. Finish it."** → the Registrar stamps **CLAIM DEFENSIBLE** and you get
-   **Your Poster, Rolled Up** (tied with a red ribbon, tag 312). **"Take the poster to the Mensa."**
+Then: *"Certainly! Printing."* KIRA's printer rattles, she rolls the poster and ties it with a red
+ribbon (*"I have not changed a word. I wanted to."*), and Stellmacher signs it **CLAIM
+DEFENSIBLE**. **"Take the poster to the Mensa."**
 
 ### V.3 The Poster Session (the Mensa)
 
@@ -698,7 +700,7 @@ Everything here is recoverable, and most of it is where the jokes live.
 | Enrolment Register | Library | Workshop, Mensa, Bureau |
 | Swedish for Nobel Laureates | Library stacks | the Stockholm call |
 | An Extremely Grand Phrase | Hall dispenser | nothing — a decoy |
-| Reading List | Library | **Writing Room** (the Registrar) |
+| Reading List | Library | **Writing Room** (what your result adds) |
 | ALTERNATIVE EXPLANATION card | Seminar | **Bureau** |
 | Prediction Slip (Form P-1) | the seal | Casino lectern, **Psych Lab** |
 | Torn Calendar Page | Ethics | Survey Lab patient 3 |
@@ -717,9 +719,9 @@ Everything here is recoverable, and most of it is where the jokes live.
 | A Scoreboard Tile Reading 75 | Fieldwork | Bureau |
 | A Tape Reel Marked DATA | Delegation Engine | Casino |
 | The Interval, On A Brass Slide | Casino (after the results scene) | Bureau ("Number, please"), Tobi; filed under RESULT once the Bureau is done |
-| Your Poster, Rolled Up | Writing Room (CLAIM DEFENSIBLE) | Poster Session: pin it to board 312 |
-| A Brass Plaque, Engraved By You | Bureau | Writing Room (the Registrar) |
-| A Brass Tag ("A Boundary Condition") | Writing Room (the Registrar) | the abstract |
+| Your Poster, Rolled Up | Writing Room (KIRA prints it) | Poster Session: pin it to board 312 |
+| A Brass Plaque, Engraved By You | Bureau | Writing Room (what your result adds) |
+| A Brass Tag ("A Boundary Condition") | Writing Room (Stellmacher's question) | the abstract |
 | The ID Key | Office filing cabinet (Act IV) | **Delegation Engine** (KIRA relinks on IDs) *(consumed)* |
 | A Weak Tie | Granovetter (Poster Session) | **Tobi** *(traded)* |
 | A Laser Pointer | Tobi, for the weak tie | **Keynote** — the duel |
