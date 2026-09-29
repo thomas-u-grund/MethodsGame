@@ -54,7 +54,7 @@
     function beep(f, d, type, v){ if (!AC) return; var o = AC.createOscillator(), g = AC.createGain(); o.type = type || 'square'; o.frequency.value = f;
       g.gain.setValueAtTime(v || .05, AC.currentTime); g.gain.exponentialRampToValueAtTime(.0001, AC.currentTime + d); o.connect(g); g.connect(AC.destination); o.start(); o.stop(AC.currentTime + d); }
     var hi = 0; try { hi = +localStorage.getItem('cb_pacsoc_hi') || 0; } catch(e){}
-    var grid, pellets, score = 0, lives = 3, level = 1, pac, ghosts, fright = 0, dead = 0, raf = 0, last = 0, over = false, msgT = 0, waka = 0, ready = 0, eatChain = 0;
+    var grid, pellets, score = 0, lives = 4, level = 1, pac, ghosts, fright = 0, dead = 0, raf = 0, last = 0, over = false, msgT = 0, waka = 0, ready = 0, eatChain = 0;
     var DIRS = { L:[-1,0], R:[1,0], U:[0,-1], D:[0,1] };
     function cell(x, y){ if (y < 0 || y >= H) return '#'; x = (x + W) % W; return grid[y][x]; }
     function open(x, y, isGhost){ var c = cell(x, y); return c !== '#' && (c !== '-' || isGhost); }
@@ -67,7 +67,7 @@
       grid.forEach(function(r, y){ r.forEach(function(c, x){ if (c === 'P'){ px = x; py = y; } }); });
       pac = { x:px, y:py, fx:px, fy:py, dir:'L', want:'L', mouth:0 };
       var homes = [[10,7],[9,9],[10,9],[11,9]];
-      ghosts = FOUNDERS.map(function(f, i){ return { i:i, x:homes[i][0], y:homes[i][1], fx:homes[i][0], fy:homes[i][1], dir:'U', out:i === 0, delay:i * 90, eaten:false }; });
+      ghosts = FOUNDERS.map(function(f, i){ return { i:i, x:homes[i][0], y:homes[i][1], fx:homes[i][0], fy:homes[i][1], dir:'U', out:i === 0, delay:120 + i * 240, eaten:false }; });
       fright = 0; ready = 90;
     }
     function say(h, ms){ var m = document.getElementById('arMsg'); if (!m) return; m.innerHTML = h; m.classList.add('on'); clearTimeout(msgT); msgT = setTimeout(function(){ m.classList.remove('on'); }, ms || 1600); }
@@ -107,10 +107,10 @@
       else {
         // four personalities: Marx chases, Durkheim heads you off, Comte keeps order at a distance, Weber wanders rationally
         var ahead = DIRS[p.dir];
-        if (g.i === 0){ tx = p.x; ty = p.y; }
+        if (g.i === 0){ tx = Math.random() < .8 ? p.x : 1; ty = Math.random() < .8 ? p.y : 1; }
         else if (g.i === 1){ tx = p.x + ahead[0] * 4; ty = p.y + ahead[1] * 4; }
         else if (g.i === 2){ var d = Math.abs(g.x - p.x) + Math.abs(g.y - p.y); tx = d > 7 ? p.x : 1; ty = d > 7 ? p.y : 19; }
-        else { tx = Math.random() < .6 ? p.x : Math.floor(Math.random() * W); ty = Math.random() < .6 ? p.y : Math.floor(Math.random() * H); }
+        else { tx = Math.random() < .35 ? p.x : Math.floor(Math.random() * W); ty = Math.random() < .35 ? p.y : Math.floor(Math.random() * H); }
       }
       opts.sort(function(a, b){ return dist(g, a, tx, ty) - dist(g, b, tx, ty); });
       g.dir = opts[0];
@@ -129,7 +129,7 @@
         if (c === '.' || c === 'o'){
           grid[pac.y][pac.x] = ' '; pellets--; score += c === 'o' ? 50 : 10;
           waka = !waka; beep(waka ? 440 : 330, .06, 'square', .03);
-          if (c === 'o'){ fright = 420 - Math.min(240, level * 40); eatChain = 0; say('PEER REVIEW!', 1200); beep(180, .35, 'sawtooth', .05); }
+          if (c === 'o'){ fright = 600 - Math.min(240, level * 40); eatChain = 0; say('PEER REVIEW!', 1200); beep(180, .35, 'sawtooth', .05); }
           if (pellets <= 0){ level++; say('LEVEL ' + level + '<br><small>the founders revise their theory</small>', 2200); reset(true); }
         }
       }
@@ -140,7 +140,7 @@
         if (g.delay > 0){ g.delay--; return; }
         if (!g.out && g.y <= 6) g.out = true;
         if (g.eaten && g.x === 10 && g.y === 9){ g.eaten = false; g.out = false; }
-        var gs = g.eaten ? .3 : fright && !g.eaten ? .07 : .105 + level * .006;
+        var gs = g.eaten ? .3 : fright && !g.eaten ? .05 : Math.min(.12, .075 + level * .007);   // gentler (author, 2026-09-29: "too hard")
         if (g.fx === g.x && g.fy === g.y) ghostChoose(g);
         if (step(g, gs, true)) ghostChoose(g);
         // collisions
@@ -205,7 +205,7 @@
       hud();
       say('GAME OVER<br><small>the founders have eaten you. Press SPACE or tap to play again</small>', 99999);
     }
-    function restart(){ score = 0; lives = 3; level = 1; over = false; dead = 0; reset(true); hud(); say('READY!', 1400); }
+    function restart(){ score = 0; lives = 4; level = 1; over = false; dead = 0; reset(true); hud(); say('READY!', 1400); }
     function key(e){
       var k = { ArrowLeft:'L', ArrowRight:'R', ArrowUp:'U', ArrowDown:'D', a:'L', d:'R', w:'U', s:'D', A:'L', D:'R', W:'U', S:'D' }[e.key];
       if (k){ pac.want = k; e.preventDefault(); e.stopPropagation(); return; }
