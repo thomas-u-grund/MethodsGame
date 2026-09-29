@@ -620,8 +620,8 @@ with four thousand likes is in the envelope too.
 
 ## After every step
 
-A short **NEXT · Stellmacher's note** appears after each finished step, saying what comes next (the
-room's next step, or where to go). Calling her gives the same advice in more detail.
+After each finished step your **phone buzzes** in the inventory: Stellmacher has something to say.
+Call her (or talk to her where she is) and she tells you what comes next, and how, if you ask.
 
 ## Tobi
 
