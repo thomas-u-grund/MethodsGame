@@ -1,6 +1,6 @@
 # The Secret of the Lost Codebook — Handover
 
-*Project handover / internal reference — compiled 2026-09-15, last updated 2026-09-29 (section 00 is current; everything below it is history)*
+*Project handover / internal reference — compiled 2026-09-15, last updated 2026-09-29 evening (section 00 is current; everything below it is history)*
 
 A LucasArts-style point-and-click adventure teaching Research Methods, built as a single self-contained HTML file. This is the orientation doc for picking the project back up — what's live, how it's wired together, and what's still open.
 
@@ -66,10 +66,57 @@ tool; ko-fi.com blocks automated checks (403).
 ### Game changes 2026-09-28/29
 
 - **Cross-room puzzles, Acts IV–V:** the ID key on the Office filing cabinet → KIRA relinks on IDs
-  (Delegation approval now persists, `dlApprovedPrompt`); a chip on the Casino carpet → the Bureau
-  clerk's letter-opener → breaks the seal; Granovetter's weak tie → Tobi's laser pointer (Poster Session)
-  → needed for the keynote duel; the stamp monkey on Becker's piano takes the Poster Session banana and
-  drops Achterberg's REGISTERED stamp → Psych Lab registration. Stellmacher's hints cover every step.
+  (Delegation approval persists, `dlApprovedPrompt`; flag `dlApproved`); Granovetter's weak tie → Tobi's
+  laser pointer (Poster Session) → needed for the keynote duel; the stamp monkey on Becker's piano takes the
+  Poster Session banana and drops Achterberg's REGISTERED stamp → Psych Lab registration. (The chip →
+  letter-opener errand was added and then **removed** as busywork, 2026-09-29.)
+
+### Act IV, simplified (2026-09-29, author: "the puzzles in act 4 are a bit hard")
+
+- **KIRA's terminal:** two reasons per wrong line; the weaker one still marks it (KIRA's correction states
+  the real problem). It closes itself after the data is taken; a "Close the terminal" button and Esc too.
+- **Items stay in hand until used** (`HAND_UNTIL` in the engine, next to `FILED`): the tape reel
+  `cleandata` until `statsDone`, the brass slide `resultprint` until `bureauDone`; then `tidyInventory()`
+  files them in the folder. Older saves are moved back into the hand.
+- **The results scene** (`resultsInterlude` in the Casino): the seal breaking on the lectern
+  (`il4-seal-casino.webp`), your own sealed hypothesis on a card, then a chart that builds itself with an
+  interval and a stamp (HOLDS / NULL — AND INFORMATIVE / CONSISTENT WITH EVERYTHING; `.rs-*` CSS). The
+  outcome is decided before the scene (`resultHolds` / `resultNull` / `resultVacuous`).
+- **The lectern** is empty in `casino-bg.webp` (the painted envelope was removed); after the test only two
+  halves of wax are drawn (`renderSeal`). The slip stays in your pocket for Achterberg.
+- **The Bureau:** "Number, please. What size?" → LARGE (sold out) / EXTRA LARGE (`claim_overstated`) /
+  **"The size it is."** → tick three real limits among five (`LIMITS` in the room; decoys: further research,
+  the p-value) → `lodge()`. Using the old evidence items on the clerk still ticks their limit.
+- **Stellmacher on her mobile:** during Act IV (`away === 'delegation'`, same rule as the Office's
+  `atKira`) calls from other rooms reach her mobile (`call-stellmacher-mobile.webp`, talking mouth);
+  from the Delegation Engine itself her mobile buzzes four metres away. The Act IV intro has her say so.
+- **Her hints** (`hintLadder`, Act IV and the Writing Room) name the exact next action from the flags.
+- **After every finished step** (`MILESTONES` in the engine, via `setFlag` → `whatNext`) the phone slot in
+  the inventory buzzes (`.cb-buzz`). No text pop-ups (tried and rejected by the author): the advice is hers,
+  voiced, when you call or talk to her.
+
+### Act V changes (2026-09-29)
+
+- **The Registrar is gone from the Writing Room.** Stellmacher's red pen (the Bullshit Detector), then her
+  question "what does your result add?" (`contributionQ`, the former Registrar question), and KIRA's three
+  words, in any order; when all three are right `maybePrint()` → KIRA prints the poster: item **poster**
+  ("Your Poster, Rolled Up"), pinned to board 312 at the Poster Session (`psPosterHung`). He is also painted
+  out of `il5-cast.webp` (original kept in `art/season-src/`).
+- **Tobi's laser-pointer pose talks** (`mouth-sprite-tobi-laser.webp`, inverted overlay).
+- The Act V programme carries the game's crest; the intro explains the escaped monkeys (Tobi's livestream).
+- The Psych Lab monkey no longer slides across the room.
+
+### Engine notes (2026-09-29)
+
+- **Mouths in cutscenes:** a panel whose `voice` is a character clip (not `vo-narr-`) calls
+  `CODEBOOK_TRACK_TALK`, so a `.cb-mouth-free` layer with that `data-voice` in the panel's `html` moves
+  (the Act IV intro: `mouth-trailer3-b-prof.webp`). `then:` exists only in the opening trailer, not in
+  `CODEBOOK_PLAY_INTERLUDE`: split a line into two panels on the same `src` with `pan:'still'` instead.
+- **Map:** planes and the sleigh fly curving, banking routes (`mapFlight`); the biplane
+  (`map-plane.webp`) tows each act's gossip banner; a paper plane now and then.
+- **Voice gotchas:** all-caps words are spelled out (write "auto-submit", "Kira" in the TTS text); a quote
+  whose exact text already has a clip plays *that* clip, whoever says it now, so reword moved lines.
+- **Bureau clerk** is voiced (`lv-yearsley`).
 - **Schnitzel** can be fed to Tobi (anywhere, `CODEBOOK_FEED_TOBI`) or the Writing Room's assistant professor.
 - **Slot machines** go close-up (`slot-closeup.webp`, painted reels `reel-*.webp`); the jackpot pays
   **casino tokens**, and **PAC-SOC** needs one to start.
@@ -87,17 +134,15 @@ tool; ko-fi.com blocks automated checks (403).
 Act IV–V puzzles). Last full run: 51/51 before the Casino and support changes; the relevant tests pass
 after them.
 
-### Open list (2026-09-29)
+### Open list (2026-09-29, evening)
 
 1. Sender `noreply@lostcodebook.org` (Brevo domain authentication, then the Cloudflare secret).
 2. Browser Cache TTL → Respect Existing Headers.
 3. The first real results email (a deadline passing) has not been seen yet.
 4. `ROADMAP.md` has uncommitted edits from another session (Cloudflare decision); ask before committing.
 5. Remove the old static course certificate? Delete the stray pending `contact@` destination in Email Routing?
-6. **Map gag waiting for art:** a biplane towing a banner with each act's gossip (Act I "WHAT IS YOUR
-   QUESTION?", II "CITE ME · FELDSTROM 2026", III "100% RESPONSE RATE! (ASK HOW)", IV "p < .05 GUARANTEED",
-   V "KEYNOTE TONIGHT: CIVILISATION IS TRAFFIC"); needs `map-plane.webp` (red biplane flying left, blank
-   cream banner, keyed). Done instead: the paper plane (`CODEBOOK_MAP_PAPER()` launches one for tests).
+6. Play-test Acts IV and V end to end with a fresh save: the new Bureau, the results scene, the phone
+   buzz, the Writing Room without the Registrar, the rolled poster.
 7. Delete `Screenshot 2026-09-29 at 17.00.00.png` (shows most of the Brevo API key; untracked, never commit it).
 
 ---
