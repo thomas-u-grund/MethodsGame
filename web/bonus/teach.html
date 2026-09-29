@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=JetBrains+Mono:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
 <link rel="stylesheet" href="bonus.css">
 <script src="config.js"></script>
+<script src="../support.js"></script>
 </head>
 <body>
 <main>
@@ -69,6 +70,7 @@
       <button id="create">Register the course</button>
       <div id="createMsg" class="msg"></div>
     </section>
+    <p class="small" id="support"></p>
     <p class="small">What is stored: your course details, and for each claim the student number, name and time.
       Students never create an account. You can delete a course, and with it all its claims, at any time.</p>
   </section>
@@ -77,6 +79,8 @@
 <script>
 (function(){
   var CFG = window.CB_BONUS || {}, $ = function(id){ return document.getElementById(id); };
+  var SUP = window.CB_SUPPORT || {};   // one line, for instructors who use it for a whole course (8-SUPPORT)
+  if (SUP.url) $('support').innerHTML = 'Using the game in your course? It is free, and made in spare time. If you would like to support it: <a href="' + SUP.url + '" target="_blank" rel="noopener">' + (SUP.label || 'Patreon') + '</a>.';
   if (!CFG.enabled){ $('off').hidden = false; return; }
   var ACTS = ['1','2','3','4','5'], ACT_NAME = { '1':'Act I', '2':'Act II', '3':'Act III', '4':'Act IV', '5':'Act V', end:'End of game' };
   function msg(id, text, ok){ var m = $(id); m.textContent = text || ''; m.className = 'msg ' + (ok ? 'ok' : 'err'); }

@@ -1,6 +1,6 @@
 // Course bonus points (ROADMAP 8-BONUS): the whole backend, as one Cloudflare Pages Function on
 // lostcodebook.org/api/*. D1 database bound as DB. Secrets (Pages > Settings > Variables and secrets):
-//   BREVO_API_KEY, SENDER_EMAIL, SENDER_NAME (optional), REPORT_SECRET.
+//   BREVO_API_KEY, SENDER_EMAIL, SENDER_NAME (optional), REPORT_SECRET, SUPPORT_URL (optional: a line in the results email).
 // Without BREVO_API_KEY (local development) emails are printed to the log instead of sent.
 //
 //   POST /api/auth/request   {email}              email a 6-digit sign-in code
@@ -186,7 +186,8 @@ async function report(req, env) {
         ${rows.length ? `<table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px">
           <tr style="background:#f3efe6"><th align="left" style="padding:6px 12px">Student number</th><th align="left" style="padding:6px 12px">Name</th><th align="left" style="padding:6px 12px">Claimed (UTC)</th></tr>
           ${rows.map((r) => `<tr><td style="${cell}">${esc(r.student_number)}</td><td style="${cell}">${esc(r.student_name)}</td><td style="${cell};color:#666">${esc(r.created_at.slice(0, 16))}</td></tr>`).join('')}</table>` : ''}
-        <p style="color:#777;font-size:13px;margin-top:20px">The same list is attached as a CSV file. Each point can be claimed once per student number and once per game device.</p></div>`;
+        <p style="color:#777;font-size:13px;margin-top:20px">The same list is attached as a CSV file. Each point can be claimed once per student number and once per game device.</p>
+        ${env.SUPPORT_URL ? `<p style="color:#999;font-size:12px;margin-top:18px">The game is free and made in spare time. If it is useful for your course, you can support it: <a href="${esc(env.SUPPORT_URL)}">${esc(env.SUPPORT_URL.replace(/^https?:\/\/(www\.)?/, ''))}</a></p>` : ''}</div>`;
       const q = (s) => '"' + String(s).replace(/"/g, '""') + '"';
       const csv = 'student_number,student_name,claimed_utc\n' + rows.map((r) => [r.student_number, r.student_name, r.created_at].map(q).join(',')).join('\n');
       const ok = await sendMail(env, { to: c.instructor_email, name: c.instructor_name,
