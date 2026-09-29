@@ -16,10 +16,11 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
                   toggle: (CODEBOOK_SETTINGS(), document.querySelector('#cbSettings [data-ctl="simple"].on') ? 'Simple' : '') };
     document.getElementById('cbSettings').remove();
     const click = el => { const r = el.getBoundingClientRect(); el.dispatchEvent(new MouseEvent('click', { bubbles:true, cancelable:true, clientX:r.left + r.width/2, clientY:r.top + r.height/2 })); };
-    // one action (KIRA: Talk) is done by one click; two actions (the conveyor: Look, Use) show icons
+    // one action (KIRA: Talk) is done by one click; two actions (Look, Use) show icons
+    // (the conveyor has one action since 2026-09-29, so take any two-action hotspot)
     click(document.querySelector('#lb_sceneWrap .hotspot[data-id="kira"]')); await w(400);
     out.talked = /Certainly/.test(document.getElementById('lb_line').textContent) && !document.querySelector('.cb-icons');
-    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="conveyor"]')); await w(250);
+    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="printer"]')); await w(250);   // Look, Pick up
     out.icons = [...document.querySelectorAll('.cb-icons button')].map(b => b.dataset.v).join(',');
     out.noUseWithEmptyHand = !/usewith/.test(out.icons);
     document.body.click(); await w(100);
@@ -39,6 +40,6 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1'); localStorage.setItem('cb_controls','classic')`);
-  const ok = r.simple && r.verbRowHidden && /Simple/.test(r.toggle) && r.icons === 'lookat,use' && r.talked && r.takeable && r.useArmed && r.onlyUseWith && r.usedOnKira && r.noUseWithEmptyHand && !p.errors.length;
+  const ok = r.simple && r.verbRowHidden && /Simple/.test(r.toggle) && r.icons === 'lookat,pickup' && r.talked && r.takeable && r.useArmed && r.onlyUseWith && r.usedOnKira && r.noUseWithEmptyHand && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
 })();

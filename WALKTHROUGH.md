@@ -403,7 +403,7 @@ Not "a big dataset", and not "the survey system exported them".
 
 ### IV.1 The Delegation Engine
 
-**Needs:** nothing. **Gives:** `cleandata`.
+**Needs:** the **ID Key** (`idkey`) from the Office. **Gives:** `cleandata`.
 
 KIRA thinks she has found the Codebook. A lever descends towards AUTO-SUBMIT; the Professor
 watches with an hourglass and a red pen.
@@ -424,17 +424,23 @@ watches with an hourglass and a red pen.
    Response rate (75%), design and your hypothesis are **true** — answer *"…actually, nothing."*
 3. **Show it to Prof. Stellmacher.** Anything you missed she circles; say what is wrong with
    each, then show her again.
-4. ✅ **"Give me the data, linked on the IDs. I will run the test my slip names myself."** The
-   lever locks out. *"Certainly. …What exactly do you mean?"*
+4. ✅ **"Give me the data, linked on the IDs. I will run the test my slip names myself."**
+   Without the key KIRA cannot relink (*"Shall I link on surnames?"* — *"No."*): the **ID Key**
+   hangs on the filing cabinet in the **Office**, kept away from the data as the ethics form
+   promised. Pick it up, come back and **use it on KIRA** (her review stands; you go straight to
+   the decision). The lever locks out. *"Certainly. …What exactly do you mean?"*
 
 *"KIRA, fix it"* → a different wrong answer, faster: *"'Fix it' is not an instruction. It is a
 mood."* *"Submit it anyway"* → she rejects it herself.
 
 ### IV.2 The Significance Casino (the old Statistics Basement)
 
-**Needs:** `cleandata`, `examrecords`. **Gives:** `resultprint`.
+**Needs:** `cleandata`, `examrecords`, the **letter-opener**. **Gives:** `resultprint`.
 
-Use the **sealed Prediction Slip** on the lectern. (Vossberg's worked-example sheets are pinned
+The wax will not yield to fingernails. **Pick up the red chip** on the carpet, take it up to the
+**Bureau** and **use it on the clerk**: he trades the brass **letter-opener** on his counter for it
+(*"We accept all currencies. Especially the worthless ones."*). Back down here, use the **sealed
+Prediction Slip** on the lectern. (Vossberg's worked-example sheets are pinned
 above the desk.) ✅ **"The one the slip names: is the gap larger on the worked-example
 questions, and smaller for students already practising elsewhere?"** Overall marks, or all forty
 questions one by one, are both turned down.
@@ -484,9 +490,11 @@ before the keynote: the ending waits until all four rooms are done.
 
 ### V.1 The Infinite Monkey Project (Psych Lab)
 
-Talk to **Dr. Achterberg** (the Visiting Fellow) → ✅ **"Show her the sealed Prediction
-Slip"**. **REGISTERED.** Your result, data or interpretation are all turned away: *"Anyone can
-predict yesterday."*
+Talk to **Dr. Achterberg** (the Visiting Fellow) → **"Show her the sealed Prediction Slip"**.
+She reaches for her stamp: **a monkey has taken it.** It is on the piano in the **Writing Room**,
+and it wants a banana (the **Poster Session** coffee table has the last one). Use the banana on
+the monkey, bring the **REGISTERED stamp** back → ✅ **"Give her back her stamp"**. **REGISTERED.**
+Your result, data or interpretation are all turned away: *"Anyone can predict yesterday."*
 
 ### V.2 The Writing Room
 
@@ -533,7 +541,9 @@ clickable, all flavour).
 ### V.3 The Poster Session (the Mensa)
 
 **Needs:** the Writing Room done. Mark Granovetter is in the aisle with an armful of neckties:
-talk to him for **A Weak Tie** (flavour).
+talk to him for **A Weak Tie**. **Tobi** is livestreaming with a laser pointer and will trade it
+for a *connection*: **use the weak tie on Tobi** → **the Laser Pointer** (needed for the keynote).
+Pick up the **banana** on the coffee table by the flowers (for the Psych Lab's stolen stamp).
 
 > ### ⚠️ Feldstrom at your poster
 > He is waiting at Poster 312 to "improve" the title, and the visitors do not come until he is
@@ -558,7 +568,9 @@ Achterberg warns you: *"Feldstrom has a slide about you. Slide fourteen."* **"Go
 
 ### V.4 The Keynote Showdown (Hall of Founders)
 
-Opens after the Poster Session and starts on its own. Feldstrom — *47,012 citations* — puts up
+Opens after the Poster Session and starts on its own. **Needs the Laser Pointer:** without it
+you stand up and wave a finger at a slide the size of a house, and Stellmacher sends you back to
+Tobi. Feldstrom — *47,012 citations* — puts up
 slide 14: your chart, the small bar grown to the top, your name gone. You stand up, Stellmacher
 in your corner, and it becomes a **laser-pointer duel**, full screen:
 
@@ -701,7 +713,14 @@ Everything here is recoverable, and most of it is where the jokes live.
 | The Interval, On A Brass Slide | Casino | Bureau, Tobi |
 | A Brass Plaque, Engraved By You | Bureau | Writing Room (the Registrar) |
 | A Brass Tag ("A Boundary Condition") | Writing Room (the Registrar) | the abstract |
-| A Weak Tie · A Schnitzel | Granovetter · the Hotline | nothing — gimmicks |
+| The ID Key | Office filing cabinet (Act IV) | **Delegation Engine** (KIRA relinks on IDs) *(consumed)* |
+| A Casino Chip | Casino carpet | **Bureau** clerk *(traded)* |
+| A Brass Letter-Opener | Bureau counter, for the chip | **Casino** — breaks the seal *(consumed)* |
+| A Weak Tie | Granovetter (Poster Session) | **Tobi** *(traded)* |
+| A Laser Pointer | Tobi, for the weak tie | **Keynote** — the duel |
+| A Banana | Poster Session coffee table | the stamp monkey in the **Writing Room** *(consumed)* |
+| The REGISTERED Stamp | the monkey on the piano | **Psych Lab** — Achterberg registers the slip *(consumed)* |
+| A Schnitzel | the Hotline | give it to Tobi (anywhere) or the assistant professor in the Writing Room |
 
 **Tip:** Look at anything in your inventory (in simple controls: click it twice). Every item has
 a description, and several contain a nudge. The folder lists what is actually in it. Stuck?

@@ -24,7 +24,7 @@ async function run(inv) {
 }
 (async () => {
   const none  = await run(['folder','cleandata']);
-  const marks = await run(['folder','cleandata','examrecords']);
+  const marks = await run(['folder','cleandata','examrecords','letteropener']);   // the seal needs the Bureau's letter-opener (2026-09-29)
   const both  = marks;
   console.log('nothing:   ', JSON.stringify(none));
   console.log('\nmarks only:', JSON.stringify(marks));

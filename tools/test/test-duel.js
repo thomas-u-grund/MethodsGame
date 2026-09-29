@@ -5,7 +5,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 (async () => {
   const p = await connect(U + Date.now());
   await p.send('Emulation.setDeviceMetricsOverride', { width:1600, height:900, deviceScaleFactor:1, mobile:false });
-  await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({ inventory:['folder','pen'], flags:{ corridorDone:true, slipSealed:true,
+  await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({ inventory:['folder','pen','laserpointer'], flags:{ corridorDone:true, slipSealed:true,
     actIIIDone:true, actIVDone:true, act3IntroSeen:true, act4IntroSeen:true, act5IntroSeen:true, labDone:true, writingDone:true, postersDone:true } }))`);
   await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const r = await p.evaluate(`(async () => {

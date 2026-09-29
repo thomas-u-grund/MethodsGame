@@ -57,12 +57,29 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.paused = !!flags().dlPaused;
     term.querySelector('#dl_termFoot [data-v="fix"]').click(); await wait(200);
     out.fixNotDone = !flags().delegationDone;
+    // cross-room (2026-09-29): relinking on IDs needs the key from her Office
     term.querySelector('#dl_termFoot [data-v="own"]').click(); await wait(600);
+    out.needKey = !flags().delegationDone && !!flags().dlNeedKey;
+    await go('The Seven-Second Office');
+    [...document.querySelectorAll('#wp_verbGrid button, #wp_verbs button, .verb-btn')].find(b => /pick up/i.test(b.textContent)).click();
+    document.querySelector('#wp_sceneWrap .hotspot[data-id="idkey"]').click(); await wait(400);
+    out.idkey = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('idkey');
+    await go('The Delegation Engine');
+    item('dl','idkey'); spot('kira'); await wait(2600);
+    document.querySelector('#dl_termFoot [data-v="own"]').click(); await wait(600);
     out.delegation = !!flags().delegationDone;
     // the clean data is filed in the folder (ROADMAP 8zf), not an inventory slot of its own
     out.cleandata = window.CODEBOOK_IS_FILED('cleandata') && !document.querySelector('#dl_sideInv .side-inv-slot[data-item="cleandata"]');
 
     // --- Statistics Basement: now it can actually be analysed
+    await go('Statistics Basement');
+    // cross-room: the wax needs the Bureau's letter-opener, bought with the chip on the carpet
+    verb('sb','use'); spot('seal'); await wait(500);
+    out.needOpener = !!flags().sbNeedOpener && !document.querySelector('#sb_choices button');
+    verb('sb','pick up'); spot('chip'); await wait(400);
+    await go('The Bureau of Implications');
+    item('bu','chip'); spot('clerk'); await wait(400);
+    out.opener = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('letteropener');
     await go('Statistics Basement');
     verb('sb','use'); spot('seal'); await wait(500); ch('sb','The one the slip names'); await wait(700);
     out.stats = !!flags().statsDone;
@@ -84,7 +101,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     ch('pl','your result'); await wait(300); out.resultRefused = !flags().labDone;
     verb('pl','talk to'); spot('achterberg'); await wait(400);
     ch('pl','sealed Prediction Slip'); await wait(500);
-    out.registered = !!flags().labDone;
+    out.stampGone = !flags().labDone && !!flags().plStampGone;   // a monkey has her stamp (cross-room, 2026-09-29)
     // --- Writing Room: find the three words, refuse the title
     await go('The Writing Room');
     // The Registrar asks the Gap Registry's question here now (8zv)
@@ -130,6 +147,28 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     await wait(600);
     out.posters = !!flags().postersDone; out.audience = flags().posterCrowd;
     out.actVNotYet = !flags().actVDone;
+    // the keynote without a laser pointer: Stellmacher sends you back (cross-room, 2026-09-29)
+    window.CODEBOOK_KN_SPEED = 0.05;
+    await go('The Keynote Showdown');
+    for (let t = 0; t < 120 && ![...document.querySelectorAll('#kn_choices button')].some(b => /laser pointer/i.test(b.textContent)); t++) await wait(100);
+    out.needPointer = !!flags().knNeedPointer;
+    ch('kn','laser pointer'); await wait(300);
+    // the Poster Session: a weak tie for Tobi's laser pointer, and the banana
+    await go('The Poster Session');
+    document.querySelector('#ps_sceneWrap .hotspot[data-id="cameo"]').click(); await wait(300);
+    ch('ps','have one'); await wait(300);
+    item('ps','weaktie'); spot('tobiLaser'); await wait(400);
+    verb('ps','pick up'); spot('banana'); await wait(400);
+    const inv5 = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory;
+    out.pointer = inv5.includes('laserpointer') && inv5.includes('banana') && !inv5.includes('weaktie');
+    // the Writing Room: the banana for the stamp; then the Psych Lab registers the slip
+    await go('The Writing Room');
+    item('wr','banana'); spot('stampmonkey'); await wait(2800);
+    out.regstamp = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('regstamp');
+    await go('The Infinite Monkey Project');
+    verb('pl','talk to'); spot('achterberg'); await wait(400);
+    ch('pl','her stamp'); await wait(500);
+    out.registered = !!flags().labDone;
     // --- the Keynote Showdown (8zy): four slides, answered with the right evidence
     window.CODEBOOK_KN_SPEED = 0.05; window.CODEBOOK_KN_NO_CUTAWAY = true; window.CODEBOOK_KN_NO_DUEL = true;   // the four-slide path; test-duel covers the duel
     await go('The Keynote Showdown');
@@ -181,7 +220,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.fogBlocks && r.folderGone
+  const ok = r.needKey && r.idkey && r.needOpener && r.opener && r.stampGone && r.needPointer && r.pointer && r.regstamp && r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.fogBlocks && r.folderGone
     && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 6
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && r.fogGame && r.draftClear && r.knCoda && r.titleGrew && r.visitorsWait && r.feldGone
