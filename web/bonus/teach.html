@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Codebook for Instructors</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=JetBrains+Mono:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<link rel="stylesheet" href="bonus.css">
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+</head>
+<body>
+<main>
+  <div class="kicker">The Secret of the Lost Codebook &middot; for instructors</div>
+  <h1>Bonus points for your course</h1>
+  <p class="lede">Let your students claim a bonus point for playing: after each act, or once at the end.
+    Register your course, share its game link, and you will get the list of claims by email when each deadline passes.
+    Entirely optional; the game works the same without it.</p>
+
+  <div id="off" class="card" hidden><h2>Not switched on yet</h2><p class="small">The bonus-point service is not configured on this site.</p></div>
+
+  <!-- sign in with an emailed 6-digit code -->
+  <section id="signin" class="card" hidden>
+    <h2>Sign in</h2>
+    <p class="small">No password: we email you a 6-digit code. Your university address is best.</p>
+    <label for="email">Email</label>
+    <input id="email" type="email" autocomplete="email" placeholder="name@university.edu">
+    <button id="sendCode">Email me a code</button>
+    <div id="codeBox" hidden>
+      <label for="code">6-digit code</label>
+      <input id="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="123456">
+      <button id="verify">Sign in</button>
+    </div>
+    <div id="signinMsg" class="msg"></div>
+  </section>
+
+  <section id="app" hidden>
+    <div class="meta" style="margin-bottom:14px"><span id="who"></span><a href="#" id="signout">Sign out</a></div>
+    <div id="courses"></div>
+
+    <section class="card">
+      <h2>Register a course</h2>
+      <div class="row">
+        <div><label for="f_name">Your name</label><input id="f_name" autocomplete="name"></div>
+        <div><label for="f_email">Email for the results</label><input id="f_email" type="email"></div>
+      </div>
+      <div class="row">
+        <div><label for="f_uni">University</label><input id="f_uni" autocomplete="organization"></div>
+        <div><label for="f_country">Country</label><input id="f_country" autocomplete="country-name"></div>
+      </div>
+      <div class="row">
+        <div><label for="f_course">Course</label><input id="f_course" placeholder="Introduction to Research Methods"></div>
+        <div><label for="f_term">Term</label><input id="f_term" placeholder="Winter 2026/27"></div>
+      </div>
+      <label>When can students claim?</label>
+      <label class="radio"><input type="radio" name="mode" value="acts" checked> After each act (five points, one deadline per act)</label>
+      <label class="radio"><input type="radio" name="mode" value="end"> Once, at the end of the game (one deadline)</label>
+      <div id="dlActs" class="row">
+        <div><label for="d1">Act I deadline</label><input id="d1" type="date"></div>
+        <div><label for="d2">Act II deadline</label><input id="d2" type="date"></div>
+        <div><label for="d3">Act III deadline</label><input id="d3" type="date"></div>
+        <div><label for="d4">Act IV deadline</label><input id="d4" type="date"></div>
+        <div><label for="d5">Act V deadline</label><input id="d5" type="date"></div>
+      </div>
+      <div id="dlEnd" class="row" hidden>
+        <div><label for="dend">Deadline</label><input id="dend" type="date"></div>
+      </div>
+      <p class="small">Deadlines run to the end of the day (UTC). The results email goes out the next morning.</p>
+      <button id="create">Register the course</button>
+      <div id="createMsg" class="msg"></div>
+    </section>
+    <p class="small">What is stored: your course details, and for each claim the student number, name and time.
+      Students never create an account. You can delete a course, and with it all its claims, at any time.</p>
+  </section>
+</main>
+
+<script>
+(function(){
+  var CFG = window.CB_BONUS || {}, $ = function(id){ return document.getElementById(id); };
+  if (!CFG.url || !CFG.anonKey){ $('off').hidden = false; return; }
+  var sb = supabase.createClient(CFG.url, CFG.anonKey);
+  var ACTS = ['1','2','3','4','5'], ACT_NAME = { '1':'Act I', '2':'Act II', '3':'Act III', '4':'Act IV', '5':'Act V', end:'End of game' };
+  function msg(id, text, ok){ var m = $(id); m.textContent = text || ''; m.className = 'msg ' + (ok ? 'ok' : 'err'); }
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]; }); }
+
+  // ---- sign in
+  $('sendCode').onclick = async function(){
+    var email = $('email').value.trim(); if (!email) return msg('signinMsg', 'Please enter your email.');
+    this.disabled = true;
+    var r = await sb.auth.signInWithOtp({ email: email, options: { shouldCreateUser: true } });
+    this.disabled = false;
+    if (r.error) return msg('signinMsg', r.error.message);
+    $('codeBox').hidden = false; $('code').focus();
+    msg('signinMsg', 'Code sent. Check your inbox (and the spam folder).', true);
+  };
+  $('verify').onclick = async function(){
+    var r = await sb.auth.verifyOtp({ email: $('email').value.trim(), token: $('code').value.trim(), type: 'email' });
+    if (r.error) return msg('signinMsg', 'That code did not work. Codes expire after an hour and work once.');
+    show();
+  };
+  $('signout').onclick = async function(e){ e.preventDefault(); await sb.auth.signOut(); show(); };
+
+  // ---- the form
+  document.querySelectorAll('input[name=mode]').forEach(function(r){ r.onchange = function(){
+    var acts = document.querySelector('input[name=mode]:checked').value === 'acts';
+    $('dlActs').hidden = !acts; $('dlEnd').hidden = acts; }; });
+  $('create').onclick = async function(){
+    var mode = document.querySelector('input[name=mode]:checked').value, d = {};
+    if (mode === 'acts') ACTS.forEach(function(a){ if ($('d' + a).value) d[a] = $('d' + a).value; });
+    else if ($('dend').value) d.end = $('dend').value;
+    var row = { instructor_name: $('f_name').value.trim(), instructor_email: $('f_email').value.trim(), university: $('f_uni').value.trim(),
+                country: $('f_country').value.trim(), course_name: $('f_course').value.trim(), term: $('f_term').value.trim() || null, mode: mode, deadlines: d };
+    if (!row.instructor_name || !row.instructor_email || !row.university || !row.country || !row.course_name)
+      return msg('createMsg', 'Please fill in your name, email, university, country and course.');
+    if (!Object.keys(d).length) return msg('createMsg', mode === 'acts' ? 'Set at least one act deadline.' : 'Set the deadline.');
+    var r = await sb.from('courses').insert(row).select().single();
+    if (r.error) return msg('createMsg', r.error.message);
+    msg('createMsg', 'Registered. Your course link is at the top of the page.', true);
+    loadCourses(); window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  // ---- my courses
+  async function loadCourses(){
+    var cs = await sb.from('courses').select('*').order('created_at', { ascending: false });
+    var cl = await sb.from('claims').select('course_id, act, student_number, student_name, created_at').order('created_at');
+    var claims = cl.data || [];
+    $('courses').innerHTML = (cs.data || []).map(function(c){
+      var link = CFG.game + '?course=' + c.code, mine = claims.filter(function(x){ return x.course_id === c.id; });
+      var dls = Object.keys(c.deadlines).map(function(a){
+        var n = mine.filter(function(x){ return x.act === a; }).length;
+        return '<span class="pill">' + ACT_NAME[a] + ': ' + esc(c.deadlines[a]) + ' &middot; ' + n + ' claimed' + (c.reported && c.reported[a] ? ' &middot; emailed' : '') + '</span>'; }).join('');
+      return '<section class="card"><div class="kicker">Course ' + esc(c.code) + '</div><h2>' + esc(c.course_name) + '</h2>' +
+        '<div class="meta"><span>' + esc(c.university) + '</span><span>' + esc(c.country) + '</span>' + (c.term ? '<span>' + esc(c.term) + '</span>' : '') +
+        '<span>' + (c.mode === 'acts' ? 'a point per act' : 'one point at the end') + '</span></div>' +
+        '<p style="margin:12px 0 4px">' + dls + '</p>' +
+        '<label>Give your students this link</label><div class="link"><input readonly value="' + esc(link) + '"><button class="ghost" data-copy="' + esc(link) + '">Copy</button></div>' +
+        (mine.length ? '<details style="margin-top:14px"><summary>Claims so far (' + mine.length + ')</summary><div class="table-wrap"><table><tr><th>Act</th><th>Student number</th><th>Name</th><th>When (UTC)</th></tr>' +
+          mine.map(function(x){ return '<tr><td>' + ACT_NAME[x.act] + '</td><td>' + esc(x.student_number) + '</td><td>' + esc(x.student_name) + '</td><td>' + x.created_at.slice(0, 16).replace('T', ' ') + '</td></tr>'; }).join('') +
+          '</table></div></details>' : '<p class="small">No claims yet.</p>') +
+        '<button class="ghost" data-del="' + c.id + '" style="margin-top:14px">Delete course and its claims</button></section>';
+    }).join('');
+    $('courses').querySelectorAll('[data-copy]').forEach(function(b){ b.onclick = function(){
+      var t = b.dataset.copy, inp = b.previousElementSibling;
+      (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function(){ b.textContent = 'Copied'; }, function(){ inp.select(); });
+    }; });
+    $('courses').querySelectorAll('[data-del]').forEach(function(b){ b.onclick = async function(){
+      if (b.dataset.armed !== '1'){ b.dataset.armed = '1'; b.textContent = 'Click again to delete for good'; return; }
+      await sb.from('courses').delete().eq('id', b.dataset.del); loadCourses();
+    }; });
+  }
+
+  async function show(){
+    var s = (await sb.auth.getSession()).data.session;
+    $('signin').hidden = !!s; $('app').hidden = !s;
+    if (s){ $('who').textContent = 'Signed in as ' + s.user.email; if (!$('f_email').value) $('f_email').value = s.user.email; loadCourses(); }
+  }
+  show();
+})();
+</script>
+</body>
+</html>

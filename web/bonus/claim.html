@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Claim Your Bonus Point</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=JetBrains+Mono:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<link rel="stylesheet" href="bonus.css">
+<script src="config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+</head>
+<body>
+<main style="max-width:560px">
+  <div class="kicker">The Secret of the Lost Codebook</div>
+  <h1 id="title">Claim your bonus point</h1>
+  <p class="lede" id="sub">&nbsp;</p>
+
+  <section class="card" id="form" hidden>
+    <label for="num">Student number</label>
+    <input id="num" autocomplete="off" inputmode="text">
+    <label for="name">Full name</label>
+    <input id="name" autocomplete="name">
+    <label class="radio"><input type="checkbox" id="ok"> I played this part of the game myself. My student number and name go to my instructor with this claim.</label>
+    <button id="send">Claim the point</button>
+    <div id="msg" class="msg"></div>
+  </section>
+  <section class="card" id="done" hidden>
+    <h2>Claimed.</h2>
+    <p id="doneText"></p>
+    <p class="small">You can close this tab and go back to the game.</p>
+  </section>
+</main>
+<script>
+(function(){
+  var CFG = window.CB_BONUS || {}, $ = function(id){ return document.getElementById(id); };
+  var q = new URLSearchParams(location.search), code = q.get('course') || '', act = q.get('act') || '', key = q.get('key') || '';
+  var ACT_NAME = { '1':'Act I: The Question', '2':'Act II: Theory', '3':'Act III: Data', '4':'Act IV: Evidence', '5':'Act V: The Annual Meeting', end:'the whole game' };
+  function fail(t){ $('sub').textContent = t; }
+  if (!CFG.url || !CFG.anonKey) return fail('The bonus-point service is not switched on.');
+  if (!code || !act || !key) return fail('This claim link is incomplete. Open it again from the game.');
+  var done = 'cb_claimed_' + code + '_' + act;
+  var sb = supabase.createClient(CFG.url, CFG.anonKey);
+  sb.rpc('course_public', { p_code: code }).then(function(r){
+    var c = r.data; if (!c) return fail('This course link is not known. Ask your instructor for the right game link.');
+    var dl = c.deadlines[act];
+    $('sub').innerHTML = 'For <b>' + ACT_NAME[act] + '</b> in <b>' + c.course_name.replace(/</g, '&lt;') + '</b>, ' + c.university.replace(/</g, '&lt;') +
+      (dl ? '. Claim by ' + dl + '.' : '.');
+    try { if (localStorage.getItem(done)){ $('done').hidden = false; $('doneText').textContent = 'You have already claimed this point on this device.'; return; } } catch(e){}
+    $('form').hidden = false;
+  });
+  $('send').onclick = async function(){
+    var m = $('msg');
+    if (!$('ok').checked){ m.className = 'msg err'; m.textContent = 'Please tick the box first.'; return; }
+    this.disabled = true;
+    var r = await sb.rpc('submit_claim', { p_code: code, p_act: act, p_key: key, p_number: $('num').value, p_name: $('name').value });
+    this.disabled = false;
+    var res = r.data || {};
+    if (r.error || !res.ok){ m.className = 'msg err'; m.textContent = (res && res.error) || 'Something went wrong. Please try again in a minute.'; return; }
+    try { localStorage.setItem(done, '1'); } catch(e){}
+    $('form').hidden = true; $('done').hidden = false;
+    $('doneText').textContent = 'Your point for ' + ACT_NAME[act] + ' is recorded. Your instructor gets the list after the deadline.';
+  };
+})();
+</script>
+</body>
+</html>

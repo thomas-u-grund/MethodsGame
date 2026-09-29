@@ -1,0 +1,32 @@
+/* Shared look for the instructor and claim pages: the game's paper, ink and brass. */
+:root{ --paper:#f7f1e3; --card:#fffaf0; --ink:#2a2440; --muted:#6b6378; --line:#e3d8bf; --brass:#8a5a14; --red:#a3241a; --ok:#2f6b2a; color-scheme:light; }
+@media (prefers-color-scheme: dark){ :root{ --paper:#1b1712; --card:#241f18; --ink:#f1e7d0; --muted:#b3a88f; --line:#3d3426; --brass:#e0b458; --red:#f08a7e; --ok:#9bd48f; color-scheme:dark; } }
+*{ box-sizing:border-box; }
+body{ margin:0; background:var(--paper); color:var(--ink); font:16px/1.55 'Source Sans 3', system-ui, sans-serif; padding-inline:16px; }
+main{ max-width:760px; margin:0 auto; padding-block:40px 80px; }
+h1{ font:700 clamp(26px,4vw,36px)/1.15 Fraunces, Georgia, serif; margin:0 0 6px; text-wrap:balance; }
+h2{ font:700 21px/1.2 Fraunces, Georgia, serif; margin:0 0 10px; }
+.kicker{ font:700 12px 'JetBrains Mono', monospace; letter-spacing:.18em; text-transform:uppercase; color:var(--brass); margin-bottom:8px; }
+.lede{ color:var(--muted); margin:0 0 28px; max-width:62ch; }
+.card{ background:var(--card); border:1px solid var(--line); border-radius:10px; padding:22px; margin-bottom:18px; }
+label{ display:block; font-weight:600; font-size:14px; margin:14px 0 5px; }
+input, select{ width:100%; font:inherit; padding:10px 12px; border:1px solid var(--line); border-radius:6px; background:var(--paper); color:var(--ink); }
+input:focus, select:focus{ outline:2px solid var(--brass); outline-offset:1px; }
+.row{ display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:0 16px; }
+button{ font:600 15px/1 inherit; font-family:inherit; padding:12px 18px; border-radius:6px; border:1px solid var(--brass); background:var(--brass); color:#fff; cursor:pointer; margin-top:18px; }
+button.ghost{ background:transparent; color:var(--brass); }
+button:disabled{ opacity:.5; cursor:default; }
+.msg{ margin-top:14px; font-size:15px; }
+.msg.err{ color:var(--red); } .msg.ok{ color:var(--ok); }
+.radio{ display:flex; gap:10px; align-items:flex-start; font-weight:400; margin:8px 0; }
+.radio input{ width:auto; margin-top:5px; }
+.link{ display:flex; gap:8px; align-items:center; margin-top:10px; }
+.link input{ font:13px 'JetBrains Mono', monospace; }
+.link button{ margin:0; white-space:nowrap; }
+table{ width:100%; border-collapse:collapse; font-size:14px; font-variant-numeric:tabular-nums; }
+th, td{ text-align:left; padding:7px 8px; border-bottom:1px solid var(--line); }
+th{ font-weight:600; color:var(--muted); }
+.table-wrap{ overflow-x:auto; margin-top:10px; }
+.pill{ display:inline-block; font:600 12px 'JetBrains Mono', monospace; padding:2px 8px; border-radius:99px; border:1px solid var(--line); color:var(--muted); margin-right:6px; }
+.small{ font-size:13px; color:var(--muted); }
+.meta{ display:flex; flex-wrap:wrap; gap:4px 14px; color:var(--muted); font-size:14px; }
