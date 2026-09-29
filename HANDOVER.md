@@ -94,10 +94,7 @@ after them.
 3. The first real results email (a deadline passing) has not been seen yet.
 4. `ROADMAP.md` has uncommitted edits from another session (Cloudflare decision); ask before committing.
 5. Remove the old static course certificate? Delete the stray pending `contact@` destination in Email Routing?
-6. **Tobi's laser-pointer pose has no talking mouth** (`sprite-tobi-laser.webp` is open-mouthed, so it needs a
-   *closed*-mouth overlay, MOUTHS entry `['tobi',1]`): ChatGPT image generation was failing on 2026-09-29;
-   the source image for the edit is `art/tobi-laser-green.png`.
-6b. **Map gag waiting for art:** a biplane towing a banner with each act's gossip (Act I "WHAT IS YOUR
+6. **Map gag waiting for art:** a biplane towing a banner with each act's gossip (Act I "WHAT IS YOUR
    QUESTION?", II "CITE ME · FELDSTROM 2026", III "100% RESPONSE RATE! (ASK HOW)", IV "p < .05 GUARANTEED",
    V "KEYNOTE TONIGHT: CIVILISATION IS TRAFFIC"); needs `map-plane.webp` (red biplane flying left, blank
    cream banner, keyed). Done instead: the paper plane (`CODEBOOK_MAP_PAPER()` launches one for tests).
