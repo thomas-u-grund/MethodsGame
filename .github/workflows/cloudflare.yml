@@ -1,0 +1,29 @@
+# Publishes web/ (the whole game) to Cloudflare Pages on every push to main -> https://lostcodebook.org
+# Needs two repository secrets: CLOUDFLARE_API_TOKEN (permission: Cloudflare Pages: Edit) and
+# CLOUDFLARE_ACCOUNT_ID. Skips quietly until they exist. GitHub Pages (pages.yml) keeps running alongside.
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: cloudflare
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+        if: env.CLOUDFLARE_API_TOKEN != ''
+      - name: Create the Pages project (first run only)
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: npx --yes wrangler@3 pages project create lostcodebook --production-branch main || true
+      - name: Deploy
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: npx --yes wrangler@3 pages deploy web --project-name lostcodebook --branch main --commit-dirty=true
