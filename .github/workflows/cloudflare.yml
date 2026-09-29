@@ -1,5 +1,5 @@
-# Publishes web/ (the whole game) to Cloudflare Pages on every push to main -> https://lostcodebook.org
-# Needs two repository secrets: CLOUDFLARE_API_TOKEN (permission: Cloudflare Pages: Edit) and
+# Publishes web/ (the whole game) and functions/ (the bonus-points API) to Cloudflare Pages on every push to main -> https://lostcodebook.org
+# Needs two repository secrets: CLOUDFLARE_API_TOKEN (permissions: Cloudflare Pages: Edit, D1: Edit) and
 # CLOUDFLARE_ACCOUNT_ID. Skips quietly until they exist. GitHub Pages (pages.yml) keeps running alongside.
 name: Deploy to Cloudflare Pages
 
@@ -24,6 +24,9 @@ jobs:
       - name: Create the Pages project (first run only)
         if: env.CLOUDFLARE_API_TOKEN != ''
         run: npx --yes wrangler@3 pages project create lostcodebook --production-branch main || true
-      - name: Deploy
+      - name: Update the bonus-points database (bonus/migrations)
         if: env.CLOUDFLARE_API_TOKEN != ''
-        run: npx --yes wrangler@3 pages deploy web --project-name lostcodebook --branch main --commit-dirty=true
+        run: npx --yes wrangler@3 d1 migrations apply lostcodebook --remote
+      - name: Deploy (the game in web/, the API in functions/, settings in wrangler.toml)
+        if: env.CLOUDFLARE_API_TOKEN != ''
+        run: npx --yes wrangler@3 pages deploy --project-name lostcodebook --branch main --commit-dirty=true

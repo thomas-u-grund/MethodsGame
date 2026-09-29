@@ -6,7 +6,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html';
 (async () => {
   const p = await connect(U + '?cb=' + Date.now());
   await p.send('Page.addScriptToEvaluateOnNewDocument', { source:
-    `Object.defineProperty(window, 'CB_BONUS', { value: { url:'http://127.0.0.1:9', anonKey:'test', game:'${U}' }, writable:false });` });
+    `Object.defineProperty(window, 'CB_BONUS', { value: { enabled:true, api:'http://127.0.0.1:9/api', game:'${U}' }, writable:false });` });
   const COURSE = { code:'TESTAB12', course_name:'Methods I', university:'RWTH', mode:'acts',
     deadlines:{ '1':'2099-01-01', '2':'2099-01-01', '3':'2000-01-01', '4':'2099-01-01' } };
   const run = async (query, extra) => {

@@ -1,0 +1,10 @@
+# Cloudflare Pages project for lostcodebook.org: the game (web/) plus the bonus-points API (functions/).
+name = "lostcodebook"
+pages_build_output_dir = "web"
+compatibility_date = "2026-09-01"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "lostcodebook"
+database_id = "00000000-0000-0000-0000-000000000000"   # set once the D1 database exists (see bonus/README.md)
+migrations_dir = "bonus/migrations"

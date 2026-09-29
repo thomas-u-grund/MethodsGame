@@ -1,0 +1,20 @@
+# Course bonus points (ROADMAP 8-BONUS): once a day, email instructors the claims of every deadline
+# that has passed (lostcodebook.org/api/report). Needs the repository secret BONUS_REPORT_SECRET, the
+# same value as REPORT_SECRET in the Cloudflare Pages project. Skips quietly until it exists.
+name: Bonus points daily report
+
+on:
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    env:
+      SECRET: ${{ secrets.BONUS_REPORT_SECRET }}
+    steps:
+      - name: Send the reports
+        if: env.SECRET != ''
+        run: |
+          curl -sS --fail-with-body -X POST https://lostcodebook.org/api/report -H "x-report-secret: $SECRET"

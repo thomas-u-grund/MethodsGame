@@ -27,3 +27,4 @@ screenshots/
 rap battle/
 __pycache__/
 build/
+.wrangler/

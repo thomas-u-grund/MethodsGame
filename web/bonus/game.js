@@ -6,7 +6,7 @@
   var CFG = window.CB_BONUS || {}, LS = window.localStorage;
   window.CODEBOOK_BONUS_BADGE = function(){};
   window.CODEBOOK_BONUS_CLAIMABLE = function(){ return []; };
-  if (!CFG.url || !CFG.anonKey) return;
+  if (!CFG.enabled) return;
   var code = null;
   try {
     var q = new URLSearchParams(location.search).get('course');
@@ -16,11 +16,9 @@
   if (!code) return;
   var course = null;
   try { course = JSON.parse(LS.getItem('cb_course_info') || 'null'); if (course && course.code !== code) course = null; } catch(e){}
-  fetch(CFG.url + '/rest/v1/rpc/course_public', { method:'POST',
-    headers:{ apikey: CFG.anonKey, Authorization: 'Bearer ' + CFG.anonKey, 'content-type': 'application/json' },
-    body: JSON.stringify({ p_code: code }) })
-    .then(function(r){ return r.ok ? r.json() : null; })
-    .then(function(c){ if (c && c.code){ course = c; try { LS.setItem('cb_course_info', JSON.stringify(c)); } catch(e){} } })
+  fetch(CFG.api + '/course/' + encodeURIComponent(code))
+    .then(function(r){ return r.json(); })
+    .then(function(r){ if (r && r.ok){ course = r.course; try { LS.setItem('cb_course_info', JSON.stringify(course)); } catch(e){} } })
     .catch(function(){});   // offline: the cached course is good enough to show the button
 
   // when each act counts as finished (the same flags the game's gates use)

@@ -2,6 +2,7 @@
 :root{ --paper:#f7f1e3; --card:#fffaf0; --ink:#2a2440; --muted:#6b6378; --line:#e3d8bf; --brass:#8a5a14; --red:#a3241a; --ok:#2f6b2a; color-scheme:light; }
 @media (prefers-color-scheme: dark){ :root{ --paper:#1b1712; --card:#241f18; --ink:#f1e7d0; --muted:#b3a88f; --line:#3d3426; --brass:#e0b458; --red:#f08a7e; --ok:#9bd48f; color-scheme:dark; } }
 *{ box-sizing:border-box; }
+[hidden]{ display:none !important; }
 body{ margin:0; background:var(--paper); color:var(--ink); font:16px/1.55 'Source Sans 3', system-ui, sans-serif; padding-inline:16px; }
 main{ max-width:760px; margin:0 auto; padding-block:40px 80px; }
 h1{ font:700 clamp(26px,4vw,36px)/1.15 Fraunces, Georgia, serif; margin:0 0 6px; text-wrap:balance; }
