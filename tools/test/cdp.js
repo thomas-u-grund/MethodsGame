@@ -31,6 +31,9 @@ async function connect(url) {
   // measured from the previous version, and test-audio reported an overrun that had
   // already been fixed on disk.
   await send('Network.enable'); await send('Network.setCacheDisabled', { cacheDisabled: true });
+  // Rooms of finished acts close (2026-09-29). Most tests seed a later act and then visit an earlier
+  // room on purpose, so by default the harness keeps every room open; test-closedrooms turns it off.
+  if (!process.env.CB_REAL_CLOSURE) await send('Page.addScriptToEvaluateOnNewDocument', { source: 'window.CODEBOOK_OPEN_ALL_ROOMS = true;' });
   // Wait for the game to be usable rather than for a fixed number of seconds. Every test
   // used to sleep 4-4.5s after each navigation "to be safe", which across 28 tests was
   // most of the suite's runtime; the page is normally ready in well under a second.
