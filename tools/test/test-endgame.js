@@ -36,12 +36,13 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     term.querySelector('[data-claim="rr"]').click(); await wait(150);
     [...term.querySelectorAll('#dl_termFoot [data-r]')].find(b => b.dataset.r === 'bad').click(); await wait(200);
     out.trueNotFlagged = !term.querySelector('[data-claim="rr"]').classList.contains('flagged');
-    // a wrong reason must not flag
+    // the weaker of the two reasons still marks the line (simplified 2026-09-29)
     term.querySelector('[data-claim="n"]').click(); await wait(150);
+    out.twoReasons = term.querySelectorAll('#dl_termFoot [data-r]').length === 2;
     [...term.querySelectorAll('#dl_termFoot [data-r]')].find(b => b.dataset.r !== '-1').click(); await wait(200);
-    out.wrongReasonNotFlagged = !term.querySelector('[data-claim="n"]').classList.contains('flagged');
-    // flag five yourself, then show her: she must circle the two you missed
-    for (const id of ['n','merge','miss','p','cause']){
+    out.wrongReasonStillFlags = term.querySelector('[data-claim="n"]').classList.contains('flagged');
+    // flag four more yourself, then show her: she must circle the two you missed
+    for (const id of ['merge','miss','p','cause']){
       term.querySelector('[data-claim="' + id + '"]').click(); await wait(150);
       term.querySelector('#dl_termFoot [data-ok="1"]').click(); await wait(200);
     }
@@ -73,15 +74,11 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
     // --- Statistics Basement: now it can actually be analysed
     await go('Statistics Basement');
-    // cross-room: the wax needs the Bureau's letter-opener, bought with the chip on the carpet
-    verb('sb','use'); spot('seal'); await wait(500);
-    out.needOpener = !!flags().sbNeedOpener && !document.querySelector('#sb_choices button');
-    verb('sb','pick up'); spot('chip'); await wait(400);
-    await go('The Bureau of Implications');
-    item('bu','chip'); spot('clerk'); await wait(400);
-    out.opener = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('letteropener');
-    await go('Statistics Basement');
-    verb('sb','use'); spot('seal'); await wait(500); ch('sb','The one the slip names'); await wait(700);
+    verb('sb','use'); spot('seal'); await wait(500); ch('sb','The one the slip names'); await wait(1500);
+    // the results interlude (2026-09-29): the seal, the prediction, the chart with its stamp
+    out.resultsScene = !!document.getElementById('interlude') && !!document.querySelector('#interlude .rs-card, #interlude img[src*="il4-seal"]');
+    document.dispatchEvent(new KeyboardEvent('keydown', { code:'Escape', key:'Escape', bubbles:true })); window.dispatchEvent(new KeyboardEvent('keydown', { code:'Escape', key:'Escape', bubbles:true })); await wait(1500);
+    out.resultInHand = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('resultprint');
     out.stats = !!flags().statsDone;
     out.resultKind = flags().resultHolds ? 'holds' : flags().resultNull ? 'null' : '?';
 
@@ -90,10 +87,13 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     verb('bu','talk to'); spot('clerk'); await wait(400);
     ch('bu','write my own'); await wait(400);
     // BU1: each limitation is shown, not ticked -- its evidence goes on the counter
-    for (const ev of ['enrolreg','altcard','rateprint']){ item('bu', ev); spot('clerk'); await wait(2900); }
+    // the first limitation through the new menu (the clerk asks how you know), the other two by using the item
+    ch('bu','One course'); await wait(300); ch('bu','enrolment register'); await wait(2900);
+    for (const ev of ['altcard','rateprint']){ item('bu', ev); spot('clerk'); await wait(2900); }
     out.evidenceIcons = document.querySelectorAll('#bu_evidence img, [id^=bu_ev] img').length;
     ch('bu','Lodge it'); await wait(600);
     out.bureau = !!flags().bureauDone; out.actIV = !!flags().actIVDone;
+    out.resultFiled = window.CODEBOOK_IS_FILED('resultprint');
 
     // --- Act V opens in the Psych Lab: register the sealed slip with Dr. Achterberg (8zv)
     await go('The Infinite Monkey Project');
@@ -132,6 +132,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.writing = !!flags().writingDone;
     // --- the Poster Session: Feldstrom at your poster first, then five visitors (8zv; 2026-09-28)
     await go('The Poster Session');
+    // the Writing Room gave you the poster rolled up; the first use pins it to board 312 (2026-09-29)
+    out.posterItem = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('poster');
+    verb('ps','use'); spot('poster'); await wait(500);
+    out.posterHung = !!document.getElementById('ps_poster') && !JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('poster');
     verb('ps','use'); spot('poster'); await wait(500);
     ch('ps','What improvement'); await wait(400);
     ch('ps','What are you doing'); await wait(400);
@@ -220,7 +224,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
-  const ok = r.needKey && r.idkey && r.needOpener && r.opener && r.stampGone && r.needPointer && r.pointer && r.regstamp && r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.wrongReasonNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.fogBlocks && r.folderGone
+  const ok = r.posterItem && r.posterHung && r.needKey && r.idkey && r.twoReasons && r.wrongReasonStillFlags && r.resultsScene && r.resultInHand && r.resultFiled && r.stampGone && r.needPointer && r.pointer && r.regstamp && r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.fogBlocks && r.folderGone
     && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 6
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && r.fogGame && r.draftClear && r.knCoda && r.titleGrew && r.visitorsWait && r.feldGone

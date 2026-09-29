@@ -409,7 +409,8 @@ KIRA thinks she has found the Codebook. A lever descends towards AUTO-SUBMIT; th
 watches with an hourglass and a red pen.
 
 1. Talk to KIRA (or use her terminal) and pick any question. She streams a ten-line report.
-2. **Click each wrong line and say why.** Seven are wrong:
+2. **Click each wrong line and say why** (two reasons to choose from; the weaker one still marks the
+   line, and KIRA's correction gives the real problem). Seven are wrong:
 
 | Line | Stamp | Right reason |
 |---|---|---|
@@ -435,15 +436,17 @@ mood."* *"Submit it anyway"* → she rejects it herself.
 
 ### IV.2 The Significance Casino (the old Statistics Basement)
 
-**Needs:** `cleandata`, `examrecords`, the **letter-opener**. **Gives:** `resultprint`.
+**Needs:** `cleandata`, `examrecords`. **Gives:** `resultprint` (**The Interval, On A Brass Slide**,
+kept in your hand until the Bureau has read it).
 
-The wax will not yield to fingernails. **Pick up the red chip** on the carpet, take it up to the
-**Bureau** and **use it on the clerk**: he trades the brass **letter-opener** on his counter for it
-(*"We accept all currencies. Especially the worthless ones."*). Back down here, use the **sealed
-Prediction Slip** on the lectern. (Vossberg's worked-example sheets are pinned
+Use the **sealed Prediction Slip** on the lectern. (Vossberg's worked-example sheets are pinned
 above the desk.) ✅ **"The one the slip names: is the gap larger on the worked-example
 questions, and smaller for students already practising elsewhere?"** Overall marks, or all forty
 questions one by one, are both turned down.
+
+A short scene plays: the seal breaks, your own prediction from Act II, then a chart builds itself and
+a stamp comes down: **THE PREDICTION HOLDS**, **NULL — AND INFORMATIVE**, or **CONSISTENT WITH
+EVERYTHING**. Then the brass slide arrives in your hand.
 
 - If you sealed an empty theory: **the result is vacuous.** *"Something will probably happen."*
 - Otherwise the result either **holds**, modestly, or is **null** — flat, and informatively so
@@ -468,7 +471,8 @@ The Clerk: *"Number, please. And what size would you like it to mean?"*
   → `claim_overstated`, room complete. *"We don't stock true. We stock sizes."*
 - ✅ **"I'd like to write my own."**
 
-Then use the evidence for each limitation **on the clerk**:
+Then, for each limitation, pick it from the list: the clerk asks **"And how do you know?"** and you
+show him the right item from your pocket (or use the item on the clerk):
 
 | Limitation | Evidence |
 |---|---|
@@ -535,8 +539,8 @@ clickable, all flavour).
 | demonstrate | **are consistent with** |
 | people | **first-year Methods students** |
 
-4. **"This is what happened. Finish it."** → the Registrar stamps **CLAIM DEFENSIBLE**.
-   **"Take the poster to the Mensa."**
+4. **"This is what happened. Finish it."** → the Registrar stamps **CLAIM DEFENSIBLE** and you get
+   **Your Poster, Rolled Up** (tied with a red ribbon, tag 312). **"Take the poster to the Mensa."**
 
 ### V.3 The Poster Session (the Mensa)
 
@@ -552,7 +556,7 @@ Pick up the **banana** on the coffee table by the flowers (for the Psych Lab's s
 > name on it."* He photographs your poster on the way out: *"Tiny now. Wait until you see what it
 > becomes on slide 14."*
 
-Then use **Poster 312**. Five visitors; each answer is shuffled. A good answer keeps them at your
+First **use board 312** to unroll and pin your poster up. Then use **Poster 312**. Five visitors; each answer is shuffled. A good answer keeps them at your
 board; a bad one sends them away. No fail state.
 
 | Visitor | Asks | ✅ Answer |
@@ -712,12 +716,11 @@ Everything here is recoverable, and most of it is where the jokes live.
 | Reminder Postcards | Fieldwork telephone | Fieldwork |
 | A Scoreboard Tile Reading 75 | Fieldwork | Bureau |
 | A Tape Reel Marked DATA | Delegation Engine | Casino |
-| The Interval, On A Brass Slide | Casino | Bureau, Tobi |
+| The Interval, On A Brass Slide | Casino (after the results scene) | Bureau ("Number, please"), Tobi; filed under RESULT once the Bureau is done |
+| Your Poster, Rolled Up | Writing Room (CLAIM DEFENSIBLE) | Poster Session: pin it to board 312 |
 | A Brass Plaque, Engraved By You | Bureau | Writing Room (the Registrar) |
 | A Brass Tag ("A Boundary Condition") | Writing Room (the Registrar) | the abstract |
 | The ID Key | Office filing cabinet (Act IV) | **Delegation Engine** (KIRA relinks on IDs) *(consumed)* |
-| A Casino Chip | Casino carpet | **Bureau** clerk *(traded)* |
-| A Brass Letter-Opener | Bureau counter, for the chip | **Casino** — breaks the seal *(consumed)* |
 | A Weak Tie | Granovetter (Poster Session) | **Tobi** *(traded)* |
 | A Laser Pointer | Tobi, for the weak tie | **Keynote** — the duel |
 | A Banana | Poster Session coffee table | the stamp monkey in the **Writing Room** *(consumed)* |
