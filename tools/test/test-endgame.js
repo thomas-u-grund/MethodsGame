@@ -70,7 +70,8 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     document.querySelector('#dl_termFoot [data-v="own"]').click(); await wait(600);
     out.delegation = !!flags().delegationDone;
     // the clean data is filed in the folder (ROADMAP 8zf), not an inventory slot of its own
-    out.cleandata = window.CODEBOOK_IS_FILED('cleandata') && !document.querySelector('#dl_sideInv .side-inv-slot[data-item="cleandata"]');
+    // the clean data is a tape reel in your hand until the Casino has run the test (2026-09-29)
+    out.cleandata = !window.CODEBOOK_IS_FILED('cleandata') && JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('cleandata');
 
     // --- Statistics Basement: now it can actually be analysed
     await go('Statistics Basement');
