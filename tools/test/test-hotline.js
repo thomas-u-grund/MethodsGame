@@ -29,7 +29,15 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     [...document.querySelectorAll('.cb-contacts .row')].find(r => /Schnitzel/.test(r.textContent)).click(); await w(2700);
     [...document.querySelectorAll('.cb-call .btns button')].find(b => /One schnitzel/.test(b.textContent)).click(); await w(300);
     out.ordered = flags().schnitzelOrders === 1 && /Where to/.test(document.querySelector('.cb-call .ln').innerHTML);
+    out.waiting = !!flags().schnitzelWaiting && /at the counter/.test(document.querySelector('.cb-call .ln').innerHTML);
     [...document.querySelectorAll('.cb-call .btns button')].find(b => /hang up/i.test(b.textContent)).click(); await w(500);
+    // pick it up at the Mensa counter (2026-09-29)
+    [...document.querySelectorAll('.cb-call .btns button')].forEach(b => { if (/hang up/i.test(b.textContent)) b.click(); }); await w(400);
+    await go('^The Mensa');
+    [...document.querySelectorAll('#mn_verbGrid button')].find(b => /talk/i.test(b.textContent)).click();
+    document.querySelector('#mn_sceneWrap [data-id="counters"]').click(); await w(2200);
+    out.pickedUp = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('schnitzel') && !flags().schnitzelWaiting;
+    await go('^The Ethics Tribunal');
     for (const k of [1, 2]){ document.querySelector('.side-inv-slot[data-item="mobile"]').click(); await w(300);
       [...document.querySelectorAll('.cb-contacts .row')].find(r => /Schnitzel/.test(r.textContent)).click(); await w(3700);
       if (k === 2) out.voicebox = /press one/.test(document.querySelector('.cb-call .ln').innerHTML);
