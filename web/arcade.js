@@ -222,7 +222,8 @@
     document.addEventListener('keydown', key, true);
     window.addEventListener('resize', size);
     size(); reset(true); hud(); say('READY!', 1400);
-    window.CODEBOOK_ARCADE_TEST = { state:function(){ return { score:score, lives:lives, pellets:pellets, level:level, over:over }; }, eatAll:function(){ grid.forEach(function(r){ r.forEach(function(c, x){ if (c === '.' || c === 'o') r[x] = ' '; }); }); pellets = 1; } };
+    window.CODEBOOK_ARCADE_TEST = { state:function(){ return { score:score, lives:lives, pellets:pellets, level:level, over:over }; }, eatAll:function(){ grid.forEach(function(r){ r.forEach(function(c, x){ if (c === '.' || c === 'o') r[x] = ' '; }); }); pellets = 1;
+      var nx = pac.x + DIRS[pac.dir][0]; if (!open(nx, pac.y, false)) nx = pac.x - DIRS[pac.dir][0]; grid[pac.y][nx] = '.'; } };
     last = performance.now(); raf = requestAnimationFrame(frame);
   };
 
