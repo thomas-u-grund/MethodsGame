@@ -1,12 +1,12 @@
 # The Secret of the Lost Codebook — Handover
 
-*Project handover / internal reference — compiled 2026-09-15, last updated 2026-09-27 (section 00 is current; everything below it is history)*
+*Project handover / internal reference — compiled 2026-09-15, last updated 2026-09-29 (section 00 is current; everything below it is history)*
 
 A LucasArts-style point-and-click adventure teaching Research Methods, built as a single self-contained HTML file. This is the orientation doc for picking the project back up — what's live, how it's wired together, and what's still open.
 
-> **Current state: section 00 below (2026-09-27).** `ROADMAP.md` §1 has the build plan. Sections 01b
-> onwards are the history of how the engine was built and are frozen; their tables and backlogs are
-> out of date. The game is played from GitHub Pages; the whole-game artifact below is stale on purpose.
+> **Current state: section 00 below (2026-09-29).** `ROADMAP.md` §1 has the build plan. Section 00a
+> (2026-09-27) and everything from 01b onwards are history and frozen. **The game is played at
+> https://lostcodebook.org** (Cloudflare Pages); the whole-game artifact below is stale on purpose.
 
 **Old whole-game build (stale):** https://claude.ai/artifact/1VJHdVezyJFxnsZXS3kRi6 (v51 · 2026-09-20)
 
@@ -14,7 +14,92 @@ A LucasArts-style point-and-click adventure teaching Research Methods, built as 
 
 ---
 
-## 00. Current state (2026-09-27)
+## 00. Current state (2026-09-29)
+
+### Hosting: lostcodebook.org on Cloudflare
+
+| What | Where |
+|---|---|
+| **The game** | **https://lostcodebook.org** — Cloudflare Pages project `lostcodebook` (account ID in `wrangler.toml`'s deploy secrets, not secret itself: `3e68ab503d54d9d165b0c278d0111b81`). `lostcodebook.pages.dev` is the same site. |
+| **Deploy** | every push to `main` runs **two** workflows: `.github/workflows/cloudflare.yml` (D1 migrations, then `wrangler pages deploy`: `web/` + `functions/`, settings in `wrangler.toml`) and the old `pages.yml` (GitHub Pages mirror at thomas-u-grund.github.io/MethodsGame, kept as a backup). Check with `gh run list --workflow cloudflare.yml --limit 1`. |
+| **GitHub secrets** | `CLOUDFLARE_API_TOKEN` (permissions: Cloudflare Pages Edit, D1 Edit; the user stores it themselves), `CLOUDFLARE_ACCOUNT_ID`, `BONUS_REPORT_SECRET`. A `!` command in Claude Code cannot prompt, so `gh secret set NAME` there stores an **empty** value: use `pbpaste \| gh secret set NAME` or the GitHub web UI. |
+| **Cloudflare secrets** | *Workers & Pages → lostcodebook → Settings → Variables and secrets*, Production, **type Secret**: `BREVO_API_KEY`, `SENDER_EMAIL`, `SENDER_NAME`, `REPORT_SECRET` (= `BONUS_REPORT_SECRET`), optional `SUPPORT_URL`. Plain *Text* variables are ignored because `wrangler.toml` exists. Secrets reach only **new** deployments. `GET /api/health` says which are present (yes/no only). |
+| **Addresses** | Cloudflare drops `.html` (`/the-secret-of-the-codebook`, old links redirect). `web/index.html` forwards to the game **keeping the query** (`?play=`, `?course=`). `web/_redirects`: `/teach`, `/claim`. `web/_headers`: `/bonus/*` no-cache. |
+| **Caching caveat** | the zone's *Browser Cache TTL* is 4 h, so non-HTML files (`support.js`, images) can be stale for returning players after a push; the HTML itself revalidates. Fix when convenient: *Caching → Configuration → Browser Cache TTL → Respect Existing Headers*. |
+| **Email** | **Brevo** sends (API key, sender currently the user's Gmail; move `SENDER_EMAIL` to `noreply@lostcodebook.org` once the domain is authenticated in Brevo). **contact@lostcodebook.org** → user's Gmail via Cloudflare Email Routing (tested). Catch-all is off. |
+| **Local DNS** | right after DNS changes this Mac may not resolve the domain; test with `curl --resolve lostcodebook.org:443:188.114.96.3 …`. |
+
+### Course bonus points (ROADMAP 8-BONUS) — live
+
+Instructors sign in at **lostcodebook.org/teach** (6-digit code by email, 7-day session cookie), register
+a course (per act or end of game, deadlines) and get `lostcodebook.org/?course=CODE`. Opened through that
+link, the game shows **Claim your bonus point** on the map after each finished act (`web/bonus/game.js`:
+act 1 `corridorDone`, 2 `slipSealed`, 3 `actIIIDone`, 4 `actIVDone`, 5/end `submitted`; the end claim is also
+offered in the Office). The claim page takes student number + name with a one-time 128-bit key made on the
+device. Rules: one claim per student number per act per course, one per key, before the deadline.
+A GitHub cron (`bonus-report.yml`, 06:00 UTC) calls `POST /api/report`, which emails each instructor a
+table + CSV the day after each deadline, once.
+
+| Part | File |
+|---|---|
+| API (auth, courses, claims, report, health) | `functions/api/[[path]].js` (one Pages Function) |
+| Database (D1 `lostcodebook`, id in `wrangler.toml`) | `bonus/migrations/*.sql` |
+| Pages | `web/bonus/teach.html`, `claim.html`, `bonus.css`; switch: `web/bonus/config.js` (`enabled`) |
+| Docs | `bonus/README.md` (setup, local dev, rules, data kept) |
+| Test | `tools/test/test-bonus.js` (game side); the API was tested with `wrangler pages dev --binding DEV=1` |
+
+Local: `npx wrangler@3 d1 migrations apply lostcodebook --local` then
+`npx wrangler@3 pages dev --port 8788 --binding DEV=1 --binding REPORT_SECRET=dev` (emails are printed,
+the sign-in page shows the code). **Superseded but still in the game:** the static *course certificate*
+from 2026-09-27 (`web/courses/*.json`, `verify.html`, `CODEBOOK_AFTER_GAME`); it only reacts to a
+matching JSON file, so it stays silent with the new codes. Removal awaits the user's OK.
+
+### Support links (ROADMAP 8-SUPPORT)
+
+`web/support.js`: Patreon (https://www.patreon.com/lostcodebook, monthly), Ko-fi
+(https://ko-fi.com/lostcodebook, once), contact@lostcodebook.org. Shown only in three quiet places:
+Settings → About, one card after the outro's last panel (`CODEBOOK_SUPPORT_PANEL`), the instructor page
+(and the results email if `SUPPORT_URL` is set). Never mid-game. Patreon/Ko-fi texts and images:
+`art/patreon/` (`patreon-page.md`, cover, avatar, tier cover). patreon.com is blocked for the browser
+tool; ko-fi.com blocks automated checks (403).
+
+### Game changes 2026-09-28/29
+
+- **Cross-room puzzles, Acts IV–V:** the ID key on the Office filing cabinet → KIRA relinks on IDs
+  (Delegation approval now persists, `dlApprovedPrompt`); a chip on the Casino carpet → the Bureau
+  clerk's letter-opener → breaks the seal; Granovetter's weak tie → Tobi's laser pointer (Poster Session)
+  → needed for the keynote duel; the stamp monkey on Becker's piano takes the Poster Session banana and
+  drops Achterberg's REGISTERED stamp → Psych Lab registration. Stellmacher's hints cover every step.
+- **Schnitzel** can be fed to Tobi (anywhere, `CODEBOOK_FEED_TOBI`) or the Writing Room's assistant professor.
+- **Slot machines** go close-up (`slot-closeup.webp`, painted reels `reel-*.webp`); the jackpot pays
+  **casino tokens**, and **PAC-SOC** needs one to start.
+- **Seasons in the rooms:** late autumn through the Act II windows (Library, Hall, Workshop, Seminar),
+  spring in the Poster Session and Writing Room. Pasted with a luminance mask after aligning the ChatGPT
+  edit (ORB + homography, OpenCV in `.venv-tts`), because ChatGPT edits often reframe.
+- **Interludes:** the flat Gazette (`il4-gazette-flat.webp`) spins in for Act IV; the folder panels use
+  the top-down folder (`CODEBOOK_FOLDER_IL(n)`).
+- **Phones:** on touch screens the Campus Map / Settings buttons sit top-left (the browser's tabs button
+  is top-right).
+
+### Tests
+
+`bash tools/test/run-all.sh`, about 52 tests (`test-bonus.js` is new; `test-endgame.js` walks the new
+Act IV–V puzzles). Last full run: 51/51 before the Casino and support changes; the relevant tests pass
+after them.
+
+### Open list (2026-09-29)
+
+1. Sender `noreply@lostcodebook.org` (Brevo domain authentication, then the Cloudflare secret).
+2. Browser Cache TTL → Respect Existing Headers.
+3. The first real results email (a deadline passing) has not been seen yet.
+4. `ROADMAP.md` has uncommitted edits from another session (Cloudflare decision); ask before committing.
+5. Remove the old static course certificate? Delete the stray pending `contact@` destination in Email Routing?
+6. More map gags; a support line in the GitHub README.
+7. Delete `Screenshot 2026-09-29 at 17.00.00.png` (shows most of the Brevo API key; untracked, never commit it).
+
+---
+
+## 00a. State on 2026-09-27 (history)
 
 **Live:** https://thomas-u-grund.github.io/MethodsGame/ — GitHub Pages redeploys on every push to
 `main` (about a minute). **"push" means:** run the tests, commit, `git push origin main`, confirm the
@@ -539,6 +624,7 @@ All are plain query strings on the game URL. `?start=` and `?room=` **overwrite 
 | `?room=<id>` | go straight into a room, skipping map and interludes |
 | `?room=workshop&acc=1` | …and open the Hypotheses Accelerator on arrival |
 | `?room=<id>&post=1` | …and have Tobi take and post the photograph |
+| `?course=CODE` | open the game for a registered course (bonus points; remembered on the device) |
 
 `?room=` seeds an Act II save carrying a written mechanism, the enrolment register and the
 hook pole, so the room has something to work with, and sets every `actNIntroSeen` flag so no
