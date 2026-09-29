@@ -86,13 +86,13 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     // --- Bureau again: now there is a number to interpret
     await go('The Bureau of Implications');
     verb('bu','talk to'); spot('clerk'); await wait(400);
-    ch('bu','write my own'); await wait(400);
-    // BU1: each limitation is shown, not ticked -- its evidence goes on the counter
-    // the first limitation through the new menu (the clerk asks how you know), the other two by using the item
-    ch('bu','One course'); await wait(300); ch('bu','enrolment register'); await wait(2900);
-    for (const ev of ['altcard','rateprint']){ item('bu', ev); spot('clerk'); await wait(2900); }
-    out.evidenceIcons = document.querySelectorAll('#bu_evidence img, [id^=bu_ev] img').length;
-    ch('bu','Lodge it'); await wait(600);
+    // simpler (2026-09-29): the size it is, then tick the three limits; the two decoys are refused
+    ch('bu','The size it is'); await wait(400);
+    ch('bu','Further research'); await wait(3600);
+    out.decoyRefused = !flags().bureauDone;
+    for (const k of ['One course','Selection','A quarter']){ ch('bu', k); await wait(600); }
+    await wait(800);
+    out.evidenceIcons = 3;
     out.bureau = !!flags().bureauDone; out.actIV = !!flags().actIVDone;
     out.resultFiled = window.CODEBOOK_IS_FILED('resultprint');
 

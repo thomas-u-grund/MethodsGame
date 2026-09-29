@@ -439,12 +439,13 @@ mood."* *"Submit it anyway"* → she rejects it herself.
 **Needs:** `cleandata`, `examrecords`. **Gives:** `resultprint` (**The Interval, On A Brass Slide**,
 kept in your hand until the Bureau has read it).
 
-Use the **sealed Prediction Slip** on the lectern. (Vossberg's worked-example sheets are pinned
+Use the **sealed Prediction Slip** on the empty lectern (it goes back in your pocket afterwards;
+Achterberg wants it in Act V). (Vossberg's worked-example sheets are pinned
 above the desk.) ✅ **"The one the slip names: is the gap larger on the worked-example
 questions, and smaller for students already practising elsewhere?"** Overall marks, or all forty
 questions one by one, are both turned down.
 
-A short scene plays: the seal breaks, your own prediction from Act II, then a chart builds itself and
+A short scene plays: the seal breaks on the lectern, your own prediction from Act II, then a chart builds itself and
 a stamp comes down: **THE PREDICTION HOLDS**, **NULL — AND INFORMATIVE**, or **CONSISTENT WITH
 EVERYTHING**. Then the brass slide arrives in your hand.
 
@@ -462,26 +463,17 @@ EVERYTHING**. Then the brass slide arrives in your hand.
 
 ### IV.3 The Bureau of Implications
 
-**Needs:** `resultprint`, plus `enrolreg`/`pseudolist`, `altcard`, `rateprint`.
-**Gives:** `interpretation`.
+**Needs:** `resultprint` (the brass slide). **Gives:** `interpretation`.
 
 The Clerk: *"Number, please. And what size would you like it to mean?"*
 
 - **"LARGE."** → SOLD OUT (the whole department had one this week) → **"EXTRA LARGE, then."**
   → `claim_overstated`, room complete. *"We don't stock true. We stock sizes."*
-- ✅ **"I'd like to write my own."**
-
-Then, for each limitation, pick it from the list: the clerk asks **"And how do you know?"** and you
-show him the right item from your pocket (or use the item on the clerk):
-
-| Limitation | Evidence |
-|---|---|
-| One course, one university, one term | the frame (`enrolreg` or `pseudolist`) |
-| The design cannot rule out selection | the **ALTERNATIVE EXPLANATION card** from the Seminar |
-| A quarter of them never answered | the **75 tile** (`rateprint`) |
-
-**"Further research is needed"** gets a plaque from the wall and never counts. With all three
-ticked → **Lodge it**.
+- ✅ **"The size it is."** → *"Then it comes with its limits. Which of these could still be wrong?"*
+  Tick the three real ones: **one course, one university, one term**; **selection** (students who
+  come to lectures may be different to begin with); **a quarter never answered**. The decoys:
+  *"Further research is needed"* (he has a plaque for that) and *"The p-value might be too high"*
+  (*"What could be wrong is not the arithmetic."*). With all three ticked, he files it.
 
 **→ Act V unlocks** (the programme goes up: you are Poster 312, next to the bins).
 
@@ -625,6 +617,11 @@ skeleton (*WELCOME TO ACADEMIA*), and the monkey. If you **showed Tobi a number*
 with four thousand likes is in the envelope too.
 
 ---
+
+## After every step
+
+A short **NEXT · Stellmacher's note** appears after each finished step, saying what comes next (the
+room's next step, or where to go). Calling her gives the same advice in more detail.
 
 ## Tobi
 
