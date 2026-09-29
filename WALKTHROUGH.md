@@ -645,7 +645,9 @@ Methods dept today 🔬✨*. There is exactly one post.
   counter while the Mensa is open; later he delivers), ask for the curry nobody has ever ordered,
   and every third call gets his voicebox.
 - **PAC-SOC**, the 1983 arcade cabinet in the Significance Casino: Pac-Man, but the ghosts are
-  Marx, Durkheim, Comte and Weber. PEER REVIEW pellets make them edible. Esc to leave.
+  Marx, Durkheim, Comte and Weber. PEER REVIEW pellets make them edible. Esc to leave. It takes a
+  token: pull a slot machine three times and the jackpot pays out **A Handful of Casino Tokens**
+  (whether or not you take the finding).
 - **Durkheim** in the Ethics Tribunal talks (rap battle, ecological fallacy); **Granovetter** gives
   you a weak tie; **Bourdieu** judges lunches in the Mensa.
 
