@@ -4,5 +4,5 @@ window.CB_SUPPORT = {
   url: '',                                  // e.g. 'https://www.patreon.com/…'
   label: 'Patreon',
   author: 'Thomas U. Grund',
-  contact: ''                               // e.g. 'hello@lostcodebook.org' (optional)
+  contact: 'contact@lostcodebook.org'       // forwarded to the author's Gmail by Cloudflare Email Routing
 };
