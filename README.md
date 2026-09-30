@@ -28,7 +28,6 @@ The game is free to play and free to use in teaching. Instructors can also let s
 
 Each point can be claimed once per student number and once per game device. How it works and how to run it yourself: `bonus/README.md`.
 
-(An older, server-free variant still works for self-hosted copies: a course JSON file in `web/courses/`, a completion certificate with an HMAC code, checked on `verify.html`; see `web/courses/example.json`.)
 
 ## Support
 

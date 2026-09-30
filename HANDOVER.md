@@ -50,9 +50,8 @@ table + CSV the day after each deadline, once.
 
 Local: `npx wrangler@3 d1 migrations apply lostcodebook --local` then
 `npx wrangler@3 pages dev --port 8788 --binding DEV=1 --binding REPORT_SECRET=dev` (emails are printed,
-the sign-in page shows the code). **Superseded but still in the game:** the static *course certificate*
-from 2026-09-27 (`web/courses/*.json`, `verify.html`, `CODEBOOK_AFTER_GAME`); it only reacts to a
-matching JSON file, so it stays silent with the new codes. Removal awaits the user's OK.
+the sign-in page shows the code). The old static *course certificate* (`web/courses/*.json`, `verify.html`, `CODEBOOK_AFTER_GAME`) was
+removed on 2026-09-30 with the user's OK.
 
 ### Support links (ROADMAP 8-SUPPORT)
 
@@ -232,7 +231,6 @@ leaves for her lecture. A save already under way skips the trailer and preloads 
 | **Mix** | `CODEBOOK_SFX(name, vol)`: one-shots ×0.6, loops ×0.45, `amb-clock` ×0.5 more; room music ×0.75; phone calls duck music and ambience. |
 | **Cutscenes** | `CODEBOOK_PLAY_INTERLUDE(panels, done, {label})`; a panel is `{src, text, voice, sfx:[[name, vol, delayMs]], then:{sfx, delay, voice, text}}`. Esc/Space skips the whole cutscene (tests use this). |
 | **Leaving a room** | `window.CODEBOOK_LEAVE_GUARD` — a room may set it; the Campus Map button calls it first and does not leave if it returns true. Reset on every `enterRoom`. The Library's monkey uses it. |
-| **Course certificate** | `?course=<id>` loads `web/courses/<id>.json`; code = HMAC-SHA256(secret, id\|studentId\|date); `web/verify.html` checks one or a whole form export. See README "Bonus points for your course". |
 | **Prediction Slip** | an entry a room accepted that says nothing (`sound:false`) now shows as an amber ☒ in the room bar and in the open folder, with the coherence rating. |
 
 ### Rooms changed this week

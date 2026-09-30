@@ -38,7 +38,7 @@
   - *Narration:* the narrator reads descriptions (≈1,000 clips). A quote nobody speaks (a sign, a label) is read as part of his sentence. Lines found by the harvest hook (`localStorage.cb_narr_harvest = '1'` collects unvoiced lines into `cb_narr_miss`) and a room-by-room sweep.
   - *Puzzles:* the bingo gates the ink, and the ink brings the real black swan (no more watching the lake). The Corridor plays each case's own recording (it used to play by position in the shuffled order). Stellmacher's hints follow the room you are in. You can ring Feldstrom from your own phone (contacts), with prank lines for a wrong answer; he hands you his extension, which is also painted by his telephone.
   - *Art:* Coleman twice the size; the Swedish book painted into the Library; ticked P-1 and a painted wax seal in the Act II ending; Feldstrom's four poses and KIRA's talk pose have real closed/open mouths; **the third founder is a bearded monkey** (Hall, rap battle panels, keynote hall), the first plant for the ending's reveal.
-  - *Course certificate:* see README, "Bonus points for your course". `courses/<id>.json` per course, `verify.html` for checking codes.
+  - *Course certificate:* superseded by the Cloudflare bonus points (8-BONUS); the static version was removed 2026-09-30.
 
 - **Hosting (2026-09-26):** the whole game is on GitHub Pages, https://thomas-u-grund.github.io/MethodsGame/ , deployed by `.github/workflows/pages.yml` on every push to `main` (it publishes `web/`). The artifact host's 255-file and 15 MB limits no longer apply to the game. Voices are four bundles, each preloaded with its act: `voices-act1` (Act I and the Office), `voices-act2`, `voices-act3`, `voices-act45` (Acts IV, V and the outro).
 - **Standalone pages:** the rap battle and the bingo stay as claude.ai artifacts. **The
@@ -260,6 +260,16 @@ The user raised on 2026-09-20 that we do not have to publish that way. **We don'
 - **Audio can breathe.** Per-act music instead of reusing one theme, longer ambience loops, and voices at a higher bitrate than `-q:a 3`.
 - **The single-file constraint becomes a choice, not a requirement.** The game is ~5,000 lines in one HTML file. On a normal static host it could be split into modules. **Recommend not doing this yet** — the single file has been genuinely convenient and splitting it is a large, risky refactor with no player-visible benefit. Revisit only if the file becomes hard to work in.
 
+### DECIDED 2026-09-29 (user): move to Cloudflare Pages at launch — after development is finished
+
+**DONE 2026-09-29:** lostcodebook.org has run on Cloudflare Pages since then (see HANDOVER, "Hosting"); GitHub Pages stays as a mirror.
+
+**Not now.** Finish the game on GitHub Pages, then migrate as part of shipping (WP-6.4). The reason is bandwidth, not file limits: GitHub Pages has a soft cap of **~100 GB/month**, and a player costs roughly **60–100 MB** for a full playthrough (Act I alone preloads **~20 MB**: 90 files including the HTML; later acts add 4–14 MB each; voice clips stream on demand). That is only **~1,000–1,500 players a month** before GitHub starts warning or throttling — nothing, if the game spreads. **Cloudflare Pages' free tier has no bandwidth limit on static files and never bills or pauses.** Netlify and Vercel were ruled out because their free tiers *pause the site* when a quota runs out, which is the worst possible failure mid-spike.
+
+**Fit, measured 2026-09-29:** `web/` is **167 MB, 2,735 files, largest file ~5.5 MB** (`profg-live.mp3`) — well inside Cloudflare's free limits (**25 MiB per file, 20,000 files**). Keep it that way: **no single file in `web/` may exceed 25 MiB**, or the deploy fails.
+
+**Before launch, cheap wins on the first load (optional):** about 8 of Act I's ~20 MB is the three music tracks (`title-theme`, `office-bgm`, `lecture-bgm`, 128 kbps stereo). Re-encoding to 96 kbps, or streaming the title theme instead of preloading it, would cut the wait noticeably. Check whether `web/title-theme.m4a` (2.7 MB, alongside the `.mp3`) is still used before removing it.
+
 **Until the move actually happens, keep publishing to the artifact**, which means the 255/64 limits still bind the *published* build. Current state after WP-0.1: **140 files, 44 MB**. That is enough headroom for Act II; it would not have been enough for Acts II, IV and V together, so the hosting decision wants making before Phase 3.
 
 ## 4. Per-package standard steps
@@ -405,6 +415,16 @@ Read `STORY.md` § Act II in full first. It is the most detailed act in the bibl
 **WP-6.1 · Full five-act playthrough**, headless, zero errors, every folder stamp in order, all eight flag combinations reachable.
 **WP-6.2 · Asset budget final check** — **artifact preview only**. §3 already decided (2026-09-20) that GitHub Pages is the real home and the 255-file / 64 MB ceiling is the Claude artifact's, not the game's; the user reconfirmed 2026-09-22. So this package is "does the preview build still fit", not "does the game fit". Plus a real listen-through with the user.
 **WP-6.3 · Publish and push** — only on the user's word.
+**WP-6.4 · Move hosting to Cloudflare Pages** — decided 2026-09-29 (§3), **after development is finished, only on the user's word.** Free, unlimited static bandwidth, so a viral spike cannot take the game down.
+1. Pre-flight: no file in `web/` over 25 MiB (`find web -size +25M` must print nothing); under 20,000 files.
+2. The user creates a free Cloudflare account (their step, not Claude's).
+3. **Choose one deploy route:**
+   - *Git integration (simplest):* Cloudflare dashboard → Workers & Pages → Create → Pages → Connect to Git → `thomas-u-grund/MethodsGame`. **Build command: empty. Output directory: `web`.** Caveat: `.git` is ~1.6 GB, so every deploy clones it — slow but works.
+   - *From the existing Action (recommended if the clone is slow):* add a step to `.github/workflows/pages.yml` running `npx wrangler pages deploy web --project-name=<name>`, with `CLOUDFLARE_API_TOKEN` and `CLOUDFLARE_ACCOUNT_ID` as repo secrets. Only `web/` is uploaded.
+4. Run both hosts side by side; test a full playthrough on `<name>.pages.dev` (asset paths, audio, preload bars, saves).
+5. Optional but recommended: a custom domain (~€10/year, the one thing that isn't free) pointed at Cloudflare, so the shared link never has to change again.
+6. Then point GitHub Pages at the new home: replace the root `index.html` redirect target and/or retire the Pages workflow. Update the URL in `README.md`, `CITATION.cff`, §1 and `HANDOVER.md`.
+7. If 8-BONUS (§8-BONUS) needs a backend by then, Cloudflare Workers + D1 is the natural fit on the same account.
 
 ---
 
