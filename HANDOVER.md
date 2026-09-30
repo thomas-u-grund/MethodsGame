@@ -147,6 +147,19 @@ The monkeys got out in the autumn, not at the Annual Meeting. The Act V escape s
 - **Outro:** the monkey-lab wide shot is gone; the ACCEPTED slide ends on "Meanwhile…" (`vo-narr-end-3m`, `-3tm`).
 - **Narration for the monkey plants:** every new look line has its own clip (`vo-narr-m*`). The Fieldwork audience monkey has no hotspot, and Patient 11 is on a second look at the Survey Lab board.
 
+### More fixes (2026-09-30, late)
+
+- **Stellmacher:** reachable on her mobile in Act I while she is out of the office. `call-stellmacher-away.webp` is the mobile portrait's original pixels over a new corridor background, so the mouth file is a copy (`mouth-call-stellmacher-away.webp`).
+- **Stellmacher's hints:** four were unvoiced (the Library's two and two in Act IV), so calls went silent in voice-only mode; now `vo-prof-h*`.
+- **Lecture:**
+  - the BINGO sign is gone completely;
+  - after the win the crowd leaves with Vossberg, and one student stays (`#lt_lone`, `sprite-lt-student`, male like his voice), clipped behind a bench back, with the "something new on the board" hint;
+  - when Vossberg is summoned back, the seated crowd returns (the cheer images are swapped back).
+- **Corridor:** the plaque boxes are measured per room on the paintings. The Doorman appears without walking in.
+- **Library:** the printer hotspot covers only the printer, and exists only while a reprint lies on it (one click takes it).
+- **Pond:** the paper boat has no hotspot and sits above the background crossfade (`z-index:2`), so it stays when the black swan comes.
+- **Writing Room:** everything the player writes and prints is called "poster" (re-voiced); the painted ABSTRACT wall poster stays.
+
 ### Act V, panels, preloading (2026-09-30, evening)
 
 - **Writing Room:**

@@ -20,12 +20,14 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     // (the conveyor has one action since 2026-09-29, so take any two-action hotspot)
     click(document.querySelector('#lb_sceneWrap .hotspot[data-id="kira"]')); await w(400);
     out.talked = /Certainly/.test(document.getElementById('lb_line').textContent) && !document.querySelector('.cb-icons');
-    click(document.querySelector('#lb_sceneWrap .hotspot[data-id="printer"]')); await w(250);   // Look, Pick up
+    // (the printer is one action and only there with a reprint on it since 2026-09-30: make a two-action spot)
+    const two = document.querySelector('#lb_sceneWrap .hotspot[data-id="stacks"]'); two.dataset.id = 'twoactions'; two.dataset.verbs = 'lookat pickup';
+    click(two); await w(250);   // Look, Pick up
     out.icons = [...document.querySelectorAll('.cb-icons button')].map(b => b.dataset.v).join(',');
     out.noUseWithEmptyHand = !/usewith/.test(out.icons);
     document.body.click(); await w(100);
     // the register is takeable: one click takes it
-    const reg = document.querySelector('#lb_sceneWrap .hotspot[data-verbs~="pickup"]');
+    const reg = document.querySelector('#lb_sceneWrap .hotspot[data-id="register"]');
     out.takeable = reg ? reg.dataset.id : null;
     if (reg){ click(reg); await w(900); }
     out.inv = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.join(',');
