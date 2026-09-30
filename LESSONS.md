@@ -13,11 +13,11 @@ better exam results? (This winter term)**
 
 *Folder stamp: QUESTION EXISTS · "What the Question rooms taught you"*
 
-- **The Seven-Second Office** — A topic is not a question. Check how a number is built; then say who,
+- A topic is not a question. Check how a number is built; then say who,
   what and when, and leave the direction open.
-- **Introduction to Systems Theory** — Long words are not an explanation.
-- **Probability Pond** — One black swan is enough to refute "all swans are white". Found, not made.
-- **Causality Corridor** — X may cause Y, Y may cause X, a third thing may cause both, or it may be
+- Long words are not an explanation.
+- One black swan is enough to refute "all swans are white". Found, not made.
+- X may cause Y, Y may cause X, a third thing may cause both, or it may be
   chance. A correlation never tells you which.
 
 > *A good question is precise, can be answered, and does not know its answer yet.*
@@ -31,10 +31,10 @@ That is Chapter One.
 
 *Folder stamp: THEORY EXISTS · "What the Theory rooms taught you"*
 
-- **The Library** — Don't blindly trust the AI. Read the whole paper, and check that it exists.
-- **The Hall of Founders** — A mechanism says *how*, in your own words. Famous names are not an argument.
-- **Feldstrom's Workshop** — A small claim that could fail beats a huge one that never can.
-- **The Seminar Room** — Write down, before you look, which result would prove you wrong.
+- Don't blindly trust the AI. Read the whole paper, and check that it exists.
+- A mechanism says *how*, in your own words. Famous names are not an argument.
+- A small claim that could fail beats a huge one that never can.
+- Write down, before you look, which result would prove you wrong.
 
 > *Theory means different things to different people. In the end it is a way of making sense of the
 > world — and one with a clear mechanism can be tested, which makes it the better kind.*
@@ -47,10 +47,10 @@ That is Chapter One.
 
 *Folder stamp: QUESTION HAS DATA · "What the Data rooms taught you"*
 
-- **The Ethics Tribunal** — People agree knowing what to, can walk away, and cannot be named.
-- **The Survey Lab** — One question asks one thing, and does not lean.
-- **The Mensa** — A sample is drawn at random, from a list of exactly the people you mean.
-- **The Fieldwork Arena** — Chase the people who did not answer. Never swap in whoever is nearest.
+- People agree knowing what to, can walk away, and cannot be named.
+- One question asks one thing, and does not lean.
+- A sample is drawn at random, from a list of exactly the people you mean.
+- Chase the people who did not answer. Never swap in whoever is nearest.
 
 > *Good data can be collected or found. Either way, know how it came to be: who was asked, what,
 > whether they were chosen at random, and who is missing.*
@@ -63,10 +63,10 @@ That is Chapter One.
 
 *Folder stamp: RESULT EXISTS · "What the Evidence rooms taught you"*
 
-- **The Delegation Engine** — Check every line the machine writes. The analysis is still yours.
-- **The Significance Casino** — Run the test you promised. Pull the lever often enough and something
+- Check every line the machine writes. The analysis is still yours.
+- Run the test you promised. Pull the lever often enough and something
   always pays out.
-- **The Bureau of Implications** — Say what the result means at its true size, and name its limits.
+- Say what the result means at its true size, and name its limits.
 
 > *Be solid. Do the work, one step after another.*
 
@@ -78,10 +78,10 @@ That is Chapter One.
 
 *Folder stamp: SUBMITTED · "What the Annual Meeting taught you"*
 
-- **The Infinite Monkey Project** — A prediction only counts if it was made before the result.
-- **The Writing Room** — Your contribution is what you add to what was known, in words the data can carry.
-- **The Poster Session** — Answer the question you were asked, in one sentence.
-- **The Keynote** — Design, scope, interval, literature. Evidence answers a claim; volume does not.
+- A prediction only counts if it was made before the result.
+- Your contribution is what you add to what was known, in words the data can carry.
+- Answer the question you were asked, in one sentence.
+- Design, scope, interval, literature. Evidence answers a claim; volume does not.
 
 > *There was never a Codebook. There was only Methods.*
 

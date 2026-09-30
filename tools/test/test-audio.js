@@ -14,7 +14,7 @@ const { connect } = require('./cdp');
     const bundles = new Set(Object.values(sprite).map(v => v[0]));
     // Music, not clips: the rap battle's three founder verses are full beat-and-voice mixes
     // and Professor G's track is 4:45 of recorded music, so they stream as their own files.
-    const nonClip = new Set([...bundles, 'title-theme.mp3','office-bgm.mp3','lecture-bgm.mp3','sfx-act1.mp3','sfx-act3.mp3',
+    const nonClip = new Set([...bundles, 'title-theme.mp3','sfx-act1.mp3','sfx-act3.mp3',
       'rap-marx.mp3','rap-durkheim.mp3','rap-weber.mp3','profg-live.mp3','sfx-rap.mp3',
       // the set-piece music (author's Suno tracks, 2026-09-28)
       'fieldwork-show.mp3','casino-lounge.mp3','ceremony-fanfare.mp3','reviewer2-battle.mp3','r2-reveal-song.mp3',

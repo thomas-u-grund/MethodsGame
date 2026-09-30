@@ -150,9 +150,8 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   const ok = a && a.speaker === 'Dr. Vossberg' && a.poses && a.mouths && a.noProfSprite
           && a.started && a.show && /^tense:running/.test(a.music || '') && /^tight/.test(a.musicBeforeShout || '') && a.wrongNotMarked && a.shouted && a.lectureDone && a.lecturerGone && a.profAtOffice
           && b.officeOccupied && c && d
-          && e && !e.err && e.offered && !e.before && e.after   // asking alone brings her back
-          && e.lecturerStillHere                                // without derailing anything
-          && e.notReoffered
+          && e && !e.err && !e.offered && !e.before   // (2026-09-30) no "Where is she?" any more: the story that
+                                                     // Vossberg covers her class is gone; the bingo brings her back
           && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL');
   p.close(); process.exit(ok ? 0 : 1);

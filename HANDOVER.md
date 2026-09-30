@@ -147,6 +147,20 @@ The monkeys got out in the autumn, not at the Annual Meeting. The Act V escape s
 - **Outro:** the monkey-lab wide shot is gone; the ACCEPTED slide ends on "Meanwhile…" (`vo-narr-end-3m`, `-3tm`).
 - **Narration for the monkey plants:** every new look line has its own clip (`vo-narr-m*`). The Fieldwork audience monkey has no hotspot, and Patient 11 is on a second look at the Survey Lab board.
 
+### Act I and conventions (2026-09-30, later)
+
+- **Labels:** a line the narrator reads carries no name, in every room and on the phone screens. That covers "You" with nothing in quotes and "System" lines (`CODEBOOK_SPEAKER_LABEL`, `CODEBOOK_MARK_NARRATION`); "You" stays for what you say out loud.
+- **The covering story is gone:** Vossberg no longer covers Stellmacher's class, and there is no "Where is she?" question. She is back once the bingo has ended the lecture. The empty Office shows a red-pen note: BACK SOON (`vo-narr-office-backsoon`, `-nobody`).
+- **Lecture:**
+  - the BINGO sign fades out once the card is up, and returns only for the win;
+  - after the win, the students say goodbye (`vo-student-won-1/2`) and leave;
+  - the empty benches point at the board (`vo-narr-lt-empty`);
+  - the back-row monkey has no hotspot.
+- **Act I music:** one main theme. The Office and Lecture Theatre play the act track, which runs on from the map (a fading track is picked up again instead of restarted). `office-bgm` and `lecture-bgm` were removed.
+- **Pond:** the sign reads N=2 in both backgrounds (repainted locally; the originals are in `art/pond-fix/`).
+- **Stellmacher in person** (the Office, and the Delegation Engine in Act IV): every step of her advice has "Never mind.".
+- **Summary cards:** they show only the lessons, no room names (`LESSONS.md` likewise). The Act I card covers all four rooms.
+
 ### Voice tooling (2026-09-30)
 
 `tools/tts/split_plan.py` works again. It had read each clip's act from its old bundle name, and it matched clip names in the room table itself, so almost everything fell into act1-core. Now it finds each clip's room from where its text is used. A clip it cannot place keeps its current bundle, so nothing is ever guessed into act1-core, which the Act I loading bar waits for.

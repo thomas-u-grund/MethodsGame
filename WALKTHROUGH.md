@@ -73,10 +73,10 @@ None of them is a game over. All of them are stamped, filed and approved by some
 Four rooms, no locks.
 
 > **Two different people.** *Prof. Stellmacher* — "the Professor" — is a woman, and the Office
-> is hers. *Dr. Vossberg* is the man in the Lecture Theatre, covering her nine o'clock.
+> is hers. *Dr. Vossberg* is the man in the Lecture Theatre, giving his lecture on systems theory.
 
-> **Loot the Office.** On a fresh save she is out: she will not be in the building while a
-> class runs under her name that she did not design. Her desk is blocked only *during* the
+> **Loot the Office.** After your first meeting she is out (a note on the desk: *BACK SOON*), and
+> she is back once the lecture is over. Her desk is blocked only *during* the
 > interview; once she has given you the question you can take things in front of her. If you
 > need her gone, tell her **"Dr. Vossberg asked for you. The projector in the Lecture Theatre is
 > broken again."** — she walks out.
@@ -100,16 +100,13 @@ corkboard: she is Professor G's biggest fan.
 Professor back in her office.
 
 **Do:**
-1. **Talk To Dr. Vossberg → "Where is Professor Stellmacher?"** He stops dead and explains she
-   will not be in the building while this runs under her name. *She is now in her office*, and
-   the room is done.
-2. **The bingo is the way to the ink.** The bottle sits at his elbow on the lectern; while he
+1. **The bingo is the way to the ink, and it ends the lecture, which brings the Professor back.** The bottle sits at his elbow on the lectern; while he
    lectures, reaching for it gets a look (*"Not while he is standing next to it"*). Use
    `bingocard` on him (or ask *"Could you say a bit more about Luhmann?"*). Dab each square the
    moment he *says* the term (decoys are near-misses; a missed term comes round again), and press
    **BINGO!** on the card when a row, column or diagonal fills. He loses the thread and walks out
    forty minutes early. **Now pick up the ink** (`blackink`).
-3. Use the blackboard to summon him back (he cannot resist a wrong arrow).
+2. Use the blackboard to summon him back (he cannot resist a wrong arrow).
 
 ### I.3 The Seven-Second Office (part two — the interview)
 
