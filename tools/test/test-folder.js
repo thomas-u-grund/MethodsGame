@@ -16,7 +16,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   const load = () => p.evaluate(`JSON.parse(localStorage.getItem('codebook_save_v1'))`);
 
   // 1 + 2 + 4 + 5
-  await save({ inventory:['folder','pen','readinglist','slip','resultprint','usb'], flags:{ corridorDone:true, act2IntroSeen:true, slipSealed:true, act3IntroSeen:true } });
+  await save({ inventory:['folder','pen','readinglist','slip','resultprint','usb'], flags:{ corridorDone:true, act2IntroSeen:true, slipSealed:true, act3IntroSeen:true, bureauDone:true } });   // bureauDone: the printout is carried in hand until the Bureau (HAND_UNTIL)
   await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
   const r = await p.evaluate(`(async () => {
     const w = ms => new Promise(r => setTimeout(r, ms));

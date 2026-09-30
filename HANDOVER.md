@@ -106,6 +106,48 @@ tool; ko-fi.com blocks automated checks (403).
 - The Act V programme carries the game's crest; the intro explains the escaped monkeys (Tobi's livestream).
 - The Psych Lab monkey no longer slides across the room.
 
+### Outro and start screen (2026-09-30)
+
+- **Start screen:** "Grund Arts presents", then after 2.6 s the professorG card (`#bootLogo2`); "Tap to start" waits for both that card and the preload (`showTapIfReady`).
+- **Outro, redesigned from scratch** (author: too many slides, and the R&R came twice). `CODEBOOK_PLAY_OUTRO`, four beats in two places:
+  1. The Act V recap, then the Professor's office months later (`outro-1-months`), then the letter: **REVISE AND RESUBMIT** plus Reviewer 2's 47 comments (`outro-2-letter`).
+  2. The Reviewer 2 battle is your response; its win screen says **RESUBMITTED**; the ACCEPTED letter comes on the next slide, six weeks later. Its backdrop is `outro-2-letter`.
+  3. ACCEPTED in the same office; the skeleton holds WELCOME TO ACADEMIA (`outro-3-accepted`). With `tobiSawResult`, his post is one line on this slide (`vo-narr-end-3t`), not a slide of its own. (The credits card was later folded into The End card.)
+  4. "Meanwhile", the Monkey lab at night: a camera move from the queue down to the monkey (`outro-4-monkey`), the close-up (`outro-5-close`), the monitor (`outro-6-screen`). asdfghjkl resolves into comment 42, then Enter. The Vossberg reveal and the campus walk are gone (author: A1, B).
+- Then the resting professorG **The End** card: Back to the title, Patreon, Ko-fi.
+- **Voices:** `vo-narr-end-*.mp3` (narrator, set per panel as `voice:`), preloaded in act45-core. `split_plan.py` now matches `vo-narr-end-`.
+- **Music:** the title theme under the outro; the battle keeps `reviewer2-battle.mp3`; the title theme returns afterwards. At the monkey slide the music stops (`music:'stop'`), and at the close-up the Reviewer 2 song starts (`r2-reveal-song.mp3`). Interlude panels can cue music with `music:'stop'` or `[src, vol, ms]` (played once), and can hold for a set time without a voice (`hold:` in seconds).
+- **Camera:** every interlude slide pushes in (`.il-cam`, `il-push`): about 7% normally, about 2.5% on `pan:'still'` slides, and none on `pan:'none'` (credits). Overlays move with the picture. The duration comes from the slide's voice clip.
+- **Art:** originals are in `art/outro/`, all from ChatGPT with `office-bg-empty` / `psychlab-bg` + `sprite-monkey-lead` as references. The monitor overlay (`.ms-h/.ms-box/.ms-submit`) is measured on `outro-6-screen`.
+
+### Monkeys all along (2026-09-30)
+
+The monkeys got out in the autumn, not at the Annual Meeting. The Act V escape slide (`il5-monkeys`) is gone. Achterberg and the Psych Lab intro say they have been out for months (new clips: `vo-fellow-escaped`, `vo-narr-pl-escaped`). Subtle Act I plants, each paying off in the outro:
+- **Office:** the pen jar is missing its red pen.
+- **Corridor:** the corkboard's visitor sheet ends with "asdfghjkl".
+- **Lecture Theatre:** `sprite-lt-monkey` sits in the back row (`#lt_hairy`, class `lt-crowd`, behind the front crowd layer). Hotspot `hairy`; once the lecture is over, a folded banana peel is all that's left on the bench.
+- **Pond:** `sprite-pond-boat`, a paper boat folded from a MAJOR CONCERNS form with a banana peel aboard. It bobs, and has a hotspot `paperboat`.
+- **Act III plants (2026-09-30):**
+  - **Survey Lab:** the DISCHARGED board also has an old chart, PATIENT 11: every box ticked, "asdfghjkl" as the comment.
+  - **Mensa:** `sprite-mensa-bananas`, an empty fruit bowl ("BANANAS: ONE PER STUDENT. THIS MEANS YOU.") on the sideboard by Bourdieu, hotspot `bananas`. Bourdieu has a fourth line about it.
+  - **Ethics:** `sprite-ethics-consent`, participant 11's consent form in the aisle, signed with a handprint, hotspot `consent11`.
+  - **Fieldwork:** `sprite-audience.webp` was repainted so that the third audience member from the left is the hairy student, hotspot `hairyfan`.
+  - Act II already has the Library monkey and the monkey founder's portrait in the Hall.
+  - The sources are in `art/act1-monkey/`.
+- **Outro:** the reveal is the author's Suno song `r2-reveal-song.mp3` (source in `audio/music-src/`). The close-up and the monitor hold for set times (`hold:`), timed to the song. The mid-outro credits card is gone; the credits are on The End card.
+
+### Act IV fixes (2026-09-30)
+
+- **Stellmacher's call:** from her office in Act IV, it goes to her mobile (`here` is false whenever she is away).
+- **Stellmacher's card:** clicking it in the inventory calls her directly.
+- **Casino:** the Doorman is voiced (`vo-doorman-casino-1/2`, lv-neufeld). The lectern line no longer says "a sealed prediction" as if one lay there (`vo-narr-casino-noclean`).
+- **KIRA's missing-data item:** it now says the three non-responders were filled in as "attended every lecture". The fix: nobody knows how often they attended, so filling them in invents data in the hypothesis's favour. Stellmacher: "You made up three answers." (`vo-prof-madeup`, `vo-narr-miss-r/-no`)
+- **Delegation Engine schedule:** the 12:00 row is struck through with a red ✗, and a CANCELLED (or amber PAUSED) stamp goes across the rows that depended on it.
+- **Research folder:** the RESULT divider has three boxes (Delegation, Casino, Bureau) and, after the Casino, a line with the result.
+- **Title screen:** one monkey only (the dangling one), taking turns with the swan every 8–14 s.
+- **Outro:** the monkey-lab wide shot is gone; the ACCEPTED slide ends on "Meanwhile…" (`vo-narr-end-3m`, `-3tm`).
+- **Narration for the monkey plants:** every new look line has its own clip (`vo-narr-m*`). The Fieldwork audience monkey has no hotspot, and Patient 11 is on a second look at the Survey Lab board.
+
 ### Engine notes (2026-09-29)
 
 - **Mouths in cutscenes:** a panel whose `voice` is a character clip (not `vo-narr-`) calls
@@ -727,7 +769,7 @@ Seventeen rooms, in five acts, all reachable and all finishable:
 | III | Survey Lab, Ethics, Mensa, Fieldwork | painted, voiced, rigged |
 | IV | Statistics Basement, Delegation Engine, Bureau of Implications | **code complete, placeholder art, silent** |
 | V | Gap Registry, Writing Room | **code complete, placeholder art, silent** |
-| Outro | a cutscene on the trailer pipeline | **code complete, placeholder panels, unnarrated** |
+| Outro | a cutscene on the trailer pipeline | painted, voiced (2026-09-30, see section 00) |
 
 **Key engine additions this session:**
 

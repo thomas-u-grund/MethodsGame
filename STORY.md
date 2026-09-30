@@ -1705,8 +1705,12 @@ analysis. I can tell. They always say *robust*.").
 
 **The lab.** The Infinite Monkey Project, in the Psychology basement: monkeys at typewriters
 since 1974, waiting for *Hamlet*. Output to date: no *Hamlet*, a great deal of "asdfghjkl".
-On the first morning of the Annual Meeting, Tobi props the lab door open for a livestream
-shot, and the monkeys get out. They are loose for the whole act.
+The monkeys got out in the autumn, months before the Annual Meeting (author, 2026-09-30:
+the old Act V escape slide was dropped). Somebody left a door open, and they have been auditing
+lectures ever since. So they are there all along, never commented on: one very hairy student
+in the back row of the Act I lecture, the last entry on the Corridor's visitor sheet
+("asdfghjkl"), a paper boat folded from a MAJOR CONCERNS form on the Pond, Stellmacher's
+missing red pen, the portrait in the Hall and the Library monkey (Act II), and in Act III Patient 11's chart on the Survey Lab board, the empty banana bowl in the Mensa, a consent form signed with a handprint in the Ethics aisle, and the hairy student again in the Fieldwork studio audience. Achterberg says so in the Psych Lab.
 
 **Running gags, one per room:**
 - **Poster Session (Mensa):** a monkey steals the free pens (the pen hunter is outraged) and
@@ -1746,7 +1750,7 @@ ones.
 | IV.2 | **The Significance Casino** | the Statistics Basement | the gold rush's trading floor; the seal is broken here | slot machines of analyses, a DISCOVERY board of other people's wins, the sealed slip as the only honest chip; the Skeptic in the doorway | rebuild |
 | IV.3 | **The Bureau of Implications** | the Bureau | what the number means; LARGE sold out, EXTRA LARGE on order | evidence on the counter | built; add the sold-out gag |
 | — | **Act IV closing beat** | the Office noticeboard | the meeting programme: Feldstrom's keynote, your Poster 312 by the bins | stamp EVIDENCE VERIFIED | new |
-| — | **Act V opening interlude** | campus gate | coaches, lanyards, banners; Tobi props the lab door; the monkeys get out | trailer panels | new |
+| — | **Act V opening interlude** | campus gate | coaches, lanyards, banners (the monkeys are already out, since the autumn) | trailer panels | new |
 | V.1 | **The Psych Lab** | the basement, across the corridor from the Statistics Basement | the Infinite Monkey Project; Achterberg registers your finding | prove the prediction predates the data | **new room** |
 | V.2 | **The Gap Registry** | the Registry | the poster's contribution, relative to three papers | as built (G1) | built |
 | V.3 | **The Writing Room** | the Writing Room | the poster's title and abstract; Feldstrom and KIRA both "help" | three words over the line; the honest title | built |

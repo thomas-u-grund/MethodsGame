@@ -55,7 +55,7 @@ for clip, (bundle, st, du) in sprite.items():
     cur = bundle.replace('voices-', '').replace('.mp3', '')
     if cur in ('common', 'intro'): plan[clip] = cur; why['keep'] += 1; continue
     act = cur if cur.startswith('act') else None
-    if re.match(r'vo-narr-(act\d|seal|il|intro|trailer|outro)', clip): plan[clip] = (act or 'act1') + '-core'; why['interlude'] += 1; continue
+    if re.match(r'vo-narr-(act\d|seal|il|intro|trailer|outro|end-)', clip): plan[clip] = (act or 'act1') + '-core'; why['interlude'] += 1; continue
     pos = [m.start() for m in re.finditer(re.escape(clip), body)]
     for k in key_of.get(clip, []): pos += find_text(k)
     rs = rooms_at(pos)
