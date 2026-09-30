@@ -107,16 +107,11 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     await go('The Writing Room');
     // No Registrar any more (2026-09-29): KIRA's three words, Stellmacher's red pen, her contribution
     // question, and then KIRA prints the poster by herself.
-    verb('wr','look at'); spot('abstract'); await wait(450);
-    ch('wr','improved'); await wait(300); ch('wr','^.caused'); await wait(2900);
-    out.wrongWordKept = [...document.querySelectorAll('#wr_choices button')].some(b => /improved/.test(b.textContent));
-    ch('wr','improved'); await wait(300); ch('wr','was associated'); await wait(2700);
-    ch('wr','demonstrate'); await wait(300); ch('wr','consistent with'); await wait(2700);
-    ch('wr','people'); await wait(300); ch('wr','first-year'); await wait(2700);
-    out.fogBlocks = !flags().writingDone;                                 // words done, the red pen still to come
+    // (KIRA's three abstract words were cut, 2026-09-30: the red pen and the contribution are the room)
+    out.wrongWordKept = true; out.fogBlocks = !flags().writingDone;
     verb('wr','talk to'); spot('prof');
-    for (let t = 0; t < 250 && ![...document.querySelectorAll('#wr_choices button')].some(b => /Read the abstract/.test(b.textContent)); t++) await wait(100);
-    ch('wr','Read the abstract'); await wait(2600);
+    for (let t = 0; t < 250 && ![...document.querySelectorAll('#wr_choices button')].some(b => /Read the poster/.test(b.textContent)); t++) await wait(100);
+    ch('wr','Read the poster'); await wait(2600);
     out.fogGame = !!document.getElementById('wr_fog') && document.querySelectorAll('#wr_fog .wf-s').length === 9;
     window.CODEBOOK_WR_FOG_WIN(); await wait(7200);
     out.draftClear = document.querySelectorAll('#wr_draft b').length === 3 && !!flags().wrClear;
@@ -125,7 +120,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     ch('wr','confirms the three papers'); await wait(400);
     out.gapWrongRefused = !flags().gapDone;
     for (let t = 0; t < 80 && ![...document.querySelectorAll('#wr_choices button')].some(b => /boundary condition/.test(b.textContent)); t++) await wait(100);
-    ch('wr','boundary condition'); await wait(4500);
+    ch('wr','boundary condition'); await wait(8500);   // KIRA's print animation runs first (2026-09-30)
     out.gap = !!flags().gapDone;
     out.writing = !!flags().writingDone;
     // --- the Poster Session: Feldstrom at your poster first, then five visitors (8zv; 2026-09-28)

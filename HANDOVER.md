@@ -147,6 +147,18 @@ The monkeys got out in the autumn, not at the Annual Meeting. The Act V escape s
 - **Outro:** the monkey-lab wide shot is gone; the ACCEPTED slide ends on "Meanwhile…" (`vo-narr-end-3m`, `-3tm`).
 - **Narration for the monkey plants:** every new look line has its own clip (`vo-narr-m*`). The Fieldwork audience monkey has no hotspot, and Patient 11 is on a second look at the Survey Lab board.
 
+### Act V, panels, preloading (2026-09-30, evening)
+
+- **Writing Room:**
+  - KIRA's three over-the-line words are cut (`fixed()` is always 3); the print follows as soon as the abstract is clear and the contribution is in, and talking to Stellmacher also triggers it for older saves;
+  - KIRA prints visibly (`printAnimation`): a sheet feeds out of her paper stack and rolls into the tied poster;
+  - the draft is labelled ABSTRACT, and on phones it sits top-left, clear of the dialogue.
+- **Dialogue panel:** it fades a few seconds after a line has been heard and read (`.panel.cb-idle`, a MutationObserver on `.panel` lines), and stays while there are choices.
+- **Preloading:** every room's images are now in its act's `ACT_ASSETS` list. Act V lacked the Psych Lab and Poster Session backgrounds, and other acts lacked sprites and seasonal maps. All item icons load quietly after the act is ready.
+- **Summary cards:** titled "Act … : what you learned", over the whole campus map in that act's season instead of one room.
+- **Office:** a small graduation photo of a chimp on the corkboard (`sprite-office-gradmonkey`, no hotspot).
+- **Ethics:** picking up the consent form shows it as an item card, then puts it back (`CODEBOOK_SHOW_AND_DROP`).
+
 ### Act I and conventions (2026-09-30, later)
 
 - **Labels:** a line the narrator reads carries no name, in every room and on the phone screens. That covers "You" with nothing in quotes and "System" lines (`CODEBOOK_SPEAKER_LABEL`, `CODEBOOK_MARK_NARRATION`); "You" stays for what you say out loud.
