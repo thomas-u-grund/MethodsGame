@@ -103,7 +103,7 @@ tool; ko-fi.com blocks automated checks (403).
   ("Your Poster, Rolled Up"), pinned to board 312 at the Poster Session (`psPosterHung`). He is also painted
   out of `il5-cast.webp` (original kept in `art/season-src/`).
 - **Tobi's laser-pointer pose talks** (`mouth-sprite-tobi-laser.webp`, inverted overlay).
-- The Act V programme carries the game's crest; the intro explains the escaped monkeys (Tobi's livestream).
+- The Act V programme carries the game's crest (the escape slide was later dropped, see "Monkeys all along").
 - The Psych Lab monkey no longer slides across the room.
 
 ### Outro and start screen (2026-09-30)
@@ -147,6 +147,14 @@ The monkeys got out in the autumn, not at the Annual Meeting. The Act V escape s
 - **Title screen:** one monkey only (the dangling one), taking turns with the swan every 8–14 s.
 - **Outro:** the monkey-lab wide shot is gone; the ACCEPTED slide ends on "Meanwhile…" (`vo-narr-end-3m`, `-3tm`).
 - **Narration for the monkey plants:** every new look line has its own clip (`vo-narr-m*`). The Fieldwork audience monkey has no hotspot, and Patient 11 is on a second look at the Survey Lab board.
+
+### Voice tooling (2026-09-30)
+
+`tools/tts/split_plan.py` works again. It had read each clip's act from its old bundle name, and it matched clip names in the room table itself, so almost everything fell into act1-core. Now it finds each clip's room from where its text is used. A clip it cannot place keeps its current bundle, so nothing is ever guessed into act1-core, which the Act I loading bar waits for.
+- `--write` rewrites `CODEBOOK_ROOM_CLIPS`.
+- First run: the Ethics, Fieldwork and Mensa lines moved out of the Survey Lab's list into their own rooms, and act1-core went from 259 to 223 clips.
+
+21 dead outro clips were removed: the old panel narration, `vo-narr-outro-p1a/b`, and superseded `vo-narr-end-*`.
 
 ### Engine notes (2026-09-29)
 

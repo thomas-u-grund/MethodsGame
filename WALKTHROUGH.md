@@ -416,7 +416,7 @@ watches with an hourglass and a red pen.
 |---|---|---|
 | N = 140 | WRONG N | 140 is the register. Only 9 people answered |
 | Linked by surname | WRONG KEY | Link on the pseudonymous IDs; surnames collide |
-| 3 missing imputed as full attendance | MADE UP | Filling in the answer you hoped for manufactures the result |
+| 3 non-responders filled in as "attended every lecture" | MADE UP | Nobody knows how often they attended; filling them in as always there invents data that favours the hypothesis |
 | p < 0.001 | FORKING PATHS | Nine people, twenty models, kept the best |
 | *causes* 23% higher marks | NOT CAUSAL | It is a survey: associated with, not causes |
 | consistent with Müller & Singh | ABSTRACT ONLY | Its conclusion says the effect vanished; she read the abstract |
@@ -597,9 +597,10 @@ it Methods."* → **"Take it to the submission chute"** → **"Leave the buildin
 
 ## The outro
 
-The walk back, the envelope, Reviewer 2's letter — and then the **Reviewer 2 battle**: each
-comment is an attack, each card from the folder an answer. A wrong card costs composure (an
-overclaim costs most); at zero you walk round the pond and come back. No fail state.
+Months later, in the Professor's office (the skeleton still waiting), the letter: **REVISE AND
+RESUBMIT**, and Reviewer 2's forty-seven comments. Then the **Reviewer 2 battle**, which is writing
+your response: each comment is an attack, each card from the folder an answer. A wrong card costs
+composure (an overclaim costs most); at zero you walk round the pond and come back. No fail state.
 
 | Comment | ✅ Card |
 |---|---|
@@ -612,9 +613,22 @@ overclaim costs most); at zero you walk round the pond and come back. No fail st
 | 38 · The abstract says "causes" *(overstated only)* | **Concede it, honestly** |
 | 17 · Selection not ruled out *(the boss, always last)* | **The limitation you wrote down (p. 4)** |
 
-Never play *"Our findings are robust and generalisable."* → **REVISE AND RESUBMIT**, the armchair
-skeleton (*WELCOME TO ACADEMIA*), and the monkey. If you **showed Tobi a number**, a screenshot
-with four thousand likes is in the envelope too.
+Never play *"Our findings are robust and generalisable."* The battle ends **RESUBMITTED**. Six weeks
+later: **ACCEPTED**, in the same office; the skeleton's sign now reads *WELCOME TO ACADEMIA*. If you
+**showed Tobi a number**, his post (four thousand likes; the paper has three readers) is one line on
+that slide. *"Meanwhile…"* — the Reviewer 2 reveal, sung: the monkey at the monitor types
+*asdfghjkl*, the system resolves it into comment 42, Enter. Then **The End**: the credits, Patreon,
+Ko-fi and *Back to the title*. `?play=outro` previews it.
+
+### The monkeys, all along
+
+They got out in the autumn (Achterberg says so in the Psych Lab). Nobody remarks on them; they are
+there for those who look: the Office pen jar is missing its red pen; the Corridor's visitor sheet
+ends in *asdfghjkl*; a very hairy student sits in the back row of the lecture; a paper boat folded
+from a MAJOR CONCERNS form floats on the Pond; the Library monkey and the third founder's portrait
+(Act II); Patient 11's chart on the Survey Lab board (look twice); an empty banana bowl in the Mensa;
+participant 11's consent form, signed with a handprint, in the Ethics aisle; and the same hairy
+student in the Fieldwork studio audience.
 
 ---
 
@@ -622,6 +636,10 @@ with four thousand likes is in the envelope too.
 
 After each finished step your **phone buzzes** in the inventory: Stellmacher has something to say.
 Call her (or talk to her where she is) and she tells you what comes next, and how, if you ask.
+Clicking **her card** in the inventory calls her directly. In Act IV her office line goes to her
+mobile, even when you call from her office. The **folder** ticks off each act's steps as you go:
+Act IV's are the Delegation Engine, the Casino and the Bureau, and after the Casino it shows your
+result.
 
 ## Tobi
 
@@ -633,7 +651,7 @@ He stays out of Act III's rooms.
 | Ask | Requires | Gets you |
 |---|---|---|
 | *(he asks you)* **the photograph** | refuse three times; the give-in appears on the fourth ask | the one post, and he does not know he owes you |
-| **"Show him a number"** | `resultprint` | *"Okay so this says lectures make you smarter."* → an extra outro panel |
+| **"Show him a number"** | `resultprint` | *"Okay so this says lectures make you smarter."* → one extra line in the outro |
 | **Encore** (Hall, after the battle) | `rapDone` | the rap battle again |
 
 He takes eleven photographs and posts the one you are barely in: *big ideas happening in the
