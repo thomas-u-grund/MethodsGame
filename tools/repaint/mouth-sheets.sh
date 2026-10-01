@@ -21,6 +21,7 @@ case $1 in
 14) F="support/final-bourdieu busts/final-cook support/final-director:215,125";;   # director: overwritten by 15
 16) F="support/final-doorman support/final-nurse:130,122 support/final-officer";;
 15) F="kira/final-kira-talk:205,150 support/final-director:215,125 support/final-director-printout:240,165,32,26 support/final-director-visitor:252,130";;   # CLOSED mouths: these sprites talk already (inverted in MOUTHS)
+17) F="monkeys/final-lt-student:208,120";;   # the Lecture Theatre student after the bingo (author: "should move his mouth")
 b01) F="prof/final-prof-stand prof/final-prof-arms prof/final-prof-redpen:150,75 feldstrom/final-feldstrom";;
 b02) F="feldstrom/final-feldstrom-keynote feldstrom/final-feldstrom-pen tobi/final-tobi tobi/final-tobi-laser";;
 b03) F="vossberg/final-vossberg2-idle vossberg/final-vossberg2-chair vossberg/final-vossberg2-explain fellow/final-fellow";;

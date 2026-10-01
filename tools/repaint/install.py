@@ -22,6 +22,8 @@ POSTERS = {'trailer-cast-act1.webp': 'cb-repaint-cast-act1.png', 'il2-cast.webp'
            'trailer3-e-cast.webp': 'cb-repaint-cast-act3.png', 'il4-cast.webp': 'cb-repaint-cast-act4.png',
            'il5-cast.webp': 'cb-repaint-cast-act5-c.png'}
 RIGS = ['director', 'doorman', 'nurse', 'officer']
+# kept in their earlier version on purpose (author, 2026-10-01: the bingo hands "the older version was much better")
+SKIP = {f'crowd-arm-{k}' for k in range(1, 9)}
 
 def webp(src, dst, size=None, q=90):
     im = Image.open(src)
@@ -37,6 +39,7 @@ def target(name):
 n = 0
 for p in sorted(glob.glob(f'{REP}/*/final-*.png')):
     name = os.path.basename(p)[6:-4]; t = target(name)
+    if name in SKIP: continue
     if not t: print('!! no web file for', name); continue
     webp(p, os.path.join(WEB, t)); n += 1
     d = os.path.dirname(p); base = os.path.basename(t)[:-5]; sub = os.path.dirname(t)
