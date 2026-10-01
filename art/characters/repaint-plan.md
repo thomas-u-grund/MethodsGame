@@ -144,3 +144,36 @@ Pilot (Stellmacher and Feldstrom), then the author approves the style. After tha
   with `git rm` and are not committed yet; restore with `git checkout HEAD -- web/<file>`.
   Kept: the art/ originals, `art/png-originals/vossberg2-*-before-recast.webp` (version 2) and
   `art/vossberg3/`.
+- 2026-10-01, evening:
+  - **Rigs:** director, doorman, nurse and officer repainted. `tools/rig/refit.py` maps each new sheet
+    onto the existing parts.json, then `cut.py` writes the parts. They are not installed yet:
+    `rig-<name>-<part>.webp` in web/ and the `*_RIG` json in the game HTML still need updating.
+  - **PROF_RIG is dead code:** `ensureRig()` is never called, so it was skipped.
+  - **Call portraits and duel images:** already in the new finish (made 09-26 to 10-01). Kept, so their
+    mouths keep working.
+  - **Cutscene panels:** the painted scenes already match. Only the five cast posters were built from
+    old sprites (`trailer-cast-act1`, `trailer3-e-cast`, `il2-cast`, `il4-cast`, `il5-cast`), so they
+    are being repainted with the layout and the empty name plate kept.
+  - **Props kept as they are:** `sprite-office-gradmonkey`, `sprite-ethics-consent`, `sprite-mensa-bananas`.
+- 2026-10-01, late: the five cast posters are done in `repaint/panels/cb-repaint-cast-*.png`
+  (act1 → trailer-cast-act1, act2 → il2-cast, act3 → trailer3-e-cast, act4 → il4-cast, act5 →
+  il5-cast; for Act V use **cast-act5-c**).
+  - **Casts now match the narration:** Act IV has the Skeptic instead of Tobi; Act V has Achterberg,
+    Feldstrom, KIRA and Tobi (no skeleton); Act I has the current Vossberg.
+  - **Prompting lesson:** attach a reference row of the repainted figures (`panels/chars-*.png`). A text
+    description alone let ChatGPT swap characters.
+  - **Download lesson:** dedupe by content hash (`__cbGet`, SHA-256 kept in the chat page's
+    localStorage). Image IDs change when the page reloads.
+  - **The painting is complete.** Next: mouth edits (one "open" per talking pose) and blink edits for
+    the main cast, then installing everything in web/ with the same file names, the rigs' JSON, the
+    engine animation, then placement and tests.
+  - **Face edits done (2026-10-01).** `tools/repaint/mouth-sheets.sh NN|bNN` re-extracts any sheet from the
+    returned edits in `art/characters/repaint/mouths/cb-{mouth,blink}-NN.png` (figure lists and face hints
+    are in the script). 46 sprite mouths (`mouth-<pose>.png` next to each final), 4 rig-head mouths
+    (`tools/rig/<name>/mouth-head.png`) and 16 blinks (`blink-<pose>.png`: Stellmacher ×3, Feldstrom ×3,
+    Tobi ×2, Vossberg ×3, Achterberg ×2, KIRA ×2, the skeptic). `kira-talk` has no overlay: its screen
+    mouth is already open, so it is the "open" frame itself. `mouths.py` fixes on the way: the edit is
+    laid over the final (no stray fringe colours), the mask is solid inside, blinks cover both eyes and
+    are searched just above the pose's own mouth, `path:cx,cy` hints (or `cx,cy,rx,ry` for a fixed ellipse).
+  - **Done:** the accepted-paper newspaper `outro-journal.webp` repainted as a later issue of the
+    Act IV Gazette (same masthead and layout), with Feldstrom as the professor in the photo (author).

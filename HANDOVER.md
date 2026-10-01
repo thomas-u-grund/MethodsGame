@@ -207,7 +207,7 @@ The monkeys got out in the autumn, not at the Annual Meeting. The Act V escape s
 - **Writing Room:** the talk finishes, Stellmacher signs CLAIM DEFENSIBLE ("Good. KIRA, print it."), KIRA prints (`sfx-oldprinter`, built from the electric-typewriter recording), the poster lands in the inventory.
 - **Poster Session:** Feldstrom appears only once the poster is pinned; his title inflation is a played scene (three steps, you write the small title back); when he takes out his phone the sprite swaps to `sprite-feldstrom-phone.webp` and his post appears. The poster is `poster-312.webp` (ChatGPT; sources in `art/postersession/`), mapped onto board 312 with a homography (`fitPoster`, corners in `PCORNERS`); the title is live text over its empty band. Visitors (four: the Doorman is gone; the Sampling Officer asks about random sampling) appear one at a time; a good answer and they join the crowd left of the board in their listening pose (`sprite-listen-*.webp`), a bad one and they fade out. No monkeys, no MAJOR CONCERNS. At the end a title card with a gong (`sfx-gong`, synthesised) leads straight into the Keynote.
 - **Keynote:** you are seated; the hall dims (brightness filter on the painted layers), Vossberg introduces Feldstrom, who walks on to huge applause under CIVILISATION IS TRAFFIC; then slide 14, Tobi's pointer if you have none, then the duel.
-- **Round 2026-10-01 (Act V and outro):** the Poster Session opens by itself once Feldstrom has gone (his post closes itself after 9 s, `CODEBOOK_POST` `autoClose`); the pinned poster is a painted patch (`poster-312-pinned.webp`, ChatGPT repaint aligned with `align.py`, sources in `art/postersession/`), Feldstrom's titles go on a paper strip over it; after the last visitor: a loud gong, Tobi's "KEYNOTE IN 5" post, and the rush slide `il5-rush.webp` (monkeys among the crowd), then the Keynote. In the Keynote: no monkeys any more (the founders' portrait in `keynote-bg.webp` is Spencer again, the original is in `art/`; the duel's monkey rounds and round-card monkey are gone; an unseen voice asks the closing question), except one monkey in the audience from behind (`sprite-monkey-audience.webp`); Feldstrom talks his theory first (slides 1, 2, 7, 13, voiced) and then slide 14; his slides are painted (`kn-slide-NN.webp`, `KN_ART`), and he stands in front of them. Outro: The Journal spins in before ACCEPTED (`outro-journal.webp`). Credits: a line for teachers pointing to lostcodebook.org/teach.
+- **Round 2026-10-01 (Act V and outro):** the Poster Session opens by itself once Feldstrom has gone (his post closes itself after 9 s, `CODEBOOK_POST` `autoClose`); the pinned poster is a painted patch (`poster-312-pinned.webp`, ChatGPT repaint aligned with `align.py`, sources in `art/postersession/`), Feldstrom's titles go on a paper strip over it; after the last visitor: a loud gong, Tobi's "KEYNOTE IN 5" post, and the rush slide `il5-rush.webp` (monkeys among the crowd), then the Keynote. In the Keynote: no monkeys any more (the founders' portrait in `keynote-bg.webp` is Spencer again, the original is in `art/`; the duel's monkey rounds and round-card monkey are gone; an unseen voice asks the closing question), except one monkey in the audience from behind (`sprite-monkey-audience.webp`); Feldstrom talks his theory first (slides 1, 2, 7, 13, voiced) and then slide 14; his slides are painted (`kn-slide-NN.webp`, `KN_ART`), and he stands in front of them. Outro: the Gazette spins in again before ACCEPTED (`outro-journal.webp`, a later issue of the Act IV Gazette: your paper ACCEPTED, Feldstrom's theory with unconvinced reviewers; source `art/interludes/outro-gazette-accepted.png`). Credits: a line for teachers pointing to lostcodebook.org/teach.
 - **Debug:** `?room=postersession` starts at board 312 with the poster in hand and everything before done; `?room=keynote` starts the keynote.
 - **Voices:** quotes without a character clip fall back to the narrator (the resolver reads unmatched quotes as narration). The Poster Session's were re-recorded in character; about 50 other such lines remain (list: quotes in `CODEBOOK_NARR` keys).
 
@@ -243,7 +243,31 @@ From the end of the Poster Session to the credits, everything now looks and adva
 - Feldstrom's slides keep Arial, as the Keynote room's own slides do (they are his PowerPoint).
   `__duelTest.aimHit()` lands a shot on the flaw, for screenshots.
 
-### Character sprite audit (2026-10-01): not decided, nothing changed in the game yet
+### Character repaint (2026-10-01): installed locally, not yet committed
+
+The author chose a **hybrid style** (B's crisp finish, A's warm palette) and had every character repainted.
+Plan and log: `art/characters/repaint-plan.md`; working files in `art/characters/repaint/` (not in git, ~170 MB).
+
+- **Installed in `web/` under the old names** by `tools/repaint/install.py` (re-runnable): 90 sprites
+  (`final-*.png` → `sprite-*.webp` / `vossberg2-*.webp` / `crowd-*` / `duel/duel-crowd.webp`), their
+  `mouth-*.webp` (open mouths) and 16 `blink-*.webp`, the five cast posters, and the four refitted rigs
+  (`rig-<name>-<part>.webp` plus the `*_RIG` lines in the game, from `tools/rig/<name>/rig-def.js`).
+  Not repainted on purpose: the call portraits and duel images (already in the style), most cutscene panels.
+- **Mouths:** every overlay is now an OPEN mouth, except closed ones for KIRA talking and the Director's three
+  yelling poses (`inv` in `MOUTHS`, `mouthClosed` for her default). Overlays come from ChatGPT "mouth open"
+  edits of 4-figure sheets, cut back onto each sprite by `tools/repaint/mouths.py` (aligned, feathered);
+  `tools/repaint/mouth-sheets.sh NN|bNN` redoes any sheet, with the figure lists and face hints in it.
+- **Lip-sync:** `WebVoice.level()` reads the decoded clip's loudness at the playback point; `lipTick` maps
+  it to `--cb-m` (0 / .55 / 1) under `html.cb-lipsync`, which replaces the fixed flicker for all three
+  overlay kinds. Audio elements (file://) keep the flicker.
+- **Blinks:** `BLINKS` lists the poses with a closed-eyes layer; `blinkFor` clones it after the mouth, and a
+  200 ms timer shuts each visible one for ~150 ms every 2.5–7 s.
+- **Checks:** `tools/test/shot-rooms.js OUTDIR [rooms]` screenshots rooms; `tools/test/probe-face.js ROOM
+  VOICE OUT.png` reports blink layers, mouth states during a line and errors (both on `CDP_PORT=9334`).
+- **The accepted-paper newspaper** (`outro-journal.webp`) is now a later issue of the Act IV Gazette with
+  Feldstrom in the photo (author's request).
+
+### Character sprite audit (2026-10-01, superseded by the repaint above)
 
 Author: the sprites are "a bit too diverse in look and feel... they should fit into the backgrounds".
 The author is open to repainting characters throughout but has **not chosen a style yet**. The material
