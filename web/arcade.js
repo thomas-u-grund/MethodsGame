@@ -120,7 +120,7 @@
       if (ready > 0){ ready--; return; }
       if (dead > 0){ dead--; if (dead === 0){ if (lives <= 0) return gameOver(); reset(false); } return; }
       // pac
-      var sp = .13 + level * .006;
+      var sp = .10 + level * .005;
       var fx = pac.x + DIRS[pac.want][0], fy = pac.y + DIRS[pac.want][1];
       if (pac.fx === pac.x && pac.fy === pac.y && open(fx, fy, false)) pac.dir = pac.want;
       if (pac.want !== pac.dir && DIRS[pac.want][0] === -DIRS[pac.dir][0] && DIRS[pac.want][1] === -DIRS[pac.dir][1]) pac.dir = pac.want;
@@ -140,7 +140,7 @@
         if (g.delay > 0){ g.delay--; return; }
         if (!g.out && g.y <= 6) g.out = true;
         if (g.eaten && g.x === 10 && g.y === 9){ g.eaten = false; g.out = false; }
-        var gs = g.eaten ? .3 : fright && !g.eaten ? .05 : Math.min(.12, .075 + level * .007);   // gentler (author, 2026-09-29: "too hard")
+        var gs = g.eaten ? .25 : fright && !g.eaten ? .04 : Math.min(.09, .06 + level * .005);   // gentler (author, 2026-09-29: "too hard"; slower again 2026-09-30)
         if (g.fx === g.x && g.fy === g.y) ghostChoose(g);
         if (step(g, gs, true)) ghostChoose(g);
         // collisions
@@ -194,9 +194,13 @@
         ctx.restore();
       });
     }
+    var acc = 0;
     function frame(now){
       if (!document.getElementById('cbArcade')) return;
-      if (!over){ var n = Math.min(4, Math.round((now - last) / 16.7) || 1); for (var i = 0; i < n; i++) tick(); }
+      // a fixed 60 steps a second whatever the screen (author, 2026-09-30: "still far too fast"): one step per
+      // frame ran twice as fast on a 120 Hz display
+      acc = Math.min(acc + (now - last), 100);
+      if (!over) while (acc >= 1000 / 60){ tick(); acc -= 1000 / 60; }
       last = now; draw(); raf = requestAnimationFrame(frame);
     }
     function gameOver(){

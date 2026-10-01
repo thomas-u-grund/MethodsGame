@@ -1,5 +1,5 @@
-// The spectacularly wrong complete theory: every room stamps it, the Registry APPROVES it,
-// H-27 drops out anyway, and the consequence is deferred to Act IV via theory_empty.
+// The spectacularly wrong complete theory. Since 2026-09-30 (author: "they can only progress if they got
+// things right") the device refuses to seal it and names the boxes to fix; nothing is sealed.
 const { connect } = require('./cdp');
 const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 (async () => {
@@ -28,14 +28,13 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     await wait(700);
     const line = document.getElementById('wp_line').textContent;
     const f = JSON.parse(localStorage.getItem('codebook_save_v1')).flags;
-    out.onFire = /on fire/.test(line);
-    out.approved = /INFORMATION CONTENT: 0/.test(line) && /APPROVED/.test(line);
+    out.refused = /will not seal/.test(line) && /SCOPE/.test(line);
     out.sealed = !!f.slipSealed; out.h27 = !!f.h27issued; out.theoryEmpty = !!f.theory_empty;
     return out;
   })()`);
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = r.coherence === 'EVERYTHING EXPLAINS EVERYTHING' && r.prompt && r.alarm
-          && r.onFire && r.approved && r.sealed && r.h27 && r.theoryEmpty && !p.errors.length;
+          && r.refused && !r.sealed && !r.h27 && !r.theoryEmpty && !p.errors.length;
   console.log(ok ? 'PASS' : 'FAIL'); p.close(); process.exit(ok ? 0 : 1);
 })();

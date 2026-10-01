@@ -1,0 +1,67 @@
+{
+ "amb-lecture": [
+  "amb-lecture.mp3",
+  0,
+  40.0
+ ],
+ "amb-roomtone": [
+  "amb-roomtone.mp3",
+  0,
+  40.0
+ ],
+ "amb-hum": [
+  "amb-hum.mp3",
+  0,
+  40.0
+ ],
+ "amb-library": [
+  "amb-library.mp3",
+  0,
+  40.0
+ ],
+ "amb-hall": [
+  "amb-hall.mp3",
+  0,
+  40.0
+ ],
+ "amb-workshop": [
+  "amb-workshop.mp3",
+  0,
+  40.0
+ ],
+ "amb-ethics": [
+  "amb-ethics.mp3",
+  0,
+  40.0
+ ],
+ "amb-casino": [
+  "amb-casino.mp3",
+  0,
+  40.0
+ ],
+ "amb-machine": [
+  "amb-machine.mp3",
+  0,
+  40.0
+ ],
+ "amb-bureau": [
+  "amb-bureau.mp3",
+  0,
+  40.0
+ ],
+ "amb-typing": [
+  "amb-typing.mp3",
+  0,
+  40.0
+ ],
+ "amb-audience": [
+  "amb-audience.mp3",
+  0,
+  40.0
+ ],
+ "amb-writing": [
+  "amb-writing.mp3",
+  0,
+  40.0
+ ]
+}

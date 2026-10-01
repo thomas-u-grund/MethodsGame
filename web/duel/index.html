@@ -1,19 +1,21 @@
 <title>Laser Pointer Duel</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&family=Rye&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@500;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700;9..144,800&family=Rye&family=Source+Sans+3:wght@400;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
 <style>
   :root{
     --ground:#0d0f16; --panel:#171b27; --ink:#eef0f6; --soft:#9aa3ba; --line:#2c3347;
     --laser:#ff2e3a; --you:#6dff9a; --feld:#ffb347; --gold:#e0b458;
+    /* the game's own (2026-10-01): one panel, one set of fonts */
+    --mustard:#E0A83E; --mustard-deep:#C68A2E; --cream-dim:#C3CBD1; --g-ink:#2E2118; --g-ink-soft:#5C4A3A; --rust:#C0552F;
     color-scheme:dark;
   }
   [hidden]{display:none!important;}
   html,body{height:100%;overflow:hidden;}
-  body{margin:0;background:#000;color:var(--ink);font:15px/1.45 "Source Sans 3",system-ui,sans-serif;}
+  body{margin:0;background:#000;color:var(--ink);font:15px/1.45 Fraunces,Georgia,serif;}
   main{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;overflow:hidden;background:#000;}
   /* the interface sits on the screen edges, the scene fills the screen behind it */
   .ui{position:fixed;inset:0;z-index:20;pointer-events:none;container-type:inline-size;padding:env(safe-area-inset-top,0px) env(safe-area-inset-right,0px) env(safe-area-inset-bottom,0px) env(safe-area-inset-left,0px);}
-  .ui .speech, .ui .callbtn, .ui .card{pointer-events:auto;}
-  .ui.fighting .hud, .ui.fighting .chat, .ui.fighting .speech, .ui.fighting .callbtn{opacity:0;transition:opacity .3s;}
+  .ui .speech, .ui .card{pointer-events:auto;}
+  .ui.fighting .hud, .ui.fighting .chat{opacity:0;transition:opacity .3s;}
   header{position:fixed;top:calc(env(safe-area-inset-top,0px) + 8px);left:50%;transform:translateX(-50%);z-index:30;display:flex;align-items:center;gap:8px;opacity:.35;transition:opacity .2s;}
   header:hover,header:focus-within{opacity:1;}
   body.ingame header{display:none;}   /* in the game (2026-09-28): no prototype controls */
@@ -34,6 +36,8 @@
   .stage{position:relative;width:max(100vw, calc(100dvh * 16 / 9));aspect-ratio:16/9;overflow:hidden;flex:0 0 auto;background:#000;container-type:inline-size;touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair;}
   .cam{position:absolute;inset:0;transform-origin:51.3% 49.4%;transition:transform .8s cubic-bezier(.3,.1,.2,1);}
   .cam > img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
+  .cam > img.voss{ position:absolute; inset:auto; left:81.5%; bottom:28.5%; width:auto; height:26%; transform:translateX(-50%); }   /* (author, 2026-10-01) */
+  .cam > img.monkey{ position:absolute; inset:auto; left:56%; top:75%; width:8.6%; height:auto; filter:brightness(.8); }
   .feld{position:absolute;left:28.6%;bottom:30.5%;height:27%;transform:translateX(-50%);transform-origin:50% 100%;pointer-events:none;}
   .feld img{height:100%;display:block;}
   .feld.stagger{animation:stagger .7s cubic-bezier(.3,1.6,.5,1);}
@@ -41,7 +45,8 @@
   @keyframes stagger{0%{transform:translateX(-50%)}30%{transform:translateX(-58%) rotate(-7deg)}60%{transform:translateX(-47%) rotate(3deg)}100%{transform:translateX(-50%)}}
   @keyframes gloat{50%{transform:translateX(-50%) translateY(-4%) scale(1.03)}}
 
-  .screen{position:absolute;left:32.3%;top:34.2%;width:38%;height:30.4%;overflow:hidden;container-type:size;}
+  .screen{position:absolute;left:32.3%;top:34.2%;width:38%;height:30.4%;overflow:hidden;container-type:size;z-index:2;}
+  .feld{z-index:4;} .cam > img.voss{z-index:3;} .cam > img.monkey{z-index:5;}
   .slide{position:absolute;inset:0;background:linear-gradient(#fbf7ee,#efe6d2);color:#1d2340;font-family:Arial,Helvetica,sans-serif;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:5cqh 5cqw 9cqh;box-sizing:border-box;gap:2.5cqh;}
   .slide.flip{animation:flip .28s ease-out;}
   @keyframes flip{from{filter:brightness(2.2);opacity:.4}}
@@ -75,10 +80,12 @@
   .xmark::after{transform:rotate(-45deg);}
   @keyframes pop{from{transform:scale(2.2);opacity:0}}
 
+  .crowd-monkey{ position:absolute; left:47%; bottom:20%; width:8%; z-index:7; pointer-events:none; filter:brightness(.75); transition:translate .7s ease; }
   .crowd{position:absolute;left:0;bottom:0;width:100%;height:auto;pointer-events:none;z-index:7;transform-origin:50% 100%;transition:translate .7s ease;}
   .crowd.low{translate:0 58%;}
   .me{position:absolute;right:1%;bottom:-2%;height:58%;aspect-ratio:1038/1287;pointer-events:none;z-index:7;transform-origin:60% 100%;animation:tremble var(--tr,.18s) ease-in-out infinite alternate;}
   .me img{width:100%;height:100%;display:block;filter:drop-shadow(0 0 1cqw rgba(255,200,140,.25));}
+  .me.raise img{ animation:meRaise .6s cubic-bezier(.3,1.4,.5,1); } @keyframes meRaise{ from{ transform:translateY(6%) scale(.97); } }
   #hand{position:absolute;left:1.7%;top:1.4%;width:2px;height:2px;}
   @keyframes tremble{from{transform:rotate(calc(var(--amp,1) * -.35deg))}to{transform:rotate(calc(var(--amp,1) * .35deg))}}
   .me.cheer{animation:cheer .6s cubic-bezier(.2,1.6,.4,1);}
@@ -117,7 +124,7 @@
   @keyframes creep{ from{ transform:scale(1.02); } to{ transform:scale(1.12); } }
   @keyframes shake{ from{ transform:scale(1.05) translateX(1%); } to{ transform:scale(1.14) translateX(-1%); } }
   @keyframes jit{ 50%{ translate:.25% .2%; } }
-  .eyes .lbl{ position:absolute; left:2%; bottom:6%; font:400 max(10px,1.5cqw) Rye,serif; color:#e7c790; letter-spacing:.2em; z-index:2; }
+  .eyes .lbl{ position:absolute; left:2%; bottom:6%; font:700 max(10px,1.5cqw) Fraunces,Georgia,serif; color:#e7c790; letter-spacing:.2em; z-index:2; }
   .crowd.gasp{ animation:gasp .7s cubic-bezier(.2,1.6,.4,1); }
   @keyframes gasp{ 30%{ transform:translateY(-9%) scaleY(1.06); } }
   .pflash{ position:absolute; width:1.1cqw; height:1.1cqw; border-radius:50%; background:#fff; box-shadow:0 0 1.4cqw .6cqw rgba(255,255,255,.9); z-index:8; pointer-events:none; animation:pf .35s ease-out forwards; }
@@ -132,24 +139,40 @@
   .dab.miss{ filter:grayscale(1); opacity:.5; }
   @keyframes dabIn{ to{ transform:scale(1) rotate(var(--r,0deg)); } }
 
-  /* ---------- Stellmacher in your corner ---------- */
-  .coach{ position:absolute; left:1.4cqw; bottom:13cqw; z-index:13; display:flex; align-items:flex-end; gap:.8cqw; max-width:48cqw; pointer-events:none;
-    transform:translateX(-120%); transition:transform .45s cubic-bezier(.2,.9,.3,1.2); }
-  .coach.on{ transform:none; }
-  .coach img{ width:max(64px,11cqw); aspect-ratio:1; object-fit:cover; object-position:50% 20%; border-radius:50%; border:.35cqw solid #e0b458; box-shadow:0 .6cqw 2cqw rgba(0,0,0,.7); background:#1a1410; flex:0 0 auto; }
-  .coach .bub{ background:#f6ecd6; color:#221a10; border-radius:1.2cqw; padding:.9cqw 1.3cqw; font:600 max(12px,1.55cqw)/1.3 'Source Sans 3',sans-serif; box-shadow:0 .6cqw 2cqw rgba(0,0,0,.6); position:relative; margin-bottom:2cqw; }
-  .coach .bub::before{ content:''; position:absolute; left:-1cqw; bottom:1.4cqw; border:.6cqw solid transparent; border-right:1.1cqw solid #f6ecd6; border-left:0; }
-  .coach .bub b{ display:block; font:400 max(9px,1.05cqw) Rye,Georgia,serif; letter-spacing:.14em; text-transform:uppercase; color:#8a5a1e; margin-bottom:.2em; }
-  .callbtn{ position:absolute; left:1.4cqw; top:8.6cqw; z-index:13; display:flex; align-items:center; gap:.5em; padding:.45em .9em .45em .5em; border-radius:999px; border:1px solid #e0b458;
-    background:rgba(20,14,8,.85); color:#f3d9a0; font:400 max(10px,1.2cqw) Rye,Georgia,serif; letter-spacing:.08em; cursor:pointer; }
-  .callbtn img{ width:max(20px,2.4cqw); aspect-ratio:1; border-radius:50%; object-fit:cover; object-position:50% 20%; }
-  .callbtn:hover{ background:rgba(60,40,16,.95); }
+  /* ---------- jokers: the people who stayed at your poster (author, 2026-10-01) ----------
+     usable while you aim, once each; pressing one shows them big, their line in the panel, and what they do */
+  /* in the top bar, beside the meters: never over the slide when the camera zooms in */
+  .jokers{ position:absolute; left:calc(1.4cqw + clamp(120px, 26cqw, 260px) + 2.6cqw); top:.6cqw; z-index:13; pointer-events:auto; }
+  .jokers .jl{ display:block; font:700 max(9px,.9cqw) "JetBrains Mono",monospace; letter-spacing:.18em; text-transform:uppercase; color:#e0b458; text-shadow:0 1px 3px #000; margin-bottom:.3cqw; }
+  .jokers .jrow{ display:flex; gap:.6cqw; }
+  .ui.fighting .jokers{ opacity:0; }
+  .jokers button{ width:max(32px,3.3cqw); aspect-ratio:1; border-radius:50%; border:max(2px,.2cqw) solid #e0b458; padding:0; overflow:hidden; background:#1a1410; cursor:pointer; box-shadow:0 .4cqw 1.2cqw rgba(0,0,0,.6); position:relative; transition:filter .25s, transform .15s; }
+  .jokers button img{ width:100%; height:180%; object-fit:cover; object-position:50% 0; display:block; }
+  .jokers button.off{ filter:grayscale(1) brightness(.55); cursor:not-allowed; border-color:#6b6150; }
+  .jokers button.used{ filter:grayscale(1) brightness(.35); cursor:default; border-color:#4a4438; }
+  .jokers button.ready{ animation:jready 1.4s ease-in-out infinite; }
+  .jokers button.ready:hover{ transform:scale(1.1); }
+  @keyframes jready{ 50%{ box-shadow:0 0 0 .35cqw rgba(224,180,88,.45), 0 .4cqw 1.2cqw rgba(0,0,0,.6); } }
+  .jbig{ position:absolute; left:3cqw; bottom:9cqw; height:46%; z-index:12; pointer-events:none; opacity:0; transform:translateX(-120%); }
+  .jbig img{ height:100%; display:block; filter:drop-shadow(0 0 2cqw rgba(224,180,88,.55)) drop-shadow(0 1cqw 2cqw rgba(0,0,0,.8)); }
+  .jbig b{ position:absolute; left:50%; top:-1.4em; transform:translateX(-50%); white-space:nowrap; font:700 max(12px,1.6cqw) Fraunces,Georgia,serif; color:#fff3c4; text-shadow:0 .1em 0 #000, 0 0 .6em #000; }
+  .jbig.go{ animation:jbig 2.1s cubic-bezier(.2,1,.3,1) forwards; }
+  @keyframes jbig{ 0%{ opacity:0; transform:translateX(-120%) scale(.9); } 16%{ opacity:1; transform:none; } 78%{ opacity:1; transform:none; } 100%{ opacity:0; transform:translateX(-30%) scale(.96); } }
+  /* what each joker does, on the slide and on the meters */
+  [data-zone].jglow{ background:rgba(255,214,90,.22); box-shadow:0 0 0 .7cqh #ffd24a, 0 0 3.2cqh 1.2cqh rgba(255,200,60,.85); animation:jglow 1s ease-in-out infinite; }
+  @keyframes jglow{ 50%{ box-shadow:0 0 0 .9cqh #ffe48a, 0 0 4.4cqh 1.8cqh rgba(255,200,60,.6); } }
+  .jtag{ position:absolute; right:3cqw; top:3cqh; z-index:7; font:700 6cqh "JetBrains Mono",monospace; letter-spacing:.12em; color:#fff; background:#ec4899; padding:.4cqh 1.6cqw; border-radius:.8cqh; box-shadow:0 0 2cqh rgba(236,72,153,.8); animation:jtag .5s cubic-bezier(.2,1.6,.4,1); pointer-events:none; }
+  @keyframes jtag{ from{ transform:scale(2.2); opacity:0; } }
+  .meter.boost{ animation:mboost .45s ease-in-out 3; }
+  @keyframes mboost{ 50%{ transform:scale(1.07); filter:drop-shadow(0 0 8px #e0b458); } }
+  .meter .tagup{ position:absolute; right:0; top:100%; margin-top:2px; font:700 max(9px,1.1cqw) "JetBrains Mono",monospace; color:#ffe48a; text-shadow:0 1px 3px #000; animation:cdelta 1.8s ease-out forwards; white-space:nowrap; }
+  .meter{ position:relative; }
 
   /* ---------- whispers in the audience ---------- */
-  .whisper{ position:absolute; z-index:8; pointer-events:none; padding:.35em .7em; border-radius:1em; background:rgba(246,236,214,.9); color:#2a2016;
-    font:italic 600 max(10px,1.3cqw)/1.2 'Source Sans 3',sans-serif; box-shadow:0 .3cqw 1cqw rgba(0,0,0,.5); white-space:nowrap;
+  /* small plain captions, not speech bubbles (2026-10-01) */
+  .whisper{ position:absolute; z-index:8; pointer-events:none; color:rgba(243,230,196,.9);
+    font:italic 400 max(10px,1.15cqw)/1.2 Fraunces,Georgia,serif; text-shadow:0 1px 2px #000, 0 0 .8em rgba(0,0,0,.9); white-space:nowrap;
     animation:whisper 3.4s ease-out forwards; }
-  .whisper::after{ content:''; position:absolute; left:18%; bottom:-.5em; border:.35em solid transparent; border-top-color:rgba(246,236,214,.9); }
   @keyframes whisper{ 0%{ opacity:0; transform:translateY(40%) scale(.8); } 15%{ opacity:1; transform:none; } 80%{ opacity:1; } 100%{ opacity:0; transform:translateY(-60%); } }
   /* ---------- the stand-up: sweat, memories, breath, rise ---------- */
   .rise{ position:absolute; inset:0; z-index:14; background:#000; opacity:0; pointer-events:none; overflow:hidden; }
@@ -160,7 +183,7 @@
   .rise .mem{ opacity:0; filter:sepia(.6) contrast(1.2) brightness(.9) blur(1px); mix-blend-mode:screen; }
   .rise .mem.go{ animation:mem .9s ease-out forwards; }
   @keyframes mem{ 0%{ opacity:0; transform:scale(1.15); } 25%{ opacity:.85; } 100%{ opacity:0; transform:scale(1); } }
-  .rise .lesson{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3; font:400 max(18px,4.4cqw)/1.1 Rye,Georgia,serif; color:#fff3c4; text-align:center;
+  .rise .lesson{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3; font:700 max(18px,4.4cqw)/1.1 Fraunces,Georgia,serif; color:#fff3c4; text-align:center;
     text-shadow:0 0 1.2cqw #000, 0 0 3cqw rgba(236,72,153,.6); opacity:0; white-space:nowrap; }
   .rise .lesson.go{ animation:lesson .9s ease-out forwards; }
   @keyframes lesson{ 0%{ opacity:0; transform:translate(-50%,-50%) scale(1.8); } 20%{ opacity:1; transform:translate(-50%,-50%) scale(1); } 75%{ opacity:1; } 100%{ opacity:0; } }
@@ -175,7 +198,7 @@
   .fight > .ann{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; transform-origin:50% 35%; }
   .fight.on > .ann{ animation:annPush 9s linear forwards; }
   @keyframes annPush{ from{ transform:scale(1.02); } to{ transform:scale(1.14); } }
-  .fight .cap{ position:absolute; left:0; right:0; bottom:9%; text-align:center; font:400 max(16px,3.6cqw)/1.15 Rye,Georgia,serif; color:#fff3c4;
+  .fight .cap{ position:absolute; left:0; right:0; top:7%; text-align:center; font:700 max(16px,3.6cqw)/1.15 Fraunces,Georgia,serif; color:#fff3c4;
     text-shadow:0 .15em 0 #5a2a0a, 0 0 1em rgba(0,0,0,.9); padding:0 6%; opacity:0; }
   .fight .cap.go{ animation:capIn .5s cubic-bezier(.2,1.5,.4,1) forwards; }
   @keyframes capIn{ from{ opacity:0; transform:scale(1.5); } to{ opacity:1; transform:none; } }
@@ -188,20 +211,20 @@
   .tape .lit img{ opacity:1; transform:none; }
   .tape .blue .p{ left:48%; height:86%; } .tape .blue .c{ left:4%; height:58%; border-radius:50%; bottom:auto; top:14%; border:.4cqw solid #e0b458; }
   .tape .red .f{ left:50%; height:92%; transform:translateX(-50%) translateY(8%); } .tape .red.lit .f{ transform:translateX(-50%); }
-  .tape .nm{ position:absolute; top:4%; left:0; right:0; text-align:center; font:400 max(12px,2.4cqw)/1.1 Rye,serif; color:#fff3c4; text-shadow:0 .12em 0 #000; z-index:2; }
+  .tape .nm{ position:absolute; top:4%; left:0; right:0; text-align:center; font:700 max(12px,2.4cqw)/1.1 Fraunces,Georgia,serif; color:#fff3c4; text-shadow:0 .12em 0 #000; z-index:2; }
   .tape .nm small{ display:block; font-size:.5em; letter-spacing:.25em; color:#e0b458; margin-top:.3em; }
-  .tape .vs{ position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); z-index:3; font:400 max(28px,7cqw) Rye,serif; color:#f5c542; text-shadow:0 .08em 0 #5a2a0a, 0 0 .5em #000; }
+  .tape .vs{ position:absolute; left:50%; top:46%; transform:translate(-50%,-50%); z-index:3; font:700 max(28px,7cqw) Fraunces,Georgia,serif; color:#f5c542; text-shadow:0 .08em 0 #5a2a0a, 0 0 .5em #000; }
   /* the face-off: two fighters circling each other, each in a spotlight (author, 2026-09-28) */
   .faceoff{ position:absolute; inset:0; opacity:0; transition:opacity .6s; overflow:hidden; background:#050308; }
   .faceoff.on{ opacity:1; }
   .faceoff .bgd{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:brightness(.22) saturate(.7); }
   .faceoff .ftr{ position:absolute; bottom:-4%; transform-origin:50% 100%; will-change:transform, left; }
   .faceoff .ftr img{ height:100%; display:block; filter:drop-shadow(0 0 1.4cqw rgba(0,0,0,.9)); }
-  .faceoff .ftr .cone{ position:absolute; left:50%; bottom:0; width:190%; height:260%; transform:translateX(-50%); z-index:-1; opacity:1; filter:blur(4px);
+  .faceoff .ftr .cone{ position:absolute; left:50%; bottom:0; width:190%; height:700%; transform:translateX(-50%); z-index:-1; opacity:1; filter:blur(4px);
     clip-path:polygon(43% 0,57% 0,100% 100%,0 100%); background:linear-gradient(rgba(255,238,200,.5), rgba(255,238,200,.06) 92%); mix-blend-mode:screen; }
   .faceoff .ftr .pool{ position:absolute; left:50%; bottom:2%; width:160%; height:14%; transform:translateX(-50%); z-index:-1; border-radius:50%;
     background:radial-gradient(ellipse, rgba(255,232,190,.55), rgba(255,232,190,0) 70%); }
-  .faceoff .ftr .nm{ position:absolute; left:50%; top:-12%; transform:translateX(-50%); white-space:nowrap; text-align:center; font:400 max(12px,2.2cqw)/1.1 Rye,serif; color:#fff3c4;
+  .faceoff .ftr .nm{ position:absolute; left:50%; top:-12%; transform:translateX(-50%); white-space:nowrap; text-align:center; font:700 max(12px,2.2cqw)/1.1 Fraunces,Georgia,serif; color:#fff3c4;
     text-shadow:0 .12em 0 #000, 0 0 .6em #000; opacity:0; transition:opacity .4s; }
   .faceoff .ftr .nm small{ display:block; font-size:.5em; letter-spacing:.25em; color:#e0b458; margin-top:.3em; }
   .faceoff .ftr.lit .nm{ opacity:1; }
@@ -214,16 +237,16 @@
   @keyframes rcSwing{ 0%{ transform:translateX(-37.25%) rotate(80deg); } 22%{ transform:translateX(-37.25%) rotate(-24deg); } 36%{ transform:translateX(-37.25%) rotate(12deg); }
     48%{ transform:translateX(-37.25%) rotate(-5deg); } 56%,70%{ transform:translateX(-37.25%) rotate(0deg); } 100%{ transform:translateX(-37.25%) rotate(-85deg); } }
   .roundcard .rope{ flex:1; margin-left:calc(37.25% - 1.6%); width:3.2%; background:repeating-linear-gradient(160deg,#c6802f 0 .5cqw,#8a5420 .5cqw .9cqw); border-radius:1cqw; }
-  .roundcard .mk{ position:relative; flex:0 0 auto; }
+  .roundcard .mk{ position:relative; flex:0 0 auto; aspect-ratio:992/1370; }   /* (the monkey that held the card is gone, 2026-10-01: a placard on the rope) */
   .roundcard .mk img{ width:100%; display:block; }
-  .roundcard .rcard{ position:absolute; left:65.0%; top:39.1%; width:32.3%; height:23.3%; display:flex; align-items:center; justify-content:center; text-align:center; white-space:nowrap; font:400 max(10px,1.5cqw)/1 Rye,serif; color:#b3261e; }
+  .roundcard .rcard{ position:absolute; left:calc(37.25% - 30%); top:0; width:60%; height:30%; background:linear-gradient(#fbf3df,#ead9b4); border:.5cqw solid #4a2e14; border-radius:.8cqw; box-shadow:0 1cqw 2cqw rgba(0,0,0,.5); display:flex; align-items:center; justify-content:center; text-align:center; white-space:nowrap; font:700 max(10px,1.5cqw)/1 Fraunces,Georgia,serif; color:#b3261e; }
 
   .tab{ position:absolute; inset:0; z-index:15; background:#000; opacity:0; pointer-events:none; transition:opacity .5s; overflow:hidden; }
   .tab.on{ opacity:1; }
   .tab img{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
   .tab.on img{ animation:annPush 8s linear forwards; }
-  .tab .cap{ position:absolute; left:0; right:0; bottom:8%; text-align:center; font:400 max(16px,3.4cqw)/1.15 Rye,Georgia,serif; color:#fff3c4; text-shadow:0 .15em 0 #5a2a0a, 0 0 1em rgba(0,0,0,.9); padding:0 6%; }
-  .tab .count{ position:absolute; right:6%; top:8%; font:400 max(40px,12cqw)/1 Rye,serif; color:#fff; text-shadow:0 .08em 0 #b3261e, 0 0 .5em #000; }
+  .tab .cap{ position:absolute; left:0; right:0; top:7%; text-align:center; font:700 max(16px,3.4cqw)/1.15 Fraunces,Georgia,serif; color:#fff3c4; text-shadow:0 .15em 0 #5a2a0a, 0 0 1em rgba(0,0,0,.9); padding:0 6%; }
+  .tab .count{ position:absolute; right:6%; top:8%; font:700 max(40px,12cqw)/1 Fraunces,Georgia,serif; color:#fff; text-shadow:0 .08em 0 #b3261e, 0 0 .5em #000; }
   .confetti{ position:absolute; top:-5%; width:1cqw; height:1.6cqw; z-index:17; pointer-events:none; animation:conf linear forwards; }
   @keyframes conf{ to{ transform:translateY(120cqh) rotate(900deg); } }
 
@@ -256,20 +279,34 @@
   .meter .fill{position:absolute;left:0;top:0;bottom:0;border-radius:99px;background:#ff6a4a;transition:width .6s;}
   .nerves .bar{background:rgba(255,255,255,.18);}
 
-  .chat{position:absolute;right:1.2cqw;top:1.2cqw;width:21cqw;max-width:230px;min-width:110px;z-index:9;display:flex;flex-direction:column;gap:3px;pointer-events:none;font:600 max(9px,1.15cqw)/1.25 "Source Sans 3",sans-serif;}
+  .chat{position:absolute;right:1.2cqw;top:1.2cqw;width:21cqw;max-width:230px;min-width:110px;z-index:9;display:flex;flex-direction:column;gap:3px;pointer-events:none;font:500 max(9px,1.15cqw)/1.25 Fraunces,Georgia,serif;}
   .chat .live{align-self:flex-start;background:#e0282e;color:#fff;font:700 max(8px,1cqw) "JetBrains Mono",monospace;padding:1px 6px;border-radius:3px;letter-spacing:.1em;}
   .chat div.msg{background:rgba(10,12,20,.72);padding:3px 7px;border-radius:5px;animation:in .3s ease-out;}
-  .chat b{font-weight:700;}
+  .chat b{font:700 .85em "JetBrains Mono",monospace;}
   @keyframes in{from{transform:translateX(20%);opacity:0}}
 
-  .speech{position:absolute;left:3cqw;right:3cqw;bottom:2.2cqw;z-index:10;background:rgba(12,14,22,.9);border:1px solid rgba(255,255,255,.14);border-radius:10px;padding:1.2cqw 1.8cqw 1.4cqw;font-size:max(13px,1.9cqw);line-height:1.35;box-shadow:0 6px 24px rgba(0,0,0,.5);cursor:pointer;}
-  .speech .who{font:800 max(11px,1.35cqw) Fraunces,Georgia,serif;letter-spacing:.04em;margin-bottom:2px;}
-  .speech .who.tobi{color:#ffd24a;}
-  .speech .who.you{color:var(--you);} .speech .who.fs{color:var(--feld);} .speech .who.sys{color:var(--soft);font-style:italic;} .speech .who.voss{color:#b9a7ff;}
-  .speech .next{position:absolute;right:1.2cqw;bottom:.8cqw;font:500 max(9px,1cqw) "JetBrains Mono",monospace;color:var(--soft);}
-  .speech .choices{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;}
-  .speech .choices button{font:700 max(13px,1.7cqw) "Source Sans 3",sans-serif;background:var(--laser);color:#fff;border:0;border-radius:999px;padding:.5em 1.1em;cursor:pointer;}
-  .prompt{position:absolute;left:50%;top:1.6cqw;transform:translateX(-50%);z-index:10;background:rgba(12,14,22,.85);border:1px solid var(--laser);color:#fff;border-radius:999px;padding:.35em 1em;font:700 max(11px,1.5cqw) "Source Sans 3",sans-serif;white-space:nowrap;pointer-events:none;}
+  /* the game's own dialogue panel (2026-10-01): translucent light panel, mustard top border, speaker label
+     in JetBrains Mono, the line in Fraunces, the standard hint at the bottom; choices as in the rooms */
+  .speech{position:absolute;left:0;right:0;bottom:0;z-index:10;background:rgba(237,240,242,0.76);backdrop-filter:blur(9px) saturate(.9);-webkit-backdrop-filter:blur(9px) saturate(.9);
+    color:var(--g-ink);padding:14px 26px 12px;display:flex;flex-direction:column;gap:9px;border-top:3px solid var(--mustard-deep);min-height:70px;max-height:40%;overflow-y:auto;cursor:pointer;}
+  .speech .who{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--rust);min-height:1em;}
+  .speech .line{font-family:Fraunces,Georgia,serif;font-size:clamp(1rem,2vw,1.2rem);line-height:1.5;text-wrap:balance;}
+  .speech .line i{color:var(--g-ink-soft);}
+  .speech .next, .conthint{align-self:center;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--g-ink-soft);opacity:.85;animation:contIn .5s ease .4s both;}
+  .conthint{position:absolute;left:50%;bottom:2.4vh;transform:translateX(-50%);z-index:21;color:rgba(240,228,200,.7);text-shadow:0 1px 3px #000;pointer-events:none;}
+  @keyframes contIn{from{opacity:0}}
+  /* the game's VOICE ONLY setting: a voiced line shows no words, only the hint; choices keep their panel */
+  .speech.vo .who, .speech.vo .line{display:none;}
+  .speech.vo:not(:has(.choices button)){background:transparent;border-top-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;min-height:0;}
+  .speech.vo:not(:has(.choices button)) .next{color:rgba(240,228,200,.75);text-shadow:0 1px 3px #000;}
+  .speech.vo:not(:has(.choices button)):has(.next[hidden]){display:none;}
+  .speech .choices{display:flex;flex-direction:column;gap:8px;}
+  .speech .choices:empty{display:none;}
+  button.choice, .speech .choices button, .card button{all:unset;cursor:pointer;background:rgba(252,253,254,0.94);border:1px solid var(--cream-dim);border-radius:3px;padding:12px 16px;
+    font-family:'Source Sans 3',sans-serif;font-size:.95rem;line-height:1.4;color:var(--g-ink);transition:border-color .12s, transform .12s, background .12s;}
+  button.choice:hover, .speech .choices button:hover, .card button:hover{border-color:#22323F;background:#fff;}
+  button.choice:active, .speech .choices button:active, .card button:active{transform:scale(.99);}
+  .prompt{position:absolute;left:50%;top:1.6cqw;transform:translateX(-50%);z-index:10;background:rgba(12,14,22,.85);border:1px solid var(--laser);color:#fff;border-radius:999px;padding:.45em 1.2em;font:700 max(10px,1.1cqw) "JetBrains Mono",monospace;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;pointer-events:none;}
   .prompt.pulse{animation:pp 1s ease-in-out infinite;}
   @keyframes pp{50%{box-shadow:0 0 0 6px rgba(255,46,58,.25)}}
   .flash{position:absolute;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:11;}
@@ -279,12 +316,12 @@
   @keyframes shake{20%{translate:-1% .5%}40%{translate:1% -.6%}60%{translate:-.6% .3%}80%{translate:.4% 0}}
 
   .card{position:absolute;inset:0;z-index:12;display:flex;align-items:center;justify-content:center;background:rgba(8,10,16,.72);padding:3cqw;}
-  .card > div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:2.4cqw 3cqw;max-width:62cqw;min-width:min(260px,90%);text-align:center;}
-  .card h2{font:800 max(18px,3.2cqw)/1.1 Fraunces,Georgia,serif;margin:0 0 .4em;color:var(--gold);text-wrap:balance;}
-  .card p{margin:.3em 0;font-size:max(13px,1.7cqw);color:var(--ink);}
+  .card > div{background:rgba(237,240,242,0.92);color:var(--g-ink);border-top:3px solid var(--mustard-deep);border-radius:4px;padding:2.4cqw 3cqw;max-width:62cqw;min-width:min(260px,90%);text-align:center;box-shadow:0 18px 50px rgba(0,0,0,.45);}
+  .card h2{font:700 max(18px,3.2cqw)/1.1 Fraunces,Georgia,serif;margin:0 0 .4em;color:var(--g-ink);text-wrap:balance;}
+  .card p{margin:.3em 0;font:400 clamp(1rem,1.7cqw,1.2rem)/1.5 Fraunces,Georgia,serif;color:var(--g-ink);}
   .card .tally{display:flex;gap:2.5cqw;justify-content:center;margin:.6em 0;font:700 max(12px,1.5cqw) "JetBrains Mono",monospace;}
-  .card .tally span{display:grid;gap:2px;} .card .tally em{font-style:normal;font-size:1.9em;font-variant-numeric:tabular-nums;}
-  .card button{margin-top:.8em;font:700 max(13px,1.6cqw) "Source Sans 3",sans-serif;background:var(--laser);color:#fff;border:0;border-radius:999px;padding:.55em 1.3em;cursor:pointer;}
+  .card .tally span{display:grid;gap:2px;color:var(--g-ink-soft);letter-spacing:.1em;text-transform:uppercase;font-size:.8em;} .card .tally em{color:var(--g-ink);} .card .tally em{font-style:normal;font-size:1.9em;font-variant-numeric:tabular-nums;}
+  .card button{margin-top:.8em;}
 
   .notes{color:var(--soft);font-size:14px;max-width:70ch;margin:0 auto;}
   .notes b{color:var(--ink);}
@@ -309,22 +346,26 @@
     <div class="cam" id="cam">
       <img src="../keynote-bg.webp" alt="">
       <div class="feld" id="feld"><div class="cites" id="cites"><small>CITATIONS</small><span class="n" id="citeN">0</span></div><img src="../sprite-feldstrom-keynote.webp" alt="Professor Feldstrom at the lectern"></div>
+      <img class="voss" src="../vossberg2-chair.webp" alt="Dr. Vossberg, chairing">
       <img src="../keynote-front.webp" alt="">
+      <img class="monkey" src="../sprite-monkey-audience.webp" alt="">
       <div class="screen" id="screen"><div class="slide" id="slide"></div></div>
       <div class="lights" id="lights"></div>
       <div class="cone feld" id="coneFeld"></div>
     </div>
     <div class="cone mespot" id="coneMe"></div>
     <img class="crowd" src="duel-crowd.webp" alt="" aria-hidden="true">
-    <div class="me" id="me" aria-label="You, standing up in the audience"><div class="mycite" id="mycite">1 POSTER</div><img src="duel-player.webp" alt=""><span id="hand"></span></div>
+    <img class="crowd-monkey" src="../sprite-monkey-audience.webp" alt="" aria-hidden="true">
+    <div class="me" id="me" aria-label="You, standing up in the audience"><div class="mycite" id="mycite">1 POSTER</div><img id="meImg" src="duel-player-down.webp" alt=""><span id="hand"></span></div>
     <svg class="beam" id="beam"><line id="beamLine" x1="0" y1="0" x2="0" y2="0" stroke-width="0"></line></svg>
     <div class="hud">
-      <div class="meter"><div class="lab"><span>Feldstrom</span><span>Hall</span><span>You</span></div><div class="bar"><div class="needle" id="needle"></div></div></div>
-      <div class="meter nerves"><div class="lab"><span>Your hand</span><span id="nervesLab">shaky</span></div><div class="bar"><div class="fill" id="nerves"></div></div></div>
+      <div class="meter" id="mApplause"><div class="lab"><span>Feldstrom</span><span>Hall</span><span>You</span></div><div class="bar"><div class="needle" id="needle"></div></div></div>
+      <div class="meter nerves" id="mNerves"><div class="lab"><span>Your hand</span><span id="nervesLab">shaky</span></div><div class="bar"><div class="fill" id="nerves"></div></div></div>
     </div>
     <div class="chat" id="chat"><span class="live">&#9679; LIVE &middot; tobi</span></div>
     <div class="prompt" id="prompt" hidden></div>
-    <div class="speech" id="speech" hidden><div class="who" id="who"></div><div id="line"></div><div class="choices" id="choices"></div><span class="next" id="next">tap &#9656;</span></div>
+    <div class="speech" id="speech" hidden><div class="who" id="who"></div><div class="line" id="line"></div><div class="choices" id="choices"></div><span class="next" id="next">Click or press space to continue</span></div>
+    <div class="conthint" id="conthint" hidden>Click or press space to continue</div>
     <div class="flash" id="flash"></div>
     <div class="strobe" id="strobe"></div>
     <div class="rise" id="rise"><img class="sweat" src="duel-sweat.webp" alt="">
@@ -339,9 +380,9 @@
       <div class="tape" id="tape"><div class="blue" id="tapeBlue"><img class="c" src="duel-coach.webp" alt=""><img class="p" src="duel-player.webp" alt=""><div class="nm">The Student<small>Trained by Prof. Stellmacher</small></div></div>
         <div class="red" id="tapeRed"><img class="f" src="../sprite-feldstrom-keynote.webp" alt=""><div class="nm">Magnus Feldstrom<small>Undefeated &middot; Unfalsified</small></div></div><div class="vs">VS</div></div>
       <div class="cap" id="fightCap"></div></div>
-    <div class="roundcard" id="roundcard"><div class="rope"></div><div class="mk"><img src="duel-chimprope.webp" alt=""><div class="rcard" id="roundTxt">ROUND 1</div></div></div>
-    <div class="coach" id="coach"><img src="duel-coach.webp" alt="Professor Stellmacher"><div class="bub"><b>Stellmacher &middot; your corner</b><span id="coachLine"></span></div></div>
-    <button class="callbtn" id="callbtn" type="button"><img src="duel-coach.webp" alt="">Call your corner</button>
+    <div class="roundcard" id="roundcard"><div class="rope"></div><div class="mk"><div class="rcard" id="roundTxt">ROUND 1</div></div></div>
+    <div class="jokers" id="jokers" hidden><span class="jl">Jokers</span><div class="jrow" id="jrow"></div></div>
+    <div class="jbig" id="jbig"><b id="jbigName"></b><img id="jbigImg" alt=""></div>
     <div class="western" id="western"><b>The Keynote Showdown</b><i>One pointer &middot; one professor &middot; four slides</i></div>
     <div class="eyes" id="eyes"><div class="feye"><img src="duel-eyes.webp" alt=""><span class="lbl">Feldstrom</span></div><div class="hand"><img src="duel-hand.webp" alt=""><span class="lbl">You</span></div></div>
     <div class="card" id="card" hidden><div id="cardBody"></div></div>
@@ -420,6 +461,8 @@
   // the game's music setting and voice table, and hands the win back to the room.
   var IN_GAME = window.parent !== window && !!window.parent.CODEBOOK_VO;
   if (IN_GAME) document.body.classList.add('ingame');
+  // the game's Voice only setting (its default): voiced lines show no words here either
+  var VO = IN_GAME && (function(){ try { return window.parent.document.body.classList.contains('cb-voiceonly'); } catch(e){ return false; } })();
   var MV = (function(){ try { if (localStorage.getItem('cb_music') === '0') return 0; return { quiet:.3, normal:.6, loud:1 }[localStorage.getItem('cb_music_vol') || 'normal'] || .6; } catch(e){ return .6; } })();
   function gameClips(html){
     if (!IN_GAME) return [];
@@ -504,7 +547,7 @@
       alias:{ where:'every', pin:'every' },
       hint:'Where was your study actually done? And where does he say it holds?', coach:'One course, one term. Find where he says <i>everywhere</i>.' },
 
-    { n:17, speed:1.16, chaos:'monkey',
+    { n:17, speed:1.16,
       html:'<div class="st">AN <span data-zone="enorm">ENORMOUS</span> EFFECT</div>' +
            '<div class="row" style="align-items:flex-end">' +
            '<div style="display:flex;flex-direction:column;justify-content:space-between;height:40cqh;font-size:4.2cqh;font-weight:700;text-align:right"><span>100</span><span>99</span><span data-zone="axis" style="color:#d2261e">98</span></div>' +
@@ -522,7 +565,7 @@
           weak:'&ldquo;Those lines on the bar&hellip; they&rsquo;re quite long?&rdquo;',
           back:'He looks at the screen. The screen looks back. Somebody in row four laughs, and it isn&rsquo;t at you.',
           weakBack:'&ldquo;Long lines, long career. Next.&rdquo;',
-          chat:[['stats_nerd','interval says no'],['anon_reviewer','the right size of sure'],['tobi','is the monkey still presenting']] },
+          chat:[['stats_nerd','interval says no'],['anon_reviewer','the right size of sure'],['tobi','is he still presenting']] },
         axis:{ ok:true, stampText:'AXIS AT 98',
           strong:'&ldquo;Your axis starts at ninety-eight. That&rsquo;s not an effect. That&rsquo;s a zoom.&rdquo;',
           weak:'&ldquo;The numbers on the side are&hellip; a bit high?&rdquo;',
@@ -578,7 +621,7 @@
               pct:Z(false, '&ldquo;Ninety-seven is simply the number. It is correctly calculated. I used a calculator.&rdquo;'),
               love:Z(false, '&ldquo;&lsquo;Love&rsquo; is the word on the form. Five stars: love. Ask the form.&rdquo;') },
       hint:'The percentage is correct. Ask <i>who</i> it&rsquo;s a percentage of. The star at the bottom.', coach:'Ninety-seven per cent of <i>whom</i>? Find the star.' },
-    { n:33, speed:1.16, chaos:'monkey',
+    { n:33, speed:1.16,
       html:'<div class="st">BY 2040, GRADES WILL REACH <span data-zone="big">140%</span></div>' +
            '<svg viewBox="0 0 140 64" style="height:40cqh"><line x1="6" y1="58" x2="136" y2="58" stroke="#1d2340" stroke-width="1.4"/><line x1="6" y1="4" x2="6" y2="58" stroke="#1d2340" stroke-width="1.4"/>' +
            '<polyline points="10,50 20,47 30,46 40,42 50,41" fill="none" stroke="#2f5fc4" stroke-width="2.4"/>' +
@@ -626,7 +669,7 @@
                 [['stats_nerd','BIMODAL'],['phd_yr4','the average family has 2.4 children'],['tobi','i am the 0.4']]),
               avg:Z(false, '&ldquo;The average is correctly computed. Add them up, divide. I did it twice.&rdquo;') },
       hint:'The average is correct. Look at the shape of the bars.', coach:'Forget the headline. Where are the students on his chart? Point at the bars.' },
-    { n:43, speed:1.16, chaos:'monkey',
+    { n:43, speed:1.16,
       html:'<div class="st">ICE CREAM <u data-zone="raises">RAISES</u> GRADES</div>' +
            '<div class="row" style="font-size:4.4cqh;gap:3cqw"><span style="background:#f3c8d8;padding:1cqh 2cqw">Ice cream sales &uarr;</span><span style="background:#c8e3f3;padding:1cqh 2cqw">Exam grades &uarr;</span></div>' +
            '<div class="ss" data-zone="june" style="font-size:5.6cqh;font-style:normal;font-weight:700;color:#d2261e">both measured in June</div>',
@@ -720,22 +763,80 @@
   // ---------- the coach: she talks you through it, and you can call her at any moment
   var coachT = null, curRound = null;
   var TOBI = {"open": "Hi chat, Tobi here, live from the Annual Meeting keynote. Front row. Well. Row nine. Feldstrom is up, and word is he's got one of our posters in his slides.", "stand": "Chat. CHAT. My colleague just stood up. Nobody stands up at a Feldstrom keynote. This is happening. This is actually happening.", "down": "Oh no. Oh no no no. Chat, send good vibes. Spam the chat. GET UP.", "ko": "HE'S DOWN! Feldstrom is DOWN! Chat, did you see that? Clip it! CLIP IT!"};
-  var DV = {"coach": {"Read his survey question word by word. Could anyone answer &lsquo;not at all&rsquo;?": "dv-prof-065f8482.mp3", "Pointing at <i>never</i> proves nothing. See the little &sup1; after DISCOVERED? Follow it to the bottom of his slide.": "dv-prof-ffafd0e3.mp3", "That&rsquo;s it. Again.": "dv-prof-b6293acb.mp3", "Finish him. Politely.": "dv-prof-35fb2ef6.mp3", "The blue line is data. What is the red dotted line?": "dv-prof-29e84076.mp3", "Chin up. Hands steady. I&rsquo;m right here.": "dv-prof-6a06c3e5.mp3", "Where do his data end? Hit what comes after.": "dv-prof-4876902d.mp3", "Now down. Same again.": "dv-prof-2fe3f789.mp3", "One famous person is a story, not a finding. How many people is it? The &sect; at the bottom.": "dv-prof-fc495a10.mp3", "Breathe. Press on the slide where the flaw is. Keep still till your hand calms down, then let go.": "dv-prof-9e0fb18c.mp3", "Who ends up in the front row, and why? That&rsquo;s your target.": "dv-prof-24ec99bf.mp3", "THAT&rsquo;S my student!": "dv-prof-4e5f00b6.mp3", "The claim comes from the survey. Read the survey question itself.": "dv-prof-568d4732.mp3", "The average is correct. Look at the shape of the bars.": "dv-prof-37c7d8fa.mp3", "Breathe. The beam sweeps across: tap when it&rsquo;s on the flaw. Then it sweeps down: tap again. Where they cross, that&rsquo;s your argument.": "dv-prof-7cc6ca82.mp3", "One brilliant person proves nothing. How big is his sample? Bottom of the slide.": "dv-prof-3613c9b2.mp3", "Not yet. Let him talk. When he shows your chart, stand up.": "dv-prof-d11d26b9.mp3", "Forget the headline. Where are the students on his chart? Point at the bars.": "dv-prof-e666cf6e.mp3", "Up. You&rsquo;re not wrong, you were aiming at the wrong thing. He&rsquo;s changing his slides. Read the new ones.": "dv-prof-888467e3.mp3", "Again? Fine. Breathe. Every slide has one flaw that holds the rest up. Find that one.": "dv-prof-456e0aeb.mp3", "A word is not evidence. The &sup1; sends you to his own footnote: three papers that did it before.": "dv-prof-058ef382.mp3", "What else goes up in June? That&rsquo;s the third thing. Point at it.": "dv-prof-c08199d8.mp3", "Third time. Listen: small print, footnotes, who got asked. That&rsquo;s where he hides it. Up.": "dv-prof-4eade7c2.mp3", "He felt that one.": "dv-prof-3ae9a510.mp3", "The p-value is below .05. Ask how many times he rolled the dice. The dagger.": "dv-prof-7276f72a.mp3", "The dots are fine. It&rsquo;s what he says they <i>do</i>.": "dv-prof-6ed296ad.mp3", "The percentage is correct. Ask <i>who</i> it&rsquo;s a percentage of. The star at the bottom.": "dv-prof-069651e3.mp3", "The grades are real. Ask who <i>chose</i> to sit in the front.": "dv-prof-3084916a.mp3", "He says <i>causes</i>. What did your design let you say?": "dv-prof-9cf2c335.mp3", "Good. Keep your hand still.": "dv-prof-6e9a7d0a.mp3", "Something else happens in June. The red line under the chart.": "dv-prof-170b1ef4.mp3", "Ninety-seven per cent of <i>whom</i>? Find the star.": "dv-prof-16ac0eed.mp3", "Ignore his words. Read his chart: the axis, the whiskers.": "dv-prof-698e21e0.mp3", "Not the words this time. Look at the chart itself.": "dv-prof-4061ef89.mp3", "Where was your study actually done? And where does he say it holds?": "dv-prof-39451583.mp3", "One course, one term. Find where he says <i>everywhere</i>.": "dv-prof-fe079061.mp3", "Don&rsquo;t look at me. Look at his slides. Every one of them says more than his data can. When you stand up, I&rsquo;m in your corner. Call me any time.": "dv-prof-49c4b67d.mp3", "How many tries did it take him? Follow the dagger to the bottom.": "dv-prof-adf32f42.mp3", "Right target. Dead centre next time.": "dv-prof-487cb76e.mp3"}, "narr": {"It is your chart. The small bar has grown to the top of the screen. Your name is not on it.": "dv-narr-4a1300a7.mp3", "The lights go down. One spotlight on him, one on you. Four hundred people stop breathing. You find the laser pointer on your lanyard. Your hand is shaking.": "dv-narr-9020e425.mp3", "The hall laughs, with him. The slide is still up.": "dv-narr-48457283.mp3", "A seat creaks next to you.": "dv-narr-ae025204.mp3", "Professor Stellmacher. Towel. Stopwatch. Your corner.": "dv-narr-42f84a15.mp3"}, "tobi": {"Hi chat, Tobi here, live from the Annual Meeting keynote. Front row. Well. Row nine. Feldstrom is up, and word is he's got one of our posters in his slides.": "dv-tobi-open.mp3", "Chat. CHAT. My colleague just stood up. Nobody stands up at a Feldstrom keynote. This is happening. This is actually happening.": "dv-tobi-stand.mp3", "Oh no. Oh no no no. Chat, send good vibes. Spam the chat. GET UP.": "dv-tobi-down.mp3", "HE'S DOWN! Feldstrom is DOWN! Chat, did you see that? Clip it! CLIP IT!": "dv-tobi-ko.mp3"}};   // text -> clip (excited takes, 2026-09-28)
+  var DV = {"coach": {"Read his survey question word by word. Could anyone answer &lsquo;not at all&rsquo;?": "dv-prof-065f8482.mp3", "Pointing at <i>never</i> proves nothing. See the little &sup1; after DISCOVERED? Follow it to the bottom of his slide.": "dv-prof-ffafd0e3.mp3", "That&rsquo;s it. Again.": "dv-prof-b6293acb.mp3", "Finish him. Politely.": "dv-prof-35fb2ef6.mp3", "The blue line is data. What is the red dotted line?": "dv-prof-29e84076.mp3", "Chin up. Hands steady. I&rsquo;m right here.": "dv-prof-6a06c3e5.mp3", "Where do his data end? Hit what comes after.": "dv-prof-4876902d.mp3", "Now down. Same again.": "dv-prof-2fe3f789.mp3", "One famous person is a story, not a finding. How many people is it? The &sect; at the bottom.": "dv-prof-fc495a10.mp3", "Breathe. Press on the slide where the flaw is. Keep still till your hand calms down, then let go.": "dv-prof-9e0fb18c.mp3", "Who ends up in the front row, and why? That&rsquo;s your target.": "dv-prof-24ec99bf.mp3", "THAT&rsquo;S my student!": "dv-prof-4e5f00b6.mp3", "The claim comes from the survey. Read the survey question itself.": "dv-prof-568d4732.mp3", "The average is correct. Look at the shape of the bars.": "dv-prof-37c7d8fa.mp3", "Breathe. The beam sweeps across: tap when it&rsquo;s on the flaw. Then it sweeps down: tap again. Where they cross, that&rsquo;s your argument.": "dv-prof-7cc6ca82.mp3", "One brilliant person proves nothing. How big is his sample? Bottom of the slide.": "dv-prof-3613c9b2.mp3", "Not yet. Let him talk. When he shows your chart, stand up.": "dv-prof-d11d26b9.mp3", "Forget the headline. Where are the students on his chart? Point at the bars.": "dv-prof-e666cf6e.mp3", "Up. You&rsquo;re not wrong, you were aiming at the wrong thing. He&rsquo;s changing his slides. Read the new ones.": "dv-prof-888467e3.mp3", "Again? Fine. Breathe. Every slide has one flaw that holds the rest up. Find that one.": "dv-prof-456e0aeb.mp3", "A word is not evidence. The &sup1; sends you to his own footnote: three papers that did it before.": "dv-prof-058ef382.mp3", "What else goes up in June? That&rsquo;s the third thing. Point at it.": "dv-prof-c08199d8.mp3", "Third time. Listen: small print, footnotes, who got asked. That&rsquo;s where he hides it. Up.": "dv-prof-4eade7c2.mp3", "He felt that one.": "dv-prof-3ae9a510.mp3", "The p-value is below .05. Ask how many times he rolled the dice. The dagger.": "dv-prof-7276f72a.mp3", "The dots are fine. It&rsquo;s what he says they <i>do</i>.": "dv-prof-6ed296ad.mp3", "The percentage is correct. Ask <i>who</i> it&rsquo;s a percentage of. The star at the bottom.": "dv-prof-069651e3.mp3", "The grades are real. Ask who <i>chose</i> to sit in the front.": "dv-prof-3084916a.mp3", "He says <i>causes</i>. What did your design let you say?": "dv-prof-9cf2c335.mp3", "Good. Keep your hand still.": "dv-prof-6e9a7d0a.mp3", "Something else happens in June. The red line under the chart.": "dv-prof-170b1ef4.mp3", "Ninety-seven per cent of <i>whom</i>? Find the star.": "dv-prof-16ac0eed.mp3", "Ignore his words. Read his chart: the axis, the whiskers.": "dv-prof-698e21e0.mp3", "Not the words this time. Look at the chart itself.": "dv-prof-4061ef89.mp3", "Where was your study actually done? And where does he say it holds?": "dv-prof-39451583.mp3", "One course, one term. Find where he says <i>everywhere</i>.": "dv-prof-fe079061.mp3", "Don&rsquo;t look at me. Look at his slides. Every one of them says more than his data can. When you stand up, I&rsquo;m in your corner.": "dv-prof-corner.mp3", "How many tries did it take him? Follow the dagger to the bottom.": "dv-prof-adf32f42.mp3", "Right target. Dead centre next time.": "dv-prof-487cb76e.mp3"}, "narr": {"It is your chart. The small bar has grown to the top of the screen. Your name is not on it.": "dv-narr-4a1300a7.mp3", "The lights go down. One spotlight on him, one on you. Four hundred people stop breathing. You find the laser pointer on your lanyard. Your hand is shaking.": "dv-narr-9020e425.mp3", "The hall laughs, with him. The slide is still up.": "dv-narr-48457283.mp3", "A seat creaks next to you.": "dv-narr-ae025204.mp3", "Professor Stellmacher. Towel. Stopwatch. Your corner.": "dv-narr-42f84a15.mp3"}, "tobi": {"Hi chat, Tobi here, live from the Annual Meeting keynote. Front row. Well. Row nine. Feldstrom is up, and word is he's got one of our posters in his slides.": "dv-tobi-open.mp3", "Chat. CHAT. My colleague just stood up. Nobody stands up at a Feldstrom keynote. This is happening. This is actually happening.": "dv-tobi-stand.mp3", "Oh no. Oh no no no. Chat, send good vibes. Spam the chat. GET UP.": "dv-tobi-down.mp3", "HE'S DOWN! Feldstrom is DOWN! Chat, did you see that? Clip it! CLIP IT!": "dv-tobi-ko.mp3"}};   // text -> clip (excited takes, 2026-09-28)
   var voiceEl = null;
   function voice(src){ if (!src) return null; if (voiceEl) voiceEl.pause(); voiceEl = new Audio(src); voiceEl.volume = 1; trackTo(.2, 300);
     voiceEl.addEventListener('ended', function(){ trackTo(aim ? .28 : trackVol, 800); }); voiceEl.play().catch(function(){}); return voiceEl; }
-  function coach(html, ms){ if (DV.coach && DV.coach[html]) voice(DV.coach[html]);
-    $('coachLine').innerHTML = html; var c = $('coach'); c.classList.add('on');
-    clearTimeout(coachT); coachT = setTimeout(function(){ c.classList.remove('on'); }, ms || Math.max(3200, html.replace(/<[^>]+>/g,'').length * 70));
+  // Stellmacher's notes from your corner go into the panel under her name, like everybody's lines
+  // (2026-10-01). A note does not wait for you: it steps aside after a while, unless a newer line has
+  // replaced it, and stays while you aim.
+  var COACH = 'Prof. Stellmacher', noteTok = 0;
+  function note(who, html, ms, voiced){
+    var tok = ++noteTok, sp = $('speech');
+    sp.hidden = false; $('choices').innerHTML = ''; $('next').hidden = true; sp.classList.toggle('vo', VO && !!voiced);
+    $('who').textContent = who || ''; $('line').innerHTML = html;
+    setTimeout(function(){ if (tok === noteTok && !aim) sp.hidden = true; }, ms || Math.max(3200, html.replace(/<[^>]+>/g,'').length * 70));
   }
+  function coach(html, ms){ var v = DV.coach && DV.coach[html]; if (v) voice(v); note(COACH, html, ms, !!v); }
   var FIRST_AIM = {
     lock:'Breathe. The beam sweeps across: tap when it&rsquo;s on the flaw. Then it sweeps down: tap again. Where they cross, that&rsquo;s your argument.',
     hand:'Breathe. Press on the slide where the flaw is. Keep still till your hand calms down, then let go.' };
-  $('callbtn').addEventListener('pointerdown', function(e){
-    e.stopPropagation(); audio();
-    if (!curRound){ coach('Not yet. Let him talk. When he shows your chart, stand up.'); return; }
-    coach(curRound.coach + ' ' + (mode === 'lock' ? 'Stop the beam on it, twice.' : 'Hold still on it, then let go.'), 6000);
-  });
+  // ---------- jokers: whoever stayed at Poster 312 helps once each, while you aim (author, 2026-10-01).
+  // Pressing one shows them big, puts their line in the panel, and does one thing you can see.
+  var JOKERS = {
+    fellow:   { img:'../sprite-listen-fellow.webp', name:'Dr. Achterberg', line:'Selection? No. Look <i>there</i>.',
+      fx:function(){ okZones().forEach(function(z){ z.classList.add('jglow'); }); } },
+    skeptic:  { img:'../sprite-listen-skeptic.webp', name:'The Skeptic', line:'Slower. Be sure.', fx:function(){ slower(); } },
+    officer:  { img:'../sprite-listen-officer.webp', name:'The Sampling Officer', line:'Steady, young person! Steady!',
+      fx:function(){ setNerves(.08); boost('mNerves', 'STEADY'); } },
+    'vossberg2-think': { img:'../vossberg2-think.webp', name:'Dr. Vossberg', line:'Ze system observes zat zis slide is an irritation.',
+      fx:function(){ swing(22); chat([['stats_nerd','even vossberg??']]); } },
+    director: { img:'../sprite-listen-director.webp', name:'The Fieldwork Director', line:'Make some NOISE for Poster 312!',
+      fx:function(){ swing(22); chat([['phd_yr4','THREE ONE TWO'],['tobi','THREE ONE TWO!!']]); } } };
+  function okZones(){
+    var R = aim && aim.R; if (!R) return [];
+    return Object.keys(R.zones).filter(function(k){ return R.zones[k].ok; })
+      .map(function(k){ return slideEl.querySelector('[data-zone="' + k + '"]'); }).filter(Boolean);
+  }
+  // the beam slows from where it is, without a jump, and says so on the slide
+  function slower(){
+    var st = aim; if (!st) return;
+    var now = performance.now(), ph = (now - st.t0) / st.period;
+    st.period *= 1.8; st.t0 = now - ph * st.period; st.slow = 1.8;
+    var t = document.createElement('div'); t.className = 'jtag'; t.textContent = 'SLOWER'; screen.appendChild(t); st.els.push(t);
+  }
+  function boost(id, label){
+    var m = $(id); anim(m, 'boost');
+    var t = document.createElement('span'); t.className = 'tagup'; t.textContent = label; m.appendChild(t); setTimeout(function(){ t.remove(); }, 1900);
+  }
+  function cheer(){
+    var done = false;
+    try { if (IN_GAME && window.parent.CODEBOOK_SFX){ window.parent.CODEBOOK_SFX('sfx-applause-big', .32); done = true; } } catch(e){}
+    if (!done) music.gasp();
+    anim(document.querySelector('.crowd'), 'gasp'); camFlashes(10);
+    $('me').classList.add('cheer'); setTimeout(function(){ $('me').classList.remove('cheer'); }, 900);
+  }
+  function swing(n){ setMeter(S.meter + n); boost('mApplause', 'THE HALL IS WITH YOU'); cheer(); }
+  (function(){
+    var stayed = []; try { stayed = (JSON.parse(localStorage.getItem('codebook_save_v1') || '{}').flags || {}).psStayed || []; } catch(e){}
+    if (!IN_GAME && !stayed.length) stayed = Object.keys(JOKERS);
+    var row = $('jrow');
+    stayed.forEach(function(k){ var J = JOKERS[k]; if (!J) return;
+      var b = document.createElement('button'); b.type = 'button'; b.className = 'off'; b.dataset.j = k; b.title = J.name + ': during your turn';
+      b.innerHTML = '<img src="' + J.img + '" alt="' + J.name + '">';
+      b.addEventListener('pointerdown', function(e){ e.stopPropagation(); e.preventDefault(); audio();
+        if (!aim || b.classList.contains('used')) return;
+        b.classList.remove('ready', 'off'); b.classList.add('used'); b.title = J.name + ': used';
+        $('jbigImg').src = J.img; $('jbigName').textContent = J.name; anim($('jbig'), 'go');
+        note(J.name, '&ldquo;' + J.line + '&rdquo;', 4200);
+        J.fx(); });
+      row.appendChild(b); });
+    $('jokers').hidden = !row.children.length;
+  })();
+  function jokersArm(on){
+    [].forEach.call($('jrow').children, function(b){ if (b.classList.contains('used')) return;
+      b.classList.toggle('off', !on); b.classList.toggle('ready', on); b.title = JOKERS[b.dataset.j].name + (on ? '' : ': during your turn'); });
+  }
   // whispers rise out of the crowd while he talks
   var WHISPERS = ['Is that really true?', 'Wait, proven?', 'Isn\u2019t that poster 312?', 'That bar was small this morning', 'n = ?', 'Since when is it a law?',
                   'Who drew that axis?', 'He can\u2019t just say that\u2026', 'Is anyone going to say something?', 'Correlation, surely', 'Everywhere? Really?', 'Shh!'];
@@ -777,17 +878,15 @@
     var g = gen;
     return new Promise(function(res, rej){
       var a = new Audio(src), done = false;
-      function fin(){ if (done) return; done = true; skip = null; try { a.pause(); } catch(e){} clearTimeout(t); g === gen ? res() : rej('reset'); }
-      a.addEventListener('ended', fin); a.addEventListener('error', function(){ setTimeout(fin, 1800); });
+      function fin(cut){ if (done) return; done = true; skip = null; try { a.pause(); } catch(e){} clearTimeout(t); g === gen ? res(cut === true) : rej('reset'); }
+      a.addEventListener('ended', function(){ fin(); }); a.addEventListener('error', function(){ setTimeout(fin, 1800); });
       a.play().catch(function(){ setTimeout(fin, 1800); });
       var t = setTimeout(fin, maxMs || 12000);
-      setTimeout(function(){ skip = fin; }, 250);
+      setTimeout(function(){ skip = function(){ fin(true); }; }, 250);
     });
   }
-  function gong(){ if (!ac) return; var t = ac.currentTime;
-    [[98, .5, 5], [98 * 2.4, .22, 3.5], [98 * 3.9, .12, 2.5], [98 * 5.8, .07, 1.6]].forEach(function(p){ note('sine', p[0], t, .008, p[1], p[2], { vib:3 }); });
-    var n = ac.createBufferSource(), g = ac.createGain(), bp = ac.createBiquadFilter(); n.buffer = noise(); bp.type = 'bandpass'; bp.frequency.value = 600;
-    n.connect(bp); bp.connect(g); g.connect(ac.destination); g.gain.setValueAtTime(.3, t); g.gain.exponentialRampToValueAtTime(.0001, t + .6); n.start(t); n.stop(t + .7); }
+  // a real gong at the start of every round, like the bell in boxing (author, 2026-10-01)
+  function gong(){ try { var g = new Audio('../sfx-gong.mp3'); g.volume = .75; g.play().catch(function(){}); } catch(e){} }
   function capt(t){ var c = $('fightCap'); c.innerHTML = t; anim(c, 'go'); }
   // two fighters on one ellipse, half a turn apart; the one nearer the audience is bigger and in front
   var circleRAF = null;
@@ -808,17 +907,18 @@
       circleRAF = requestAnimationFrame(step);
     })();
   }
+  async function called(src){ if (!(await clip(src))) await cont(); }
   async function fightNight(){
     var f = $('fight'); f.classList.add('on'); $('ui').classList.add('fighting');
     gong(); capt('Ladies and gentlemen&hellip;');
-    await clip('ann-intro.mp3');
+    await called('ann-intro.mp3');
     circling(true); $('foMe').classList.add('lit'); $('foFeld').classList.add('dim'); capt('In the blue corner&hellip;');
     coach('Chin up. Hands steady. I&rsquo;m right here.', 4000);
-    await clip('ann-blue.mp3');
+    await called('ann-blue.mp3');
     $('foMe').classList.remove('lit'); $('foMe').classList.add('dim'); $('foFeld').classList.remove('dim'); $('foFeld').classList.add('lit'); capt('&hellip;and in the red corner');
-    await clip('ann-red.mp3');
+    await called('ann-red.mp3');
     $('foMe').classList.remove('dim'); $('foMe').classList.add('lit'); capt('Let&rsquo;s get ready to FALSIFYYY!'); anim($('strobe'), 'go'); camFlashes(20); music.gasp();
-    await clip('ann-ready.mp3');
+    await called('ann-ready.mp3');
     f.classList.remove('on'); $('ui').classList.remove('fighting'); circling(false); ['foMe','foFeld'].forEach(function(id){ $(id).classList.remove('lit','dim'); });
   }
   function tableau(src, cap){ $('tabImg').src = src; $('tabCap').innerHTML = cap || ''; $('tabCount').textContent = ''; anim($('tab'), 'on'); $('ui').classList.add('fighting'); }
@@ -839,11 +939,9 @@
     var cnt = $('tabCount');
     clip('ann-count.mp3', 9000).catch(function(){});
     for (var k = 1; k <= 8; k++){ cnt.textContent = k; if (ac) note('sine', 180, ac.currentTime, .005, .25, .3); await wait(700); }
-    coach(['Up. You&rsquo;re not wrong, you were aiming at the wrong thing. He&rsquo;s changing his slides. Read the new ones.',
+    await say(COACH, ['Up. You&rsquo;re not wrong, you were aiming at the wrong thing. He&rsquo;s changing his slides. Read the new ones.',
            'Again? Fine. Breathe. Every slide has one flaw that holds the rest up. Find that one.',
-           'Third time. Listen: small print, footnotes, who got asked. That&rsquo;s where he hides it. Up.'][bout % 3], 7000);
-    $('tabCap').innerHTML = 'Stellmacher: &ldquo;Up!&rdquo;';
-    await wait(3200);
+           'Third time. Listen: small print, footnotes, who got asked. That&rsquo;s where he hides it. Up.'][bout % 3]);
     tableauOff(); setMeter(-40); setNerves(.55); $('me').style.visibility = 'hidden';
     await standUp();
   }
@@ -851,7 +949,6 @@
     var bout = window.__bout ? window.__bout() : 0;
     $('roundTxt').textContent = (bout ? 'BOUT ' + (bout + 1) + ' \u00b7 ' : '') + (last ? 'FINAL ROUND' : 'ROUND ' + (i + 1));
     $('speech').hidden = true; anim($('roundcard'), 'go'); gong();
-    if (ac) setTimeout(function(){ note('sine', 700, ac.currentTime, .01, .05, .2, { bend:1.4 }); }, 400);   // a monkey chirp
     await clip('ann-r' + (last ? 4 : i + 1) + '.mp3', 3000);
     await wait(900);
   }
@@ -860,29 +957,38 @@
 
   // Speech: resolves after reading time, or on a tap.
   var skip = null;
-  var WHO = { 'Tobi':'tobi', 'Feldstrom':'fs', 'You':'you', 'Dr. Vossberg':'voss', '':'sys' };
   function say(who, html){
-    var g = gen;
+    var g = gen; noteTok++;
     return new Promise(function(res, rej){
-      var sp = $('speech'); sp.hidden = false; $('choices').innerHTML = ''; $('next').hidden = false;
-      $('who').className = 'who ' + (WHO[who] || 'sys'); $('who').textContent = who || 'Narrator';
+      var sp = $('speech'); sp.hidden = false; $('choices').innerHTML = ''; $('next').hidden = false; $('conthint').hidden = true;
+      $('who').textContent = who || '';          // the narrator carries no name, as everywhere in the game
       $('line').innerHTML = html;
       var len = html.replace(/<[^>]+>|&[a-z]+;/g, 'x').length, done = false;
       function fin(){ if (done) return; done = true; skip = null; clearTimeout(t); g === gen ? res() : rej('reset'); }
-      var clipSrc = (!who && DV.narr && DV.narr[html]) || (who === 'Tobi' && DV.tobi && DV.tobi[html]), a = clipSrc ? voice(clipSrc) : null;
-      if (a) a.addEventListener('ended', function(){ setTimeout(fin, 400); });
+      var clipSrc = (!who && DV.narr && DV.narr[html]) || (who === 'Tobi' && DV.tobi && DV.tobi[html]) || (who === COACH && DV.coach && DV.coach[html]), a = clipSrc ? voice(clipSrc) : null;
+      if (a && window.__duelAuto) a.addEventListener('ended', function(){ setTimeout(fin, 400); });
       else { var list = gameClips(html);                 // the game's own voices (Feldstrom, you, Vossberg, the narrator)
         if (list.length){ var k = 0; (function nextClip(){ if (done) return; a = voice(list[k++]); if (!a) return;
-          a.addEventListener('ended', function(){ if (k < list.length) nextClip(); else setTimeout(fin, 400); }); })(); } }
-      var t = setTimeout(fin, (a ? 20000 : (1400 + len * 48)) * (easy ? 1.2 : 1));
+          a.addEventListener('ended', function(){ if (k < list.length) nextClip(); else if (window.__duelAuto) setTimeout(fin, 400); }); })(); } }
+      sp.classList.toggle('vo', VO && !!(a || (list && list.length)));
+      var t = window.__duelAuto ? setTimeout(fin, (a ? 20000 : (1400 + len * 48)) * (easy ? 1.2 : 1)) : null;   // waits for you (tests: __duelAuto)
       setTimeout(function(){ skip = function(){ if (a) a.pause(); fin(); }; }, 250);
+    });
+  }
+  // a beat with no line of its own (the announcer, a picture) waits for a click, a tap, Space or Enter too
+  function cont(){
+    var g = gen;
+    return new Promise(function(res, rej){
+      if (window.__duelAuto){ res(); return; }
+      var h = $('speech').hidden ? $('conthint') : $('next'); h.hidden = false;
+      setTimeout(function(){ skip = function(){ skip = null; h.hidden = true; g === gen ? res() : rej('reset'); }; }, 250);
     });
   }
   function ask(label){
     var g = gen;
     return new Promise(function(res, rej){
-      $('speech').hidden = false; $('next').hidden = true;
-      var b = document.createElement('button'); b.innerHTML = label; $('choices').innerHTML = ''; $('choices').appendChild(b);
+      $('speech').hidden = false; $('next').hidden = true; noteTok++;
+      var b = document.createElement('button'); b.className = 'choice'; b.innerHTML = label; $('choices').innerHTML = ''; $('choices').appendChild(b);
       b.onclick = function(e){ e.stopPropagation(); audio(); $('choices').innerHTML = ''; g === gen ? res() : rej('reset'); };
     });
   }
@@ -895,12 +1001,15 @@
     if (skip) skip();
   }, true);
 
+  document.addEventListener('keydown', function(e){
+    if (aim || (e.code !== 'Space' && e.code !== 'Enter')) return;
+    e.preventDefault(); audio(); if (voiceEl && !voiceEl.paused){ voiceEl.pause(); trackTo(trackVol, 500); } if (skip) skip();
+  });
   // ---------- aiming. Resolves with a point in slide percent {x, y}.
   var aim = null;          // the running aim state
   function aimRound(R){
     var g = gen;
     return new Promise(function(res, rej){
-      $('speech').hidden = true;
       var pr = $('prompt'); pr.hidden = true;
       var period = 3600 / (R.speed * (0.8 + S.nerves * 0.4)) * (easy ? 1.6 : 1);
       var st = aim = { mode:mode, phase:'x', t0:performance.now(), x:50, y:50, lx:null, res:res, rej:rej, g:g, period:period, R:R, els:[] };
@@ -913,7 +1022,7 @@
         pr.textContent = 'Press and hold on the slide, keep still, let go';
       }
       if (R.chaos === 'green'){ st.green = mk('dot green'); }
-      if (R.chaos === 'monkey'){ st.junkAt = performance.now() + 900; }
+      jokersArm(true);
       requestAnimationFrame(function tick(now){
         if (aim !== st || g !== gen) return;
         var ph = (now - st.t0) / st.period;
@@ -924,7 +1033,7 @@
         } else if (st.hold){
           // the hand: a Lissajous wobble that shrinks while you keep still
           var calm = 0.3 + 0.7 * Math.exp(-st.still / 450), amp = (1.2 + 5 * S.nerves) * calm * (easy ? .6 : 1);
-          var t = now / 1000 * (1 + R.speed * .5);
+          var t = now / 1000 * (1 + R.speed * .5) / (st.slow || 1);
           st.x = st.ax + amp * Math.sin(t * 5.1) ; st.y = st.ay + amp * 1.5 * Math.sin(t * 3.7 + 1.3);
           st.still += 16;
           st.dot.style.left = st.x + '%'; st.dot.style.top = st.y + '%'; st.dot.style.display = '';
@@ -932,12 +1041,6 @@
         }
         if (st.green){                                          // Feldstrom's own pointer circles his headline, to distract you
           st.green.style.left = (50 + 30 * Math.sin(now / 520)) + '%'; st.green.style.top = (26 + 9 * Math.sin(now / 330)) + '%';
-        }
-        if (st.junkAt && now > st.junkAt){                      // the monkey has the clicker
-          st.junkAt = now + 2200 + Math.random() * 1500;
-          var j = document.createElement('div'); j.className = 'junk';
-          j.textContent = ['BANANAS', 'SLIDE 3 (AGAIN)', 'asdfghjkl', 'n = 1'][Math.floor(Math.random() * 4)];
-          screen.appendChild(j); setTimeout(function(){ j.remove(); }, 380);
         }
         requestAnimationFrame(tick);
       });
@@ -968,11 +1071,17 @@
     if (moved > 0.6){ st.still = Math.max(0, st.still - moved * 90); st.last = p; }
     st.ax = p.x; st.ay = p.y;
   });
+  document.addEventListener('keydown', function(e){
+    var st = aim; if (!st || (e.code !== 'Space' && e.code !== 'Enter')) return; e.preventDefault();
+    if (st.mode === 'lock') stage.dispatchEvent(new PointerEvent('pointerdown', { bubbles:true }));
+    else if (!st.hold){ st.hold = true; st.ax = st.ax || 50; st.ay = st.ay || 50; st.still = 0; st.last = { x:st.ax, y:st.ay }; }
+  });
+  document.addEventListener('keyup', function(e){ if ((e.code === 'Space' || e.code === 'Enter') && aim && aim.mode === 'hand') release(); });
   function release(){ var st = aim; if (st && st.mode === 'hand' && st.hold){ st.hold = false; finishAim(st); } }
   stage.addEventListener('pointerup', release);
   stage.addEventListener('pointercancel', release);
   function finishAim(st){
-    aim = null; $('prompt').hidden = true;
+    aim = null; $('prompt').hidden = true; jokersArm(false);
     var pt = { x:st.x, y:st.y };
     setTimeout(function(){ st.els.forEach(function(e){ e.remove(); }); }, 650);
     st.g === gen ? st.res(pt) : st.rej('reset');
@@ -1018,12 +1127,9 @@
     await say('Feldstrom', '&ldquo;Forty-seven thousand and twelve citations. No one in this field has ever been cited more. And our young friend has&hellip;&rdquo; <i>(he checks the programme)</i> &ldquo;&hellip;a poster. Next to the bins.&rdquo;');
     await say('Dr. Vossberg', '&ldquo;Ze floor is now open, which is to say, ze system irritates its environment. Questions?&rdquo;');
     // Stellmacher takes the seat next to you: your corner (author, 2026-09-28)
-    whispers(false); tableau('duel-coachsetup.webp', 'A seat creaks next to you.');
-    await wait(1600);
-    coach('Don&rsquo;t look at me. Look at his slides. Every one of them says more than his data can. When you stand up, I&rsquo;m in your corner. Call me any time.', 9000);
-    await wait(4500);
-    $('tabCap').innerHTML = 'Professor Stellmacher. Towel. Stopwatch. Your corner.';
-    await wait(3500);
+    whispers(false); tableau('duel-coachsetup.webp', '');
+    await say('', 'A seat creaks next to you.');
+    await say(COACH, 'Don&rsquo;t look at me. Look at his slides. Every one of them says more than his data can. When you stand up, I&rsquo;m in your corner.');
     tableauOff(); whispers(true);
     await ask('Stand up');
     whispers(false);
@@ -1038,7 +1144,9 @@
     anim($('western'), 'go');
     chat([['stats_nerd','who turned the lights off'],['tobi','IT&rsquo;S A SHOWDOWN'],['anon_reviewer','*spurs jingle*']]);
     await wait(2600);
-    await say('', 'The lights go down. One spotlight on him, one on you. Four hundred people stop breathing. You find the laser pointer on your lanyard. Your hand is shaking.');
+    var said = say('', 'The lights go down. One spotlight on him, one on you. Four hundred people stop breathing. You find the laser pointer on your lanyard. Your hand is shaking.');
+    setTimeout(function(){ var mi = $('meImg'); if (mi){ mi.src = 'duel-player.webp'; anim($('me'), 'raise'); } }, 4200);   // the pointer comes up
+    await said;
 
     var bout = 0; window.__bout = function(){ return bout; };
     bouts: while (true){
@@ -1082,11 +1190,11 @@
             setMeter(S.meter + 10); setNerves(S.nerves + .04); chat([['phd_yr4','...kind of?'],['tobi','say it LOUDER']]);
             setTimeout(function(){ cite(-(300 + Math.round(Math.random() * 600))); chat([HEDGE[S.weak % HEDGE.length]]); }, 1300);
           }
-          coach(strong ? ['That&rsquo;s it. Again.', 'He felt that one.', 'Good. Keep your hand still.', 'Finish him. Politely.'][i % 4] : 'Right target. Dead centre next time.', 3000);
           await wait(500); zoom('mid');
           await say('You', strong ? res.Z.strong : res.Z.weak);
           if (!strong) anim(feld, 'gloat');
           await say(strong ? '' : 'Feldstrom', strong ? res.Z.back : res.Z.weakBack);
+          await say(COACH, strong ? ['That&rsquo;s it. Again.', 'He felt that one.', 'Good. Keep your hand still.', 'Finish him. Politely.'][i % 4] : 'Right target. Dead centre next time.');
 
           break;
         }
@@ -1100,7 +1208,6 @@
         await say('Feldstrom', res.kind === 'decoy' && res.Z ? res.Z.back : MISS);
         if (res.el) res.el.classList.remove('wrong');
         if (S.meter <= -90){ down = true; break; }           // the hall is his: you go down
-        coach('Not that. ' + R.hint, 6500);
         await say('', 'The hall laughs, with him. The slide is still up.');
         if (fails >= 1) Object.keys(R.zones).forEach(function(k){ if (R.zones[k].ok){ var z = slideEl.querySelector('[data-zone="' + k + '"]'); if (z) z.classList.add('hint'); } });
       }
@@ -1119,11 +1226,10 @@
     setTimeout(function(){ cite(-Math.round(CITE.n * .6)); $('cites').classList.add('review'); $('cites').querySelector('small').textContent = 'CITATIONS \u00b7 UNDER REVIEW';
       CITE.mine += 3; myCite(); chat(retract(3)); }, 900);
     await say('Tobi', TOBI.ko);
-    await clip('ann-winner.mp3', 7000).catch(function(){});
-    await wait(1200);
     tableau('duel-win.webp', 'The winner&hellip; by falsification!'); confetti(90); camFlashes(24); music.strong();
-    coach('THAT&rsquo;S my student!', 5000);
-    await wait(5500);
+    $('speech').hidden = true;
+    await called('ann-winner.mp3');
+    await say(COACH, 'THAT&rsquo;S my student!');
     tableauOff(); lightsDown(false);
 
     zoom('wide');
@@ -1133,14 +1239,15 @@
       : S.strong >= 1 ? ['A narrow escape', 'You got there. Not loudly, but you got there, and the chat noticed.']
       : ['Still standing', 'Every point was right, even the quiet ones. Now it&rsquo;s the Professor&rsquo;s turn.'];
     $('cardBody').innerHTML = '<h2>' + verdict[0] + '</h2><div class="tally"><span><em>' + S.strong + '</em>strong</span><span><em>' + S.weak + '</em>weak</span><span><em>' + S.laughs + '</em>laughs for him</span></div>' +
-      '<p>' + verdict[1] + '</p>' + (IN_GAME ? '<button id="again">Continue</button>' : '<p style="color:var(--soft)">In the game, the Professor stands up next, and Achterberg&rsquo;s replication board follows.</p><button id="again">Duel again</button>');
+      '<p>' + verdict[1] + '</p>' + (IN_GAME ? '<button class="choice" id="again">Continue</button>' : '<p style="color:var(--g-ink-soft)">In the game, the Professor stands up next, and Achterberg&rsquo;s replication board follows.</p><button class="choice" id="again">Duel again</button>');
     $('card').hidden = false; $('speech').hidden = true;
     $('again').onclick = function(e){ e.stopPropagation();
       if (IN_GAME){ music.stop && music.stop(); window.parent.postMessage({ codebookDuel:'won', strong:S.strong, weak:S.weak, laughs:S.laughs, bouts:bout }, location.origin); return; }
       restart(); };
   }
   function restart(){
-    gen++; aim = null; skip = null;
+    gen++; aim = null; skip = null; jokersArm(false); $('conthint').hidden = true;
+    [].forEach.call($('jrow').children, function(b){ b.classList.remove('used'); });
     if (ac) music.stop(); lightsDown(false); whispers(false); $('rise').classList.remove('on'); $('fight').classList.remove('on'); $('tab').classList.remove('on'); $('ui') && $('ui').classList.remove('fighting');
     screen.querySelectorAll('.sweep,.dot,.xmark,.junk,.dab').forEach(function(e){ e.remove(); });
     $('prompt').hidden = true;
@@ -1151,10 +1258,15 @@
   $('modeHand').onclick = function(){ setMode('hand'); };
   $('easy').onchange = function(){ easy = this.checked; };
   $('restart').onclick = restart;
-  window.__duelTest = { cite:cite, CITE:CITE, myCite:myCite, chat:chat, retract:retract, circling:circling, tableau:tableau, knockdown:knockdown, confetti:confetti, gen:function(){ return gen; } };   // screenshots only
+  window.__duelTest = { cite:cite, CITE:CITE, myCite:myCite, chat:chat, retract:retract, circling:circling, tableau:tableau, knockdown:knockdown, confetti:confetti, gen:function(){ return gen; },
+    aiming:function(){ return !!aim; },
+    // lands the current shot dead centre on the flaw (screenshots and tests)
+    aimHit:function(){ var st = aim, z = okZones()[0]; if (!st || !z) return false;
+      var r = z.getBoundingClientRect(), sr = screen.getBoundingClientRect();
+      st.x = (r.left + r.width / 2 - sr.left) / sr.width * 100; st.y = (r.top + r.height / 2 - sr.top) / sr.height * 100; finishAim(st); return true; } };   // screenshots only
   // move the interface out of the scene onto the screen
   var ui = document.createElement('div'); ui.className = 'ui'; ui.id = 'ui'; document.querySelector('main').appendChild(ui);
-  ['.hud', '#chat', '#prompt', '#speech', '#card', '#coach', '#callbtn'].forEach(function(q){ var e = stage.querySelector(q); if (e) ui.appendChild(e); });
+  ['.hud', '#chat', '#prompt', '#speech', '#conthint', '#card', '#jokers', '#jbig'].forEach(function(q){ var e = stage.querySelector(q); if (e) ui.appendChild(e); });
   restart();
 })();
 </script>

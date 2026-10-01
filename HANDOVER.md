@@ -1,6 +1,6 @@
 # The Secret of the Lost Codebook — Handover
 
-*Project handover / internal reference — compiled 2026-09-15, last updated 2026-09-29 evening (section 00 is current; everything below it is history)*
+*Project handover / internal reference — compiled 2026-09-15, last updated 2026-10-01 (section 00 is current; everything below it is history)*
 
 A LucasArts-style point-and-click adventure teaching Research Methods, built as a single self-contained HTML file. This is the orientation doc for picking the project back up — what's live, how it's wired together, and what's still open.
 
@@ -186,6 +186,109 @@ The monkeys got out in the autumn, not at the Annual Meeting. The Act V escape s
 - **Stellmacher in person** (the Office, and the Delegation Engine in Act IV): every step of her advice has "Never mind.".
 - **Summary cards:** they show only the lessons, no room names (`LESSONS.md` likewise). The Act I card covers all four rooms.
 
+### Sound and small fixes (2026-09-30, night)
+
+- **No room music.** Rooms no longer play the office/lecture tracks; the campus theme stays on the map, and set pieces (bingo, casino, keynote, outro) keep their own music. The bingo track stops 7 s after the win.
+- **Room ambience loops.** `tools/sfx/build_amb.py` mixes Mixkit sounds (free licence, no account; sources in `tools/sfx/raw2/`) into seamless 40 s mono loops, `web/amb-<name>.mp3`: a quiet bed plus a few sparse details, the last 3 s crossfaded into the first. Rooms: lecture (murmur; `amb-roomtone` once the hall empties), corridor `amb-hum`, library, hall, workshop, ethics (one snore), casino, machine, bureau, typing (Psych Lab), audience (Keynote), writing. Unchanged: Office clock, Pond, Survey Lab, Mensa, Fieldwork. The loops are in each act's preload list. `test-audio` ignores `amb-*` names.
+- **Seminar Room jazz.** `web/amb-seminar-jazz.mp3` is the author's Suno track (source `audio/music-src/seminar-jazz-suno.mp3`), filtered to sound as if it comes through a window (seconds 20–180, highpass 160, lowpass 1500, light echo, −24 LUFS). Dr. Achterberg has a talk option, "Is that jazz outside?" ("Becker's trio…", voiced `vo-fellow-jazz-1/2`). The Seminar Room now names her Dr. Achterberg (speaker and hotspot); the voiced narration still says "visiting fellow".
+- **Vossberg stays on the floor.** Each pose image is anchored at his feet (`translateX` per pose, `FEET` table for the alternate poses), and he no longer strolls at random, only on his way out.
+- **Summary slides** (`wait:true`) wait for a click, and hold still (`pan:'none'`). `.il-veil` no longer uses `backdrop-filter`: a blur recomputed under the moving camera flickered along the edges of the title and summary slides.
+- **The act theme follows you into a room** (`CODEBOOK_THEME_INTO_ROOM(20000, 8000)` in `enterRoom`): it runs on from the map, holds 20 s, fades over 8 s, and leaves the room to its ambience. Rooms with their own music (casino, game show) are untouched; a set piece started meanwhile is not faded.
+- **THE LITERATURE runs.** `tools/art/library_belt.py` cuts three layers from `library-bg.webp` (`lib-belt-strip/clean/press.webp`); a canvas (`#lb_belt`) scrolls the stacks along the belt's slope and under the press. Off with prefers-reduced-motion.
+- **Mensa:** the `counters` hotspot is only the cook now, not the queue.
+- **Schnitzel Hotline, Acts IV–V:** the cook's voicebox answers (his book in Act IV, his poster in Act V) and still takes an order; the schnitzel arrives in your inventory as usual. Voiced (`vo-cook-vm-*`).
+- **Achterberg recast:** all 38 `vo-fellow-*` lines re-recorded with **Kara Shallenberg** (LibriVox *Dracula*, `tools/tts/refs/lv-shallenberg.wav`, 0.5 / 0.5); `lv-gesine` had a hum. `lv-savage` (Karen Savage) was the other candidate.
+- **Fieldwork target:** the board reads TARGET 75% while the rate is short, the Director says it when the rate crashes (voiced, `vo-director-target`), and the status lines show it.
+- **"THE LITERATURE" re-voiced** in normal case (`vo-narr-lib-literature`). All-caps words must be written in normal case in TTS text.
+
+### Act V and the rules of progress (2026-09-30 / 10-01)
+
+- **Only right answers progress.** The slip is not sealed while a box says nothing (`CODEBOOK_SLIP_UNSOUND`); the Casino's p-hacked banner and the Bureau's EXTRA LARGE implication are shown and handed back; the Writing Room will not accept an overstated abstract. The three durable failure flags can no longer be set in normal play, so the outro's failure branches are dormant. The Act IV result has no coin flip: honest work always "holds" (small effect, where the mechanism said); only an empty theory gives "vacuous".
+- **Writing Room:** the talk finishes, Stellmacher signs CLAIM DEFENSIBLE ("Good. KIRA, print it."), KIRA prints (`sfx-oldprinter`, built from the electric-typewriter recording), the poster lands in the inventory.
+- **Poster Session:** Feldstrom appears only once the poster is pinned; his title inflation is a played scene (three steps, you write the small title back); when he takes out his phone the sprite swaps to `sprite-feldstrom-phone.webp` and his post appears. The poster is `poster-312.webp` (ChatGPT; sources in `art/postersession/`), mapped onto board 312 with a homography (`fitPoster`, corners in `PCORNERS`); the title is live text over its empty band. Visitors (four: the Doorman is gone; the Sampling Officer asks about random sampling) appear one at a time; a good answer and they join the crowd left of the board in their listening pose (`sprite-listen-*.webp`), a bad one and they fade out. No monkeys, no MAJOR CONCERNS. At the end a title card with a gong (`sfx-gong`, synthesised) leads straight into the Keynote.
+- **Keynote:** you are seated; the hall dims (brightness filter on the painted layers), Vossberg introduces Feldstrom, who walks on to huge applause under CIVILISATION IS TRAFFIC; then slide 14, Tobi's pointer if you have none, then the duel.
+- **Round 2026-10-01 (Act V and outro):** the Poster Session opens by itself once Feldstrom has gone (his post closes itself after 9 s, `CODEBOOK_POST` `autoClose`); the pinned poster is a painted patch (`poster-312-pinned.webp`, ChatGPT repaint aligned with `align.py`, sources in `art/postersession/`), Feldstrom's titles go on a paper strip over it; after the last visitor: a loud gong, Tobi's "KEYNOTE IN 5" post, and the rush slide `il5-rush.webp` (monkeys among the crowd), then the Keynote. In the Keynote: no monkeys any more (the founders' portrait in `keynote-bg.webp` is Spencer again, the original is in `art/`; the duel's monkey rounds and round-card monkey are gone; an unseen voice asks the closing question), except one monkey in the audience from behind (`sprite-monkey-audience.webp`); Feldstrom talks his theory first (slides 1, 2, 7, 13, voiced) and then slide 14; his slides are painted (`kn-slide-NN.webp`, `KN_ART`), and he stands in front of them. Outro: The Journal spins in before ACCEPTED (`outro-journal.webp`). Credits: a line for teachers pointing to lostcodebook.org/teach.
+- **Debug:** `?room=postersession` starts at board 312 with the poster in hand and everything before done; `?room=keynote` starts the keynote.
+- **Voices:** quotes without a character clip fall back to the narrator (the resolver reads unmatched quotes as narration). The Poster Session's were re-recorded in character; about 50 other such lines remain (list: quotes in `CODEBOOK_NARR` keys).
+
+### End of Act V: one look, one way to continue (2026-10-01, `todo.md`)
+
+From the end of the Poster Session to the credits, everything now looks and advances like the rest of the game.
+
+- **Continue = click, tap, Space or Enter, never a timer.** `CODEBOOK_AFTER_CLICK(fallbackMs, fn, host)`
+  (next to `CODEBOOK_AFTER_LINE`) puts the standard hint, CLICK OR PRESS SPACE TO CONTINUE, at the bottom of the
+  visible panel, or of `host`, and waits. A click while the voice is speaking cuts it off and moves on.
+  It is used at the end of the Poster Session, in the Keynote room's `play()`, in the Office submission
+  scene and in the Reviewer 2 battle. Interludes take `opts.manual` (the poster rush, Stockholm, both
+  outro halves), so narrated slides wait for a click. Song-timed `hold` panels (the R2 reveal) still run
+  on the song. Tests set `CODEBOOK_LINES_CUT`, which keeps the old timing.
+- **The duel (`web/duel/index.html`)** uses the game's dialogue panel: the same light panel, mustard border,
+  JetBrains Mono speaker label and Fraunces line. Narrator lines are unlabelled. The duel follows the game's
+  Voice only setting, read from the parent page.
+  - Rye is kept only on the "Keynote Showdown" title card; elsewhere it is Fraunces bold.
+  - Stellmacher has no bubble or portrait any more. Her lines are panel lines ("Prof. Stellmacher"); her
+    notes during aiming (`note()`/`coach()`) stay in the panel without waiting.
+  - "Call your corner" is gone. "…Call me any time." was cut from her corner line (`dv-prof-corner.mp3`,
+    trimmed from `dv-prof-49c4b67d.mp3`).
+  - The announcer beats wait too (`called()`). Whispers are small plain captions.
+- **Jokers** sit in the top bar beside the meters, under a JOKERS label, and are live only while aiming.
+  Each can be used once. Pressing one shows the person big (`.jbig`), puts their line in the panel, and
+  does something visible:
+  - Achterberg: a gold glow on the flaw.
+  - Skeptic: the beam slows, with a SLOWER tag.
+  - Sampling Officer: the hand meter drops to rock steady.
+  - Director and Vossberg: the applause meter swings your way, with a cheer.
+- **Reviewer 2 battle and credits:** running text is in Fraunces. The teacher line is a gold, underlined
+  link that opens lostcodebook.org/teach in a new tab.
+- Feldstrom's slides keep Arial, as the Keynote room's own slides do (they are his PowerPoint).
+  `__duelTest.aimHit()` lands a shot on the flaw, for screenshots.
+
+### Character sprite audit (2026-10-01): not decided, nothing changed in the game yet
+
+Author: the sprites are "a bit too diverse in look and feel... they should fit into the backgrounds".
+The author is open to repainting characters throughout but has **not chosen a style yet**. The material
+is in `art/characters/style-audit/`:
+
+| File | What it shows |
+|---|---|
+| `style-A-vs-B.png` | the existing sprites in two rows, same height, by style |
+| `sets-A-vs-B.png` | the whole cast twice: everyone in style A, everyone in style B (existing sprites plus ChatGPT repaints) |
+| `set-all-style-A.png`, `set-all-style-B.png` | the two sets on their own |
+| `gen-B-cast-in-style-A.png`, `gen-A-cast-in-style-B.png` | the raw ChatGPT repaints (screen captures, about 1380 px wide; the full-resolution files are in the author's ChatGPT, chat "Generate Character Redraw") |
+| `ref-style-A-row.png`, `ref-style-B-row.png` | the reference rows uploaded to ChatGPT |
+
+- **Style A** is the warm storybook look of the backgrounds: brown ink outlines, sepia and earthy colours,
+  gouache-like texture. It covers Feldstrom, Achterberg, the Doorman, the Officer, the registrar, the clerk,
+  Bourdieu, the Director, the nurse, the judges, the cook, the Skeptic and the monkeys.
+- **Style B** is a clean modern look: cool saturated colours, smooth shading. It covers the main cast:
+  Stellmacher, Tobi, Vossberg (`vossberg2-*`) and Prof G. KIRA is borderline; its cream and brass are
+  warm.
+- **What the repaints showed:** all-A works, and the main cast keeps its identity. All-B only half worked:
+  ChatGPT kept outlines and warm period costumes, so the supporting cast would need redesigning rather
+  than restyling, and B clashes with the painted rooms.
+- **Recommendation:** style A throughout, which means repainting 5 characters rather than 11 or more.
+- **Problems for every style:**
+  - Sprites are lit flat from the front; the rooms have warm or cold directional light.
+  - The only shadow is a generic `drop-shadow(0 4px 7px)` (`CODEBOOK_ADV_HTML`), with nothing on the
+    floor, so figures float.
+  - Scale is inconsistent: Writing Room, Hall (Prof G), Delegation (crowded), Casino.
+  - Feldstrom's poses drift in warmth; Granovetter is oversaturated; Tobi's crouch is more realistic
+    than his other poses.
+- **Cheap fix that could come first:** an engine pass with a colour grade per room for the sprites, a
+  floor shadow at the feet instead of the drop shadow, edge light from the room's light source, and a
+  scale pass using the room `DEPTH`.
+- **Cost of repainting the main cast:**
+  - Stellmacher: 6 poses plus mouths, the cut-out rig `rig-prof-*`, and her call and cutscene portraits.
+  - Tobi: 7 poses plus mouths.
+  - Vossberg: 9 poses plus mouths.
+  - Prof G and KIRA: 4 poses.
+  - All `mouth-sprite-*` overlays must be regenerated and realigned.
+- **Unused files:** `vossberg-chair/lecturing/pointing/walking.webp` (the old grey-haired Vossberg).
+  Deletable.
+- **Getting images out of ChatGPT:** its CSP blocks posting to localhost, and a base64 transfer is too
+  big. What worked was showing the image full-window in the page, saving a screenshot and cropping it.
+  A full-resolution file needs a download, which needs the author's OK.
+
 ### Voice tooling (2026-09-30)
 
 `tools/tts/split_plan.py` works again. It had read each clip's act from its old bundle name, and it matched clip names in the room table itself, so almost everything fell into act1-core. Now it finds each clip's room from where its text is used. A clip it cannot place keeps its current bundle, so nothing is ever guessed into act1-core, which the Act I loading bar waits for.
@@ -219,8 +322,10 @@ The monkeys got out in the autumn, not at the Annual Meeting. The Act V escape s
 ### Tests
 
 `bash tools/test/run-all.sh`, about 52 tests (`test-bonus.js` is new; `test-endgame.js` walks the new
-Act IV–V puzzles). Last full run: 51/51 before the Casino and support changes; the relevant tests pass
-after them.
+Act IV–V puzzles). Last full run (2026-10-01, after the end-of-Act-V changes): 49/52 in the suite;
+`test-audio`, `test-bugs` and `test-corridor` failed there and passed on their own (timing under load, not
+the changes). Tests that walk the end sequence set `CODEBOOK_LINES_CUT` / `__duelAuto`, so the
+click-to-continue waits fall back to the old timing.
 
 ### Open list (2026-09-29, evening)
 
@@ -232,6 +337,13 @@ after them.
 6. Play-test Acts IV and V end to end with a fresh save: the new Bureau, the results scene, the phone
    buzz, the Writing Room without the Registrar, the rolled poster.
 7. Delete `Screenshot 2026-09-29 at 17.00.00.png` (shows most of the Brevo API key; untracked, never commit it).
+8. **Not committed (2026-10-01):** the end-of-Act-V changes (`todo.md`), on top of a large set of
+   earlier uncommitted Oct 1 work (voices, ambience, `arcade.js`, `keynote-bg.webp`, the game HTML).
+   The author is to play `?room=postersession` to the credits, then "push".
+9. Sprite style: the author has to choose between A and B (see "Character sprite audit"). Then: an
+   engine pass for light and floor shadows, and repaints of the main cast.
+10. End of Act V, still on a timer by choice; ask the author: the stand-up montage (about 7 s, can be
+    clicked through), the knockdown count, and the song-timed R2 reveal.
 
 ---
 

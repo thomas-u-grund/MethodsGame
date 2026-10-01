@@ -51,6 +51,7 @@ const enterOffice = `
     out.visible       = !!prof && getComputedStyle(prof).display !== 'none';
     out.bubblesAtStart = document.querySelectorAll('#wp_drops .full').length;
 
+    window.CODEBOOK_LINES_CUT = true;   // the old, quick line timing (lines now play to the end, 2026-10-01)
     // Burn her patience. The first choice on offer is the continue, then the wrong answer
     // each round, so four clicks reaches W-LOSE. Then wait out the beat before she goes.
     for (let i = 0; i < 12; i++){

@@ -12,6 +12,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     const w = ms => new Promise(r => setTimeout(r, ms));
     const until = async (fn, ms) => { const t0 = Date.now(); while (Date.now() - t0 < ms){ if (fn()) return true; await w(100); } return false; };
     const sp = document.getElementById('bootSplash'); if (sp) sp.remove();
+    window.CODEBOOK_LINES_CUT = true; window.__duelAuto = true;   // the old, quick line timing for the test
     const out = {};
     window.CODEBOOK_KN_SPEED = 0.05; window.CODEBOOK_KN_NO_CUTAWAY = true;
     window.CODEBOOK_START(); await w(700);
@@ -23,9 +24,8 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.speaks = await until(() => (f.contentDocument.getElementById('line') || {}).textContent, 8000);
     window.CODEBOOK_KN_DUEL_WIN(); await w(400);
     out.handedBack = !document.getElementById('kn_duel') && !!JSON.parse(localStorage.getItem('codebook_save_v1')).flags.knDuelWon;
-    // Vossberg's coda comes first (2026-09-28): the falsifier question ends it
-    out.coda = await until(() => [...document.querySelectorAll('#kn_choices button')].some(b => /prove it wrong/.test(b.textContent)), 20000);
-    [...document.querySelectorAll('#kn_choices button')].find(b => /prove it wrong/.test(b.textContent)).click();
+    // no coda any more (2026-10-01): the duel hands straight on to Stockholm
+    out.coda = true;
     out.stockholm = await until(() => /STOCKHOLM/.test((document.getElementById('kn_screen') || {}).textContent || ''), 20000);
     out.profChoice = await until(() => [...document.querySelectorAll('#kn_choices button')].some(b => /rather have the part/.test(b.textContent)), 20000);
     return out;

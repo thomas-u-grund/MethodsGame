@@ -49,7 +49,7 @@ That is Chapter One.
 
 - People agree knowing what to, can walk away, and cannot be named.
 - One question asks one thing, and does not lean.
-- A sample is drawn at random, from a list of exactly the people you mean.
+- A sample is best drawn at random (later statistics rely on it), from a list of exactly the people you mean.
 - Chase the people who did not answer. Never swap in whoever is nearest.
 
 > *Good data can be collected or found. Either way, know how it came to be: who was asked, what,
@@ -67,6 +67,7 @@ That is Chapter One.
 - Run the test you promised. Pull the lever often enough and something
   always pays out.
 - Say what the result means at its true size, and name its limits.
+- The finding: go to the lectures. They help most where they make you practise: a modest effect, and a real one.
 
 > *Be solid. Do the work, one step after another.*
 

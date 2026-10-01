@@ -18,10 +18,10 @@ const { connect } = require('./cdp');
       'rap-marx.mp3','rap-durkheim.mp3','rap-weber.mp3','profg-live.mp3','sfx-rap.mp3',
       // the set-piece music (author's Suno tracks, 2026-09-28)
       'fieldwork-show.mp3','casino-lounge.mp3','ceremony-fanfare.mp3','reviewer2-battle.mp3','r2-reveal-song.mp3',
-      'bingo-tense.mp3','bingo-tight.mp3','bingo-hit.mp3','bingo-miss.mp3','sfx-ringback.mp3','sfx-phone-bell.mp3','silence.mp3','sfx-monkey-1.mp3','sfx-monkey-2.mp3','sfx-typewriter.mp3','sfx-drawer.mp3','sfx-knock.mp3','sfx-lever.mp3','sfx-chair-crash.mp3']);   // silence: unlocks the voice players on the first tap
+      'bingo-tense.mp3','bingo-tight.mp3','bingo-hit.mp3','bingo-miss.mp3','sfx-ringback.mp3','sfx-phone-bell.mp3','silence.mp3','sfx-monkey-1.mp3','sfx-monkey-2.mp3','sfx-typewriter.mp3','sfx-drawer.mp3','sfx-knock.mp3','sfx-lever.mp3','sfx-chair-crash.mp3','sfx-newsboy.mp3','sfx-oldprinter.mp3','sfx-gong.mp3','credits-musette.mp3']);   // silence: unlocks the voice players on the first tap
     out.referenced = names.size;
     out.spriteClips = Object.keys(sprite).length;
-    out.unresolved = [...names].filter(n => !sprite[n] && !nonClip.has(n));
+    out.unresolved = [...names].filter(n => !sprite[n] && !nonClip.has(n) && !/^amb-/.test(n));   // room ambience loops (2026-09-30)
 
     // one file per clip (2026-09-27): every file the table names must exist, and a random
     // sample must be as long as the table says (a wrong length cuts a line short)

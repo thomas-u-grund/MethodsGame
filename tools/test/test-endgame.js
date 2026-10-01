@@ -14,6 +14,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   const r = await p.evaluate(`(async () => {
     const wait = ms => new Promise(r => setTimeout(r, ms));
     const out = {};
+    window.CODEBOOK_LINES_CUT = true; window.__duelAuto = true;   // the old, quick line timing for the test
     const go = async t => { window.CODEBOOK_START(); await wait(700);
       const b = document.querySelector('button.campus-hotspot[title^="' + t + '"]');
       if (!b) throw new Error('no button ' + t); b.click(); await wait(1200); };
@@ -129,27 +130,27 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.posterItem = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('poster');
     verb('ps','use'); spot('poster'); await wait(500);
     out.posterHung = !!document.getElementById('ps_poster') && !JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('poster');
-    verb('ps','use'); spot('poster'); await wait(500);
-    ch('ps','What improvement'); await wait(400);
-    ch('ps','What are you doing'); await wait(400);
-    ch('ps','bigger'); await wait(400);
-    out.titleGrew = /WHAT MAKES STUDENTS LEARN/.test(document.getElementById('ps_title').textContent);
-    verb('ps','use'); spot('poster'); await wait(400);
+    // Feldstrom's scene plays by itself once the poster is up (2026-09-30): the title grows, you put it back
+    let grew = false;
+    for (let x = 0; x < 900 && !flags().psFeldGone; x++){ if (/WHAT MAKES STUDENTS LEARN/.test((document.getElementById('ps_title')||{}).textContent||'')) grew = true; await wait(100); }
+    out.titleGrew = grew;
     out.visitorsWait = !document.querySelector('#ps_sceneWrap .ps-fig');
-    verb('ps','talk to'); spot('feldstrom'); await wait(400);
-    ch('ps','Refuse him'); await wait(900);
+    await wait(900);
     out.feldGone = !!flags().psFeldGone && /FIRST-YEAR METHODS COURSE/.test(document.getElementById('ps_title').textContent);
     verb('ps','use'); spot('poster'); await wait(3200);
-    for (let i = 0; i < 5; i++){ window.CODEBOOK_PS_ANSWER_RIGHT(); await wait(4800); }
+    // visitors come one at a time, each after the last has finished talking (2026-09-30)
+    for (let i = 0; i < 5; i++){ for (let t = 0; t < 200 && !window.CODEBOOK_PS_ANSWER_RIGHT(); t++) await wait(100); await wait(300); }
+    for (let t = 0; t < 250 && !flags().postersDone; t++) await wait(100);
     await wait(600);
     out.posters = !!flags().postersDone; out.audience = flags().posterCrowd;
     out.actVNotYet = !flags().actVDone;
     // the keynote without a laser pointer: Stellmacher sends you back (cross-room, 2026-09-29)
     window.CODEBOOK_KN_SPEED = 0.05;
-    await go('The Keynote Showdown');
-    for (let t = 0; t < 120 && ![...document.querySelectorAll('#kn_choices button')].some(b => /laser pointer/i.test(b.textContent)); t++) await wait(100);
-    out.needPointer = !!flags().knNeedPointer;
-    ch('kn','laser pointer'); await wait(300);
+    // the Poster Session hands straight on to the keynote (a title card, then the Hall); with no pointer,
+    // Tobi gives you his from row nine (2026-09-30)
+    for (let x = 0; x < 400 && !document.getElementById('kn_sceneWrap'); x++){ if (document.getElementById('interlude')) document.dispatchEvent(new KeyboardEvent('keydown',{code:'Escape',key:'Escape',bubbles:true})); await wait(100); }
+    for (let x = 0; x < 300 && !JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('laserpointer'); x++) await wait(100);
+    out.needPointer = !!document.getElementById('kn_sceneWrap') && JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('laserpointer');
     // the Poster Session: a weak tie for Tobi's laser pointer, and the banana
     await go('The Poster Session');
     document.querySelector('#ps_sceneWrap .hotspot[data-id="cameo"]').click(); await wait(300);
@@ -185,10 +186,8 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
       out['knR' + i] = window.CODEBOOK_KN_ANSWER_RIGHT();
       await wait(300);
     }
-    // Vossberg's coda (2026-09-28): wrong questions loop; the falsifier ends it
-    out.knCoda = await until(() => hasCh('prove it wrong'), 20000);
-    ch('kn','Nod along'); await until(() => hasCh('prove it wrong'), 12000);
-    ch('kn','prove it wrong');
+    // after the slides, straight on to Stockholm and Stellmacher (2026-10-01: no Vossberg coda any more)
+    out.knCoda = await until(() => /STOCKHOLM/.test((document.getElementById('kn_screen') || {}).textContent || ''), 20000);
     out.knProf = await until(() => hasCh('rather have the part'), 30000);
     out.knProfUp = !!document.querySelector('.kn-fig img[src="sprite-prof-stand.webp"]');
     ch('kn','rather have the part');
@@ -204,13 +203,14 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
     // --- Office: reveal + submission
     await go('The Seven-Second Office');
-    out.revealStarts = /hourglass turns/.test(document.getElementById('wp_line').textContent);
+    out.revealStarts = /she does not interrupt/.test(document.getElementById('wp_line').textContent);
     ch('wp','is that the Codebook'); await wait(400);
     out.codebookLine = /used to call it Methods/.test(document.getElementById('wp_line').textContent)
       && /accurate/.test(document.getElementById('wp_line').textContent);
-    ch('wp','submission chute'); await wait(600);
+    ch('wp','Submit it'); await wait(600);
     out.submitted = !!flags().submitted;
     out.folderGone = !JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('folder');
+    for (let x = 0; x < 300 && ![...document.querySelectorAll('#wp_choices button')].some(b => /Leave the building/.test(b.textContent)); x++) await wait(100);   // she submits it first (2026-10-01)
     ch('wp','Leave the building'); await wait(1200);
     out.outroRunning = !!document.querySelector('.il-stage, .interlude, [class*=il-]');
     return out;
@@ -218,7 +218,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = r.posterItem && r.posterHung && r.needKey && r.idkey && r.twoReasons && r.wrongReasonStillFlags && r.resultsScene && r.resultInHand && r.resultFiled && r.stampGone && r.needPointer && r.pointer && r.regstamp && r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.fogBlocks && r.folderGone
-    && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 6
+    && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 8
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && r.fogGame && r.draftClear && r.knCoda && r.titleGrew && r.visitorsWait && r.feldGone
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
