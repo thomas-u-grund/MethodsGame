@@ -44,7 +44,7 @@ async function inRoom(p, inv, flags, room, body){
     out.balls = document.querySelectorAll('#mn_draw .ball').length === 12;   // the draw is shown
     return out;`);
 
-  const field = await inRoom(p, ['folder','ballotboxwrapped','altquestionnaire'], { surveyDone:true, ethicsDone:true, mensaDone:true }, 'The Fieldwork Arena', `
+  const field = await inRoom(p, ['folder','ballotboxwrapped','redacted'], { surveyDone:true, ethicsDone:true, mensaDone:true }, 'The Fieldwork Arena', `
     const out = {};
     verb('fw', /talk to/i); spot('director'); await w(4500);
     out.running = !!g().flags.fwRunning;
@@ -53,7 +53,7 @@ async function inRoom(p, inv, flags, room, body){
     verb('fw', /pick up/i); spot('phone'); await w(400);
     out.gotBoth = has('voucher') && has('reminders');
     use('fw', 'reminders', 'podiums'); await w(400);
-    use('fw', 'altquestionnaire', 'podiums'); await w(400);
+    use('fw', 'redacted', 'podiums'); await w(400);
     use('fw', 'voucher', 'podiums'); await w(900);
     const f = g().flags;
     out.roomDone = !!f.fieldworkDone; out.actNotYet = !f.actIIIDone;

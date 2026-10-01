@@ -13,7 +13,7 @@ const BASE = { corridorDone:true, act2IntroSeen:true, act3IntroSeen:true, act4In
   const p = await connect(U + Date.now());
   await p.send('Emulation.setDeviceMetricsOverride', { width:1600, height:900, deviceScaleFactor:1, mobile:false });
   await p.evaluate(`localStorage.setItem('codebook_save_v1', JSON.stringify({
-    inventory:['folder','ballotboxwrapped','reminders','altquestionnaire','voucher'],
+    inventory:['folder','ballotboxwrapped','reminders','redacted','voucher'],
     flags: ${JSON.stringify({ ...BASE, fwRunning:true })} }))`);
   await p.send('Page.navigate', { url: U + Date.now() }); await p.ready();
 
@@ -40,7 +40,7 @@ const BASE = { corridorDone:true, act2IntroSeen:true, act3IntroSeen:true, act4In
 
     snap('arrive');                                    // 58% -> 7
     item('reminders');  podiums(); await w(900); snap('reminders');   // 64% -> 8
-    item('altquestionnaire'); podiums(); await w(900); snap('altq');  // 70% -> 8
+    item('redacted'); podiums(); await w(900); snap('altq');  // 70% -> 8
     item('voucher');    podiums(); await w(1200); snap('voucher');    // 75% -> 9
 
     // The named-empty seats are the ones the Director's dialogue calls out.

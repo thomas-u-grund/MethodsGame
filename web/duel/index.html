@@ -33,7 +33,7 @@
   button:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
 
   /* the stage: the Hall of Founders, 16:9, as big as the window allows */
-  .stage{position:relative;width:max(100vw, calc(100dvh * 16 / 9));aspect-ratio:16/9;overflow:hidden;flex:0 0 auto;background:#000;container-type:inline-size;touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair;}
+  .stage{position:relative;width:min(100vw, calc(100dvh * 16 / 9));aspect-ratio:16/9;overflow:hidden;flex:0 0 auto;background:#000;container-type:inline-size;touch-action:none;user-select:none;-webkit-user-select:none;cursor:crosshair;}
   .cam{position:absolute;inset:0;transform-origin:51.3% 49.4%;transition:transform .8s cubic-bezier(.3,.1,.2,1);}
   .cam > img{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;}
   .cam > img.voss{ position:absolute; inset:auto; left:81.5%; bottom:28.5%; width:auto; height:26%; transform:translateX(-50%); }   /* (author, 2026-10-01) */
@@ -80,7 +80,7 @@
   .xmark::after{transform:rotate(-45deg);}
   @keyframes pop{from{transform:scale(2.2);opacity:0}}
 
-  .crowd-monkey{ position:absolute; left:47%; bottom:20%; width:8%; z-index:7; pointer-events:none; filter:brightness(.75); transition:translate .7s ease; }
+  .crowd-monkey{ position:absolute; left:36%; bottom:10%; width:7.4%; z-index:7; pointer-events:none; filter:brightness(.75); transition:translate .7s ease; }
   .crowd{position:absolute;left:0;bottom:0;width:100%;height:auto;pointer-events:none;z-index:7;transform-origin:50% 100%;transition:translate .7s ease;}
   .crowd.low{translate:0 58%;}
   .me{position:absolute;right:1%;bottom:-2%;height:58%;aspect-ratio:1038/1287;pointer-events:none;z-index:7;transform-origin:60% 100%;animation:tremble var(--tr,.18s) ease-in-out infinite alternate;}
@@ -99,6 +99,11 @@
     -webkit-mask-composite:source-in; mask-image:radial-gradient(ellipse 8% 20% at 28.6% 57%, transparent 45%, #000 100%), radial-gradient(ellipse 23% 21% at 51.3% 49.4%, transparent 72%, #000 100%);
     mask-composite:intersect; }
   .lights.on{ opacity:1; }
+  /* the hall is already half dark from Feldstrom's talk in the game (it dims the room and the front rows to 50%, not
+     the screen or him), so the duel carries straight on at that level (author, 2026-10-01: "much brighter suddenly") */
+  .cam > img:first-child, .cam > img[src*="keynote-front"]{ filter:brightness(.5); }
+  .crowd{ filter:brightness(.5); }
+  .cam > img.monkey, .crowd-monkey{ filter:brightness(.42); }
   .cone{ position:absolute; top:-8%; mix-blend-mode:screen; opacity:0; transition:opacity 1.4s; pointer-events:none; filter:blur(3px);
     clip-path:polygon(44% 0,56% 0,100% 100%,0 100%); background:linear-gradient(rgba(255,238,200,.55), rgba(255,238,200,.05) 95%); }
   .cone.on{ opacity:1; }
@@ -298,7 +303,7 @@
   /* the game's VOICE ONLY setting: a voiced line shows no words, only the hint; choices keep their panel */
   .speech.vo .who, .speech.vo .line{display:none;}
   .speech.vo:not(:has(.choices button)){background:transparent;border-top-color:transparent;backdrop-filter:none;-webkit-backdrop-filter:none;min-height:0;}
-  .speech.vo:not(:has(.choices button)) .next{color:rgba(240,228,200,.75);text-shadow:0 1px 3px #000;}
+  .speech.vo:not(:has(.choices button)) .next{color:#f3e6c4;text-shadow:0 1px 3px #000,0 0 8px #000;font-weight:700;}
   .speech.vo:not(:has(.choices button)):has(.next[hidden]){display:none;}
   .speech .choices{display:flex;flex-direction:column;gap:8px;}
   .speech .choices:empty{display:none;}
@@ -966,12 +971,21 @@
       var len = html.replace(/<[^>]+>|&[a-z]+;/g, 'x').length, done = false;
       function fin(){ if (done) return; done = true; skip = null; clearTimeout(t); g === gen ? res() : rej('reset'); }
       var clipSrc = (!who && DV.narr && DV.narr[html]) || (who === 'Tobi' && DV.tobi && DV.tobi[html]) || (who === COACH && DV.coach && DV.coach[html]), a = clipSrc ? voice(clipSrc) : null;
-      if (a && window.__duelAuto) a.addEventListener('ended', function(){ setTimeout(fin, 400); });
+      // a spoken line moves on by itself when its voice ends: in voice-only mode (there is no text to click past) and
+      // for Feldstrom presenting (author, 2026-10-01: "the slides of Feldstrom should click by themselves")
+      var autoEnd = window.__duelAuto || VO || who === 'Feldstrom';
+      if (a && autoEnd) a.addEventListener('ended', function(){ setTimeout(fin, 400); });
       else { var list = gameClips(html);                 // the game's own voices (Feldstrom, you, Vossberg, the narrator)
         if (list.length){ var k = 0; (function nextClip(){ if (done) return; a = voice(list[k++]); if (!a) return;
-          a.addEventListener('ended', function(){ if (k < list.length) nextClip(); else if (window.__duelAuto) setTimeout(fin, 400); }); })(); } }
+          a.addEventListener('ended', function(){ if (k < list.length) nextClip(); else if (autoEnd) setTimeout(fin, 400); }); })(); } }
       sp.classList.toggle('vo', VO && !!(a || (list && list.length)));
+      // a voice the browser refuses to play (or that fails to load) must not leave an empty screen waiting for its end
+      // (author, 2026-10-02, Chrome on a Mac: standing, nothing on screen, nothing to do): show the words instead
+      if (a){ a.addEventListener('error', function(){ sp.classList.remove('vo'); });
+        var pr = a.play && a.play(); if (pr && pr.catch) pr.catch(function(){ sp.classList.remove('vo'); }); }
       var t = window.__duelAuto ? setTimeout(fin, (a ? 20000 : (1400 + len * 48)) * (easy ? 1.2 : 1)) : null;   // waits for you (tests: __duelAuto)
+      // and a spoken line that should move on by itself never hangs: at the latest after a generous reading time
+      if (!t && autoEnd && (a || (list && list.length))) t = setTimeout(function(){ sp.classList.remove('vo'); }, 2500 + len * 60);
       setTimeout(function(){ skip = function(){ if (a) a.pause(); fin(); }; }, 250);
     });
   }

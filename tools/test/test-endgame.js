@@ -128,6 +128,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     await go('The Poster Session');
     // the Writing Room gave you the poster rolled up; the first use pins it to board 312 (2026-09-29)
     out.posterItem = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('poster');
+    // not before the slip is registered (2026-10-02): Tobi says so, and the poster stays rolled up
+    verb('ps','use'); spot('poster'); await wait(500);
+    out.notBeforeRegistered = !document.getElementById('ps_poster') && /Achterberg/.test(document.getElementById('ps_line').textContent);
+    window.CODEBOOK_SET_FLAG('labDone');   // (the real registration runs further down, after the banana trade)
     verb('ps','use'); spot('poster'); await wait(500);
     out.posterHung = !!document.getElementById('ps_poster') && !JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('poster');
     // Feldstrom's scene plays by itself once the poster is up (2026-09-30): the title grows, you put it back
@@ -165,7 +169,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
     out.regstamp = JSON.parse(localStorage.getItem('codebook_save_v1')).inventory.includes('regstamp');
     await go('The Infinite Monkey Project');
     verb('pl','talk to'); spot('achterberg'); await wait(400);
-    ch('pl','her stamp'); await wait(500);
+    if (!flags().labDone){ ch('pl','her stamp'); await wait(500); }   // (registered earlier for the poster, 2026-10-02)
     out.registered = !!flags().labDone;
     // --- the Keynote Showdown (8zy): four slides, answered with the right evidence
     window.CODEBOOK_KN_SPEED = 0.05; window.CODEBOOK_KN_NO_CUTAWAY = true; window.CODEBOOK_KN_NO_DUEL = true;   // the four-slide path; test-duel covers the duel

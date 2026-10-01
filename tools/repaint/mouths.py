@@ -92,7 +92,14 @@ def extract(edited, kind, paths):
         m = np.clip(cv2.GaussianBlur(m, (0, 0), max(2, rx / 5)) * 1.8, 0, 1) * (F[:, :, 3] / 255.0)   # solid inside, soft only at the rim
         # the edit laid over the final, so the edit's transparent fringe never shows its stray colours
         ea = np.clip(Ea[:, :, 3:4].astype(float) / 255 * 4, 0, 1)   # a half-transparent edit (a glass screen) still counts as the edit
-        out = F.copy(); out[:, :, :3] = (Ea[:, :, :3] * ea + F[:, :, :3] * (1 - ea)).astype('uint8')
+        # tone-match the edit to the sprite (author, 2026-10-01: the Skeptic's "mouth has color changes"): in the
+        # overlay's area, the pixels the edit left alone tell how much lighter or warmer the edit came out
+        same = (m > 0.05) & (np.abs(Ea[:, :, :3].astype(float) - F[:, :, :3].astype(float)).sum(2) < 60) & (F[:, :, 3] > 200)
+        Ec = Ea[:, :, :3].astype(float)
+        if same.sum() > 40:
+            g = np.clip(F[:, :, :3][same].astype(float).mean(0) / np.maximum(Ec[same].mean(0), 1), 0.8, 1.25)
+            Ec = np.clip(Ec * g, 0, 255)
+        out = F.copy(); out[:, :, :3] = (Ec * ea + F[:, :, :3] * (1 - ea)).astype('uint8')
         out[:, :, 3] = (m * 255).clip(0, 255).astype('uint8')
         d0, base = os.path.split(p)
         name = base.replace('final-', '').replace('.png', '')

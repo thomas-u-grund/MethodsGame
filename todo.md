@@ -1,68 +1,53 @@
-# To do: Act V end sequence, look, feel and controls (proposed 2026-10-01)
+# To do (2026-10-02)
 
-Scope: Poster Session end → Keynote room → duel → replications → Stockholm → Office submission →
-outro (Reviewer 2 battle) → credits. Root cause: the duel (`web/duel/index.html`) is a separate page
-built as a prototype with its own fonts, dialogue box and controls; the outro battle and the
-credits have their own variations too.
+State: everything below "Done, not pushed" is working locally and the affected tests pass (the full
+suite has not been rerun since the last push). Nothing from 2026-10-01 evening onwards is pushed yet.
+Art sources are in `art/interludes/chapters/` and `art/characters/repaint/` (not in git).
 
-Status: **done 2026-10-01** (details in HANDOVER, "End of Act V: one look, one way to continue").
-Decisions taken: Rye stays on the single "Keynote Showdown" title card only; the whispers stay, restyled as
-small plain captions. Feldstrom's slides keep Arial, like the Keynote room's own slides.
+## Open
 
-## A. Fonts: one set, the game's own
+1. **Duel freeze, Act V (author, Chrome on a Mac, voice-only).** Screenshot: standing, empty slide, no line,
+   no hint. Fixed blind (not reproduced): in voice-only mode a duel line whose voice the browser refuses to
+   play now shows its words instead of an empty screen, a voice that runs long shows the words and the
+   hint, the hint is easier to see, and the duel is letterboxed to the window instead of cut off at the
+   sides. **Re-test on the Mac**; if it still hangs, a screenshot plus Chrome's console (View > Developer >
+   JavaScript Console) would show the cause.
+2. **Monkey in the duel crowd** (`web/duel/index.html`, `.crowd-monkey`): it should replace one
+   audience member, not sit between them. Plan: a ChatGPT edit of `web/duel/duel-crowd.webp` with
+   the person in the red beanie (middle row, left of centre) repainted as the monkey seen from
+   behind (references: `art/interludes/chapters/ref-duelcrowd.png`, `ref-monkey-back.png`), then
+   paste back only that patch and remove the separate `.crowd-monkey` image. The request was sent
+   but ChatGPT ran out of images; resend when the limit resets.
+3. Small: the Chapter Three painting (`il-ch3-complete.webp`) has a nonsense door sign on the far
+   right ("HALL NEED TO TAP IN"); repaint that corner if it bothers.
+4. Run the full suite (`bash tools/test/run-all.sh`, ~20 min), then push.
 
-1. Use the game's fonts everywhere: speaker names in JetBrains Mono (uppercase, spaced), spoken
-   lines in Fraunces. Replace Source Sans and Arial in the duel.
-2. Replace the western font (Rye) on the ~14 duel elements (round cards, captions, name tapes,
-   "VS", K.O. and winner captions, countdown) with Fraunces bold.
-   **DECIDE:** keep Rye on the single "Keynote Showdown" title card, or remove it everywhere?
-3. Outro and Reviewer 2 battle: headings stay JetBrains Mono; running text becomes Fraunces.
+## Done, not pushed (2026-10-01/02)
 
-## B. Dialogue and speech bubbles
-
-4. Replace the duel's dark speech box with the game's own dialogue panel (translucent light
-   panel, mustard top border, speaker label, line font, bottom position).
-5. Remove Stellmacher's round portrait with a bubble. Her lines go into the normal panel,
-   labelled "PROF. STELLMACHER".
-6. Audience whispers ("n = ?", "Correlation, surely"): restyle as small plain captions, not bubbles.
-   **DECIDE:** restyle, or remove entirely?
-7. Joker lines go into the normal panel, under the joker's name.
-8. "THAT'S my student!" appears once, in the panel.
-
-## C. Continue and controls
-
-9. Continue works one way everywhere: click, tap, Space or Enter. The hint is the game's
-   standard one, the small uppercase "CLICK OR PRESS SPACE TO CONTINUE" at bottom centre. This
-   covers the duel, the Keynote room, the replications, the Reviewer 2 battle (drop its italic
-   "Click to continue."), The Journal and the credits.
-10. Nothing advances on a timer. Exceptions: round cards, the gong and the K.O. flash (short
-    animations under 3 s that block nothing).
-11. The duel's "Continue" scorecard button uses the standard room choice-button style.
-
-## D. Jokers (they work, but you can't see that they do)
-
-12. Pressing a joker shows that person big for a moment, plus their line in the panel, plus one
-    clearly visible effect:
-    - Achterberg: a glowing outline around the flaw on the slide.
-    - Skeptic: the beam visibly slows, with a "SLOWER" tag.
-    - Sampling Officer: the "Your hand" meter jumps to steady.
-    - Fieldwork Director: the applause meter swings your way, with a cheer.
-    - Vossberg: the same, with his own line.
-13. Jokers can only be pressed while aiming. Otherwise they are greyed, with a "during your turn"
-    tooltip. Each can be used once; used ones stay grey.
-14. A small "JOKERS" label above the icons.
-
-## E. Remove
-
-15. Drop the "Call your corner" button and its code.
-
-## F. Credits
-
-16. Make the teacher line a clickable link, "For teachers: lostcodebook.org/teach", in the gold
-    accent with an underline, opening in a new tab.
-
-## G. Check
-
-17. Play the whole sequence, from `?room=postersession` to the end of the credits, in the test
-    browser. Send screenshots of each screen type (duel, panel lines, joker in action, Reviewer 2,
-    credits) before handing over for testing.
+- **Keynote and duel:** in voice-only mode a spoken line moves on by itself when the voice ends (game:
+  `CODEBOOK_AFTER_CLICK`; duel: `say()`); Feldstrom's build-up slides run by themselves; the hall stays
+  as dark from his talk into the stand-up and the duel; monkey moved down into the crowd (see 2).
+- **Tobi's live windows** sit below the room bar and left of the verb panel (Poster Session, Writing
+  Room, Keynote chat); Tobi leaves the Poster Session before announcing the keynote from the Hall.
+- **Tobi's warning** when you try to hang the poster unregistered is voiced.
+- **Poster Session:** the poster cannot go up before the slip is registered (Tobi says so); only Tobi
+  announces the keynote; coming back after the session goes straight on to the keynote.
+- **Achterberg's stamp** leaves a red REGISTERED impression on screen.
+- **Schnitzel hotline** in Act V delivers a real schnitzel.
+- **Research folder:** one icon per solved room in every act; Act V lists its steps.
+- **Chapter-complete slides** for Acts II, III, IV: new paintings in the style of Chapter One
+  (`il-ch2/3/4-complete.webp`).
+- **Mensa ceremony:** the "A SAMPLE HAS OCCURRED" banner unrolls from the ceiling and stays up
+  (`mn-sample-flag.webp`).
+- **Stellmacher's office, end of Act II:** the device on the tube is a painted brass machine
+  (`wp-device.webp`).
+- **Act III:** GO LIVE button in the Fieldwork Arena; the students leave after the "Zero" round with a
+  hint to the ballot box; one questionnaire (the redacted ones are the paper forms); ballot-box hints
+  in the Tribunal; the approval speech no longer says the box comes bagged; one judge asleep, not two.
+- **Casino:** the two wax dots on the lectern are gone.
+- **Music:** each act's map theme starts again after the act's intro, at its normal volume.
+- **Mouths and faces:** nurse, doorman, officer, director and judges use their new mouths; the walking
+  rigs move their mouths; overlays colour-matched (the Skeptic); her blink dropped.
+- **Rap crowd:** original heads and bingo arms back.
+- **Voice:** re-recorded the "best poster" lines, the Tribunal recess line, the approval speech, the
+  casino lectern line, podium 9's line.

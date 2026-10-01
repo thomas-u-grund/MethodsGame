@@ -23,7 +23,9 @@ POSTERS = {'trailer-cast-act1.webp': 'cb-repaint-cast-act1.png', 'il2-cast.webp'
            'il5-cast.webp': 'cb-repaint-cast-act5-c.png'}
 RIGS = ['director', 'doorman', 'nurse', 'officer']
 # kept in their earlier version on purpose (author, 2026-10-01: the bingo hands "the older version was much better")
-SKIP = {f'crowd-arm-{k}' for k in range(1, 9)}
+SKIP = {f'crowd-arm-{k}' for k in range(1, 9)} | {'crowd-heads'}   # the arms were placed to fit these heads
+# rooms that load a mouth by its own name (the 2026-10-01 nurse bug): also written under that name
+ALIAS = {n: f'mouth-{n}.webp' for n in ('director', 'doorman', 'judge-chair', 'judge-keeper', 'nurse', 'officer')}
 
 def webp(src, dst, size=None, q=90):
     im = Image.open(src)
@@ -46,6 +48,7 @@ for p in sorted(glob.glob(f'{REP}/*/final-*.png')):
     for kind in ('mouth', 'blink'):
         o = os.path.join(d, f'{kind}-{name}.png')
         if os.path.exists(o): webp(o, os.path.join(WEB, sub, f'{kind}-{base}.webp'), q=88)
+        if kind == 'mouth' and name in ALIAS and os.path.exists(o): webp(o, os.path.join(WEB, ALIAS[name]), q=88)
 print(n, 'sprites')
 
 for dst, src in POSTERS.items():
@@ -64,6 +67,8 @@ for r in RIGS:
         node['src'] = f'rig-{r}-{part}.webp'
         for c in node.get('children', []): walk(c)
     walk(cfg['root'])
+    mo = os.path.join(ROOT, 'tools/rig', r, 'mouth-head.png')   # the talking head (see the rig builder in the game)
+    if os.path.exists(mo): webp(mo, os.path.join(WEB, f'rig-{r}-head-mouth.webp'), q=88)
     line = f'window.{var} = ' + json.dumps(cfg) + ';'
     game, k = re.subn(r'window\.' + var + r' = \{.*\};', lambda _: line, game)
     print(var, 'replaced' if k == 1 else f'!! found {k} times')
