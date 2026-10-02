@@ -40,6 +40,8 @@ Art sources are in `art/interludes/chapters/` and `art/characters/repaint/` (not
   on a PC both sit higher, just under the room bar.
 - **Schnitzel hotline:** a delivered schnitzel shows in the bag at once (it appeared only after a room change).
 - **Bingo arms** rise from behind students' heads (drawn under the front-row picture), not over the rows.
+- **Background sound** quieter throughout (loops at ~60% of before, the Lecture Theatre under half), and a
+  Settings switch "Background sounds: Off / On".
 
 ## Done (pushed 2026-10-02)
 
