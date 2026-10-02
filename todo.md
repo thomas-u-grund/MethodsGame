@@ -12,17 +12,16 @@ Art sources are in `art/interludes/chapters/` and `art/characters/repaint/` (not
    hint, the hint is easier to see, and the duel is letterboxed to the window instead of cut off at the
    sides. **Re-test on the Mac**; if it still hangs, a screenshot plus Chrome's console (View > Developer >
    JavaScript Console) would show the cause.
-2. **Monkey in the duel crowd** (`web/duel/index.html`, `.crowd-monkey`): it should replace one
-   audience member, not sit between them. Plan: a ChatGPT edit of `web/duel/duel-crowd.webp` with
-   the person in the red beanie (middle row, left of centre) repainted as the monkey seen from
-   behind (references: `art/interludes/chapters/ref-duelcrowd.png`, `ref-monkey-back.png`), then
-   paste back only that patch and remove the separate `.crowd-monkey` image. The request was sent
-   but ChatGPT ran out of images; resend when the limit resets.
-3. Small: the Chapter Three painting (`il-ch3-complete.webp`) has a nonsense door sign on the far
-   right ("HALL NEED TO TAP IN"); repaint that corner if it bothers.
-4. **Outro office slides** (`outro-2-letter.webp`, `outro-3-accepted.webp`, Stellmacher's office): the
-   corkboard lacks the monkey and Prof G's photo that the in-game office has. Repaint those corners in
-   ChatGPT with the game's office background as reference, when the image limit resets.
+
+
+## Done (pushed 2026-10-02, evening)
+
+- **Duel crowd:** the monkey sits in a seat of its own (painted into `duel/duel-crowd.webp` in place of the
+  student in the red beanie); the separate monkey image is gone.
+- **Outro office slides:** the corkboard now matches the game's office, with the monkey photo and Prof G's
+  photo (copied from `office-bg-empty.webp`; on the months-later slide Prof G hangs a little further left,
+  beside the calendar).
+- **Chapter Three painting:** the far-right door sign reads I DON'T DO SURVEYS.
 
 ## Done (pushed 2026-10-02, later)
 
