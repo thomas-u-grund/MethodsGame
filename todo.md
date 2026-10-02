@@ -1,7 +1,7 @@
 # To do (2026-10-02)
 
-State: everything below "Done, not pushed" is working locally and the affected tests pass (the full
-suite has not been rerun since the last push). Nothing from 2026-10-01 evening onwards is pushed yet.
+State: everything under "Done" is pushed (commit 3b384a3, 2026-10-02) and live on GitHub Pages and
+lostcodebook.org; all 44 tests passed before the push.
 Art sources are in `art/interludes/chapters/` and `art/characters/repaint/` (not in git).
 
 ## Open
@@ -20,13 +20,33 @@ Art sources are in `art/interludes/chapters/` and `art/characters/repaint/` (not
    but ChatGPT ran out of images; resend when the limit resets.
 3. Small: the Chapter Three painting (`il-ch3-complete.webp`) has a nonsense door sign on the far
    right ("HALL NEED TO TAP IN"); repaint that corner if it bothers.
-4. Run the full suite (`bash tools/test/run-all.sh`, ~20 min), then push.
+4. **Outro office slides** (`outro-2-letter.webp`, `outro-3-accepted.webp`, Stellmacher's office): the
+   corkboard lacks the monkey and Prof G's photo that the in-game office has. Repaint those corners in
+   ChatGPT with the game's office background as reference, when the image limit resets.
 
-## Done, not pushed (2026-10-01/02)
+## Done (pushed 2026-10-02, later)
+
+- **Duel sound:** the duel's own sound (music, bell, effects) starts when it opens; it waited for a click
+  inside the duel, which voice-only play may never give. Checked in a Chrome that blocks sound until a
+  click: nothing else in Act V is refused.
+- **Tobi's clip:** after you win the duel he posts it (the outro's "Tobi's clip" now exists).
+- **Outro:** the two Stockholm prize slides are one, shorter (new narration with KIRA's lines); Feldstrom's
+  two slides are one, no click between; no empty-office slide, the Office opens with her there on that
+  narration; Stellmacher's mouth in the office moves (its slow fade swallowed the lip-sync); the Gazette
+  shouts "Extra, extra!" as in Act IV.
+- **Keynote chat** moved under the applause meter on the left (it covered Vossberg); on landscape phones meter
+  and chat start below the room's buttons.
+- **Map button:** a big Map icon right above the bag (simple controls, PC and phones), same width as the bag;
+  on a PC both sit higher, just under the room bar.
+- **Schnitzel hotline:** a delivered schnitzel shows in the bag at once (it appeared only after a room change).
+- **Bingo arms** rise from behind students' heads (drawn under the front-row picture), not over the rows.
+
+## Done (pushed 2026-10-02)
 
 - **Keynote and duel:** in voice-only mode a spoken line moves on by itself when the voice ends (game:
   `CODEBOOK_AFTER_CLICK`; duel: `say()`); Feldstrom's build-up slides run by themselves; the hall stays
-  as dark from his talk into the stand-up and the duel; monkey moved down into the crowd (see 2).
+  as dark from his talk into the stand-up and the duel; the duel fits the window (letterboxed); a
+  voice the browser refuses shows its words instead of an empty screen (see 1).
 - **Tobi's live windows** sit below the room bar and left of the verb panel (Poster Session, Writing
   Room, Keynote chat); Tobi leaves the Poster Session before announcing the keynote from the Hall.
 - **Tobi's warning** when you try to hang the poster unregistered is voiced.

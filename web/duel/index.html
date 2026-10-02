@@ -466,6 +466,10 @@
   // the game's music setting and voice table, and hands the win back to the room.
   var IN_GAME = window.parent !== window && !!window.parent.CODEBOOK_VO;
   if (IN_GAME) document.body.classList.add('ingame');
+  // In the game the player has already clicked (in the game page, which lends this frame its autoplay), so the
+  // duel's own sound starts at once: it used to wait for a click inside the duel, and in voice-only mode, where
+  // lines move on by themselves, its music and effects could stay silent (author, 2026-10-02, Chrome)
+  if (IN_GAME){ audio(); setTimeout(audio, 600); }
   // the game's Voice only setting (its default): voiced lines show no words here either
   var VO = IN_GAME && (function(){ try { return window.parent.document.body.classList.contains('cb-voiceonly'); } catch(e){ return false; } })();
   var MV = (function(){ try { if (localStorage.getItem('cb_music') === '0') return 0; return { quiet:.3, normal:.6, loud:1 }[localStorage.getItem('cb_music_vol') || 'normal'] || .6; } catch(e){ return .6; } })();

@@ -207,6 +207,10 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
 
     // --- Office: reveal + submission
     await go('The Seven-Second Office');
+    // the Office opens on the door narration (2026-10-02), then the paper goes down
+    out.officeBridge = /door is open/.test(document.getElementById('wp_line').textContent);
+    for (let t = 0; t < 60 && !/she does not interrupt/.test(document.getElementById('wp_line').textContent); t++){
+      document.dispatchEvent(new KeyboardEvent('keydown', { code:'Space', key:' ', bubbles:true })); await wait(250); }
     out.revealStarts = /she does not interrupt/.test(document.getElementById('wp_line').textContent);
     ch('wp','is that the Codebook'); await wait(400);
     out.codebookLine = /used to call it Methods/.test(document.getElementById('wp_line').textContent)
@@ -222,7 +226,7 @@ const U = 'http://localhost:8934/the-secret-of-the-codebook.html?cb=';
   console.log(JSON.stringify(r, null, 1), '\nerrors:', p.errors.length ? p.errors : 'none');
   await p.evaluate(`localStorage.removeItem('codebook_save_v1')`);
   const ok = r.posterItem && r.posterHung && r.needKey && r.idkey && r.twoReasons && r.wrongReasonStillFlags && r.resultsScene && r.resultInHand && r.resultFiled && r.stampGone && r.needPointer && r.pointer && r.regstamp && r.registered && r.resultRefused && r.posters && r.audience === 5 && r.paused && r.trueNotFlagged && r.stamps === 7 && r.profCircled >= 2 && r.noVerdictYet && r.fixNotDone && r.cleandata && r.papersLaid && r.gapWrongRefused && r.wrongWordKept && r.fogBlocks && r.folderGone
-    && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 8
+    && r.actVNotYet && r.knOpened && r.knSlide14 && r.knWrongStays && r.knR0 && r.knR1 && r.knR2 && r.knR3 && r.knProf && r.knProfUp && r.knContinue && r.knFell === 5 && r.knHeld === 1 && r.keynote && r.stockholmPanels === 5
     && r.stats && r.delegation && r.bureau && r.actIV && r.gap && r.writing && r.actV
     && r.fogGame && r.draftClear && r.knCoda && r.titleGrew && r.visitorsWait && r.feldGone
     && !r.overstated && r.revealStarts && r.codebookLine && r.submitted && !p.errors.length;
