@@ -48,15 +48,9 @@ SHOTS = [
     ('clip', 'casino.mp4', 2, {'start': 6.2, 'say': ('vo-fellow-e251c16a.mp3', -1.2)}),
     ('still', 'tr-ch5.png', 2, {'flash': True}),
     ('clip', 'keynote.mp4', 2, {'start': 40.0, 'say': ('vo-feldstrom-825f62a7.mp3', -0.6)}),
-    # the gags: 4 bars, one per half-bar
+    # the gags: 1 bar, one per half-bar (no schnitzel, no Tobi, no Reviewer 2: author, 2026-10-02)
     ('still', 'lib-cut-print.webp', 1, {'say': ('vo-kira-2b9393f2.mp3', 0.0)}),
-    ('still', 'tobi-live.webp', 1, {'say': ('vo-tobi-4b52907b.mp3', 0.0), 'fit': True}),
-    ('clip', 'poster.mp4', 1, {'start': 19.0}),
-    ('still', 'tr-cook.png', 1, {'zoom': (0.84, 0.42, 1.7)}),   # new art: the cook in his Mensa, not a close-up (2026-10-02)
     ('still', 'lecture-bg-cheer.webp', 1, {}),
-    ('still', 'lib-cut-monkey.webp', 1, {}),
-    ('clip', 'reviewer2.mp4', 1, {'start': 3.0, 'say': ('vo-prof-2fc5f563.mp3', -0.4, 3.4)}),
-    ('still', 'stockholm-nobel.webp', 1, {}),
     # the laser hit: 2 bars, the break in the music
     ('still', 'duel-hand.webp', 2, {'sfx': ('sfx-whoosh.mp3', 0.9, 0.8)}),
     ('still', 'duel-ko.webp', 2, {'flash': True, 'sfx': ('sfx-gong.mp3', 0.0, 0.7)}),
@@ -65,16 +59,15 @@ SHOTS = [
     ('text', None, 2, {'cap': 'FREE IN YOUR BROWSER\nlostcodebook.org', 'small': 'For teachers: lostcodebook.org/teach'}),
 ]
 
-# the 30 s vertical cut: intro, the five chapters a half-bar shorter each, two gags, the hit, the title
-if VERT:
-    SHOTS = [SHOTS[2], SHOTS[4], SHOTS[5], SHOTS[7], SHOTS[9], SHOTS[11], SHOTS[13], SHOTS[14], SHOTS[22], SHOTS[23], SHOTS[24]]
-    SHOTS = [(k, s, min(hb, 2) if k in ('still', 'clip') else hb, o) for k, s, hb, o in SHOTS]
+# The phone version (author, 2026-10-02: "a proper mobile version... portrait mode without cut-offs"): the same edit,
+# the same voices. A picture with a portrait repaint (<name>-9x16.png in art/trailer/v2) fills the screen; anything
+# else (game footage, in-game art) is shown whole on a blurred copy of itself, so nothing is ever cut off.
 
 # The voice-over (author, 2026-10-02): one trailer narrator, characters answering him. (line, at): at is a time
 # in seconds, or ('after', gap) = right after the previous line. Takes: build/trailer2/vo/<line>-s<seed>.wav.
 VO = [('n01', 5.6), ('c01', ('after', .35)), ('n02', 10.1), ('c02', ('after', .15)), ('c03', ('after', .3)),
       ('n03', 17.6), ('n04', 22.6), ('c04', ('after', .2)), ('n05', 27.6), ('c05', ('after', .2)),
-      ('c06', 32.7), ('n06', ('after', .25)), ('n07', 47.6), ('n08', 52.7), ('c07', ('after', .45)), ('n09', 60.1)]
+      ('c06', 32.7), ('n06', ('after', .25)), ('n07', 40.1), ('n08', 45.2), ('c07', ('after', .45)), ('n09', 52.6)]
 VO_SEED = {'c02': 2, 'n09': 2}   # line -> the chosen take (default 1), checked with Whisper
 VO_GAIN = {'c02': 1.2, 'c06': 1.1}
 
@@ -108,11 +101,12 @@ def caption(fr, text, small=None, card=False):
         fs = F(SERIF, int(size * 0.42)); tw = d.textlength(small, font=fs); d.text(((W - tw) / 2, y + size * 0.4), small, font=fs, fill=(243, 223, 166))
     return Image.alpha_composite(fr, ov).convert('RGB')
 
-def clip_frames(path, start, n):
-    vf = 'fps=%d,scale=%d:%d:force_original_aspect_ratio=increase,crop=%d:%d' % (FPS, W, H, W, H)
+def clip_frames(path, start, n, size=None):
+    w, h = size or (W, H)
+    vf = 'fps=%d,scale=%d:%d:force_original_aspect_ratio=increase,crop=%d:%d' % (FPS, w, h, w, h)
     raw = subprocess.run(['ffmpeg', '-v', 'error', '-ss', str(start), '-i', path, '-frames:v', str(n), '-vf', vf, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'],
                          capture_output=True, check=True).stdout
-    k = len(raw) // (W * H * 3); fr = [Image.frombytes('RGB', (W, H), raw[i * W * H * 3:(i + 1) * W * H * 3]) for i in range(k)]
+    k = len(raw) // (w * h * 3); fr = [Image.frombytes('RGB', (w, h), raw[i * w * h * 3:(i + 1) * w * h * 3]) for i in range(k)]
     while len(fr) < n: fr.append(fr[-1])
     return fr
 
@@ -126,10 +120,15 @@ def shot_frames(kind, src, n, o):
         bg = cover(Image.open(P('tr-main-poster.png')).convert('RGB')).filter(ImageFilter.GaussianBlur(18)).point(lambda v: v * .35)
         one = caption(bg, o['cap'], o.get('small'), card=True); return [one] * n
     if kind == 'clip':
+        if VERT:   # landscape footage, whole, on a blurred copy of itself
+            return [fit(f) for f in clip_frames(P(src), o.get('start', 0), n, (1920, 1080))]
         return clip_frames(P(src), o.get('start', 0), n)
+    if VERT:
+        tall = os.path.join(V2, os.path.splitext(os.path.basename(src))[0] + '-9x16.png')
+        if os.path.exists(tall): src = tall
     im = Image.open(P(src)).convert('RGB')
-    titled = os.path.basename(src).startswith(('tr-ch', 'tr-main', 'title-v1'))
-    if VERT and titled:   # a poster with a title: the whole poster, big, on a blurred copy of itself
+    titled = VERT and im.width > im.height * 1.1          # still landscape: show it whole
+    if titled:   # a poster with a title: the whole poster, big, on a blurred copy of itself
         bg = cover(im).filter(ImageFilter.GaussianBlur(28)).point(lambda v: v * .45)
         s0 = W / im.width * 1.0; fg = im.resize((W, int(im.height * s0)), Image.LANCZOS)
         out = []
@@ -139,12 +138,12 @@ def shot_frames(kind, src, n, o):
         return out
     base = fit(im) if o.get('fit') and not VERT else cover(im)
     z0, z1 = 1.0, 1.08
-    if 'zoom' in o and not VERT:   # a push-in towards a point (fx, fy) to scale z
+    if 'zoom' in o and im.width > im.height:   # a push-in towards a point (fx, fy) to scale z
         fx, fy, z = o['zoom']; z0, z1 = z * .85, z
     out = []
     for i in range(n):
         z = z0 + (z1 - z0) * i / max(1, n - 1)
-        if 'zoom' in o and not VERT:
+        if 'zoom' in o and im.width > im.height:
             cw, ch = im.width / z, im.height / z; cx, cy = o['zoom'][0] * im.width, o['zoom'][1] * im.height
             x0 = min(max(0, cx - cw / 2), im.width - cw); y0 = min(max(0, cy - ch / 2), im.height - ch)
             fr = cover(im.crop((int(x0), int(y0), int(x0 + cw), int(y0 + ch))))
@@ -185,7 +184,7 @@ def soundtrack():
             vo[i:j] += c[:j - i] * 1.6; duck[max(0, i - int(.15 * SR)):j + int(.25 * SR)] = 0.45   # music dips under a voice
         if 'sfx' in o:
             f, delay, g = o['sfx']; c = load(P(f)); i = int((starts[k] + delay) * SR); j = min(len(mix), i + len(c)); mix[i:j] += c[:j - i] * g
-    if not VERT:
+    if True:
         t_prev = 0.0
         for line, at in VO:
             f = os.path.join(B, 'vo', 't-%s-s%d.wav' % (line, VO_SEED.get(line, 1)))   # t-: silence trimmed (KIRA pitched up)

@@ -1,6 +1,6 @@
 # The Secret of the Lost Codebook — Handover
 
-*Project handover / internal reference — compiled 2026-09-15, last updated 2026-10-01 (section 00 is current; everything below it is history)*
+*Project handover / internal reference — compiled 2026-09-15, last updated 2026-10-02 (section 00 is current; everything below it is history)*
 
 A LucasArts-style point-and-click adventure teaching Research Methods, built as a single self-contained HTML file. This is the orientation doc for picking the project back up — what's live, how it's wired together, and what's still open.
 
@@ -14,7 +14,52 @@ A LucasArts-style point-and-click adventure teaching Research Methods, built as 
 
 ---
 
-## 00. Current state (2026-09-29)
+## 00. Current state (2026-10-02)
+
+### 2026-10-02 in brief (all pushed, live)
+
+- **Character repaint is live** (commits 9b9dbe9, 6915878 and later): 90 sprites, mouths, blinks, rigs and posters
+  installed by `tools/repaint/install.py` (it skips the bingo arms and crowd heads on purpose, and also writes the
+  rooms' fixed-name mouths, `mouth-nurse.webp` etc.). Mouths: `tools/repaint/mouth-sheets.sh NN|bNN` re-cuts a
+  sheet (figure lists and face hints inside); `mouths.py` tone-matches each overlay to its sprite.
+- **Engine:** lip-sync from the Web Audio voice's loudness (`WebVoice.level()`, `lipTick`, `html.cb-lipsync`,
+  `--cb-m`); blinking (`BLINKS`, `blinkFor`); walking rigs carry a mouth layer (`rig-<name>-head-mouth.webp`);
+  voice-only mode moves a spoken line on by itself (`CODEBOOK_AFTER_CLICK`); a delivered schnitzel redraws the
+  bag at once (`CODEBOOK_REFRESH_INV`); background loops are quieter and switchable in Settings
+  (`CODEBOOK_AMB_OFF`, `cb_ambience`); a Map button sits above the bag (simple controls).
+- **Duel** (`web/duel/index.html`): its own sound starts when it opens (`audio()` in game mode); a voice the
+  browser refuses shows its words; the stage is letterboxed to the window; the hall stays dim from the talk into
+  the duel; the monkey sits in a seat painted into `duel-crowd.webp`. After a win, Tobi posts his clip
+  (`tobiClip` in the Keynote room).
+- **Act III:** GO LIVE button, the students leave after the "Zero" round, one questionnaire (the redacted paper
+  forms), ballot-box hints. **Act V:** the poster goes up only after registering (Tobi says so, voiced), Tobi
+  leaves before announcing the keynote, the end of the Poster Session runs by itself (`toKeynote`), a red
+  REGISTERED stamp on screen, Act V's steps in the folder, one icon per solved room in every act.
+- **Art:** chapter-complete paintings for Acts II–IV (`il-ch2/3/4-complete.webp`), the "A SAMPLE HAS OCCURRED"
+  banner (`mn-sample-flag.webp`), the brass device in the office (`wp-device.webp`), the Gazette for the
+  accepted paper, Prof G and the monkey on the outro corkboards, the neon title screen with a vignette
+  (`title-screen.webp`; sources in `art/trailer/v2/`).
+- **Outro:** Stockholm and Feldstrom slides merged (`vo-narr-stockholm-12/34.mp3`), no empty-office slide (the
+  Office opens with her there), "Extra, extra!" on the Gazette.
+
+### The trailer (2026-10-02)
+
+`tools/trailer/trailer2.py` builds it: `build/trailer2/trailer-16x9.mp4` (55 s) and, with `vertical`,
+`trailer-9x16.mp4` (55 s, 1080x1920). Not in git: `build/`. In git: the script, `tools/trailer/tall.py`, the art
+(`art/trailer/v2/`: the neon posters `tr-main-poster`, `tr-ch1/3/4/5`, `tr-cold`, `tr-cook`, their `-9x16`
+portrait versions with the ChatGPT originals as `-src`, and the reference sheets) and the music source
+`audio/music-src/trailer-v2-suno.mp3` (the author's Suno track, 95.7 BPM).
+
+- **Shots** are whole half-bars on the music's grid (`SHOTS`); music is simply the start of the song, faded out.
+- **Voice-over** (`VO`): one trailer narrator (`lv-marksmith`, exag 0.45 / cfg 0.3) with character lines in their
+  game voices; takes in `build/trailer2/vo/` (regenerate with `tools/tts/gen.py build/trailer2/vo/jobs.json`,
+  then trim to `t-*.wav`); `VO_SEED` picks the take (checked with Whisper).
+- **Phone version:** a picture with a `-9x16.png` repaint fills the screen; anything else (game footage, in-game
+  art) is shown whole on a blurred copy of itself. ChatGPT paints 2:3; `tall.py` fits it into 9:16 without
+  cropping.
+- Clips come from `tools/trailer/record-clip.js` (`build/teaser/clips/`). Posting copy (YouTube, Shorts, X,
+  WhatsApp) was written in the session, not stored.
+
 
 ### Hosting: lostcodebook.org on Cloudflare
 
@@ -243,7 +288,7 @@ From the end of the Poster Session to the credits, everything now looks and adva
 - Feldstrom's slides keep Arial, as the Keynote room's own slides do (they are his PowerPoint).
   `__duelTest.aimHit()` lands a shot on the flaw, for screenshots.
 
-### Character repaint (2026-10-01): installed locally, not yet committed
+### Character repaint (2026-10-01): live since 2026-10-02
 
 The author chose a **hybrid style** (B's crisp finish, A's warm palette) and had every character repainted.
 Plan and log: `art/characters/repaint-plan.md`; working files in `art/characters/repaint/` (not in git, ~170 MB).
@@ -345,11 +390,17 @@ is in `art/characters/style-audit/`:
 
 ### Tests
 
-`bash tools/test/run-all.sh`, about 52 tests (`test-bonus.js` is new; `test-endgame.js` walks the new
-Act IV–V puzzles). Last full run (2026-10-01, after the end-of-Act-V changes): 49/52 in the suite;
+`bash tools/test/run-all.sh`, 52 tests; last full run 2026-10-02: 52/52. If many tests fail at `connect`, the
+test Chrome on 9333 has no tab left: `curl -X PUT "localhost:9333/json/new?about:blank"`. Earlier run
+(2026-10-01, after the end-of-Act-V changes): 49/52 in the suite;
 `test-audio`, `test-bugs` and `test-corridor` failed there and passed on their own (timing under load, not
 the changes). Tests that walk the end sequence set `CODEBOOK_LINES_CUT` / `__duelAuto`, so the
 click-to-continue waits fall back to the old timing.
+
+### Open list (2026-10-02)
+
+- **Duel freeze on the author's Mac** (Chrome, voice-only): fixed blind (see `todo.md`); re-test there.
+- Items 1–5 and 7 below are still open; 8–10 are done (pushed 2026-10-02) or settled.
 
 ### Open list (2026-09-29, evening)
 
