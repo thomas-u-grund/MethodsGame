@@ -594,28 +594,13 @@ it Methods."* → **"Take it to the submission chute"** → **"Leave the buildin
 
 ## The outro
 
-Months later, in the Professor's office (the skeleton still waiting), the letter: **REVISE AND
-RESUBMIT**, and Reviewer 2's forty-seven comments. Then the **Reviewer 2 battle**, which is writing
-your response: each comment is an attack, each card from the folder an answer. A wrong card costs
-composure (an overclaim costs most); at zero you walk round the pond and come back. No fail state.
-
-| Comment | ✅ Card |
-|---|---|
-| 1 · The literature review omits a substantial body of work | **The three papers on your reading list** |
-| 31 · Please cite Smith (1987) | **"There is no Smith (1987)."** |
-| 9 · How many tests did the authors run? *(p-hacked only)* | **Concede it, honestly** |
-| 14 · What did the authors expect to find? *(empty theory only)* | **Concede it, honestly** |
-| 42 / 43 · More ambition / claims beyond the evidence | **Concede it, honestly** (42, and keep 43) |
-| 12 · The title claims more than the design allows *(overstated only)* | **Concede it, honestly** |
-| 38 · The abstract says "causes" *(overstated only)* | **Concede it, honestly** |
-| 17 · Selection not ruled out *(the boss, always last)* | **The limitation you wrote down (p. 4)** |
-
-Never play *"Our findings are robust and generalisable."* The battle ends **RESUBMITTED**. Six weeks
-later: **ACCEPTED**, in the same office; the skeleton's sign now reads *WELCOME TO ACADEMIA*. If you
-**showed Tobi a number**, his post (four thousand likes; the paper has three readers) is one line on
-that slide. *"Meanwhile…"* — the Reviewer 2 reveal, sung: the monkey at the monitor types
-*asdfghjkl*, the system resolves it into comment 42, Enter. Then **The End**: the credits, Patreon,
-Ko-fi and *Back to the title*. `?play=outro` previews it.
+Months later, the letter: **REVISE AND RESUBMIT**, and Reviewer 2's forty-seven comments. In the
+Professor's office you start on comment one; the skeleton's sign falls over to reveal *WELCOME TO
+ACADEMIA*. If you **showed Tobi a number**, his post (four thousand likes; nobody has read the paper) is
+one line on that slide. *"Meanwhile…"*: the Reviewer 2 reveal, sung. The monkey at the monitor types
+*asdfghjkl*, the system resolves it into comment 42, Enter. Then the last card: **To be continued…
+Part Two: The Revisions**, the credits, Patreon, Ko-fi and *Back to the title*. There is no battle and no
+acceptance: answering Reviewer 2 is the sequel's (since 2026-10-03). `?play=outro` previews it.
 
 ### The monkeys, all along
 

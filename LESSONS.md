@@ -92,14 +92,7 @@ That is Chapter One.
 
 ## The ending — Reviewer 2
 
-The paper comes back with **REVISE AND RESUBMIT** and forty-seven comments. Answering them is the
-last lesson: every comment answered, none of them by making the paper bigger.
-
-- Name the papers you actually read, and what each could show.
-- Say so when a reference does not exist (there is no Smith, 1987).
-- If you ran more than one test, or expected nothing in particular, concede it honestly.
-- Concede that the study is small (comment 42) and keep the claim the size of the evidence (comment 43).
-- Answer "selection" with the limitation you wrote down before anyone asked (comment 17).
-- Never answer with *"Our findings are robust and generalisable."*
+The paper comes back with **REVISE AND RESUBMIT** and forty-seven comments from Reviewer 2. The game ends
+there, on comment one: answering them is Part Two, *The Revisions* (the companion game, in planning).
 
 Small and true outlasts large.

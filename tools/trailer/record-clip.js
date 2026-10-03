@@ -34,10 +34,6 @@ const SCENES = {
   // the Significance Casino: three pulls, the third pays out DISCOVERY!
   casino: { save:{ inventory:['folder','slip','cleandata'], flags:{ corridorDone:true, slipSealed:true, h27issued:true, actIIIDone:true, act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true, statsKeyUsed:true } },
     room:'Statistics Basement', go:`(async () => { for (let i = 0; i < 3; i++){ verb('Use'); spot('switches'); await w(2600); } })();`, secs:10 },
-  // Reviewer 2: the battle, answered well
-  reviewer2: { save:{ inventory:['folder'], flags:{ corridorDone:true, slipSealed:true, actIIIDone:true, actIVDone:true, act2IntroSeen:true, act3IntroSeen:true, act4IntroSeen:true, act5IntroSeen:true } },
-    room:null, go:`(async () => { window.CODEBOOK_R2_BATTLE({}, function(){}); await w(2500);
-      for (let i = 0; i < 4; i++){ window.CODEBOOK_R2_ANSWER_RIGHT(); await w(2600); } })();`, secs:14 },
 };
 
 function get(p){ return new Promise((res, rej) => http.get({ host:'127.0.0.1', port:9333, path:p }, r => { let d=''; r.on('data', c => d += c); r.on('end', () => res(JSON.parse(d))); }).on('error', rej)); }

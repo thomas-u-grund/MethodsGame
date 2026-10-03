@@ -2135,6 +2135,12 @@ Folder update: `STATUS: SUBMITTED`. Cut to the outro.
 
 ## The Outro — Reviewer 2
 
+> **As built since 2026-10-03 (author: "there should be no acceptance or reviewer two battle. I want to leave
+> room for the companion sequel game on revisions"):** the letter arrives (R&R, 47 comments), the player starts
+> on comment one in the Office, the skeleton's WELCOME TO ACADEMIA, the monkey, and the sequel card on the last
+> screen. The Reviewer 2 battle and the ACCEPTED letter are gone; the revisions are Part Two
+> (`companion/outline.md`). The sections below are the earlier design.
+
 **Order of the ending, fixed.** The old draft had the Professor speaking during the decision-letter sequence without the player having gone back to her, and it used the reverse-campus walk as a prologue to a letter that had not arrived yet. Correct order:
 
 1. **The Office** — the Codebook reveal, *"It's accurate. Send it."* (end of Act V)

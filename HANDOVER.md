@@ -16,6 +16,17 @@ A LucasArts-style point-and-click adventure teaching Research Methods, built as 
 
 ## 00. Current state (2026-10-02)
 
+### 2026-10-03: the outro ends on the R&R (author: "no acceptance or reviewer two battle")
+
+- `CODEBOOK_PLAY_OUTRO` is one interlude: recap, months, the letter (R&R), the office (`outro-3-resubmit.webp`,
+  the old ACCEPTED picture with a RESUBMIT stamp; `vo-narr-end-3r` / `-3tr` with Tobi's post), the monkey song,
+  then `theEnd()` with *To be continued… Part Two: The Revisions*.
+- Removed: `CODEBOOK_R2_BATTLE`, `test-r2battle.js`, `reviewer2-battle.mp3`, `outro-3-accepted.webp`,
+  `outro-journal.webp`, `vo-narr-end-3m/3tm`. The battle's voices (`vo-narr-r2-*`, `vo-rtwo-*`,
+  `CODEBOOK_OUTRO_VO`) stay in the sprite map but are no longer preloaded. `claim_overstated` no longer pays
+  off anywhere at the end.
+- The companion game (the revisions, and statistics): `companion/outline.md`.
+
 ### 2026-10-02 in brief (all pushed, live)
 
 - **Character repaint is live** (commits 9b9dbe9, 6915878 and later): 90 sprites, mouths, blinks, rigs and posters
