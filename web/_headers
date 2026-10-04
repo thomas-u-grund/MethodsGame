@@ -1,0 +1,4 @@
+# Cloudflare Pages: the bonus-point pages and their settings are always re-checked, so a change
+# (like switching the feature on) reaches every browser at once instead of after its cache expires.
+/bonus/*
+  Cache-Control: no-cache

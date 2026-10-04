@@ -1,0 +1,3 @@
+# Cloudflare Pages: short addresses for the bonus-point pages
+/teach   /bonus/teach   301
+/claim   /bonus/claim   301
