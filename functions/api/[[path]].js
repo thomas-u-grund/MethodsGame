@@ -174,6 +174,7 @@ async function claim(req, env) {
 // ---- daily: email the results of every deadline that has passed ---------------------------------
 async function report(req, env) {
   if (!env.REPORT_SECRET || req.headers.get('x-report-secret') !== env.REPORT_SECRET) return fail('Forbidden.', 403);
+  try { await env.DB.prepare('DELETE FROM play_events WHERE at < ?').bind(now() - 365 * 86400).run(); } catch (e) { /* the table may not exist yet */ }
   const courses = (await env.DB.prepare('SELECT * FROM courses').all()).results, sent = [];
   for (const c of courses) {
     const deadlines = JSON.parse(c.deadlines), reported = JSON.parse(c.reported);
