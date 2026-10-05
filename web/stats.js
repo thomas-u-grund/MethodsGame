@@ -119,6 +119,8 @@
     d.querySelector('[data-n]').onclick = function(){ done(false); };
     document.body.appendChild(d);
   }
-  if (document.body) notice(); else addEventListener('DOMContentLoaded', notice);
+  // no notice box when the config says notice:false (author, 2026-10-05: "remove the notice about data collection");
+  // the Settings switch and privacy.html still let players turn it off
+  if (CFG.notice !== false){ if (document.body) notice(); else addEventListener('DOMContentLoaded', notice); }
   if (on) startAll();
 })();

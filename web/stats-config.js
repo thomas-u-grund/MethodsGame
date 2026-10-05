@@ -2,5 +2,6 @@
 window.CB_STATS = {
   enabled: true,
   api: '/api',
-  consent: 'notice'   // 'notice' = on, with a notice and a one-click "No thanks"; 'optin' = off until the player agrees
+  consent: 'notice',  // 'notice' = on, with a notice and a one-click "No thanks"; 'optin' = off until the player agrees
+  notice: false       // false = no notice box on the landing page (author, 2026-10-05); Settings and privacy.html still have the switch
 };
