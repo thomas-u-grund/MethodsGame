@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Play statistics (admin)</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=JetBrains+Mono:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<link rel="stylesheet" href="bonus/bonus.css">
+</head>
+<body>
+<main>
+  <div class="kicker">The Secret of the Lost Codebook &middot; admin</div>
+  <h1>Play statistics</h1>
+  <div class="card" id="gate">
+    <p class="small">Enter the REPORT_SECRET of the site. It is kept only in this tab and sent only to this site's own API.</p>
+    <input id="secret" type="password" autocomplete="off" placeholder="REPORT_SECRET">
+    <label for="since">Since (optional)</label>
+    <input id="since" type="date">
+    <button id="go">Show</button> <button id="csv">Download all events (CSV)</button>
+    <div id="msg" class="msg"></div>
+  </div>
+  <div id="out"></div>
+</main>
+<script>
+(function(){
+  var $ = function(i){ return document.getElementById(i); };
+  try { $('secret').value = sessionStorage.getItem('cb_admin') || ''; } catch(e){}
+  function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  function since(){ var v = $('since').value; return v ? Math.floor(new Date(v + 'T00:00:00Z').getTime() / 1000) : 0; }
+  function table(title, rows, cols){
+    if (!rows || !rows.length) return '<div class="card"><h2>' + title + '</h2><p class="small">No data yet.</p></div>';
+    return '<div class="card"><h2>' + title + '</h2><div class="table-wrap"><table><tr>' + cols.map(function(c){ return '<th>' + c[1] + '</th>'; }).join('') + '</tr>' +
+      rows.map(function(r){ return '<tr>' + cols.map(function(c){ return '<td>' + esc(r[c[0]]) + '</td>'; }).join('') + '</tr>'; }).join('') + '</table></div></div>';
+  }
+  function call(path){
+    var s = $('secret').value; try { sessionStorage.setItem('cb_admin', s); } catch(e){}
+    return fetch('/api/stats/' + path + '?since=' + since(), { headers: { 'x-report-secret': s } });
+  }
+  $('go').onclick = function(){
+    $('msg').textContent = 'Loading...';
+    call('summary').then(function(r){ return r.json(); }).then(function(d){
+      if (!d.ok) { $('msg').textContent = d.error || 'Not allowed.'; return; }
+      $('msg').textContent = '';
+      var s = d.sessions || {}, ends = {}; (d.ends || []).forEach(function(e){ ends[e.kind] = e.players; });
+      $('out').innerHTML =
+        '<div class="card"><h2>Overview</h2><p><b>' + esc(s.n) + '</b> play sessions, <b>' + esc(s.events) + '</b> events. ' +
+        'Reached a Lessons Learned slide: <b>' + esc(ends.recap || 0) + '</b>. Reached the ending: <b>' + esc(ends.end || 0) + '</b>.</p>' +
+        '<p class="small">A session is one page-load. A player who returns, or resumes a saved game, counts again.</p></div>' +
+        table('New sessions per day', d.byDay, [['day', 'Day'], ['n', 'Sessions']]) +
+        table('Rooms: how many sessions visited, average seconds per visit', d.rooms, [['room', 'Room'], ['players', 'Sessions'], ['avg_seconds', 'Avg seconds']]) +
+        table('Hints asked for', d.hints, [['room', 'Where'], ['n', 'Times'], ['players', 'Sessions']]) +
+        table('Story steps reached (sessions)', d.flags, [['flag', 'Step'], ['players', 'Sessions']]) +
+        table('Most clicked things', d.hs, [['room', 'Room'], ['thing', 'Thing'], ['n', 'Clicks']]);
+    }).catch(function(){ $('msg').textContent = 'Could not reach the API.'; });
+  };
+  $('csv').onclick = function(){
+    call('export').then(function(r){ if (!r.ok) throw 0; return r.blob(); }).then(function(b){
+      var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'play-events.csv'; a.click();
+    }).catch(function(){ $('msg').textContent = 'Not allowed, or could not reach the API.'; });
+  };
+})();
+</script>
+</body>
+</html>

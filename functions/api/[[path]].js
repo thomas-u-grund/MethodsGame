@@ -13,6 +13,9 @@
 //   GET  /api/course/CODE                         public course info (game + claim page)
 //   POST /api/claim          {code, act, key, number, name}
 //   POST /api/report         (x-report-secret)    email the results of passed deadlines (daily)
+//   POST /api/stats          {s, v, e:[...]}       anonymous play statistics (STATS.md)
+//   GET  /api/stats/export   (x-report-secret)    the events as CSV (?since=UNIX_SECONDS)
+//   GET  /api/stats/summary  (x-report-secret)    counts for the admin page web/stats-admin.html (?since=UNIX_SECONDS)
 //   GET  /api/health                              which settings are present (yes/no only)
 
 const SESSION_DAYS = 7, CODE_MINUTES = 60, MAX_ATTEMPTS = 5, RESEND_SECONDS = 60;
@@ -202,6 +205,48 @@ async function report(req, env) {
   return json({ ok: true, sent });
 }
 
+// Anonymous play statistics (STATS.md): no cookies, no IP, no link to claims or courses.
+const STAT_KINDS = new Set(['start', 'enter', 'map', 'flag', 'hs', 'choice', 'hint', 'recap', 'end', 'hide', 'show']);
+async function stats(req, env) {
+  const raw = await req.text();
+  if (raw.length > 32000) return fail('Too large.', 413);
+  let d; try { d = JSON.parse(raw); } catch { return fail('Bad request.'); }
+  if (!d || !/^[0-9a-f]{16}$/.test(d.s || '') || !Array.isArray(d.e)) return fail('Bad request.');
+  const at = now(), rows = [];
+  for (const e of d.e.slice(0, 60)) {
+    if (!e || !STAT_KINDS.has(e.k)) continue;
+    const t = Number.isFinite(e.t) ? Math.max(0, Math.min(Math.trunc(e.t), 864e5)) : 0;
+    rows.push(env.DB.prepare('INSERT INTO play_events (session, at, t, kind, a, b, c) VALUES (?, ?, ?, ?, ?, ?, ?)')
+      .bind(d.s, at, t, e.k, clean(e.a, 60), clean(e.b, 120), clean(e.c, 300)));
+  }
+  if (rows.length) await env.DB.batch(rows);
+  return new Response(null, { status: 204 });
+}
+async function statsExport(req, env) {
+  if (!env.REPORT_SECRET || req.headers.get('x-report-secret') !== env.REPORT_SECRET) return fail('Not allowed.', 403);
+  const since = parseInt(new URL(req.url).searchParams.get('since') || '0', 10) || 0;
+  const { results } = await env.DB.prepare('SELECT session, at, t, kind, a, b, c FROM play_events WHERE at >= ? ORDER BY session, t LIMIT 200000').bind(since).all();
+  const q = (v) => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const csv = 'session,at,t_ms,kind,a,b,c\n' + results.map((r) => [r.session, r.at, r.t, r.kind, r.a, r.b, r.c].map(q).join(',')).join('\n');
+  return new Response(csv, { headers: { 'content-type': 'text/csv; charset=utf-8', 'cache-control': 'no-store' } });
+}
+
+async function statsSummary(req, env) {
+  if (!env.REPORT_SECRET || req.headers.get('x-report-secret') !== env.REPORT_SECRET) return fail('Not allowed.', 403);
+  const since = parseInt(new URL(req.url).searchParams.get('since') || '0', 10) || 0;
+  const all = async (sql) => (await env.DB.prepare(sql).bind(since).all()).results;
+  const [sessions, byDay, rooms, hints, flags, ends, hs] = await Promise.all([
+    all("SELECT COUNT(DISTINCT session) n, COUNT(*) events FROM play_events WHERE at >= ?"),
+    all("SELECT date(at,'unixepoch') day, COUNT(DISTINCT session) n FROM play_events WHERE kind='start' AND at >= ? GROUP BY day ORDER BY day DESC LIMIT 60"),
+    all("SELECT a room, COUNT(DISTINCT session) players, ROUND(AVG(CAST(b AS REAL))) avg_seconds FROM play_events WHERE kind='map' AND at >= ? GROUP BY a ORDER BY players DESC LIMIT 60"),
+    all("SELECT b room, COUNT(*) n, COUNT(DISTINCT session) players FROM play_events WHERE kind='hint' AND at >= ? GROUP BY b ORDER BY n DESC LIMIT 30"),
+    all("SELECT a flag, COUNT(DISTINCT session) players FROM play_events WHERE kind='flag' AND at >= ? GROUP BY a ORDER BY players DESC LIMIT 200"),
+    all("SELECT kind, COUNT(DISTINCT session) players FROM play_events WHERE kind IN ('recap','end') AND at >= ? GROUP BY kind"),
+    all("SELECT a room, b thing, COUNT(*) n FROM play_events WHERE kind='hs' AND at >= ? GROUP BY a, b ORDER BY n DESC LIMIT 40"),
+  ]);
+  return json({ ok: true, sessions: sessions[0], byDay, rooms, hints, flags, ends, hs });
+}
+
 export async function onRequest({ request: req, env, params }) {
   const path = (params.path || []).join('/'), m = req.method;
   try {
@@ -211,6 +256,9 @@ export async function onRequest({ request: req, env, params }) {
     if (m === 'GET' && path.startsWith('course/')) return await publicCourse(clean(path.slice(7), 16).toUpperCase(), env);
     if (m === 'POST' && path === 'claim') return await claim(req, env);
     if (m === 'POST' && path === 'report') return await report(req, env);
+    if (m === 'POST' && path === 'stats') return await stats(req, env);
+    if (m === 'GET' && path === 'stats/summary') return await statsSummary(req, env);
+    if (m === 'GET' && path === 'stats/export') return await statsExport(req, env);
     // which settings are present (never their values), for checking a deployment
     if (m === 'GET' && path === 'health') return json({ ok: true, db: !!(await env.DB.prepare('SELECT 1 AS x').first()),
       mail: !!(env.BREVO_API_KEY && env.SENDER_EMAIL), sender: env.SENDER_EMAIL ? env.SENDER_EMAIL.replace(/^[^@]+/, '…') : null, report: !!env.REPORT_SECRET });

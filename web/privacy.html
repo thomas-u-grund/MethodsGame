@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Privacy: The Secret of the Lost Codebook</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700&family=JetBrains+Mono:wght@600;700&family=Source+Sans+3:wght@400;600&display=swap">
+<link rel="stylesheet" href="bonus/bonus.css">
+<style>
+  ul.plain{ margin:8px 0 0; padding-left:20px; }
+  ul.plain li{ margin:4px 0; }
+  .choice{ display:flex; flex-wrap:wrap; align-items:center; gap:10px 16px; margin-top:6px; }
+  .state{ font-weight:600; }
+  .back{ display:inline-block; margin-top:6px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker">The Secret of the Lost Codebook</div>
+  <h1>Privacy</h1>
+  <p class="lede">In short: the game can keep anonymous counts of how it is played, so that the author can see where players get stuck.
+    It never keeps your name, email address, IP address or anything you type, and you can switch it off at any time.</p>
+
+  <div class="card" id="choiceCard">
+    <h2>Your choice on this device</h2>
+    <div class="choice">
+      <span>Anonymous play statistics: <span id="state" class="state"></span></span>
+      <span><button id="stop">Turn off</button> <button id="allow">Turn on</button></span>
+    </div>
+    <p class="small" id="note"></p>
+    <p class="small">You can also change this inside the game, under Settings. The choice is stored only in this browser and takes effect at once, also in a game tab that is already open.</p>
+  </div>
+
+  <div class="card">
+    <h2>What is recorded</h2>
+    <ul class="plain">
+      <li>which rooms are entered, and for how long each stays open;</li>
+      <li>which story steps are reached, and which things are clicked (and whether looked at, talked to, picked up or used);</li>
+      <li>which dialogue answers are chosen;</li>
+      <li>when the hint button is used, and which Lessons Learned slides and the ending are reached;</li>
+      <li>your screen size (rounded to the nearest hundred pixels), whether it is a touch screen, your control setting, whether voice-only is on,
+        and whether you are continuing a saved game;</li>
+      <li>that the game was opened through a course link (yes or no; the course code itself is not recorded).</li>
+    </ul>
+    <p>Each visit is given a random number that exists only while the page is open. It is not stored on your device, so a later visit cannot be
+      linked to an earlier one.</p>
+    <p>The purpose is to improve the game, for example by finding a puzzle where many players leave, and to describe in general terms how
+      it is used. The anonymous counts may be summarised in teaching or research writing about the game.</p>
+  </div>
+
+  <div class="card">
+    <h2>What is not recorded</h2>
+    <ul class="plain">
+      <li>your name, email address, student number or any account;</li>
+      <li>your IP address (the game does not store it);</li>
+      <li>anything you type;</li>
+      <li>cookies, advertising or tracking identifiers: none are set.</li>
+    </ul>
+    <p>The statistics are kept apart from the bonus-point service for instructors, which is separate, optional and used only when you
+      choose to claim a point.</p>
+    <p>The game also respects your browser's <i>Do Not Track</i> and <i>Global Privacy Control</i> signals: if either is on, nothing is
+      recorded and the Settings switch is disabled.</p>
+  </div>
+
+  <div class="card">
+    <h2>Who is responsible</h2>
+    <p>The game is hosted on Cloudflare, which handles requests technically and may see IP addresses as any web host does; the game itself does not
+      store them. The anonymous counts are kept in a Cloudflare database.</p>
+    <p class="small">Responsible: Thomas U. Grund, [address to complete]. Retention: [period to complete]. Questions, or a request about your data:
+      <a href="mailto:contact@lostcodebook.org">contact@lostcodebook.org</a>. Because the counts carry no name or identifier that survives the visit,
+      they cannot be traced back to one person, even on request.</p>
+    <a class="back" href="./">Back to the game</a>
+  </div>
+</main>
+<script>
+(function(){
+  var st = document.getElementById('state'), note = document.getElementById('note');
+  var stop = document.getElementById('stop'), allow = document.getElementById('allow');
+  function get(){ try { return localStorage.getItem('cb_stats'); } catch(e){ return null; } }
+  function set(v){ try { localStorage.setItem('cb_stats', v); localStorage.setItem('cb_stats_seen', '1'); } catch(e){} show(); }
+  function show(){
+    var dnt = navigator.doNotTrack === '1' || !!navigator.globalPrivacyControl, v = get();
+    var off = dnt || v === '0';
+    st.textContent = off ? 'off' : 'on';
+    note.textContent = dnt ? 'Your browser asks not to be tracked, so nothing is recorded.' : '';
+    stop.hidden = off; allow.hidden = !off || dnt;
+  }
+  stop.onclick = function(){ set('0'); };
+  allow.onclick = function(){ set('1'); };
+  show();
+})();
+</script>
+</body>
+</html>
