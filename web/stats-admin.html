@@ -27,11 +27,21 @@
   var $ = function(i){ return document.getElementById(i); };
   try { $('secret').value = sessionStorage.getItem('cb_admin') || ''; } catch(e){}
   function esc(s){ return String(s == null ? '' : s).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
+  // rooms by name, not by their internal ids (author, 2026-10-05: "one room is still called whirlpool"; it is the
+  // Office's id from an earlier version). The CSV export keeps the raw ids.
+  var ROOMS = { whirlpool:'The Seven-Second Office', lecture:'Introduction to Systems Theory', corridor:'Causality Corridor',
+    pond:'Probability Pond', library:'The Library', hall:'The Hall of Founders', workshop:'Feldstrom\u2019s Workshop',
+    seminar:'The Seminar Room', surveylab:'Survey Lab', ethics:'The Ethics Tribunal', mensa:'The Mensa',
+    fieldwork:'The Fieldwork Arena', statsbasement:'Statistics Basement', delegation:'The Delegation Engine',
+    bureau:'The Bureau of Implications', psychlab:'The Infinite Monkey Project', postersession:'The Poster Session',
+    keynote:'The Keynote Showdown', writingroom:'The Writing Room', map:'Campus map' };
+  function room(id){ return ROOMS[id] || id; }
+  function step(f){ var m = /^([a-z]+)Done$/.exec(f || ''); return m && ROOMS[m[1]] ? 'Finished: ' + ROOMS[m[1]] : f; }
   function since(){ var v = $('since').value; return v ? Math.floor(new Date(v + 'T00:00:00Z').getTime() / 1000) : 0; }
   function table(title, rows, cols){
     if (!rows || !rows.length) return '<div class="card"><h2>' + title + '</h2><p class="small">No data yet.</p></div>';
     return '<div class="card"><h2>' + title + '</h2><div class="table-wrap"><table><tr>' + cols.map(function(c){ return '<th>' + c[1] + '</th>'; }).join('') + '</tr>' +
-      rows.map(function(r){ return '<tr>' + cols.map(function(c){ return '<td>' + esc(r[c[0]]) + '</td>'; }).join('') + '</tr>'; }).join('') + '</table></div></div>';
+      rows.map(function(r){ return '<tr>' + cols.map(function(c){ return '<td>' + esc(c[2] ? c[2](r[c[0]]) : r[c[0]]) + '</td>'; }).join('') + '</tr>'; }).join('') + '</table></div></div>';
   }
   function call(path){
     var s = $('secret').value; try { sessionStorage.setItem('cb_admin', s); } catch(e){}
@@ -48,10 +58,10 @@
         'Reached a Lessons Learned slide: <b>' + esc(ends.recap || 0) + '</b>. Reached the ending: <b>' + esc(ends.end || 0) + '</b>.</p>' +
         '<p class="small">A session is one page-load. A player who returns, or resumes a saved game, counts again.</p></div>' +
         table('New sessions per day', d.byDay, [['day', 'Day'], ['n', 'Sessions']]) +
-        table('Rooms: how many sessions visited, average seconds per visit', d.rooms, [['room', 'Room'], ['players', 'Sessions'], ['avg_seconds', 'Avg seconds']]) +
-        table('Hints asked for', d.hints, [['room', 'Where'], ['n', 'Times'], ['players', 'Sessions']]) +
-        table('Story steps reached (sessions)', d.flags, [['flag', 'Step'], ['players', 'Sessions']]) +
-        table('Most clicked things', d.hs, [['room', 'Room'], ['thing', 'Thing'], ['n', 'Clicks']]);
+        table('Rooms: how many sessions visited, average seconds per visit', d.rooms, [['room', 'Room', room], ['players', 'Sessions'], ['avg_seconds', 'Avg seconds']]) +
+        table('Hints asked for', d.hints, [['room', 'Where', room], ['n', 'Times'], ['players', 'Sessions']]) +
+        table('Story steps reached (sessions)', d.flags, [['flag', 'Step', step], ['players', 'Sessions']]) +
+        table('Most clicked things', d.hs, [['room', 'Room', room], ['thing', 'Thing'], ['n', 'Clicks']]);
     }).catch(function(){ $('msg').textContent = 'Could not reach the API.'; });
   };
   $('csv').onclick = function(){
