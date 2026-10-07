@@ -12,12 +12,18 @@
 //   DELETE /api/courses/CODE                      delete a course and its claims
 //   GET  /api/course/CODE                         public course info (game + claim page)
 //   POST /api/claim          {code, act, key, number, name}
+//   GET  /api/open-courses                        courses with an open deadline (the claim page's list)
+//   POST /api/claim-end      {code, password, key, number, name}   claim from the game's last screen
+//   POST /api/courses/CODE/password {password}    set or change a course's student password
 //   POST /api/report         (x-report-secret)    email the results of passed deadlines (daily)
 //   POST /api/stats          {s, v, e:[...]}       anonymous play statistics (STATS.md)
 //   GET  /api/stats/export   (x-report-secret)    the events as CSV (?since=UNIX_SECONDS)
 //   GET  /api/stats/summary  (x-report-secret)    counts for the admin page web/stats-admin.html (?since=UNIX_SECONDS)
 //   GET  /api/health                              which settings are present (yes/no only)
 
+const PASSWORD_FAILS_PER_HOUR = 200;   // enough to stop guessing; too many for a prank to lock a class out
+const PW_MIN = 6;                       // each instructor sets their own (author, 2026-10-06)
+const normPw = (s) => String(s ?? '').trim().toUpperCase().replace(/\s+/g, '');
 const SESSION_DAYS = 7, CODE_MINUTES = 60, MAX_ATTEMPTS = 5, RESEND_SECONDS = 60;
 const ACTS = ['1', '2', '3', '4', '5'];
 const ACT_NAMES = { '1': 'Act I: The Question', '2': 'Act II: Theory', '3': 'Act III: Data',
@@ -123,16 +129,26 @@ async function myCourses(email, env) {
 async function createCourse(req, email, env) {
   const b = await body(req);
   const c = { instructor_name: clean(b.instructor_name), instructor_email: clean(b.instructor_email).toLowerCase(), university: clean(b.university),
-    course_name: clean(b.course_name), country: clean(b.country, 80), term: clean(b.term, 80) || null, mode: b.mode === 'end' ? 'end' : 'acts' };
+    course_name: clean(b.course_name), country: clean(b.country, 80), term: clean(b.term, 80) || null, mode: b.mode === 'end' ? 'end' : 'acts',
+    password: normPw(clean(b.password, 40)) };
+  if (c.password.length < PW_MIN) return fail('Please set a student password of at least ' + PW_MIN + ' characters.');
   if (!c.instructor_name || !c.university || !c.course_name || !c.country) return fail('Please fill in your name, university, country and course.');
   if (!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(c.instructor_email)) return fail('Please enter a valid email for the results.');
   const d = {}, keys = c.mode === 'acts' ? ACTS : ['end'];
   for (const k of keys) if (b.deadlines && isDate(b.deadlines[k])) d[k] = b.deadlines[k];
   if (!Object.keys(d).length) return fail(c.mode === 'acts' ? 'Set at least one act deadline.' : 'Set the deadline.');
   const code = randomHex(4).toUpperCase();
-  await env.DB.prepare(`INSERT INTO courses (code, owner_email, instructor_name, instructor_email, university, course_name, country, term, mode, deadlines)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(code, email, c.instructor_name, c.instructor_email, c.university, c.course_name, c.country, c.term, c.mode, JSON.stringify(d)).run();
+  await env.DB.prepare(`INSERT INTO courses (code, owner_email, instructor_name, instructor_email, university, course_name, country, term, mode, deadlines, password)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`).bind(code, email, c.instructor_name, c.instructor_email, c.university, c.course_name, c.country, c.term, c.mode, JSON.stringify(d), c.password).run();
   return json({ ok: true, code });
+}
+
+async function setPassword(req, code, email, env) {
+  const pw = normPw(clean((await body(req)).password, 40));
+  if (pw.length < PW_MIN) return fail('Please use at least ' + PW_MIN + ' characters.');
+  const r = await env.DB.prepare('UPDATE courses SET password = ? WHERE code = ? AND owner_email = ?').bind(pw, code, email).run();
+  if (!r.meta || !r.meta.changes) return fail('Not found.', 404);
+  return json({ ok: true, password: pw });
 }
 
 async function deleteCourse(code, email, env) {
@@ -169,6 +185,44 @@ async function claim(req, env) {
     throw e;
   }
   return json({ ok: true });
+}
+
+// ---- claiming from the game's last screen: pick a course, type its password -------------------------
+async function openCourses(env) {
+  const all = (await env.DB.prepare("SELECT code, course_name, university, term, mode, deadlines FROM courses WHERE password IS NOT NULL AND password != '' ORDER BY university, course_name").all()).results;
+  const t = today();
+  return json({ ok: true, courses: all.filter((c) => Object.values(JSON.parse(c.deadlines)).some((d) => d >= t))
+    .map(({ deadlines, ...c }) => c) });
+}
+
+async function claimEnd(req, env) {
+  const b = await body(req), code = clean(b.code, 16).toUpperCase(), key = clean(b.key, 64),
+    number = clean(b.number, 40), name = clean(b.name, 120), pw = normPw(clean(b.password, 40));
+  const c = await env.DB.prepare('SELECT * FROM courses WHERE code = ?').bind(code).first();
+  if (!c) return fail('Please choose your course from the list.');
+  const hour = now() - 3600;
+  const tries = await env.DB.prepare('SELECT COUNT(*) n FROM password_fails WHERE course_id = ? AND at > ?').bind(c.id, hour).first();
+  if (tries && tries.n >= PASSWORD_FAILS_PER_HOUR) return fail('Too many wrong passwords for this course. Please try again in an hour.', 429);
+  if (!c.password || pw !== c.password) {
+    await env.DB.batch([env.DB.prepare('INSERT INTO password_fails (course_id, at) VALUES (?, ?)').bind(c.id, now()),
+      env.DB.prepare('DELETE FROM password_fails WHERE at < ?').bind(hour)]);
+    return fail('That is not the password for this course. Ask your instructor for it.');
+  }
+  if (!/^[0-9a-f]{32}$/.test(key)) return fail('This claim link is incomplete. Open it again from the end of the game.');
+  if (number.length < 2 || name.length < 2) return fail('Please enter your student number and your name.');
+  // finishing the game earns the end point, or, per act, every act whose deadline is still open
+  const t = today(), dl = JSON.parse(c.deadlines);
+  const acts = (c.mode === 'end' ? ['end'] : ACTS).filter((a) => dl[a] && dl[a] >= t);
+  if (!acts.length) return fail('The deadline for this course has passed.');
+  const got = [], had = [];
+  for (const a of acts) {
+    try {
+      await env.DB.prepare('INSERT INTO claims (course_id, act, student_number, student_name, claim_key) VALUES (?, ?, ?, ?, ?)').bind(c.id, a, number, name, key).run();
+      got.push(a);
+    } catch (e) { if (/UNIQUE/i.test(String(e))) had.push(a); else throw e; }
+  }
+  if (!got.length) return fail('These points have already been claimed (by this student number, or from this device).');
+  return json({ ok: true, acts: got.map((a) => ACT_NAMES[a] || a), already: had.map((a) => ACT_NAMES[a] || a), course: c.course_name });
 }
 
 // ---- daily: email the results of every deadline that has passed ---------------------------------
@@ -256,6 +310,8 @@ export async function onRequest({ request: req, env, params }) {
     if (m === 'POST' && path === 'auth/logout') return await logout(req, env);
     if (m === 'GET' && path.startsWith('course/')) return await publicCourse(clean(path.slice(7), 16).toUpperCase(), env);
     if (m === 'POST' && path === 'claim') return await claim(req, env);
+    if (m === 'GET' && path === 'open-courses') return await openCourses(env);
+    if (m === 'POST' && path === 'claim-end') return await claimEnd(req, env);
     if (m === 'POST' && path === 'report') return await report(req, env);
     if (m === 'POST' && path === 'stats') return await stats(req, env);
     if (m === 'GET' && path === 'stats/summary') return await statsSummary(req, env);
@@ -268,6 +324,7 @@ export async function onRequest({ request: req, env, params }) {
     if (!email) return fail('Please sign in.', 401);
     if (m === 'GET' && path === 'courses') return await myCourses(email, env);
     if (m === 'POST' && path === 'courses') return await createCourse(req, email, env);
+    if (m === 'POST' && /^courses\/[A-Za-z0-9]+\/password$/.test(path)) return await setPassword(req, clean(path.split('/')[1], 16).toUpperCase(), email, env);
     if (m === 'DELETE' && path.startsWith('courses/')) return await deleteCourse(clean(path.slice(8), 16).toUpperCase(), email, env);
     return fail('Not found.', 404);
   } catch (e) {

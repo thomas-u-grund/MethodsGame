@@ -6,6 +6,16 @@ the campus map after each act (or once, at the end) and claim with their student
 The day after each deadline, the instructor gets the list by email (a table plus a CSV file).
 Off while `enabled: false` in `web/bonus/config.js`: nothing appears anywhere.
 
+**Claiming from the end of the game (2026-10-06).** The game's last card has **Claim your bonus points**, for
+students who did not come through a course link. It opens `bonus/claim.html?from=end&key=…`, which lists the
+courses with an open deadline (`GET /api/open-courses`); the student picks theirs, types the **course password**
+and their student number (Matrikelnummer) and name (`POST /api/claim-end`). An end-of-game course records `end`;
+a per-act course records every act whose deadline is still open and that this student number has not claimed.
+Each instructor sets their own course password: required when registering, and set or changed on the
+course's card at /teach (`POST /api/courses/CODE/password`; `bonus/migrations/0003_course_password.sql`). A course
+without one (registered before 2026-10-06) is not listed until its instructor sets one; its course link works as
+before. Capitals and spaces do not count. Wrong passwords are limited to 200 an hour per course.
+
 Everything runs on the Cloudflare Pages project that serves the game:
 
 | Part | Where |

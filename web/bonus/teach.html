@@ -15,7 +15,7 @@
   <div class="kicker">The Secret of the Lost Codebook &middot; for instructors</div>
   <h1>Bonus points for your course</h1>
   <p class="lede">Let your students claim a bonus point for playing: after each act, or once at the end.
-    Register your course, share its game link, and you will get the list of claims by email when each deadline passes.
+    Register your course, share its game link and its student password, and you will get the list of claims by email when each deadline passes.
     Entirely optional; the game works the same without it.</p>
 
   <div id="off" class="card" hidden><h2>Not switched on yet</h2><p class="small">The bonus-point service is not configured on this site.</p></div>
@@ -67,6 +67,9 @@
         <div><label for="dend">Deadline</label><input id="dend" type="date"></div>
       </div>
       <p class="small">Deadlines run to the end of the day (UTC). The results email goes out the next morning.</p>
+      <label for="f_pw">Student password</label>
+      <input id="f_pw" autocomplete="off" placeholder="At least 6 characters, e.g. SWAN-4821">
+      <p class="small">Students who finish the game can also claim on its last screen: they pick your course from a list and type this password. Tell it to your class, not just anyone: it is what stops strangers claiming in your course. Capitals and spaces do not matter.</p>
       <button id="create">Register the course</button>
       <div id="createMsg" class="msg"></div>
     </section>
@@ -121,7 +124,7 @@
     if (mode === 'acts') ACTS.forEach(function(a){ if ($('d' + a).value) d[a] = $('d' + a).value; });
     else if ($('dend').value) d.end = $('dend').value;
     var r = await api('/courses', 'POST', { instructor_name: $('f_name').value, instructor_email: $('f_email').value, university: $('f_uni').value,
-      country: $('f_country').value, course_name: $('f_course').value, term: $('f_term').value, mode: mode, deadlines: d });
+      country: $('f_country').value, course_name: $('f_course').value, term: $('f_term').value, mode: mode, deadlines: d, password: $('f_pw').value });
     if (!r.ok) return msg('createMsg', r.error);
     msg('createMsg', 'Registered. Your course link is at the top of the page.', true);
     loadCourses(); window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -140,6 +143,11 @@
         '<span>' + (c.mode === 'acts' ? 'a point per act' : 'one point at the end') + '</span><span>results to ' + esc(c.instructor_email) + '</span></div>' +
         '<p style="margin:12px 0 4px">' + dls + '</p>' +
         '<label>Give your students this link</label><div class="link"><input readonly value="' + esc(link) + '"><button class="ghost" data-copy="' + esc(link) + '">Copy</button></div>' +
+        // claiming from the game's last screen (2026-10-06): the instructor's own course password, set or changed here
+        '<label for="pw_' + esc(c.code) + '">Student password</label><div class="link"><input id="pw_' + esc(c.code) + '" autocomplete="off" value="' + esc(c.password || '') + '" placeholder="Set one: at least 6 characters">' +
+          '<button class="ghost" data-pw="' + esc(c.code) + '">' + (c.password ? 'Change' : 'Set') + '</button></div>' +
+        '<p class="small" id="pwmsg_' + esc(c.code) + '">' + (c.password ? 'Students who finish the game can claim on its last screen, even without the link: they pick this course and type the password.'
+          : '<b>No password yet.</b> Set one, and students who finish the game can claim on its last screen: they pick this course and type it. Until then the course link works as before.') + '</p>' +
         (mine.length ? '<details style="margin-top:14px"><summary>Claims so far (' + mine.length + ')</summary><div class="table-wrap"><table><tr><th>Act</th><th>Student number</th><th>Name</th><th>When (UTC)</th></tr>' +
           mine.map(function(x){ return '<tr><td>' + ACT_NAME[x.act] + '</td><td>' + esc(x.student_number) + '</td><td>' + esc(x.student_name) + '</td><td>' + esc(x.created_at.slice(0, 16)) + '</td></tr>'; }).join('') +
           '</table></div></details>' : '<p class="small">No claims yet.</p>') +
@@ -148,6 +156,13 @@
     $('courses').querySelectorAll('[data-copy]').forEach(function(b){ b.onclick = function(){
       var t = b.dataset.copy, inp = b.previousElementSibling;
       (navigator.clipboard ? navigator.clipboard.writeText(t) : Promise.reject()).then(function(){ b.textContent = 'Copied'; }, function(){ inp.select(); });
+    }; });
+    $('courses').querySelectorAll('[data-pw]').forEach(function(b){ b.onclick = async function(){
+      var c = b.dataset.pw, m = $('pwmsg_' + c);
+      var r = await api('/courses/' + c + '/password', 'POST', { password: $('pw_' + c).value });
+      if (!r.ok){ m.className = 'small msg err'; m.textContent = r.error; return; }
+      $('pw_' + c).value = r.password; b.textContent = 'Change';
+      m.className = 'small msg ok'; m.textContent = 'Saved. Students now pick this course on the last screen of the game and type ' + r.password + '.';
     }; });
     $('courses').querySelectorAll('[data-del]').forEach(function(b){ b.onclick = async function(){
       if (b.dataset.armed !== '1'){ b.dataset.armed = '1'; b.textContent = 'Click again to delete for good'; return; }
