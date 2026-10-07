@@ -13,7 +13,10 @@
 //   GET  /api/course/CODE                         public course info (game + claim page)
 //   POST /api/claim          {code, act, key, number, name}
 //   GET  /api/open-courses                        courses with an open deadline (the claim page's list)
-//   POST /api/claim-end      {code, password, key, number, name}   claim from the game's last screen
+//   POST /api/claim-end      {code, password, completion, number, name}   claim from the game's last screen
+//   POST /api/run                                 a new play id (random, nothing personal)
+//   POST /api/run/checkpoint {run, act}           an act was finished in that game
+//   POST /api/run/code       {run}                the completion code, once Act V is reached
 //   POST /api/courses/CODE/password {password}    set or change a course's student password
 //   POST /api/report         (x-report-secret)    email the results of passed deadlines (daily)
 //   POST /api/stats          {s, v, e:[...]}       anonymous play statistics (STATS.md)
@@ -22,7 +25,10 @@
 //   GET  /api/health                              which settings are present (yes/no only)
 
 const PASSWORD_FAILS_PER_HOUR = 200;   // enough to stop guessing; too many for a prank to lock a class out
-const PW_MIN = 6;                       // each instructor sets their own (author, 2026-10-06)
+const PW_MIN = 6;
+const CODE_CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';   // no 0/O, 1/I/L: it gets typed
+function newCompletionCode() { const b = crypto.getRandomValues(new Uint8Array(8)); const c = [...b].map((x) => CODE_CHARS[x % CODE_CHARS.length]).join(''); return c.slice(0, 4) + '-' + c.slice(4); }
+const normCode = (s) => String(s ?? '').toUpperCase().replace(/[^A-Z0-9]/g, '').replace(/^(.{4})(.{4})$/, '$1-$2');                       // each instructor sets their own (author, 2026-10-06)
 const normPw = (s) => String(s ?? '').trim().toUpperCase().replace(/\s+/g, '');
 const SESSION_DAYS = 7, CODE_MINUTES = 60, MAX_ATTEMPTS = 5, RESEND_SECONDS = 60;
 const ACTS = ['1', '2', '3', '4', '5'];
@@ -196,39 +202,88 @@ async function openCourses(env) {
 }
 
 async function claimEnd(req, env) {
-  const b = await body(req), code = clean(b.code, 16).toUpperCase(), key = clean(b.key, 64),
+  const b = await body(req), code = clean(b.code, 16).toUpperCase(), done = normCode(clean(b.completion, 20)),
     number = clean(b.number, 40), name = clean(b.name, 120), pw = normPw(clean(b.password, 40));
   const c = await env.DB.prepare('SELECT * FROM courses WHERE code = ?').bind(code).first();
   if (!c) return fail('Please choose your course from the list.');
   const hour = now() - 3600;
   const tries = await env.DB.prepare('SELECT COUNT(*) n FROM password_fails WHERE course_id = ? AND at > ?').bind(c.id, hour).first();
   if (tries && tries.n >= PASSWORD_FAILS_PER_HOUR) return fail('Too many wrong passwords for this course. Please try again in an hour.', 429);
-  if (!c.password || pw !== c.password) {
+  // capitals, spaces and punctuation do not count: OWL-2027, owl 2027 and Owl2027 are the same password
+  const alnum = (x) => String(x || '').replace(/[^A-Z0-9]/g, '');
+  if (!c.password || alnum(pw) !== alnum(c.password)) {
     await env.DB.batch([env.DB.prepare('INSERT INTO password_fails (course_id, at) VALUES (?, ?)').bind(c.id, now()),
       env.DB.prepare('DELETE FROM password_fails WHERE at < ?').bind(hour)]);
     return fail('That is not the password for this course. Ask your instructor for it.');
   }
-  if (!/^[0-9a-f]{32}$/.test(key)) return fail('This claim link is incomplete. Open it again from the end of the game.');
   if (number.length < 2 || name.length < 2) return fail('Please enter your student number and your name.');
   // finishing the game earns the end point, or, per act, every act whose deadline is still open
   const t = today(), dl = JSON.parse(c.deadlines);
   const acts = (c.mode === 'end' ? ['end'] : ACTS).filter((a) => dl[a] && dl[a] >= t);
   if (!acts.length) return fail('The deadline for this course has passed.');
+  // the completion code from the game's last screen, good for one claim only
+  const run = /^[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(done) ? await env.DB.prepare('SELECT id, used_at FROM runs WHERE code = ?').bind(done).first() : null;
+  if (!run) return fail('That completion code is not right. It is shown on the last screen of the game.');
+  if (run.used_at) return fail('This completion code has already been used. Each code works once.');
+  const took = await env.DB.prepare('UPDATE runs SET used_at = ? WHERE id = ? AND used_at IS NULL').bind(now(), run.id).run();
+  if (!took.meta || !took.meta.changes) return fail('This completion code has already been used. Each code works once.');
   const got = [], had = [];
   for (const a of acts) {
     try {
-      await env.DB.prepare('INSERT INTO claims (course_id, act, student_number, student_name, claim_key) VALUES (?, ?, ?, ?, ?)').bind(c.id, a, number, name, key).run();
+      await env.DB.prepare('INSERT INTO claims (course_id, act, student_number, student_name, claim_key) VALUES (?, ?, ?, ?, ?)').bind(c.id, a, number, name, run.id.slice(0, 32)).run();
       got.push(a);
     } catch (e) { if (/UNIQUE/i.test(String(e))) had.push(a); else throw e; }
   }
-  if (!got.length) return fail('These points have already been claimed (by this student number, or from this device).');
+  if (!got.length) {   // nothing new for this student number: give the code back
+    await env.DB.prepare('UPDATE runs SET used_at = NULL WHERE id = ?').bind(run.id).run();
+    return fail('This student number has already claimed these points.');
+  }
   return json({ ok: true, acts: got.map((a) => ACT_NAMES[a] || a), already: had.map((a) => ACT_NAMES[a] || a), course: c.course_name });
+}
+
+// ---- the completion code: a game watched from act to act, and a code it can use once ---------------
+async function runFor(b, env) {
+  const r = clean(b.run, 64); if (!/^[0-9a-f]{32}$/.test(r)) return null;
+  return await env.DB.prepare('SELECT * FROM runs WHERE id = ?').bind(await sha256(r)).first();
+}
+async function newRun(env) {
+  const r = randomHex(16);
+  await env.DB.prepare('INSERT INTO runs (id, created) VALUES (?, ?)').bind(await sha256(r), now()).run();
+  return json({ ok: true, run: r });
+}
+async function checkpoint(req, env) {
+  const b = await body(req), act = clean(b.act, 2), row = await runFor(b, env);
+  if (!row) return fail('Unknown game.');
+  if (!ACTS.includes(act)) return fail('Unknown act.');
+  const acts = JSON.parse(row.acts);
+  if (!acts[act]) { acts[act] = now(); await env.DB.prepare('UPDATE runs SET acts = ? WHERE id = ?').bind(JSON.stringify(acts), row.id).run(); }
+  return json({ ok: true });
+}
+async function completionCode(req, env) {
+  const row = await runFor(await body(req), env);
+  if (!row) return fail('This game is not known to the server, so it cannot give a completion code.');
+  if (row.code) return json({ ok: true, code: row.code, used: !!row.used_at });
+  const acts = JSON.parse(row.acts), t5 = acts['5'], min = (parseInt(env.RUN_MIN_MINUTES || '10', 10) || 0) * 60;
+  if (!t5) return fail('The game is not finished yet.');
+  // Act V, and an earlier act reported a while before it: a game played, not five clicks in a row
+  if (!Object.keys(acts).some((a) => a !== '5' && acts[a] <= t5 - min))
+    return fail('The server did not see this game being played through, so it cannot give a completion code.');
+  for (let i = 0; i < 5; i++) {
+    const code = newCompletionCode();
+    try { await env.DB.prepare('UPDATE runs SET code = ? WHERE id = ? AND code IS NULL').bind(code, row.id).run(); }
+    catch (e) { if (/UNIQUE/i.test(String(e))) continue; throw e; }
+    const back = await env.DB.prepare('SELECT code, used_at FROM runs WHERE id = ?').bind(row.id).first();
+    return json({ ok: true, code: back.code, used: !!back.used_at });
+  }
+  return fail('Something went wrong on our side. Please try again in a minute.', 500);
 }
 
 // ---- daily: email the results of every deadline that has passed ---------------------------------
 async function report(req, env) {
   if (!env.REPORT_SECRET || req.headers.get('x-report-secret') !== env.REPORT_SECRET) return fail('Forbidden.', 403);
   try { await env.DB.prepare('DELETE FROM play_events WHERE at < ?').bind(now() - 365 * 86400).run(); } catch (e) { /* the table may not exist yet */ }
+  try { await env.DB.batch([env.DB.prepare('DELETE FROM runs WHERE code IS NULL AND created < ?').bind(now() - 90 * 86400),
+    env.DB.prepare('DELETE FROM runs WHERE created < ?').bind(now() - 365 * 86400)]); } catch (e) { /* the table may not exist yet */ }
   const courses = (await env.DB.prepare('SELECT * FROM courses').all()).results, sent = [];
   for (const c of courses) {
     const deadlines = JSON.parse(c.deadlines), reported = JSON.parse(c.reported);
@@ -312,6 +367,9 @@ export async function onRequest({ request: req, env, params }) {
     if (m === 'POST' && path === 'claim') return await claim(req, env);
     if (m === 'GET' && path === 'open-courses') return await openCourses(env);
     if (m === 'POST' && path === 'claim-end') return await claimEnd(req, env);
+    if (m === 'POST' && path === 'run') return await newRun(env);
+    if (m === 'POST' && path === 'run/checkpoint') return await checkpoint(req, env);
+    if (m === 'POST' && path === 'run/code') return await completionCode(req, env);
     if (m === 'POST' && path === 'report') return await report(req, env);
     if (m === 'POST' && path === 'stats') return await stats(req, env);
     if (m === 'GET' && path === 'stats/summary') return await statsSummary(req, env);

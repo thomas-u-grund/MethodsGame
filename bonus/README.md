@@ -14,7 +14,16 @@ a per-act course records every act whose deadline is still open and that this st
 Each instructor sets their own course password: required when registering, and set or changed on the
 course's card at /teach (`POST /api/courses/CODE/password`; `bonus/migrations/0003_course_password.sql`). A course
 without one (registered before 2026-10-06) is not listed until its instructor sets one; its course link works as
-before. Capitals and spaces do not count. Wrong passwords are limited to 200 an hour per course.
+before. Capitals, spaces and dashes do not count. Wrong passwords are limited to 200 an hour per course.
+
+**The completion code (2026-10-07).** A claim from the last screen also needs the game's **completion code**, and each
+code works once, so a copied claim page or a classmate's code is refused. `web/bonus/run.js` gets a random play id
+from the server (`POST /api/run`) and reports each finished act (`/api/run/checkpoint`, read off the save every few
+seconds). At the end, `/api/run/code` issues a code (like `K7QM-3XPA`) only if the play id reached Act V *and* an
+earlier act was reported at least `RUN_MIN_MINUTES` (default 10) before it. The claim marks the code used; if the
+student number had already claimed, the code is given back. Table `runs` (`bonus/migrations/0004_runs.sql`); the
+daily job deletes unfinished games after 90 days and all after a year. Honest limit: someone who scripts the API
+calls and waits can still mint a code; a copied link or code cannot.
 
 Everything runs on the Cloudflare Pages project that serves the game:
 

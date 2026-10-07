@@ -28,6 +28,8 @@
   <section class="card" id="endForm" hidden>
     <label for="course">Your course</label>
     <select id="course"><option value="">Choose your course…</option></select>
+    <label for="ccode">Completion code</label>
+    <input id="ccode" autocomplete="off" autocapitalize="characters" placeholder="shown on the last screen of the game, like K7QM-3XPA">
     <label for="pw">Course password</label>
     <input id="pw" autocomplete="off" autocapitalize="characters" placeholder="from your instructor, like SWAN-4821">
     <label for="enum">Student number (Matrikelnummer)</label>
@@ -65,13 +67,11 @@
   // claiming from the game's last screen: the courses with an open deadline, the course password, the student number
   function fromEnd(){
     $('title').textContent = 'Claim your bonus points';
-    if (!/^[0-9a-f]{32}$/.test(key)) return fail('This claim link is incomplete. Open it again from the end of the game.');
-    var doneKey = 'cb_claimed_end_' + key;
-    try { if (localStorage.getItem(doneKey)){ $('done').hidden = false; $('doneText').textContent = 'You have already claimed your points on this device.'; return; } } catch(e){}
+    $('ccode').value = (q.get('code') || '').toUpperCase();   // from the game's button; can also be typed
     fetch(CFG.api + '/open-courses').then(function(r){ return r.json(); }).then(function(r){
       if (!r.ok) return fail('No connection. Please reload the page.');
       if (!r.courses.length) return fail('No course is taking claims at the moment.');
-      $('sub').textContent = 'You finished the game. Choose your course, type the password your instructor gave you, and claim.';
+      $('sub').textContent = 'You finished the game. Choose your course, check your completion code, type the password your instructor gave you, and claim.';
       $('course').innerHTML += r.courses.map(function(c){
         return '<option value="' + esc(c.code) + '"' + (c.code === code ? ' selected' : '') + '>' + esc(c.course_name) + ' \u00b7 ' + esc(c.university) + (c.term ? ' \u00b7 ' + esc(c.term) : '') + '</option>'; }).join('');
       $('endForm').hidden = false;
@@ -79,16 +79,16 @@
     $('esend').onclick = async function(){
       var m = $('emsg');
       if (!$('course').value){ m.className = 'msg err'; m.textContent = 'Please choose your course.'; return; }
+      if (!$('ccode').value.trim()){ m.className = 'msg err'; m.textContent = 'Please enter the completion code from the last screen of the game.'; return; }
       if (!$('eok').checked){ m.className = 'msg err'; m.textContent = 'Please tick the box first.'; return; }
       this.disabled = true;
       var res;
       try {
         res = await (await fetch(CFG.api + '/claim-end', { method:'POST', headers:{ 'content-type':'application/json' },
-          body: JSON.stringify({ code: $('course').value, password: $('pw').value, key: key, number: $('enum').value, name: $('ename').value }) })).json();
+          body: JSON.stringify({ code: $('course').value, password: $('pw').value, completion: $('ccode').value, number: $('enum').value, name: $('ename').value }) })).json();
       } catch(e){ res = { ok:false, error:'No connection. Please try again.' }; }
       this.disabled = false;
       if (!res.ok){ m.className = 'msg err'; m.textContent = res.error; return; }
-      try { localStorage.setItem(doneKey, '1'); } catch(e){}
       $('endForm').hidden = true; $('done').hidden = false;
       $('doneText').textContent = 'Recorded for ' + res.course + ': ' + res.acts.join(', ') + '.' +
         (res.already.length ? ' Already claimed before: ' + res.already.join(', ') + '.' : '') + ' Your instructor gets the list after the deadline.';
