@@ -8,8 +8,14 @@
      sprite  ENGLISH clip name -> ["voices-de/<german clip>.mp3", 0, seconds]. It replaces the English entry in
              CODEBOOK_VOICE_SPRITE, so every name test, duration and preload in the game keeps working.   Anything with no German entry stays English (text and voice), so the switch can ship early. */
 (function(){
+  // German is switched off on the live site until it has been reviewed: it is available on localhost / file://,
+  // or for the browser session that opened the page with &pw=merton. Elsewhere the game is English only and
+  // neither the flags nor the Settings row are shown.
+  var deOk = /^(localhost|127\.0\.0\.1|)$/.test(location.hostname) || /[?&]pw=merton(&|$)/.test(location.search);
+  try { if (deOk) sessionStorage.setItem('cb_de_ok', '1'); else deOk = sessionStorage.getItem('cb_de_ok') === '1'; } catch(e){}
+  window.CODEBOOK_DE_OK = deOk;
   var lang = 'en';
-  try { if (localStorage.getItem('cb_lang') === 'de') lang = 'de'; } catch(e){}
+  try { if (deOk && localStorage.getItem('cb_lang') === 'de') lang = 'de'; } catch(e){}
   window.CODEBOOK_LANG = lang;
   window.CODEBOOK_SET_LANG = function(l){
     try { localStorage.setItem('cb_lang', l === 'de' ? 'de' : 'en'); } catch(e){}
